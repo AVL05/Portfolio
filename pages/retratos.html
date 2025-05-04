@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fotografía de Retratos | Alex Vicente López</title>
+    <meta name="description" content="Galería profesional de fotografía de retratos de Alex Vicente López. Expresiones y emociones capturadas con sensibilidad.">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="icon" href="../assets/img/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- Actualización del menú de navegación -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">AVL</a>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html" class="nav-link">Inicio</a></li>
+                <li><a href="../index.html#proyectos" class="nav-link">Proyectos</a></li>
+                <li><a href="../index.html#habilidades" class="nav-link">Habilidades</a></li>
+                <li class="nav-item has-submenu">
+                    <a href="../index.html#fotografia" class="nav-link">Fotografía <i class="fas fa-chevron-down"></i></a>
+                    <ul class="submenu">
+                        <li><a href="naturaleza.html" class="submenu-link">Naturaleza</a></li>
+                        <li><a href="retratos.html" class="submenu-link">Retratos</a></li>
+                        <li><a href="urbano.html" class="submenu-link">Urbano</a></li>
+                    </ul>
+                </li>
+                <li><a href="../index.html#contacto" class="nav-link">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="category-header retratos-header">
+        <div class="container">
+            <h1>Retratos</h1>
+            <p class="subtitle">Expresiones auténticas</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="breadcrumbs">
+            <a href="../index.html">Inicio</a> &gt; <span>Retratos</span>
+        </div>
+
+        <section class="gallery-section" data-animate>
+            <div class="gallery-filter" data-animate>
+                <button class="filter-btn active" data-filter="all">Todas</button>
+                <button class="filter-btn" data-filter="picos">Picos de Europa</button>
+                <button class="filter-btn" data-filter="rios">Ríos y Cascadas</button>
+            </div>
+            <div class="gallery" id="nature-gallery" data-animate>
+                <!-- Las imágenes se cargarán dinámicamente -->
+            </div>
+        </section>
+
+        <section class="category-description">
+            <h2>Sobre mi fotografía de retratos</h2>
+            <p>Mis retratos buscan capturar la esencia de las personas, sus emociones y personalidad. Trabajo con iluminación natural y de estudio para crear ambientes que complementen al sujeto.</p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> Alex Vicente López. Todos los derechos reservados.</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/aleexx_005/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://github.com/AVL05" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/alex-vicente-lopez-083821309/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../assets/js/fotos.js"></script>
+    <script src="../assets/js/gallery.js"></script>
+    <script src="../assets/js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            initGallery('portraits', 'retratos');
+        });
+    </script>
+</body>
+</html>

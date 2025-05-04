@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Vicente López | Fotografía Profesional</title>
+    <meta name="description" content="Portfolio fotográfico profesional de Alex Vicente López. Especializado en naturaleza, retratos y fotografía urbana.">
+    
+    <!-- Preload de recursos críticos -->
+    <link rel="preload" href="assets/css/styles.css" as="style">
+    <link rel="preload" href="assets/js/script.js" as="script">
+    
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+    
+    <!-- Open Graph / Redes Sociales -->
+    <meta property="og:title" content="Alex Vicente López | Fotografía Profesional">
+    <meta property="og:description" content="Portfolio fotográfico profesional de Alex Vicente López. Especializado en naturaleza, retratos y fotografía urbana.">
+    <meta property="og:image" content="assets/img/social-preview.jpg">
+    <meta property="og:url" content="https://tudominio.com">
+    <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-spinner"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">AVL</a>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="index.html#proyectos" class="nav-link">Proyectos</a></li>
+                <li><a href="index.html#habilidades" class="nav-link">Habilidades</a></li>
+                <li class="nav-item has-submenu">
+                    <a href="index.html#fotografia" class="nav-link">Fotografía <i class="fas fa-chevron-down"></i></a>
+                    <ul class="submenu">
+                        <li><a href="pages/naturaleza.html" class="submenu-link">Naturaleza</a></li>
+                        <li><a href="pages/retratos.html" class="submenu-link">Retratos</a></li>
+                        <li><a href="pages/urbano.html" class="submenu-link">Urbano</a></li>
+                    </ul>
+                </li>
+                <li><a href="index.html#contacto" class="nav-link">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-background"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="title-line">Capturando momentos,</span>
+                    <span class="title-line highlight">creando arte</span>
+                </h1>
+                <p class="hero-subtitle">Fotografía profesional de naturaleza, retratos y entornos urbanos</p>
+                <div class="hero-cta">
+                    <a href="#portfolio" class="btn btn-primary">
+                        <span>Ver Portfolio</span>
+                        <i class="fas fa-camera"></i>
+                    </a>
+                    <a href="#contacto" class="btn btn-secondary">
+                        <span>Contactar</span>
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="image-frame">
+                    <img src="assets/img/hero-fotografo.webp" alt="Alex Vicente López fotografiando" class="profile-image" loading="eager">
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-scroll-indicator">
+            <span>Scroll</span>
+            <div class="mouse"></div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="section portfolio-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Mi <span class="highlight">Portfolio</span></h2>
+                <p class="section-subtitle">Explora mis galerías fotográficas</p>
+            </div>
+            
+            <div class="portfolio-grid">
+                <!-- Naturaleza -->
+                <div class="portfolio-card" data-category="naturaleza">
+                    <div class="portfolio-image">
+                        <img src="assets/img/portfolio-naturaleza.webp" alt="Naturaleza" loading="lazy">
+                        <div class="portfolio-overlay">
+                            <div class="overlay-content">
+                                <h3>Naturaleza</h3>
+                                <p>Paisajes y vida salvaje</p>
+                                <a href="galerias/naturaleza.html" class="btn btn-small">Ver galería</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Retratos -->
+                <div class="portfolio-card" data-category="retratos">
+                    <div class="portfolio-image">
+                        <img src="assets/img/portfolio-retratos.webp" alt="Retratos" loading="lazy">
+                        <div class="portfolio-overlay">
+                            <div class="overlay-content">
+                                <h3>Retratos</h3>
+                                <p>Expresiones y emociones</p>
+                                <a href="galerias/retratos.html" class="btn btn-small">Ver galería</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Urbano -->
+                <div class="portfolio-card" data-category="urbano">
+                    <div class="portfolio-image">
+                        <img src="assets/img/portfolio-urbano.webp" alt="Urbano" loading="lazy">
+                        <div class="portfolio-overlay">
+                            <div class="overlay-content">
+                                <h3>Urbano</h3>
+                                <p>Arquitectura y vida urbana</p>
+                                <a href="galerias/urbano.html" class="btn btn-small">Ver galería</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Proyectos Especiales -->
+                <div class="portfolio-card" data-category="proyectos">
+                    <div class="portfolio-image">
+                        <img src="assets/img/portfolio-proyectos.webp" alt="Proyectos Especiales" loading="lazy">
+                        <div class="portfolio-overlay">
+                            <div class="overlay-content">
+                                <h3>Proyectos</h3>
+                                <p>Trabajos conceptuales</p>
+                                <a href="galerias/proyectos.html" class="btn btn-small">Ver galería</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="portfolio-cta">
+                <a href="galerias/todas.html" class="btn btn-primary">
+                    <span>Ver todas las fotos</span>
+                    <i class="fas fa-images"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Mí Section -->
+    <section id="sobremi" class="section about-section">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image">
+                    <div class="image-container">
+                        <img src="assets/img/fotografo-perfil.webp" alt="Alex Vicente López" loading="lazy">
+                        <div class="image-decorator"></div>
+                    </div>
+                </div>
+                <div class="about-content">
+                    <div class="section-header">
+                        <h2 class="section-title">Sobre <span class="highlight">mí</span></h2>
+                        <p class="section-subtitle">Mi pasión por la fotografía</p>
+                    </div>
+                    
+                    <div class="about-text">
+                        <p>Hola, soy Alex Vicente López, fotógrafo profesional con más de 5 años de experiencia capturando momentos únicos y creando arte visual.</p>
+                        
+                        <p>Mi enfoque combina técnica profesional con una sensibilidad artística que busca transmitir emociones y contar historias a través de cada imagen.</p>
+                        
+                        <div class="about-details">
+                            <div class="detail-item">
+                                <i class="fas fa-camera"></i>
+                                <div>
+                                    <h4>Especializaciones</h4>
+                                    <p>Naturaleza, Retratos, Urbano</p>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <h4>Ubicación</h4>
+                                    <p>Valencia, España</p>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-award"></i>
+                                <div>
+                                    <h4>Reconocimientos</h4>
+                                    <p>3 premios internacionales</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="about-cta">
+                        <a href="cv/Alex_Vicente_CV_Fotografia.pdf" class="btn btn-secondary" download>
+                            <span>Descargar CV</span>
+                            <i class="fas fa-file-download"></i>
+                        </a>
+                        <a href="#contacto" class="btn btn-primary">
+                            <span>Contratar</span>
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Equipo Section -->
+    <section id="equipo" class="section equipment-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Mi <span class="highlight">Equipo</span></h2>
+                <p class="section-subtitle">Las herramientas que uso para crear</p>
+            </div>
+            
+            <div class="equipment-grid">
+                <div class="equipment-card">
+                    <div class="equipment-image">
+                        <img src="assets/img/camara.webp" alt="Cámara Canon EOS R6" loading="lazy">
+                    </div>
+                    <div class="equipment-details">
+                        <h3>Canon EOS R6</h3>
+                        <p>Cuerpo principal</p>
+                        <ul class="equipment-specs">
+                            <li><span>Sensor:</span> Full Frame 20.1MP</li>
+                            <li><span>ISO:</span> 100-102400</li>
+                            <li><span>Estabilización:</span> 8 stops IBIS</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="equipment-card">
+                    <div class="equipment-image">
+                        <img src="assets/img/objetivos.webp" alt="Objetivos Canon RF" loading="lazy">
+                    </div>
+                    <div class="equipment-details">
+                        <h3>Objetivos RF</h3>
+                        <p>Selección profesional</p>
+                        <ul class="equipment-specs">
+                            <li><span>RF 15-35mm f/2.8L:</span> Ultra gran angular</li>
+                            <li><span>RF 24-105mm f/4L:</span> Todo terreno</li>
+                            <li><span>RF 70-200mm f/2.8L:</span> Teleobjetivo</li>
+                            <li><span>RF 85mm f/1.2L:</span> Retratos</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="equipment-card">
+                    <div class="equipment-image">
+                        <img src="assets/img/accesorios.webp" alt="Accesorios fotográficos" loading="lazy">
+                    </div>
+                    <div class="equipment-details">
+                        <h3>Accesorios</h3>
+                        <p>Para cada situación</p>
+                        <ul class="equipment-specs">
+                            <li><span>Trípodes:</span> Manfrotto y Peak Design</li>
+                            <li><span>Filtros:</span> ND y polarizadores</li>
+                            <li><span>Flash:</span> Godox AD200 Pro</li>
+                            <li><span>Drones:</span> DJI Mavic 3</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonios Section -->
+    <section class="section testimonials-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Clientes <span class="highlight">Satisfechos</span></h2>
+                <p class="section-subtitle">Lo que dicen sobre mi trabajo</p>
+            </div>
+            
+            <div class="testimonials-slider">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="testimonial-text">
+                            <p>"Alex capturó la esencia de nuestro evento de manera increíble. Las fotos transmiten exactamente la emoción del momento."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="assets/img/cliente1.webp" alt="María González" loading="lazy">
+                            <div>
+                                <h4>María González</h4>
+                                <p>Directora de Marketing</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="testimonial-text">
+                            <p>"Las fotos de paisaje que nos hizo Alex para nuestra campaña superaron todas las expectativas. Absolutamente impresionantes."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="assets/img/cliente2.webp" alt="Javier Martínez" loading="lazy">
+                            <div>
+                                <h4>Javier Martínez</h4>
+                                <p>Director Creativo</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="testimonial-text">
+                            <p>"Nunca me había sentido tan cómoda frente a una cámara. Los retratos que me hizo Alex son mis fotos favoritas de todos los tiempos."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="assets/img/cliente3.webp" alt="Laura Sánchez" loading="lazy">
+                            <div>
+                                <h4>Laura Sánchez</h4>
+                                <p>Modelo</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto Section -->
+    <section id="contacto" class="section contact-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Trabajemos <span class="highlight">Juntos</span></h2>
+                <p class="section-subtitle">Contáctame para tu próximo proyecto</p>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Email</h3>
+                            <p>alex@fotografiaavl.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Teléfono</h3>
+                            <p>+34 600 123 456</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Estudio</h3>
+                            <p>Calle Creatividad 23, Valencia</p>
+                        </div>
+                    </div>
+                    
+                    <div class="social-links">
+                        <a href="https://instagram.com/aleexx_005" target="_blank" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://facebook.com/fotografiaavl" target="_blank" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://500px.com/avlphoto" target="_blank" aria-label="500px">
+                            <i class="fab fa-500px"></i>
+                        </a>
+                        <a href="https://wa.me/34600123456" target="_blank" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="formContacto" action="procesar-formulario.php" method="POST">
+                        <div class="form-group">
+                            <input type="text" id="nombre" name="nombre" required>
+                            <label for="nombre">Nombre completo</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" required>
+                            <label for="email">Correo electrónico</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="tel" id="telefono" name="telefono">
+                            <label for="telefono">Teléfono (opcional)</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <select id="servicio" name="servicio" required>
+                                <option value="" disabled selected></option>
+                                <option value="retratos">Sesión de retratos</option>
+                                <option value="eventos">Cobertura de eventos</option>
+                                <option value="producto">Fotografía de producto</option>
+                                <option value="paisaje">Fotografía de paisaje</option>
+                                <option value="otro">Otro servicio</option>
+                            </select>
+                            <label for="servicio">Tipo de servicio</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+                            <label for="mensaje">Cuéntame sobre tu proyecto</label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">
+                            <span>Enviar mensaje</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>AVL Fotografía</h3>
+                    <p>Capturando momentos, creando arte visual desde 2018.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="500px"><i class="fab fa-500px"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Enlaces rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                        <li><a href="#sobremi">Sobre mí</a></li>
+                        <li><a href="#equipo">Equipo</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Servicios</h3>
+                    <ul class="footer-links">
+                        <li><a href="servicios/retratos.html">Retratos</a></li>
+                        <li><a href="servicios/eventos.html">Eventos</a></li>
+                        <li><a href="servicios/producto.html">Producto</a></li>
+                        <li><a href="servicios/paisaje.html">Paisaje</a></li>
+                        <li><a href="servicios/edicion.html">Edición</a></li>
+                        <li><a href="servicios/talleres.html">Talleres</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contacto</h3>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-envelope"></i> alex@fotografiaavl.com</li>
+                        <li><i class="fas fa-phone"></i> +34 600 123 456</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Valencia, España</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year"></span> Alex Vicente López Fotografía. Todos los derechos reservados.</p>
+                <div class="legal-links">
+                    <a href="legal/privacidad.html">Política de Privacidad</a>
+                    <a href="legal/cookies.html">Cookies</a>
+                    <a href="legal/terminos.html">Términos de uso</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <script src="assets/js/fotos.js"></script>
+    <script src="assets/js/gallery.js"></script>
+    <script src="assets/js/script.js"></script>
+    
+    <!-- Inicialización -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar animaciones
+            if (typeof gsap !== 'undefined') {
+                initAnimations();
+            }
+            
+            // Actualizar año en el footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+            
+            // Inicializar formulario de contacto
+            const contactForm = document.getElementById('formContacto');
+            if (contactForm) {
+                contactForm.addEventListener('submit', handleFormSubmit);
+            }
+        });
+        
+        function initAnimations() {
+            // Animaciones GSAP aquí
+        }
+        
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            // Lógica para manejar el formulario
+        }
+    </script>
+</body>
+</html>

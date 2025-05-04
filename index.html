@@ -4,11 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alex Vicente López | Portfolio</title>
+    <meta name="description" content="Portfolio profesional de Alex Vicente López. Desarrollo web, diseño y fotografía.">
+    
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- Iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <!-- Preloader -->
@@ -19,18 +27,25 @@
     <!-- Navbar -->
     <nav class="navbar">
         <div class="container">
-            <a href="#" class="logo">AVL</a>
+            <a href="../index.html" class="logo">AVL</a>
             <div class="hamburger">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
             <ul class="nav-links">
-                <li><a href="#inicio" class="nav-link">Inicio</a></li>
-                <li><a href="#proyectos" class="nav-link">Proyectos</a></li>
-                <li><a href="#habilidades" class="nav-link">Habilidades</a></li>
-                <li><a href="#curriculum" class="nav-link">Curriculum</a></li>
-                <li><a href="#contacto" class="nav-link">Contacto</a></li>
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="index.html#proyectos" class="nav-link">Proyectos</a></li>
+                <li><a href="index.html#habilidades" class="nav-link">Habilidades</a></li>
+                <li class="nav-item has-submenu">
+                    <a href="index.html#fotografia" class="nav-link">Fotografía <i class="fas fa-chevron-down"></i></a>
+                    <ul class="submenu">
+                        <li><a href="pages/naturaleza.html" class="submenu-link">Naturaleza</a></li>
+                        <li><a href="pages/retratos.html" class="submenu-link">Retratos</a></li>
+                        <li><a href="pages/urbano.html" class="submenu-link">Urbano</a></li>
+                    </ul>
+                </li>
+                <li><a href="index.html#contacto" class="nav-link">Contacto</a></li>
             </ul>
         </div>
     </nav>
@@ -43,14 +58,14 @@
                     <span class="title-line">Hola, soy</span>
                     <span class="title-line highlight">Alex Vicente López</span>
                 </h1>
-                <p class="hero-subtitle">Estudiante de Desarrollo de Aplicaciones Web</p>
+                <p class="hero-subtitle">Desarrollador Web & Fotógrafo</p>
                 <div class="hero-cta">
                     <a href="#proyectos" class="btn btn-primary">
                         <span>Ver proyectos</span>
                         <i class="fas fa-arrow-down"></i>
                     </a>
-                    <a href="#curriculum" class="btn btn-secondary">
-                        <span>Mi CV</span>
+                    <a href="docs/Alex_Vicente_CV.pdf" class="btn btn-secondary" download>
+                        <span>Descargar CV</span>
                         <i class="fas fa-file-alt"></i>
                     </a>
                 </div>
@@ -62,7 +77,7 @@
             </div>
             <div class="hero-image">
                 <div class="image-wrapper">
-                    <img src="yo.jpg" alt="Alex Vicente López" class="profile-image">
+                    <img src="assets/img/yo.jpg" alt="Alex Vicente López" class="profile-image">
                     <div class="image-dots"></div>
                 </div>
             </div>
@@ -70,64 +85,56 @@
     </section>
 
     <!-- Proyectos -->
-    <section id="proyectos" class="section projects-section">
+    <section id="proyectos" class="section projects-section" data-animate>
         <div class="container">
-            <div class="section-header">
+            <div class="section-header" data-animate>
                 <h2 class="section-title">Mis <span class="highlight">Proyectos</span></h2>
                 <p class="section-subtitle">Algunos de mis trabajos recientes</p>
             </div>
             
             <div class="projects-grid">
                 <!-- Proyecto 1 -->
-                <div class="project-card" data-project="1">
+                <div class="project-card" data-animate>
                     <div class="project-image">
-                        <img src="proyectos/portada1.jpg" alt="Llibret Falla">
-                        <div class="project-badge">Diseño</div>
+                        <img src="assets/img/proyectos/portada1.jpg" alt="Llibret Falla">
                     </div>
                     <div class="project-details">
                         <h3>Llibret Falla el Moli 24/25</h3>
                         <p>Diseño editorial completo realizado con Adobe Creative Suite</p>
+                    </div>
+                </div>
+
+                <!-- Proyecto 2 - Portfolio Fotográfico -->
+                <div class="project-card" data-project="2">
+                    <div class="project-image">
+                        <img src="assets/img/proyectos/portada2.webp" alt="Portfolio Fotográfico">
+                        <div class="project-badge">Desarrollo</div>
+                    </div>
+                    <div class="project-details">
+                        <h3>Portfolio Fotográfico</h3>
+                        <p>Galería profesional de mis trabajos fotográficos</p>
                         <div class="project-actions">
-                            <a href="proyectos/LLIBRET 24-25.pdf" class="btn btn-small" target="_blank">
-                                <i class="fas fa-eye"></i> Ver
+                            <a href="pages/naturaleza.html" class="btn btn-small">
+                                <i class="fas fa-camera"></i> Ver Galería
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Proyecto 2 -->
-                <div class="project-card" data-project="2">
-                    <div class="project-image">
-                        <img src="proyectos/portada2.webp" alt="Web de Recetas">
-                        <div class="project-badge">Desarrollo</div>
-                    </div>
-                    <div class="project-details">
-                        <h3>Portfolio Web Fotografico</h3>
-                        <p>Aplicación web enseñar uno de mis hobbies</p>
-                        <div class="project-actions">
-                            <a href="https://github.com/AVL05/web-xml-alex" class="btn btn-small">
-                                <i class="fab fa-github"></i> Código
-                            </a>
-                            <a href="https://avl05.github.io/web-xml-alex/" class="btn btn-small">
-                                <i class="fas fa-external-link-alt"></i> Demo
-                            </a>
-                        </div>
-                    </div>
-                </div>
                 <!-- Proyecto 3 -->
-                <div class="project-card" data-project="2">
+                <div class="project-card" data-project="3">
                     <div class="project-image">
-                        <img src="proyectos/favicon.ico" alt="Web de Recetas">
+                        <img src="assets/img/proyectos/web-xml.jpg" alt="Web XML">
                         <div class="project-badge">Desarrollo</div>
                     </div>
                     <div class="project-details">
                         <h3>Web de XML</h3>
-                        <p>Aplicación web para aprender a usar XML en 4 semanas</p>
+                        <p>Aplicación web para aprender a usar XML</p>
                         <div class="project-actions">
-                            <a href="https://github.com/AVL05/web-xml-alex" class="btn btn-small">
+                            <a href="https://github.com/AVL05/web-xml-alex" class="btn btn-small" target="_blank">
                                 <i class="fab fa-github"></i> Código
                             </a>
-                            <a href="https://avl05.github.io/web-xml-alex/" class="btn btn-small">
+                            <a href="https://avl05.github.io/web-xml-alex/" class="btn btn-small" target="_blank">
                                 <i class="fas fa-external-link-alt"></i> Demo
                             </a>
                         </div>
@@ -220,15 +227,6 @@
                                 <p>Maquetación editorial</p>
                             </div>
                         </div>
-                        <div class="skill-item">
-                            <div class="skill-icon">
-                                <i class="fas fa-video"></i>
-                            </div>
-                            <div class="skill-info">
-                                <h4>Premiere</h4>
-                                <p>Edición de video</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 
@@ -254,56 +252,38 @@
                                 <p>Intermedio (B1)</p>
                             </div>
                         </div>
-                        <div class="skill-item">
-                            <div class="skill-icon">
-                                <i class="fas fa-flag"></i>
-                            </div>
-                            <div class="skill-info">
-                                <h4>Castellano</h4>
-                                <p>Nativo</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Curriculum -->
-    <section id="curriculum" class="section cv-section">
+    <!-- Fotografía -->
+    <section id="fotografia" class="section photography-section">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Mi <span class="highlight">Curriculum</span></h2>
-                <p class="section-subtitle">Descarga mi CV para más detalles</p>
+                <h2 class="section-title">Mi <span class="highlight">Fotografía</span></h2>
+                <p class="section-subtitle">Explora mis trabajos fotográficos</p>
             </div>
             
-            <div class="cv-container">
-                <div class="cv-card">
-                    <div class="cv-icon">
-                        <i class="fas fa-file-pdf"></i>
-                    </div>
-                    <h3>CV Completo</h3>
-                    <p>Documento PDF con toda mi experiencia y formación</p>
-                    <a href="cv/Alex_Vicente_CV.pdf" class="btn btn-primary" download>
-                        <i class="fas fa-download"></i> Descargar CV
-                    </a>
+            <div class="category-preview">
+                <div class="preview-card">
+                    <img src="assets/img/naturaleza-preview.webp" alt="Naturaleza" loading="lazy">
+                    <h3>Naturaleza</h3>
+                    <p>Paisajes impresionantes de los Picos de Europa y más.</p>
+                    <a href="pages/naturaleza.html" class="btn">Ver galería</a>
                 </div>
-                
-                <div class="cv-info">
-                    <div class="info-item">
-                        <h3>Educación</h3>
-                        <ul>
-                            <li>1º Desarrollo de Aplicaciones Web - Actual</li>
-                            <li>Grado Medio de Sistemas Microinformaticos y Redes Locales - 2024</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="info-item">
-                        <h3>Experiencia</h3>
-                        <ul>
-                            <li>Prácticas en Ayuntamiento de Carlet - 2024</li>
-                        </ul>
-                    </div>
+                <div class="preview-card">
+                    <img src="assets/img/retratos-preview.webp" alt="Retratos" loading="lazy">
+                    <h3>Retratos</h3>
+                    <p>Expresiones y emociones capturadas con sensibilidad.</p>
+                    <a href="pages/retratos.html" class="btn">Ver galería</a>
+                </div>
+                <div class="preview-card">
+                    <img src="assets/img/urbano-preview.webp" alt="Urbano" loading="lazy">
+                    <h3>Urbano</h3>
+                    <p>Arquitectura y vida en las ciudades de Oporto y Braga.</p>
+                    <a href="pages/urbano.html" class="btn">Ver galería</a>
                 </div>
             </div>
         </div>
@@ -313,7 +293,7 @@
     <section id="contacto" class="section contact-section">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Contácta<span class="highlight">me</span></h2>
+                <h2 class="section-title">Contáctame</h2>
                 <p class="section-subtitle">¿Quieres hablar sobre un proyecto?</p>
             </div>
             
@@ -341,13 +321,6 @@
                     <h3>GitHub</h3>
                     <p>AVL05</p>
                 </a>
-                <a href="https://www.instagram.com/aleexx_005/" class="contact-card" target="_blank">
-                    <div class="contact-icon">
-                        <i class="fab fa-instagram"></i>
-                    </div>
-                    <h3>Instagram</h3>
-                    <p>aleexx_005</p>
-                </a>
             </div>
         </div>
     </section>
@@ -356,9 +329,19 @@
     <footer class="footer">
         <div class="container">
             <p>&copy; <span id="current-year"></span> Alex Vicente López. Todos los derechos reservados.</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/aleexx_005/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://github.com/AVL05" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/alex-vicente-lopez-083821309/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <script src="assets/js/fotos.js"></script>
+    <script src="assets/js/gallery.js"></script>
+    <script src="assets/js/script.js"></script>
 </body>
 </html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fotografía de Retratos | Alex Vicente Lopez</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/naturaleza.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">AVL</a>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="naturaleza.html" class="nav-link">Naturaleza</a></li>
+                <li><a href="retratos.html" class="nav-link active">Retratos</a></li>
+                <li><a href="urbano.html" class="nav-link">Urbano</a></li>
+                <li><a href="index.html#contacto" class="nav-link">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Encabezado -->
+    <header class="minimal-header retratos-header">
+        <div class="container">
+            <h1>Retratos</h1>
+            <p class="subtitle">Emociones capturadas</p>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="container">
+        <section class="gallery-section">
+            <h2 class="section-title">Galería</h2>
+            <div class="gallery" id="retratos-gallery">
+                <!-- Las imágenes se cargarán dinámicamente desde gallery.js -->
+            </div>
+        </section>
+
+        <section class="category-description">
+            <h2>Sobre mi fotografía de retratos</h2>
+            <p>Mis retratos buscan capturar la esencia y emociones de las personas, ya sea en estudios o entornos naturales. Cada imagen cuenta una historia única, reflejando la personalidad y momentos auténticos.</p>
+        </section>
+    </main>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox hidden">
+        <span class="close">&times;</span>
+        <img class="lightbox-image" src="" alt="Imagen ampliada">
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> Alex Vicente López. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/fotos.js"></script>
+    <script src="js/gallery.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Inicializar la galería de retratos
+        initGallery('retratos', CATEGORIES.RETRATOS);
+    </script>
+</body>
+</html>

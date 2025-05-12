@@ -6,7 +6,8 @@
     <title>Alex Vicente López | Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/index.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
 </head>
@@ -30,6 +31,7 @@
                 <li><a href="#proyectos" class="nav-link">Proyectos</a></li>
                 <li><a href="#habilidades" class="nav-link">Habilidades</a></li>
                 <li><a href="#curriculum" class="nav-link">Curriculum</a></li>
+                <li><a href="#fotografia" class="nav-link">Fotografía</a></li> <!-- Nuevo enlace -->
                 <li><a href="#contacto" class="nav-link">Contacto</a></li>
             </ul>
         </div>
@@ -79,55 +81,34 @@
             
             <div class="projects-grid">
                 <!-- Proyecto 1 -->
-                <div class="project-card" data-project="1">
+                <div class="project-card">
                     <div class="project-image">
                         <img src="proyectos/portada1.jpg" alt="Llibret Falla">
-                        <div class="project-badge">Diseño</div>
                     </div>
                     <div class="project-details">
-                        <h3>Llibret Falla el Moli 24/25</h3>
-                        <p>Diseño editorial completo realizado con Adobe Creative Suite</p>
+                        <h3 class="project-title">Llibret Falla el Moli 24/25</h3>
+                        <p class="project-description">Diseño editorial completo realizado con Adobe Creative Suite</p>
                         <div class="project-actions">
-                            <a href="proyectos/LLIBRET 24-25.pdf" class="btn btn-small" target="_blank">
+                            <a href="proyectos/LLIBRET 24-25.pdf" class="btn btn-primary" target="_blank">
                                 <i class="fas fa-eye"></i> Ver
                             </a>
                         </div>
                     </div>
                 </div>
-
+                
                 <!-- Proyecto 2 -->
-                <div class="project-card" data-project="2">
-                    <div class="project-image">
-                        <img src="proyectos/portada2.webp" alt="Web de Recetas">
-                        <div class="project-badge">Desarrollo</div>
-                    </div>
-                    <div class="project-details">
-                        <h3>Portfolio Web Fotografico</h3>
-                        <p>Aplicación web enseñar uno de mis hobbies</p>
-                        <div class="project-actions">
-                            <a href="https://github.com/AVL05/web-xml-alex" class="btn btn-small">
-                                <i class="fab fa-github"></i> Código
-                            </a>
-                            <a href="https://avl05.github.io/web-xml-alex/" class="btn btn-small">
-                                <i class="fas fa-external-link-alt"></i> Demo
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Proyecto 3 -->
-                <div class="project-card" data-project="2">
+                <div class="project-card">
                     <div class="project-image">
                         <img src="proyectos/favicon.ico" alt="Web de Recetas">
-                        <div class="project-badge">Desarrollo</div>
                     </div>
                     <div class="project-details">
-                        <h3>Web de XML</h3>
-                        <p>Aplicación web para aprender a usar XML en 4 semanas</p>
+                        <h3 class="project-title">Web de XML</h3>
+                        <p class="project-description">Aplicación web para aprender a usar XML en 4 semanas</p>
                         <div class="project-actions">
-                            <a href="https://github.com/AVL05/web-xml-alex" class="btn btn-small">
+                            <a href="https://github.com/AVL05/web-xml-alex" class="btn btn-secondary" target="_blank">
                                 <i class="fab fa-github"></i> Código
                             </a>
-                            <a href="https://avl05.github.io/web-xml-alex/" class="btn btn-small">
+                            <a href="https://avl05.github.io/web-xml-alex/" class="btn btn-primary" target="_blank">
                                 <i class="fas fa-external-link-alt"></i> Demo
                             </a>
                         </div>
@@ -302,8 +283,40 @@
                         <h3>Experiencia</h3>
                         <ul>
                             <li>Prácticas en Ayuntamiento de Carlet - 2024</li>
+                            <li>Llevo las redes sociales de la Falla el Moli - Actualmente</li>
                         </ul>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fotografía -->
+    <section id="fotografia" class="section photography-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Mi <span class="highlight">Fotografía</span></h2>
+                <p class="section-subtitle">Explora mis colecciones de fotografía profesional</p>
+            </div>
+            
+            <div class="photography-grid">
+                <div class="photography-card">
+                    <img src="web-fotografica/img/naturaleza-preview.webp" alt="Naturaleza" loading="lazy">
+                    <h3>Naturaleza</h3>
+                    <p>Paisajes impresionantes de los Picos de Europa y más.</p>
+                    <a href="naturaleza.html" class="btn btn-small">Ver más</a>
+                </div>
+                <div class="photography-card">
+                    <img src="web-fotografica/img/retratos-preview.webp" alt="Retratos" loading="lazy">
+                    <h3>Retratos</h3>
+                    <p>Expresiones y emociones capturadas con sensibilidad.</p>
+                    <a href="web-fotografica/retratos.html" class="btn btn-small">Ver más</a>
+                </div>
+                <div class="photography-card">
+                    <img src="web-fotografica/img/urbano-preview.webp" alt="Urbano" loading="lazy">
+                    <h3>Urbano</h3>
+                    <p>Arquitectura y vida en las ciudades de Oporto y Braga.</p>
+                    <a href="web-fotografica/urbano.html" class="btn btn-small">Ver más</a>
                 </div>
             </div>
         </div>
@@ -313,8 +326,8 @@
     <section id="contacto" class="section contact-section">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Contácta<span class="highlight">me</span></h2>
-                <p class="section-subtitle">¿Quieres hablar sobre un proyecto?</p>
+                <h2 class="section-title">Contáctame</h2>
+                <p class="section-subtitle">¿Quieres hablar sobre un proyecto? Estoy disponible en las siguientes plataformas:</p>
             </div>
             
             <div class="contact-options">
@@ -341,12 +354,13 @@
                     <h3>GitHub</h3>
                     <p>AVL05</p>
                 </a>
+                
                 <a href="https://www.instagram.com/aleexx_005/" class="contact-card" target="_blank">
                     <div class="contact-icon">
                         <i class="fab fa-instagram"></i>
                     </div>
                     <h3>Instagram</h3>
-                    <p>aleexx_005</p>
+                    <p>@aleexx_005</p>
                 </a>
             </div>
         </div>
@@ -359,6 +373,6 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>

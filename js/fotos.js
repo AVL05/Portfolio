@@ -61,94 +61,94 @@ const fotosData = [
     }, 
     // Fotos de retratos
     { 
-        src: 'fotos/retratos/foto1.jpg', 
+        src: 'img/retratos/foto1.jpg', 
         category: CATEGORIES.RETRATOS, 
         title: 'Mare de Déu (Torrent)' 
     },
 
     // Fotos urbanas
     { 
-        src: 'fotos/urbano/foto1.jpg', 
+        src: 'img/urbano/foto1.jpg', 
         category: CATEGORIES.URBANO, 
         title: 'Calle de Oporto' 
     },
     { 
-        src: 'fotos/urbano/foto2.jpg', 
+        src: 'img/urbano/foto2.jpg', 
         category: CATEGORIES.URBANO, 
         title: 'Arquitectura moderna' 
     },
     { 
-        src: 'fotos/urbano/foto3.jpg', 
+        src: 'img/urbano/foto3.jpg', 
         category: CATEGORIES.URBANO, 
         title: 'Vida nocturna' 
     },
     { 
-        src: 'fotos/urbano/foto1.jpg', 
+        src: 'img/urbano/foto1.jpg', 
         category: CATEGORIES.URBANO, 
         title: 'Ponte Luís I (Oporto)' 
     },
     { 
-        src: 'fotos/urbano/foto2.jpg', 
+        src: 'img/urbano/foto2.jpg', 
         category: CATEGORIES.URBANO, 
         title: 'Casas antiguas' 
     },
     { 
-        src: 'fotos/urbano/foto3.jpg', 
+        src: 'img/urbano/foto3.jpg', 
         category: CATEGORIES.URBANO, 
         title: 'Ponte Luís I (Oporto)' 
     },
     { 
-        src: 'fotos/urbano/foto4.jpg', 
+        src: 'img/urbano/foto4.jpg', 
         category: CATEGORIES.CIUDAD, 
         title: 'Ponte Luís I (Oporto)' 
     },
     { 
-        src: 'fotos/urbano/foto5.jpg', 
+        src: 'img/urbano/foto5.jpg', 
         category: CATEGORIES.CIUDAD, 
         title: 'Braga' 
     },
     { 
-        src: 'fotos/urbano/foto6.jpg', 
+        src: 'img/urbano/foto6.jpg', 
         category: CATEGORIES.URBANO, 
         title: 'Ayuntamiento Oporto' 
     },
     { 
-        src: 'fotos/urbano/foto7.jpg', 
+        src: 'img/urbano/foto7.jpg', 
         category: CATEGORIES.URBANO, 
         title: 'Ayuntamiento Braga' 
     },
     { 
-        src: 'fotos/urbano/foto8.jpg', 
+        src: 'img/urbano/foto8.jpg', 
         category: CATEGORIES.URBANO, 
         title: 'Catedral Oporto' 
     },
     { 
-        src: 'fotos/urbano/foto9.jpg', 
+        src: 'img/urbano/foto9.jpg', 
         category: CATEGORIES.URBANO, 
         title: 'Puesta de sol en Oporto' 
     },
     { 
-        src: 'fotos/urbano/foto10.jpg', 
+        src: 'img/urbano/foto10.jpg', 
         category: CATEGORIES.URBANO, 
         title: 'Luces de navidad' 
     },
     { 
-        src: 'fotos/urbano/foto11.jpg', 
+        src: 'img/urbano/foto11.jpg', 
         category: CATEGORIES.URBANO, 
         title: 'Camino de Santiago' 
     },
     { 
-        src: 'fotos/urbano/foto12.jpg', 
+        src: 'img/urbano/foto12.jpg', 
         category: CATEGORIES.URBANO, 
         title: 'Sin título' 
     },
     { 
-        src: 'fotos/urbano/foto13.jpg', 
+        src: 'img/urbano/foto13.jpg', 
         category: CATEGORIES.URBANO, 
         title: 'Canal de agua' 
     },
     { 
-        src: 'fotos/urbano/foto14.jpg', 
+        src: 'img/urbano/foto14.jpg', 
         category: CATEGORIES.URBANO, 
         title: 'Ponte Luís I (Oporto)' 
     }

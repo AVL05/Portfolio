@@ -2,13 +2,13 @@
 .minimal-header {
     text-align: center;
     padding: 100px 20px;
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../web-fotografica/img/naturaleza-bg.webp') center/cover no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/naturaleza-bg.webp') center/cover no-repeat;
     color: white;
 }
 
 /* Fondo específico para el encabezado de naturaleza */
 .minimal-header.naturaleza-header {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../web-fotografica/img/naturaleza-bg.webp') center/cover no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/naturaleza-bg.webp') center/cover no-repeat;
 }
 
 .minimal-header h1 {
@@ -157,3 +157,57 @@
     cursor: pointer;
 }
 
+.footer-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 40px 0 0 0;
+    text-align: left;
+}
+.footer-about, .footer-contact, .footer-links {
+    flex: 1 1 220px;
+    min-width: 200px;
+    margin-bottom: 30px;
+}
+.footer-about {
+    max-width: 300px;
+}
+.footer-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: var(--primary);
+}
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+}
+.footer-links li {
+    margin-bottom: 0.5rem;
+}
+.footer-links a {
+    color: var(--light);
+    transition: color 0.2s;
+}
+.footer-links a:hover {
+    color: var(--primary-light);
+}
+.footer-legal {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.95em;
+    color: #888;
+    border-top: 1px solid #333;
+    padding-top: 15px;
+}
+@media (max-width: 900px) {
+    .footer-grid {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+    }
+    .footer-about, .footer-contact, .footer-links {
+        margin-bottom: 0;
+    }
+}

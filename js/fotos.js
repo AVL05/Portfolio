@@ -75,21 +75,6 @@ const fotosData = [
     { 
         src: 'img/urbano/foto1.jpg', 
         category: CATEGORIES.URBANO, 
-        title: 'Calle de Oporto' 
-    },
-    { 
-        src: 'img/urbano/foto2.jpg', 
-        category: CATEGORIES.URBANO, 
-        title: 'Arquitectura moderna' 
-    },
-    { 
-        src: 'img/urbano/foto3.jpg', 
-        category: CATEGORIES.URBANO, 
-        title: 'Vida nocturna' 
-    },
-    { 
-        src: 'img/urbano/foto1.jpg', 
-        category: CATEGORIES.URBANO, 
         title: 'Ponte Luís I (Oporto)' 
     },
     { 

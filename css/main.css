@@ -476,3 +476,196 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+/* Mejoras responsive generales */
+
+/* Ajusta el padding de las secciones en pantallas pequeñas */
+@media (max-width: 768px) {
+    .section,
+    .photography-section,
+    .contact-section {
+        padding: 40px 0;
+    }
+    .section-header {
+        margin-bottom: 30px;
+    }
+    .photography-card h3 {
+        font-size: 1.2rem;
+    }
+    .photography-card p {
+        font-size: 0.95rem;
+    }
+}
+
+/* Ajusta la cuadrícula de fotografía para móviles */
+@media (max-width: 600px) {
+    .photography-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+    .photography-card img {
+        height: 180px;
+    }
+}
+
+/* Ajusta la cuadrícula de proyectos para móviles */
+@media (max-width: 600px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+    .project-image {
+        height: 180px;
+    }
+}
+
+/* Navbar: mejora el menú hamburguesa */
+@media (max-width: 768px) {
+    .navbar .container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .nav-links {
+        width: 100vw;
+        max-width: none;
+        right: -100vw;
+        top: 60px;
+        background: var(--white);
+        box-shadow: var(--shadow-md);
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+    .nav-links.active {
+        right: 0;
+    }
+    .nav-link {
+        font-size: 1.2rem;
+        padding: 10px 0;
+    }
+}
+
+/* Hero: imagen y texto apilados en móvil */
+@media (max-width: 768px) {
+    .hero .container {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .hero-content {
+        max-width: 100%;
+    }
+    .hero-image {
+        margin-top: 30px;
+    }
+}
+
+/* Footer: apila el contenido en móvil */
+@media (max-width: 900px) {
+    .footer-grid {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+    }
+    .footer-about, .footer-contact, .footer-links {
+        margin-bottom: 0;
+    }
+}
+
+/* Botones: tamaño más grande y fácil de pulsar en móvil */
+@media (max-width: 600px) {
+    .btn, .btn-small {
+        width: 100%;
+        font-size: 1rem;
+        padding: 14px 0;
+        margin-bottom: 10px;
+    }
+}
+
+/* Ajusta el tamaño de iconos sociales en móvil */
+@media (max-width: 600px) {
+    .hero-social a {
+        width: 36px;
+        height: 36px;
+        font-size: 1.2rem;
+    }
+}
+
+/* Ajusta el tamaño de las imágenes de galería en móvil */
+@media (max-width: 600px) {
+    .gallery-item {
+        aspect-ratio: 4/3;
+    }
+    .gallery-item img {
+        height: 100%;
+    }
+}
+
+/* Ajuste del hero y body para móvil */
+@media (max-width: 576px) {
+    body {
+        margin-top: 60px; /* Reduce el espacio superior para navbar en móvil */
+    }
+    .hero {
+        min-height: 70vh;
+        padding: 80px 0 40px;
+    }
+    .hero-title {
+        font-size: 1.5rem;
+    }
+    .hero-image {
+        max-width: 250px;
+        margin: 0 auto;
+    }
+}
+
+/* Mejoras extra para móvil */
+@media (max-width: 576px) {
+    .hero {
+        min-height: unset;
+        padding: 60px 0 30px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .hero .container {
+        flex-direction: column;
+        gap: 20px;
+        padding: 0 10px;
+    }
+    .hero-content {
+        max-width: 100%;
+        text-align: left;
+    }
+    .hero-title {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+    }
+    .hero-subtitle {
+        font-size: 1rem;
+        margin-bottom: 20px;
+    }
+    .hero-cta {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+    .hero-social {
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+    .hero-image {
+        max-width: 180px;
+        margin: 20px auto 0 auto;
+    }
+    .image-wrapper {
+        max-width: 180px;
+    }
+    .profile-image {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* Ajuste para evitar desbordamiento horizontal */
+html, body {
+    max-width: 100vw;
+    overflow-x: hidden;
+}

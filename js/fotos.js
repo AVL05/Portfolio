@@ -65,6 +65,11 @@ const fotosData = [
         category: CATEGORIES.RETRATOS, 
         title: 'Mare de Déu (Torrent)' 
     },
+{ 
+        src: 'img/retratos/foto2.jpg', 
+        category: CATEGORIES.RETRATOS, 
+        title: 'Mare de Déu (Torrent)' 
+    },
 
     // Fotos urbanas
     { 

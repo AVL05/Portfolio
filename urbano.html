@@ -6,13 +6,25 @@
     <title>Fotografía Urbana | Alex Vicente Lopez</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollToPlugin.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/naturaleza.css">
+    <link rel="stylesheet" href="css/photography.css">
     <link rel="icon" href="img/fav.png" type="image/x-icon">
 </head>
 <body>
+    <!-- Page Loader -->
+    <div class="page-loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <p>Cargando...</p>
+        </div>
+    </div>
+    
     <!-- Navbar -->
     <nav class="navbar">
         <div class="container">
@@ -32,76 +44,157 @@
         </div>
     </nav>
 
-    <!-- Encabezado -->
-    <header class="minimal-header urbano-header">
-        <div class="container">
-            <h1>Urbano</h1>
-            <p class="subtitle">La ciudad como escenario</p>
+    <!-- Hero Section -->
+<header class="photo-hero naturaleza-hero enhanced-hero">
+    <div class="hero-bg"></div>
+    <div class="container hero-content">
+        <div class="hero-text">
+            <h1><span class="emoji">🏙️</span> Urbano</h1>
+            <p class="hero-subtitle">Capturando la belleza del mundo natural</p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <i class="fas fa-camera"></i>
+                    <span id="photo-count">24</span>
+                    <label>Fotografías</label>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span id="location-count">12</span>
+                    <label>Ubicaciones</label>
+                </div>
+            </div>
         </div>
-    </header>
+    </div>
+</header>
 
-    <!-- Contenido principal -->
-    <main class="container">
-        <section class="gallery-section">
-            <h2 class="section-title">Galería</h2>
-            <div class="gallery" id="urbano-gallery">
+    <!-- Category Intro -->
+    <section class="category-intro">
+        <div class="container">
+            <div class="intro-content">
+                <h2>Sobre mi fotografía urbana</h2>
+                <p>Exploro la belleza oculta en las ciudades, capturando la arquitectura, el movimiento y la vida urbana. Desde imponentes rascacielos hasta callejones llenos de carácter, cada imagen cuenta una historia única de la vida en la ciudad.</p>
+                <div class="intro-stats">
+                    <div class="equipment-item">
+                        <i class="fas fa-camera-retro"></i>
+                        <span>16-35mm f/2.8</span>
+                    </div>
+                    <div class="equipment-item">
+                        <i class="fas fa-moon"></i>
+                        <span>Blue Hour</span>
+                    </div>
+                    <div class="equipment-item">
+                        <i class="fas fa-building"></i>
+                        <span>Arquitectura</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <main class="photo-gallery">
+        <div class="container">
+            <div class="gallery-filters">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="arquitectura">Arquitectura</button>
+                <button class="filter-btn" data-filter="calles">Calles</button>
+                <button class="filter-btn" data-filter="nocturno">Nocturno</button>
+            </div>
+            
+            <div class="gallery-grid pro-gallery" id="urban-gallery">
                 <!-- Las imágenes se cargarán dinámicamente desde gallery.js -->
             </div>
-        </section>
-
-        <section class="category-description">
-            <h2>Sobre mi fotografía urbana</h2>
-            <p>Exploro la vida en la ciudad a través de mi lente, capturando arquitectura, calles y momentos espontáneos. Desde Oporto hasta Braga, cada imagen refleja la energía y esencia única de los entornos urbanos.</p>
-        </section>
+        </div>
     </main>
 
-    <!-- Lightbox -->
+    <!-- Featured Photos -->
+    <section class="featured-photos">
+        <div class="container">
+            <h2>Destacados</h2>
+            <div class="featured-grid">
+                <!-- Se seleccionarán las mejores fotos dinámicamente -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="photo-process">
+        <div class="container">
+            <h2>Mi proceso</h2>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3>Exploración</h3>
+                    <p>Descubrir lugares únicos</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Timing</h3>
+                    <p>Momento y luz perfecta</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3>Composición</h3>
+                    <p>Líneas y perspectivas</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-sliders-h"></i>
+                    </div>
+                    <h3>Edición</h3>
+                    <p>Ajustes arquitectónicos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Lightbox -->
     <div id="lightbox" class="lightbox hidden">
         <span class="close">&times;</span>
         <img class="lightbox-image" src="" alt="Imagen ampliada">
+        <div class="lightbox-info">
+            <h3 class="photo-title"></h3>
+            <p class="photo-description"></p>
+            <div class="photo-metadata">
+                <span class="location"><i class="fas fa-map-marker-alt"></i> <span></span></span>
+                <span class="camera"><i class="fas fa-camera"></i> <span></span></span>
+                <span class="date"><i class="fas fa-calendar"></i> <span></span></span>
+            </div>
+        </div>
     </div>
 
-    <!-- Footer -->
+    <!-- Footer unificado -->
     <footer class="footer">
-        <div class="container footer-grid">
-            <!-- Presentación o lema -->
-            <div class="footer-about">
-                <h2 class="footer-title">Alex Vicente López</h2>
-                <p class="footer-subtitle">Fotografía, desarrollo web y creatividad. <br>¡Gracias por visitar mi portfolio!</p>
-            </div>
-            <!-- Contacto -->
-            <div class="footer-contact">
-                <h2 class="footer-title">Contáctame</h2>
-                <div class="contact-options">
-                    <a href="mailto:alexviclop@gmail.com" class="contact-card" title="Email">
-                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-                        <span>Email</span>
-                    </a>
-                    <a href="https://www.linkedin.com/in/alex-vicente-lopez-083821309/" class="contact-card" target="_blank" title="LinkedIn">
-                        <div class="contact-icon"><i class="fab fa-linkedin"></i></div>
-                        <span>LinkedIn</span>
-                    </a>
-                    <a href="https://github.com/AVL05" class="contact-card" target="_blank" title="GitHub">
-                        <div class="contact-icon"><i class="fab fa-github"></i></div>
-                        <span>GitHub</span>
-                    </a>
-                    <a href="https://www.instagram.com/aleexx_005/" class="contact-card" target="_blank" title="Instagram">
-                        <div class="contact-icon"><i class="fab fa-instagram"></i></div>
-                        <span>Instagram</span>
-                    </a>
+        <div class="container footer-flex">
+            <div class="footer-brand">
+                <div class="footer-logo-wrapper">
+                    <img src="img/fav.png" alt="Logo AVL" class="footer-logo" style="background: none; box-shadow: none; border-radius: 0; width: 70px; height: 70px; object-fit: contain;">
+                </div>
+                <div>
+                    <h2 class="footer-title">Alex Vicente López</h2>
+                    <p class="footer-subtitle">Fotografía, desarrollo web y creatividad.<br>¡Gracias por visitar mi portfolio!</p>
                 </div>
             </div>
-            <!-- Enlaces rápidos -->
-            <nav class="footer-links" aria-label="Enlaces rápidos">
-                <h2 class="footer-title">Enlaces</h2>
-                <ul>
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="naturaleza.html">Naturaleza</a></li>
-                    <li><a href="retratos.html">Retratos</a></li>
-                    <li><a href="urbano.html">Urbano</a></li>
-                    <li><a href="index.html#contacto">Contacto</a></li>
-                </ul>
-            </nav>
+            <div class="footer-social">
+                <a href="https://github.com/AVL05" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/alex-vicente-lopez-083821309/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/aleexx_005/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:alexviclop@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+            <div class="footer-links">
+                <a href="index.html#inicio">Inicio</a>
+                <a href="index.html#proyectos">Proyectos</a>
+                <a href="index.html#habilidades">Habilidades</a>
+                <a href="index.html#curriculum">Curriculum</a>
+                <a href="index.html#fotografia">Fotografía</a>
+                <a href="index.html#contacto">Contacto</a>
+            </div>
         </div>
         <div class="footer-legal">
             <p>&copy; <span id="current-year"></span> Alex Vicente López. Todos los derechos reservados.</p>
@@ -111,10 +204,34 @@
     <!-- Scripts -->
     <script src="js/fotos.js"></script>
     <script src="js/gallery.js"></script>
+    <script src="js/animations.js"></script>
     <script src="js/main.js"></script>
     <script>
-        // Inicializar la galería urbana
-        initGallery('urbano', CATEGORIES.URBANO);
+        // Page-specific initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize gallery
+            const categoryPhotos = window.fotosData.filter(photo => 
+                photo.category === 'urbano'
+            );
+            initGallery('urban', categoryPhotos);
+            
+            // Update statistics
+            const photoCount = document.getElementById('photo-count');
+            const locationCount = document.getElementById('location-count');
+            
+            if (photoCount) photoCount.textContent = categoryPhotos.length;
+            if (locationCount) {
+                const cities = getUniqueLocations(categoryPhotos);
+                locationCount.textContent = cities.length;
+            }
+            
+            // Hide loader after everything is loaded
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    document.querySelector('.page-loader').classList.add('hidden');
+                }, 500);
+            });
+        });
     </script>
 </body>
 </html>

@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alex Vicente López | Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/index.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
@@ -369,19 +371,34 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-about">
-                <h2 class="footer-title">Alex Vicente López</h2>
-                <p class="footer-subtitle">Fotografía, desarrollo web y creatividad. <br>¡Gracias por visitar mi portfolio!</p>
+        <div class="container footer-flex">
+            <div class="footer-brand">
+                <img src="img/fav.png" alt="Logo AVL" class="footer-logo" style="background: none; box-shadow: none; border-radius: 0; width: 70px; height: 70px; object-fit: contain;">
+                <div>
+                    <h2 class="footer-title">Alex Vicente López</h2>
+                    <p class="footer-subtitle">Fotografía, desarrollo web y creatividad.<br>¡Gracias por visitar mi portfolio!</p>
+                </div>
+            </div>
+            <div class="footer-social">
+                <a href="https://github.com/AVL05" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/alex-vicente-lopez-083821309/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/aleexx_005/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:alexviclop@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+            <div class="footer-links">
+                <a href="#inicio">Inicio</a>
+                <a href="#proyectos">Proyectos</a>
+                <a href="#habilidades">Habilidades</a>
+                <a href="#curriculum">Curriculum</a>
+                <a href="#fotografia">Fotografía</a>
+                <a href="#contacto">Contacto</a>
             </div>
         </div>
-                <div class="footer-legal">
+        <div class="footer-legal">
             <p>&copy; <span id="current-year"></span> Alex Vicente López. Todos los derechos reservados.</p>
         </div>
     </footer>
 
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/index.css">
     <script src="js/main.js"></script>
 </body>
 </html>

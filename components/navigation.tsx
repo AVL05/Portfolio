@@ -89,7 +89,7 @@ export function Navigation() {
                   backgroundSize: "200% 200%",
                 }}
               >
-                Portfolio
+                Alex Vicente López
               </motion.span>
             </motion.a>
 

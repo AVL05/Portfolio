@@ -13,24 +13,26 @@ const TypewriterText = ({
 }) => {
   const [displayText, setDisplayText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isStarted, setIsStarted] = useState(false);
 
   useEffect(() => {
+    const startTimeout = setTimeout(() => {
+      setIsStarted(true);
+    }, delay);
+    return () => clearTimeout(startTimeout);
+  }, [delay, text]);
+
+  useEffect(() => {
+    if (!isStarted) return;
+
     if (currentIndex < text.length) {
       const timeout = setTimeout(() => {
         setDisplayText((prev) => prev + text[currentIndex]);
         setCurrentIndex((prev) => prev + 1);
-      }, 100);
+      }, 80);
       return () => clearTimeout(timeout);
     }
-  }, [currentIndex, text]);
-
-  useEffect(() => {
-    const startTimeout = setTimeout(() => {
-      setCurrentIndex(0);
-      setDisplayText("");
-    }, delay);
-    return () => clearTimeout(startTimeout);
-  }, [delay]);
+  }, [currentIndex, text, isStarted]);
 
   return (
     <span>

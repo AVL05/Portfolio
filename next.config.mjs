@@ -7,11 +7,11 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    unoptimized: true,
+    formats: ["image/avif", "image/webp"],
   },
-  output: 'standalone',
+  output: "standalone",
   trailingSlash: false,
   poweredByHeader: false,
-}
+};
 
-export default nextConfig
+export default nextConfig;

@@ -10,6 +10,7 @@ import {
 } from "@/hooks/useScrollReveal";
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
+import Image from "next/image";
 
 const smallImageProjects = [
   "Llibret Falla el Molí 24/25",
@@ -202,14 +203,16 @@ export function Projects() {
                   />
 
                   {/* Image */}
-                  <motion.img
+                  <Image
                     src={project.image || "/placeholder.svg"}
                     alt={project.title}
+                    fill
                     className={`transition-all duration-500 relative z-0 ${
                       smallImageProjects.includes(project.title)
-                        ? "object-contain w-3/4 h-3/4 mx-auto my-auto"
-                        : "object-cover w-full h-full"
+                        ? "object-contain p-8"
+                        : "object-cover"
                     }`}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
 
                   {/* Category badge */}

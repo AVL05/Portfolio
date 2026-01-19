@@ -101,7 +101,6 @@ export function Photography() {
                     fill
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
-                    priority
                   />
                 ) : (
                   // Placeholder when no image is available

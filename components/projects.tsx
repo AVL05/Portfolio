@@ -12,7 +12,7 @@ import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 
 const smallImageProjects = [
-  "Llibret Falla el Moli 24/25",
+  "Llibret Falla el Molí 24/25",
   "Web de XML",
   "Cartel Cena de Proclamación",
   "XIX Concurso",
@@ -22,9 +22,9 @@ const smallImageProjects = [
 
 const projects = [
   {
-    title: "Llibret Falla el Moli 24/25",
+    title: "Llibret Falla el Molí 24/25",
     description:
-      "Diseño editorial completo del llibret de la Falla el Moli para la temporada 2024/2025. Proyecto integral que incluye maquetación, diseño gráfico y preparación para impresión.",
+      "Diseño editorial completo del llibret de la Falla el Molí para la temporada 2024/2025. Proyecto integral que incluye maquetación, diseño gráfico y preparación para impresión.",
     image: "/projects/Falla.svg",
     technologies: ["Adobe InDesign", "Photoshop", "Illustrator"],
     category: "Diseño Editorial",
@@ -42,7 +42,7 @@ const projects = [
   {
     title: "Cartel Cena de Proclamación",
     description:
-      "Diseño de cartel para la invitación a la cena de proclamación de la Falla el Moli 24/25. Diseño visual impactante que captura la esencia del evento.",
+      "Diseño de cartel para la invitación a la cena de proclamación de la Falla el Molí 24/25. Diseño visual impactante que captura la esencia del evento.",
     image: "/projects/Falla.svg",
     technologies: ["Adobe Illustrator", "Photoshop"],
     category: "Diseño Gráfico",
@@ -66,7 +66,7 @@ const projects = [
   },
   {
     title: "XIX Concurso",
-    description: "Diseño del cartel de la Falla el Moli por el XIX Concurso",
+    description: "Diseño del cartel de la Falla el Molí por el XIX Concurso",
     image: "/projects/XIX Concurso.png",
     technologies: ["Photoshop", "Lightroom"],
     category: "Diseño Gráfico",
@@ -74,7 +74,7 @@ const projects = [
   },
   {
     title: "XX Concurso",
-    description: "Diseño del cartel de la Falla el Moli por el XX Concurso",
+    description: "Diseño del cartel de la Falla el Molí por el XX Concurso",
     image: "/projects/XX Concurso.png",
     technologies: ["Photoshop", "Lightroom"],
     category: "Diseño Gráfico",
@@ -82,7 +82,7 @@ const projects = [
   },
   {
     title: "XXI Concurso",
-    description: "Diseño del cartel de la Falla el Moli por el XXI Concurso",
+    description: "Diseño del cartel de la Falla el Molí por el XXI Concurso",
     image: "/projects/XXI Concurso.png",
     technologies: ["Photoshop", "Lightroom"],
     category: "Diseño Gráfico",
@@ -90,10 +90,11 @@ const projects = [
   },
   {
     title: "Dulces Navideños",
-    description: "Pagina WEB echa con Vue, para el encargo de dulces navideños",
+    description:
+      "Página web hecha con Vue, para el encargo de dulces navideños",
     image: "/projects/aitanamora.png",
     technologies: ["Vue"],
-    category: "Pagina WEB",
+    category: "Página web",
     link: "https://aitanamora.vercel.app/",
   },
 ];

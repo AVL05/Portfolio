@@ -88,7 +88,7 @@ export function About() {
             <motion.p variants={scrollRevealVariants}>
               Además del desarrollo web, mi hobby es{" "}
               <motion.span className="text-foreground font-medium relative">
-                fotógrafo creativo y diseñador digital
+                la fotografía creativa y el diseño digital
                 <motion.span
                   className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-primary/50 to-accent/50 block"
                   initial={{ width: 0 }}

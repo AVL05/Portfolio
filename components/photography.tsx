@@ -195,7 +195,7 @@ export function Photography() {
                     className="border-2 border-primary/20 hover:border-primary/40 bg-background/50 backdrop-blur-sm hover:bg-primary/5 px-6 py-6 rounded-full text-base font-medium transition-all duration-300"
                   >
                     <Instagram className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-                    Sigueme en Instagram
+                    Sígueme en Instagram
                     <ExternalLink className="ml-2 h-4 w-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                   </Button>
                 </motion.a>

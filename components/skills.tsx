@@ -36,7 +36,7 @@ const skillCategories = [
       { name: "Photoshop", level: "Edición y retoque fotográfico" },
       { name: "Illustrator", level: "Diseño vectorial" },
       { name: "InDesign", level: "Maquetación editorial" },
-      { name: "Premiere", level: "Edición de video" },
+      { name: "Premiere", level: "Edición de vídeo" },
       { name: "Lightroom", level: "Edición y retoque fotográfico" },
     ],
   },

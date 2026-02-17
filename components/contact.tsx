@@ -1,26 +1,28 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { useState } from "react"
-import { Card } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Github, Linkedin, Mail, Send, Instagram, Camera } from "lucide-react"
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Camera, Github, Instagram, Linkedin, Mail, Send } from "lucide-react";
+import type React from "react";
+import { useState } from "react";
 
 export function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<"success" | "error" | null>(null)
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"success" | "error" | null>(
+    null,
+  );
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    setSubmitStatus(null)
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
@@ -34,31 +36,37 @@ export function Contact() {
           email: formData.email,
           message: formData.message,
         }),
-      })
+      });
 
-      const data = await response.json()
+      const data = await response.json();
 
       if (data.success) {
-        setSubmitStatus("success")
-        setFormData({ name: "", email: "", message: "" })
+        setSubmitStatus("success");
+        setFormData({ name: "", email: "", message: "" });
       } else {
-        setSubmitStatus("error")
+        setSubmitStatus("error");
       }
     } catch (error) {
-      console.error("Error submitting form:", error)
-      setSubmitStatus("error")
+      console.error("Error submitting form:", error);
+      setSubmitStatus("error");
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   return (
-    <section id="contact" className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-background">
+    <section
+      id="contact"
+      className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-background"
+    >
       <div className="max-w-4xl mx-auto">
         <div className="space-y-4 mb-8 sm:mb-12 text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-balance">Contáctame</h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-balance">
+            Contáctame
+          </h2>
           <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed px-2">
-            ¿Quieres hablar sobre un proyecto? Estoy disponible en las siguientes plataformas
+            ¿Quieres hablar sobre un proyecto? Estoy disponible en las
+            siguientes plataformas
           </p>
         </div>
 
@@ -66,7 +74,10 @@ export function Contact() {
           <Card className="p-6">
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium mb-2">
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium mb-2"
+                >
                   Nombre
                 </label>
                 <Input
@@ -74,13 +85,18 @@ export function Contact() {
                   type="text"
                   placeholder="Tu nombre"
                   value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
                   required
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium mb-2">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium mb-2"
+                >
                   Email
                 </label>
                 <Input
@@ -88,13 +104,18 @@ export function Contact() {
                   type="email"
                   placeholder="tu@email.com"
                   value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
                   required
                 />
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium mb-2">
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-medium mb-2"
+                >
                   Mensaje
                 </label>
                 <Textarea
@@ -102,7 +123,9 @@ export function Contact() {
                   placeholder="Cuéntame sobre tu proyecto..."
                   rows={5}
                   value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, message: e.target.value })
+                  }
                   required
                 />
               </div>
@@ -120,7 +143,8 @@ export function Contact() {
 
               {submitStatus === "error" && (
                 <p className="text-sm text-red-600 dark:text-red-400 text-center">
-                  Hubo un error al enviar el mensaje. Por favor, intenta de nuevo.
+                  Hubo un error al enviar el mensaje. Por favor, intenta de
+                  nuevo.
                 </p>
               )}
             </form>
@@ -175,11 +199,13 @@ export function Contact() {
               </div>
             </Card>
 
-            <Card className="p-6 bg-gradient-to-br from-primary/10 to-accent/10 border-primary/20">
+            <Card className="p-6 bg-linear-to-br from-primary/10 to-accent/10 border-primary/20">
               <div className="flex items-start gap-3">
                 <Camera className="h-6 w-6 text-primary mt-1" />
                 <div>
-                  <h3 className="text-xl font-semibold mb-2">Portfolio Fotográfico</h3>
+                  <h3 className="text-xl font-semibold mb-2">
+                    Portfolio Fotográfico
+                  </h3>
                   <p className="text-muted-foreground text-pretty leading-relaxed mb-4">
                     Explora mi colección completa de fotografías profesionales
                   </p>
@@ -197,5 +223,5 @@ export function Contact() {
         </footer>
       </div>
     </section>
-  )
+  );
 }

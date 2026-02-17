@@ -62,7 +62,7 @@ export function Skills() {
       className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-muted/30 relative overflow-hidden"
     >
       {/* Background decorations */}
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-accent/5 to-secondary/5" />
+      <div className="absolute inset-0 bg-linear-to-r from-primary/5 via-accent/5 to-secondary/5" />
       <motion.div
         className="absolute top-0 left-1/4 w-72 h-72 bg-primary/10 rounded-full blur-3xl"
         animate={{
@@ -80,7 +80,7 @@ export function Skills() {
           variants={staggerChildrenVariants}
         >
           <motion.h2
-            className="text-2xl sm:text-3xl md:text-4xl font-bold text-balance bg-gradient-to-r from-foreground via-primary to-accent bg-clip-text text-transparent"
+            className="text-2xl sm:text-3xl md:text-4xl font-bold text-balance bg-linear-to-r from-foreground via-primary to-accent bg-clip-text text-transparent"
             variants={scrollRevealVariants}
           >
             Habilidades
@@ -105,7 +105,7 @@ export function Skills() {
               <Card className="p-6 h-full relative overflow-hidden group hover:shadow-2xl transition-all duration-500 backdrop-blur-sm border-2 hover:border-primary/20">
                 {/* Card background gradient */}
                 <motion.div
-                  className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
+                  className={`absolute inset-0 bg-linear-to-br ${category.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
                 />
 
                 <div className="relative z-10">
@@ -122,7 +122,7 @@ export function Skills() {
                       className={`p-3 ${category.bgColor} rounded-lg relative overflow-hidden`}
                     >
                       <motion.div
-                        className={`absolute inset-0 bg-gradient-to-r ${category.color} opacity-0 group-hover:opacity-20 transition-opacity duration-300`}
+                        className={`absolute inset-0 bg-linear-to-r ${category.color} opacity-0 group-hover:opacity-20 transition-opacity duration-300`}
                       />
                       <category.icon className="h-6 w-6 text-primary relative z-10" />
                     </div>

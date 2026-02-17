@@ -54,7 +54,7 @@ export function Navigation() {
     <>
       {/* Progress bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-secondary origin-left z-50"
+        className="fixed top-0 left-0 right-0 h-1 bg-linear-to-r from-primary via-accent to-secondary origin-left z-60"
         style={{ scaleX }}
       />
 
@@ -76,7 +76,7 @@ export function Navigation() {
               className="text-xl font-bold text-foreground hover:text-primary transition-colors relative"
             >
               <motion.span
-                className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
+                className="bg-linear-to-r from-primary to-accent bg-clip-text text-transparent"
                 animate={{
                   backgroundPosition: ["0%", "100%"],
                 }}
@@ -121,7 +121,7 @@ export function Navigation() {
                       />
                     )}
                     <motion.div
-                      className="absolute bottom-0 left-1/2 h-0.5 bg-gradient-to-r from-primary to-accent rounded-full"
+                      className="absolute bottom-0 left-1/2 h-0.5 bg-linear-to-r from-primary to-accent rounded-full"
                       initial={{ width: 0, x: "-50%" }}
                       animate={isActive ? { width: "80%" } : { width: 0 }}
                       transition={{

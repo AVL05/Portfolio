@@ -133,7 +133,7 @@ export function Experience() {
               formación
             </p>
             <Button size="lg" asChild className="w-full sm:w-auto">
-              <a href="/cv.pdf" download>
+              <a href="/curriculum.pdf" download>
                 <FileText className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
                 Descargar CV
               </a>

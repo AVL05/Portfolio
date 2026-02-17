@@ -47,57 +47,51 @@ const TypewriterText = ({
 };
 
 const FloatingElements = () => {
-  const [floatingData, setFloatingData] = useState<
-    Array<{
-      id: number;
-      left: number;
-      xMovement: number;
-      duration: number;
-      delay: number;
-    }>
-  >([]);
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
-    const elements = Array.from({ length: 6 }).map((_, i) => ({
-      id: i,
-      left: Math.random() * 100,
-      xMovement: Math.random() * 100 - 50,
-      duration: 3 + Math.random() * 2,
-      delay: Math.random() * 2,
-    }));
-    setFloatingData(elements);
   }, []);
 
-  if (!isClient) {
-    return (
-      <div className="absolute inset-0 overflow-hidden pointer-events-none" />
-    );
-  }
+  if (!isClient) return null;
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {floatingData.map((element) => (
-        <motion.div
-          key={element.id}
-          className="absolute w-2 h-2 bg-white/10 rounded-full"
-          animate={{
-            y: [-20, -100],
-            x: [0, element.xMovement],
-            opacity: [0, 1, 0],
-          }}
-          transition={{
-            duration: element.duration,
-            repeat: Infinity,
-            delay: element.delay,
-          }}
+      {[...Array(6)].map((_, i) => (
+        <div
+          key={i}
+          className="absolute w-2 h-2 bg-white/10 rounded-full animate-float-up"
           style={{
-            left: `${element.left}%`,
+            left: `${Math.random() * 100}%`,
             top: "100%",
+            animationDelay: `${Math.random() * 5}s`,
+            animationDuration: `${Math.random() * 4 + 3}s`,
+            opacity: 0,
           }}
         />
       ))}
+      <style jsx global>{`
+        @keyframes float-up {
+          0% {
+            transform: translateY(0) translateX(0);
+            opacity: 0;
+          }
+          20% {
+            opacity: 0.5;
+          }
+          80% {
+            opacity: 0.5;
+          }
+          100% {
+            transform: translateY(-120vh)
+              translateX(${Math.random() * 100 - 50}px);
+            opacity: 0;
+          }
+        }
+        .animate-float-up {
+          animation: float-up ease-in infinite;
+        }
+      `}</style>
     </div>
   );
 };
@@ -108,11 +102,10 @@ export function Hero() {
       id="hero"
       className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 gradient-bg relative overflow-hidden"
     >
-      {/* Animated background elements */}
       <FloatingElements />
 
-      {/* Parallax background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-amber-500/5" />
+      {/* Parallax background - reduced opacity for better contrast */}
+      <div className="absolute inset-0 bg-linear-to-br from-orange-500/5 to-amber-500/5" />
 
       <div className="max-w-4xl mx-auto text-center flex-1 flex flex-col items-center justify-center z-10">
         <motion.div
@@ -121,7 +114,6 @@ export function Hero() {
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
         >
-          {/* Name with typewriter effect */}
           <motion.h1
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white/95 text-balance leading-tight px-4"
             initial={{ y: 20, opacity: 0 }}
@@ -131,7 +123,6 @@ export function Hero() {
             <TypewriterText text="Alex Vicente López" delay={200} />
           </motion.h1>
 
-          {/* Subtitle with stagger animation */}
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -149,7 +140,6 @@ export function Hero() {
             </p>
           </motion.div>
 
-          {/* Description */}
           <motion.p
             className="text-sm sm:text-base md:text-lg text-white/70 max-w-2xl mx-auto text-pretty leading-relaxed px-4 text-center"
             initial={{ y: 10, opacity: 0 }}
@@ -161,7 +151,6 @@ export function Hero() {
             realmente conectan.
           </motion.p>
 
-          {/* Social links with enhanced animations */}
           <motion.div
             className="flex items-center justify-center gap-4 sm:gap-6 pt-4 px-4"
             initial={{ y: 10, opacity: 0 }}
@@ -212,7 +201,6 @@ export function Hero() {
         </motion.div>
       </div>
 
-      {/* Enhanced scroll indicator */}
       <motion.a
         href="#about"
         className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/70 hover:text-white transition-colors"

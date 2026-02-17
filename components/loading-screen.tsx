@@ -8,125 +8,206 @@ export function LoadingScreen() {
   const [loadingProgress, setLoadingProgress] = useState(0);
 
   useEffect(() => {
-    // Simulate loading progress
-    const interval = setInterval(() => {
-      setLoadingProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setTimeout(() => setIsLoading(false), 500);
-          return 100;
-        }
-        return prev + Math.random() * 15;
-      });
-    }, 150); // Slightly faster loading simulator
+    let animationFrame: number;
+    let progress = 0;
+    const startTime = Date.now();
 
-    return () => clearInterval(interval);
+    const updateProgress = () => {
+      // Simulate progress: faster and more responsive
+      const remaining = 100 - progress;
+
+      // Increased increments for a snappier feel
+      const increment = Math.random() * (remaining > 20 ? 1.0 : 0.5);
+
+      progress = Math.min(100, progress + increment);
+      setLoadingProgress(progress);
+
+      if (progress < 100) {
+        animationFrame = requestAnimationFrame(updateProgress);
+      } else {
+        setTimeout(() => setIsLoading(false), 400);
+      }
+    };
+
+    animationFrame = requestAnimationFrame(updateProgress);
+    return () => cancelAnimationFrame(animationFrame);
   }, []);
 
   return (
     <AnimatePresence>
       {isLoading && (
         <motion.div
-          className="fixed inset-0 z-50 bg-background flex items-center justify-center overflow-hidden"
+          className="fixed inset-0 z-100 bg-[#0a0a0a] flex items-center justify-center overflow-hidden"
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
+          exit={{
+            y: "-100%",
+            transition: {
+              duration: 1.2,
+              ease: [0.7, 0, 0.3, 1],
+              delay: 0.1,
+            },
+          }}
         >
-          {/* Background pattern */}
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10" />
+          {/* Clean minimalist background */}
 
-          <div className="relative z-10 text-center space-y-6 sm:space-y-8 px-4">
-            {/* Logo animation */}
-            <motion.div
-              initial={{ scale: 0, rotate: -180 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{
-                type: "spring",
-                stiffness: 100,
-                damping: 20,
-                delay: 0.2,
-              }}
-            >
-              <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full bg-gradient-to-r from-primary to-accent flex items-center justify-center shadow-lg shadow-primary/20">
-                <motion.div
-                  className="text-white text-xl sm:text-2xl font-bold"
-                  animate={{ rotate: [0, 180, 360] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+          {/* High-end ambient glow */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl aspect-square bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
+
+          <div className="relative flex flex-col items-center w-full max-w-sm px-8">
+            {/* Typographic Logo Section */}
+            <div className="relative mb-12 flex flex-col items-center">
+              <div className="relative h-24 sm:h-32 mb-4 overflow-visible">
+                <svg
+                  width="240"
+                  height="120"
+                  viewBox="0 0 240 120"
+                  className="overflow-visible"
                 >
-                  ⚡
-                </motion.div>
+                  <defs>
+                    <linearGradient
+                      id="logo-gradient"
+                      x1="0%"
+                      y1="0%"
+                      x2="100%"
+                      y2="0%"
+                    >
+                      <stop offset="0%" stopColor="var(--primary)" />
+                      <stop offset="100%" stopColor="var(--accent)" />
+                    </linearGradient>
+                  </defs>
+
+                  {/* Background Stroke Lettering */}
+                  <motion.text
+                    x="50%"
+                    y="50%"
+                    dominantBaseline="middle"
+                    textAnchor="middle"
+                    className="text-6xl sm:text-7xl font-bold fill-none stroke-white/10"
+                    strokeWidth="0.5"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1 }}
+                    style={{
+                      letterSpacing: "0.15em",
+                      fontFamily: "var(--font-geist-sans)",
+                    }}
+                  >
+                    AVL
+                  </motion.text>
+
+                  {/* Foreground Animated Filling Lettering */}
+                  <motion.text
+                    x="50%"
+                    y="50%"
+                    dominantBaseline="middle"
+                    textAnchor="middle"
+                    className="text-6xl sm:text-7xl font-bold"
+                    fill="url(#logo-gradient)"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                    style={{
+                      letterSpacing: "0.15em",
+                      fontFamily: "var(--font-geist-sans)",
+                      clipPath: `inset(0 ${100 - loadingProgress}% 0 0)`,
+                    }}
+                  >
+                    AVL
+                  </motion.text>
+                </svg>
               </div>
-            </motion.div>
 
-            {/* Loading text */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.8 }}
-              className="space-y-3 sm:space-y-4"
-            >
-              <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                Alex Vicente López
-              </h1>
-              <p className="text-sm sm:text-base text-muted-foreground">
-                Cargando experiencia...
-              </p>
-            </motion.div>
+              {/* Name and Roles */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+                className="text-center space-y-3"
+              >
+                <h2 className="text-xs sm:text-sm uppercase tracking-[0.5em] text-white/40 font-light">
+                  Alex Vicente López
+                </h2>
+                <div className="flex items-center justify-center gap-3 text-[9px] sm:text-[10px] tracking-[0.3em] text-primary/60 uppercase font-medium">
+                  <span>Digital Developer</span>
+                  <span className="w-1 h-1 bg-primary/30 rounded-full" />
+                  <span>Visual Artist</span>
+                </div>
+              </motion.div>
+            </div>
 
-            {/* Progress bar */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.8, duration: 0.5 }}
-              className="w-56 sm:w-64 mx-auto space-y-2"
-            >
-              <div className="flex justify-between text-sm text-muted-foreground">
-                <span>Progreso</span>
-                <motion.span
-                  key={Math.floor(loadingProgress)}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {Math.floor(loadingProgress)}%
-                </motion.span>
-              </div>
-
-              <div className="w-full bg-muted/30 rounded-full h-2 overflow-hidden">
+            {/* Bottom Progress Area */}
+            <div className="w-full flex flex-col items-center gap-6 mt-8">
+              {/* Minimal Progress Line */}
+              <div className="w-full h-px bg-white/5 relative overflow-hidden">
                 <motion.div
-                  className="h-full bg-gradient-to-r from-primary to-accent rounded-full relative"
+                  className="absolute inset-y-0 left-0 bg-linear-to-r from-primary to-accent"
                   initial={{ width: 0 }}
                   animate={{ width: `${loadingProgress}%` }}
-                  transition={{ type: "spring", stiffness: 100, damping: 20 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 100,
+                    damping: 30,
+                    restDelta: 0.01,
+                  }}
                 />
               </div>
-            </motion.div>
 
-            {/* Loading dots */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1, duration: 0.5 }}
-              className="flex justify-center space-x-2"
-            >
-              {[0, 1, 2].map((i) => (
-                <motion.div
-                  key={i}
-                  className="w-2 h-2 bg-primary rounded-full"
-                  animate={{
-                    y: [0, -10, 0],
-                    opacity: [0.5, 1, 0.5],
-                  }}
-                  transition={{
-                    duration: 1.5,
-                    repeat: Infinity,
-                    delay: i * 0.2,
-                    ease: "easeInOut",
-                  }}
-                />
-              ))}
-            </motion.div>
+              {/* Elegant Counter */}
+              <div className="flex justify-between w-full px-1 items-baseline">
+                <motion.span className="text-[10px] tracking-widest text-white/20 uppercase font-mono">
+                  System Initializing
+                </motion.span>
+                <motion.span
+                  className="text-2xl font-mono text-white/30 tabular-nums"
+                  key={Math.floor(loadingProgress)}
+                >
+                  {Math.floor(loadingProgress).toString().padStart(3, "0")}
+                </motion.span>
+              </div>
+            </div>
           </div>
+
+          {/* Decorative Corner Framing (Photography elements style) */}
+          <div className="absolute inset-8 sm:inset-12 pointer-events-none opacity-30">
+            <motion.div
+              className="absolute top-0 left-0 w-12 h-px bg-primary/50"
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ delay: 0.2, duration: 0.8 }}
+              style={{ originX: 0 }}
+            />
+            <motion.div
+              className="absolute top-0 left-0 w-px h-12 bg-primary/50"
+              initial={{ scaleY: 0 }}
+              animate={{ scaleY: 1 }}
+              transition={{ delay: 0.2, duration: 0.8 }}
+              style={{ originY: 0 }}
+            />
+
+            <motion.div
+              className="absolute bottom-0 right-0 w-12 h-px bg-primary/50"
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ delay: 0.2, duration: 0.8 }}
+              style={{ originX: 1 }}
+            />
+            <motion.div
+              className="absolute bottom-0 right-0 w-px h-12 bg-primary/50"
+              initial={{ scaleY: 0 }}
+              animate={{ scaleY: 1 }}
+              transition={{ delay: 0.2, duration: 0.8 }}
+              style={{ originY: 1 }}
+            />
+          </div>
+
+          {/* Shutter reveal panels for exit animation */}
+          <motion.div
+            className="absolute inset-0 z-[-1] flex flex-col"
+            exit={{ opacity: 1 }}
+          >
+            <motion.div className="flex-1 bg-[#0a0a0a]" />
+            <motion.div className="flex-1 bg-[#0a0a0a]" />
+          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>

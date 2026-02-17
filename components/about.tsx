@@ -17,7 +17,7 @@ export function About() {
       className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-background relative overflow-hidden"
     >
       {/* Background decoration */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-50" />
+      <div className="absolute inset-0 bg-linear-to-br from-primary/5 to-accent/5 opacity-50" />
       <motion.div
         className="absolute top-20 -right-20 w-96 h-96 bg-primary/10 rounded-full blur-3xl"
         animate={{
@@ -43,7 +43,7 @@ export function About() {
           variants={staggerChildrenVariants}
         >
           <motion.h2
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-balance bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent px-2"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-balance bg-linear-to-r from-foreground to-primary bg-clip-text text-transparent px-2"
             variants={scrollRevealVariants}
           >
             Conoce al Desarrollador, No Solo el Código
@@ -90,7 +90,7 @@ export function About() {
               <motion.span className="text-foreground font-medium relative">
                 la fotografía creativa y el diseño digital
                 <motion.span
-                  className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-primary/50 to-accent/50 block"
+                  className="absolute bottom-0 left-0 h-0.5 bg-linear-to-r from-primary/50 to-accent/50 block"
                   initial={{ width: 0 }}
                   animate={isInView ? { width: "100%" } : { width: 0 }}
                   transition={{ delay: 2, duration: 0.8 }}

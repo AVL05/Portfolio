@@ -167,9 +167,9 @@ export function Projects() {
       className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-background relative overflow-hidden"
     >
       {/* Background decorations */}
-      <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-primary/5" />
+      <div className="absolute inset-0 bg-linear-to-br from-accent/5 to-primary/5" />
       <motion.div
-        className="absolute top-1/4 -right-32 w-96 h-96 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full blur-3xl"
+        className="absolute top-1/4 -right-32 w-96 h-96 bg-linear-to-br from-primary/10 to-accent/10 rounded-full blur-3xl"
         animate={{
           rotate: [0, 180, 360],
           scale: [1, 1.1, 1],
@@ -177,7 +177,7 @@ export function Projects() {
         transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
       />
       <motion.div
-        className="absolute bottom-1/4 -left-32 w-80 h-80 bg-gradient-to-br from-accent/10 to-secondary/10 rounded-full blur-3xl"
+        className="absolute bottom-1/4 -left-32 w-80 h-80 bg-linear-to-br from-accent/10 to-secondary/10 rounded-full blur-3xl"
         animate={{
           rotate: [360, 180, 0],
           scale: [1.1, 1, 1.1],
@@ -193,7 +193,7 @@ export function Projects() {
           variants={staggerChildrenVariants}
         >
           <motion.h2
-            className="text-2xl sm:text-3xl md:text-4xl font-bold text-balance bg-gradient-to-r from-foreground via-primary to-accent bg-clip-text text-transparent"
+            className="text-2xl sm:text-3xl md:text-4xl font-bold text-balance bg-linear-to-r from-foreground via-primary to-accent bg-clip-text text-transparent"
             variants={scrollRevealVariants}
           >
             Mis Proyectos
@@ -258,7 +258,7 @@ export function Projects() {
                   >
                     {/* Overlay gradient */}
                     <motion.div
-                      className={`absolute inset-0 bg-gradient-to-br ${getCategoryColor(
+                      className={`absolute inset-0 bg-linear-to-br ${getCategoryColor(
                         project.category,
                       )} opacity-0 group-hover:opacity-20 transition-opacity duration-500 z-10`}
                     />
@@ -285,7 +285,7 @@ export function Projects() {
                     >
                       <Badge
                         variant="secondary"
-                        className={`bg-gradient-to-r ${getCategoryColor(
+                        className={`bg-linear-to-r ${getCategoryColor(
                           project.category,
                         )} text-white border-0 backdrop-blur-sm font-medium px-3 py-1`}
                       >
@@ -308,7 +308,7 @@ export function Projects() {
                   </div>
 
                   {/* Content */}
-                  <div className="p-6 space-y-4 flex-grow flex flex-col">
+                  <div className="p-6 space-y-4 grow flex flex-col">
                     <motion.h3
                       className="text-2xl font-semibold group-hover:text-primary transition-colors duration-300"
                       initial={{ opacity: 0, y: 10 }}
@@ -321,7 +321,7 @@ export function Projects() {
                     </motion.h3>
 
                     <motion.p
-                      className="text-muted-foreground text-pretty leading-relaxed flex-grow"
+                      className="text-muted-foreground text-pretty leading-relaxed grow"
                       initial={{ opacity: 0, y: 10 }}
                       animate={
                         isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }
@@ -377,7 +377,7 @@ export function Projects() {
                           variant="outline"
                           size="sm"
                           asChild
-                          className={`group/btn bg-gradient-to-r ${getCategoryColor(
+                          className={`group/btn bg-linear-to-r ${getCategoryColor(
                             project.category,
                           )} text-white border-0 hover:shadow-lg transition-all duration-300`}
                         >

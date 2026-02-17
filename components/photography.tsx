@@ -5,7 +5,6 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { motion } from "framer-motion";
 import { Camera, ExternalLink, Globe, Instagram } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 
 // Enlaces a tus redes de fotografía
 const photographyLinks = {
@@ -16,40 +15,9 @@ const photographyLinks = {
 
 export function Photography() {
   const { ref, isInView } = useScrollReveal();
-  const [hasHeroImage, setHasHeroImage] = useState(false);
-  const [imagePath, setImagePath] = useState("");
-
-  // Check if hero image exists using Image onLoad/onError
-  useEffect(() => {
-    const checkImage = (src: string): Promise<boolean> => {
-      return new Promise((resolve) => {
-        const img = new globalThis.Image();
-        img.onload = () => resolve(true);
-        img.onerror = () => resolve(false);
-        img.src = src;
-      });
-    };
-
-    const checkImages = async () => {
-      const formats = [
-        "/photography/hero.jpg",
-        "/photography/hero.png",
-        "/photography/hero.webp",
-      ];
-
-      for (const format of formats) {
-        const exists = await checkImage(format);
-        if (exists) {
-          setHasHeroImage(true);
-          setImagePath(format);
-          return;
-        }
-      }
-      setHasHeroImage(false);
-    };
-
-    checkImages();
-  }, []);
+  // Use a simpler approach for the showcase image
+  const imagePath = "/photography/hero.webp";
+  const hasHeroImage = true; // Set to true by default or use a single check
 
   return (
     <section
@@ -66,7 +34,7 @@ export function Photography() {
         >
           <div className="flex items-center justify-center gap-3 mb-4">
             <Camera className="h-8 w-8 text-primary" />
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-linear-to-r from-primary to-accent bg-clip-text text-transparent">
               Fotografía
             </h2>
           </div>
@@ -84,15 +52,15 @@ export function Photography() {
           className="relative"
         >
           {/* Main showcase card */}
-          <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-primary/10 via-background to-accent/10 border border-border/50 backdrop-blur-sm">
+          <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-linear-to-br from-primary/10 via-background to-accent/10 border border-border/50 backdrop-blur-sm">
             {/* Background pattern */}
             <div className="absolute inset-0 opacity-5">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20" />
+              <div className="absolute inset-0 bg-linear-to-br from-primary/20 to-accent/20" />
             </div>
 
             <div className="relative p-8 sm:p-12 lg:p-16">
               {/* Hero image */}
-              <motion.div className="relative aspect-[16/9] sm:aspect-[21/9] rounded-xl sm:rounded-2xl overflow-hidden mb-8 bg-gradient-to-br from-primary/20 via-accent/30 to-secondary/20">
+              <motion.div className="relative aspect-video sm:aspect-21/9 rounded-xl sm:rounded-2xl overflow-hidden mb-8 bg-linear-to-br from-primary/20 via-accent/30 to-secondary/20">
                 {/* Conditional image rendering */}
                 {hasHeroImage ? (
                   <Image
@@ -110,7 +78,7 @@ export function Photography() {
                 )}
 
                 {/* Overlay gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent" />
 
                 {/* Featured text overlay */}
                 <div className="absolute bottom-6 left-6 right-6">
@@ -137,7 +105,7 @@ export function Photography() {
               {/* Description and stats */}
               <div className="text-center mb-8">
                 <motion.h3
-                  className="text-2xl sm:text-3xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
+                  className="text-2xl sm:text-3xl font-bold mb-4 bg-linear-to-r from-primary to-accent bg-clip-text text-transparent"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.0 }}
@@ -173,7 +141,7 @@ export function Photography() {
                 >
                   <Button
                     size="lg"
-                    className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-primary-foreground px-8 py-6 rounded-full text-lg font-semibold shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all duration-300"
+                    className="bg-linear-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-primary-foreground px-8 py-6 rounded-full text-lg font-semibold shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all duration-300"
                   >
                     <Globe className="mr-3 h-5 w-5 group-hover:rotate-12 transition-transform" />
                     Ver Galería Completa

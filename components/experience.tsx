@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -22,6 +22,13 @@ const education = [
 ];
 
 const experience = [
+  {
+    title: "Prácticas de Desarrollo Web",
+    company: "Burguet Sistemas",
+    period: "Actual",
+    description:
+      "Prácticas del Grado Superior en Desarrollo de Aplicaciones Web (DAW), participando en tareas de desarrollo y mantenimiento de aplicaciones web.",
+  },
   {
     title: "Diseñador Gráfico y Fotógrafo",
     company: "Falla el Molí",

@@ -1,23 +1,23 @@
-"use client";
+'use client'
 
-import { Button } from "@/components/ui/button";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { motion } from "framer-motion";
-import { Camera, ExternalLink, Globe, Instagram } from "lucide-react";
-import Image from "next/image";
+import { Button } from '@/components/ui/button'
+import { useScrollReveal } from '@/hooks/useScrollReveal'
+import { motion } from 'framer-motion'
+import { Camera, ExternalLink, Globe, Instagram } from 'lucide-react'
+import Image from 'next/image'
 
 // Enlaces a tus redes de fotografía
 const photographyLinks = {
-  website: "https://alexgallery.alexviclop.workers.dev/", // Tu galería fotográfica
-  instagram: "https://www.instagram.com/raw.vives/", // Tu Instagram de fotografía
-  portfolio: "https://galeria-fotografica.vercel.app/", // Tu galería principal
-};
+  website: 'https://alexgallery.alexviclop.workers.dev/', // Tu galería fotográfica
+  instagram: 'https://www.instagram.com/raw.vives/', // Tu Instagram de fotografía
+  portfolio: 'https://galeria-fotografica.vercel.app/', // Tu galería principal
+}
 
 export function Photography() {
-  const { ref, isInView } = useScrollReveal();
+  const { ref, isInView } = useScrollReveal()
   // Use a simpler approach for the showcase image
-  const imagePath = "/photography/hero.webp";
-  const hasHeroImage = true; // Set to true by default or use a single check
+  const imagePath = '/photography/hero.webp'
+  const hasHeroImage = true // Set to true by default or use a single check
 
   return (
     <section
@@ -51,126 +51,154 @@ export function Photography() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="relative"
         >
-          {/* Main showcase card */}
-          <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-linear-to-br from-primary/10 via-background to-accent/10 border border-border/50 backdrop-blur-sm">
-            {/* Background pattern */}
-            <div className="absolute inset-0 opacity-5">
-              <div className="absolute inset-0 bg-linear-to-br from-primary/20 to-accent/20" />
+          {/* Main showcase card - RAW Editor OS Window */}
+          <div className="relative overflow-hidden rounded-xl bg-[#0d1117] border border-primary/20 shadow-2xl backdrop-blur-md font-mono">
+            {/* Window controls and title */}
+            <div className="flex items-center justify-between px-4 py-3 bg-[#161b22] border-b border-primary/20">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
+                <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
+              </div>
+              <span className="text-xs font-mono text-muted-foreground/70 uppercase tracking-wider font-semibold">
+                RAW_EDITOR.exe
+              </span>
+              <div className="flex gap-1">
+                <div className="w-1.5 h-1.5 rounded-full bg-primary/40"></div>
+                <div className="w-1.5 h-1.5 rounded-full bg-primary/40"></div>
+                <div className="w-1.5 h-1.5 rounded-full bg-primary/40"></div>
+              </div>
             </div>
 
-            <div className="relative p-8 sm:p-12 lg:p-16">
-              {/* Hero image */}
-              <motion.div className="relative aspect-video sm:aspect-21/9 rounded-xl sm:rounded-2xl overflow-hidden mb-8 bg-linear-to-br from-primary/20 via-accent/30 to-secondary/20">
-                {/* Conditional image rendering */}
-                {hasHeroImage ? (
-                  <Image
-                    src={imagePath}
-                    alt="Fotografía destacada - Alex Vicente López"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
-                  />
-                ) : (
-                  // Placeholder when no image is available
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <Camera className="h-16 w-16 sm:h-20 sm:w-20 text-white/30" />
-                  </div>
-                )}
-
-                {/* Overlay gradient */}
-                <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent" />
-
-                {/* Featured text overlay */}
-                <div className="absolute bottom-6 left-6 right-6">
-                  <motion.h3
-                    className="text-white text-xl sm:text-2xl lg:text-3xl font-bold mb-2"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6 }}
-                  >
-                    Explorando el Mundo a Través del Lente
-                  </motion.h3>
-                  <motion.p
-                    className="text-white/80 text-sm sm:text-base"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.8 }}
-                  >
-                    Paisajes, retratos, vida urbana y momentos únicos capturados
-                    con pasión
-                  </motion.p>
-                </div>
-              </motion.div>
-
-              {/* Description and stats */}
-              <div className="text-center mb-8">
-                <motion.h3
-                  className="text-2xl sm:text-3xl font-bold mb-4 bg-linear-to-r from-primary to-accent bg-clip-text text-transparent"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.0 }}
-                >
-                  Mi Mundo Fotográfico
-                </motion.h3>
-                <motion.p
-                  className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.2 }}
-                >
-                  Descubre mi colección completa de fotografías donde cada
-                  imagen cuenta una historia. Desde paisajes impresionantes
-                  hasta retratos emotivos, explora mi visión artística en mi
-                  sitio web dedicado.
-                </motion.p>
+            <div className="flex flex-col lg:flex-row">
+              {/* Left sidebar - mock tools */}
+              <div className="hidden lg:flex flex-col gap-4 p-4 border-r border-primary/20 bg-[#0d1117] items-center text-muted-foreground">
+                <Camera className="w-5 h-5 text-primary" />
+                <div className="w-6 h-px bg-border/50 my-2"></div>
+                <div className="w-4 h-4 border-2 border-current rounded-sm"></div>
+                <div className="w-4 h-4 border border-current rounded-full"></div>
+                <div className="w-4 h-4 border-t-2 border-l-2 border-current"></div>
               </div>
 
-              {/* Action buttons */}
-              <motion.div
-                className="flex flex-col sm:flex-row items-center justify-center gap-4"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.4 }}
-              >
-                {/* Main CTA Button */}
-                <motion.a
-                  href={photographyLinks.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group"
-                >
-                  <Button
-                    size="lg"
-                    className="bg-linear-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-primary-foreground px-8 py-6 rounded-full text-lg font-semibold shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all duration-300"
-                  >
-                    <Globe className="mr-3 h-5 w-5 group-hover:rotate-12 transition-transform" />
-                    Ver Galería Completa
-                    <ExternalLink className="ml-3 h-4 w-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                  </Button>
-                </motion.a>
+              {/* Main image area */}
+              <div className="relative w-full p-4 sm:p-6 lg:p-8 flex items-center justify-center bg-[#090b0f]">
+                {/* Viewfinder brackets */}
+                <div className="absolute top-8 left-8 w-8 h-8 border-t-2 border-l-2 border-primary/50"></div>
+                <div className="absolute top-8 right-8 w-8 h-8 border-t-2 border-r-2 border-primary/50"></div>
+                <div className="absolute bottom-8 left-8 w-8 h-8 border-b-2 border-l-2 border-primary/50"></div>
+                <div className="absolute bottom-8 right-8 w-8 h-8 border-b-2 border-r-2 border-primary/50"></div>
 
-                {/* Secondary button */}
-                <motion.a
-                  href={photographyLinks.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group"
-                >
+                {/* Hero image */}
+                <motion.div className="relative w-full aspect-video sm:aspect-3/2 rounded-none overflow-hidden ring-1 ring-border/30 shadow-2xl">
+                  {hasHeroImage ? (
+                    <Image
+                      src={imagePath}
+                      alt="Fotografía destacada - Alex Vicente López"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center bg-[#161b22]">
+                      <Camera className="h-16 w-16 sm:h-20 sm:w-20 text-white/10" />
+                      <span className="absolute bottom-4 right-4 text-xs font-mono text-muted-foreground/30">
+                        NO_SIGNAL
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Crosshair target */}
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20">
+                    <div className="w-px h-12 bg-primary"></div>
+                    <div className="absolute h-px w-12 bg-primary"></div>
+                    <div className="absolute w-4 h-4 border border-primary rounded-full"></div>
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* Right sidebar - Exif properties & CTA */}
+              <div className="w-full lg:w-80 p-6 border-t lg:border-t-0 lg:border-l border-primary/20 bg-[#0d1117] flex flex-col justify-between">
+                <div>
+                  <h3 className="text-primary font-bold mb-4 uppercase text-sm border-b border-primary/20 pb-2">
+                    Propiedades.RAW
+                  </h3>
+                  <div className="space-y-3 text-xs text-muted-foreground font-mono">
+                    <div className="flex justify-between">
+                      <span>ISO</span>
+                      <span className="text-foreground">100</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Apertura</span>
+                      <span className="text-foreground">f/2.8</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Exposicion</span>
+                      <span className="text-foreground">1/250s</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Dist focal</span>
+                      <span className="text-foreground">35mm</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Lente</span>
+                      <span className="text-foreground text-right">
+                        Sigma 35mm Art
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="mt-8">
+                    <h3 className="text-primary font-bold mb-3 uppercase text-sm border-b border-primary/20 pb-2">
+                      Filtros
+                    </h3>
+                    <div className="grid grid-cols-3 gap-2">
+                      <div className="h-8 rounded bg-primary/10 border border-primary/30 flex items-center justify-center text-[10px] text-primary cursor-pointer hover:bg-primary/20">
+                        B&N
+                      </div>
+                      <div className="h-8 rounded bg-[#161b22] border border-border flex items-center justify-center text-[10px] cursor-pointer hover:bg-white/5">
+                        CINE
+                      </div>
+                      <div className="h-8 rounded bg-[#161b22] border border-border flex items-center justify-center text-[10px] cursor-pointer hover:bg-white/5">
+                        VNTG
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-8 space-y-3">
+                  <Button
+                    asChild
+                    className="w-full font-mono bg-primary text-[#0d1117] hover:bg-primary/80 hover:shadow-[0_0_15px_rgba(119,255,150,0.4)] transition-all duration-300"
+                  >
+                    <a
+                      href={photographyLinks.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Globe className="mr-2 h-4 w-4" />[ EXPORT_GALLERY ]
+                    </a>
+                  </Button>
+
                   <Button
                     variant="outline"
-                    size="lg"
-                    className="border-2 border-primary/20 hover:border-primary/40 bg-background/50 backdrop-blur-sm hover:bg-primary/5 px-6 py-6 rounded-full text-base font-medium transition-all duration-300"
+                    asChild
+                    className="w-full font-mono bg-transparent text-primary border-primary/30 hover:bg-primary/10 hover:border-primary transition-all duration-300"
                   >
-                    <Instagram className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-                    Sígueme en Instagram
-                    <ExternalLink className="ml-2 h-4 w-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                    <a
+                      href={photographyLinks.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Instagram className="mr-2 h-4 w-4" />
+                      @raw.vives
+                    </a>
                   </Button>
-                </motion.a>
-              </motion.div>
+                </div>
+              </div>
             </div>
           </div>
         </motion.div>
       </div>
     </section>
-  );
+  )
 }

@@ -1,49 +1,49 @@
-﻿"use client";
+﻿'use client'
 
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Briefcase, Calendar, FileText, GraduationCap } from "lucide-react";
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
+import { Briefcase, Calendar, FileText, GraduationCap } from 'lucide-react'
 
 const education = [
   {
-    title: "Desarrollo de Aplicaciones Web",
-    institution: "2º DAW",
-    period: "Actual",
+    title: 'Desarrollo de Aplicaciones Web',
+    institution: 'IES Serra Perenxisa',
+    period: 'Actual',
     description:
-      "Formación en desarrollo de aplicaciones web con tecnologías modernas, bases de datos y arquitectura de software.",
+      'Formación avanzada en desarrollo frontend y backend, bases de datos relacionales y no relacionales, y arquitectura eficiente de aplicaciones web modernas.',
   },
   {
-    title: "Sistemas Microinformáticos y Redes",
-    institution: "Grado Medio SMR",
-    period: "2024",
+    title: 'Sistemas Microinformáticos y Redes',
+    institution: 'Grado Medio SMR',
+    period: '2024',
     description:
-      "Formación en sistemas informáticos, redes locales, mantenimiento de equipos y soporte técnico.",
+      'Instalación, configuración y mantenimiento de sistemas microinformáticos aislados o en red, así como administración de infraestructura tecnológica.',
   },
-];
+]
 
 const experience = [
   {
-    title: "Prácticas de Desarrollo Web",
-    company: "Burguet Sistemas",
-    period: "Actual",
+    title: 'Prácticas de Desarrollo Web',
+    company: 'Burguet Sistemas',
+    period: 'Actual',
     description:
-      "Prácticas del Grado Superior en Desarrollo de Aplicaciones Web (DAW), participando en tareas de desarrollo y mantenimiento de aplicaciones web.",
+      'Desarrollo y mantenimiento activo de aplicaciones web empleando frameworks actuales. Colaboración en la resolución de bugs e implementación de nuevas funcionalidades.',
   },
   {
-    title: "Diseñador Gráfico y Fotógrafo",
-    company: "Falla el Molí",
-    period: "2023 - 2025",
+    title: 'Diseñador Gráfico y Fotógrafo',
+    company: 'Falla el Molí',
+    period: '2023 - 2025',
     description:
-      "Gestión de redes sociales, diseño gráfico, fotografía y edición de contenido visual para eventos y comunicación de la falla.",
+      'Responsable de identidad visual. Gestión completa de redes sociales, creación de cartelería, dirección de reportajes fotográficos y maquetación del llibret.',
   },
   {
-    title: "Técnico en Prácticas",
-    company: "Ayuntamiento de Carlet",
-    period: "2024",
+    title: 'Técnico en Prácticas',
+    company: 'Ayuntamiento de Carlet',
+    period: '2024',
     description:
-      "Prácticas profesionales en el departamento de informática, brindando soporte técnico y mantenimiento de sistemas.",
+      'Asistencia en el departamento de informática. Resolución de incidencias en hardware y software, mantenimiento de infraestructura de red y soporte a usuarios.',
   },
-];
+]
 
 export function Experience() {
   return (
@@ -62,71 +62,93 @@ export function Experience() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-          <div className="space-y-6">
-            <div className="flex items-center gap-3 mb-4 sm:mb-6">
-              <div className="p-2 sm:p-3 bg-primary/10 rounded-lg">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16 relative">
+          <div className="space-y-8 relative">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="p-2 sm:p-3 bg-primary/10 rounded-lg border border-primary/20">
                 <GraduationCap className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
               </div>
-              <h3 className="text-xl sm:text-2xl font-semibold">Educación</h3>
+              <h3 className="text-xl sm:text-2xl font-mono font-bold text-primary">
+                {'< Educación />'}
+              </h3>
             </div>
 
-            {education.map((edu, index) => (
-              <Card
-                key={index}
-                className="p-6 hover:shadow-lg transition-shadow"
-              >
-                <div className="space-y-3">
-                  <div>
-                    <h4 className="text-xl font-semibold">{edu.title}</h4>
-                    <p className="text-primary font-medium">
-                      {edu.institution}
-                    </p>
-                  </div>
+            <div className="relative border-l-2 border-primary/30 pl-6 sm:pl-8 ml-2 sm:ml-4 space-y-10">
+              {education.map((edu, index) => (
+                <div key={index} className="relative group">
+                  {/* Git commit node */}
+                  <div className="absolute -left-[33px] sm:-left-[41px] top-1.5 w-4 h-4 rounded-full bg-background border-2 border-primary group-hover:bg-primary ring-4 ring-background transition-colors cursor-pointer" />
 
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Calendar className="h-4 w-4" />
-                    <span>{edu.period}</span>
-                  </div>
+                  <Card className="p-5 sm:p-6 bg-[#0d1117] border-primary/20 hover:border-primary/50 hover:shadow-[0_0_20px_rgba(119,255,150,0.1)] transition-all font-mono">
+                    <div className="space-y-3">
+                      <div>
+                        <h4 className="text-lg font-bold text-green-400">
+                          {edu.title}
+                        </h4>
+                        <p className="text-purple-400 font-medium text-sm sm:text-base mt-1">
+                          Centro:{' '}
+                          <span className="text-foreground">
+                            {edu.institution}
+                          </span>
+                        </p>
+                      </div>
 
-                  <p className="text-muted-foreground text-pretty leading-relaxed">
-                    {edu.description}
-                  </p>
+                      <div className="flex items-center gap-2 text-sm text-yellow-500/80">
+                        <Calendar className="h-4 w-4" />
+                        <span>Date: {edu.period}</span>
+                      </div>
+
+                      <p className="text-muted-foreground text-sm leading-relaxed border-l-2 border-primary/20 pl-3">
+                        {edu.description}
+                      </p>
+                    </div>
+                  </Card>
                 </div>
-              </Card>
-            ))}
+              ))}
+            </div>
           </div>
 
-          <div className="space-y-6">
-            <div className="flex items-center gap-3 mb-4 sm:mb-6">
-              <div className="p-2 sm:p-3 bg-primary/10 rounded-lg">
+          <div className="space-y-8 relative">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="p-2 sm:p-3 bg-primary/10 rounded-lg border border-primary/20">
                 <Briefcase className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
               </div>
-              <h3 className="text-xl sm:text-2xl font-semibold">Experiencia</h3>
+              <h3 className="text-xl sm:text-2xl font-mono font-bold text-primary">
+                {'< Experiencia />'}
+              </h3>
             </div>
 
-            {experience.map((exp, index) => (
-              <Card
-                key={index}
-                className="p-6 hover:shadow-lg transition-shadow"
-              >
-                <div className="space-y-3">
-                  <div>
-                    <h4 className="text-xl font-semibold">{exp.title}</h4>
-                    <p className="text-primary font-medium">{exp.company}</p>
-                  </div>
+            <div className="relative border-l-2 border-primary/30 pl-6 sm:pl-8 ml-2 sm:ml-4 space-y-10">
+              {experience.map((exp, index) => (
+                <div key={index} className="relative group">
+                  {/* Git commit node */}
+                  <div className="absolute -left-[33px] sm:-left-[41px] top-1.5 w-4 h-4 rounded-full bg-background border-2 border-primary group-hover:bg-primary ring-4 ring-background transition-colors cursor-pointer" />
 
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Calendar className="h-4 w-4" />
-                    <span>{exp.period}</span>
-                  </div>
+                  <Card className="p-5 sm:p-6 bg-[#0d1117] border-primary/20 hover:border-primary/50 hover:shadow-[0_0_20px_rgba(119,255,150,0.1)] transition-all font-mono">
+                    <div className="space-y-3">
+                      <div>
+                        <h4 className="text-lg font-bold text-green-400">
+                          {exp.title}
+                        </h4>
+                        <p className="text-purple-400 font-medium text-sm sm:text-base mt-1">
+                          Empresa:{' '}
+                          <span className="text-foreground">{exp.company}</span>
+                        </p>
+                      </div>
 
-                  <p className="text-muted-foreground text-pretty leading-relaxed">
-                    {exp.description}
-                  </p>
+                      <div className="flex items-center gap-2 text-sm text-yellow-500/80">
+                        <Calendar className="h-4 w-4" />
+                        <span>Date: {exp.period}</span>
+                      </div>
+
+                      <p className="text-muted-foreground text-sm leading-relaxed border-l-2 border-primary/20 pl-3">
+                        {exp.description}
+                      </p>
+                    </div>
+                  </Card>
                 </div>
-              </Card>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
 
@@ -149,5 +171,5 @@ export function Experience() {
         </div>
       </div>
     </section>
-  );
+  )
 }

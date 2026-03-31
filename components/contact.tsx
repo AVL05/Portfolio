@@ -57,191 +57,164 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-background"
+      className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-[#0a0a0a] relative overflow-hidden text-white"
     >
-      <div className="max-w-4xl mx-auto">
-        <div className="space-y-4 mb-8 sm:mb-12 text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-balance text-primary font-mono tracking-tight">
-            {'< Contacto />'}
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="mb-20">
+          <h2 className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter opacity-10 absolute -top-12 left-0 select-none hidden sm:block uppercase">
+            SAY HELLO
           </h2>
-          <p className="sm:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed px-2 font-mono text-sm">
-            // ¿Quieres hablar sobre un proyecto? Ejecuta el script de abajo o
-            utiliza las conexiones directas.
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary font-mono relative">
+            <span className="text-primary/50 mr-4 font-normal">06.</span>
+            Contacto <span className="text-white/20 ml-2">/ Let's Connect</span>
+          </h2>
+          <p className="text-base sm:text-lg text-white/50 max-w-2xl mt-4 font-medium">
+            ¿Tienes un proyecto en mente o simplemente quieres saludar? Mi puerta digital siempre está abierta.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-          <Card className="p-0 overflow-hidden bg-[#0d1117] border-primary/20 shadow-2xl">
-            {/* Terminal Header */}
-            <div className="flex items-center gap-2 px-4 py-3 bg-[#161b22] border-b border-primary/20">
-              <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
-              <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-              <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
-              <span className="ml-2 text-xs font-mono text-muted-foreground/70 flex-1 text-center pr-8">
-                contact_form.sh
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-20">
+          <Card className="p-0 overflow-hidden bg-[#111111] border-white/5 shadow-2xl rounded-3xl hover:border-primary/20 transition-all">
+            <div className="flex items-center gap-2 px-6 py-4 bg-[#181818] border-b border-white/5">
+              <div className="flex gap-1.5">
+                <div className="w-2.5 h-2.5 rounded-full bg-red-400/20"></div>
+                <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/20"></div>
+                <div className="w-2.5 h-2.5 rounded-full bg-green-400/20"></div>
+              </div>
+              <span className="ml-4 text-xs font-mono text-white/30 truncate flex-1 uppercase tracking-widest font-bold">
+                send_message.sh
               </span>
             </div>
 
-            <form onSubmit={handleSubmit} className="p-6 space-y-6">
-              <div>
-                <label
-                  htmlFor="name"
-                  className="flex items-center text-sm font-mono text-primary mb-2"
-                >
-                  <span className="mr-2 text-green-400">▹</span> Nombre
+            <form onSubmit={handleSubmit} className="p-8 sm:p-10 space-y-8">
+              <div className="space-y-4">
+                <label htmlFor="name" className="text-sm font-black uppercase tracking-widest text-primary/80 ml-1">
+                  Tu Nombre
                 </label>
-                <div className="flex items-center relative">
-                  <Input
-                    id="name"
-                    type="text"
-                    placeholder="Tu nombre completo"
-                    value={formData.name}
-                    onChange={(e) =>
-                      setFormData({ ...formData, name: e.target.value })
-                    }
-                    className="font-mono bg-black/30 border-primary/20 focus-visible:ring-primary/50 focus-visible:border-primary placeholder:text-muted-foreground/50 rounded-md py-6"
-                    required
-                  />
-                </div>
+                <Input
+                  id="name"
+                  type="text"
+                  placeholder="Alex Vicente"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="bg-white/5 border-white/5 focus-visible:ring-primary/50 focus-visible:border-primary placeholder:text-white/20 rounded-2xl py-7 px-6 text-lg font-medium"
+                  required
+                />
               </div>
 
-              <div>
-                <label
-                  htmlFor="email"
-                  className="flex items-center text-sm font-mono text-primary mb-2"
-                >
-                  <span className="mr-2 text-green-400">▹</span> Correo
-                  Electrónico
+              <div className="space-y-4">
+                <label htmlFor="email" className="text-sm font-black uppercase tracking-widest text-primary/80 ml-1">
+                  Tu Email
                 </label>
-                <div className="flex items-center relative">
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="tu@email.com"
-                    value={formData.email}
-                    onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
-                    }
-                    className="font-mono bg-black/30 border-primary/20 focus-visible:ring-primary/50 focus-visible:border-primary placeholder:text-muted-foreground/50 rounded-md py-6"
-                    required
-                  />
-                </div>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="hola@ejemplo.com"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="bg-white/5 border-white/5 focus-visible:ring-primary/50 focus-visible:border-primary placeholder:text-white/20 rounded-2xl py-7 px-6 text-lg font-medium"
+                  required
+                />
               </div>
 
-              <div>
-                <label
-                  htmlFor="message"
-                  className="flex items-center text-sm font-mono text-primary mb-2"
-                >
-                  <span className="mr-2 text-green-400">▹</span> Mensaje
+              <div className="space-y-4">
+                <label htmlFor="message" className="text-sm font-black uppercase tracking-widest text-primary/80 ml-1">
+                  Tu Mensaje
                 </label>
-                <div className="relative">
-                  <Textarea
-                    id="message"
-                    placeholder="Cuéntame sobre tu proyecto..."
-                    rows={5}
-                    value={formData.message}
-                    onChange={(e) =>
-                      setFormData({ ...formData, message: e.target.value })
-                    }
-                    className="font-mono bg-black/30 border-primary/20 focus-visible:ring-primary/50 focus-visible:border-primary placeholder:text-muted-foreground/50 rounded-md resize-none"
-                    required
-                  />
-                </div>
+                <Textarea
+                  id="message"
+                  placeholder="Cuéntame sobre tu proyecto o idea..."
+                  rows={5}
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  className="bg-white/5 border-white/5 focus-visible:ring-primary/50 focus-visible:border-primary placeholder:text-white/20 rounded-2xl p-6 text-lg font-medium resize-none"
+                  required
+                />
               </div>
 
               <Button
                 type="submit"
-                className="w-full font-mono bg-primary text-[#0d1117] hover:bg-primary/80 hover:shadow-[0_0_15px_rgba(119,255,150,0.4)] transition-all duration-300 group"
+                className="w-full bg-primary text-black font-black text-lg py-8 rounded-2xl hover:bg-primary/90 hover:shadow-[0_0_40px_rgba(119,255,150,0.3)] transition-all group"
                 disabled={isSubmitting}
               >
-                <span className="mr-2 group-hover:translate-x-1 transition-transform">
-                  {'>'}
-                </span>
-                {isSubmitting ? 'Enviando mensaje...' : '[ Enviar Mensaje_ ]'}
+                {isSubmitting ? 'ENVIANDO...' : 'ENVIAR MENSAJE'}
               </Button>
 
               {submitStatus === 'success' && (
-                <p className="text-sm text-green-600 dark:text-green-400 text-center">
-                  ¡Mensaje enviado con éxito! Te responderé pronto.
-                </p>
-              )}
-
-              {submitStatus === 'error' && (
-                <p className="text-sm text-red-600 dark:text-red-400 text-center">
-                  Hubo un error al enviar el mensaje. Por favor, intenta de
-                  nuevo.
+                <p className="text-sm text-primary font-bold text-center animate-pulse">
+                  ✓ ¡Mensaje enviado con éxito! Te responderé pronto.
                 </p>
               )}
             </form>
           </Card>
 
-          <div className="space-y-6">
-            <Card className="p-6 bg-[#0d1117] border-primary/20 shadow-xl">
-              <h3 className="text-xl font-bold font-mono text-primary mb-4">
-                {'< Conexiones />'}
-              </h3>
-              <div className="space-y-4 font-mono">
-                <a
-                  href="mailto:alexviclop@gmail.com"
-                  className="flex items-center gap-3 text-muted-foreground hover:text-green-400 transition-colors group"
-                >
-                  <div className="p-2 bg-black/50 border border-primary/20 rounded-lg group-hover:bg-primary/10 transition-colors">
-                    <Mail className="h-5 w-5 group-hover:text-primary transition-colors" />
-                  </div>
-                  <span>alexviclop@gmail.com</span>
-                </a>
-                <a
-                  href="https://github.com/AVL05"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-muted-foreground hover:text-green-400 transition-colors group"
-                >
-                  <div className="p-2 bg-black/50 border border-primary/20 rounded-lg group-hover:bg-primary/10 transition-colors">
-                    <Github className="h-5 w-5 group-hover:text-primary transition-colors" />
-                  </div>
-                  <span>github.com/AVL05</span>
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/alex-vicente-lopez/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-muted-foreground hover:text-green-400 transition-colors group"
-                >
-                  <div className="p-2 bg-black/50 border border-primary/20 rounded-lg group-hover:bg-primary/10 transition-colors">
-                    <Linkedin className="h-5 w-5 group-hover:text-primary transition-colors" />
-                  </div>
-                  <span>linkedin.com/in/alexvicente</span>
-                </a>
-              </div>
-            </Card>
-
-            <Card className="p-6 bg-linear-to-br from-primary/5 to-accent/5 border-primary/20 shadow-xl">
-              <div className="flex items-start gap-3">
-                <Camera className="h-6 w-6 text-primary mt-1" />
-                <div>
-                  <h3 className="text-xl font-bold font-mono text-primary mb-2">
-                    {'< Portfolio Fotografico />'}
-                  </h3>
-                  <p className="text-muted-foreground text-pretty leading-relaxed mb-4 text-sm font-mono">
-                    // Explora mi colección visual
-                  </p>
-                  <Button
-                    variant="outline"
-                    asChild
-                    className="font-mono bg-transparent text-primary border-primary/30 hover:bg-primary/10 hover:border-primary"
+          <div className="flex flex-col justify-between py-4">
+            <div className="space-y-12">
+              <div>
+                <h3 className="text-sm font-black uppercase tracking-[0.3em] text-white/30 mb-8 ml-1">
+                  Direct Links
+                </h3>
+                <div className="space-y-6">
+                  <a
+                    href="mailto:alexviclop@gmail.com"
+                    className="flex items-center gap-6 text-2xl sm:text-3xl font-bold group hover:text-primary transition-colors"
                   >
-                    <a href="#photography">Ver Galería</a>
-                  </Button>
+                    <div className="p-4 bg-white/5 rounded-2xl group-hover:bg-primary group-hover:text-black transition-all">
+                      <Mail className="h-6 w-6" />
+                    </div>
+                    alexviclop@gmail.com
+                  </a>
+                  <a
+                    href="https://github.com/AVL05"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-6 text-2xl sm:text-3xl font-bold group hover:text-primary transition-colors"
+                  >
+                    <div className="p-4 bg-white/5 rounded-2xl group-hover:bg-primary group-hover:text-black transition-all">
+                      <Github className="h-6 w-6" />
+                    </div>
+                    github.com/AVL05
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/alex-vicente-lopez/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-6 text-2xl sm:text-3xl font-bold group hover:text-primary transition-colors"
+                  >
+                    <div className="p-4 bg-white/5 rounded-2xl group-hover:bg-primary group-hover:text-black transition-all">
+                      <Linkedin className="h-6 w-6" />
+                    </div>
+                    linkedin / alexvicvicente
+                  </a>
                 </div>
               </div>
-            </Card>
+
+              <Card className="p-8 bg-[#111111] border-white/5 rounded-3xl mt-12 group hover:border-primary/20 transition-all">
+                <div className="flex flex-col sm:flex-row items-center gap-6">
+                  <div className="p-5 bg-primary/10 rounded-2xl text-primary">
+                    <Camera className="h-8 w-8" />
+                  </div>
+                  <div className="text-center sm:text-left">
+                    <h3 className="text-xl font-bold mb-1 group-hover:text-primary transition-colors">Portafolio Visual</h3>
+                    <p className="text-white/40 text-sm mb-4">Explora mis capturas y visión creativa</p>
+                    <Button variant="link" asChild className="text-primary font-bold p-0 h-auto hover:text-white transition-colors">
+                      <a href="#photography">Ver Galería →</a>
+                    </Button>
+                  </div>
+                </div>
+              </Card>
+            </div>
+
+            <footer className="mt-20 pt-10 border-t border-white/5 text-center sm:text-left">
+              <p className="text-white/20 text-xs font-mono tracking-widest uppercase mb-2">
+                © 2025 Alex Vicente López
+              </p>
+              <p className="text-white/40 text-sm font-medium">
+                Diseñado con pasión. Desarrollado con precisión.
+              </p>
+            </footer>
           </div>
         </div>
-
-        <footer className="mt-12 sm:mt-16 pt-6 sm:pt-8 border-t border-border text-center text-xs sm:text-sm text-muted-foreground">
-          <p>© 2025 Alex Vicente López. Diseñado y desarrollado con pasión</p>
-        </footer>
       </div>
     </section>
   )

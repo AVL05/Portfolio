@@ -1,9 +1,10 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { motion, useScroll, useSpring } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
+import { gsap, useGSAP } from '@/lib/gsap'
+import { AnimatePresence, motion } from 'framer-motion'
 
 const navItems = [
   { name: 'Inicio', href: '#hero' },
@@ -18,196 +19,141 @@ export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('hero')
+  const containerRef = useRef<HTMLDivElement>(null)
+  const navRef = useRef<HTMLElement>(null)
+  const progressRef = useRef<HTMLDivElement>(null)
 
-  const { scrollYProgress } = useScroll()
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  })
+  useGSAP(() => {
+    if (progressRef.current) {
+      gsap.to(progressRef.current, {
+        scaleX: 1,
+        ease: 'none',
+        scrollTrigger: {
+          scrub: 0.1,
+          start: 0,
+          end: 'max',
+        }
+      })
+    }
+
+    if (navRef.current) {
+      gsap.from(navRef.current, {
+        y: -100,
+        opacity: 0,
+        duration: 1.2,
+        ease: 'power4.out',
+        delay: 1.5
+      })
+    }
+  }, { scope: containerRef })
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-
-      // Update active section based on scroll position
+      setIsScrolled(window.scrollY > 20)
       const sections = navItems.map((item) => item.href.substring(1))
       const currentSection = sections.find((section) => {
         const element = document.getElementById(section)
         if (element) {
           const rect = element.getBoundingClientRect()
-          return rect.top <= 100 && rect.bottom >= 100
+          return rect.top <= 150 && rect.bottom >= 150
         }
         return false
       })
-
-      if (currentSection) {
-        setActiveSection(currentSection)
-      }
+      if (currentSection) setActiveSection(currentSection)
     }
-
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   return (
-    <>
-      {/* Progress bar */}
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-linear-to-r from-primary via-accent to-secondary origin-left z-60"
-        style={{ scaleX }}
+    <div ref={containerRef}>
+      <div 
+        ref={progressRef}
+        className="fixed top-0 left-0 right-0 h-1 bg-primary origin-left z-[100] scale-x-0 shadow-[0_0_10px_rgba(119,255,150,0.5)]"
       />
 
-      <motion.nav
-        className={`fixed top-1 left-0 right-0 z-40 transition-all duration-500 ${
+      <nav
+        ref={navRef}
+        className={`fixed top-0 left-0 right-0 z-[90] transition-all duration-300 ${
           isScrolled
-            ? 'bg-background/90 backdrop-blur-md border border-border/50 rounded-2xl mx-2 sm:mx-4 shadow-2xl'
-            : 'bg-transparent'
+            ? 'py-4 bg-[#0a0a0a]/90 backdrop-blur-md border-b border-white/5'
+            : 'py-8 bg-transparent'
         }`}
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ type: 'spring', stiffness: 100, damping: 20 }}
       >
-        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-14 sm:h-16">
-            {/* Logo */}
-            <motion.a
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+          <div className="flex items-center justify-between">
+            <a
               href="#hero"
-              className="text-xl font-bold text-foreground hover:text-primary transition-colors relative"
+              className="group text-2xl font-black text-white tracking-tighter transition-all"
             >
-              <motion.span
-                className="bg-linear-to-r from-primary to-accent bg-clip-text text-transparent font-mono tracking-tight"
-                animate={{
-                  backgroundPosition: ['0%', '100%'],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  repeatType: 'reverse',
-                }}
-                style={{
-                  backgroundSize: '200% 200%',
-                }}
-              >
-                {'< Alex />'}
-              </motion.span>
-            </motion.a>
+              ALEX <span className="text-primary">VICENTE</span>
+            </a>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-1">
-              {navItems.map((item) => {
+            <div className="hidden md:flex items-center gap-8">
+              {navItems.map((item, index) => {
                 const isActive = activeSection === item.href.substring(1)
                 return (
-                  <motion.a
+                  <a
                     key={item.name}
                     href={item.href}
-                    className={`relative px-4 py-2 text-sm font-mono rounded-lg transition-all duration-300 ${
-                      isActive
-                        ? 'text-primary font-bold'
-                        : 'text-muted-foreground hover:text-primary'
+                    className={`group relative text-xs font-black uppercase tracking-[0.2em] transition-all duration-300 ${
+                      isActive ? 'text-primary' : 'text-white/40 hover:text-white'
                     }`}
                   >
-                    {isActive ? `> ${item.name}` : item.name}
-                    {isActive && (
-                      <motion.div
-                        className="absolute inset-0 bg-primary/10 rounded-lg border border-primary/20"
-                        layoutId="activeNavItem"
-                        initial={false}
-                        transition={{
-                          type: 'spring',
-                          stiffness: 500,
-                          damping: 30,
-                        }}
-                      />
-                    )}
-                    <motion.div
-                      className="absolute bottom-0 left-1/2 h-0.5 bg-linear-to-r from-primary to-accent rounded-full"
-                      initial={{ width: 0, x: '-50%' }}
-                      animate={isActive ? { width: '80%' } : { width: 0 }}
-                      transition={{
-                        type: 'spring',
-                        stiffness: 300,
-                        damping: 30,
-                      }}
-                    />
-                  </motion.a>
+                    <span className="mr-2 text-[10px] opacity-30 font-mono">0{index + 1}.</span>
+                    {item.name}
+                    <div className={`absolute -bottom-1 left-0 h-[2px] bg-primary transition-all duration-300 ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}`} />
+                  </a>
                 )
               })}
             </div>
 
-            {/* Mobile Menu Button */}
-            <motion.div className="md:hidden">
+            <div className="md:hidden">
               <Button
                 variant="ghost"
                 size="icon"
-                className="hover:bg-primary/10 relative overflow-hidden"
+                className="text-white hover:bg-white/5 p-0"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               >
-                <motion.div
-                  animate={isMobileMenuOpen ? { rotate: 180 } : { rotate: 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {isMobileMenuOpen ? (
-                    <X className="h-5 w-5" />
-                  ) : (
-                    <Menu className="h-5 w-5" />
-                  )}
-                </motion.div>
+                {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </Button>
-            </motion.div>
+            </div>
           </div>
         </div>
 
         {/* Mobile Menu */}
-        <motion.div
-          className="md:hidden overflow-hidden"
-          initial={false}
-          animate={{
-            height: isMobileMenuOpen ? 'auto' : 0,
-            opacity: isMobileMenuOpen ? 1 : 0,
-          }}
-          transition={{ duration: 0.3, ease: 'easeInOut' }}
-        >
-          <motion.div
-            className="px-4 py-4 space-y-1 bg-background/95 backdrop-blur-md border-t border-border/50"
-            initial={{ y: -20 }}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.3, delay: 0.1 }}
-          >
-            {navItems.map((item, index) => {
-              const isActive = activeSection === item.href.substring(1)
-              return (
-                <motion.a
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, x: '100%' }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: '100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="fixed inset-0 top-0 left-0 w-full h-screen bg-[#0a0a0a] z-[80] md:hidden flex flex-col items-center justify-center space-y-8"
+            >
+              {navItems.map((item, index) => (
+                <a
                   key={item.name}
                   href={item.href}
-                  className={`block px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300 relative ${
-                    isActive
-                      ? 'text-primary bg-primary/10 border border-primary/20'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-                  }`}
+                  className="text-4xl sm:text-5xl font-black text-white hover:text-primary transition-all tracking-tighter"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 + 0.2 }}
-                  whileTap={{ scale: 0.95 }}
                 >
-                  <div className="flex items-center justify-between">
-                    {item.name}
-                    {isActive && (
-                      <motion.div
-                        className="w-2 h-2 bg-primary rounded-full"
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ type: 'spring', stiffness: 500 }}
-                      />
-                    )}
-                  </div>
-                </motion.a>
-              )
-            })}
-          </motion.div>
-        </motion.div>
-      </motion.nav>
-    </>
+                  <span className="text-lg font-mono text-primary/40 mr-4">0{index + index}.</span>
+                  {item.name}
+                </a>
+              ))}
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="absolute top-8 right-8 text-white scale-150"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <X className="h-8 w-8" />
+              </Button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </nav>
+    </div>
   )
 }

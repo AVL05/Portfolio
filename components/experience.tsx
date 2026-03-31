@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -49,125 +49,99 @@ export function Experience() {
   return (
     <section
       id="experience"
-      className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-muted/30"
+      className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-[#0a0a0a] relative overflow-hidden text-white"
     >
-      <div className="max-w-6xl mx-auto">
-        <div className="space-y-4 mb-8 sm:mb-12 text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-balance">
-            Experiencia y Formación
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="mb-20">
+          <h2 className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter opacity-10 absolute -top-12 left-0 select-none hidden sm:block uppercase">
+            JOURNEY
           </h2>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto text-pretty leading-relaxed px-2">
-            Mi trayectoria académica y profesional en el mundo del desarrollo y
-            diseño digital
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary font-mono relative">
+            <span className="text-primary/50 mr-4 font-normal">05.</span>
+            Trayectoria <span className="text-white/20 ml-2">/ My Experience</span>
+          </h2>
+          <p className="text-base sm:text-lg text-white/50 max-w-2xl mt-4 font-medium">
+            Mi camino académico y profesional en el mundo del desarrollo y el diseño digital.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16 relative">
-          <div className="space-y-8 relative">
-            <div className="flex items-center gap-3 mb-8">
-              <div className="p-2 sm:p-3 bg-primary/10 rounded-lg border border-primary/20">
-                <GraduationCap className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
-              </div>
-              <h3 className="text-xl sm:text-2xl font-mono font-bold text-primary">
-                {'< Educación />'}
-              </h3>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-20">
+          <div className="space-y-12">
+            <div className="flex items-center gap-4">
+              <GraduationCap className="h-6 w-6 text-primary" />
+              <h3 className="text-2xl font-bold tracking-tight uppercase">Educación</h3>
             </div>
 
-            <div className="relative border-l-2 border-primary/30 pl-6 sm:pl-8 ml-2 sm:ml-4 space-y-10">
+            <div className="relative border-l border-white/10 pl-8 ml-3 space-y-12">
               {education.map((edu, index) => (
                 <div key={index} className="relative group">
-                  {/* Git commit node */}
-                  <div className="absolute -left-[33px] sm:-left-[41px] top-1.5 w-4 h-4 rounded-full bg-background border-2 border-primary group-hover:bg-primary ring-4 ring-background transition-colors cursor-pointer" />
-
-                  <Card className="p-5 sm:p-6 bg-[#0d1117] border-primary/20 hover:border-primary/50 hover:shadow-[0_0_20px_rgba(119,255,150,0.1)] transition-all font-mono">
-                    <div className="space-y-3">
-                      <div>
-                        <h4 className="text-lg font-bold text-green-400">
-                          {edu.title}
-                        </h4>
-                        <p className="text-purple-400 font-medium text-sm sm:text-base mt-1">
-                          Centro:{' '}
-                          <span className="text-foreground">
-                            {edu.institution}
-                          </span>
-                        </p>
-                      </div>
-
-                      <div className="flex items-center gap-2 text-sm text-yellow-500/80">
-                        <Calendar className="h-4 w-4" />
-                        <span>Date: {edu.period}</span>
-                      </div>
-
-                      <p className="text-muted-foreground text-sm leading-relaxed border-l-2 border-primary/20 pl-3">
-                        {edu.description}
-                      </p>
+                  <div className="absolute -left-[37px] top-1.5 w-4 h-4 rounded-full bg-[#0a0a0a] border-2 border-primary group-hover:bg-primary transition-colors ring-4 ring-[#0a0a0a]" />
+                  <div className="space-y-3">
+                    <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+                      <h4 className="text-xl font-bold text-white group-hover:text-primary transition-colors">
+                        {edu.title}
+                      </h4>
+                      <span className="text-xs font-mono text-primary/60 bg-primary/5 px-2 py-1 rounded">
+                        {edu.period}
+                      </span>
                     </div>
-                  </Card>
+                    <p className="text-white/40 font-mono text-sm tracking-wider uppercase">
+                      {edu.institution}
+                    </p>
+                    <p className="text-white/60 text-sm leading-relaxed max-w-lg">
+                      {edu.description}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="space-y-8 relative">
-            <div className="flex items-center gap-3 mb-8">
-              <div className="p-2 sm:p-3 bg-primary/10 rounded-lg border border-primary/20">
-                <Briefcase className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
-              </div>
-              <h3 className="text-xl sm:text-2xl font-mono font-bold text-primary">
-                {'< Experiencia />'}
-              </h3>
+          <div className="space-y-12">
+            <div className="flex items-center gap-4">
+              <Briefcase className="h-6 w-6 text-primary" />
+              <h3 className="text-2xl font-bold tracking-tight uppercase">Experiencia</h3>
             </div>
 
-            <div className="relative border-l-2 border-primary/30 pl-6 sm:pl-8 ml-2 sm:ml-4 space-y-10">
+            <div className="relative border-l border-white/10 pl-8 ml-3 space-y-12">
               {experience.map((exp, index) => (
                 <div key={index} className="relative group">
-                  {/* Git commit node */}
-                  <div className="absolute -left-[33px] sm:-left-[41px] top-1.5 w-4 h-4 rounded-full bg-background border-2 border-primary group-hover:bg-primary ring-4 ring-background transition-colors cursor-pointer" />
-
-                  <Card className="p-5 sm:p-6 bg-[#0d1117] border-primary/20 hover:border-primary/50 hover:shadow-[0_0_20px_rgba(119,255,150,0.1)] transition-all font-mono">
-                    <div className="space-y-3">
-                      <div>
-                        <h4 className="text-lg font-bold text-green-400">
-                          {exp.title}
-                        </h4>
-                        <p className="text-purple-400 font-medium text-sm sm:text-base mt-1">
-                          Empresa:{' '}
-                          <span className="text-foreground">{exp.company}</span>
-                        </p>
-                      </div>
-
-                      <div className="flex items-center gap-2 text-sm text-yellow-500/80">
-                        <Calendar className="h-4 w-4" />
-                        <span>Date: {exp.period}</span>
-                      </div>
-
-                      <p className="text-muted-foreground text-sm leading-relaxed border-l-2 border-primary/20 pl-3">
-                        {exp.description}
-                      </p>
+                  <div className="absolute -left-[37px] top-1.5 w-4 h-4 rounded-full bg-[#0a0a0a] border-2 border-primary group-hover:bg-primary transition-colors ring-4 ring-[#0a0a0a]" />
+                  <div className="space-y-3">
+                    <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+                      <h4 className="text-xl font-bold text-white group-hover:text-primary transition-colors">
+                        {exp.title}
+                      </h4>
+                      <span className="text-xs font-mono text-primary/60 bg-primary/5 px-2 py-1 rounded">
+                        {exp.period}
+                      </span>
                     </div>
-                  </Card>
+                    <p className="text-white/40 font-mono text-sm tracking-wider uppercase">
+                      {exp.company}
+                    </p>
+                    <p className="text-white/60 text-sm leading-relaxed max-w-lg">
+                      {exp.description}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
         </div>
 
-        <div className="mt-8 sm:mt-12 text-center">
-          <Card className="inline-block p-6 sm:p-8 max-w-2xl mx-4">
-            <h3 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">
-              Mi Currículum
-            </h3>
-            <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6 text-pretty leading-relaxed">
-              Descarga mi CV completo para más detalles sobre mi experiencia y
-              formación
+        <div className="mt-24 text-center">
+          <div className="inline-block p-10 bg-[#111111] border border-white/5 rounded-3xl max-w-2xl group hover:border-primary/20 transition-all">
+            <h3 className="text-2xl font-bold mb-4">¿Quieres saber más?</h3>
+            <p className="text-white/50 mb-8 max-w-md mx-auto text-pretty">
+              Puedes descargar mi currículum completo para ver todos los detalles de mi formación técnica y trayectoria profesional.
             </p>
-            <Button size="lg" asChild className="w-full sm:w-auto">
+            <Button size="lg" asChild className="bg-primary text-black font-bold hover:bg-primary/90 px-8 py-6 rounded-2xl">
               <a href="/curriculum.pdf" download>
-                <FileText className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
-                Descargar CV
+                <FileText className="h-5 w-5 mr-3" />
+                Descargar CV [PDF]
               </a>
             </Button>
-          </Card>
+          </div>
         </div>
       </div>
     </section>

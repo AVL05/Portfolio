@@ -1,114 +1,120 @@
 'use client'
 
+import { useRef } from 'react'
 import { Card } from '@/components/ui/card'
-import {
-  scrollRevealVariants,
-  staggerChildrenVariants,
-  useScrollReveal,
-} from '@/hooks/useScrollReveal'
-import { motion } from 'framer-motion'
+import { gsap, useGSAP } from '@/lib/gsap'
 
 export function About() {
-  const { ref, isInView } = useScrollReveal()
+  const containerRef = useRef<HTMLDivElement>(null)
+  const terminalRef = useRef<HTMLDivElement>(null)
+
+  useGSAP(() => {
+    // Initial entrance
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: 'top 80%',
+        toggleActions: 'play none none none'
+      }
+    })
+
+    tl.from('.about-title', { opacity: 0, x: -30, duration: 1 })
+      .from(terminalRef.current, { opacity: 0, scale: 0.95, y: 30, duration: 1 }, '-=0.5')
+      .from('.about-status', { opacity: 0, y: 20, duration: 0.8 }, '-=0.3')
+
+    // Terminal typing-like staggered entrance
+    gsap.from('.terminal-line', {
+      opacity: 0,
+      x: -20,
+      stagger: 0.3,
+      duration: 0.8,
+      scrollTrigger: {
+        trigger: terminalRef.current,
+        start: 'top 75%'
+      }
+    })
+  }, { scope: containerRef })
 
   return (
     <section
       id="about"
-      className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-background relative overflow-hidden"
+      ref={containerRef}
+      className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-[#0a0a0a] relative overflow-hidden text-white"
     >
       {/* Background decoration */}
-      <div className="absolute inset-0 bg-linear-to-br from-primary/5 to-accent/5 opacity-50" />
-      <motion.div
-        className="absolute top-20 -right-20 w-96 h-96 bg-primary/10 rounded-full blur-3xl"
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.3, 0.6, 0.3],
-        }}
-        transition={{ duration: 8, repeat: Infinity }}
-      />
-      <motion.div
-        className="absolute bottom-20 -left-20 w-80 h-80 bg-accent/10 rounded-full blur-3xl"
-        animate={{
-          scale: [1.2, 1, 1.2],
-          opacity: [0.6, 0.3, 0.6],
-        }}
-        transition={{ duration: 6, repeat: Infinity }}
-      />
+      <div className="absolute top-1/4 -left-20 w-80 h-80 bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-accent/5 rounded-full blur-[100px] pointer-events-none" />
 
-      <div className="max-w-4xl mx-auto relative z-10" ref={ref}>
-        <motion.div
-          className="space-y-6 text-center"
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          variants={staggerChildrenVariants}
-        >
-          <motion.h2
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-balance text-primary px-2 font-mono tracking-tight"
-            variants={scrollRevealVariants}
-          >
-            Conoce al Desarrollador, No Solo el Código
-          </motion.h2>
+      <div className="max-w-5xl mx-auto relative z-10">
+        <div className="mb-16">
+          <h2 className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter opacity-10 absolute -top-12 left-0 select-none hidden sm:block uppercase">
+            WHOAMI
+          </h2>
+          <h2 className="about-title text-3xl sm:text-4xl md:text-5xl font-bold text-primary font-mono relative">
+            <span className="text-primary/50 mr-4 font-normal">01.</span>
+            Sobre Mí <span className="text-white/20 ml-2">/ Background</span>
+          </h2>
+        </div>
 
-          <motion.div
-            className="w-full max-w-2xl mx-auto mt-8 bg-[#0d1117] border border-primary/20 rounded-xl overflow-hidden shadow-2xl backdrop-blur-md"
-            variants={scrollRevealVariants}
-            initial="hidden"
-            animate={isInView ? 'visible' : 'hidden'}
-          >
-            {/* Window controls */}
-            <div className="flex items-center gap-2 px-4 py-3 bg-[#161b22] border-b border-primary/20">
-              <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
-              <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-              <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
-              <span className="ml-2 text-xs font-mono text-muted-foreground/70">
-                about.ts
-              </span>
-            </div>
-
-            {/* Code content */}
-            <div className="p-6 text-left font-mono text-sm sm:text-base overflow-x-auto leading-relaxed space-y-4">
-              <p className="text-muted-foreground flex items-center gap-2">
-                <span className="text-green-400">root@portfolio:~$</span> whoami
-              </p>
-              <p className="text-foreground pl-2 text-pretty">
-                ¡Hola! Soy{' '}
-                <span className="text-primary font-bold">
-                  Alex Vicente López
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-12 space-y-8">
+            <div
+              ref={terminalRef}
+              className="w-full bg-[#111111]/80 border border-white/10 rounded-xl overflow-hidden shadow-2xl backdrop-blur-xl"
+            >
+              {/* Window controls */}
+              <div className="flex items-center gap-2 px-4 py-3 bg-[#181818] border-b border-white/5">
+                <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
+                <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
+                <span className="ml-3 text-xs font-mono text-white/40 tracking-wider">
+                  ~/bio/about_me.sh
                 </span>
-                , un estudiande de Desarrollo de Aplicaciones Web.
-              </p>
+              </div>
 
-              <p className="text-muted-foreground flex items-center gap-2 mt-4">
-                <span className="text-green-400">root@portfolio:~$</span> cat
-                background.txt
-              </p>
-              <div className="pl-2 space-y-2 text-foreground text-pretty">
-                <p>
-                  Mi camino tecnológico comenzó con Sistemas Microinformáticos y
-                  Redes Locales, y actualmente me estoy especializando en
-                  Desarrollo de Aplicaciones Web.
-                </p>
-                <p>
-                  Mi punto fuerte es combinar la lógica del código con mi pasión
-                  por el diseño digital y la fotografía creativa. Esto me
-                  permite crear soluciones que no solo funcionan perfectamente,
-                  sino que también ofrecen una experiencia visual increíble.
-                </p>
+              {/* Code content */}
+              <div className="p-8 text-left font-mono text-sm sm:text-base overflow-x-auto leading-relaxed space-y-8">
+                <div className="terminal-line space-y-3">
+                  <p className="text-white/40 flex items-center gap-2">
+                    <span className="text-primary">alex@portfolio:</span>
+                    <span className="text-accent">~</span>$ whoami
+                  </p>
+                  <p className="text-white/90 pl-2 text-pretty text-lg">
+                    ¡Hola! Soy{' '}
+                    <span className="text-primary font-bold">
+                      Alex Vicente López
+                    </span>
+                    , un estudiante de Desarrollo de Aplicaciones Web apasionado por la tecnología y el diseño minimalista.
+                  </p>
+                </div>
+
+                <div className="terminal-line space-y-4">
+                  <p className="text-white/40 flex items-center gap-2">
+                    <span className="text-primary">alex@portfolio:</span>
+                    <span className="text-accent">~</span>$ cat experience.txt
+                  </p>
+                  <div className="pl-2 space-y-4 text-white/70 text-pretty">
+                    <p>
+                      Mi formación en Sistemas Microinformáticos y Redes Locales me dio una base sólida que ahora estoy expandiendo con el Desarrollo de Aplicaciones Web.
+                    </p>
+                    <p>
+                      Busco la armonía perfecta entre la robustez del código y la elegancia visual, utilizando herramientas como la fotografía creativa para enriquecer mi visión digital.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
-          </motion.div>
 
-          <motion.div className="pt-8" variants={scrollRevealVariants}>
-            <Card className="inline-block px-6 py-3 bg-primary/10 border border-primary/40 backdrop-blur-md hover:bg-primary/20 transition-colors cursor-pointer group shadow-[0_0_15px_rgba(119,255,150,0.1)] hover:shadow-[0_0_25px_rgba(119,255,150,0.2)]">
-              <p className="text-primary font-mono text-sm flex items-center gap-2">
-                <span className="text-green-400 animate-pulse">●</span>
-                <span className="group-hover:text-green-300 transition-colors">
+            <div className="about-status flex justify-center">
+              <div className="inline-flex items-center gap-4 px-8 py-4 bg-[#111111] border border-primary/30 rounded-2xl hover:bg-primary/5 transition-all duration-500 cursor-pointer group shadow-[0_0_30px_rgba(119,255,150,0.05)] hover:shadow-[0_0_40px_rgba(119,255,150,0.15)] hover:scale-105 active:scale-95">
+                <div className="w-3 h-3 bg-primary rounded-full animate-pulse shadow-[0_0_10px_rgba(119,255,150,1)]" />
+                <span className="text-primary font-mono text-sm font-bold tracking-wider uppercase">
                   Disponible para nuevos proyectos
                 </span>
-              </p>
-            </Card>
-          </motion.div>
-        </motion.div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   )

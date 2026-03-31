@@ -1,10 +1,10 @@
 'use client'
 
+import { useRef } from 'react'
 import { Button } from '@/components/ui/button'
-import { useScrollReveal } from '@/hooks/useScrollReveal'
-import { motion } from 'framer-motion'
-import { Camera, ExternalLink, Globe, Instagram } from 'lucide-react'
+import { Camera, Globe, Instagram } from 'lucide-react'
 import Image from 'next/image'
+import { gsap, useGSAP } from '@/lib/gsap'
 
 // Enlaces a tus redes de fotografía
 const photographyLinks = {
@@ -14,45 +14,80 @@ const photographyLinks = {
 }
 
 export function Photography() {
-  const { ref, isInView } = useScrollReveal()
+  const containerRef = useRef<HTMLDivElement>(null)
+  const headerRef = useRef<HTMLDivElement>(null)
+  const showcaseRef = useRef<HTMLDivElement>(null)
+
+  useGSAP(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: 'top 80%',
+      }
+    })
+
+    tl.from('.photo-header', { opacity: 0, y: 30, duration: 1 })
+      .from('.raw-window', { 
+        opacity: 0, 
+        y: 50, 
+        scale: 0.98,
+        duration: 1.2, 
+        ease: 'power3.out' 
+      }, '-=0.5')
+      .from('.sidebar-tool', { 
+        opacity: 0, 
+        scale: 0, 
+        stagger: 0.1, 
+        duration: 0.5 
+      }, '-=0.8')
+      .from('.exif-item', { 
+        opacity: 0, 
+        x: 20, 
+        stagger: 0.05, 
+        duration: 0.5 
+      }, '-=0.5')
+
+    // Parallax effect for the hero image
+    gsap.to('.hero-image-container', {
+      y: -20,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.raw-window',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true
+      }
+    })
+  }, { scope: containerRef })
+
   // Use a simpler approach for the showcase image
   const imagePath = '/photography/hero.webp'
-  const hasHeroImage = true // Set to true by default or use a single check
+  const hasHeroImage = true
 
   return (
-    <section
+<section
       id="photography"
-      className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 relative"
+      ref={containerRef}
+      className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-[#0a0a0a] relative overflow-hidden text-white"
     >
-      <div className="max-w-4xl mx-auto" ref={ref}>
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-center mb-8 sm:mb-12"
-        >
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <Camera className="h-8 w-8 text-primary" />
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-linear-to-r from-primary to-accent bg-clip-text text-transparent">
-              Fotografía
-            </h2>
-          </div>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Explora mi mundo a través del lente. Capturando momentos, emociones
-            y la belleza que nos rodea.
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="mb-20">
+          <h2 className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter opacity-10 absolute -top-12 left-0 select-none hidden sm:block uppercase">
+            GALLERY
+          </h2>
+          <h2 className="photo-header text-3xl sm:text-4xl md:text-5xl font-bold text-primary font-mono relative">
+            <span className="text-primary/50 mr-4 font-normal">04.</span>
+            Fotografía <span className="text-white/20 ml-2">/ Creative View</span>
+          </h2>
+          <p className="photo-header text-base sm:text-lg text-white/50 max-w-2xl mt-4 font-medium">
+            Explora mi mundo a través del lente. Capturando momentos, emociones y la belleza que nos rodea.
           </p>
-        </motion.div>
+        </div>
 
         {/* Photography Showcase */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="relative"
-        >
+        <div ref={showcaseRef} className="raw-window relative">
           {/* Main showcase card - RAW Editor OS Window */}
-          <div className="relative overflow-hidden rounded-xl bg-[#0d1117] border border-primary/20 shadow-2xl backdrop-blur-md font-mono">
+          <div className="relative overflow-hidden rounded-xl bg-[#0d1117]/80 border border-primary/20 shadow-2xl backdrop-blur-xl font-mono">
             {/* Window controls and title */}
             <div className="flex items-center justify-between px-4 py-3 bg-[#161b22] border-b border-primary/20">
               <div className="flex items-center gap-2">
@@ -72,12 +107,12 @@ export function Photography() {
 
             <div className="flex flex-col lg:flex-row">
               {/* Left sidebar - mock tools */}
-              <div className="hidden lg:flex flex-col gap-4 p-4 border-r border-primary/20 bg-[#0d1117] items-center text-muted-foreground">
-                <Camera className="w-5 h-5 text-primary" />
-                <div className="w-6 h-px bg-border/50 my-2"></div>
-                <div className="w-4 h-4 border-2 border-current rounded-sm"></div>
-                <div className="w-4 h-4 border border-current rounded-full"></div>
-                <div className="w-4 h-4 border-t-2 border-l-2 border-current"></div>
+              <div className="hidden lg:flex flex-col gap-4 p-4 border-r border-primary/20 bg-[#0d1117]/50 items-center text-muted-foreground">
+                <Camera className="sidebar-tool w-5 h-5 text-primary" />
+                <div className="w-6 h-px bg-border/50 my-1"></div>
+                <div className="sidebar-tool w-4 h-4 border-2 border-current rounded-sm"></div>
+                <div className="sidebar-tool w-4 h-4 border border-current rounded-full"></div>
+                <div className="sidebar-tool w-4 h-4 border-t-2 border-l-2 border-current"></div>
               </div>
 
               {/* Main image area */}
@@ -88,8 +123,8 @@ export function Photography() {
                 <div className="absolute bottom-8 left-8 w-8 h-8 border-b-2 border-l-2 border-primary/50"></div>
                 <div className="absolute bottom-8 right-8 w-8 h-8 border-b-2 border-r-2 border-primary/50"></div>
 
-                {/* Hero image */}
-                <motion.div className="relative w-full aspect-video sm:aspect-3/2 rounded-none overflow-hidden ring-1 ring-border/30 shadow-2xl">
+                {/* Hero image container */}
+                <div className="hero-image-container relative w-full aspect-video sm:aspect-3/2 rounded-none overflow-hidden ring-1 ring-border/30 shadow-2xl">
                   {hasHeroImage ? (
                     <Image
                       src={imagePath}
@@ -101,9 +136,6 @@ export function Photography() {
                   ) : (
                     <div className="absolute inset-0 flex items-center justify-center bg-[#161b22]">
                       <Camera className="h-16 w-16 sm:h-20 sm:w-20 text-white/10" />
-                      <span className="absolute bottom-4 right-4 text-xs font-mono text-muted-foreground/30">
-                        NO_SIGNAL
-                      </span>
                     </div>
                   )}
 
@@ -113,7 +145,7 @@ export function Photography() {
                     <div className="absolute h-px w-12 bg-primary"></div>
                     <div className="absolute w-4 h-4 border border-primary rounded-full"></div>
                   </div>
-                </motion.div>
+                </div>
               </div>
 
               {/* Right sidebar - Exif properties & CTA */}
@@ -123,28 +155,18 @@ export function Photography() {
                     Propiedades.RAW
                   </h3>
                   <div className="space-y-3 text-xs text-muted-foreground font-mono">
-                    <div className="flex justify-between">
-                      <span>ISO</span>
-                      <span className="text-foreground">100</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Apertura</span>
-                      <span className="text-foreground">f/2.8</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Exposicion</span>
-                      <span className="text-foreground">1/250s</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Dist focal</span>
-                      <span className="text-foreground">35mm</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Lente</span>
-                      <span className="text-foreground text-right">
-                        Sigma 35mm Art
-                      </span>
-                    </div>
+                    {[
+                      { label: 'ISO', value: '100' },
+                      { label: 'Apertura', value: 'f/2.8' },
+                      { label: 'Exposicion', value: '1/250s' },
+                      { label: 'Dist focal', value: '35mm' },
+                      { label: 'Lente', value: 'Sigma 35mm Art' },
+                    ].map((item) => (
+                      <div key={item.label} className="exif-item flex justify-between">
+                        <span>{item.label}</span>
+                        <span className="text-foreground">{item.value}</span>
+                      </div>
+                    ))}
                   </div>
 
                   <div className="mt-8">
@@ -152,20 +174,20 @@ export function Photography() {
                       Filtros
                     </h3>
                     <div className="grid grid-cols-3 gap-2">
-                      <div className="h-8 rounded bg-primary/10 border border-primary/30 flex items-center justify-center text-[10px] text-primary cursor-pointer hover:bg-primary/20">
+                      <div className="h-8 rounded bg-primary/10 border border-primary/30 flex items-center justify-center text-[10px] text-primary cursor-pointer hover:bg-primary/20 transition-all">
                         B&N
                       </div>
-                      <div className="h-8 rounded bg-[#161b22] border border-border flex items-center justify-center text-[10px] cursor-pointer hover:bg-white/5">
+                      <div className="h-8 rounded bg-[#161b22] border border-border flex items-center justify-center text-[10px] cursor-pointer hover:bg-white/5 transition-all">
                         CINE
                       </div>
-                      <div className="h-8 rounded bg-[#161b22] border border-border flex items-center justify-center text-[10px] cursor-pointer hover:bg-white/5">
+                      <div className="h-8 rounded bg-[#161b22] border border-border flex items-center justify-center text-[10px] cursor-pointer hover:bg-white/5 transition-all">
                         VNTG
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-8 space-y-3">
+                <div className="mt-12 space-y-3">
                   <Button
                     asChild
                     className="w-full font-mono bg-primary text-[#0d1117] hover:bg-primary/80 hover:shadow-[0_0_15px_rgba(119,255,150,0.4)] transition-all duration-300"
@@ -197,7 +219,7 @@ export function Photography() {
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

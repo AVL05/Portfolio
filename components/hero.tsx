@@ -1,8 +1,9 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { Camera, Github, Instagram, Linkedin } from 'lucide-react'
+import { useRef } from 'react'
+import { Github, Linkedin, ArrowDown } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { gsap, useGSAP } from '@/lib/gsap'
 
 const TypewriterText = ({
   text,
@@ -29,205 +30,148 @@ const TypewriterText = ({
       const timeout = setTimeout(() => {
         setDisplayText((prev) => prev + text[currentIndex])
         setCurrentIndex((prev) => prev + 1)
-      }, 80)
+      }, 70)
       return () => clearTimeout(timeout)
     }
   }, [currentIndex, text, isStarted])
 
   return (
-    <span>
+    <span className="relative">
       {displayText}
-      <motion.span
-        animate={{ opacity: [1, 0] }}
-        transition={{ duration: 0.5, repeat: Infinity, repeatType: 'reverse' }}
-        className="inline-block w-0.5 h-6 bg-white/80 ml-1"
-      />
+      <span className="inline-block w-[3px] h-[1.1em] bg-primary align-middle ml-2 animate-pulse shadow-[0_0_10px_rgba(119,255,150,0.8)]" />
     </span>
   )
 }
 
-const FloatingElements = () => {
-  const [isClient, setIsClient] = useState(false)
+const FloatingCircles = () => {
+  const containerRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
-
-  if (!isClient) return null
+  useGSAP(() => {
+    const circles = gsap.utils.toArray('.floating-circle')
+    circles.forEach((circle: any) => {
+      gsap.to(circle, {
+        x: 'random(-100, 100)',
+        y: 'random(-100, 100)',
+        duration: 'random(10, 20)',
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+      })
+    })
+  }, { scope: containerRef })
 
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {[...Array(6)].map((_, i) => (
-        <div
-          key={i}
-          className="absolute w-2 h-2 bg-white/10 rounded-full animate-float-up"
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: '100%',
-            animationDelay: `${Math.random() * 5}s`,
-            animationDuration: `${Math.random() * 4 + 3}s`,
-            opacity: 0,
-          }}
-        />
-      ))}
-      <style jsx global>{`
-        @keyframes float-up {
-          0% {
-            transform: translateY(0) translateX(0);
-            opacity: 0;
-          }
-          20% {
-            opacity: 0.5;
-          }
-          80% {
-            opacity: 0.5;
-          }
-          100% {
-            transform: translateY(-120vh)
-              translateX(${Math.random() * 100 - 50}px);
-            opacity: 0;
-          }
-        }
-        .animate-float-up {
-          animation: float-up ease-in infinite;
-        }
-      `}</style>
+    <div ref={containerRef} className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
+      <div className="floating-circle absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[120px]" />
+      <div className="floating-circle absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/20 rounded-full blur-[120px]" />
     </div>
   )
 }
 
 export function Hero() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  
+  useGSAP(() => {
+    const tl = gsap.timeline({ defaults: { ease: 'power4.out' } })
+
+    tl.from('.hero-number', { opacity: 0, x: -30, duration: 1 }, 0.5)
+      .from('.hero-hi', { opacity: 0, y: 20, duration: 0.8 }, 0.7)
+      .from('.hero-name', { opacity: 0, scale: 1.1, duration: 1.2, filter: 'blur(10px)' }, 0.8)
+      .from('.hero-subtitle', { opacity: 0, x: -20, duration: 1 }, 1.2)
+      .from('.hero-description', { opacity: 0, y: 20, duration: 1 }, 1.4)
+      .from('.social-btn', { 
+        opacity: 0, 
+        y: 20, 
+        stagger: 0.1, 
+        duration: 0.8,
+        ease: 'back.out(1.7)'
+      }, 1.6)
+      .from('.scroll-btn', { opacity: 0, y: 10, duration: 1 }, 2.5)
+
+    // Dynamic mouse parallax
+    const handleMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY } = e
+      const xPos = (clientX / window.innerWidth - 0.5) * 40
+      const yPos = (clientY / window.innerHeight - 0.5) * 40
+
+      gsap.to('.hero-parallax', {
+        x: xPos,
+        y: yPos,
+        duration: 1.5,
+        ease: 'power2.out'
+      })
+    }
+
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => window.removeEventListener('mousemove', handleMouseMove)
+  }, { scope: containerRef })
+
   return (
     <section
       id="hero"
-      className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 gradient-bg relative overflow-hidden"
+      ref={containerRef}
+      className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 bg-[#0a0a0a] relative overflow-hidden font-sans"
     >
-      <FloatingElements />
+      <FloatingCircles />
 
-      {/* Parallax background - reduced opacity for better contrast */}
-      <div className="absolute inset-0 bg-linear-to-br from-primary/10 to-accent/10" />
+      <div className="hero-parallax w-full max-w-7xl mx-auto flex flex-col items-start justify-center z-10 space-y-8 sm:space-y-12">
+        <div className="flex flex-col items-start gap-2">
+          <span className="hero-hi text-primary font-mono text-lg sm:text-xl tracking-widest uppercase">
+            Hola Mundo, mi nombre es
+          </span>
+          <div className="flex items-baseline gap-4 sm:gap-6">
+            <span className="hero-number text-white/5 font-black text-6xl sm:text-8xl md:text-9xl select-none leading-none">
+              00.
+            </span>
+            <h1 className="hero-name text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-white tracking-tighter leading-none">
+              <TypewriterText text="Alex Vicente." delay={1000} />
+            </h1>
+          </div>
+        </div>
 
-      <div className="max-w-4xl mx-auto text-center flex-1 flex flex-col items-center justify-center z-10">
-        <motion.div
-          className="space-y-6 sm:space-y-8"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-        >
-          <motion.h1
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white/95 text-balance leading-tight px-4 font-mono tracking-tight"
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.1, duration: 0.8 }}
-          >
-            <span className="text-primary mr-2">{'>'}</span>
-            <TypewriterText text="Alex Vicente López" delay={200} />
-          </motion.h1>
+        <div className="space-y-6 max-w-3xl">
+          <h2 className="hero-subtitle text-3xl sm:text-5xl md:text-6xl font-bold text-white/40 tracking-tight leading-tight">
+            Diseño experiencias digitales <span className="text-white/80">que impactan.</span>
+          </h2>
+          
+          <p className="hero-description text-lg sm:text-xl text-white/50 max-w-2xl text-pretty leading-relaxed font-medium">
+            Estudiante de <span className="text-primary">Desarrollo Web</span> apasionado por la creación de aplicaciones robustas y el diseño visual minimalista. Combinando técnica y creatividad para resolver problemas complejos.
+          </p>
 
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
-            className="px-4"
-          >
-            <p className="text-lg sm:text-xl md:text-2xl text-primary max-w-2xl mx-auto text-pretty leading-relaxed font-mono font-medium text-center shadow-primary/20 drop-shadow-lg">
-              <motion.span
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4 }}
-              >
-                Estudiante de Desarrollo Web | Fotógrafo Creativo
-              </motion.span>
-            </p>
-          </motion.div>
-
-          <motion.p
-            className="text-sm sm:text-base md:text-lg text-white/70 max-w-2xl mx-auto text-pretty leading-relaxed px-4 text-center"
-            initial={{ y: 10, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-          >
-            Desarrollador apasionado por arquitecturas modernas, creando
-            aplicaciones web robustas y escalables. Transformo problemas
-            complejos en código eficiente y soluciones digitales innovadoras.
-          </motion.p>
-
-          <motion.div
-            className="flex items-center justify-center gap-4 sm:gap-6 pt-4 px-4"
-            initial={{ y: 10, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-          >
-            {[
-              {
-                icon: Github,
-                href: 'https://github.com/AVL05',
-                label: 'GitHub',
-              },
-              {
-                icon: Linkedin,
-                href: 'https://www.linkedin.com/in/alex-vicente-lopez/',
-                label: 'LinkedIn',
-              },
-            ].map((social, index) => (
-              <motion.a
-                key={social.label}
-                href={social.href}
-                target={social.href.startsWith('http') ? '_blank' : undefined}
-                rel={
-                  social.href.startsWith('http')
-                    ? 'noopener noreferrer'
-                    : undefined
-                }
-                className="text-white/70 hover:text-white transition-colors p-3 rounded-full hover:bg-white/10 backdrop-blur-sm"
-                initial={{ scale: 0, rotate: -90 }}
-                animate={{ scale: 1, rotate: 0 }}
-                transition={{
-                  delay: 0.6 + index * 0.1,
-                  type: 'spring',
-                  stiffness: 200,
-                }}
-              >
-                <social.icon className="h-6 w-6" />
-                <span className="sr-only">{social.label}</span>
-              </motion.a>
-            ))}
-          </motion.div>
-        </motion.div>
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6 pt-4">
+            <a
+              href="https://github.com/AVL05"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-btn group px-6 py-3 bg-white text-black font-bold rounded-xl flex items-center gap-3 hover:bg-primary transition-all duration-300 hover:shadow-[0_0_30px_rgba(119,255,150,0.5)]"
+            >
+              <Github className="h-5 w-5" />
+              <span>GitHub</span>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/alex-vicente-lopez/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-btn group px-6 py-3 bg-transparent border-2 border-white/10 text-white font-bold rounded-xl flex items-center gap-3 hover:border-primary/50 hover:bg-white/5 transition-all duration-300"
+            >
+              <Linkedin className="h-5 w-5 text-[#0077b5]" />
+              <span>LinkedIn</span>
+            </a>
+          </div>
+        </div>
       </div>
 
-      <motion.a
+      <a
         href="#about"
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/70 hover:text-white transition-colors"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.8 }}
+        className="scroll-btn absolute bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-4 text-white/20 hover:text-primary transition-all duration-500 group"
       >
-        <motion.span
-          className="text-sm font-medium"
-          animate={{ y: [0, -5, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          Scroll down
-        </motion.span>
-        <motion.div
-          className="w-6 h-10 border-2 border-white/70 rounded-full flex items-start justify-center p-2"
-          animate={{
-            boxShadow: [
-              '0 0 0px rgba(255,255,255,0)',
-              '0 0 20px rgba(255,255,255,0.3)',
-              '0 0 0px rgba(255,255,255,0)',
-            ],
-          }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          <motion.div
-            className="w-1.5 h-2 bg-white/70 rounded-full"
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          />
-        </motion.div>
-      </motion.a>
+        <span className="text-xs font-black uppercase tracking-[0.3em] font-mono group-hover:tracking-[0.5em] transition-all">
+          Scroll Down
+        </span>
+        <div className="p-2 border border-white/10 rounded-full group-hover:border-primary group-hover:scale-110 transition-all">
+          <ArrowDown className="h-4 w-4 animate-bounce" />
+        </div>
+      </a>
     </section>
   )
 }

@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import type React from "react";
 import { Suspense } from "react";
 import "./globals.css";
+
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://aleviclop.vercel.app";
 
@@ -30,6 +31,8 @@ export const metadata: Metadata = {
     "Diseño Digital",
     "React",
     "Next.js",
+    "GSAP",
+    "Animations",
   ],
   authors: [{ name: "Alex Vicente López", url: SITE_URL }],
   openGraph: {
@@ -81,9 +84,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className="dark">
+    <html lang="es" className="dark scroll-smooth" suppressHydrationWarning>
       <body
-        className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased`}
+        className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased selection:bg-primary/30 selection:text-primary bg-[#0a0a0a] text-white`}
       >
         <Suspense fallback={null}>{children}</Suspense>
         <Analytics />

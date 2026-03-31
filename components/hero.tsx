@@ -72,29 +72,35 @@ export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null)
   
   useGSAP(() => {
+    const q = gsap.utils.selector(containerRef)
     const tl = gsap.timeline({ defaults: { ease: 'power4.out' } })
 
-    tl.from('.hero-number', { opacity: 0, x: -30, duration: 1 }, 0.5)
-      .from('.hero-hi', { opacity: 0, y: 20, duration: 0.8 }, 0.7)
-      .from('.hero-name', { opacity: 0, scale: 1.1, duration: 1.2, filter: 'blur(10px)' }, 0.8)
-      .from('.hero-subtitle', { opacity: 0, x: -20, duration: 1 }, 1.2)
-      .from('.hero-description', { opacity: 0, y: 20, duration: 1 }, 1.4)
-      .from('.social-btn', { 
-        opacity: 0, 
+    // Use fromTo for absolute reliability - starting from very low alpha instead of total 0
+    tl.fromTo(q('.hero-number'), { autoAlpha: 0, x: -30 }, { autoAlpha: 1, x: 0, duration: 1 }, 0.5)
+      .fromTo(q('.hero-hi'), { autoAlpha: 0.01, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.8 }, 0.7)
+      .fromTo(q('.hero-name'), { autoAlpha: 0, scale: 1.1, filter: 'blur(10px)' }, { autoAlpha: 1, scale: 1, filter: 'blur(0px)', duration: 1.2 }, 0.8)
+      .fromTo(q('.hero-subtitle'), { autoAlpha: 0.01, x: -20 }, { autoAlpha: 1, x: 0, duration: 1 }, 1.2)
+      .fromTo(q('.hero-description'), { autoAlpha: 0.01, y: 20 }, { autoAlpha: 1, y: 0, duration: 1, clearProps: 'all' }, 1.4)
+      .fromTo(q('.social-btn'), { 
+        autoAlpha: 0.01, 
         y: 20, 
+      }, {
+        autoAlpha: 1,
+        y: 0,
         stagger: 0.1, 
         duration: 0.8,
-        ease: 'back.out(1.7)'
+        ease: 'back.out(1.7)',
+        clearProps: 'all'
       }, 1.6)
-      .from('.scroll-btn', { opacity: 0, y: 10, duration: 1 }, 2.5)
+      .fromTo(q('.scroll-btn'), { autoAlpha: 0.01, y: 10 }, { autoAlpha: 1, y: 0, duration: 1, clearProps: 'all' }, 2.5)
 
-    // Dynamic mouse parallax
+    // Dynamic mouse parallax with scoped selector
     const handleMouseMove = (e: MouseEvent) => {
       const { clientX, clientY } = e
       const xPos = (clientX / window.innerWidth - 0.5) * 40
       const yPos = (clientY / window.innerHeight - 0.5) * 40
 
-      gsap.to('.hero-parallax', {
+      gsap.to(q('.hero-parallax'), {
         x: xPos,
         y: yPos,
         duration: 1.5,

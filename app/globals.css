@@ -150,7 +150,12 @@
     background: radial-gradient(circle, var(--tw-gradient-stops));
   }
 
-  /* Smooth fade-in animation */
+  /* Smooth fade-in animation base */
+  .hero-number, .hero-hi, .hero-name, .hero-subtitle, .hero-description, 
+  .about-title, .terminal-line, .skill-badge {
+    opacity: 1; /* Default to visible for SEO and reliability */
+  }
+
   @keyframes fadeInUp {
     from {
       opacity: 0;

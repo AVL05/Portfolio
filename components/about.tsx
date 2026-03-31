@@ -9,6 +9,8 @@ export function About() {
   const terminalRef = useRef<HTMLDivElement>(null)
 
   useGSAP(() => {
+    const q = gsap.utils.selector(containerRef)
+    
     // Initial entrance
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -18,21 +20,25 @@ export function About() {
       }
     })
 
-    tl.from('.about-title', { opacity: 0, x: -30, duration: 1 })
-      .from(terminalRef.current, { opacity: 0, scale: 0.95, y: 30, duration: 1 }, '-=0.5')
-      .from('.about-status', { opacity: 0, y: 20, duration: 0.8 }, '-=0.3')
+    tl.fromTo(q('.about-title'), { autoAlpha: 0.01, x: -30 }, { autoAlpha: 1, x: 0, duration: 1 })
+      .fromTo(terminalRef.current, { autoAlpha: 0, scale: 0.95, y: 30 }, { autoAlpha: 1, scale: 1, y: 0, duration: 1, clearProps: 'all' }, '-=0.5')
+      .fromTo(q('.about-status'), { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.8, clearProps: 'all' }, '-=0.3')
 
-    // Terminal typing-like staggered entrance
-    gsap.from('.terminal-line', {
-      opacity: 0,
-      x: -20,
-      stagger: 0.3,
-      duration: 0.8,
-      scrollTrigger: {
-        trigger: terminalRef.current,
-        start: 'top 75%'
+    // Terminal typing-like staggered entrance with separate fromTo for reliability
+    gsap.fromTo(q('.terminal-line'), 
+      { autoAlpha: 0.01, x: -20 },
+      {
+        autoAlpha: 1,
+        x: 0,
+        stagger: 0.3,
+        duration: 0.8,
+        scrollTrigger: {
+          trigger: terminalRef.current,
+          start: 'top 75%'
+        },
+        clearProps: 'all'
       }
-    })
+    )
   }, { scope: containerRef })
 
   return (

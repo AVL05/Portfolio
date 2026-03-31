@@ -61,7 +61,8 @@ export function Skills() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useGSAP(() => {
-    const rows = gsap.utils.toArray('.skill-row')
+    const q = gsap.utils.selector(containerRef)
+    const rows = q('.skill-row')
     
     rows.forEach((row: any) => {
       const category = row.querySelector('.category-title')
@@ -71,24 +72,39 @@ export function Skills() {
         scrollTrigger: {
           trigger: row,
           start: 'top 90%',
+          toggleActions: 'play none none none'
         }
       })
 
-      tl.from(category, {
-        x: -30,
-        autoAlpha: 0,
-        duration: 0.8,
-        ease: 'power3.out'
-      })
-      .from(items, {
-        autoAlpha: 0,
-        scale: 0.9,
-        y: 15,
-        stagger: 0.04,
-        duration: 0.5,
-        ease: 'power2.out',
-        clearProps: 'all'
-      }, '-=0.4')
+      // High-end entrance with reveal and blur
+      tl.fromTo(category, 
+        { autoAlpha: 0.01, x: -40, filter: 'blur(10px)' },
+        {
+          autoAlpha: 1,
+          x: 0,
+          filter: 'blur(0px)',
+          duration: 1.2,
+          ease: 'power4.out'
+        }
+      )
+      .fromTo(items, 
+        { autoAlpha: 0.01, scale: 0.95, y: 25, filter: 'blur(8px)' },
+        {
+          autoAlpha: 1,
+          scale: 1,
+          y: 0,
+          filter: 'blur(0px)',
+          stagger: {
+            amount: 0.5,
+            from: 'start',
+            grid: 'auto'
+          },
+          duration: 1,
+          ease: 'power4.out',
+          clearProps: 'all'
+        }, 
+        '-=0.8'
+      )
     })
   }, { scope: containerRef })
 

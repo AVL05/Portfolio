@@ -87,6 +87,7 @@ export default function RootLayout({
     <html lang="es" className="dark scroll-smooth" suppressHydrationWarning>
       <body
         className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased selection:bg-primary/30 selection:text-primary bg-[#0a0a0a] text-white`}
+        suppressHydrationWarning
       >
         <Suspense fallback={null}>{children}</Suspense>
         <Analytics />

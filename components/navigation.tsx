@@ -24,6 +24,8 @@ export function Navigation() {
   const progressRef = useRef<HTMLDivElement>(null)
 
   useGSAP(() => {
+    const q = gsap.utils.selector(containerRef)
+    
     if (progressRef.current) {
       gsap.to(progressRef.current, {
         scaleX: 1,
@@ -37,13 +39,17 @@ export function Navigation() {
     }
 
     if (navRef.current) {
-      gsap.from(navRef.current, {
-        y: -100,
-        opacity: 0,
-        duration: 1.2,
-        ease: 'power4.out',
-        delay: 1.5
-      })
+      gsap.fromTo(navRef.current, 
+        { y: -100, autoAlpha: 0.01 },
+        {
+          y: 0,
+          autoAlpha: 1,
+          duration: 1.2,
+          ease: 'power4.out',
+          delay: 1.5,
+          clearProps: 'all'
+        }
+      )
     }
   }, { scope: containerRef })
 
@@ -69,12 +75,12 @@ export function Navigation() {
     <div ref={containerRef}>
       <div 
         ref={progressRef}
-        className="fixed top-0 left-0 right-0 h-1 bg-primary origin-left z-[100] scale-x-0 shadow-[0_0_10px_rgba(119,255,150,0.5)]"
+        className="fixed top-0 left-0 right-0 h-1 bg-primary origin-left z-100 scale-x-0 shadow-[0_0_10px_rgba(119,255,150,0.5)]"
       />
 
       <nav
         ref={navRef}
-        className={`fixed top-0 left-0 right-0 z-[90] transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-90 transition-all duration-300 ${
           isScrolled
             ? 'py-4 bg-[#0a0a0a]/90 backdrop-blur-md border-b border-white/5'
             : 'py-8 bg-transparent'
@@ -129,7 +135,7 @@ export function Navigation() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed inset-0 top-0 left-0 w-full h-screen bg-[#0a0a0a] z-[80] md:hidden flex flex-col items-center justify-center space-y-8"
+              className="fixed inset-0 top-0 left-0 w-full h-screen bg-[#0a0a0a] z-80 md:hidden flex flex-col items-center justify-center space-y-8"
             >
               {navItems.map((item, index) => (
                 <a

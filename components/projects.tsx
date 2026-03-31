@@ -131,38 +131,52 @@ export function Projects() {
   })
 
   useGSAP(() => {
-    gsap.from('.projects-header', {
-      opacity: 0,
-      y: 30,
-      duration: 1,
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: 'top 80%',
+    const q = gsap.utils.selector(containerRef)
+    
+    gsap.fromTo(q('.projects-header'), 
+      { autoAlpha: 0.01, y: 30 },
+      {
+        autoAlpha: 1,
+        y: 0,
+        duration: 1,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top 80%',
+        },
+        clearProps: 'all'
       }
-    })
+    )
 
-    gsap.from('.category-btn', {
-      opacity: 0,
-      y: 20,
-      stagger: 0.1,
-      duration: 0.8,
-      scrollTrigger: {
-        trigger: '.filter-buttons',
-        start: 'top 85%',
+    gsap.fromTo(q('.category-btn'), 
+      { autoAlpha: 0.01, y: 20 },
+      {
+        autoAlpha: 1,
+        y: 0,
+        stagger: 0.1,
+        duration: 0.8,
+        scrollTrigger: {
+          trigger: q('.filter-buttons'),
+          start: 'top 85%',
+        },
+        clearProps: 'all'
       }
-    })
+    )
 
-    gsap.from('.project-card', {
-      opacity: 0,
-      y: 50,
-      stagger: 0.15,
-      duration: 1,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: '.projects-grid',
-        start: 'top 85%',
+    gsap.fromTo(q('.project-card'), 
+      { autoAlpha: 0.01, y: 50 },
+      {
+        autoAlpha: 1,
+        y: 0,
+        stagger: 0.15,
+        duration: 1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: q('.projects-grid'),
+          start: 'top 85%',
+        },
+        clearProps: 'all'
       }
-    })
+    )
   }, { scope: containerRef })
 
   const shouldOpenInNewTab = (link: string) => link.startsWith('http')

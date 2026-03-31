@@ -10,14 +10,15 @@ export function LoadingScreen() {
   useEffect(() => {
     let animationFrame: number;
     let progress = 0;
-    const startTime = Date.now();
+    
+    // Fail-safe: ensure loader disappears even if something gets stuck
+    const failSafeTimeout = setTimeout(() => {
+      setIsLoading(false);
+    }, 6000);
 
     const updateProgress = () => {
-      // Simulate progress: faster and more responsive
       const remaining = 100 - progress;
-
-      // Increased increments for a snappier feel
-      const increment = Math.random() * (remaining > 20 ? 1.0 : 0.5);
+      const increment = Math.random() * (remaining > 20 ? 1.5 : 0.8);
 
       progress = Math.min(100, progress + increment);
       setLoadingProgress(progress);
@@ -25,12 +26,15 @@ export function LoadingScreen() {
       if (progress < 100) {
         animationFrame = requestAnimationFrame(updateProgress);
       } else {
-        setTimeout(() => setIsLoading(false), 400);
+        setTimeout(() => setIsLoading(false), 500);
       }
     };
 
     animationFrame = requestAnimationFrame(updateProgress);
-    return () => cancelAnimationFrame(animationFrame);
+    return () => {
+      cancelAnimationFrame(animationFrame);
+      clearTimeout(failSafeTimeout);
+    };
   }, []);
 
   return (

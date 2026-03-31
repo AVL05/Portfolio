@@ -19,6 +19,7 @@ export function Photography() {
   const showcaseRef = useRef<HTMLDivElement>(null)
 
   useGSAP(() => {
+    const q = gsap.utils.selector(containerRef)
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
@@ -26,33 +27,17 @@ export function Photography() {
       }
     })
 
-    tl.from('.photo-header', { opacity: 0, y: 30, duration: 1 })
-      .from('.raw-window', { 
-        opacity: 0, 
-        y: 50, 
-        scale: 0.98,
-        duration: 1.2, 
-        ease: 'power3.out' 
-      }, '-=0.5')
-      .from('.sidebar-tool', { 
-        opacity: 0, 
-        scale: 0, 
-        stagger: 0.1, 
-        duration: 0.5 
-      }, '-=0.8')
-      .from('.exif-item', { 
-        opacity: 0, 
-        x: 20, 
-        stagger: 0.05, 
-        duration: 0.5 
-      }, '-=0.5')
+    tl.fromTo(q('.photo-header'), { autoAlpha: 0.01, y: 30 }, { autoAlpha: 1, y: 0, duration: 1 })
+      .fromTo(q('.raw-window'), { autoAlpha: 0.01, y: 50, scale: 0.98 }, { autoAlpha: 1, y: 0, scale: 1, duration: 1.2, ease: 'power3.out' }, '-=0.5')
+      .fromTo(q('.sidebar-tool'), { autoAlpha: 0, scale: 0 }, { autoAlpha: 1, scale: 1, stagger: 0.1, duration: 0.5 }, '-=0.8')
+      .fromTo(q('.exif-item'), { autoAlpha: 0, x: 20 }, { autoAlpha: 1, x: 0, stagger: 0.05, duration: 0.5, clearProps: 'all' }, '-=0.5')
 
     // Parallax effect for the hero image
-    gsap.to('.hero-image-container', {
+    gsap.to(q('.hero-image-container'), {
       y: -20,
       ease: 'none',
       scrollTrigger: {
-        trigger: '.raw-window',
+        trigger: q('.raw-window'),
         start: 'top bottom',
         end: 'bottom top',
         scrub: true

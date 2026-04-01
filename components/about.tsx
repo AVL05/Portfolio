@@ -1,53 +1,98 @@
 'use client'
 
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Card } from '@/components/ui/card'
-import { gsap, useGSAP } from '@/lib/gsap'
+
+const TYPING_SPEED = 40
+const LINE_PAUSE = 600
+
+const terminalLines = [
+  { type: 'command', text: '$ whoami' },
+  { type: 'output', text: '¡Hola! Soy Alex Vicente López, un estudiante de Desarrollo de Aplicaciones Web apasionado por la tecnología y el diseño minimalista.' },
+  { type: 'command', text: '$ cat experience.txt' },
+  { type: 'output', text: 'Mi formación en Sistemas Microinformáticos y Redes Locales me dio una base sólida que ahora estoy expandiendo con el Desarrollo de Aplicaciones Web.' },
+  { type: 'output', text: 'Busco la armonía perfecta entre la robustez del código y la elegancia visual, utilizando herramientas como la fotografía creativa para enriquecer mi visión digital.' },
+]
 
 export function About() {
-  const containerRef = useRef<HTMLDivElement>(null)
   const terminalRef = useRef<HTMLDivElement>(null)
+  const [visibleLines, setVisibleLines] = useState(0)
+  const [typingText, setTypingText] = useState('')
+  const [isTyping, setIsTyping] = useState(false)
+  const [hasStarted, setHasStarted] = useState(false)
+  const lineIndexRef = useRef(0)
+  const charIndexRef = useRef(0)
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
-  useGSAP(() => {
-    const q = gsap.utils.selector(containerRef)
-    
-    // Initial entrance
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: 'top 80%',
-        toggleActions: 'play none none none'
-      }
-    })
+  const typeNextChar = () => {
+    if (lineIndexRef.current >= terminalLines.length) {
+      setIsTyping(false)
+      return
+    }
 
-    tl.fromTo(q('.about-title'), { autoAlpha: 0.01, x: -30 }, { autoAlpha: 1, x: 0, duration: 1 })
-      .fromTo(terminalRef.current, { autoAlpha: 0, scale: 0.95, y: 30 }, { autoAlpha: 1, scale: 1, y: 0, duration: 1, clearProps: 'all' }, '-=0.5')
-      .fromTo(q('.about-status'), { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.8, clearProps: 'all' }, '-=0.3')
+    const line = terminalLines[lineIndexRef.current]
 
-    // Terminal typing-like staggered entrance with separate fromTo for reliability
-    gsap.fromTo(q('.terminal-line'), 
-      { autoAlpha: 0.01, x: -20 },
-      {
-        autoAlpha: 1,
-        x: 0,
-        stagger: 0.3,
-        duration: 0.8,
-        scrollTrigger: {
-          trigger: terminalRef.current,
-          start: 'top 75%'
-        },
-        clearProps: 'all'
-      }
+    if (charIndexRef.current === 0) {
+      setVisibleLines(prev => Math.max(prev, lineIndexRef.current + 1))
+    }
+
+    if (charIndexRef.current < line.text.length) {
+      setTypingText(prev => {
+        const lines = prev.split('\n')
+        if (lines.length <= lineIndexRef.current) {
+          lines.push('')
+        }
+        lines[lineIndexRef.current] = line.text.substring(0, charIndexRef.current + 1)
+        return lines.join('\n')
+      })
+      charIndexRef.current++
+      timeoutRef.current = setTimeout(typeNextChar, TYPING_SPEED)
+    } else {
+      charIndexRef.current = 0
+      lineIndexRef.current++
+      timeoutRef.current = setTimeout(typeNextChar, LINE_PAUSE)
+    }
+  }
+
+  useEffect(() => {
+    if (!hasStarted) return
+
+    setIsTyping(true)
+    lineIndexRef.current = 0
+    charIndexRef.current = 0
+    setVisibleLines(0)
+    setTypingText('')
+
+    timeoutRef.current = setTimeout(typeNextChar, 300)
+
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current)
+    }
+  }, [hasStarted])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHasStarted(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.2 }
     )
-  }, { scope: containerRef })
+
+    if (terminalRef.current) {
+      observer.observe(terminalRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <section
       id="about"
-      ref={containerRef}
       className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-[#0a0a0a] relative overflow-hidden text-white"
     >
-      {/* Background decoration */}
       <div className="absolute top-1/4 -left-20 w-80 h-80 bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-accent/5 rounded-full blur-[100px] pointer-events-none" />
 
@@ -56,7 +101,7 @@ export function About() {
           <h2 className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter opacity-10 absolute -top-12 left-0 select-none hidden sm:block uppercase">
             WHOAMI
           </h2>
-          <h2 className="about-title text-3xl sm:text-4xl md:text-5xl font-bold text-primary font-mono relative">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary font-mono relative">
             <span className="text-primary/50 mr-4 font-normal">01.</span>
             Sobre Mí <span className="text-white/20 ml-2">/ Background</span>
           </h2>
@@ -68,7 +113,6 @@ export function About() {
               ref={terminalRef}
               className="w-full bg-[#111111]/80 border border-white/10 rounded-xl overflow-hidden shadow-2xl backdrop-blur-xl"
             >
-              {/* Window controls */}
               <div className="flex items-center gap-2 px-4 py-3 bg-[#181818] border-b border-white/5">
                 <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
                 <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
@@ -78,40 +122,44 @@ export function About() {
                 </span>
               </div>
 
-              {/* Code content */}
-              <div className="p-8 text-left font-mono text-sm sm:text-base overflow-x-auto leading-relaxed space-y-8">
-                <div className="terminal-line space-y-3">
-                  <p className="text-white/40 flex items-center gap-2">
-                    <span className="text-primary">alex@portfolio:</span>
-                    <span className="text-accent">~</span>$ whoami
-                  </p>
-                  <p className="text-white/90 pl-2 text-pretty text-lg">
-                    ¡Hola! Soy{' '}
-                    <span className="text-primary font-bold">
-                      Alex Vicente López
-                    </span>
-                    , un estudiante de Desarrollo de Aplicaciones Web apasionado por la tecnología y el diseño minimalista.
-                  </p>
-                </div>
+              <div className="p-8 text-left font-mono text-sm sm:text-base overflow-x-auto leading-relaxed space-y-6 min-h-[280px]">
+                {terminalLines.map((line, i) => {
+                  if (i >= visibleLines) return null
+                  const isCurrentLine = i === lineIndexRef.current && isTyping
+                  const isCommand = line.type === 'command'
 
-                <div className="terminal-line space-y-4">
-                  <p className="text-white/40 flex items-center gap-2">
-                    <span className="text-primary">alex@portfolio:</span>
-                    <span className="text-accent">~</span>$ cat experience.txt
-                  </p>
-                  <div className="pl-2 space-y-4 text-white/70 text-pretty">
-                    <p>
-                      Mi formación en Sistemas Microinformáticos y Redes Locales me dio una base sólida que ahora estoy expandiendo con el Desarrollo de Aplicaciones Web.
-                    </p>
-                    <p>
-                      Busco la armonía perfecta entre la robustez del código y la elegancia visual, utilizando herramientas como la fotografía creativa para enriquecer mi visión digital.
-                    </p>
-                  </div>
-                </div>
+                  return (
+                    <div key={i} className={isCommand ? 'space-y-3' : 'space-y-4'}>
+                      {isCommand ? (
+                        <p className="text-white/40 flex items-center gap-2">
+                          <span className="text-primary">alex@portfolio:</span>
+                          <span className="text-accent">~</span>
+                          <span>
+                            {isCurrentLine
+                              ? line.text.substring(0, charIndexRef.current)
+                              : line.text}
+                            {isCurrentLine && (
+                              <span className="inline-block w-[6px] h-[1.1em] bg-primary align-middle ml-1 animate-pulse" />
+                            )}
+                          </span>
+                        </p>
+                      ) : (
+                        <p className="text-white/90 pl-2 text-pretty text-lg">
+                          {isCurrentLine
+                            ? line.text.substring(0, charIndexRef.current)
+                            : line.text}
+                          {isCurrentLine && (
+                            <span className="inline-block w-[6px] h-[1.1em] bg-primary align-middle ml-1 animate-pulse" />
+                          )}
+                        </p>
+                      )}
+                    </div>
+                  )
+                })}
               </div>
             </div>
 
-            <div className="about-status flex justify-center">
+            <div className="flex justify-center">
               <div className="inline-flex items-center gap-4 px-8 py-4 bg-[#111111] border border-primary/30 rounded-2xl hover:bg-primary/5 transition-all duration-500 cursor-pointer group shadow-[0_0_30px_rgba(119,255,150,0.05)] hover:shadow-[0_0_40px_rgba(119,255,150,0.15)] hover:scale-105 active:scale-95">
                 <div className="w-3 h-3 bg-primary rounded-full animate-pulse shadow-[0_0_10px_rgba(119,255,150,1)]" />
                 <span className="text-primary font-mono text-sm font-bold tracking-wider uppercase">

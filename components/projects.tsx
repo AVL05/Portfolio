@@ -1,13 +1,12 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { AnimatePresence, motion } from 'framer-motion'
 import { ExternalLink, Github } from 'lucide-react'
 import Image from 'next/image'
-import { gsap, useGSAP } from '@/lib/gsap'
+import { gsap } from '@/lib/gsap'
 
 const smallImageProjects = [
   'Llibret Falla el Molí 24/25',
@@ -119,65 +118,44 @@ const projects = [
   },
 ]
 
-export function Projects() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [activeCategory, setActiveCategory] = useState('Todos')
+function ProjectCard({ project }: { project: typeof projects[0] }) {
+  const cardRef = useRef<HTMLDivElement>(null)
+  const overlayRef = useRef<HTMLDivElement>(null)
+  const shineRef = useRef<HTMLDivElement>(null)
 
-  const categories = ['Todos', 'Diseño Gráfico', 'Desarrollo Web']
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current || !overlayRef.current) return
+    const rect = cardRef.current.getBoundingClientRect()
+    const x = ((e.clientX - rect.left) / rect.width) * 100
+    const y = ((e.clientY - rect.top) / rect.height) * 100
 
-  const filteredProjects = projects.filter((project) => {
-    if (activeCategory === 'Todos') return true
-    return project.category === activeCategory
-  })
+    gsap.to(overlayRef.current, {
+      background: `radial-gradient(circle at ${x}% ${y}%, rgba(119, 255, 150, 0.08), transparent 50%)`,
+      duration: 0.3,
+      ease: 'power2.out',
+    })
 
-  useGSAP(() => {
-    const q = gsap.utils.selector(containerRef)
-    
-    gsap.fromTo(q('.projects-header'), 
-      { autoAlpha: 0.01, y: 30 },
-      {
-        autoAlpha: 1,
-        y: 0,
-        duration: 1,
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top 80%',
-        },
-        clearProps: 'all'
-      }
-    )
+    if (shineRef.current) {
+      gsap.to(shineRef.current, {
+        x: (e.clientX - rect.left) - rect.width / 2,
+        y: (e.clientY - rect.top) - rect.height / 2,
+        duration: 0.5,
+        ease: 'power2.out',
+      })
+    }
+  }
 
-    gsap.fromTo(q('.category-btn'), 
-      { autoAlpha: 0.01, y: 20 },
-      {
-        autoAlpha: 1,
-        y: 0,
-        stagger: 0.1,
-        duration: 0.8,
-        scrollTrigger: {
-          trigger: q('.filter-buttons'),
-          start: 'top 85%',
-        },
-        clearProps: 'all'
-      }
-    )
+  const handleMouseEnter = () => {
+    if (overlayRef.current) {
+      gsap.to(overlayRef.current, { opacity: 1, duration: 0.3 })
+    }
+  }
 
-    gsap.fromTo(q('.project-card'), 
-      { autoAlpha: 0.01, y: 50 },
-      {
-        autoAlpha: 1,
-        y: 0,
-        stagger: 0.15,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: q('.projects-grid'),
-          start: 'top 85%',
-        },
-        clearProps: 'all'
-      }
-    )
-  }, { scope: containerRef })
+  const handleMouseLeave = () => {
+    if (overlayRef.current) {
+      gsap.to(overlayRef.current, { opacity: 0, duration: 0.3 })
+    }
+  }
 
   const shouldOpenInNewTab = (link: string) => link.startsWith('http')
   const getButtonText = (link: string) => {
@@ -187,13 +165,129 @@ export function Projects() {
     return 'Ver Proyecto'
   }
 
-  const getCategoryColor = (category: string) => {
-    switch (category) {
-      case 'Desarrollo Web': return 'from-blue-500 to-cyan-500'
-      case 'Diseño Gráfico': return 'from-orange-500 to-red-500'
-      default: return 'from-gray-500 to-gray-600'
+  return (
+    <div
+      ref={cardRef}
+      className="project-card h-full relative rounded-2xl overflow-hidden"
+      onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <div ref={overlayRef} className="absolute inset-0 pointer-events-none z-20 opacity-0 rounded-2xl" />
+      <div ref={shineRef} className="absolute w-32 h-32 rounded-full bg-primary/10 blur-3xl pointer-events-none z-10 -translate-x-1/2 -translate-y-1/2" />
+
+      <Card className="overflow-hidden bg-[#111111] border-white/5 hover:border-primary/50 transition-all duration-500 group h-full flex flex-col rounded-2xl hover:shadow-[0_0_50px_rgba(119,255,150,0.1)] relative z-10">
+        <div className="flex items-center gap-2 px-6 py-4 bg-[#181818] border-b border-white/5">
+          <div className="flex gap-1.5">
+            <div className="w-2.5 h-2.5 rounded-full bg-red-500/30"></div>
+            <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/30"></div>
+            <div className="w-2.5 h-2.5 rounded-full bg-green-500/30"></div>
+          </div>
+          <span className="ml-4 text-xs font-mono text-white/30 truncate flex-1 uppercase tracking-widest">
+            {project.category} :: {project.title.toLowerCase().replace(/ /g, '_')}
+          </span>
+        </div>
+
+        <div className={`relative aspect-video overflow-hidden ${smallImageProjects.includes(project.title) ? 'bg-[#0a0a0a] p-12' : ''}`}>
+          <Image
+            src={project.image || '/placeholder.svg'}
+            alt={project.title}
+            fill
+            className={`transition-all duration-700 group-hover:scale-105 ${smallImageProjects.includes(project.title) ? 'object-contain' : 'object-cover'}`}
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center">
+            <ExternalLink className="h-10 w-10 text-white scale-75 group-hover:scale-100 transition-transform" />
+          </div>
+        </div>
+
+        <div className="p-8 space-y-6 flex-1 flex flex-col">
+          <h3 className="text-2xl font-bold text-white group-hover:text-primary transition-colors">
+            {project.title}
+          </h3>
+          <p className="text-white/60 leading-relaxed grow text-pretty font-medium">
+            {project.description}
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {project.technologies.map((tech) => (
+              <Badge key={tech} variant="secondary" className="bg-white/5 text-white/70 border-white/5 hover:border-primary/30 transition-colors">
+                {tech}
+              </Badge>
+            ))}
+          </div>
+          <div className="pt-4 flex gap-4">
+            <Button asChild className="bg-primary text-black font-bold hover:bg-primary/90 rounded-xl">
+              <a href={project.link} target={shouldOpenInNewTab(project.link) ? '_blank' : '_self'}>
+                {getButtonText(project.link)}
+              </a>
+            </Button>
+            {project.github && (
+              <Button variant="outline" asChild className="border-white/10 hover:bg-white/5 rounded-xl">
+                <a href={project.github} target="_blank"><Github className="h-4 w-4 mr-2" /> Source</a>
+              </Button>
+            )}
+          </div>
+        </div>
+      </Card>
+    </div>
+  )
+}
+
+export function Projects() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const gridRef = useRef<HTMLDivElement>(null)
+  const [activeCategory, setActiveCategory] = useState('Todos')
+  const [isAnimating, setIsAnimating] = useState(false)
+
+  const categories = ['Todos', 'Diseño Gráfico', 'Desarrollo Web']
+
+  const filteredProjects = projects.filter((project) => {
+    if (activeCategory === 'Todos') return true
+    return project.category === activeCategory
+  })
+
+  const handleCategoryChange = useCallback((category: string) => {
+    if (isAnimating || category === activeCategory) return
+    setIsAnimating(true)
+
+    const cards = gridRef.current?.querySelectorAll('.project-card')
+    if (!cards || cards.length === 0) {
+      setActiveCategory(category)
+      setIsAnimating(false)
+      return
     }
-  }
+
+    gsap.to(cards, {
+      opacity: 0,
+      scale: 0.9,
+      rotateX: 10,
+      z: -30,
+      stagger: 0.03,
+      duration: 0.25,
+      ease: 'power2.in',
+      onComplete: () => {
+        setActiveCategory(category)
+        requestAnimationFrame(() => {
+          const newCards = gridRef.current?.querySelectorAll('.project-card')
+          if (newCards) {
+            gsap.set(newCards, { opacity: 0, scale: 0.9, rotateX: 10, z: -30 })
+            gsap.to(newCards, {
+              opacity: 1,
+              scale: 1,
+              rotateX: 0,
+              z: 0,
+              stagger: 0.08,
+              duration: 0.6,
+              ease: 'power3.out',
+              onComplete: () => setIsAnimating(false),
+            })
+          } else {
+            setIsAnimating(false)
+          }
+        })
+      },
+    })
+  }, [activeCategory, isAnimating])
 
   return (
     <section id="projects" ref={containerRef} className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-[#0a0a0a] relative overflow-hidden text-white">
@@ -204,11 +298,11 @@ export function Projects() {
           <h2 className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter opacity-10 absolute -top-12 left-0 select-none hidden sm:block uppercase">
             PROJECTS
           </h2>
-          <h2 className="projects-header text-3xl sm:text-4xl md:text-5xl font-bold text-primary font-mono relative">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary font-mono relative">
             <span className="text-primary/50 mr-4 font-normal">03.</span>
             Proyectos <span className="text-white/20 ml-2">/ My Work</span>
           </h2>
-          <p className="projects-header text-base sm:text-lg text-white/50 max-w-2xl mt-4 font-medium">
+          <p className="text-base sm:text-lg text-white/50 max-w-2xl mt-4 font-medium">
             Una selección de mis trabajos recientes en desarrollo web y diseño gráfico.
           </p>
         </div>
@@ -218,7 +312,8 @@ export function Projects() {
             <div key={category} className="category-btn">
               <Button
                 variant={activeCategory === category ? 'default' : 'outline'}
-                onClick={() => setActiveCategory(category)}
+                onClick={() => handleCategoryChange(category)}
+                disabled={isAnimating}
                 className={`transition-all duration-300 font-mono ${
                   activeCategory === category
                     ? 'shadow-lg scale-105 bg-primary text-black'
@@ -231,74 +326,10 @@ export function Projects() {
           ))}
         </div>
 
-        <div className="projects-grid grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10">
-          <AnimatePresence mode="popLayout" initial={false}>
-            {filteredProjects.map((project) => (
-              <motion.div
-                key={project.title}
-                layout
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.4 }}
-                className="project-card h-full"
-              >
-                <Card className="overflow-hidden bg-[#111111] border-white/5 hover:border-primary/50 transition-all duration-500 group h-full flex flex-col rounded-2xl hover:shadow-[0_0_50px_rgba(119,255,150,0.1)]">
-                  <div className="flex items-center gap-2 px-6 py-4 bg-[#181818] border-b border-white/5">
-                    <div className="flex gap-1.5">
-                      <div className="w-2.5 h-2.5 rounded-full bg-red-500/30"></div>
-                      <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/30"></div>
-                      <div className="w-2.5 h-2.5 rounded-full bg-green-500/30"></div>
-                    </div>
-                    <span className="ml-4 text-xs font-mono text-white/30 truncate flex-1 uppercase tracking-widest">
-                      {project.category} :: {project.title.toLowerCase().replace(/ /g, '_')}
-                    </span>
-                  </div>
-
-                  <div className={`relative aspect-video overflow-hidden ${smallImageProjects.includes(project.title) ? 'bg-[#0a0a0a] p-12' : ''}`}>
-                    <Image
-                      src={project.image || '/placeholder.svg'}
-                      alt={project.title}
-                      fill
-                      className={`transition-all duration-700 group-hover:scale-105 ${smallImageProjects.includes(project.title) ? 'object-contain' : 'object-cover'}`}
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                    />
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center">
-                      <ExternalLink className="h-10 w-10 text-white scale-75 group-hover:scale-100 transition-transform" />
-                    </div>
-                  </div>
-
-                  <div className="p-8 space-y-6 flex-1 flex flex-col">
-                    <h3 className="text-2xl font-bold text-white group-hover:text-primary transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="text-white/60 leading-relaxed grow text-pretty font-medium">
-                      {project.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {project.technologies.map((tech) => (
-                        <Badge key={tech} variant="secondary" className="bg-white/5 text-white/70 border-white/5 hover:border-primary/30 transition-colors">
-                          {tech}
-                        </Badge>
-                      ))}
-                    </div>
-                    <div className="pt-4 flex gap-4">
-                      <Button asChild className="bg-primary text-black font-bold hover:bg-primary/90 rounded-xl">
-                        <a href={project.link} target={shouldOpenInNewTab(project.link) ? '_blank' : '_self'}>
-                          {getButtonText(project.link)}
-                        </a>
-                      </Button>
-                      {project.github && (
-                        <Button variant="outline" asChild className="border-white/10 hover:bg-white/5 rounded-xl">
-                          <a href={project.github} target="_blank"><Github className="h-4 w-4 mr-2" /> Source</a>
-                        </Button>
-                      )}
-                    </div>
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
-          </AnimatePresence>
+        <div ref={gridRef} className="projects-grid grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10">
+          {filteredProjects.map((project) => (
+            <ProjectCard key={project.title} project={project} />
+          ))}
         </div>
       </div>
     </section>

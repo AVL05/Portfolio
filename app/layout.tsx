@@ -4,6 +4,7 @@ import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 import type React from "react";
 import { Suspense } from "react";
+import "@/lib/raf-polyfill";
 import "./globals.css";
 
 const SITE_URL =

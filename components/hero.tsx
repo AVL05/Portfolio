@@ -15,6 +15,14 @@ const TypewriterText = ({
   const [displayText, setDisplayText] = useState('')
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isStarted, setIsStarted] = useState(false)
+  const [showCursor, setShowCursor] = useState(true)
+
+  useEffect(() => {
+    const cursorInterval = setInterval(() => {
+      setShowCursor(prev => !prev)
+    }, 530)
+    return () => clearInterval(cursorInterval)
+  }, [])
 
   useEffect(() => {
     const startTimeout = setTimeout(() => {
@@ -38,7 +46,10 @@ const TypewriterText = ({
   return (
     <span className="relative">
       {displayText}
-      <span className="inline-block w-[3px] h-[1.1em] bg-primary align-middle ml-2 animate-pulse shadow-[0_0_10px_rgba(119,255,150,0.8)]" />
+      <span
+        className="inline-block w-[3px] h-[1.1em] bg-primary align-middle ml-2 shadow-[0_0_10px_rgba(119,255,150,0.8)]"
+        style={{ opacity: showCursor ? 1 : 0, transition: 'opacity 0.1s' }}
+      />
     </span>
   )
 }
@@ -49,9 +60,11 @@ const FloatingCircles = () => {
   useGSAP(() => {
     const circles = gsap.utils.toArray('.floating-circle')
     circles.forEach((circle: any) => {
+      gsap.set(circle, { willChange: 'transform' })
       gsap.to(circle, {
         x: 'random(-100, 100)',
         y: 'random(-100, 100)',
+        z: 'random(-50, 50)',
         duration: 'random(10, 20)',
         repeat: -1,
         yoyo: true,
@@ -61,7 +74,7 @@ const FloatingCircles = () => {
   }, { scope: containerRef })
 
   return (
-    <div ref={containerRef} className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
+    <div ref={containerRef} className="absolute inset-0 overflow-hidden pointer-events-none opacity-20" style={{ perspective: '1000px' }}>
       <div className="floating-circle absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[120px]" />
       <div className="floating-circle absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/20 rounded-full blur-[120px]" />
     </div>
@@ -70,46 +83,33 @@ const FloatingCircles = () => {
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null)
-  
+
   useGSAP(() => {
     const q = gsap.utils.selector(containerRef)
     const tl = gsap.timeline({ defaults: { ease: 'power4.out' } })
 
-    // Use fromTo for absolute reliability - starting from very low alpha instead of total 0
-    tl.fromTo(q('.hero-number'), { autoAlpha: 0, x: -30 }, { autoAlpha: 1, x: 0, duration: 1 }, 0.5)
-      .fromTo(q('.hero-hi'), { autoAlpha: 0.01, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.8 }, 0.7)
-      .fromTo(q('.hero-name'), { autoAlpha: 0, scale: 1.1, filter: 'blur(10px)' }, { autoAlpha: 1, scale: 1, filter: 'blur(0px)', duration: 1.2 }, 0.8)
-      .fromTo(q('.hero-subtitle'), { autoAlpha: 0.01, x: -20 }, { autoAlpha: 1, x: 0, duration: 1 }, 1.2)
-      .fromTo(q('.hero-description'), { autoAlpha: 0.01, y: 20 }, { autoAlpha: 1, y: 0, duration: 1, clearProps: 'all' }, 1.4)
-      .fromTo(q('.social-btn'), { 
-        autoAlpha: 0.01, 
-        y: 20, 
-      }, {
-        autoAlpha: 1,
-        y: 0,
-        stagger: 0.1, 
+    gsap.set(q('.hero-number'), { opacity: 0, rotateY: -90, transformPerspective: 800, willChange: 'transform, opacity' })
+    gsap.set(q('.hero-hi'), { opacity: 0, rotateX: 90, transformPerspective: 800, willChange: 'transform, opacity' })
+    gsap.set(q('.hero-name'), { opacity: 0, scale: 1.3, z: -100, transformPerspective: 1000, willChange: 'transform, opacity' })
+    gsap.set(q('.hero-subtitle'), { opacity: 0, rotateY: 45, transformPerspective: 800, willChange: 'transform, opacity' })
+    gsap.set(q('.hero-description'), { opacity: 0, rotateX: 30, transformPerspective: 800, willChange: 'transform, opacity' })
+    gsap.set(q('.social-btn'), { opacity: 0, scale: 0.8, z: -50, transformPerspective: 800, willChange: 'transform, opacity' })
+    gsap.set(q('.scroll-btn'), { opacity: 0, z: -80, transformPerspective: 800, willChange: 'transform, opacity' })
+
+    tl.to(q('.hero-number'), { opacity: 1, rotateY: 0, duration: 1.2 }, 0.5)
+      .to(q('.hero-hi'), { opacity: 1, rotateX: 0, duration: 0.8 }, 0.7)
+      .to(q('.hero-name'), { opacity: 1, scale: 1, z: 0, duration: 1.4 }, 0.8)
+      .to(q('.hero-subtitle'), { opacity: 1, rotateY: 0, duration: 1 }, 1.2)
+      .to(q('.hero-description'), { opacity: 1, rotateX: 0, duration: 1 }, 1.4)
+      .to(q('.social-btn'), {
+        opacity: 1,
+        scale: 1,
+        z: 0,
+        stagger: 0.12,
         duration: 0.8,
         ease: 'back.out(1.7)',
-        clearProps: 'all'
       }, 1.6)
-      .fromTo(q('.scroll-btn'), { autoAlpha: 0.01, y: 10 }, { autoAlpha: 1, y: 0, duration: 1, clearProps: 'all' }, 2.5)
-
-    // Dynamic mouse parallax with scoped selector
-    const handleMouseMove = (e: MouseEvent) => {
-      const { clientX, clientY } = e
-      const xPos = (clientX / window.innerWidth - 0.5) * 40
-      const yPos = (clientY / window.innerHeight - 0.5) * 40
-
-      gsap.to(q('.hero-parallax'), {
-        x: xPos,
-        y: yPos,
-        duration: 1.5,
-        ease: 'power2.out'
-      })
-    }
-
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
+      .to(q('.scroll-btn'), { opacity: 1, z: 0, duration: 1 }, 2.5)
   }, { scope: containerRef })
 
   return (
@@ -117,10 +117,11 @@ export function Hero() {
       id="hero"
       ref={containerRef}
       className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 bg-[#0a0a0a] relative overflow-hidden font-sans"
+      style={{ perspective: '1200px' }}
     >
       <FloatingCircles />
 
-      <div className="hero-parallax w-full max-w-7xl mx-auto flex flex-col items-start justify-center z-10 space-y-8 sm:space-y-12">
+      <div className="w-full max-w-7xl mx-auto flex flex-col items-start justify-center z-10 space-y-8 sm:space-y-12">
         <div className="flex flex-col items-start gap-2">
           <span className="hero-hi text-primary font-mono text-lg sm:text-xl tracking-widest uppercase">
             Hola Mundo, mi nombre es
@@ -139,7 +140,7 @@ export function Hero() {
           <h2 className="hero-subtitle text-3xl sm:text-5xl md:text-6xl font-bold text-white/40 tracking-tight leading-tight">
             Diseño experiencias digitales <span className="text-white/80">que impactan.</span>
           </h2>
-          
+
           <p className="hero-description text-lg sm:text-xl text-white/50 max-w-2xl text-pretty leading-relaxed font-medium">
             Estudiante de <span className="text-primary">Desarrollo Web</span> apasionado por la creación de aplicaciones robustas y el diseño visual minimalista. Combinando técnica y creatividad para resolver problemas complejos.
           </p>

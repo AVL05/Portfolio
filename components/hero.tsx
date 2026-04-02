@@ -59,16 +59,21 @@ const FloatingCircles = () => {
 
   useGSAP(() => {
     const circles = gsap.utils.toArray('.floating-circle')
-    circles.forEach((circle: any) => {
+    
+    circles.forEach((circle: any, i: number) => {
       gsap.set(circle, { willChange: 'transform' })
+      
+      // Infinite floating movement
       gsap.to(circle, {
-        x: 'random(-100, 100)',
-        y: 'random(-100, 100)',
-        z: 'random(-50, 50)',
-        duration: 'random(10, 20)',
+        x: 'random(-150, 150)',
+        y: 'random(-150, 150)',
+        z: 'random(-100, 100)',
+        rotation: 'random(-15, 15)',
+        duration: 'random(15, 25)',
         repeat: -1,
         yoyo: true,
         ease: 'sine.inOut',
+        delay: i * 0.5
       })
     })
   }, { scope: containerRef })
@@ -86,30 +91,106 @@ export function Hero() {
 
   useGSAP(() => {
     const q = gsap.utils.selector(containerRef)
-    const tl = gsap.timeline({ defaults: { ease: 'power4.out' } })
+    const tl = gsap.timeline({ defaults: { ease: 'expo.out' } })
 
-    gsap.set(q('.hero-number'), { opacity: 0, rotateY: -90, transformPerspective: 800, willChange: 'transform, opacity' })
-    gsap.set(q('.hero-hi'), { opacity: 0, rotateX: 90, transformPerspective: 800, willChange: 'transform, opacity' })
-    gsap.set(q('.hero-name'), { opacity: 0, scale: 1.3, z: -100, transformPerspective: 1000, willChange: 'transform, opacity' })
-    gsap.set(q('.hero-subtitle'), { opacity: 0, rotateY: 45, transformPerspective: 800, willChange: 'transform, opacity' })
-    gsap.set(q('.hero-description'), { opacity: 0, rotateX: 30, transformPerspective: 800, willChange: 'transform, opacity' })
-    gsap.set(q('.social-btn'), { opacity: 0, scale: 0.8, z: -50, transformPerspective: 800, willChange: 'transform, opacity' })
-    gsap.set(q('.scroll-btn'), { opacity: 0, z: -80, transformPerspective: 800, willChange: 'transform, opacity' })
+    // Set initial states for 3D entrance
+    gsap.set(q('.hero-number'), { 
+      opacity: 0, 
+      x: -100,
+      rotateY: -60, 
+      transformPerspective: 1000, 
+      willChange: 'transform, opacity' 
+    })
+    gsap.set(q('.hero-hi'), { 
+      opacity: 0, 
+      y: 40,
+      rotateX: -90, 
+      transformPerspective: 1000, 
+      willChange: 'transform, opacity' 
+    })
+    gsap.set(q('.hero-name'), { 
+      opacity: 0, 
+      scale: 0.8,
+      z: -200, 
+      rotateX: 20,
+      transformPerspective: 1200, 
+      willChange: 'transform, opacity' 
+    })
+    gsap.set(q('.hero-subtitle'), { 
+      opacity: 0, 
+      x: 50,
+      rotateY: 45, 
+      transformPerspective: 1000, 
+      willChange: 'transform, opacity' 
+    })
+    gsap.set(q('.hero-description'), { 
+      opacity: 0, 
+      y: 30,
+      rotateX: 30, 
+      transformPerspective: 1000, 
+      willChange: 'transform, opacity' 
+    })
+    gsap.set(q('.social-btn'), { 
+      opacity: 0, 
+      y: 20,
+      scale: 0.9,
+      transformPerspective: 1000, 
+      willChange: 'transform, opacity' 
+    })
+    gsap.set(q('.scroll-btn'), { 
+      opacity: 0, 
+      y: 50,
+      willChange: 'transform, opacity' 
+    })
 
-    tl.to(q('.hero-number'), { opacity: 1, rotateY: 0, duration: 1.2 }, 0.5)
-      .to(q('.hero-hi'), { opacity: 1, rotateX: 0, duration: 0.8 }, 0.7)
-      .to(q('.hero-name'), { opacity: 1, scale: 1, z: 0, duration: 1.4 }, 0.8)
-      .to(q('.hero-subtitle'), { opacity: 1, rotateY: 0, duration: 1 }, 1.2)
-      .to(q('.hero-description'), { opacity: 1, rotateX: 0, duration: 1 }, 1.4)
-      .to(q('.social-btn'), {
-        opacity: 1,
-        scale: 1,
-        z: 0,
-        stagger: 0.12,
-        duration: 0.8,
-        ease: 'back.out(1.7)',
-      }, 1.6)
-      .to(q('.scroll-btn'), { opacity: 1, z: 0, duration: 1 }, 2.5)
+    // Animation Timeline
+    tl.to(q('.hero-number'), { 
+      opacity: 0.1, 
+      x: 0,
+      rotateY: 0, 
+      duration: 1.8,
+      ease: 'power4.out'
+    }, 0.2)
+    .to(q('.hero-hi'), { 
+      opacity: 1, 
+      y: 0,
+      rotateX: 0, 
+      duration: 1.2
+    }, 0.5)
+    .to(q('.hero-name'), { 
+      opacity: 1, 
+      scale: 1,
+      z: 0, 
+      rotateX: 0,
+      duration: 1.6,
+      ease: 'elastic.out(1, 0.75)'
+    }, 0.7)
+    .to(q('.hero-subtitle'), { 
+      opacity: 1, 
+      x: 0,
+      rotateY: 0, 
+      duration: 1.4
+    }, 0.9)
+    .to(q('.hero-description'), { 
+      opacity: 1, 
+      y: 0,
+      rotateX: 0, 
+      duration: 1.2
+    }, 1.1)
+    .to(q('.social-btn'), {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      stagger: 0.15,
+      duration: 1,
+      ease: 'back.out(2)',
+    }, 1.3)
+    .to(q('.scroll-btn'), { 
+      opacity: 1, 
+      y: 0,
+      duration: 1.5,
+      ease: 'power3.out'
+    }, 2)
   }, { scope: containerRef })
 
   return (

@@ -7,7 +7,6 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
   gsap.defaults({
-    force3D: true,
     ease: 'power3.out',
   });
 

@@ -77,22 +77,34 @@ export function LoadingScreen() {
         onComplete: () => setIsLoading(false),
       });
 
-      tl.to(containerRef.current, {
-        rotateX: 8,
-        z: -100,
+      // Dramatic Exit sequence
+      tl.to('.loading-ui-element', {
         opacity: 0,
-        duration: 0.5,
-        ease: "power3.in",
-        transformPerspective: 1500,
+        y: -20,
+        stagger: 0.05,
+        duration: 0.4,
+        ease: 'power2.in'
       })
+      .to(containerRef.current, {
+        scale: 1.1,
+        filter: 'blur(10px)',
+        opacity: 0,
+        duration: 0.8,
+        ease: "expo.in"
+      }, "-=0.2")
       .to([curtainTopRef.current, curtainBottomRef.current], {
         scaleY: 1,
-        duration: 0.7,
-        ease: "power4.inOut",
-        stagger: 0.08,
-      }, "-=0.2")
+        duration: 0.8,
+        ease: "expo.inOut",
+        stagger: 0.1,
+      }, "-=0.6")
+      .to([curtainTopRef.current, curtainBottomRef.current], {
+        scaleY: 0,
+        duration: 0.8,
+        ease: "expo.inOut",
+        stagger: -0.1,
+      })
       .set(containerRef.current, { display: "none" });
-
     };
 
     animationFrame = requestAnimationFrame(updateProgress);
@@ -113,7 +125,7 @@ export function LoadingScreen() {
 
       <div className="relative flex flex-col items-center w-full max-w-sm px-8">
         <div className="relative mb-12 flex flex-col items-center">
-          <div className="relative h-24 sm:h-32 mb-4 overflow-visible">
+          <div className="relative h-24 sm:h-32 mb-4 overflow-visible loading-ui-element">
             <svg
               width="240"
               height="120"
@@ -170,7 +182,7 @@ export function LoadingScreen() {
 
           <div
             ref={nameRef}
-            className="text-center space-y-3"
+            className="text-center space-y-3 loading-ui-element"
           >
             <h2 className="text-xs sm:text-sm uppercase tracking-[0.5em] text-white/40 font-light">
               Alex Vicente López
@@ -183,7 +195,7 @@ export function LoadingScreen() {
           </div>
         </div>
 
-        <div className="w-full flex flex-col items-center gap-6 mt-8">
+        <div className="w-full flex flex-col items-center gap-6 mt-8 loading-ui-element">
           <div className="w-full h-px bg-white/5 relative overflow-hidden">
             <div
               ref={progressLineRef}
@@ -192,7 +204,7 @@ export function LoadingScreen() {
             />
           </div>
 
-          <div className="flex justify-between w-full px-1 items-baseline">
+          <div className="flex justify-between w-full px-1 items-baseline loading-ui-element">
             <span className="text-[10px] tracking-widest text-white/20 uppercase font-mono">
               System Initializing
             </span>

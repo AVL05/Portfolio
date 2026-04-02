@@ -60,6 +60,43 @@ const skillCategories = [
 export function Skills() {
   const containerRef = useRef<HTMLDivElement>(null)
 
+  useGSAP(() => {
+    const rows = gsap.utils.toArray('.skill-row')
+    
+    rows.forEach((row: any) => {
+      const q = gsap.utils.selector(row)
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: row,
+          start: 'top 85%',
+          toggleActions: 'play none none reverse',
+        }
+      })
+      
+      tl.fromTo(q('.category-title'), 
+        { opacity: 0, x: -30 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 1.5,
+          ease: 'power4.out',
+        }
+      )
+      .fromTo(q('.skill-badge'),
+        { opacity: 0, y: 20, scale: 0.95 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          stagger: 0.05,
+          duration: 1.2,
+          ease: 'expo.out',
+        },
+        '-=1'
+      )
+    })
+  }, { scope: containerRef })
+
   const handleSkillHover = (e: React.MouseEvent<HTMLDivElement>) => {
     const badge = e.currentTarget
     const glow = badge.querySelector('.skill-glow') as HTMLElement

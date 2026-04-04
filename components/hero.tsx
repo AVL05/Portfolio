@@ -208,17 +208,17 @@ export function Hero() {
             Hola Mundo, mi nombre es
           </span>
           <div className="flex items-baseline gap-4 sm:gap-6">
-            <span className="hero-number text-white/5 font-black text-6xl sm:text-8xl md:text-9xl select-none leading-none">
+            <span className="hero-number text-white/5 font-black text-6xl sm:text-7xl md:text-8xl 2xl:text-9xl select-none leading-none">
               00.
             </span>
-            <h1 className="hero-name text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-white tracking-tighter leading-none">
+            <h1 className="hero-name text-4xl sm:text-6xl md:text-7xl lg:text-8xl 2xl:text-9xl font-black text-white tracking-tighter leading-none">
               <TypewriterText text="Alex Vicente." delay={1000} />
             </h1>
           </div>
         </div>
 
         <div className="space-y-6 max-w-3xl">
-          <h2 className="hero-subtitle text-3xl sm:text-5xl md:text-6xl font-bold text-white/40 tracking-tight leading-tight">
+          <h2 className="hero-subtitle text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white/40 tracking-tight leading-tight">
             Diseño experiencias digitales <span className="text-white/80">que impactan.</span>
           </h2>
 

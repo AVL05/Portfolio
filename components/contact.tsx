@@ -61,10 +61,10 @@ export function Contact() {
     >
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="mb-20">
-          <h2 className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter opacity-10 absolute -top-12 left-0 select-none hidden sm:block uppercase">
+          <h2 className="text-4xl sm:text-6xl md:text-7xl 2xl:text-8xl font-black tracking-tighter opacity-10 absolute -top-12 left-0 select-none hidden sm:block uppercase">
             SAY HELLO
           </h2>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary font-mono relative">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary font-mono relative">
             <span className="text-primary/50 mr-4 font-normal">06.</span>
             Contacto <span className="text-white/20 ml-2">/ Let's Connect</span>
           </h2>

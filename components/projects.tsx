@@ -196,7 +196,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
         </div>
       </DialogTrigger>
 
-      <DialogContent className="max-w-6xl md:max-w-[1200px] bg-[#0a0a0a]/95 backdrop-blur-2xl border-white/10 text-white p-0 overflow-hidden rounded-[2rem] sm:rounded-[3rem] shadow-[0_0_100px_-20px_rgba(119,255,150,0.1)]">
+      <DialogContent className="max-w-[95vw] md:max-w-[90vw] lg:max-w-[1100px] 2xl:max-w-[1200px] bg-[#0a0a0a]/95 backdrop-blur-2xl border-white/10 text-white p-0 overflow-hidden rounded-[2rem] sm:rounded-[3rem] shadow-[0_0_100px_-20px_rgba(119,255,150,0.1)]">
         <div className="grid grid-cols-1 lg:grid-cols-12 h-full max-h-[90vh] lg:max-h-[85vh]">
           {/* Left: Visuals Section */}
           <div className="relative h-[350px] lg:h-auto lg:col-span-7 bg-[#0d0d0d] flex items-center justify-center group/modal-img overflow-hidden">
@@ -404,10 +404,10 @@ export function Projects() {
 
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="mb-20">
-          <h2 className="projects-header-element text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter opacity-10 absolute -top-12 left-0 select-none hidden sm:block uppercase">
+          <h2 className="projects-header-element text-4xl sm:text-6xl md:text-7xl 2xl:text-8xl font-black tracking-tighter opacity-10 absolute -top-12 left-0 select-none hidden sm:block uppercase">
             PROJECTS
           </h2>
-          <h2 className="projects-header-element text-3xl sm:text-4xl md:text-5xl font-bold text-primary font-mono relative">
+          <h2 className="projects-header-element text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary font-mono relative">
             <span className="text-primary/50 mr-4 font-normal">03.</span>
             Proyectos <span className="text-white/20 ml-2">/ Mis Trabajos</span>
           </h2>

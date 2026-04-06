@@ -1,224 +1,196 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
-import { Card } from '@/components/ui/card'
+import { useRef, useState } from 'react'
 import { gsap, useGSAP } from '@/lib/gsap'
-
-const TYPING_SPEED = 40
-const LINE_PAUSE = 600
+import { Terminal, User, Code2, Briefcase, GraduationCap, ChevronRight } from 'lucide-react'
 
 const terminalLines = [
-  { type: 'command', text: '$ whoami' },
-  { type: 'output', text: '¡Hola! Soy Alex Vicente López, un estudiante de Desarrollo de Aplicaciones Web apasionado por la tecnología y el diseño minimalista.' },
-  { type: 'command', text: '$ cat experience.txt' },
-  { type: 'output', text: 'Mi formación en Sistemas Microinformáticos y Redes Locales me dio una base sólida que ahora estoy expandiendo con el Desarrollo de Aplicaciones Web.' },
-  { type: 'output', text: 'Busco la armonía perfecta entre la robustez del código y la elegancia visual, utilizando herramientas como la fotografía creativa para enriquecer mi visión digital.' },
+  { type: 'command', text: 'whoami' },
+  { type: 'output', text: 'Alex Vicente López' },
+  { type: 'command', text: 'locate --skills' },
+  { type: 'output', text: 'Full-stack development, UI/UX Design, Digital Photography' },
+  { type: 'command', text: 'locate --projects' },
+  { type: 'output', text: '9 Projects [Web: 4, Design: 5]' },
+  { type: 'command', text: 'cat philosophy.md' },
+  { type: 'output', text: 'Building digital architectures where precision meets aesthetics. Every line of code is an opportunity to solve a problem beautifully.' },
 ]
 
 export function About() {
-  const terminalRef = useRef<HTMLDivElement>(null)
-  const [visibleLines, setVisibleLines] = useState(0)
-  const [typingText, setTypingText] = useState('')
-  const [isTyping, setIsTyping] = useState(false)
-  const [hasStarted, setHasStarted] = useState(false)
-  const lineIndexRef = useRef(0)
-  const charIndexRef = useRef(0)
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
-
-  const typeNextChar = () => {
-    if (lineIndexRef.current >= terminalLines.length) {
-      setIsTyping(false)
-      return
-    }
-
-    const line = terminalLines[lineIndexRef.current]
-
-    if (charIndexRef.current === 0) {
-      setVisibleLines(prev => Math.max(prev, lineIndexRef.current + 1))
-    }
-
-    if (charIndexRef.current < line.text.length) {
-      setTypingText(prev => {
-        const lines = prev.split('\n')
-        if (lines.length <= lineIndexRef.current) {
-          lines.push('')
-        }
-        lines[lineIndexRef.current] = line.text.substring(0, charIndexRef.current + 1)
-        return lines.join('\n')
-      })
-      charIndexRef.current++
-      timeoutRef.current = setTimeout(typeNextChar, TYPING_SPEED)
-    } else {
-      charIndexRef.current = 0
-      lineIndexRef.current++
-      timeoutRef.current = setTimeout(typeNextChar, LINE_PAUSE)
-    }
-  }
-
-  useEffect(() => {
-    if (!hasStarted) return
-
-    setIsTyping(true)
-    lineIndexRef.current = 0
-    charIndexRef.current = 0
-    setVisibleLines(0)
-    setTypingText('')
-
-    timeoutRef.current = setTimeout(typeNextChar, 300)
-
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current)
-    }
-  }, [hasStarted])
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setHasStarted(true)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.2 }
-    )
-
-    if (terminalRef.current) {
-      observer.observe(terminalRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [])
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [activeTab, setActiveTab] = useState<'terminal' | 'bio'>('terminal')
 
   useGSAP(() => {
-    const terminal = terminalRef.current
-    if (!terminal) return
+    const q = gsap.utils.selector(containerRef)
 
-    const moveTerminal = (e: MouseEvent) => {
-      const { left, top, width, height } = terminal.getBoundingClientRect()
-      const x = (e.clientX - left) / width - 0.5
-      const y = (e.clientY - top) / height - 0.5
-
-      gsap.to(terminal, {
-        rotateY: x * 10,
-        rotateX: -y * 10,
-        x: x * 20,
-        y: y * 20,
-        duration: 1.5,
-        ease: 'power3.out',
-        transformPerspective: 1200,
-      })
-    }
-
-    const resetTerminal = () => {
-      gsap.to(terminal, {
-        rotateY: 0,
-        rotateX: 0,
-        x: 0,
+    gsap.fromTo(q('.about-reveal'),
+      { y: 50, opacity: 0 },
+      {
         y: 0,
-        duration: 2,
-        ease: 'elastic.out(1, 0.3)',
-      })
-    }
+        opacity: 1,
+        duration: 1.2,
+        stagger: 0.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top 80%',
+        }
+      }
+    )
 
-    terminal.addEventListener('mousemove', moveTerminal)
-    terminal.addEventListener('mouseleave', resetTerminal)
-
-    return () => {
-      terminal.removeEventListener('mousemove', moveTerminal)
-      terminal.removeEventListener('mouseleave', resetTerminal)
-    }
-  }, { scope: terminalRef })
+    // Floating animation for the dashboard
+    gsap.to(q('.dashboard-card'), {
+      y: -10,
+      duration: 2,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut'
+    })
+  }, { scope: containerRef })
 
   return (
     <section
       id="about"
-      className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-[#050505] relative overflow-hidden text-white section-padding"
+      ref={containerRef}
+      className="section-padding bg-background relative overflow-hidden"
     >
-      <div className="absolute top-1/4 -left-20 w-80 h-80 bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-accent/10 rounded-full blur-[100px] pointer-events-none" />
+      {/* Background Decor */}
+      <div className="absolute top-1/2 left-0 w-full h-[1px] bg-white/5 pointer-events-none" />
+      <div className="absolute top-0 left-1/4 w-[1px] h-full bg-white/5 pointer-events-none" />
 
-      <div className="max-w-5xl mx-auto relative z-10">
-        <div className="mb-20">
-          <h2 className="text-4xl sm:text-7xl md:text-8xl 2xl:text-9xl font-black tracking-tighter opacity-[0.03] absolute -top-16 left-0 select-none hidden sm:block uppercase">
-            WHOAMI
-          </h2>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary font-mono relative">
-            <span className="text-primary/50 mr-4 font-normal">01.</span>
-            Sobre Mí <span className="text-white/20 ml-2">/ Background</span>
-          </h2>
-        </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-          <div className="lg:col-span-12 space-y-12">
-            <div
-              ref={terminalRef}
-              className="w-full bg-[#0a0a0a]/90 border border-white/10 rounded-[2rem] overflow-hidden shadow-[0_30px_100px_-20px_rgba(0,0,0,0.8)] backdrop-blur-2xl transition-all duration-300 will-change-transform"
-            >
-              <div className="flex items-center gap-2 px-6 py-4 bg-[#111111]/80 border-b border-white/5">
-                <div className="flex gap-1.5">
-                  <div className="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
-                  <div className="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
-                  <div className="w-3 h-3 rounded-full bg-[#27c93f]"></div>
-                </div>
-                <span className="ml-4 text-xs font-mono text-white/30 tracking-[0.2em] uppercase">
-                  ~/bio/about_me.sh
-                </span>
+          {/* Left Column: Content */}
+          <div className="lg:col-span-6 space-y-12">
+            <header className="about-reveal space-y-4">
+              <div className="flex items-center gap-4 text-primary font-mono text-sm tracking-[0.3em] uppercase">
+                <span className="w-8 h-[1px] bg-primary/50" />
+                01. Sobre Mí
               </div>
+              <h2 className="text-4xl sm:text-6xl font-black text-white tracking-tighter leading-none">
+                Codificando con <span className="text-primary italic">propósito</span> y visión.
+              </h2>
+            </header>
 
-              <div className="p-10 md:p-14 text-left font-mono text-sm sm:text-base overflow-x-auto leading-relaxed space-y-8 min-h-[350px]">
-                {terminalLines.map((line, i) => {
-                  if (i >= visibleLines) return null
-                  const isCurrentLine = i === lineIndexRef.current && isTyping
-                  const isCommand = line.type === 'command'
+            <div className="about-reveal space-y-6 text-white/50 text-lg leading-relaxed font-medium max-w-xl">
+              <p>
+                Como estudiante y entusiasta del diseño, mi enfoque se centra en la intersección entre la <span className="text-white">funcionalidad técnica</span> y la <span className="text-white">excelencia visual</span>.
+              </p>
+              <p>
+                Actualmente cursando <span className="text-white font-mono">Desarrollo de Aplicaciones Web</span>, combino mi formación técnica en sistemas con una sensibilidad creativa forjada a través de la fotografía y el diseño digital.
+              </p>
 
-                  return (
-                    <div key={i} className={isCommand ? 'space-y-4' : 'space-y-6'}>
-                      {isCommand ? (
-                        <p className="text-white/40 flex items-center gap-3">
-                          <span className="text-primary font-bold">alex@portfolio:</span>
-                          <span className="text-accent">~</span>
-                          <span className="text-white/80">
-                            {isCurrentLine
-                              ? line.text.substring(0, charIndexRef.current)
-                              : line.text}
-                            {isCurrentLine && (
-                              <span className="inline-block w-[8px] h-[1.1em] bg-primary align-middle ml-2 animate-pulse shadow-[0_0_10px_rgba(119,255,150,0.8)]" />
-                            )}
-                          </span>
-                        </p>
-                      ) : (
-                        <p className="text-white/90 pl-4 border-l-2 border-white/5 text-pretty text-lg md:text-xl font-medium tracking-tight">
-                          {isCurrentLine
-                            ? line.text.substring(0, charIndexRef.current)
-                            : line.text}
-                          {isCurrentLine && (
-                            <span className="inline-block w-[8px] h-[1.1em] bg-primary align-middle ml-2 animate-pulse shadow-[0_0_10px_rgba(119,255,150,0.8)]" />
-                          )}
-                        </p>
-                      )}
-                    </div>
-                  )
-                })}
-              </div>
-            </div>
-
-            <div className="flex justify-center pt-8">
-              <div 
-                data-cursor-hover
-                className="inline-flex items-center gap-5 px-10 py-5 bg-[#0a0a0a] border border-primary/20 rounded-2xl hover:border-primary/50 transition-all duration-700 cursor-pointer group shadow-[0_20px_50px_-15px_rgba(119,255,150,0.05)] hover:shadow-[0_20px_60px_-10px_rgba(119,255,150,0.15)] hover:-translate-y-1"
-              >
-                <div className="relative">
-                  <div className="w-3 h-3 bg-primary rounded-full animate-ping absolute inset-0 opacity-40" />
-                  <div className="w-3 h-3 bg-primary rounded-full shadow-[0_0_15px_rgba(119,255,150,1)] relative z-10" />
+              <div className="pt-4 grid grid-cols-1 sm:grid-cols-2 gap-8">
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3 text-white">
+                    <GraduationCap className="h-5 w-5 text-primary" />
+                    <span className="font-bold tracking-tight">Formación</span>
+                  </div>
+                  <p className="text-sm">DAW & Sistemas Microinformáticos</p>
                 </div>
-                <span className="text-primary font-mono text-sm font-black tracking-[0.2em] uppercase">
-                  Disponible para nuevos proyectos
-                </span>
               </div>
             </div>
           </div>
+
+          {/* Right Column: Interactive Dashboard */}
+          <div className="lg:col-span-6 flex items-center justify-center">
+            <div className="dashboard-card w-full max-w-2xl dev-border rounded-3xl overflow-hidden shadow-[0_40px_100px_-20px_rgba(0,0,0,0.6)]">
+              {/* Dashboard Header */}
+              <div className="px-6 py-4 border-b border-white/5 bg-white/5 flex items-center justify-between">
+                <div className="flex gap-2">
+                  <div className="w-3 h-3 rounded-full bg-red-500/50" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
+                  <div className="w-3 h-3 rounded-full bg-green-500/50" />
+                </div>
+                <div className="flex items-center gap-6">
+                  <button
+                    onClick={() => setActiveTab('terminal')}
+                    className={`text-[10px] uppercase tracking-[0.2em] font-bold transition-all ${activeTab === 'terminal' ? 'text-primary' : 'text-white/30 hover:text-white/70'}`}
+                  >
+                    Terminal
+                  </button>
+                  <button
+                    onClick={() => setActiveTab('bio')}
+                    className={`text-[10px] uppercase tracking-[0.2em] font-bold transition-all ${activeTab === 'bio' ? 'text-primary' : 'text-white/30 hover:text-white/70'}`}
+                  >
+                    Resumen
+                  </button>
+                </div>
+              </div>
+
+              {/* Dashboard Body */}
+              <div className="p-8 sm:p-12 min-h-[400px] flex flex-col">
+                {activeTab === 'terminal' ? (
+                  <div className="font-mono text-sm space-y-8">
+                    {terminalLines.map((line, i) => (
+                      <div key={i} className="space-y-2">
+                        {line.type === 'command' ? (
+                          <div className="flex items-center gap-3 text-white/40">
+                            <ChevronRight className="h-3 w-3 text-primary" />
+                            <span className="text-white/80">{line.text}</span>
+                          </div>
+                        ) : (
+                          <div className="pl-6 text-primary/80 border-l border-white/5 py-1">
+                            {line.text}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                    <div className="flex items-center gap-3 text-white/40 pt-4">
+                      <ChevronRight className="h-3 w-3 text-primary animate-pulse" />
+                      <span className="w-2 h-4 bg-primary/50 animate-pulse" />
+                    </div>
+                  </div>
+                ) : (
+                  <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                    <div className="flex items-center gap-6">
+                      <div className="w-20 h-20 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
+                        <User className="h-10 w-10" />
+                      </div>
+                      <div>
+                        <h3 className="text-2xl font-bold text-white">Alex Vicente</h3>
+                        <p className="text-white/40 font-mono text-xs uppercase tracking-widest">Estudiante de DAW & Creador Digital</p>
+                      </div>
+                    </div>
+
+                    <div className="space-y-6 pt-4">
+                      <div className="space-y-3">
+                        <div className="flex justify-between text-[10px] font-mono uppercase tracking-widest">
+                          <span className="text-white/30">Enfoque Actual</span>
+                          <span className="text-primary">Full-Stack Dev</span>
+                        </div>
+                        <div className="h-1 bg-white/5 rounded-full overflow-hidden">
+                          <div className="h-full bg-primary w-[75%]" />
+                        </div>
+                      </div>
+
+                      <div className="space-y-3">
+                        <div className="flex justify-between text-[10px] font-mono uppercase tracking-widest">
+                          <span className="text-white/30">Hobby & Creatividad</span>
+                          <span className="text-accent underline decoration-accent/30">Fotografía</span>
+                        </div>
+                        <div className="h-1 bg-white/5 rounded-full overflow-hidden">
+                          <div className="h-full bg-accent w-[90%]" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="pt-8 flex flex-wrap gap-3">
+                      {['React', 'Vue.js', 'Laravel', 'Electron', 'Photoshop'].map((tech) => (
+                        <div key={tech} className="px-4 py-2 rounded-xl bg-white/5 border border-white/5 text-[10px] font-mono uppercase text-white/50 hover:border-primary/30 hover:text-white transition-all cursor-default">
+                          {tech}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
   )
 }
+

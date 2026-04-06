@@ -1,21 +1,29 @@
 'use client'
 
 import { useRef } from 'react'
-import { Code2, Languages, Palette, Cpu } from 'lucide-react'
+import {
+  Globe,
+  Database,
+  PenTool,
+  Layers,
+  Camera,
+  Video,
+  Code2
+} from 'lucide-react'
 import { gsap, useGSAP } from '@/lib/gsap'
 import {
   SiHtml5, SiCss, SiJavascript, SiReact,
   SiVuedotjs, SiTailwindcss, SiBootstrap,
-  SiPhp, SiLaravel, SiMysql
+  SiPhp, SiLaravel, SiMysql, SiElectron,
+  SiGit, SiGithub
 } from 'react-icons/si'
 import { DiPhotoshop, DiIllustrator } from 'react-icons/di'
-import { LuLanguages } from 'react-icons/lu'
-import { Film, Camera, Layers } from 'lucide-react'
 
 const skillCategories = [
   {
-    title: 'FRONTEND',
-    icon: Code2,
+    title: 'Frontend Development',
+    description: 'Construcción de interfaces modernas, adaptativas y altamente interactivas enfocadas en la experiencia de usuario.',
+    icon: Globe,
     skills: [
       { name: 'HTML5', color: '#E34F26', icon: SiHtml5 },
       { name: 'CSS3', color: '#1572B6', icon: SiCss },
@@ -27,182 +35,121 @@ const skillCategories = [
     ],
   },
   {
-    title: 'BACKEND',
-    icon: Cpu,
+    title: 'Backend & Tools',
+    description: 'Gestión de datos, lógica de servidor y herramientas de control de versiones para un flujo de trabajo eficiente.',
+    icon: Database,
     skills: [
-      { name: 'PHP', color: '#777BB4', icon: SiPhp },
-      { name: 'Laravel', color: '#FF2D20', icon: SiLaravel },
+      { name: 'PHP / Laravel', color: '#FF2D20', icon: SiLaravel },
       { name: 'MySQL', color: '#4479A1', icon: SiMysql },
+      { name: 'Electron', color: '#47848F', icon: SiElectron },
+      { name: 'Git', color: '#F05032', icon: SiGit },
+      { name: 'GitHub', color: '#181717', icon: SiGithub },
     ],
   },
   {
-    title: 'CREATIVE',
-    icon: Palette,
+    title: 'Creative Tools (Hobby)',
+    description: 'Edición de fotografía, diseño editorial y post-producción de vídeo como parte de mi visión creativa personal.',
+    icon: PenTool,
     skills: [
       { name: 'Photoshop', color: '#31A8FF', icon: DiPhotoshop },
       { name: 'Illustrator', color: '#FF9A00', icon: DiIllustrator },
       { name: 'InDesign', color: '#FF3366', icon: Layers },
-      { name: 'Premiere Pro', color: '#9999FF', icon: Film },
       { name: 'Lightroom', color: '#31A8FF', icon: Camera },
+      { name: 'Premiere Pro', color: '#9999FF', icon: Video },
     ],
-  },
-  {
-    title: 'LANGUAGES',
-    icon: Languages,
-    skills: [
-      { name: 'Spanish', level: 'Native', icon: LuLanguages },
-      { name: 'Catalan', level: 'Native', icon: LuLanguages },
-      { name: 'English', level: 'Intermediate', icon: LuLanguages },
-    ],
-  },
+  }
 ]
 
 export function Skills() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useGSAP(() => {
-    const rows = gsap.utils.toArray('.skill-row')
-    
-    rows.forEach((row: any) => {
-      const q = gsap.utils.selector(row)
-      const tl = gsap.timeline({
+    const q = gsap.utils.selector(containerRef)
+
+    gsap.fromTo(q('.skill-header'),
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1.5,
         scrollTrigger: {
-          trigger: row,
+          trigger: containerRef.current,
+          start: 'top 80%',
+        }
+      }
+    )
+
+    gsap.fromTo(q('.category-card'),
+      { opacity: 0, x: -50 },
+      {
+        opacity: 1,
+        x: 0,
+        stagger: 0.3,
+        duration: 1.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: q('.categories-grid'),
           start: 'top 85%',
-          toggleActions: 'play none none reverse',
         }
-      })
-      
-      tl.fromTo(q('.category-title'), 
-        { opacity: 0, x: -30 },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 1.5,
-          ease: 'power4.out',
-        }
-      )
-      .fromTo(q('.skill-badge'),
-        { opacity: 0, y: 20, scale: 0.95 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          stagger: 0.05,
-          duration: 1.2,
-          ease: 'expo.out',
-        },
-        '-=1'
-      )
-    })
+      }
+    )
   }, { scope: containerRef })
-
-  const handleSkillHover = (e: React.MouseEvent<HTMLDivElement>) => {
-    const badge = e.currentTarget
-    const glow = badge.querySelector('.skill-glow') as HTMLElement
-    if (glow) {
-      gsap.to(glow, {
-        opacity: 0.6,
-        scale: 1.5,
-        duration: 0.4,
-        ease: 'power2.out',
-      })
-    }
-    gsap.to(badge, {
-      borderColor: 'rgba(119, 255, 150, 0.5)',
-      y: -4,
-      duration: 0.3,
-      ease: 'power2.out',
-    })
-  }
-
-  const handleSkillLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-    const badge = e.currentTarget
-    const glow = badge.querySelector('.skill-glow') as HTMLElement
-    if (glow) {
-      gsap.to(glow, {
-        opacity: 0,
-        scale: 1,
-        duration: 0.4,
-        ease: 'power2.out',
-      })
-    }
-    gsap.to(badge, {
-      borderColor: 'rgba(255, 255, 255, 0.05)',
-      y: 0,
-      duration: 0.5,
-      ease: 'power2.out',
-    })
-  }
 
   return (
     <section
       id="skills"
       ref={containerRef}
-      className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-[#0a0a0a] relative text-white"
+      className="section-padding bg-[#050505] relative overflow-hidden"
     >
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px] pointer-events-none" />
+      {/* Background Decor */}
+      <div className="absolute top-0 right-1/4 w-[1px] h-full bg-white/5 pointer-events-none" />
+      <div className="absolute bottom-1/4 left-0 w-full h-[1px] bg-white/5 pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="mb-20">
-          <h2 className="text-4xl sm:text-6xl md:text-7xl 2xl:text-8xl font-black tracking-tighter opacity-10 absolute -top-12 left-0 select-none hidden sm:block">
-            EXPERTISE
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <header className="skill-header mb-32 space-y-6">
+          <div className="flex items-center gap-4 text-primary font-mono text-sm tracking-[0.3em] uppercase">
+            <span className="w-8 h-[1px] bg-primary/50" />
+            02. Especialización
+          </div>
+          <h2 className="text-4xl sm:text-7xl font-black text-white tracking-tighter leading-none">
+            Dominando el <span className="text-primary italic">Stack</span> moderno.
           </h2>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary font-mono relative">
-            <span className="text-primary/50 mr-4 font-normal">02.</span>
-            Habilidades <span className="text-white/20 ml-2">/ Tech Stack</span>
-          </h2>
-        </div>
+          <p className="text-white/50 text-xl font-medium max-w-2xl text-balance">
+            Un conjunto de herramientas curado para transformar ideas complejas en realidades digitales excepcionales.
+          </p>
+        </header>
 
-        <div className="space-y-16 sm:space-y-24">
-          {skillCategories.map((category, catIndex) => (
-            <div
-              key={category.title}
-              className="skill-row grid grid-cols-1 lg:grid-cols-12 gap-8 items-start group"
-            >
-              <div className="lg:col-span-4 translate-y-1">
-                <div className="flex items-center gap-4 mb-2">
-                  <category.icon className="h-6 w-6 text-primary" />
-                  <span className="text-xs font-mono text-primary/60 tracking-widest uppercase">
-                    Skill Set
-                  </span>
-                </div>
-                <h3 className="category-title text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter text-white/90 group-hover:text-primary transition-colors duration-500">
-                  {category.title}
-                </h3>
-              </div>
+        <div className="categories-grid grid grid-cols-1 lg:grid-cols-3 gap-12">
+          {skillCategories.map((cat, i) => (
+            <div key={cat.title} className="category-card group">
+              <div className="h-full dev-border p-10 rounded-[3rem] space-y-10 transition-all duration-700 hover:border-primary/20 hover:bg-[#0a0a0a]/80">
+                <header className="space-y-6">
+                  <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                    <cat.icon className="h-8 w-8" />
+                  </div>
+                  <div className="space-y-4">
+                    <h3 className="text-2xl font-bold text-white tracking-tight">{cat.title}</h3>
+                    <p className="text-sm text-white/40 leading-relaxed font-medium">
+                      {cat.description}
+                    </p>
+                  </div>
+                </header>
 
-              <div className="lg:col-span-8 flex flex-wrap gap-3 sm:gap-4 lg:pt-2">
-                {category.skills.map((skill) => {
-                  const SkillIcon = (skill as any).icon;
-                  return (
-                    <div
-                      key={skill.name}
-                      className="skill-badge group/item relative px-5 py-3 sm:px-6 sm:py-4 bg-[#111111] border border-white/5 rounded-xl transition-all duration-300 flex items-center gap-4 cursor-default overflow-hidden"
-                      onMouseEnter={handleSkillHover}
-                      onMouseLeave={handleSkillLeave}
-                    >
-                      <div className="skill-glow absolute inset-0 rounded-xl opacity-0 pointer-events-none" style={{ background: `radial-gradient(circle at center, ${('color' in skill ? skill.color : 'var(--color-primary)')}22, transparent 70%)` }} />
-                      {SkillIcon && (
-                        <SkillIcon
-                          className="w-6 h-6 sm:w-7 sm:h-7 transition-transform duration-300 group-hover/item:scale-110 relative z-10"
-                          style={{ color: (skill as any).color || 'var(--color-primary)' }}
+                <div className="grid grid-cols-2 gap-x-4 gap-y-6 pt-4 border-t border-white/5">
+                  {cat.skills.map(skill => (
+                    <div key={skill.name} className="flex items-center gap-4 group/skill">
+                      <div className="relative">
+                        <skill.icon
+                          className="h-5 w-5 text-white/30 group-hover/skill:text-primary transition-colors"
+                          style={{ fill: 'currentColor' }}
                         />
-                      )}
-                      <div className="flex flex-col items-start leading-tight relative z-10">
-                        <span className="text-base sm:text-lg font-bold tracking-tight text-white/80 group-hover/item:text-white transition-colors">
-                          {skill.name}
-                        </span>
-                        {(skill as any).level && (
-                          <span className="text-[10px] sm:text-xs font-mono text-primary/40 uppercase tracking-widest mt-0.5">
-                            {(skill as any).level}
-                          </span>
-                        )}
                       </div>
+                      <span className="text-[10px] font-mono uppercase tracking-widest text-white/50 group-hover/skill:text-white transition-colors">
+                        {skill.name}
+                      </span>
                     </div>
-                  );
-                })}
+                  ))}
+                </div>
               </div>
             </div>
           ))}

@@ -196,11 +196,14 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
         </div>
       </DialogTrigger>
 
-      <DialogContent className="max-w-[95vw] md:max-w-[90vw] lg:max-w-[1100px] 2xl:max-w-[1200px] bg-[#0a0a0a]/95 backdrop-blur-2xl border-white/10 text-white p-0 overflow-hidden rounded-[2rem] sm:rounded-[3rem] shadow-[0_0_100px_-20px_rgba(119,255,150,0.1)]">
-        <div className="grid grid-cols-1 lg:grid-cols-12 h-full max-h-[90vh] lg:max-h-[85vh]">
-          {/* Left: Visuals Section */}
-          <div className="relative h-[350px] lg:h-auto lg:col-span-7 bg-[#0d0d0d] flex items-center justify-center group/modal-img overflow-hidden">
-             {/* Background Mesh/Pattern */}
+      <DialogContent 
+        data-lenis-prevent
+        className="max-w-[95vw] md:max-w-[90vw] lg:max-w-[1100px] 2xl:max-w-[1200px] max-h-[95vh] h-auto lg:h-[85vh] bg-[#0a0a0a]/95 backdrop-blur-3xl border-white/10 text-white p-0 overflow-hidden rounded-[2rem] sm:rounded-[3rem] shadow-[0_0_100px_-20px_rgba(119,255,150,0.1)] focus-visible:outline-none"
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-12 h-auto lg:h-full overflow-y-auto lg:overflow-hidden">
+          {/* Left: Visuals Section (Fixed on LG) */}
+          <div className="relative h-[300px] sm:h-[450px] lg:h-full lg:col-span-7 bg-[#0d0d0d] flex items-center justify-center group/modal-img overflow-hidden border-b lg:border-b-0 lg:border-r border-white/5">
+            {/* Background Mesh/Pattern */}
             <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,var(--color-primary)_0%,transparent_70%)] group-hover/modal-img:opacity-20 transition-opacity duration-700" />
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
             
@@ -220,8 +223,8 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20 pointer-events-none" />
           </div>
 
-          {/* Right: Info Section */}
-          <div className="lg:col-span-5 p-8 md:p-12 lg:p-16 flex flex-col justify-between bg-black/40 border-l border-white/5 overflow-y-auto">
+          {/* Right: Info Section (Scrollable on LG) */}
+          <div className="lg:col-span-5 p-8 md:p-12 lg:p-16 flex flex-col justify-between bg-black/40 lg:overflow-y-auto lg:h-full">
             <div className="space-y-12">
               <DialogHeader className="space-y-6 text-left">
                 <div className="flex items-center gap-4">

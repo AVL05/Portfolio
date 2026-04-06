@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { Card } from '@/components/ui/card'
+import { gsap, useGSAP } from '@/lib/gsap'
 
 const TYPING_SPEED = 40
 const LINE_PAUSE = 600
@@ -88,17 +89,57 @@ export function About() {
     return () => observer.disconnect()
   }, [])
 
+  useGSAP(() => {
+    const terminal = terminalRef.current
+    if (!terminal) return
+
+    const moveTerminal = (e: MouseEvent) => {
+      const { left, top, width, height } = terminal.getBoundingClientRect()
+      const x = (e.clientX - left) / width - 0.5
+      const y = (e.clientY - top) / height - 0.5
+
+      gsap.to(terminal, {
+        rotateY: x * 10,
+        rotateX: -y * 10,
+        x: x * 20,
+        y: y * 20,
+        duration: 1.5,
+        ease: 'power3.out',
+        transformPerspective: 1200,
+      })
+    }
+
+    const resetTerminal = () => {
+      gsap.to(terminal, {
+        rotateY: 0,
+        rotateX: 0,
+        x: 0,
+        y: 0,
+        duration: 2,
+        ease: 'elastic.out(1, 0.3)',
+      })
+    }
+
+    terminal.addEventListener('mousemove', moveTerminal)
+    terminal.addEventListener('mouseleave', resetTerminal)
+
+    return () => {
+      terminal.removeEventListener('mousemove', moveTerminal)
+      terminal.removeEventListener('mouseleave', resetTerminal)
+    }
+  }, { scope: terminalRef })
+
   return (
     <section
       id="about"
-      className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-[#0a0a0a] relative overflow-hidden text-white"
+      className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-[#050505] relative overflow-hidden text-white section-padding"
     >
-      <div className="absolute top-1/4 -left-20 w-80 h-80 bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-accent/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-1/4 -left-20 w-80 h-80 bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-accent/10 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-5xl mx-auto relative z-10">
-        <div className="mb-16">
-          <h2 className="text-4xl sm:text-6xl md:text-7xl 2xl:text-8xl font-black tracking-tighter opacity-10 absolute -top-12 left-0 select-none hidden sm:block uppercase">
+        <div className="mb-20">
+          <h2 className="text-4xl sm:text-7xl md:text-8xl 2xl:text-9xl font-black tracking-tighter opacity-[0.03] absolute -top-16 left-0 select-none hidden sm:block uppercase">
             WHOAMI
           </h2>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary font-mono relative">
@@ -107,49 +148,51 @@ export function About() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-12 space-y-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+          <div className="lg:col-span-12 space-y-12">
             <div
               ref={terminalRef}
-              className="w-full bg-[#111111]/80 border border-white/10 rounded-xl overflow-hidden shadow-2xl backdrop-blur-xl"
+              className="w-full bg-[#0a0a0a]/90 border border-white/10 rounded-[2rem] overflow-hidden shadow-[0_30px_100px_-20px_rgba(0,0,0,0.8)] backdrop-blur-2xl transition-all duration-300 will-change-transform"
             >
-              <div className="flex items-center gap-2 px-4 py-3 bg-[#181818] border-b border-white/5">
-                <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
-                <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-                <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
-                <span className="ml-3 text-xs font-mono text-white/40 tracking-wider">
+              <div className="flex items-center gap-2 px-6 py-4 bg-[#111111]/80 border-b border-white/5">
+                <div className="flex gap-1.5">
+                  <div className="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
+                  <div className="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
+                  <div className="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+                </div>
+                <span className="ml-4 text-xs font-mono text-white/30 tracking-[0.2em] uppercase">
                   ~/bio/about_me.sh
                 </span>
               </div>
 
-              <div className="p-8 text-left font-mono text-sm sm:text-base overflow-x-auto leading-relaxed space-y-6 min-h-[280px]">
+              <div className="p-10 md:p-14 text-left font-mono text-sm sm:text-base overflow-x-auto leading-relaxed space-y-8 min-h-[350px]">
                 {terminalLines.map((line, i) => {
                   if (i >= visibleLines) return null
                   const isCurrentLine = i === lineIndexRef.current && isTyping
                   const isCommand = line.type === 'command'
 
                   return (
-                    <div key={i} className={isCommand ? 'space-y-3' : 'space-y-4'}>
+                    <div key={i} className={isCommand ? 'space-y-4' : 'space-y-6'}>
                       {isCommand ? (
-                        <p className="text-white/40 flex items-center gap-2">
-                          <span className="text-primary">alex@portfolio:</span>
+                        <p className="text-white/40 flex items-center gap-3">
+                          <span className="text-primary font-bold">alex@portfolio:</span>
                           <span className="text-accent">~</span>
-                          <span>
+                          <span className="text-white/80">
                             {isCurrentLine
                               ? line.text.substring(0, charIndexRef.current)
                               : line.text}
                             {isCurrentLine && (
-                              <span className="inline-block w-[6px] h-[1.1em] bg-primary align-middle ml-1 animate-pulse" />
+                              <span className="inline-block w-[8px] h-[1.1em] bg-primary align-middle ml-2 animate-pulse shadow-[0_0_10px_rgba(119,255,150,0.8)]" />
                             )}
                           </span>
                         </p>
                       ) : (
-                        <p className="text-white/90 pl-2 text-pretty text-lg">
+                        <p className="text-white/90 pl-4 border-l-2 border-white/5 text-pretty text-lg md:text-xl font-medium tracking-tight">
                           {isCurrentLine
                             ? line.text.substring(0, charIndexRef.current)
                             : line.text}
                           {isCurrentLine && (
-                            <span className="inline-block w-[6px] h-[1.1em] bg-primary align-middle ml-1 animate-pulse" />
+                            <span className="inline-block w-[8px] h-[1.1em] bg-primary align-middle ml-2 animate-pulse shadow-[0_0_10px_rgba(119,255,150,0.8)]" />
                           )}
                         </p>
                       )}
@@ -159,10 +202,16 @@ export function About() {
               </div>
             </div>
 
-            <div className="flex justify-center">
-              <div className="inline-flex items-center gap-4 px-8 py-4 bg-[#111111] border border-primary/30 rounded-2xl hover:bg-primary/5 transition-all duration-500 cursor-pointer group shadow-[0_0_30px_rgba(119,255,150,0.05)] hover:shadow-[0_0_40px_rgba(119,255,150,0.15)] hover:scale-105 active:scale-95">
-                <div className="w-3 h-3 bg-primary rounded-full animate-pulse shadow-[0_0_10px_rgba(119,255,150,1)]" />
-                <span className="text-primary font-mono text-sm font-bold tracking-wider uppercase">
+            <div className="flex justify-center pt-8">
+              <div 
+                data-cursor-hover
+                className="inline-flex items-center gap-5 px-10 py-5 bg-[#0a0a0a] border border-primary/20 rounded-2xl hover:border-primary/50 transition-all duration-700 cursor-pointer group shadow-[0_20px_50px_-15px_rgba(119,255,150,0.05)] hover:shadow-[0_20px_60px_-10px_rgba(119,255,150,0.15)] hover:-translate-y-1"
+              >
+                <div className="relative">
+                  <div className="w-3 h-3 bg-primary rounded-full animate-ping absolute inset-0 opacity-40" />
+                  <div className="w-3 h-3 bg-primary rounded-full shadow-[0_0_15px_rgba(119,255,150,1)] relative z-10" />
+                </div>
+                <span className="text-primary font-mono text-sm font-black tracking-[0.2em] uppercase">
                   Disponible para nuevos proyectos
                 </span>
               </div>

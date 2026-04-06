@@ -111,11 +111,6 @@ export function Navigation() {
 
   return (
     <div ref={containerRef}>
-      <div
-        ref={progressRef}
-        className="fixed top-0 left-0 right-0 h-1 bg-primary origin-left z-100 scale-x-0 shadow-[0_0_10px_rgba(119,255,150,0.5)]"
-      />
-
       <nav
         ref={navRef}
         className={`fixed top-0 left-0 right-0 z-90 transition-all duration-500 ${

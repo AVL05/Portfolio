@@ -58,9 +58,9 @@ const FloatingCircles = () => {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useGSAP(() => {
-    const circles = gsap.utils.toArray('.floating-circle')
+    const circles = gsap.utils.toArray<HTMLElement>('.floating-circle')
     
-    circles.forEach((circle: any, i: number) => {
+    circles.forEach((circle, i) => {
       gsap.set(circle, { willChange: 'transform' })
       
       // Infinite floating movement
@@ -75,13 +75,31 @@ const FloatingCircles = () => {
         ease: 'sine.inOut',
         delay: i * 0.5
       })
+
+      // Mouse Parallax effect
+      const moveCircles = (e: MouseEvent) => {
+        const { clientX, clientY } = e
+        const xPos = (clientX / window.innerWidth - 0.5) * (i + 1) * 40
+        const yPos = (clientY / window.innerHeight - 0.5) * (i + 1) * 40
+        
+        gsap.to(circle, {
+          xPercent: xPos,
+          yPercent: yPos,
+          duration: 2,
+          ease: 'power2.out',
+        })
+      }
+
+      window.addEventListener('mousemove', moveCircles)
+      return () => window.removeEventListener('mousemove', moveCircles)
     })
   }, { scope: containerRef })
 
   return (
     <div ref={containerRef} className="absolute inset-0 overflow-hidden pointer-events-none opacity-20" style={{ perspective: '1000px' }}>
-      <div className="floating-circle absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[120px]" />
-      <div className="floating-circle absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/20 rounded-full blur-[120px]" />
+      <div className="floating-circle absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px]" />
+      <div className="floating-circle absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-accent/20 rounded-full blur-[120px]" />
+      <div className="floating-circle absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white/5 rounded-full blur-[150px]" />
     </div>
   )
 }
@@ -231,19 +249,21 @@ export function Hero() {
               href="https://github.com/AVL05"
               target="_blank"
               rel="noopener noreferrer"
-              className="social-btn group px-6 py-3 bg-white text-black font-bold rounded-xl flex items-center gap-3 hover:bg-primary transition-all duration-300 hover:shadow-[0_0_30px_rgba(119,255,150,0.5)]"
+              data-cursor-hover
+              className="social-btn group px-8 py-4 bg-white text-black font-bold rounded-2xl flex items-center gap-4 hover:bg-primary transition-all duration-500 hover:shadow-[0_0_40px_rgba(119,255,150,0.4)]"
             >
               <Github className="h-5 w-5" />
-              <span>GitHub</span>
+              <span className="text-sm tracking-tight text-black">GitHub</span>
             </a>
             <a
               href="https://www.linkedin.com/in/alex-vicente-lopez/"
               target="_blank"
               rel="noopener noreferrer"
-              className="social-btn group px-6 py-3 bg-transparent border-2 border-white/10 text-white font-bold rounded-xl flex items-center gap-3 hover:border-primary/50 hover:bg-white/5 transition-all duration-300"
+              data-cursor-hover
+              className="social-btn group px-8 py-4 bg-transparent border border-white/10 text-white font-bold rounded-2xl flex items-center gap-4 hover:border-primary/50 hover:bg-white/5 transition-all duration-500"
             >
               <Linkedin className="h-5 w-5 text-[#0077b5]" />
-              <span>LinkedIn</span>
+              <span className="text-sm tracking-tight">LinkedIn</span>
             </a>
           </div>
         </div>
@@ -251,12 +271,13 @@ export function Hero() {
 
       <a
         href="#about"
-        className="scroll-btn absolute bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-4 text-white/20 hover:text-primary transition-all duration-500 group"
+        data-cursor-hover
+        className="scroll-btn absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 text-white/20 hover:text-primary transition-all duration-500 group"
       >
-        <span className="text-xs font-black uppercase tracking-[0.3em] font-mono group-hover:tracking-[0.5em] transition-all">
-          Scroll Down
+        <span className="text-[10px] font-black uppercase tracking-[0.4em] font-mono group-hover:tracking-[0.6em] transition-all">
+          Scroll
         </span>
-        <div className="p-2 border border-white/10 rounded-full group-hover:border-primary group-hover:scale-110 transition-all">
+        <div className="p-3 border border-white/10 rounded-full group-hover:border-primary group-hover:scale-110 transition-all flex items-center justify-center">
           <ArrowDown className="h-4 w-4 animate-bounce" />
         </div>
       </a>

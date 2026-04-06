@@ -29,7 +29,7 @@ const experience = [
     title: 'Software Developer (Intern)',
     company: 'Burguet Sistemas',
     period: '2024 - Presente',
-    location: 'Paiporta, Valencia',
+    location: 'Xirivella, Valencia',
     description:
       'Colaboración activa en el ciclo de vida de desarrollo de aplicaciones empresariales. Convertir aplicacion de Java a REACT y Electron, y web PHP a REACT y PHP.',
   },

@@ -3,6 +3,7 @@
 import { useRef } from 'react'
 import { Github, Linkedin, ArrowDown, Terminal, Code2, Sparkles } from 'lucide-react'
 import { gsap, useGSAP } from '@/lib/gsap'
+import { useLanguage } from '@/lib/language-context'
 
 const MagneticLink = ({ children, href, className = "" }: { children: React.ReactNode, href: string, className?: string }) => {
   const linkRef = useRef<HTMLAnchorElement>(null)
@@ -51,6 +52,7 @@ const MagneticLink = ({ children, href, className = "" }: { children: React.Reac
 }
 
 export function Hero() {
+  const { t } = useLanguage()
   const containerRef = useRef<HTMLDivElement>(null)
   const gridRef = useRef<HTMLDivElement>(null)
 
@@ -130,7 +132,7 @@ export function Hero() {
             <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
           </span>
           <span className="text-[10px] sm:text-xs font-mono font-bold tracking-[0.2em] uppercase text-primary/80">
-            Disponible para nuevas oportunidades
+            {t.hero.status}
           </span>
         </div>
 
@@ -139,33 +141,33 @@ export function Hero() {
           <div className="flex flex-wrap justify-center overflow-hidden py-4">
             {name.split('').map((char, i) => (
               <span
-                key={i}
-                className="reveal-char inline-block text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-white tracking-tighter leading-none"
-                style={{ minWidth: char === ' ' ? '0.3em' : 'auto' }}
-              >
+  key={i}
+  className="reveal-char inline-block text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-black text-foreground tracking-tighter leading-none"
+  style={{ minWidth: char === ' ' ? '0.25em' : 'auto' }}
+>
                 {char}
               </span>
             ))}
           </div>
 
-          <h2 className="hero-description text-xl sm:text-3xl md:text-4xl text-white/50 font-medium tracking-tight max-w-4xl text-balance">
-            Estudiante de <span className="text-white">Desarrollo de Aplicaciones Web (DAW)</span>. Construyendo el futuro digital a través de <span className="text-primary">código limpio</span>, diseño moderno y una visión creativa única.
+          <h2 className="hero-description text-lg sm:text-2xl md:text-4xl text-foreground/50 font-medium tracking-tight max-w-4xl text-balance">
+            {t.hero.description}
           </h2>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-wrap items-center justify-center gap-8 pt-8">
-          <MagneticLink href="https://github.com/AVL05" className="social-magnetic">
-            <div className="group flex items-center gap-4 px-10 py-5 bg-white text-black font-bold rounded-2xl hover:bg-primary transition-all duration-500 shadow-xl">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 pt-8">
+          <MagneticLink href="https://github.com/AVL05" className="social-magnetic w-full sm:w-auto">
+            <div className="group flex items-center justify-center gap-4 px-10 py-5 bg-foreground text-background font-bold rounded-2xl hover:bg-primary hover:text-primary-foreground transition-all duration-500 shadow-xl">
               <Github className="h-5 w-5" />
               <span className="text-sm tracking-tight">GitHub</span>
             </div>
           </MagneticLink>
 
-          <MagneticLink href="https://www.linkedin.com/in/alex-vicente-lopez/" className="social-magnetic">
-            <div className="group flex items-center gap-4 px-10 py-5 bg-[#111] border border-white/10 text-white font-bold rounded-2xl hover:border-primary/50 transition-all duration-500">
-              <Linkedin className="h-5 w-5 text-[#0077b5]" />
-              <span className="text-sm tracking-tight text-white/70">LinkedIn</span>
+          <MagneticLink href="https://www.linkedin.com/in/alex-vicente-lopez/" className="social-magnetic w-full sm:w-auto">
+            <div className="group flex items-center justify-center gap-4 px-10 py-5 bg-card border border-border text-foreground font-bold rounded-2xl hover:border-primary/50 transition-all duration-500">
+              <Linkedin className="h-5 w-5 text-accent" />
+              <span className="text-sm tracking-tight text-foreground/70">LinkedIn</span>
             </div>
           </MagneticLink>
         </div>
@@ -189,11 +191,11 @@ export function Hero() {
 
       {/* Scroll indicator */}
       <a
-        href="#about"
-        className="scroll-indicator absolute bottom-12 flex flex-col items-center gap-4 text-white/20 hover:text-primary transition-all duration-500 group"
-      >
+  href="#about"
+  className="scroll-indicator absolute bottom-12 flex flex-col items-center gap-4 text-foreground/20 hover:text-primary transition-all duration-500 group"
+>
         <span className="text-[10px] font-black uppercase tracking-[0.4em] font-mono group-hover:tracking-[0.6em] transition-all">
-          Scroll
+          {t.hero.scroll}
         </span>
         <div className="p-3 border border-white/5 rounded-full group-hover:border-primary/30 group-hover:scale-110 transition-all flex items-center justify-center bg-white/5">
           <ArrowDown className="h-4 w-4 animate-bounce" />

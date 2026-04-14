@@ -11,6 +11,7 @@ import {
   Code2
 } from 'lucide-react'
 import { gsap, useGSAP } from '@/lib/gsap'
+import { useLanguage } from '@/lib/language-context'
 import {
   SiHtml5, SiCss, SiJavascript, SiReact,
   SiVuedotjs, SiTailwindcss, SiBootstrap,
@@ -19,7 +20,7 @@ import {
 } from 'react-icons/si'
 import { DiPhotoshop, DiIllustrator } from 'react-icons/di'
 
-const skillCategories = [
+const skillCategories_es = [
   {
     title: 'Frontend Development',
     description: 'Construcción de interfaces modernas, adaptativas y altamente interactivas enfocadas en la experiencia de usuario.',
@@ -60,7 +61,50 @@ const skillCategories = [
   }
 ]
 
+const skillCategories_en = [
+  {
+    title: 'Frontend Development',
+    description: 'Building modern, adaptive and highly interactive interfaces focused on user experience.',
+    icon: Globe,
+    skills: [
+      { name: 'HTML5', color: '#E34F26', icon: SiHtml5 },
+      { name: 'CSS3', color: '#1572B6', icon: SiCss },
+      { name: 'JavaScript', color: '#F7DF1E', icon: SiJavascript },
+      { name: 'React', color: '#61DAFB', icon: SiReact },
+      { name: 'Vue.js', color: '#4FC08D', icon: SiVuedotjs },
+      { name: 'Tailwind CSS', color: '#06B6D4', icon: SiTailwindcss },
+      { name: 'Bootstrap', color: '#7952B3', icon: SiBootstrap },
+    ],
+  },
+  {
+    title: 'Backend & Tools',
+    description: 'Data management, server logic and version control tools for an efficient workflow.',
+    icon: Database,
+    skills: [
+      { name: 'PHP / Laravel', color: '#FF2D20', icon: SiLaravel },
+      { name: 'MySQL', color: '#4479A1', icon: SiMysql },
+      { name: 'Electron', color: '#47848F', icon: SiElectron },
+      { name: 'Git', color: '#F05032', icon: SiGit },
+      { name: 'GitHub', color: '#181717', icon: SiGithub },
+    ],
+  },
+  {
+    title: 'Creative Tools (Hobby)',
+    description: 'Photo editing, editorial design and video post-production as part of my personal creative vision.',
+    icon: PenTool,
+    skills: [
+      { name: 'Photoshop', color: '#31A8FF', icon: DiPhotoshop },
+      { name: 'Illustrator', color: '#FF9A00', icon: DiIllustrator },
+      { name: 'InDesign', color: '#FF3366', icon: Layers },
+      { name: 'Lightroom', color: '#31A8FF', icon: Camera },
+      { name: 'Premiere Pro', color: '#9999FF', icon: Video },
+    ],
+  }
+]
+
 export function Skills() {
+  const { t, language } = useLanguage()
+  const skillCategories = language === 'es' ? skillCategories_es : skillCategories_en
   const containerRef = useRef<HTMLDivElement>(null)
 
   useGSAP(() => {
@@ -109,13 +153,13 @@ export function Skills() {
         <header className="skill-header mb-32 space-y-6">
           <div className="flex items-center gap-4 text-primary font-mono text-sm tracking-[0.3em] uppercase">
             <span className="w-8 h-[1px] bg-primary/50" />
-            02. Especialización
+            {t.skills.title}
           </div>
           <h2 className="text-4xl sm:text-7xl font-black text-white tracking-tighter leading-none">
-            Dominando el <span className="text-primary italic">Stack</span> moderno.
+            {t.skills.subtitle}
           </h2>
           <p className="text-white/50 text-xl font-medium max-w-2xl text-balance">
-            Un conjunto de herramientas curado para transformar ideas complejas en realidades digitales excepcionales.
+            {t.skills.desc}
           </p>
         </header>
 

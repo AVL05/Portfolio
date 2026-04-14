@@ -4,17 +4,20 @@ import { Button } from '@/components/ui/button'
 import { Menu, X } from 'lucide-react'
 import { useEffect, useState, useRef } from 'react'
 import { gsap, useGSAP } from '@/lib/gsap'
-
-const navItems = [
-  { name: 'Inicio', href: '#hero' },
-  { name: 'Sobre Mí', href: '#about' },
-  { name: 'Experiencia', href: '#experience' },
-  { name: 'Proyectos', href: '#projects' },
-  { name: 'Fotografía', href: '#photography' },
-  { name: 'Contacto', href: '#contact' },
-]
+import { useLanguage } from '@/lib/language-context'
+import { ThemeToggle } from './theme-toggle'
+import { LanguageToggle } from './language-toggle'
 
 export function Navigation() {
+  const { t } = useLanguage()
+  const navItems = [
+    { name: t.nav.home, href: '#hero' },
+    { name: t.nav.about, href: '#about' },
+    { name: t.nav.experience, href: '#experience' },
+    { name: t.nav.projects, href: '#projects' },
+    { name: t.nav.photography, href: '#photography' },
+    { name: t.nav.contact, href: '#contact' },
+  ]
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('hero')
@@ -78,7 +81,9 @@ export function Navigation() {
         }
         return false
       })
-      if (currentSection) setActiveSection(currentSection)
+      if (currentSection) {
+        setActiveSection(prev => prev !== currentSection ? currentSection : prev)
+      }
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
@@ -115,7 +120,7 @@ export function Navigation() {
         ref={navRef}
         className={`fixed top-0 left-0 right-0 z-90 transition-all duration-500 ${
           isScrolled
-            ? 'py-4 bg-[#0a0a0a]/90 backdrop-blur-md border-b border-white/5'
+            ? 'py-4 bg-background/90 backdrop-blur-md border-b border-border'
             : 'py-8 bg-transparent'
         }`}
       >
@@ -123,14 +128,14 @@ export function Navigation() {
           <div className="flex items-center justify-between">
             <a
               href="#hero"
-              className="group text-2xl font-black text-white tracking-tighter transition-all"
+              className="group text-xl sm:text-2xl font-black text-foreground tracking-tighter transition-all lg:whitespace-nowrap shrink-0"
             >
               ALEX <span className="text-primary">VICENTE</span>
             </a>
 
             <div
               ref={navLinksContainerRef}
-              className="hidden md:flex items-center gap-8 relative"
+              className="hidden xl:flex items-center gap-6 relative"
             >
               <div
                 className="absolute bottom-[-4px] h-[2px] bg-primary transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]"
@@ -146,22 +151,28 @@ export function Navigation() {
                     key={item.name}
                     ref={(el) => { navLinksRefs.current[index] = el; }}
                     href={item.href}
-                    className={`group relative text-xs font-black uppercase tracking-[0.2em] transition-colors duration-300 ${
-                      isActive ? 'text-primary' : 'text-white/40 hover:text-white'
+                    className={`group relative text-[10px] font-black uppercase tracking-[0.15em] transition-colors duration-300 whitespace-nowrap ${
+                      isActive ? 'text-primary' : 'text-foreground/40 hover:text-foreground'
                     }`}
                   >
-                    <span className="mr-2 text-[10px] opacity-30 font-mono">0{index + 1}.</span>
+                    <span className="mr-1 text-[9px] opacity-30 font-mono">0{index + 1}.</span>
                     {item.name}
                   </a>
                 )
               })}
             </div>
 
-            <div className="md:hidden">
+            <div className="hidden xl:flex items-center gap-4 ml-4">
+              <LanguageToggle />
+              <ThemeToggle />
+            </div>
+
+            <div className="xl:hidden flex items-center gap-4">
+              <LanguageToggle />
               <Button
                 variant="ghost"
                 size="icon"
-                className="text-white hover:bg-white/5 p-0"
+                className="text-foreground hover:bg-foreground/5 p-0"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               >
                 {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -173,14 +184,14 @@ export function Navigation() {
         {isMobileMenuOpen && (
           <div
             ref={mobileMenuRef}
-            className="fixed inset-0 top-0 left-0 w-full h-screen bg-[#0a0a0a] z-80 md:hidden flex flex-col items-center justify-center space-y-8"
+            className="fixed inset-0 top-0 left-0 w-full h-screen bg-background z-80 xl:hidden flex flex-col items-center justify-center space-y-8"
           >
             {navItems.map((item, index) => (
               <a
                 key={item.name}
                 ref={(el) => { mobileMenuItemsRef.current[index] = el; }}
                 href={item.href}
-                className="text-4xl sm:text-5xl font-black text-white hover:text-primary transition-all tracking-tighter"
+                className="text-4xl sm:text-5xl font-black text-foreground hover:text-primary transition-all tracking-tighter"
                 onClick={(e) => {
                   e.preventDefault()
                   handleMobileNavClick(item.href)

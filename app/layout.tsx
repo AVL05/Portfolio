@@ -9,6 +9,8 @@ import "./globals.css";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { NoiseOverlay } from "@/components/noise-overlay";
 import { ScrollProgress } from "@/components/scroll-progress";
+import { ThemeProvider } from "@/components/theme-provider";
+import { LanguageProvider } from "@/lib/language-context";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://aleviclop.vercel.app";
@@ -87,19 +89,28 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className="dark scroll-smooth overflow-x-hidden" suppressHydrationWarning>
+    <html lang="es" className="scroll-smooth overflow-x-hidden" suppressHydrationWarning>
       <body
-        className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased selection:bg-primary/30 selection:text-primary bg-[#050505] text-white selection:text-primary-foreground overflow-x-hidden`}
+        className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased selection:bg-primary/30 selection:text-primary bg-background text-foreground selection:text-primary-foreground overflow-x-hidden`}
         style={{ fontFeatureSettings: '"cv11", "ss01", "ss03"' }}
         suppressHydrationWarning
       >
-        <SmoothScroll>
-          <div className="relative min-h-screen overflow-x-hidden">
-            <ScrollProgress />
-            <NoiseOverlay />
-            <Suspense fallback={null}>{children}</Suspense>
-          </div>
-        </SmoothScroll>
+        <LanguageProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <SmoothScroll>
+              <div className="relative min-h-screen overflow-x-hidden scanline">
+                <ScrollProgress />
+                <NoiseOverlay />
+                <Suspense fallback={null}>{children}</Suspense>
+              </div>
+            </SmoothScroll>
+          </ThemeProvider>
+        </LanguageProvider>
         <Analytics />
       </body>
     </html>

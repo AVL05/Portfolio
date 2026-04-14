@@ -4,6 +4,7 @@ import { useRef } from 'react'
 import { Button } from '@/components/ui/button'
 import { Camera, Globe, Instagram } from 'lucide-react'
 import Image from 'next/image'
+import { useLanguage } from '@/lib/language-context'
 
 const photographyLinks = {
   website: 'https://alexgallery.alexviclop.workers.dev/',
@@ -12,6 +13,7 @@ const photographyLinks = {
 }
 
 export function Photography() {
+  const { t } = useLanguage()
   const showcaseRef = useRef<HTMLDivElement>(null)
   const imagePath = '/photography/hero.webp'
   const hasHeroImage = true
@@ -19,7 +21,7 @@ export function Photography() {
   return (
     <section
       id="photography"
-      className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-[#0a0a0a] relative overflow-hidden text-white"
+      className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-background relative overflow-hidden text-foreground"
     >
       <div className="max-w-7xl mx-auto relative z-10 section-padding">
         <div className="mb-24">
@@ -27,47 +29,47 @@ export function Photography() {
             GALLERY
           </h2>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary font-mono relative">
-            <span className="text-primary/50 mr-4 font-normal">04.</span>
-            Fotografía <span className="text-white/20 ml-2">/ Creative View</span>
+            <span className="text-primary/50 mr-2 sm:mr-4 font-normal text-lg sm:text-2xl md:text-3xl">04.</span>
+            {t.photography.title} <span className="text-foreground/20 ml-2 block sm:inline text-xl sm:text-2xl md:text-3xl">{t.photography.subtitle}</span>
           </h2>
-          <p className="text-lg sm:text-xl text-white/50 max-w-2xl mt-6 font-medium leading-relaxed">
-            Explora mi mundo a través del lente. Capturando momentos, emociones y la belleza que nos rodea.
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mt-6 font-medium leading-relaxed">
+            {t.photography.description}
           </p>
         </div>
 
         <div ref={showcaseRef} className="relative group/editor transition-all duration-700">
-          <div className="relative overflow-hidden rounded-[2rem] bg-[#050505]/80 border border-white/10 shadow-[0_50px_100px_-20px_rgba(0,0,0,1)] backdrop-blur-3xl font-mono will-change-transform hover:shadow-[0_50px_120px_-20px_rgba(119,255,150,0.05)]">
-            <div className="flex items-center justify-between px-8 py-5 bg-[#0a0a0a]/80 border-b border-white/5">
-              <div className="flex items-center gap-3">
-                <div className="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
-                <div className="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
-                <div className="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+          <div className="relative overflow-hidden rounded-[2rem] bg-card/80 border border-border shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)] backdrop-blur-3xl font-mono will-change-transform">
+            <div className="flex items-center justify-between px-4 sm:px-8 py-4 sm:py-5 bg-card/80 border-b border-border">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]"></div>
+                <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]"></div>
+                <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]"></div>
               </div>
-              <span className="text-[10px] font-mono text-white/30 uppercase tracking-[0.3em] font-black">
+              <span className="text-[8px] sm:text-[10px] font-mono text-white/30 uppercase tracking-[0.25em] sm:tracking-[0.3em] font-black">
                 RAW_EDITOR_V2.exe
               </span>
-              <div className="flex gap-2">
+              <div className="hidden sm:flex gap-2">
                 <div className="w-2 h-2 rounded-full bg-primary/20"></div>
                 <div className="w-2 h-2 rounded-full bg-primary/20"></div>
               </div>
             </div>
 
             <div className="flex flex-col lg:flex-row">
-              <div className="hidden lg:flex flex-col gap-6 p-6 border-r border-white/5 bg-[#0a0a0a]/50 items-center text-white/20">
+              <div className="hidden lg:flex flex-col gap-6 p-6 border-r border-border bg-card/50 items-center text-muted-foreground">
                 <Camera className="w-5 h-5 text-primary opacity-60" />
-                <div className="w-8 h-px bg-white/5 my-2"></div>
+                <div className="w-8 h-px bg-border/20 my-2"></div>
                 <div className="w-5 h-5 border-2 border-current rounded-sm"></div>
                 <div className="w-5 h-5 border border-current rounded-full"></div>
                 <div className="w-5 h-5 border-t-2 border-l-2 border-current"></div>
               </div>
 
-              <div className="relative w-full p-6 sm:p-10 lg:p-12 flex items-center justify-center bg-[#000000]">
+              <div className="relative w-full p-6 sm:p-10 lg:p-12 flex items-center justify-center bg-background/50">
                 <div className="absolute top-12 left-12 w-12 h-12 border-t border-l border-primary/30"></div>
                 <div className="absolute top-12 right-12 w-12 h-12 border-t border-r border-primary/30"></div>
                 <div className="absolute bottom-12 left-12 w-12 h-12 border-b border-l border-primary/30"></div>
                 <div className="absolute bottom-12 right-12 w-12 h-12 border-b border-r border-primary/30"></div>
 
-                <div className="relative w-full aspect-video sm:aspect-3/2 rounded-none overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.8)] ring-1 ring-white/10 group/img">
+                <div className="relative w-full aspect-video sm:aspect-3/2 rounded-none overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.3)] ring-1 ring-border group/img">
                   {hasHeroImage ? (
                     <Image
                       src={imagePath}
@@ -93,35 +95,38 @@ export function Photography() {
               <div className="w-full lg:w-96 p-8 border-t lg:border-t-0 lg:border-l border-white/5 bg-[#070707] flex flex-col justify-between">
                 <div>
                   <h3 className="text-primary font-black mb-6 uppercase text-[10px] tracking-[0.4em] border-b border-white/5 pb-3">
-                    Propiedades.RAW
+                    {t.photography.properties}
                   </h3>
-                  <div className="space-y-4 text-xs text-white/40 font-mono">
+                  <div className="grid grid-cols-2 md:grid-cols-1 gap-4 text-xs text-muted-foreground font-mono">
                     {[
                       { label: 'ISO', value: '100' },
-                      { label: 'Apertura', value: 'f/2.8' },
-                      { label: 'Exposicion', value: '1/250s' },
-                      { label: 'Dist focal', value: '35mm' },
-                      { label: 'Lente', value: 'Sigma 35mm Art' },
+                      { label: 'f/', value: '2.8' },
+                      { label: 'Exp', value: '1/250s' },
+                      { label: 'Dist', value: '35mm' },
                     ].map((item) => (
-                      <div key={item.label} className="flex justify-between items-center bg-white/[0.02] p-2 rounded-lg border border-white/[0.03]">
+                      <div key={item.label} className="flex justify-between items-center bg-muted/40 p-2 rounded-lg border border-border/20">
                         <span className="opacity-60">{item.label}</span>
-                        <span className="text-white font-bold">{item.value}</span>
+                        <span className="text-foreground font-bold">{item.value}</span>
                       </div>
                     ))}
+                    <div className="col-span-2 md:col-span-1 flex justify-between items-center bg-muted/40 p-2 rounded-lg border border-border/20">
+                      <span className="opacity-60">Lente</span>
+                      <span className="text-foreground font-bold">Sigma 35mm Art</span>
+                    </div>
                   </div>
 
                   <div className="mt-10">
                     <h3 className="text-primary font-black mb-5 uppercase text-[10px] tracking-[0.4em] border-b border-white/5 pb-3">
-                      Filtros
+                      {t.photography.filters}
                     </h3>
                     <div className="grid grid-cols-3 gap-3">
                       <div data-cursor-hover className="h-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center text-[10px] text-primary cursor-pointer hover:bg-primary/20 transition-all font-black">
                         B&N
                       </div>
-                      <div data-cursor-hover className="h-10 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center text-[10px] cursor-pointer hover:bg-white/10 transition-all font-black text-white/40">
+                      <div data-cursor-hover className="h-10 rounded-xl bg-secondary border border-border flex items-center justify-center text-[10px] cursor-pointer hover:bg-muted transition-all font-black text-muted-foreground">
                         CINE
                       </div>
-                      <div data-cursor-hover className="h-10 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center text-[10px] cursor-pointer hover:bg-white/10 transition-all font-black text-white/40">
+                      <div data-cursor-hover className="h-10 rounded-xl bg-secondary border border-border flex items-center justify-center text-[10px] cursor-pointer hover:bg-muted transition-all font-black text-muted-foreground">
                         VNTG
                       </div>
                     </div>
@@ -132,7 +137,7 @@ export function Photography() {
                   <Button
                     asChild
                     size="lg"
-                    className="w-full h-16 font-sans bg-primary text-black font-black hover:bg-white transition-all duration-500 rounded-2xl shadow-[0_15px_30px_-10px_rgba(119,255,150,0.4)] group/btn overflow-hidden relative"
+                    className="w-full h-16 font-sans bg-primary text-primary-foreground font-black hover:bg-primary/90 transition-all duration-500 rounded-2xl group/btn overflow-hidden relative"
                   >
                     <a
                       href={photographyLinks.website}
@@ -141,7 +146,7 @@ export function Photography() {
                       className="flex items-center justify-center gap-3 w-full h-full"
                     >
                       <Globe className="h-5 w-5 group-hover/btn:rotate-12 transition-transform" />
-                      <span className="text-base uppercase tracking-tight">Ver Galería Completa</span>
+                      <span className="text-base uppercase tracking-tight">{t.photography.view_full}</span>
                     </a>
                   </Button>
 
@@ -149,7 +154,7 @@ export function Photography() {
                     variant="outline"
                     asChild
                     size="lg"
-                    className="w-full h-14 font-mono bg-transparent text-white border-white/10 hover:border-primary/50 hover:bg-primary/5 transition-all duration-500 rounded-2xl"
+                    className="w-full h-14 font-mono bg-transparent text-foreground border-border hover:border-primary/50 hover:bg-primary/5 transition-all duration-500 rounded-2xl"
                   >
                     <a
                       href={photographyLinks.instagram}

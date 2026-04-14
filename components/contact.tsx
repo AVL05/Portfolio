@@ -7,8 +7,10 @@ import { Textarea } from '@/components/ui/textarea'
 import { Camera, Github, Linkedin, Mail } from 'lucide-react'
 import type React from 'react'
 import { useState } from 'react'
+import { useLanguage } from '@/lib/language-context'
 
 export function Contact() {
+  const { t } = useLanguage()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -66,10 +68,10 @@ export function Contact() {
           </h2>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary font-mono relative">
             <span className="text-primary/50 mr-4 font-normal">06.</span>
-            Contacto <span className="text-white/20 ml-2">/ Let's Connect</span>
+            {t.contact.title} <span className="text-white/20 ml-2">{t.contact.subtitle}</span>
           </h2>
           <p className="text-base sm:text-lg text-white/50 max-w-2xl mt-4 font-medium">
-            ¿Tienes un proyecto en mente o simplemente quieres saludar? Mi puerta digital siempre está abierta.
+            {t.contact.desc}
           </p>
         </div>
 
@@ -89,12 +91,12 @@ export function Contact() {
             <form onSubmit={handleSubmit} className="p-8 sm:p-10 space-y-8">
               <div className="space-y-4">
                 <label htmlFor="name" className="text-sm font-black uppercase tracking-widest text-primary/80 ml-1">
-                  Tu Nombre
+                  {t.contact.form_name}
                 </label>
                 <Input
                   id="name"
                   type="text"
-                  placeholder="Alex Vicente"
+                  placeholder={t.contact.form_placeholder_name}
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   className="bg-white/5 border-white/5 focus-visible:ring-primary/50 focus-visible:border-primary placeholder:text-white/20 rounded-2xl py-7 px-6 text-lg font-medium"
@@ -104,12 +106,12 @@ export function Contact() {
 
               <div className="space-y-4">
                 <label htmlFor="email" className="text-sm font-black uppercase tracking-widest text-primary/80 ml-1">
-                  Tu Email
+                  {t.contact.form_email}
                 </label>
                 <Input
                   id="email"
                   type="email"
-                  placeholder="hola@ejemplo.com"
+                  placeholder={t.contact.form_placeholder_email}
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   className="bg-white/5 border-white/5 focus-visible:ring-primary/50 focus-visible:border-primary placeholder:text-white/20 rounded-2xl py-7 px-6 text-lg font-medium"
@@ -119,11 +121,11 @@ export function Contact() {
 
               <div className="space-y-4">
                 <label htmlFor="message" className="text-sm font-black uppercase tracking-widest text-primary/80 ml-1">
-                  Tu Mensaje
+                  {t.contact.form_message}
                 </label>
                 <Textarea
                   id="message"
-                  placeholder="Cuéntame sobre tu proyecto o idea..."
+                  placeholder={t.contact.form_placeholder_message}
                   rows={5}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
@@ -137,12 +139,12 @@ export function Contact() {
                 className="w-full bg-primary text-black font-black text-lg py-8 rounded-2xl hover:bg-primary/90 hover:shadow-[0_0_40px_rgba(119,255,150,0.3)] transition-all group"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? 'ENVIANDO...' : 'ENVIAR MENSAJE'}
+                {isSubmitting ? t.contact.form_btn_sending : t.contact.form_btn_send}
               </Button>
 
               {submitStatus === 'success' && (
                 <p className="text-sm text-primary font-bold text-center animate-pulse">
-                  ✓ ¡Mensaje enviado con éxito! Te responderé pronto.
+                  {t.contact.form_success}
                 </p>
               )}
             </form>
@@ -152,7 +154,7 @@ export function Contact() {
             <div className="space-y-12">
               <div>
                 <h3 className="text-sm font-black uppercase tracking-[0.3em] text-white/30 mb-8 ml-1">
-                  Direct Links
+                  {t.contact.links_title}
                 </h3>
                 <div className="space-y-6">
                   <a
@@ -195,10 +197,10 @@ export function Contact() {
                     <Camera className="h-8 w-8" />
                   </div>
                   <div className="text-center sm:text-left">
-                    <h3 className="text-xl font-bold mb-1 group-hover:text-primary transition-colors">Portafolio Visual</h3>
-                    <p className="text-white/40 text-sm mb-4">Explora mis capturas y visión creativa</p>
+                    <h3 className="text-xl font-bold mb-1 group-hover:text-primary transition-colors">{t.contact.visual_portfolio_title}</h3>
+                    <p className="text-white/40 text-sm mb-4">{t.contact.visual_portfolio_desc}</p>
                     <Button variant="link" asChild className="text-primary font-bold p-0 h-auto hover:text-white transition-colors">
-                      <a href="#photography">Ver Galería →</a>
+                      <a href="#photography">{t.contact.visual_portfolio_btn}</a>
                     </Button>
                   </div>
                 </div>
@@ -210,7 +212,7 @@ export function Contact() {
                 © 2025 Alex Vicente López
               </p>
               <p className="text-white/40 text-sm font-medium">
-                Diseñado con pasión. Desarrollado con precisión.
+                {t.contact.footer_built}
               </p>
             </footer>
           </div>

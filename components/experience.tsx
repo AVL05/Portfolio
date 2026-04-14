@@ -4,8 +4,9 @@ import { useRef } from 'react'
 import { Button } from '@/components/ui/button'
 import { Briefcase, Calendar, FileText, GraduationCap, ChevronRight, MapPin } from 'lucide-react'
 import { gsap, useGSAP } from '@/lib/gsap'
+import { useLanguage } from '@/lib/language-context'
 
-const education = [
+const education_es = [
   {
     title: 'Desarrollo de Aplicaciones Web',
     institution: 'IES Serra Perenxisa',
@@ -24,34 +25,83 @@ const education = [
   },
 ]
 
-const experience = [
+const education_en = [
   {
-    title: 'Software Developer (Intern)',
+    title: 'Web Application Development',
+    institution: 'IES Serra Perenxisa',
+    period: '2024 - 2026',
+    location: 'Torrent, Valencia',
+    description:
+      'Technical specialization in modern web architectures, high-performance database management, and deployment of scalable infrastructures. Practical focus on cutting-edge frameworks and agile methodologies.',
+  },
+  {
+    title: 'IT Systems and Networks',
+    institution: 'Enseñanzas Profesionales Sorolla',
+    period: '2022 - 2024',
+    location: 'Valencia',
+    description:
+      'Strong foundations in systems administration, network security, and hardware infrastructure. Critical problem solving and optimization of corporate technology environments.',
+  },
+]
+
+const experience_es = [
+  {
+    title: 'Desarrollador de Aplicaciones Web (Practicas)',
     company: 'Burguet Sistemas',
-    period: '2024 - Presente',
+    period: '2026 - Presente',
     location: 'Xirivella, Valencia',
     description:
-      'Colaboración activa en el ciclo de vida de desarrollo de aplicaciones empresariales. Convertir aplicacion de Java a REACT y Electron, y web PHP a REACT y PHP.',
+      'Transformación de aplicaciones Java a entornos modernos con React y Electron, y migración de webs PHP a React, creacion de tablas en base de datos.',
+  },
+  {
+    title: 'Identidad Visual y Estrategia Digital',
+    company: 'Comisiones Culturales',
+    period: '2023 - 2025',
+    location: 'Valencia, España',
+    description:
+      'Liderazgo en la transformación digital de la comunicación visual. Dirección artística de publicaciones editoriales, gestión estratégica de redes sociales y creación de activos multimedia de alto impacto para la comisión.',
+  },
+  {
+    title: 'Técnico de Soporte Informático',
+    company: 'Soporte Municipal',
+    period: '2024',
+    location: 'Carlet, Valencia',
+    description:
+      'Gestión integral de incidencias tecnológicas en entornos públicos. Soporte técnico especializado en hardware y software, asegurando la continuidad de los servicios.',
+  },
+]
+
+const experience_en = [
+  {
+    title: 'Web Application Developer (Practicum)',
+    company: 'Burguet Sistemas',
+    period: '2026 - Present',
+    location: 'Xirivella, Valencia',
+    description:
+      'Converting Java applications to REACT and Electron, and PHP web to REACT and PHP, creation of tables in database.',
   },
   {
     title: 'Visual Identity & Digital Strategy',
     company: 'Comisiones Culturales',
     period: '2023 - 2025',
-    location: 'Valencia, España',
+    location: 'Valencia, Spain',
     description:
-      'Liderazgo en la transformación digital de la comunicación visual. Dirección artística de publicaciones editoriales, gestión estratégica de redes sociales y creación de activos multimedia de alto impacto.',
+      'Leadership in the digital transformation of visual communication. Art direction of editorial publications, strategic social media management, and creation of high-impact multimedia assets.',
   },
   {
-    title: 'IT Support Technical',
-    company: 'Soporte Municipal',
+    title: 'IT Support Technician',
+    company: 'Municipal Support',
     period: '2024',
     location: 'Carlet, Valencia',
     description:
-      'Gestión integral de incidencias tecnológicas en entornos públicos. Soporte técnico especializado en hardware y software, asegurando la continuidad operativa de los servicios.',
+      'Comprehensive management of technological incidents in public environments. Specialized technical support in hardware and software, ensuring operational continuity of services.',
   },
 ]
 
 export function Experience() {
+  const { t, language } = useLanguage()
+  const education = language === 'es' ? education_es : education_en
+  const experience = language === 'es' ? experience_es : experience_en
   const containerRef = useRef<HTMLDivElement>(null)
 
   useGSAP(() => {
@@ -99,13 +149,13 @@ export function Experience() {
         <header className="experience-header mb-32 space-y-6">
           <div className="flex items-center gap-4 text-primary font-mono text-sm tracking-[0.3em] uppercase">
             <span className="w-8 h-[1px] bg-primary/50" />
-            05. Trayectoria
+            {t.experience.title}
           </div>
           <h2 className="text-4xl sm:text-7xl font-black text-white tracking-tighter leading-none">
-            Evolución y <span className="text-primary italic">progreso</span>.
+            {t.experience.subtitle}
           </h2>
           <p className="text-white/50 text-xl font-medium max-w-2xl text-balance">
-            Un recorrido forjado a través de la formación continua y la aplicación práctica en entornos reales.
+            {t.experience.desc}
           </p>
         </header>
 
@@ -116,7 +166,7 @@ export function Experience() {
               <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
                 <GraduationCap className="h-7 w-7" />
               </div>
-              <h3 className="text-3xl font-bold text-white tracking-tight">Formación Académica</h3>
+              <h3 className="text-3xl font-bold text-white tracking-tight">{t.experience.edu_title}</h3>
             </div>
 
             <div className="space-y-12 relative">
@@ -155,7 +205,7 @@ export function Experience() {
               <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
                 <Briefcase className="h-7 w-7" />
               </div>
-              <h3 className="text-3xl font-bold text-white tracking-tight">Experiencia Profesional</h3>
+              <h3 className="text-3xl font-bold text-white tracking-tight">{t.experience.job_title}</h3>
             </div>
 
             <div className="space-y-12 relative">
@@ -189,17 +239,17 @@ export function Experience() {
           </div>
         </div>
 
-        <div className="mt-32 p-12 lg:p-20 dev-border rounded-[4rem] bg-[#070707] flex flex-col md:flex-row items-center justify-between gap-12 group hover:bg-[#0a0a0a] transition-all">
+        <div className="mt-32 p-12 lg:p-20 dev-border rounded-[4rem] bg-[#070707] flex flex-col md:flex-row items-center justify-between gap-12 group hover:bg-card transition-all">
           <div className="space-y-4 text-center md:text-left">
-            <h3 className="text-3xl lg:text-4xl font-bold text-white tracking-tight">¿Necesitas un documento más detallado?</h3>
+            <h3 className="text-3xl lg:text-4xl font-bold text-white tracking-tight">{t.experience.cv_title}</h3>
             <p className="text-white/40 text-lg font-medium max-w-xl">
-              Descarga mi currículum profesional completo en formato PDF para obtener una visión profunda de mis capacidades técnicas.
+              {t.experience.cv_desc}
             </p>
           </div>
-          <Button asChild size="lg" className="h-20 px-10 bg-primary text-black font-black hover:bg-white rounded-3xl transition-all shadow-2xl shrink-0">
+          <Button asChild size="lg" className="h-20 px-10 bg-primary text-primary-foreground font-black hover:bg-white rounded-3xl transition-all shadow-2xl shrink-0">
              <a href="/curriculum.pdf" download className="flex items-center gap-3">
                 <FileText className="h-6 w-6" />
-                DESCARGAR CV [PDF]
+                {t.experience.cv_btn}
                 <ChevronRight className="h-5 w-5 opacity-50" />
               </a>
           </Button>

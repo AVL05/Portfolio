@@ -3,7 +3,7 @@
 import { useCallback, useRef, useState } from 'react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { ExternalLink, Github, Code2, Layers, Monitor, Phone, ChevronRight } from 'lucide-react'
+import { ExternalLink, Code2, Layers, Monitor, Phone, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
 import { gsap, useGSAP } from '@/lib/gsap'
 import { useLanguage } from '@/lib/language-context'

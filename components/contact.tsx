@@ -4,7 +4,8 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { Camera, Github, Linkedin, Mail } from 'lucide-react'
+import { Camera, Mail } from 'lucide-react'
+import { FaGithub, FaLinkedin } from 'react-icons/fa6'
 import type React from 'react'
 import { useState } from 'react'
 import { useLanguage } from '@/lib/language-context'
@@ -173,7 +174,7 @@ export function Contact() {
                     className="flex items-center gap-6 text-2xl sm:text-3xl font-bold group hover:text-primary transition-colors"
                   >
                     <div className="p-4 bg-white/5 rounded-2xl group-hover:bg-primary group-hover:text-black transition-all">
-                      <Github className="h-6 w-6" />
+                      <FaGithub className="h-6 w-6" />
                     </div>
                     github.com/AVL05
                   </a>
@@ -184,7 +185,7 @@ export function Contact() {
                     className="flex items-center gap-6 text-2xl sm:text-3xl font-bold group hover:text-primary transition-colors"
                   >
                     <div className="p-4 bg-white/5 rounded-2xl group-hover:bg-primary group-hover:text-black transition-all">
-                      <Linkedin className="h-6 w-6" />
+                      <FaLinkedin className="h-6 w-6" />
                     </div>
                     linkedin / alexvicvicente
                   </a>

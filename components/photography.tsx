@@ -2,7 +2,8 @@
 
 import { useRef } from 'react'
 import { Button } from '@/components/ui/button'
-import { Camera, Globe, Instagram } from 'lucide-react'
+import { Camera, Globe } from 'lucide-react'
+import { FaInstagram } from 'react-icons/fa6'
 import Image from 'next/image'
 import { useLanguage } from '@/lib/language-context'
 
@@ -162,7 +163,7 @@ export function Photography() {
                       rel="noopener noreferrer"
                       className="flex items-center justify-center gap-2"
                     >
-                      <Instagram className="h-4 w-4" />
+                      <FaInstagram className="h-4 w-4" />
                       <span>@raw.vives</span>
                     </a>
                   </Button>

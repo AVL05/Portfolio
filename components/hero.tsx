@@ -1,7 +1,8 @@
 'use client'
 
 import { useRef } from 'react'
-import { Github, Linkedin, ArrowDown, Terminal, Code2, Sparkles } from 'lucide-react'
+import { ArrowDown, Terminal, Code2, Sparkles } from 'lucide-react'
+import { FaGithub, FaLinkedin } from 'react-icons/fa6'
 import { gsap, useGSAP } from '@/lib/gsap'
 import { useLanguage } from '@/lib/language-context'
 
@@ -159,14 +160,14 @@ export function Hero() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 pt-8">
           <MagneticLink href="https://github.com/AVL05" className="social-magnetic w-full sm:w-auto">
             <div className="group flex items-center justify-center gap-4 px-10 py-5 bg-foreground text-background font-bold rounded-2xl hover:bg-primary hover:text-primary-foreground transition-all duration-500 shadow-xl">
-              <Github className="h-5 w-5" />
+              <FaGithub className="h-5 w-5" />
               <span className="text-sm tracking-tight">GitHub</span>
             </div>
           </MagneticLink>
 
           <MagneticLink href="https://www.linkedin.com/in/alex-vicente-lopez/" className="social-magnetic w-full sm:w-auto">
             <div className="group flex items-center justify-center gap-4 px-10 py-5 bg-card border border-border text-foreground font-bold rounded-2xl hover:border-primary/50 transition-all duration-500">
-              <Linkedin className="h-5 w-5 text-accent" />
+              <FaLinkedin className="h-5 w-5 text-accent" />
               <span className="text-sm tracking-tight text-foreground/70">LinkedIn</span>
             </div>
           </MagneticLink>

@@ -1,4 +1,5 @@
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
@@ -48,7 +49,7 @@ export const metadata: Metadata = {
     siteName: "Alex Vicente López",
     images: [
       {
-        url: `${SITE_URL}/og-image.svg`,
+        url: `${SITE_URL}/api/og`,
         width: 1200,
         height: 630,
         alt: "Alex Vicente López — Portfolio",
@@ -62,7 +63,7 @@ export const metadata: Metadata = {
     title: "Alex Vicente López - Portfolio",
     description:
       "Desarrollador Web | Fotógrafo Creativo | Diseñador Digital. Transformo ideas en experiencias digitales únicas.",
-    images: [`${SITE_URL}/og-image.svg`],
+    images: [`${SITE_URL}/api/og`],
   },
 
   robots: {
@@ -112,6 +113,7 @@ export default function RootLayout({
           </ThemeProvider>
         </LanguageProvider>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

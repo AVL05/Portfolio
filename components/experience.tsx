@@ -62,7 +62,7 @@ const experience_es = [
       'Liderazgo en la transformación digital de la comunicación visual. Dirección artística de publicaciones editoriales, gestión estratégica de redes sociales y creación de activos multimedia de alto impacto para la comisión.',
   },
   {
-    title: 'Técnico de Soporte Informático',
+    title: 'Técnico de Soporte Informático (Practicas)',
     company: 'Soporte Municipal',
     period: '2024',
     location: 'Carlet, Valencia',
@@ -89,7 +89,7 @@ const experience_en = [
       'Leadership in the digital transformation of visual communication. Art direction of editorial publications, strategic social media management, and creation of high-impact multimedia assets.',
   },
   {
-    title: 'IT Support Technician',
+    title: 'IT Support Technician (Practicum)',
     company: 'Municipal Support',
     period: '2024',
     location: 'Carlet, Valencia',

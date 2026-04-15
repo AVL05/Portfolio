@@ -1,11 +1,23 @@
 import { ImageResponse } from 'next/og';
-// App router includes @vercel/og by default in ImageResponse
 
 export const runtime = 'edge';
+
+const translations = {
+  es: {
+    subtitle: 'Portafolio y Fotografía',
+  },
+  en: {
+    subtitle: 'Portfolio & Photography',
+  },
+};
 
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
+
+    // ?lang=es|en
+    const lang = (searchParams.get('lang') || 'es') as keyof typeof translations;
+    const t = translations[lang] || translations.es;
 
     // ?title=<title>
     const hasTitle = searchParams.has('title');
@@ -58,7 +70,7 @@ export async function GET(request: Request) {
                 textTransform: 'uppercase',
               }}
             >
-              Portfolio & Photography
+              {t.subtitle}
             </div>
           </div>
           <div

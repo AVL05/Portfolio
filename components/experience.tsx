@@ -2,106 +2,14 @@
 
 import { useRef } from 'react'
 import { Button } from '@/components/ui/button'
-import { Briefcase, Calendar, FileText, GraduationCap, ChevronRight, MapPin } from 'lucide-react'
+import { Briefcase, FileText, GraduationCap, ChevronRight, MapPin } from 'lucide-react'
 import { gsap, useGSAP } from '@/lib/gsap'
 import { useLanguage } from '@/lib/language-context'
 
-const education_es = [
-  {
-    title: 'Desarrollo de Aplicaciones Web',
-    institution: 'IES Serra Perenxisa',
-    period: '2024 - 2026',
-    location: 'Torrent, Valencia',
-    description:
-      'Especialización técnica en arquitecturas web modernas, gestión de bases de datos de alto rendimiento y despliegue de infraestructuras escalables. Enfoque práctico en frameworks de vanguardia y metodologías ágiles.',
-  },
-  {
-    title: 'Sistemas Microinformáticos y Redes',
-    institution: 'Enseñanzas Profesionales Sorolla',
-    period: '2022 - 2024',
-    location: 'Valencia',
-    description:
-      'Fundamentos sólidos en administración de sistemas, seguridad en redes e infraestructura de hardware. Resolución de problemas críticos y optimización de entornos tecnológicos empresariales.',
-  },
-]
-
-const education_en = [
-  {
-    title: 'Web Application Development',
-    institution: 'IES Serra Perenxisa',
-    period: '2024 - 2026',
-    location: 'Torrent, Valencia',
-    description:
-      'Technical specialization in modern web architectures, high-performance database management, and deployment of scalable infrastructures. Practical focus on cutting-edge frameworks and agile methodologies.',
-  },
-  {
-    title: 'IT Systems and Networks',
-    institution: 'Enseñanzas Profesionales Sorolla',
-    period: '2022 - 2024',
-    location: 'Valencia',
-    description:
-      'Strong foundations in systems administration, network security, and hardware infrastructure. Critical problem solving and optimization of corporate technology environments.',
-  },
-]
-
-const experience_es = [
-  {
-    title: 'Desarrollador de Aplicaciones Web (Practicas)',
-    company: 'Burguet Sistemas',
-    period: '2026 - Presente',
-    location: 'Xirivella, Valencia',
-    description:
-      'Transformación de aplicaciones Java a entornos modernos con React y Electron, y migración de webs PHP a React, creacion de tablas en base de datos.',
-  },
-  {
-    title: 'Identidad Visual y Estrategia Digital',
-    company: 'Comisiones Culturales',
-    period: '2023 - 2025',
-    location: 'Valencia, España',
-    description:
-      'Liderazgo en la transformación digital de la comunicación visual. Dirección artística de publicaciones editoriales, gestión estratégica de redes sociales y creación de activos multimedia de alto impacto para la comisión.',
-  },
-  {
-    title: 'Técnico de Soporte Informático (Practicas)',
-    company: 'Soporte Municipal',
-    period: '2024',
-    location: 'Carlet, Valencia',
-    description:
-      'Gestión integral de incidencias tecnológicas en entornos públicos. Soporte técnico especializado en hardware y software, asegurando la continuidad de los servicios.',
-  },
-]
-
-const experience_en = [
-  {
-    title: 'Web Application Developer (Practicum)',
-    company: 'Burguet Sistemas',
-    period: '2026 - Present',
-    location: 'Xirivella, Valencia',
-    description:
-      'Converting Java applications to REACT and Electron, and PHP web to REACT and PHP, creation of tables in database.',
-  },
-  {
-    title: 'Visual Identity & Digital Strategy',
-    company: 'Comisiones Culturales',
-    period: '2023 - 2025',
-    location: 'Valencia, Spain',
-    description:
-      'Leadership in the digital transformation of visual communication. Art direction of editorial publications, strategic social media management, and creation of high-impact multimedia assets.',
-  },
-  {
-    title: 'IT Support Technician (Practicum)',
-    company: 'Municipal Support',
-    period: '2024',
-    location: 'Carlet, Valencia',
-    description:
-      'Comprehensive management of technological incidents in public environments. Specialized technical support in hardware and software, ensuring operational continuity of services.',
-  },
-]
-
 export function Experience() {
-  const { t, language } = useLanguage()
-  const education = language === 'es' ? education_es : education_en
-  const experience = language === 'es' ? experience_es : experience_en
+  const { t } = useLanguage()
+  const education = t.experience.education_list
+  const experience = t.experience.experience_list
   const containerRef = useRef<HTMLDivElement>(null)
 
   useGSAP(() => {
@@ -258,4 +166,3 @@ export function Experience() {
     </section>
   )
 }
-

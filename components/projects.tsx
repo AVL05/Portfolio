@@ -1,128 +1,20 @@
 'use client'
 
-import { useCallback, useRef, useState } from 'react'
-import { Badge } from '@/components/ui/badge'
+import { useRef, useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { ExternalLink, Code2, Layers, Monitor, Phone, ChevronRight } from 'lucide-react'
+import { Code2, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
 import { gsap, useGSAP } from '@/lib/gsap'
 import { useLanguage } from '@/lib/language-context'
 import {
   Dialog,
   DialogContent,
-  DialogHeader,
-  DialogTitle,
   DialogTrigger,
-  DialogDescription,
 } from "@/components/ui/dialog"
 
 const smallImageProjects = [
   'Llibret Falla el Molí 24/25',
   'Arquitectura XML Educativa'
-]
-
-const projects_es = [
-  {
-    title: 'Llibret Falla el Molí 24/25',
-    description: 'Una obra maestra de diseño editorial que trasciende lo tradicional. Este proyecto supuso la creación de una identidad visual cohesiva para una publicación de más de 100 páginas, equilibrando la herencia cultural fallera con un minimalismo tipográfico de vanguardia.',
-    image: '/projects/Falla.svg',
-    technologies: ['Indesign', 'Photoshop', 'Illustrator'],
-    category: 'Diseño Gráfico',
-    link: '/projects/LLIBRET 24-25.pdf',
-    type: 'Diseño Editorial'
-  },
-  {
-    title: 'El Fogón: Vanguardia Gastronómica',
-    description: 'Landing page de alto impacto para un restaurante mediterráneo. El diseño destaca por su estética clean-label, micro-interacciones fluidas con GSAP y una arquitectura orientada al rendimiento y SEO.',
-    image: '/projects/el-fogon.png',
-    technologies: ['Next.js', 'Tailwind CSS', 'GSAP'],
-    category: 'Desarrollo Web',
-    link: 'https://prweb02.netlify.app/',
-    github: 'https://github.com/AVL05/PRWEB02',
-    type: 'Landing Page Premium'
-  },
-  {
-    title: 'Sistema de Gestión Hotelera (API)',
-    description: 'Backend robusto y API RESTful diseñada para la gestión integral de reservas. Implementa arquitecturas de bases de datos complejas, garantizando integridad y concurrencia en tiempo real.',
-    image: '/projects/api-hotel-cover.png',
-    technologies: ['PHP', 'MySQL', 'JavaScript'],
-    category: 'Desarrollo Web',
-    link: '/projects/Demo_API_Hotel.mp4',
-    github: 'https://github.com/avl05/API_Hotel',
-    type: 'Arquitectura Backend'
-  },
-  {
-    title: 'E-commerce Navideño Reactivo',
-    description: 'Solución de comercio electrónico estacional enfocada en la conversión y UX. Sistema de gestión de estado reactivo para carritos de compra y navegación fluida entre categorías.',
-    image: '/projects/aitanamora.png',
-    technologies: ['Vue', 'Vite', 'Firebase'],
-    category: 'Desarrollo Web',
-    link: 'https://aitanamora.vercel.app/',
-    github: 'https://github.com/AVL05/Dulces',
-    type: 'eCommerce App'
-  },
-  {
-    title: 'Arquitectura XML Educativa',
-    description: 'Plataforma Full-stack diseñada para la enseñanza estructurada de lenguajes de marcado. Integra visualizaciones de datos XML y una interfaz optimizada para lectura técnica.',
-    image: '/projects/favicon.ico',
-    technologies: ['HTML5', 'CSS3', 'JavaScript', 'XML'],
-    category: 'Desarrollo Web',
-    link: 'https://avl05.github.io/web-xml-alex/',
-    github: 'https://github.com/avl05/web-xml-alex',
-    type: 'Plataforma EduTech'
-  },
-]
-
-const projects_en = [
-  {
-    title: 'Llibret Falla el Molí 24/25',
-    description: 'An editorial design masterpiece that transcends tradition. Cohesive visual identity for a 100+ page publication, balancing cultural heritage with avant-garde typographic minimalism.',
-    image: '/projects/Falla.svg',
-    technologies: ['Indesign', 'Photoshop', 'Illustrator'],
-    category: 'Graphic Design',
-    link: '/projects/LLIBRET 24-25.pdf',
-    type: 'Editorial Design'
-  },
-  {
-    title: 'El Fogón: Gastronomic Vanguard',
-    description: 'High-impact landing page for a Mediterranean restaurant. Features clean-label aesthetics, fluid GSAP micro-interactions, and a performance-oriented architecture.',
-    image: '/projects/el-fogon.png',
-    technologies: ['Next.js', 'Tailwind CSS', 'GSAP'],
-    category: 'Web Development',
-    link: 'https://prweb02.netlify.app/',
-    github: 'https://github.com/AVL05/PRWEB02',
-    type: 'Premium Landing Page'
-  },
-  {
-    title: 'Hotel Management System (API)',
-    description: 'Robust backend and RESTful API for reservation management. Implements complex database architectures ensuring integrity and real-time concurrency.',
-    image: '/projects/api-hotel-cover.png',
-    technologies: ['PHP', 'MySQL', 'JavaScript'],
-    category: 'Web Development',
-    link: '/projects/Demo_API_Hotel.mp4',
-    github: 'https://github.com/avl05/API_Hotel',
-    type: 'Backend Architecture'
-  },
-  {
-    title: 'Reactive Holiday E-commerce',
-    description: 'Seasonal e-commerce solution focused on conversion and UX. Features a reactive state management system for carts and fluid category navigation.',
-    image: '/projects/aitanamora.png',
-    technologies: ['Vue', 'Vite', 'Firebase'],
-    category: 'Web Development',
-    link: 'https://aitanamora.vercel.app/',
-    github: 'https://github.com/AVL05/Dulces',
-    type: 'eCommerce App'
-  },
-  {
-    title: 'Educational XML Architecture',
-    description: 'Full-stack platform for structured markup language teaching. Integrates XML data visualizations with an interface optimized for technical reading.',
-    image: '/projects/favicon.ico',
-    technologies: ['HTML5', 'CSS3', 'JavaScript', 'XML'],
-    category: 'Web Development',
-    link: 'https://avl05.github.io/web-xml-alex/',
-    github: 'https://github.com/avl05/web-xml-alex',
-    type: 'EduTech Platform'
-  },
 ]
 
 function ProjectCard({ project, index, t }: { project: any; index: number, t: any }) {
@@ -246,7 +138,7 @@ export function Projects() {
   const containerRef = useRef<HTMLDivElement>(null)
   const { t, language } = useLanguage()
 
-  const projects = language === 'es' ? projects_es : projects_en
+  const projects = t.projects.items
   const categories = language === 'es' ? ['Todos', 'Desarrollo Web', 'Diseño Gráfico'] : ['All', 'Web Development', 'Graphic Design']
 
   const [activeCategory, setActiveCategory] = useState(categories[0])

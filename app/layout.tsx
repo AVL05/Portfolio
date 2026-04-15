@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     siteName: "Alex Vicente López",
     images: [
       {
-        url: `${SITE_URL}/api/og`,
+        url: `${SITE_URL}/api/og?lang=es`,
         width: 1200,
         height: 630,
         alt: "Alex Vicente López — Portfolio",
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     title: "Alex Vicente López - Portfolio",
     description:
       "Desarrollador Web | Fotógrafo Creativo | Diseñador Digital. Transformo ideas en experiencias digitales únicas.",
-    images: [`${SITE_URL}/api/og`],
+    images: [`${SITE_URL}/api/og?lang=es`],
   },
 
   robots: {

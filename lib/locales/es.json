@@ -1,0 +1,169 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "about": "Sobre Mí",
+    "experience": "Experiencia",
+    "projects": "Proyectos",
+    "photography": "Fotografía",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "status": "Disponible para nuevas oportunidades",
+    "description": "Estudiante de Desarrollo de Aplicaciones Web (DAW). Construyendo el futuro digital a través de código limpio, diseño moderno y una visión creativa única.",
+    "cta_github": "GitHub",
+    "cta_linkedin": "LinkedIn",
+    "scroll": "Scroll"
+  },
+  "about": {
+    "title": "01. Sobre Mí",
+    "subtitle": "Codificando con propósito y visión.",
+    "p1": "Como estudiante y entusiasta del diseño, mi enfoque se centra en la intersección entre la funcionalidad técnica y la excelencia visual.",
+    "p2": "Actualmente cursando Desarrollo de Aplicaciones Web, combino mi formación técnica en sistemas con una sensibilidad creativa forjada a través de la fotografía y el diseño digital.",
+    "formation": "Formación",
+    "formation_desc": "DAW & Sistemas Microinformáticos",
+    "terminal": "Terminal",
+    "summary": "Resumen"
+  },
+  "skills": {
+    "title": "02. Habilidades",
+    "subtitle": "Arsenal Técnico",
+    "desc": "Dominio de un espectro diverso de lenguajes y herramientas para materializar visiones complejas en realidades tangibles.",
+    "technologies": "Tecnologías",
+    "tools": "Herramientas"
+  },
+  "projects": {
+    "title": "03. Proyectos",
+    "subtitle": "Selección de Trabajos",
+    "desc": "Una muestra de desafíos transformados en soluciones digitales innovadoras.",
+    "concept": "Estudio de Concepto",
+    "view_live": "Ver Proyecto",
+    "view_code": "Ver Código",
+    "items": [
+      {
+        "title": "Llibret Falla el Molí 24/25",
+        "description": "Una obra maestra de diseño editorial que trasciende lo tradicional. Este proyecto supuso la creación de una identidad visual cohesiva para una publicación de más de 100 páginas, equilibrando la herencia cultural fallera con un minimalismo tipográfico de vanguardia.",
+        "image": "/projects/Falla.svg",
+        "technologies": ["Indesign", "Photoshop", "Illustrator"],
+        "category": "Diseño Gráfico",
+        "link": "/projects/LLIBRET 24-25.pdf",
+        "type": "Diseño Editorial"
+      },
+      {
+        "title": "El Fogón: Vanguardia Gastronómica",
+        "description": "Landing page de alto impacto para un restaurante mediterráneo. El diseño destaca por su estética clean-label, micro-interacciones fluidas con GSAP y una arquitectura orientada al rendimiento y SEO.",
+        "image": "/projects/el-fogon.png",
+        "technologies": ["Next.js", "Tailwind CSS", "GSAP"],
+        "category": "Desarrollo Web",
+        "link": "https://prweb02.netlify.app/",
+        "github": "https://github.com/AVL05/PRWEB02",
+        "type": "Landing Page Premium"
+      },
+      {
+        "title": "Sistema de Gestión Hotelera (API)",
+        "description": "Backend robusto y API RESTful diseñada para la gestión integral de reservas. Implementa arquitecturas de bases de datos complejas, garantizando integridad y concurrencia en tiempo real.",
+        "image": "/projects/api-hotel-cover.png",
+        "technologies": ["PHP", "MySQL", "JavaScript"],
+        "category": "Desarrollo Web",
+        "link": "/projects/Demo_API_Hotel.mp4",
+        "github": "https://github.com/avl05/API_Hotel",
+        "type": "Arquitectura Backend"
+      },
+      {
+        "title": "E-commerce Navideño Reactivo",
+        "description": "Solución de comercio electrónico estacional enfocada en la conversión y UX. Sistema de gestión de estado reactivo para carritos de compra y navegación fluida entre categorías.",
+        "image": "/projects/aitanamora.png",
+        "technologies": ["Vue", "Vite", "Firebase"],
+        "category": "Desarrollo Web",
+        "link": "https://aitanamora.vercel.app/",
+        "github": "https://github.com/AVL05/Dulces",
+        "type": "eCommerce App"
+      },
+      {
+        "title": "Arquitectura XML Educativa",
+        "description": "Plataforma Full-stack diseñada para la enseñanza estructurada de lenguajes de marcado. Integra visualizaciones de datos XML y una interfaz optimizada para lectura técnica.",
+        "image": "/projects/favicon.ico",
+        "technologies": ["HTML5", "CSS3", "JavaScript", "XML"],
+        "category": "Desarrollo Web",
+        "link": "https://avl05.github.io/web-xml-alex/",
+        "github": "https://github.com/avl05/web-xml-alex",
+        "type": "Plataforma EduTech"
+      }
+    ]
+  },
+  "photography": {
+    "title": "04. Fotografía",
+    "subtitle": "/ Creative View",
+    "description": "Explora mi mundo a través del lente. Capturando momentos, emociones y la belleza que nos rodea.",
+    "properties": "Propiedades.RAW",
+    "filters": "Filtros",
+    "view_full": "Ver Galería Completa"
+  },
+  "experience": {
+    "title": "05. Trayectoria",
+    "subtitle": "Evolución y progreso.",
+    "desc": "Un recorrido forjado a través de la formación continua y la aplicación práctica en entornos reales.",
+    "edu_title": "Formación Académica",
+    "job_title": "Experiencia Profesional",
+    "cv_title": "¿Necesitas un documento más detallado?",
+    "cv_desc": "Descarga mi currículum profesional completo en formato PDF para obtener una visión profunda de mis capacidades técnicas.",
+    "cv_btn": "DESCARGAR CV [PDF]",
+    "education_list": [
+      {
+        "title": "Desarrollo de Aplicaciones Web",
+        "institution": "IES Serra Perenxisa",
+        "period": "2024 - 2026",
+        "location": "Torrent, Valencia",
+        "description": "Especialización técnica en arquitecturas web modernas, gestión de bases de datos de alto rendimiento y despliegue de infraestructuras escalables. Enfoque práctico en frameworks de vanguardia y metodologías ágiles."
+      },
+      {
+        "title": "Sistemas Microinformáticos y Redes",
+        "institution": "Enseñanzas Profesionales Sorolla",
+        "period": "2022 - 2024",
+        "location": "Valencia",
+        "description": "Fundamentos sólidos en administración de sistemas, seguridad en redes e infraestructura de hardware. Resolución de problemas críticos y optimización de entornos tecnológicos empresariales."
+      }
+    ],
+    "experience_list": [
+      {
+        "title": "Desarrollador de Aplicaciones Web (Practicas)",
+        "company": "Burguet Sistemas",
+        "period": "2026 - Presente",
+        "location": "Xirivella, Valencia",
+        "description": "Transformación de aplicaciones Java a entornos modernos con React y Electron, y migración de webs PHP a React, creacion de tablas en base de datos."
+      },
+      {
+        "title": "Identidad Visual y Estrategia Digital",
+        "company": "Comisiones Culturales",
+        "period": "2023 - 2025",
+        "location": "Valencia, España",
+        "description": "Liderazgo en la transformación digital de la comunicación visual. Dirección artística de publicaciones editoriales, gestión estratégica de redes sociales y creación de activos multimedia de alto impacto para la comisión."
+      },
+      {
+        "title": "Técnico de Soporte Informático (Practicas)",
+        "company": "Soporte Municipal",
+        "period": "2024",
+        "location": "Carlet, Valencia",
+        "description": "Gestión integral de incidencias tecnológicas en entornos públicos. Soporte técnico especializado en hardware y software, asegurando la continuidad de los servicios."
+      }
+    ]
+  },
+  "contact": {
+    "title": "06. Contacto",
+    "subtitle": "/ Let's Connect",
+    "desc": "¿Tienes un proyecto en mente o simplemente quieres saludar? Mi puerta digital siempre está abierta.",
+    "form_name": "Tu Nombre",
+    "form_email": "Tu Email",
+    "form_message": "Tu Mensaje",
+    "form_placeholder_name": "Tu Nombre",
+    "form_placeholder_email": "hola@ejemplo.com",
+    "form_placeholder_message": "Cuéntame sobre tu proyecto o idea...",
+    "form_btn_send": "ENVIAR MENSAJE",
+    "form_btn_sending": "ENVIANDO...",
+    "form_success": "✓ ¡Mensaje enviado con éxito! Te responderé pronto.",
+    "links_title": "Direct Links",
+    "visual_portfolio_title": "Portafolio Visual",
+    "visual_portfolio_desc": "Explora mis capturas y visión creativa",
+    "visual_portfolio_btn": "Ver Galería →",
+    "footer_built": "Diseñado con pasión. Desarrollado con precisión."
+  }
+}

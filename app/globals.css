@@ -4,25 +4,23 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Clean Dev Light: White, Slate & Azure */
-  --background: oklch(0.99 0.005 240);
-  --foreground: oklch(0.15 0.03 240);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.15 0.03 240);
+  /* Premium Light: Soft Slate & Azure hues */
+  --background: oklch(0.98 0.01 240); /* Very soft blue-tinted white */
+  --foreground: oklch(0.18 0.04 240); /* Deep slate for text */
+  --card: oklch(1 0 0); /* Pure white for cards */
+  --card-foreground: oklch(0.18 0.04 240);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0.03 240);
+  --popover-foreground: oklch(0.18 0.04 240);
   --primary: oklch(0.55 0.15 150); /* Matrix Green Muted */
   --primary-foreground: oklch(0.99 0.01 150);
   --secondary: oklch(0.94 0.02 240);
   --secondary-foreground: oklch(0.2 0.04 240);
-  --muted: oklch(0.96 0.01 240);
-  --muted-foreground: oklch(0.5 0.04 240);
+  --muted: oklch(0.92 0.01 240); /* Slightly darker muted bg */
+  --muted-foreground: oklch(0.45 0.04 240);
   --accent: oklch(0.6 0.18 200); /* Dev Cyan */
   --accent-foreground: oklch(0.15 0.03 240);
-  --destructive: oklch(0.55 0.25 25);
-  --destructive-foreground: oklch(0.98 0.01 40);
-  --border: oklch(0.88 0.02 240);
-  --input: oklch(0.88 0.02 240);
+  --border: oklch(0.88 0.03 240);
+  --input: oklch(0.88 0.03 240);
   --ring: oklch(0.55 0.15 150);
   --radius: 0.75rem;
 }

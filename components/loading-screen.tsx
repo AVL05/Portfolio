@@ -119,7 +119,7 @@ export function LoadingScreen() {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-100 bg-[#0a0a0a] flex items-center justify-center overflow-hidden"
+      className="fixed inset-0 z-100 bg-background flex items-center justify-center overflow-hidden"
     >
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl aspect-square bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
 
@@ -151,7 +151,7 @@ export function LoadingScreen() {
                 y="50%"
                 dominantBaseline="middle"
                 textAnchor="middle"
-                className="text-6xl sm:text-7xl font-bold fill-none stroke-white/10"
+                className="text-6xl sm:text-7xl font-bold fill-none stroke-foreground/10"
                 strokeWidth="0.5"
                 style={{
                   letterSpacing: "0.15em",
@@ -184,7 +184,7 @@ export function LoadingScreen() {
             ref={nameRef}
             className="text-center space-y-3 loading-ui-element"
           >
-            <h2 className="text-xs sm:text-sm uppercase tracking-[0.5em] text-white/40 font-light">
+            <h2 className="text-xs sm:text-sm uppercase tracking-[0.5em] text-muted-foreground/40 font-light">
               Alex Vicente López
             </h2>
             <div className="flex items-center justify-center gap-3 text-[9px] sm:text-[10px] tracking-[0.3em] text-primary/60 uppercase font-medium">
@@ -196,7 +196,7 @@ export function LoadingScreen() {
         </div>
 
         <div className="w-full flex flex-col items-center gap-6 mt-8 loading-ui-element">
-          <div className="w-full h-px bg-white/5 relative overflow-hidden">
+          <div className="w-full h-px bg-border/20 relative overflow-hidden">
             <div
               ref={progressLineRef}
               className="absolute inset-y-0 left-0 bg-linear-to-r from-primary to-accent"
@@ -205,11 +205,11 @@ export function LoadingScreen() {
           </div>
 
           <div className="flex justify-between w-full px-1 items-baseline loading-ui-element">
-            <span className="text-[10px] tracking-widest text-white/20 uppercase font-mono">
+            <span className="text-[10px] tracking-widest text-muted-foreground/30 uppercase font-mono">
               System Initializing
             </span>
             <span
-              className="text-2xl font-mono text-white/30 tabular-nums"
+              className="text-2xl font-mono text-muted-foreground/40 tabular-nums"
               key={Math.floor(loadingProgress)}
             >
               {Math.floor(loadingProgress).toString().padStart(3, "0")}
@@ -245,11 +245,11 @@ export function LoadingScreen() {
       {/* Curtain panels for exit reveal */}
       <div
         ref={curtainTopRef}
-        className="absolute inset-x-0 top-0 h-1/2 bg-[#0a0a0a] origin-bottom scale-y-0"
+        className="absolute inset-x-0 top-0 h-1/2 bg-background origin-bottom scale-y-0"
       />
       <div
         ref={curtainBottomRef}
-        className="absolute inset-x-0 bottom-0 h-1/2 bg-[#0a0a0a] origin-top scale-y-0"
+        className="absolute inset-x-0 bottom-0 h-1/2 bg-background origin-top scale-y-0"
       />
     </div>
   );

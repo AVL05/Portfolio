@@ -96,7 +96,7 @@ export function About() {
 
           {/* Right Column: Interactive Dashboard */}
           <div className="lg:col-span-6 flex items-center justify-center">
-            <div className="dashboard-card w-full max-w-2xl dev-border rounded-3xl overflow-hidden shadow-[0_40px_100px_-20px_rgba(0,0,0,0.6)]">
+            <div className="dashboard-card w-full max-w-2xl dev-border rounded-3xl overflow-hidden shadow-2xl dark:shadow-[0_40px_100px_-20px_rgba(0,0,0,0.6)]">
               {/* Dashboard Header */}
               <div className="px-6 py-4 border-b border-border bg-card flex items-center justify-between">
                 <div className="flex gap-2">
@@ -107,13 +107,13 @@ export function About() {
                 <div className="flex items-center gap-6">
                   <button
                     onClick={() => setActiveTab('terminal')}
-                    className={`text-[10px] uppercase tracking-[0.2em] font-bold transition-all ${activeTab === 'terminal' ? 'text-primary' : 'text-foreground/30 hover:text-foreground/70'}`}
+                    className={`text-[10px] uppercase tracking-[0.2em] font-bold transition-all ${activeTab === 'terminal' ? 'text-primary' : 'text-muted-foreground/50 hover:text-foreground'}`}
                   >
                     {t.about.terminal}
                   </button>
                   <button
                     onClick={() => setActiveTab('bio')}
-                    className={`text-[10px] uppercase tracking-[0.2em] font-bold transition-all ${activeTab === 'bio' ? 'text-primary' : 'text-foreground/30 hover:text-foreground/70'}`}
+                    className={`text-[10px] uppercase tracking-[0.2em] font-bold transition-all ${activeTab === 'bio' ? 'text-primary' : 'text-muted-foreground/50 hover:text-foreground'}`}
                   >
                     {t.about.summary}
                   </button>
@@ -127,18 +127,18 @@ export function About() {
                     {terminalLines.map((line, i) => (
                       <div key={i} className="space-y-2">
                         {line.type === 'command' ? (
-                          <div className="flex items-center gap-3 text-white/40">
+                          <div className="flex items-center gap-3 text-muted-foreground">
                             <ChevronRight className="h-3 w-3 text-primary" />
-                            <span className="text-white/80">{line.text}</span>
+                            <span className="text-foreground/80">{line.text}</span>
                           </div>
                         ) : (
-                          <div className="pl-6 text-primary/80 border-l border-white/5 py-1">
+                          <div className="pl-6 text-primary/80 border-l border-border py-1">
                             {line.text}
                           </div>
                         )}
                       </div>
                     ))}
-                    <div className="flex items-center gap-3 text-white/40 pt-4">
+                    <div className="flex items-center gap-3 text-muted-foreground pt-4">
                       <ChevronRight className="h-3 w-3 text-primary animate-pulse" />
                       <span className="w-2 h-4 bg-primary/50 animate-pulse" />
                     </div>
@@ -158,20 +158,20 @@ export function About() {
                     <div className="space-y-6 pt-4">
                       <div className="space-y-3">
                         <div className="flex justify-between text-[10px] font-mono uppercase tracking-widest">
-                          <span className="text-white/30">Enfoque Actual</span>
+                          <span className="text-muted-foreground/50">Enfoque Actual</span>
                           <span className="text-primary">Full-Stack Dev</span>
                         </div>
-                        <div className="h-1 bg-white/5 rounded-full overflow-hidden">
+                        <div className="h-1 bg-secondary rounded-full overflow-hidden">
                           <div className="h-full bg-primary w-[75%]" />
                         </div>
                       </div>
 
                       <div className="space-y-3">
                         <div className="flex justify-between text-[10px] font-mono uppercase tracking-widest">
-                          <span className="text-white/30">Hobby & Creatividad</span>
+                          <span className="text-muted-foreground/50">Hobby & Creatividad</span>
                           <span className="text-accent underline decoration-accent/30">Fotografía</span>
                         </div>
-                        <div className="h-1 bg-white/5 rounded-full overflow-hidden">
+                        <div className="h-1 bg-secondary rounded-full overflow-hidden">
                           <div className="h-full bg-accent w-[90%]" />
                         </div>
                       </div>

@@ -115,7 +115,7 @@ export function Hero() {
       {/* Background elements */}
       <div
         ref={gridRef}
-        className="absolute inset-[-100px] bg-grid opacity-30 pointer-events-none"
+        className="absolute inset-[-100px] bg-grid opacity-[0.15] dark:opacity-30 pointer-events-none"
       />
 
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-background/50 to-background pointer-events-none" />
@@ -127,7 +127,7 @@ export function Hero() {
       <div className="w-full max-w-7xl mx-auto z-10 flex flex-col items-center text-center space-y-12">
 
         {/* Status Badge */}
-        <div className="hero-badge flex items-center gap-3 px-6 py-2 dev-border rounded-full shadow-[0_0_20px_rgba(0,0,0,0.3)]">
+        <div className="hero-badge flex items-center gap-3 px-6 py-2 dev-border rounded-full shadow-lg dark:shadow-[0_0_20px_rgba(0,0,0,0.3)]">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
@@ -151,7 +151,7 @@ export function Hero() {
             ))}
           </div>
 
-          <h2 className="hero-description text-lg sm:text-2xl md:text-4xl text-foreground/50 font-medium tracking-tight max-w-4xl text-balance">
+          <h2 className="hero-description text-lg sm:text-2xl md:text-4xl text-muted-foreground font-medium tracking-tight max-w-4xl text-balance">
             {t.hero.description}
           </h2>
         </div>
@@ -168,13 +168,13 @@ export function Hero() {
           <MagneticLink href="https://www.linkedin.com/in/alex-vicente-lopez/" className="social-magnetic w-full sm:w-auto">
             <div className="group flex items-center justify-center gap-4 px-10 py-5 bg-card border border-border text-foreground font-bold rounded-2xl hover:border-primary/50 transition-all duration-500">
               <FaLinkedin className="h-5 w-5 text-accent" />
-              <span className="text-sm tracking-tight text-foreground/70">LinkedIn</span>
+              <span className="text-sm tracking-tight text-muted-foreground group-hover:text-foreground">LinkedIn</span>
             </div>
           </MagneticLink>
         </div>
 
         {/* Tech Indicators */}
-        <div className="hero-description grid grid-cols-2 md:grid-cols-3 gap-8 pt-16 opacity-30">
+        <div className="hero-description grid grid-cols-2 md:grid-cols-3 gap-8 pt-16 opacity-50">
           <div className="flex items-center gap-3 grayscale hover:grayscale-0 transition-all cursor-default">
             <Terminal className="h-4 w-4" />
             <span className="text-[10px] font-mono tracking-widest uppercase">Frontend</span>
@@ -193,12 +193,12 @@ export function Hero() {
       {/* Scroll indicator */}
       <a
   href="#about"
-  className="scroll-indicator absolute bottom-12 flex flex-col items-center gap-4 text-foreground/20 hover:text-primary transition-all duration-500 group"
+  className="scroll-indicator absolute bottom-12 flex flex-col items-center gap-4 text-muted-foreground/50 hover:text-primary transition-all duration-500 group"
 >
         <span className="text-[10px] font-black uppercase tracking-[0.4em] font-mono group-hover:tracking-[0.6em] transition-all">
           {t.hero.scroll}
         </span>
-        <div className="p-3 border border-white/5 rounded-full group-hover:border-primary/30 group-hover:scale-110 transition-all flex items-center justify-center bg-white/5">
+        <div className="p-3 border border-border/50 rounded-full group-hover:border-primary/30 group-hover:scale-110 transition-all flex items-center justify-center bg-secondary">
           <ArrowDown className="h-4 w-4 animate-bounce" />
         </div>
       </a>

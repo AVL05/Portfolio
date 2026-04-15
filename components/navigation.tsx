@@ -204,7 +204,7 @@ export function Navigation() {
             <Button
               variant="ghost"
               size="icon"
-              className="absolute top-8 right-8 text-white scale-150"
+              className="absolute top-8 right-8 text-foreground scale-150"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               <X className="h-8 w-8" />

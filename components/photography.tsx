@@ -40,13 +40,13 @@ export function Photography() {
 
         <div ref={showcaseRef} className="relative group/editor transition-all duration-700">
           <div className="relative overflow-hidden rounded-[2rem] bg-card/80 border border-border shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)] backdrop-blur-3xl font-mono will-change-transform">
-            <div className="flex items-center justify-between px-4 sm:px-8 py-4 sm:py-5 bg-card/80 border-b border-border">
+            <div className="flex items-center justify-between px-4 sm:px-8 py-4 sm:py-5 bg-secondary border-b border-border">
               <div className="flex items-center gap-2 sm:gap-3">
                 <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]"></div>
                 <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]"></div>
                 <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]"></div>
               </div>
-              <span className="text-[8px] sm:text-[10px] font-mono text-white/30 uppercase tracking-[0.25em] sm:tracking-[0.3em] font-black">
+              <span className="text-[8px] sm:text-[10px] font-mono text-muted-foreground/30 uppercase tracking-[0.25em] sm:tracking-[0.3em] font-black">
                 RAW_EDITOR_V2.exe
               </span>
               <div className="hidden sm:flex gap-2">
@@ -81,7 +81,7 @@ export function Photography() {
                     />
                   ) : (
                     <div className="absolute inset-0 flex items-center justify-center bg-[#0a0a0a]">
-                      <Camera className="h-16 w-16 sm:h-20 sm:w-20 text-white/5" />
+                      <Camera className="h-16 w-16 sm:h-20 sm:w-20 text-muted-foreground/10" />
                     </div>
                   )}
 
@@ -93,9 +93,9 @@ export function Photography() {
                 </div>
               </div>
 
-              <div className="w-full lg:w-96 p-8 border-t lg:border-t-0 lg:border-l border-white/5 bg-[#070707] flex flex-col justify-between">
+              <div className="w-full lg:w-96 p-8 border-t lg:border-t-0 lg:border-l border-border bg-card/30 flex flex-col justify-between">
                 <div>
-                  <h3 className="text-primary font-black mb-6 uppercase text-[10px] tracking-[0.4em] border-b border-white/5 pb-3">
+                  <h3 className="text-primary font-black mb-6 uppercase text-[10px] tracking-[0.4em] border-b border-border pb-3">
                     {t.photography.properties}
                   </h3>
                   <div className="grid grid-cols-2 md:grid-cols-1 gap-4 text-xs text-muted-foreground font-mono">
@@ -117,7 +117,7 @@ export function Photography() {
                   </div>
 
                   <div className="mt-10">
-                    <h3 className="text-primary font-black mb-5 uppercase text-[10px] tracking-[0.4em] border-b border-white/5 pb-3">
+                    <h3 className="text-primary font-black mb-5 uppercase text-[10px] tracking-[0.4em] border-b border-border pb-3">
                       {t.photography.filters}
                     </h3>
                     <div className="grid grid-cols-3 gap-3">

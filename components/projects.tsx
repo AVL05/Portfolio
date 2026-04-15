@@ -28,8 +28,8 @@ function ProjectCard({ project, index, t }: { project: any; index: number, t: an
           ref={cardRef}
           className="project-card group relative h-full cursor-pointer "
         >
-          <div className="relative h-full flex flex-col bg-card/30 border border-white/5 overflow-hidden rounded-[2.5rem] transition-all duration-700 hover:border-primary/30 group-hover:-translate-y-2">
-            <div className="absolute top-8 left-8 z-30 font-mono text-xs text-white/20 tracking-widest uppercase">
+          <div className="relative h-full flex flex-col bg-card/50 border border-border overflow-hidden rounded-[2.5rem] transition-all duration-700 hover:border-primary/30 group-hover:-translate-y-2">
+            <div className="absolute top-8 left-8 z-30 font-mono text-xs text-muted-foreground/50 tracking-widest uppercase">
               Project <span className="text-primary font-bold">{projectNumber}</span>
             </div>
 
@@ -44,24 +44,24 @@ function ProjectCard({ project, index, t }: { project: any; index: number, t: an
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-500" />
 
               <div className="absolute top-8 right-8 z-30 flex flex-col items-end gap-2">
-                <div className="px-3 py-1 bg-white/5 backdrop-blur-md border border-white/10 rounded-full">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-white/50">{project.category}</span>
+                <div className="px-3 py-1 bg-secondary/50 backdrop-blur-md border border-border rounded-full">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">{project.category}</span>
                 </div>
               </div>
             </div>
 
             <div className="p-10 space-y-4 relative">
-              <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight group-hover:text-primary transition-colors">
+              <h3 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight group-hover:text-primary transition-colors">
                 {project.title}
               </h3>
-              <p className="text-white/40 text-sm leading-relaxed line-clamp-2">
+              <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2">
                 {project.description}
               </p>
 
               <div className="pt-4 flex items-center justify-between">
                 <div className="flex gap-4">
                   {project.technologies.slice(0, 2).map((tech: string) => (
-                    <span key={tech} className="text-[10px] font-mono text-white/20 uppercase tracking-widest">{tech}</span>
+                    <span key={tech} className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">{tech}</span>
                   ))}
                 </div>
                 <div className="flex items-center gap-2 text-primary font-mono text-[10px] uppercase font-bold tracking-widest opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0 transition-all">
@@ -75,10 +75,10 @@ function ProjectCard({ project, index, t }: { project: any; index: number, t: an
 
       <DialogContent
         data-lenis-prevent
-        className="max-w-[95vw] lg:max-w-[1200px] bg-background/95 backdrop-blur-[30px] border-white/5 text-white p-0 overflow-hidden rounded-[3rem] shadow-2xl"
+        className="max-w-[95vw] lg:max-w-[1200px] bg-background/95 backdrop-blur-[30px] border-border text-foreground p-0 overflow-hidden rounded-[3rem] shadow-2xl"
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 max-h-[90vh] overflow-y-auto lg:overflow-hidden">
-          <div className="lg:col-span-7 bg-[#050505] relative flex items-center justify-center p-12 lg:p-24 border-b lg:border-b-0 lg:border-r border-white/5">
+          <div className="lg:col-span-7 bg-secondary/20 relative flex items-center justify-center p-12 lg:p-24 border-b lg:border-b-0 lg:border-r border-border">
             <div className="absolute inset-0 bg-grid opacity-20" />
             <div className="relative w-full aspect-video drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
               <Image
@@ -94,22 +94,22 @@ function ProjectCard({ project, index, t }: { project: any; index: number, t: an
             <div className="space-y-10">
               <div className="space-y-4">
                 <div className="text-primary font-mono text-[10px] uppercase tracking-[0.4em] font-bold">{t.projects.concept}</div>
-                <h2 className="text-3xl lg:text-5xl font-black text-white tracking-tighter leading-none">{project.title}</h2>
+                <h2 className="text-3xl lg:text-5xl font-black text-foreground tracking-tighter leading-none">{project.title}</h2>
                 <div className="text-white/30 text-xs font-mono">{project.type}</div>
               </div>
 
-              <p className="text-white/60 text-lg leading-relaxed font-medium">
+              <p className="text-muted-foreground text-lg leading-relaxed font-medium">
                 {project.description}
               </p>
 
               <div className="space-y-6">
-                <div className="flex items-center gap-4 text-white/30">
+                <div className="flex items-center gap-4 text-muted-foreground/50">
                   <Code2 className="h-4 w-4" />
                   <span className="text-[10px] font-mono uppercase tracking-widest">{t.skills.technologies}</span>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tech: string) => (
-                    <div key={tech} className="px-4 py-2 bg-white/5 border border-white/5 rounded-xl text-xs font-bold text-white/70">
+                    <div key={tech} className="px-4 py-2 bg-secondary border border-border rounded-xl text-xs font-bold text-muted-foreground">
                       {tech}
                     </div>
                   ))}
@@ -122,7 +122,7 @@ function ProjectCard({ project, index, t }: { project: any; index: number, t: an
                 <a href={project.link} target="_blank">{t.projects.view_live}</a>
               </Button>
               {project.github && (
-                <Button variant="outline" size="lg" asChild className="h-16 border-white/5 bg-white/5 hover:bg-white/10 text-white rounded-2xl transition-all">
+                <Button variant="outline" size="lg" asChild className="h-16 border-border bg-secondary/50 hover:bg-secondary text-foreground rounded-2xl transition-all">
                   <a href={project.github} target="_blank">{t.projects.view_code}</a>
                 </Button>
               )}
@@ -191,7 +191,7 @@ export function Projects() {
               <span className="w-8 h-[1px] bg-primary/50" />
               {t.projects.title}
             </div>
-            <h2 className="text-4xl sm:text-7xl font-black text-white tracking-tighter leading-none">
+            <h2 className="text-4xl sm:text-7xl font-black text-foreground tracking-tighter leading-none">
               {t.projects.subtitle}
             </h2>
           </div>
@@ -201,7 +201,7 @@ export function Projects() {
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`px-6 py-2 rounded-full text-[10px] font-black tracking-[0.2em] uppercase transition-all duration-300 ${activeCategory === category ? 'bg-primary text-primary-foreground' : 'bg-white/5 text-white/30 hover:text-white/70'}`}
+                className={`px-6 py-2 rounded-full text-[10px] font-black tracking-[0.2em] uppercase transition-all duration-300 ${activeCategory === category ? 'bg-primary text-primary-foreground' : 'bg-secondary text-muted-foreground/50 hover:text-foreground'}`}
               >
                 {category}
               </button>

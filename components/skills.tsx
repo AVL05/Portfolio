@@ -143,11 +143,11 @@ export function Skills() {
     <section
       id="skills"
       ref={containerRef}
-      className="section-padding bg-[#050505] relative overflow-hidden"
+      className="section-padding bg-background relative overflow-hidden"
     >
       {/* Background Decor */}
-      <div className="absolute top-0 right-1/4 w-[1px] h-full bg-white/5 pointer-events-none" />
-      <div className="absolute bottom-1/4 left-0 w-full h-[1px] bg-white/5 pointer-events-none" />
+      <div className="absolute top-0 right-1/4 w-[1px] h-full bg-border/20 pointer-events-none" />
+      <div className="absolute bottom-1/4 left-0 w-full h-[1px] bg-border/20 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <header className="skill-header mb-32 space-y-6">
@@ -155,10 +155,10 @@ export function Skills() {
             <span className="w-8 h-[1px] bg-primary/50" />
             {t.skills.title}
           </div>
-          <h2 className="text-4xl sm:text-7xl font-black text-white tracking-tighter leading-none">
+          <h2 className="text-4xl sm:text-7xl font-black text-foreground tracking-tighter leading-none">
             {t.skills.subtitle}
           </h2>
-          <p className="text-white/50 text-xl font-medium max-w-2xl text-balance">
+          <p className="text-muted-foreground text-xl font-medium max-w-2xl text-balance">
             {t.skills.desc}
           </p>
         </header>
@@ -166,29 +166,29 @@ export function Skills() {
         <div className="categories-grid grid grid-cols-1 lg:grid-cols-3 gap-12">
           {skillCategories.map((cat, i) => (
             <div key={cat.title} className="category-card group">
-              <div className="h-full dev-border p-10 rounded-[3rem] space-y-10 transition-all duration-700 hover:border-primary/20 hover:bg-[#0a0a0a]/80">
+              <div className="h-full dev-border p-10 rounded-[3rem] space-y-10 transition-all duration-700 hover:border-primary/20 hover:bg-secondary/20">
                 <header className="space-y-6">
-                  <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                  <div className="w-16 h-16 rounded-2xl bg-secondary flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
                     <cat.icon className="h-8 w-8" />
                   </div>
                   <div className="space-y-4">
-                    <h3 className="text-2xl font-bold text-white tracking-tight">{cat.title}</h3>
-                    <p className="text-sm text-white/40 leading-relaxed font-medium">
+                    <h3 className="text-2xl font-bold text-foreground tracking-tight">{cat.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed font-medium">
                       {cat.description}
                     </p>
                   </div>
                 </header>
 
-                <div className="grid grid-cols-2 gap-x-4 gap-y-6 pt-4 border-t border-white/5">
+                <div className="grid grid-cols-2 gap-x-4 gap-y-6 pt-4 border-t border-border">
                   {cat.skills.map(skill => (
                     <div key={skill.name} className="flex items-center gap-4 group/skill">
                       <div className="relative">
                         <skill.icon
-                          className="h-5 w-5 text-white/30 group-hover/skill:text-primary transition-colors"
+                          className="h-5 w-5 text-muted-foreground/40 group-hover/skill:text-primary transition-colors"
                           style={{ fill: 'currentColor' }}
                         />
                       </div>
-                      <span className="text-[10px] font-mono uppercase tracking-widest text-white/50 group-hover/skill:text-white transition-colors">
+                      <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground/60 group-hover/skill:text-foreground transition-colors">
                         {skill.name}
                       </span>
                     </div>

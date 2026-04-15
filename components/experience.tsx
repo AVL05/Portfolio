@@ -51,7 +51,7 @@ export function Experience() {
       className="section-padding bg-background relative overflow-hidden"
     >
       {/* Absolute BG Decor */}
-      <div className="absolute top-0 left-0 w-full h-[1px] bg-white/5 pointer-events-none" />
+      <div className="absolute top-0 left-0 w-full h-[1px] bg-border/50 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <header className="experience-header mb-32 space-y-6">
@@ -59,10 +59,10 @@ export function Experience() {
             <span className="w-8 h-[1px] bg-primary/50" />
             {t.experience.title}
           </div>
-          <h2 className="text-4xl sm:text-7xl font-black text-white tracking-tighter leading-none">
+          <h2 className="text-4xl sm:text-7xl font-black text-foreground tracking-tighter leading-none">
             {t.experience.subtitle}
           </h2>
-          <p className="text-white/50 text-xl font-medium max-w-2xl text-balance">
+          <p className="text-muted-foreground text-xl font-medium max-w-2xl text-balance">
             {t.experience.desc}
           </p>
         </header>
@@ -71,34 +71,34 @@ export function Experience() {
           {/* Education */}
           <div className="space-y-16">
             <div className="flex items-center gap-6 group">
-              <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+              <div className="w-14 h-14 rounded-2xl bg-secondary flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
                 <GraduationCap className="h-7 w-7" />
               </div>
-              <h3 className="text-3xl font-bold text-white tracking-tight">{t.experience.edu_title}</h3>
+              <h3 className="text-3xl font-bold text-foreground tracking-tight">{t.experience.edu_title}</h3>
             </div>
 
             <div className="space-y-12 relative">
                {/* Vertical line connection */}
-              <div className="absolute left-[27px] top-4 bottom-4 w-[1px] bg-white/5" />
+              <div className="absolute left-[27px] top-4 bottom-4 w-[1px] bg-border/30" />
 
               {education.map((edu, i) => (
                 <div key={i} className="timeline-item relative pl-20 group">
-                  <div className="absolute left-0 top-2 w-14 h-14 bg-background border border-white/10 rounded-2xl flex items-center justify-center z-10 group-hover:border-primary/50 transition-colors">
-                    <span className="text-xs font-mono text-white/30 group-hover:text-primary transition-colors">0{i+1}</span>
+                  <div className="absolute left-0 top-2 w-14 h-14 bg-background border border-border rounded-2xl flex items-center justify-center z-10 group-hover:border-primary/50 transition-colors">
+                    <span className="text-xs font-mono text-muted-foreground group-hover:text-primary transition-colors">0{i+1}</span>
                   </div>
                   <div className="space-y-4">
                     <div className="space-y-1">
                       <div className="flex items-center justify-between gap-4">
-                        <h4 className="text-2xl font-bold text-white group-hover:text-primary transition-colors">{edu.title}</h4>
+                        <h4 className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors">{edu.title}</h4>
                         <span className="text-[10px] font-mono text-primary/60 bg-primary/5 px-3 py-1 rounded-full border border-primary/10">{edu.period}</span>
                       </div>
-                      <div className="flex items-center gap-2 text-white/30 text-xs font-mono uppercase tracking-widest">
-                        <span className="text-white/50 font-bold">{edu.institution}</span>
+                      <div className="flex items-center gap-2 text-muted-foreground text-xs font-mono uppercase tracking-widest">
+                        <span className="text-foreground/70 font-bold">{edu.institution}</span>
                         <span className="opacity-30">•</span>
                         <span className="flex items-center gap-1"><MapPin className="h-3 w-3" /> {edu.location}</span>
                       </div>
                     </div>
-                    <p className="text-white/40 text-sm leading-relaxed font-medium">
+                    <p className="text-muted-foreground/80 text-sm leading-relaxed font-medium">
                       {edu.description}
                     </p>
                   </div>
@@ -110,34 +110,34 @@ export function Experience() {
           {/* Job Experience */}
           <div className="space-y-16">
             <div className="flex items-center gap-6 group">
-              <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+              <div className="w-14 h-14 rounded-2xl bg-secondary flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
                 <Briefcase className="h-7 w-7" />
               </div>
-              <h3 className="text-3xl font-bold text-white tracking-tight">{t.experience.job_title}</h3>
+              <h3 className="text-3xl font-bold text-foreground tracking-tight">{t.experience.job_title}</h3>
             </div>
 
             <div className="space-y-12 relative">
                {/* Vertical line connection */}
-              <div className="absolute left-[27px] top-4 bottom-4 w-[1px] bg-white/5" />
+              <div className="absolute left-[27px] top-4 bottom-4 w-[1px] bg-border/30" />
 
               {experience.map((exp, i) => (
                 <div key={i} className="timeline-item relative pl-20 group">
-                  <div className="absolute left-0 top-2 w-14 h-14 bg-background border border-white/10 rounded-2xl flex items-center justify-center z-10 group-hover:border-primary/50 transition-colors">
-                    <span className="text-xs font-mono text-white/30 group-hover:text-primary transition-colors">0{i+1}</span>
+                  <div className="absolute left-0 top-2 w-14 h-14 bg-background border border-border rounded-2xl flex items-center justify-center z-10 group-hover:border-primary/50 transition-colors">
+                    <span className="text-xs font-mono text-muted-foreground group-hover:text-primary transition-colors">0{i+1}</span>
                   </div>
                   <div className="space-y-4">
                     <div className="space-y-1">
                       <div className="flex items-center justify-between gap-4">
-                        <h4 className="text-2xl font-bold text-white group-hover:text-primary transition-colors">{exp.title}</h4>
+                        <h4 className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors">{exp.title}</h4>
                         <span className="text-[10px] font-mono text-primary/60 bg-primary/5 px-3 py-1 rounded-full border border-primary/10">{exp.period}</span>
                       </div>
-                      <div className="flex items-center gap-2 text-white/30 text-xs font-mono uppercase tracking-widest">
-                        <span className="text-white/50 font-bold">{exp.company}</span>
+                      <div className="flex items-center gap-2 text-muted-foreground text-xs font-mono uppercase tracking-widest">
+                        <span className="text-foreground/70 font-bold">{exp.company}</span>
                         <span className="opacity-30">•</span>
                         <span className="flex items-center gap-1"><MapPin className="h-3 w-3" /> {exp.location}</span>
                       </div>
                     </div>
-                    <p className="text-white/40 text-sm leading-relaxed font-medium">
+                    <p className="text-muted-foreground/80 text-sm leading-relaxed font-medium">
                       {exp.description}
                     </p>
                   </div>
@@ -147,10 +147,10 @@ export function Experience() {
           </div>
         </div>
 
-        <div className="mt-32 p-12 lg:p-20 dev-border rounded-[4rem] bg-[#070707] flex flex-col md:flex-row items-center justify-between gap-12 group hover:bg-card transition-all">
+        <div className="mt-32 p-12 lg:p-20 dev-border rounded-[4rem] bg-card/50 flex flex-col md:flex-row items-center justify-between gap-12 group hover:bg-card/80 transition-all">
           <div className="space-y-4 text-center md:text-left">
-            <h3 className="text-3xl lg:text-4xl font-bold text-white tracking-tight">{t.experience.cv_title}</h3>
-            <p className="text-white/40 text-lg font-medium max-w-xl">
+            <h3 className="text-3xl lg:text-4xl font-bold text-foreground tracking-tight">{t.experience.cv_title}</h3>
+            <p className="text-muted-foreground text-lg font-medium max-w-xl">
               {t.experience.cv_desc}
             </p>
           </div>

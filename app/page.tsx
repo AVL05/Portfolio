@@ -20,9 +20,9 @@ const Contact = dynamic(() =>
 );
 
 export const metadata = {
-  title: "Inicio",
+  title: "Alex Vicente López | Portfolio — Desarrollador Full-Stack & Fotógrafo",
   description:
-    "Portafolio de Alex Vicente López — Desarrollador Web, Fotógrafo y Diseñador Digital.",
+    "Echa un vistazo al portafolio de Alex Vicente López. Especialista en desarrollo web con Next.js, React y animaciones avanzadas, además de fotografía profesional.",
 };
 
 export default function Home() {

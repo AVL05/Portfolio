@@ -139,17 +139,17 @@ export function Hero() {
 
         {/* Main Title */}
         <div className="space-y-4">
-          <div className="flex flex-wrap justify-center overflow-hidden py-4">
+          <h1 className="flex flex-wrap justify-center overflow-hidden py-4">
             {name.split('').map((char, i) => (
               <span
-  key={i}
-  className="reveal-char inline-block text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-black text-foreground tracking-tighter leading-none"
-  style={{ minWidth: char === ' ' ? '0.25em' : 'auto' }}
->
+                key={i}
+                className="reveal-char inline-block text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-black text-foreground tracking-tighter leading-none"
+                style={{ minWidth: char === ' ' ? '0.25em' : 'auto' }}
+              >
                 {char}
               </span>
             ))}
-          </div>
+          </h1>
 
           <h2 className="hero-description text-lg sm:text-2xl md:text-4xl text-muted-foreground font-medium tracking-tight max-w-4xl text-balance">
             {t.hero.description}

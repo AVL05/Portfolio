@@ -91,6 +91,25 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className="scroll-smooth overflow-x-hidden" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Alex Vicente López",
+              url: SITE_URL,
+              jobTitle: "Desarrollador Web y Fotógrafo",
+              sameAs: [
+                "https://github.com/AVL05",
+                "https://www.linkedin.com/in/alex-vicente-lopez/",
+              ],
+              description: "Desarrollador Web, Fotógrafo Creativo y Diseñador Digital especializado en experiencias digitales únicas.",
+            }),
+          }}
+        />
+      </head>
       <body
         className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased selection:bg-primary/30 selection:text-primary bg-background text-foreground selection:text-primary-foreground overflow-x-hidden`}
         style={{ fontFeatureSettings: '"cv11", "ss01", "ss03"' }}

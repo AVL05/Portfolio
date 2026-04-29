@@ -92,6 +92,8 @@ export default function RootLayout({
   return (
     <html lang="es" className="scroll-smooth overflow-x-hidden" suppressHydrationWarning>
       <head>
+        <link rel="preconnect" href="https://va.vercel-scripts.com" />
+        <link rel="preconnect" href="https://vitals.vercel-insights.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

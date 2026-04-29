@@ -22,7 +22,12 @@ if (typeof window !== 'undefined') {
 
     // Refresh after fonts load to avoid layout shifts breaking triggers
     document.fonts?.ready?.then(() => {
-      setTimeout(() => ScrollTrigger.refresh(), 100);
+      // Use requestIdleCallback if available, otherwise a longer delay
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(() => ScrollTrigger.refresh());
+      } else {
+        setTimeout(() => ScrollTrigger.refresh(), 500);
+      }
     });
 
     // Refresh on visibility change (tab switch) — helps Brave

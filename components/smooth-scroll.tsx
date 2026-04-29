@@ -1,19 +1,16 @@
 'use client'
 
-import { ReactLenis } from 'lenis/react'
 import type { ReactNode } from 'react'
 
+/**
+ * Simplified Scroll Component.
+ * Reverted to native scroll to ensure the "lightest" possible feel
+ * as per user request to remove "pesadez".
+ */
 export function SmoothScroll({ children }: { children: ReactNode }) {
   return (
-    <ReactLenis root options={{ 
-      lerp: 0.1, 
-      duration: 1.5,
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
-      infinite: false,
-    }}>
+    <div className="contents">
       {children}
-    </ReactLenis>
+    </div>
   )
 }

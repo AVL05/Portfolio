@@ -1,30 +1,34 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { gsap } from '@/lib/gsap'
+import { useRef } from 'react'
+import { gsap, useGSAP } from '@/lib/gsap'
 
 export function ScrollProgress() {
-  const [progress, setProgress] = useState(0)
+  const barRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    const updateProgress = () => {
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight
-      if (scrollHeight === 0) return
-      const scrollProgress = (window.scrollY / scrollHeight) * 100
-      setProgress(scrollProgress)
-    }
+  useGSAP(() => {
+    if (!barRef.current) return
 
-    window.addEventListener('scroll', updateProgress)
-    updateProgress()
-
-    return () => window.removeEventListener('scroll', updateProgress)
+    gsap.to(barRef.current, {
+      scaleX: 1,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: document.documentElement,
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 0.3,
+      }
+    })
   }, [])
 
   return (
     <div className="fixed top-0 left-0 w-full h-[2px] z-[10000] pointer-events-none">
       <div 
-        className="h-full bg-primary shadow-[0_0_10px_rgba(119,255,150,0.8)] transition-all duration-150 ease-out"
-        style={{ width: `${progress}%` }}
+        ref={barRef}
+        className="h-full bg-primary origin-left scale-x-0"
+        style={{ 
+          boxShadow: '0 0 15px rgba(var(--color-primary), 0.5)' 
+        }}
       />
     </div>
   )

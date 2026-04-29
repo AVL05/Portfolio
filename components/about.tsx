@@ -24,14 +24,14 @@ export function About() {
   useGSAP(() => {
     const q = gsap.utils.selector(containerRef)
 
-    gsap.fromTo(q('.about-reveal'),
-      { y: 50, opacity: 0 },
+    // Cinematic Section Reveal
+    gsap.fromTo(q('.about-header-reveal'),
+      { x: -100, opacity: 0 },
       {
-        y: 0,
+        x: 0,
         opacity: 1,
-        duration: 1.2,
-        stagger: 0.2,
-        ease: 'power3.out',
+        duration: 1.5,
+        ease: 'expo.out',
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top 80%',
@@ -39,6 +39,20 @@ export function About() {
       }
     )
 
+    gsap.fromTo(q('.content-reveal'),
+      { y: 60, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1.2,
+        stagger: 0.2,
+        ease: 'power4.out',
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top 70%',
+        }
+      }
+    )
   }, { scope: containerRef })
 
   return (
@@ -52,17 +66,17 @@ export function About() {
 
           {/* Left Column: Content */}
           <div className="lg:col-span-6 space-y-12">
-            <header className="about-reveal space-y-4">
+            <header className="about-header-reveal space-y-4">
               <div className="flex items-center gap-4 text-primary font-mono text-sm tracking-[0.3em] uppercase">
                 <span className="w-8 h-[1px] bg-primary/50" />
                 {t.about.title}
               </div>
-              <h2 className="text-4xl sm:text-6xl font-black text-foreground tracking-tighter leading-none">
+              <h2 className="text-4xl sm:text-7xl font-black text-foreground tracking-tighter leading-none">
                 {t.about.subtitle}
               </h2>
             </header>
 
-            <div className="about-reveal space-y-6 text-muted-foreground text-lg leading-relaxed font-medium max-w-xl">
+            <div className="content-reveal space-y-6 text-muted-foreground text-lg sm:text-xl font-medium leading-relaxed max-w-2xl text-balance">
               <p>
                 {t.about.p1}
               </p>

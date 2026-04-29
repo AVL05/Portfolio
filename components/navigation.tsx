@@ -21,7 +21,6 @@ export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('hero')
-  const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 })
   const containerRef = useRef<HTMLDivElement>(null)
   const navRef = useRef<HTMLElement>(null)
   const progressRef = useRef<HTMLDivElement>(null)
@@ -69,35 +68,62 @@ export function Navigation() {
     }
   }, [isMobileMenuOpen])
 
+  const indicatorRef = useRef<HTMLDivElement>(null)
+
+  // 1. Efficient Active Section Detection (Intersection Observer)
+  useEffect(() => {
+    const sections = navItems.map(item => item.href.substring(1))
+    const observers: IntersectionObserver[] = []
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -70% 0px', // Adjust to trigger when section is in "active" zone
+      threshold: 0
+    }
+
+    const handleIntersect = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id)
+        }
+      })
+    }
+
+    const observer = new IntersectionObserver(handleIntersect, observerOptions)
+    sections.forEach(id => {
+      const el = document.getElementById(id)
+      if (el) observer.observe(el)
+    })
+
+    return () => observer.disconnect()
+  }, [])
+
+  // 2. Efficient Scroll Header State
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
-      const sections = navItems.map((item) => item.href.substring(1))
-      const currentSection = sections.find((section) => {
-        const element = document.getElementById(section)
-        if (element) {
-          const rect = element.getBoundingClientRect()
-          return rect.top <= 150 && rect.bottom >= 150
-        }
-        return false
-      })
-      if (currentSection) {
-        setActiveSection(prev => prev !== currentSection ? currentSection : prev)
-      }
+      const scrolled = window.scrollY > 20
+      setIsScrolled(prev => prev !== scrolled ? scrolled : prev)
     }
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  useEffect(() => {
+  // 3. Efficient Indicator Movement (GSAP instead of React State)
+  useGSAP(() => {
     const activeIndex = navItems.findIndex(item => item.href.substring(1) === activeSection)
     const activeLink = navLinksRefs.current[activeIndex]
-    if (activeLink && navLinksContainerRef.current) {
+    const indicator = indicatorRef.current
+
+    if (activeLink && indicator && navLinksContainerRef.current) {
       const containerRect = navLinksContainerRef.current.getBoundingClientRect()
       const linkRect = activeLink.getBoundingClientRect()
-      setIndicatorStyle({
-        left: linkRect.left - containerRect.left,
+      
+      gsap.to(indicator, {
+        x: linkRect.left - containerRect.left,
         width: linkRect.width,
+        duration: 0.5,
+        ease: 'power3.out',
+        overwrite: 'auto'
       })
     }
   }, [activeSection])
@@ -138,11 +164,8 @@ export function Navigation() {
               className="hidden xl:flex items-center gap-6 relative"
             >
               <div
-                className="absolute bottom-[-4px] h-[2px] bg-primary transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]"
-                style={{
-                  left: `${indicatorStyle.left}px`,
-                  width: `${indicatorStyle.width}px`,
-                }}
+                ref={indicatorRef}
+                className="absolute bottom-[-4px] h-[2px] bg-primary"
               />
               {navItems.map((item, index) => {
                 const isActive = activeSection === item.href.substring(1)

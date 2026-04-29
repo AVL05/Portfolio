@@ -61,55 +61,59 @@ export function Hero() {
     const q = gsap.utils.selector(containerRef)
     const tl = gsap.timeline({ defaults: { ease: 'expo.out' } })
 
-    // entrance animation
-    tl.fromTo(q('.reveal-char'),
-      { y: 100, opacity: 0, rotateX: -90 },
-      { y: 0, opacity: 1, rotateX: 0, stagger: 0.03, duration: 1.5, ease: 'expo.out' }
+    // 1. Entrance Animation
+    tl.fromTo(q('.reveal-word'),
+      { y: 150, opacity: 0, rotateX: -90, rotateY: 30, z: -100 },
+      { y: 0, opacity: 1, rotateX: 0, rotateY: 0, z: 0, stagger: 0.1, duration: 2, ease: 'expo.out' }
     )
     .fromTo(q('.hero-badge'),
-      { opacity: 0, scale: 0.8, y: 20 },
-      { opacity: 1, scale: 1, y: 0, duration: 1.2 },
-      "-=1.2"
+      { opacity: 0, scale: 0.5, rotateX: 90 },
+      { opacity: 1, scale: 1, rotateX: 0, duration: 1.5, ease: 'back.out(1.7)' },
+      "-=1.8"
     )
     .fromTo(q('.hero-description'),
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 1.2 },
-      "-=1.0"
+      { opacity: 0, y: 50 },
+      { opacity: 1, y: 0, duration: 1.5 },
+      "-=1.4"
     )
     .fromTo(q('.social-magnetic'),
       { opacity: 0, y: 40, stagger: 0.1 },
       { opacity: 1, y: 0, duration: 1, ease: 'back.out(2)' },
-      "-=0.8"
+      "-=1.0"
     )
     .fromTo(q('.scroll-indicator'),
-      { opacity: 0 },
-      { opacity: 1, duration: 1.2 },
-      "-=0.4"
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 1.2 },
+      "-=0.6"
     )
 
-    gsap.to(q('.scroll-arrow'), {
-      y: 8,
-      duration: 1.5,
-      repeat: -1,
-      yoyo: true,
-      ease: 'sine.inOut'
-    })
-
-    // Grid parallax
-    const moveGrid = (e: MouseEvent) => {
+    // 3. Mouse Interaction (Subtle Parallax)
+    const handleMouseMove = (e: MouseEvent) => {
       const { clientX, clientY } = e
-      const x = (clientX / window.innerWidth - 0.5) * 30
-      const y = (clientY / window.innerHeight - 0.5) * 30
+      
+      // Word Parallax (More efficient than character parallax)
+      gsap.to(q('.reveal-word'), {
+        x: (i) => (clientX / window.innerWidth - 0.5) * (10 + i * 5),
+        y: (i) => (clientY / window.innerHeight - 0.5) * (10 + i * 5),
+        duration: 1.5,
+        ease: 'power2.out',
+      })
+
+      // Grid (More subtle)
       gsap.to(gridRef.current, {
-        x: x,
-        y: y,
+        rotateX: (clientY / window.innerHeight - 0.5) * 2,
+        rotateY: (clientX / window.innerWidth - 0.5) * -2,
+        x: (clientX / window.innerWidth - 0.5) * 20,
+        y: (clientY / window.innerHeight - 0.5) * 20,
         duration: 2,
         ease: 'power2.out'
       })
     }
 
-    window.addEventListener('mousemove', moveGrid)
-    return () => window.removeEventListener('mousemove', moveGrid)
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove)
+    }
   }, { scope: containerRef })
 
   const name = "Alex Vicente"
@@ -129,8 +133,8 @@ export function Hero() {
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-background/50 to-background pointer-events-none" />
 
       {/* Decorative Glows */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[160px] pointer-events-none opacity-30" />
-      <div className="absolute top-1/4 right-1/4 w-[300px] h-[300px] bg-accent/5 rounded-full blur-[120px] pointer-events-none opacity-20" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(var(--color-primary),0.05)_0%,transparent_70%)] pointer-events-none opacity-30" />
+      <div className="absolute top-1/4 right-1/4 w-[300px] h-[300px] bg-[radial-gradient(circle,rgba(var(--color-accent),0.05)_0%,transparent_70%)] pointer-events-none opacity-20" />
 
       <div className="w-full max-w-7xl mx-auto z-10 flex flex-col items-center text-center space-y-12">
 
@@ -147,14 +151,13 @@ export function Hero() {
 
         {/* Main Title */}
         <div className="space-y-4">
-          <h1 className="flex flex-wrap justify-center overflow-hidden py-4">
-            {name.split('').map((char, i) => (
+          <h1 className="flex flex-wrap justify-center overflow-hidden py-4 gap-x-[0.3em]">
+            {name.split(' ').map((word, i) => (
               <span
                 key={i}
-                className="reveal-char inline-block text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-black text-foreground tracking-tighter leading-none"
-                style={{ minWidth: char === ' ' ? '0.25em' : 'auto' }}
+                className="reveal-word inline-block text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-black text-foreground tracking-tighter leading-none"
               >
-                {char}
+                {word}
               </span>
             ))}
           </h1>

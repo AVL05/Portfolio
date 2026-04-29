@@ -6,6 +6,7 @@ import { Camera, Globe } from 'lucide-react'
 import { FaInstagram } from 'react-icons/fa6'
 import Image from 'next/image'
 import { useLanguage } from '@/lib/language-context'
+import { gsap, useGSAP } from '@/lib/gsap'
 
 const photographyLinks = {
   website: 'https://alexgallery.alexviclop.workers.dev/',
@@ -16,12 +17,15 @@ const photographyLinks = {
 export function Photography() {
   const { t } = useLanguage()
   const showcaseRef = useRef<HTMLDivElement>(null)
+  const imageRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
   const imagePath = '/photography/hero.webp'
   const hasHeroImage = true
 
   return (
     <section
       id="photography"
+      ref={containerRef}
       className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-background relative overflow-hidden text-foreground"
     >
       <div className="max-w-7xl mx-auto relative z-10 section-padding">
@@ -39,7 +43,7 @@ export function Photography() {
         </div>
 
         <div ref={showcaseRef} className="relative group/editor transition-all duration-700">
-          <div className="relative overflow-hidden rounded-[2rem] bg-card/80 border border-border shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)] backdrop-blur-3xl font-mono will-change-transform">
+          <div className="relative overflow-hidden rounded-[2rem] bg-card/80 border border-border shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)] font-mono will-change-transform">
             <div className="flex items-center justify-between px-4 sm:px-8 py-4 sm:py-5 bg-secondary/50 border-b border-border">
               <div className="flex items-center gap-2">
                  <Camera className="w-4 h-4 text-primary/40" />
@@ -66,12 +70,13 @@ export function Photography() {
                 <div className="absolute bottom-12 left-12 w-12 h-12 border-b border-l border-primary/20"></div>
                 <div className="absolute bottom-12 right-12 w-12 h-12 border-b border-r border-primary/20"></div>
 
-                <div className="relative w-full aspect-video sm:aspect-3/2 rounded-none overflow-hidden shadow-2xl ring-1 ring-border group/img">
+                <div ref={imageRef} className="relative w-full aspect-video sm:aspect-3/2 rounded-none overflow-hidden shadow-2xl ring-1 ring-border group/img scale-110">
                   {hasHeroImage ? (
                     <Image
                       src={imagePath}
                       alt="Fotografía destacada - Alex Vicente López"
                       fill
+                      priority
                       className="object-cover transition-transform duration-[2000ms] group-hover/img:scale-105"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
                     />

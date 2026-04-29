@@ -44,7 +44,7 @@ function ProjectCard({ project, index, t }: { project: any; index: number, t: an
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-500" />
 
               <div className="absolute top-8 right-8 z-30 flex flex-col items-end gap-2">
-                <div className="px-3 py-1 bg-secondary/50 backdrop-blur-md border border-border rounded-full">
+                <div className="px-3 py-1 bg-secondary/80 border border-border rounded-full">
                   <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">{project.category}</span>
                 </div>
               </div>
@@ -75,7 +75,7 @@ function ProjectCard({ project, index, t }: { project: any; index: number, t: an
 
       <DialogContent
         data-lenis-prevent
-        className="max-w-[95vw] lg:max-w-[1200px] bg-background/95 backdrop-blur-[30px] border-border text-foreground p-0 overflow-hidden rounded-[3rem] shadow-2xl"
+        className="max-w-[95vw] lg:max-w-[1200px] bg-background border-border text-foreground p-0 overflow-hidden rounded-[3rem] shadow-2xl"
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 max-h-[90vh] overflow-y-auto lg:overflow-hidden">
           <div className="lg:col-span-7 bg-secondary/20 relative flex items-center justify-center p-12 lg:p-24 border-b lg:border-b-0 lg:border-r border-border">

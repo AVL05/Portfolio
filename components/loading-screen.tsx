@@ -55,7 +55,7 @@ export function LoadingScreen() {
 
     const updateProgress = () => {
       const remaining = 100 - progress;
-      const increment = Math.random() * (remaining > 20 ? 1.5 : 0.8);
+      const increment = Math.random() * (remaining > 20 ? 8 : 4); // Much faster
 
       progress = Math.min(100, progress + increment);
       setLoadingProgress(progress);
@@ -63,7 +63,7 @@ export function LoadingScreen() {
       if (progress < 100) {
         animationFrame = requestAnimationFrame(updateProgress);
       } else {
-        setTimeout(exitLoading, 500);
+        setTimeout(exitLoading, 200);
       }
     };
 
@@ -77,32 +77,17 @@ export function LoadingScreen() {
         onComplete: () => setIsLoading(false),
       });
 
-      // Dramatic Exit sequence
       tl.to('.loading-ui-element', {
         opacity: 0,
-        y: -20,
-        stagger: 0.05,
-        duration: 0.4,
+        y: -10,
+        stagger: 0.02,
+        duration: 0.3,
         ease: 'power2.in'
       })
       .to(containerRef.current, {
-        scale: 1.1,
-        filter: 'blur(10px)',
         opacity: 0,
-        duration: 0.8,
-        ease: "expo.in"
-      }, "-=0.2")
-      .to([curtainTopRef.current, curtainBottomRef.current], {
-        scaleY: 1,
-        duration: 0.8,
-        ease: "expo.inOut",
-        stagger: 0.1,
-      }, "-=0.6")
-      .to([curtainTopRef.current, curtainBottomRef.current], {
-        scaleY: 0,
-        duration: 0.8,
-        ease: "expo.inOut",
-        stagger: -0.1,
+        duration: 0.4,
+        ease: "power2.inOut"
       })
       .set(containerRef.current, { display: "none" });
     };
@@ -242,15 +227,6 @@ export function LoadingScreen() {
         />
       </div>
 
-      {/* Curtain panels for exit reveal */}
-      <div
-        ref={curtainTopRef}
-        className="absolute inset-x-0 top-0 h-1/2 bg-background origin-bottom scale-y-0"
-      />
-      <div
-        ref={curtainBottomRef}
-        className="absolute inset-x-0 bottom-0 h-1/2 bg-background origin-top scale-y-0"
-      />
     </div>
   );
 }

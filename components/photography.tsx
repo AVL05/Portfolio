@@ -40,37 +40,33 @@ export function Photography() {
 
         <div ref={showcaseRef} className="relative group/editor transition-all duration-700">
           <div className="relative overflow-hidden rounded-[2rem] bg-card/80 border border-border shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)] backdrop-blur-3xl font-mono will-change-transform">
-            <div className="flex items-center justify-between px-4 sm:px-8 py-4 sm:py-5 bg-secondary border-b border-border">
-              <div className="flex items-center gap-2 sm:gap-3">
-                <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]"></div>
-                <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]"></div>
-                <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]"></div>
+            <div className="flex items-center justify-between px-4 sm:px-8 py-4 sm:py-5 bg-secondary/50 border-b border-border">
+              <div className="flex items-center gap-2">
+                 <Camera className="w-4 h-4 text-primary/40" />
+                 <span className="text-[10px] font-mono text-muted-foreground/50 uppercase tracking-[0.2em] font-bold">
+                  Image Viewer
+                </span>
               </div>
-              <span className="text-[8px] sm:text-[10px] font-mono text-muted-foreground/30 uppercase tracking-[0.25em] sm:tracking-[0.3em] font-black">
-                RAW_EDITOR_V2.exe
-              </span>
-              <div className="hidden sm:flex gap-2">
-                <div className="w-2 h-2 rounded-full bg-primary/20"></div>
-                <div className="w-2 h-2 rounded-full bg-primary/20"></div>
+              <div className="flex gap-2">
+                <div className="w-2 h-2 rounded-full bg-border"></div>
+                <div className="w-2 h-2 rounded-full bg-border"></div>
               </div>
             </div>
 
             <div className="flex flex-col lg:flex-row">
-              <div className="hidden lg:flex flex-col gap-6 p-6 border-r border-border bg-card/50 items-center text-muted-foreground">
-                <Camera className="w-5 h-5 text-primary opacity-60" />
-                <div className="w-8 h-px bg-border/20 my-2"></div>
+              <div className="hidden lg:flex flex-col gap-6 p-6 border-r border-border bg-card/30 items-center text-muted-foreground/30">
                 <div className="w-5 h-5 border-2 border-current rounded-sm"></div>
                 <div className="w-5 h-5 border border-current rounded-full"></div>
                 <div className="w-5 h-5 border-t-2 border-l-2 border-current"></div>
               </div>
 
-              <div className="relative w-full p-6 sm:p-10 lg:p-12 flex items-center justify-center bg-background/50">
-                <div className="absolute top-12 left-12 w-12 h-12 border-t border-l border-primary/30"></div>
-                <div className="absolute top-12 right-12 w-12 h-12 border-t border-r border-primary/30"></div>
-                <div className="absolute bottom-12 left-12 w-12 h-12 border-b border-l border-primary/30"></div>
-                <div className="absolute bottom-12 right-12 w-12 h-12 border-b border-r border-primary/30"></div>
+              <div className="relative w-full p-6 sm:p-10 lg:p-12 flex items-center justify-center bg-background/20">
+                <div className="absolute top-12 left-12 w-12 h-12 border-t border-l border-primary/20"></div>
+                <div className="absolute top-12 right-12 w-12 h-12 border-t border-r border-primary/20"></div>
+                <div className="absolute bottom-12 left-12 w-12 h-12 border-b border-l border-primary/20"></div>
+                <div className="absolute bottom-12 right-12 w-12 h-12 border-b border-r border-primary/20"></div>
 
-                <div className="relative w-full aspect-video sm:aspect-3/2 rounded-none overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.3)] ring-1 ring-border group/img">
+                <div className="relative w-full aspect-video sm:aspect-3/2 rounded-none overflow-hidden shadow-2xl ring-1 ring-border group/img">
                   {hasHeroImage ? (
                     <Image
                       src={imagePath}
@@ -84,53 +80,26 @@ export function Photography() {
                       <Camera className="h-16 w-16 sm:h-20 sm:w-20 text-muted-foreground/10" />
                     </div>
                   )}
-
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20">
-                    <div className="w-px h-16 bg-primary"></div>
-                    <div className="absolute h-px w-16 bg-primary"></div>
-                    <div className="absolute w-6 h-6 border border-primary rounded-full"></div>
-                  </div>
                 </div>
               </div>
 
               <div className="w-full lg:w-96 p-8 border-t lg:border-t-0 lg:border-l border-border bg-card/30 flex flex-col justify-between">
                 <div>
-                  <h3 className="text-primary font-black mb-6 uppercase text-[10px] tracking-[0.4em] border-b border-border pb-3">
+                  <h3 className="text-primary/60 font-black mb-6 uppercase text-[10px] tracking-[0.4em] border-b border-border/50 pb-3">
                     {t.photography.properties}
                   </h3>
-                  <div className="grid grid-cols-2 md:grid-cols-1 gap-4 text-xs text-muted-foreground font-mono">
+                  <div className="grid grid-cols-2 gap-3 text-[10px] text-muted-foreground font-mono">
                     {[
                       { label: 'ISO', value: '100' },
                       { label: 'f/', value: '2.8' },
                       { label: 'Exp', value: '1/250s' },
                       { label: 'Dist', value: '35mm' },
                     ].map((item) => (
-                      <div key={item.label} className="flex justify-between items-center bg-muted/40 p-2 rounded-lg border border-border/20">
-                        <span className="opacity-60">{item.label}</span>
-                        <span className="text-foreground font-bold">{item.value}</span>
+                      <div key={item.label} className="flex justify-between items-center bg-muted/20 p-2 rounded-lg border border-border/10">
+                        <span className="opacity-40">{item.label}</span>
+                        <span className="text-foreground/80 font-bold">{item.value}</span>
                       </div>
                     ))}
-                    <div className="col-span-2 md:col-span-1 flex justify-between items-center bg-muted/40 p-2 rounded-lg border border-border/20">
-                      <span className="opacity-60">Lente</span>
-                      <span className="text-foreground font-bold">Sigma 35mm Art</span>
-                    </div>
-                  </div>
-
-                  <div className="mt-10">
-                    <h3 className="text-primary font-black mb-5 uppercase text-[10px] tracking-[0.4em] border-b border-border pb-3">
-                      {t.photography.filters}
-                    </h3>
-                    <div className="grid grid-cols-3 gap-3">
-                      <div data-cursor-hover className="h-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center text-[10px] text-primary cursor-pointer hover:bg-primary/20 transition-all font-black">
-                        B&N
-                      </div>
-                      <div data-cursor-hover className="h-10 rounded-xl bg-secondary border border-border flex items-center justify-center text-[10px] cursor-pointer hover:bg-muted transition-all font-black text-muted-foreground">
-                        CINE
-                      </div>
-                      <div data-cursor-hover className="h-10 rounded-xl bg-secondary border border-border flex items-center justify-center text-[10px] cursor-pointer hover:bg-muted transition-all font-black text-muted-foreground">
-                        VNTG
-                      </div>
-                    </div>
                   </div>
                 </div>
 

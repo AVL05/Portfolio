@@ -19,18 +19,18 @@ export function AnimatedBackground() {
 
       {/* Animated particles using efficient CSS */}
       <div className="absolute inset-0">
-        {[...Array(20)].map((_, i) => (
+        {[...Array(8)].map((_, i) => (
           <div
             key={i}
-            className="absolute rounded-full bg-primary/10 blur-sm animate-float-slow"
+            className="absolute rounded-full bg-primary/5 blur-sm animate-float-slow"
             style={{
-              width: `${Math.random() * 4 + 2}px`,
-              height: `${Math.random() * 4 + 2}px`,
+              width: `${Math.random() * 3 + 2}px`,
+              height: `${Math.random() * 3 + 2}px`,
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
               animationDelay: `${Math.random() * 10}s`,
-              animationDuration: `${Math.random() * 20 + 20}s`,
-              opacity: Math.random() * 0.4,
+              animationDuration: `${Math.random() * 25 + 20}s`,
+              opacity: Math.random() * 0.2,
             }}
           />
         ))}

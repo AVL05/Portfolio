@@ -39,14 +39,6 @@ export function About() {
       }
     )
 
-    // Floating animation for the dashboard
-    gsap.to(q('.dashboard-card'), {
-      y: -10,
-      duration: 2,
-      repeat: -1,
-      yoyo: true,
-      ease: 'sine.inOut'
-    })
   }, { scope: containerRef })
 
   return (
@@ -55,10 +47,6 @@ export function About() {
       ref={containerRef}
       className="section-padding bg-background relative overflow-hidden"
     >
-      {/* Background Decor */}
-      <div className="absolute top-1/2 left-0 w-full h-[1px] bg-border/20 pointer-events-none" />
-      <div className="absolute top-0 left-1/4 w-[1px] h-full bg-border/20 pointer-events-none" />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
 

@@ -145,10 +145,6 @@ export function Skills() {
       ref={containerRef}
       className="section-padding bg-background relative overflow-hidden"
     >
-      {/* Background Decor */}
-      <div className="absolute top-0 right-1/4 w-[1px] h-full bg-border/20 pointer-events-none" />
-      <div className="absolute bottom-1/4 left-0 w-full h-[1px] bg-border/20 pointer-events-none" />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <header className="skill-header mb-32 space-y-6">
           <div className="flex items-center gap-4 text-primary font-mono text-sm tracking-[0.3em] uppercase">

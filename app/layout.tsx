@@ -123,9 +123,8 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <SmoothScroll>
-              <div className="relative min-h-screen overflow-x-hidden scanline">
+              <div className="relative min-h-screen overflow-x-hidden">
                 <ScrollProgress />
-                <NoiseOverlay />
                 <Suspense fallback={null}>{children}</Suspense>
               </div>
             </SmoothScroll>

@@ -159,32 +159,34 @@ export function Skills() {
           </p>
         </header>
 
-        <div className="categories-grid grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div className="categories-grid grid grid-cols-1 lg:grid-cols-3 gap-8">
           {skillCategories.map((cat, i) => (
             <div key={cat.title} className="category-card group">
-              <div className="h-full dev-border p-10 rounded-[3rem] space-y-10 transition-all duration-700 hover:border-primary/20 hover:bg-secondary/20">
-                <header className="space-y-6">
-                  <div className="w-16 h-16 rounded-2xl bg-secondary flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+              <div className="h-full dev-border p-10 rounded-[3rem] space-y-10 transition-all duration-700 hover:border-primary/40 hover:bg-card/40 hover:shadow-[0_0_50px_rgba(var(--primary),0.05)] relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl -mr-16 -mt-16 group-hover:bg-primary/10 transition-colors" />
+
+                <header className="space-y-6 relative z-10">
+                  <div className="w-16 h-16 rounded-2xl bg-secondary/50 border border-border flex items-center justify-center text-primary group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
                     <cat.icon className="h-8 w-8" />
                   </div>
                   <div className="space-y-4">
-                    <h3 className="text-2xl font-bold text-foreground tracking-tight">{cat.title}</h3>
+                    <h3 className="text-2xl font-black text-foreground tracking-tight group-hover:text-primary transition-colors">{cat.title}</h3>
                     <p className="text-sm text-muted-foreground leading-relaxed font-medium">
                       {cat.description}
                     </p>
                   </div>
                 </header>
 
-                <div className="grid grid-cols-2 gap-x-4 gap-y-6 pt-4 border-t border-border">
+                <div className="grid grid-cols-2 gap-x-4 gap-y-6 pt-8 border-t border-border/50 relative z-10">
                   {cat.skills.map(skill => (
                     <div key={skill.name} className="flex items-center gap-4 group/skill">
-                      <div className="relative">
+                      <div className="p-2 rounded-lg bg-secondary/30 group-hover/skill:bg-primary/10 transition-colors">
                         <skill.icon
-                          className="h-5 w-5 text-muted-foreground/40 group-hover/skill:text-primary transition-colors"
+                          className="h-4 w-4 text-muted-foreground/40 group-hover/skill:text-primary transition-colors"
                           style={{ fill: 'currentColor' }}
                         />
                       </div>
-                      <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground/60 group-hover/skill:text-foreground transition-colors">
+                      <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-muted-foreground/60 group-hover/skill:text-foreground transition-colors">
                         {skill.name}
                       </span>
                     </div>

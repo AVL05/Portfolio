@@ -23,11 +23,11 @@ export function ScrollProgress() {
 
   return (
     <div className="fixed top-0 left-0 w-full h-[2px] z-[10000] pointer-events-none">
-      <div 
+      <div
         ref={barRef}
         className="h-full bg-primary origin-left scale-x-0"
-        style={{ 
-          boxShadow: '0 0 15px rgba(var(--color-primary), 0.5)' 
+        style={{
+          boxShadow: '0 0 15px rgba(var(--color-primary), 0.5)'
         }}
       />
     </div>

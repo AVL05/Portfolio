@@ -28,7 +28,7 @@
 .dark {
   /* Terminal / Matrix Elite Theme */
   --background: oklch(0.08 0.01 150); /* Deep Obsidian with Green Tint */
-  --foreground: oklch(0.98 0.01 150); 
+  --foreground: oklch(0.98 0.01 150);
   --card: oklch(0.11 0.02 150);
   --card-foreground: oklch(0.98 0.01 150);
   --popover: oklch(0.11 0.02 150);
@@ -88,7 +88,7 @@
   }
 
   html {
-    scroll-behavior: initial; /* Lenis handles this */
+    scroll-behavior: smooth;
     overflow-x: hidden;
     width: 100%;
   }
@@ -205,7 +205,7 @@
   /* Grid Background Utility */
   .bg-grid {
     background-size: 50px 50px;
-    background-image: 
+    background-image:
       linear-gradient(to right, oklch(from var(--primary) l c h / 0.05) 1px, transparent 1px),
       linear-gradient(to bottom, oklch(from var(--primary) l c h / 0.05) 1px, transparent 1px);
   }

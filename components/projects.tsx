@@ -38,7 +38,7 @@ function ProjectCard({ project, index, t }: { project: any; index: number, t: an
                 src={project.image || '/placeholder.svg'}
                 alt={project.title}
                 fill
-                className={`transition-all duration-1000 ease-out group-hover:scale-105 ${smallImageProjects.includes(project.title) ? 'p-16 object-contain' : 'object-cover'}`}
+                className={`transition-all duration-1000 ease-out group-hover:scale-105 ${smallImageProjects.includes(project.title) ? 'p-8 object-contain' : 'object-cover'}`}
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-500" />
@@ -86,6 +86,7 @@ function ProjectCard({ project, index, t }: { project: any; index: number, t: an
                 alt={project.title}
                 fill
                 className="object-contain"
+                sizes="(max-width: 1280px) 100vw, 1200px"
               />
             </div>
           </div>
@@ -118,7 +119,7 @@ function ProjectCard({ project, index, t }: { project: any; index: number, t: an
             </div>
 
             <div className="pt-12 grid grid-cols-2 gap-4">
-              <Button asChild size="lg" className="h-16 bg-primary text-primary-foreground font-black hover:bg-white rounded-2xl transition-all shadow-xl">
+              <Button asChild size="lg" className="h-16 bg-primary text-primary-foreground font-black hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(var(--primary),0.2)] rounded-2xl transition-all shadow-xl">
                 <a href={project.link} target="_blank">{t.projects.view_live}</a>
               </Button>
               {project.github && (

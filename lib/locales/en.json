@@ -81,7 +81,7 @@
       {
         "title": "Educational XML Architecture",
         "description": "Full-stack platform for structured markup language teaching. Integrates XML data visualizations with an interface optimized for technical reading.",
-        "image": "/projects/favicon.ico",
+        "image": "/projects/xml-project.png",
         "technologies": ["HTML5", "CSS3", "JavaScript", "XML"],
         "category": "Web Development",
         "link": "https://avl05.github.io/web-xml-alex/",

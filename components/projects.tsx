@@ -135,6 +135,8 @@ function ProjectCard({ project, index, t }: { project: any; index: number, t: an
   )
 }
 
+import { RevealHeader } from '@/components/reveal-header'
+
 export function Projects() {
   const containerRef = useRef<HTMLDivElement>(null)
   const { t, language } = useLanguage()
@@ -147,26 +149,13 @@ export function Projects() {
   useGSAP(() => {
     const q = gsap.utils.selector(containerRef)
 
-    gsap.fromTo(q('.projects-header'),
+    gsap.fromTo(q('.project-card'),
       { opacity: 0, y: 50 },
       {
         opacity: 1,
         y: 0,
-        duration: 1.5,
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top 80%',
-        }
-      }
-    )
-
-    gsap.fromTo(q('.project-card'),
-      { opacity: 0, y: 100 },
-      {
-        opacity: 1,
-        y: 0,
         stagger: 0.1,
-        duration: 1.2,
+        duration: 0.8,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: q('.projects-grid'),
@@ -186,18 +175,14 @@ export function Projects() {
       <div className="absolute top-0 right-0 w-1/2 h-full bg-primary/5 [mask-image:linear-gradient(to_left,black,transparent)] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <header className="projects-header mb-32 flex flex-col md:flex-row md:items-end justify-between gap-12">
-          <div className="space-y-6">
-            <div className="flex items-center gap-4 text-primary font-mono text-sm tracking-[0.3em] uppercase">
-              <span className="w-8 h-[1px] bg-primary/50" />
-              {t.projects.title}
-            </div>
-            <h2 className="text-4xl sm:text-7xl font-black text-foreground tracking-tighter leading-none">
-              {t.projects.subtitle}
-            </h2>
-          </div>
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-16 sm:mb-0">
+          <RevealHeader 
+            title={t.projects.title} 
+            subtitle={t.projects.subtitle} 
+            className="mb-0 sm:mb-0" 
+          />
 
-          <div className="flex gap-4">
+          <div className="flex gap-4 mb-16">
             {categories.map(category => (
               <button
                 key={category}
@@ -208,7 +193,7 @@ export function Projects() {
               </button>
             ))}
           </div>
-        </header>
+        </div>
 
         <div className="projects-grid grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
           {filteredProjects.map((project, index) => (

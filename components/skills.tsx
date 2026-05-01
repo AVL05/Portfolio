@@ -102,6 +102,8 @@ const skillCategories_en = [
   }
 ]
 
+import { RevealHeader } from '@/components/reveal-header'
+
 export function Skills() {
   const { t, language } = useLanguage()
   const skillCategories = language === 'es' ? skillCategories_es : skillCategories_en
@@ -110,26 +112,13 @@ export function Skills() {
   useGSAP(() => {
     const q = gsap.utils.selector(containerRef)
 
-    gsap.fromTo(q('.skill-header'),
-      { opacity: 0, y: 50 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1.5,
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top 80%',
-        }
-      }
-    )
-
     gsap.fromTo(q('.category-card'),
-      { opacity: 0, x: -50 },
+      { opacity: 0, x: -30 },
       {
         opacity: 1,
         x: 0,
-        stagger: 0.3,
-        duration: 1.2,
+        stagger: 0.15,
+        duration: 0.8,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: q('.categories-grid'),
@@ -146,18 +135,11 @@ export function Skills() {
       className="section-padding bg-background relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <header className="skill-header mb-32 space-y-6">
-          <div className="flex items-center gap-4 text-primary font-mono text-sm tracking-[0.3em] uppercase">
-            <span className="w-8 h-[1px] bg-primary/50" />
-            {t.skills.title}
-          </div>
-          <h2 className="text-4xl sm:text-7xl font-black text-foreground tracking-tighter leading-none">
-            {t.skills.subtitle}
-          </h2>
-          <p className="text-muted-foreground text-xl font-medium max-w-2xl text-balance">
-            {t.skills.desc}
-          </p>
-        </header>
+        <RevealHeader 
+          title={t.skills.title} 
+          subtitle={t.skills.subtitle} 
+          description={t.skills.desc} 
+        />
 
         <div className="categories-grid grid grid-cols-1 lg:grid-cols-3 gap-8">
           {skillCategories.map((cat, i) => (

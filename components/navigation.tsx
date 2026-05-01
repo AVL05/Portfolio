@@ -33,6 +33,23 @@ export function Navigation() {
     if (progressRef.current) {
       gsap.set(progressRef.current, { scaleX: 0, transformOrigin: 'left center' })
     }
+
+    // Navbar Entrance
+    const tl = gsap.timeline({ defaults: { ease: 'power4.out' } })
+    tl.fromTo('.nav-logo', 
+      { opacity: 0, x: -10 },
+      { opacity: 1, x: 0, duration: 0.8, delay: 0.2 }
+    )
+    .fromTo('.nav-item',
+      { opacity: 0, y: -5 },
+      { opacity: 1, y: 0, stagger: 0.05, duration: 0.6 },
+      "-=0.6"
+    )
+    .fromTo('.nav-extra',
+      { opacity: 0, x: 10 },
+      { opacity: 1, x: 0, duration: 0.8 },
+      "-=0.6"
+    )
   }, { scope: containerRef })
 
   useEffect(() => {
@@ -154,7 +171,7 @@ export function Navigation() {
           <div className="flex items-center justify-between">
             <a
               href="#hero"
-              className="group text-xl sm:text-2xl font-black text-foreground tracking-tighter transition-all lg:whitespace-nowrap shrink-0"
+              className="nav-logo group text-xl sm:text-2xl font-black text-foreground tracking-tighter transition-all lg:whitespace-nowrap shrink-0"
             >
               ALEX <span className="text-primary">VICENTE</span>
             </a>
@@ -174,7 +191,7 @@ export function Navigation() {
                     key={item.name}
                     ref={(el) => { navLinksRefs.current[index] = el; }}
                     href={item.href}
-                    className={`group relative text-[10px] font-black uppercase tracking-[0.15em] transition-colors duration-300 whitespace-nowrap ${
+                    className={`nav-item group relative text-[10px] font-black uppercase tracking-[0.15em] transition-colors duration-300 whitespace-nowrap ${
                       isActive ? 'text-primary' : 'text-foreground/40 hover:text-foreground'
                     }`}
                   >
@@ -185,7 +202,7 @@ export function Navigation() {
               })}
             </div>
 
-            <div className="hidden xl:flex items-center gap-4 ml-4">
+            <div className="nav-extra hidden xl:flex items-center gap-4 ml-4">
               <LanguageToggle />
               <ThemeToggle />
             </div>

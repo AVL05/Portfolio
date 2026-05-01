@@ -16,6 +16,8 @@ const terminalLines = [
   { type: 'output', text: 'Building digital architectures where precision meets aesthetics. Every line of code is an opportunity to solve a problem beautifully.' },
 ]
 
+import { RevealHeader } from '@/components/reveal-header'
+
 export function About() {
   const { t } = useLanguage()
   const containerRef = useRef<HTMLDivElement>(null)
@@ -24,28 +26,13 @@ export function About() {
   useGSAP(() => {
     const q = gsap.utils.selector(containerRef)
 
-    // Cinematic Section Reveal
-    gsap.fromTo(q('.about-header-reveal'),
-      { x: -100, opacity: 0 },
-      {
-        x: 0,
-        opacity: 1,
-        duration: 1.5,
-        ease: 'expo.out',
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top 80%',
-        }
-      }
-    )
-
     gsap.fromTo(q('.content-reveal'),
-      { y: 60, opacity: 0 },
+      { y: 30, opacity: 0 },
       {
         y: 0,
         opacity: 1,
-        duration: 1.2,
-        stagger: 0.2,
+        duration: 0.8,
+        stagger: 0.1,
         ease: 'power4.out',
         scrollTrigger: {
           trigger: containerRef.current,
@@ -53,7 +40,14 @@ export function About() {
         }
       }
     )
-  }, { scope: containerRef })
+
+    if (activeTab === 'terminal') {
+      gsap.fromTo(q('.terminal-line'),
+        { opacity: 0, x: -10 },
+        { opacity: 1, x: 0, stagger: 0.1, duration: 0.5, ease: 'power2.out' }
+      )
+    }
+  }, { scope: containerRef, dependencies: [activeTab] })
 
   return (
     <section
@@ -66,15 +60,11 @@ export function About() {
 
           {/* Left Column: Content */}
           <div className="lg:col-span-6 space-y-12">
-            <header className="about-header-reveal space-y-4">
-              <div className="flex items-center gap-4 text-primary font-mono text-sm tracking-[0.3em] uppercase">
-                <span className="w-8 h-[1px] bg-primary/50" />
-                {t.about.title}
-              </div>
-              <h2 className="text-4xl sm:text-7xl font-black text-foreground tracking-tighter leading-none">
-                {t.about.subtitle}
-              </h2>
-            </header>
+            <RevealHeader 
+              title={t.about.title} 
+              subtitle={t.about.subtitle} 
+              className="mb-0 sm:mb-0" 
+            />
 
             <div className="content-reveal space-y-6 text-muted-foreground text-lg sm:text-xl font-medium leading-relaxed max-w-2xl text-balance">
               <p>
@@ -127,7 +117,7 @@ export function About() {
                 {activeTab === 'terminal' ? (
                   <div className="font-mono text-sm space-y-8">
                     {terminalLines.map((line, i) => (
-                      <div key={i} className="space-y-2">
+                      <div key={i} className="terminal-line space-y-2">
                         {line.type === 'command' ? (
                           <div className="flex items-center gap-3 text-muted-foreground">
                             <ChevronRight className="h-3 w-3 text-primary" />

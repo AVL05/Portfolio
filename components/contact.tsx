@@ -10,8 +10,13 @@ import type React from 'react'
 import { useState } from 'react'
 import { useLanguage } from '@/lib/language-context'
 
+import { RevealHeader } from '@/components/reveal-header'
+import { gsap, useGSAP } from '@/lib/gsap'
+import { useRef } from 'react'
+
 export function Contact() {
   const { t } = useLanguage()
+  const containerRef = useRef<HTMLDivElement>(null)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -21,6 +26,25 @@ export function Contact() {
   const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | null>(
     null
   )
+
+  useGSAP(() => {
+    const q = gsap.utils.selector(containerRef)
+
+    gsap.fromTo(q('.contact-item'),
+      { opacity: 0, y: 20 },
+      {
+        opacity: 1,
+        y: 0,
+        stagger: 0.1,
+        duration: 0.8,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top 75%',
+        }
+      }
+    )
+  }, { scope: containerRef })
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -60,24 +84,19 @@ export function Contact() {
   return (
     <section
       id="contact"
+      ref={containerRef}
       className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-background relative overflow-hidden text-foreground"
     >
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="mb-20">
-          <h2 className="text-4xl sm:text-6xl md:text-7xl 2xl:text-8xl font-black tracking-tighter opacity-[0.03] dark:opacity-10 absolute -top-12 left-0 select-none hidden sm:block uppercase">
-            SAY HELLO
-          </h2>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary font-mono relative">
-            <span className="text-primary/50 mr-4 font-normal">06.</span>
-            {t.contact.title} <span className="text-muted-foreground/30 ml-2">{t.contact.subtitle}</span>
-          </h2>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mt-4 font-medium">
-            {t.contact.desc}
-          </p>
-        </div>
+        <RevealHeader 
+          title={`06. ${t.contact.title}`} 
+          subtitle={t.contact.subtitle} 
+          description={t.contact.desc} 
+        />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-20">
-          <Card className="p-0 overflow-hidden bg-card border-border shadow-2xl rounded-3xl hover:border-primary/20 transition-all">
+          <div className="contact-item">
+            <Card className="p-0 overflow-hidden bg-card border-border shadow-2xl rounded-3xl hover:border-primary/20 transition-all">
             <div className="flex items-center gap-2 px-6 py-4 bg-secondary/50 border-b border-border">
               <div className="flex gap-1.5">
                 <div className="w-2.5 h-2.5 rounded-full bg-red-400/20"></div>
@@ -149,9 +168,10 @@ export function Contact() {
                 </p>
               )}
             </form>
-          </Card>
+            </Card>
+          </div>
 
-          <div className="flex flex-col justify-between py-4">
+          <div className="contact-item flex flex-col justify-between py-4">
             <div className="space-y-12">
               <div>
                 <h3 className="text-sm font-black uppercase tracking-[0.3em] text-muted-foreground/30 mb-8 ml-1">

@@ -6,6 +6,8 @@ import { Briefcase, FileText, GraduationCap, ChevronRight, MapPin } from 'lucide
 import { gsap, useGSAP } from '@/lib/gsap'
 import { useLanguage } from '@/lib/language-context'
 
+import { RevealHeader } from '@/components/reveal-header'
+
 export function Experience() {
   const { t } = useLanguage()
   const education = t.experience.education_list
@@ -15,26 +17,13 @@ export function Experience() {
   useGSAP(() => {
     const q = gsap.utils.selector(containerRef)
 
-    gsap.fromTo(q('.experience-header'),
-      { opacity: 0, y: 50 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1.5,
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top 80%',
-        }
-      }
-    )
-
     gsap.fromTo(q('.timeline-item'),
-      { opacity: 0, y: 30 },
+      { opacity: 0, y: 20 },
       {
         opacity: 1,
         y: 0,
-        stagger: 0.2,
-        duration: 1.2,
+        stagger: 0.1,
+        duration: 0.8,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: q('.timeline-grid'),
@@ -54,18 +43,11 @@ export function Experience() {
       <div className="absolute top-0 left-0 w-full h-[1px] bg-border/50 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <header className="experience-header mb-32 space-y-6">
-          <div className="flex items-center gap-4 text-primary font-mono text-sm tracking-[0.3em] uppercase">
-            <span className="w-8 h-[1px] bg-primary/50" />
-            {t.experience.title}
-          </div>
-          <h2 className="text-4xl sm:text-7xl font-black text-foreground tracking-tighter leading-none">
-            {t.experience.subtitle}
-          </h2>
-          <p className="text-muted-foreground text-xl font-medium max-w-2xl text-balance">
-            {t.experience.desc}
-          </p>
-        </header>
+        <RevealHeader 
+          title={t.experience.title} 
+          subtitle={t.experience.subtitle} 
+          description={t.experience.desc} 
+        />
 
         <div className="timeline-grid grid grid-cols-1 lg:grid-cols-2 gap-24">
           {/* Education */}

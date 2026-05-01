@@ -62,49 +62,60 @@ export function Hero() {
     const tl = gsap.timeline({ defaults: { ease: 'expo.out' } })
 
     // 1. Entrance Animation
-    tl.fromTo(q('.reveal-word'),
-      { y: 150, opacity: 0, rotateX: -90, rotateY: 30, z: -100 },
-      { y: 0, opacity: 1, rotateX: 0, rotateY: 0, z: 0, stagger: 0.1, duration: 2, ease: 'expo.out' }
+    tl.fromTo(q('.reveal-char'),
+      { y: 50, opacity: 0, rotateX: -45 },
+      { y: 0, opacity: 1, rotateX: 0, stagger: 0.015, duration: 0.8, ease: 'power4.out' }
     )
     .fromTo(q('.hero-badge'),
-      { opacity: 0, scale: 0.5, rotateX: 90 },
-      { opacity: 1, scale: 1, rotateX: 0, duration: 1.5, ease: 'back.out(1.7)' },
-      "-=1.8"
+      { opacity: 0, scale: 0.8, rotateX: 45 },
+      { opacity: 1, scale: 1, rotateX: 0, duration: 0.8, ease: 'back.out(1.7)' },
+      "-=0.6"
     )
     .fromTo(q('.hero-description'),
-      { opacity: 0, y: 50 },
-      { opacity: 1, y: 0, duration: 1.5 },
-      "-=1.4"
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.8 },
+      "-=0.5"
     )
     .fromTo(q('.social-magnetic'),
-      { opacity: 0, y: 40, stagger: 0.1 },
-      { opacity: 1, y: 0, duration: 1, ease: 'back.out(2)' },
-      "-=1.0"
+      { opacity: 0, y: 20, stagger: 0.05 },
+      { opacity: 1, y: 0, duration: 0.6, ease: 'back.out(2)' },
+      "-=0.4"
     )
     .fromTo(q('.scroll-indicator'),
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 1.2 },
-      "-=0.6"
+      { opacity: 0, y: 10 },
+      { opacity: 1, y: 0, duration: 0.6 },
+      "-=0.2"
     )
 
     // 3. Mouse Interaction (Subtle Parallax)
     const handleMouseMove = (e: MouseEvent) => {
       const { clientX, clientY } = e
+      const xPos = (clientX / window.innerWidth - 0.5)
+      const yPos = (clientY / window.innerHeight - 0.5)
       
-      // Word Parallax (More efficient than character parallax)
-      gsap.to(q('.reveal-word'), {
-        x: (i) => (clientX / window.innerWidth - 0.5) * (10 + i * 5),
-        y: (i) => (clientY / window.innerHeight - 0.5) * (10 + i * 5),
-        duration: 1.5,
+      // Char Parallax
+      gsap.to(q('.reveal-char'), {
+        x: (i) => xPos * (5 + i * 0.5),
+        y: (i) => yPos * (5 + i * 0.5),
+        duration: 2,
         ease: 'power2.out',
+      })
+
+      // Background Glows Parallax
+      gsap.to(q('.hero-glow'), {
+        x: xPos * 50,
+        y: yPos * 50,
+        duration: 3,
+        ease: 'power2.out',
+        stagger: 0.1
       })
 
       // Grid (More subtle)
       gsap.to(gridRef.current, {
-        rotateX: (clientY / window.innerHeight - 0.5) * 2,
-        rotateY: (clientX / window.innerWidth - 0.5) * -2,
-        x: (clientX / window.innerWidth - 0.5) * 20,
-        y: (clientY / window.innerHeight - 0.5) * 20,
+        rotateX: yPos * 5,
+        rotateY: xPos * -5,
+        x: xPos * 30,
+        y: yPos * 30,
         duration: 2,
         ease: 'power2.out'
       })
@@ -127,14 +138,14 @@ export function Hero() {
       {/* Background elements */}
       <div
         ref={gridRef}
-        className="absolute inset-[-50px] bg-grid opacity-[0.1] dark:opacity-20 pointer-events-none"
+        className="absolute inset-[-100px] bg-grid opacity-[0.1] dark:opacity-20 pointer-events-none"
       />
 
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-background/50 to-background pointer-events-none" />
 
       {/* Decorative Glows */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(var(--color-primary),0.05)_0%,transparent_70%)] pointer-events-none opacity-30" />
-      <div className="absolute top-1/4 right-1/4 w-[300px] h-[300px] bg-[radial-gradient(circle,rgba(var(--color-accent),0.05)_0%,transparent_70%)] pointer-events-none opacity-20" />
+      <div className="hero-glow absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(var(--color-primary),0.05)_0%,transparent_70%)] pointer-events-none opacity-30" />
+      <div className="hero-glow absolute top-1/4 right-1/4 w-[300px] h-[300px] bg-[radial-gradient(circle,rgba(var(--color-accent),0.05)_0%,transparent_70%)] pointer-events-none opacity-20" />
 
       <div className="w-full max-w-7xl mx-auto z-10 flex flex-col items-center text-center space-y-12">
 
@@ -153,16 +164,20 @@ export function Hero() {
         <div className="space-y-4">
           <h1 className="flex flex-wrap justify-center overflow-hidden py-4 gap-x-[0.3em]">
             {name.split(' ').map((word, i) => (
-              <span
-                key={i}
-                className="reveal-word inline-block text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-black text-foreground tracking-tighter leading-none"
-              >
-                {word}
+              <span key={i} className="inline-block whitespace-nowrap">
+                {word.split('').map((char, j) => (
+                  <span
+                    key={j}
+                    className="reveal-char inline-block text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-foreground tracking-tighter leading-none"
+                  >
+                    {char}
+                  </span>
+                ))}
               </span>
             ))}
           </h1>
 
-          <h2 className="hero-description text-lg sm:text-2xl md:text-4xl text-muted-foreground font-medium tracking-tight max-w-4xl text-balance">
+          <h2 className="hero-description text-lg sm:text-2xl md:text-3xl text-muted-foreground font-medium tracking-tight max-w-4xl text-balance">
             {t.hero.description}
           </h2>
         </div>

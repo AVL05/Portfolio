@@ -14,6 +14,8 @@ const photographyLinks = {
   portfolio: 'https://galeria-fotografica.vercel.app/',
 }
 
+import { RevealHeader } from '@/components/reveal-header'
+
 export function Photography() {
   const { t } = useLanguage()
   const showcaseRef = useRef<HTMLDivElement>(null)
@@ -54,19 +56,12 @@ export function Photography() {
       className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-background relative overflow-hidden text-foreground"
     >
       <div className="max-w-7xl mx-auto relative z-10 section-padding">
-        <div className="mb-24 flex flex-col md:flex-row md:items-end justify-between gap-12">
-          <div className="space-y-6">
-            <h2 className="text-4xl sm:text-7xl md:text-8xl 2xl:text-9xl font-black tracking-tighter opacity-[0.03] absolute -top-16 left-0 select-none hidden sm:block uppercase">
-              GALLERY
-            </h2>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary font-mono relative">
-              <span className="text-primary/50 mr-2 sm:mr-4 font-normal text-lg sm:text-2xl md:text-3xl">04.</span>
-              {t.photography.title} <span className="text-foreground/20 ml-2 block sm:inline text-xl sm:text-2xl md:text-3xl">{t.photography.subtitle}</span>
-            </h2>
-            <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl font-medium leading-relaxed">
-              {t.photography.description}
-            </p>
-          </div>
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-16 sm:mb-0">
+          <RevealHeader 
+            title={`04. ${t.photography.title}`} 
+            subtitle={t.photography.subtitle} 
+            description={t.photography.description} 
+          />
 
           <div className="flex gap-4">
             <Button

@@ -57,10 +57,10 @@ export function Photography() {
     >
       <div className="max-w-7xl mx-auto relative z-10 section-padding">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-16 sm:mb-0">
-          <RevealHeader 
-            title={`04. ${t.photography.title}`} 
-            subtitle={t.photography.subtitle} 
-            description={t.photography.description} 
+          <RevealHeader
+            title={t.photography.title}
+            subtitle={t.photography.subtitle}
+            description={t.photography.description}
           />
 
           <div className="flex gap-4">
@@ -85,10 +85,10 @@ export function Photography() {
                 src={galleryImages[activeIndex].src}
                 alt={galleryImages[activeIndex].label}
                 fill
-                className="object-cover transition-transform duration-[3000ms] group-hover/img:scale-110"
+                className="object-cover transition-transform duration-3000 group-hover/img:scale-110"
                 sizes="(max-width: 1200px) 100vw, 800px"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-500" />
 
               <div className="absolute bottom-8 left-8 text-white opacity-0 group-hover/img:opacity-100 translate-y-4 group-hover/img:translate-y-0 transition-all duration-500">
                 <p className="font-mono text-[10px] tracking-[0.4em] uppercase text-primary mb-2">RAW_METADATA</p>

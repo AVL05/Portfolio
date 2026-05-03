@@ -13,6 +13,7 @@ import { ScrollProgress } from "@/components/scroll-progress";
 import { ThemeProvider } from "@/components/theme-provider";
 import { LanguageProvider } from "@/lib/language-context";
 
+
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://aleviclop.vercel.app";
 
@@ -114,7 +115,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased selection:bg-primary/30 selection:text-primary bg-background text-foreground selection:text-primary-foreground overflow-x-hidden`}
+        className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased bg-background text-foreground overflow-x-hidden`}
         style={{ fontFeatureSettings: '"cv11", "ss01", "ss03"' }}
         suppressHydrationWarning
       >

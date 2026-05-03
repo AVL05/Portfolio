@@ -7,6 +7,8 @@ import { gsap, useGSAP } from '@/lib/gsap'
 import { useLanguage } from '@/lib/language-context'
 import { ThemeToggle } from './theme-toggle'
 import { LanguageToggle } from './language-toggle'
+import { Magnetic } from './magnetic'
+
 
 export function Navigation() {
   const { t } = useLanguage()
@@ -36,7 +38,7 @@ export function Navigation() {
 
     // Navbar Entrance
     const tl = gsap.timeline({ defaults: { ease: 'power4.out' } })
-    tl.fromTo('.nav-logo', 
+    tl.fromTo('.nav-logo',
       { opacity: 0, x: -10 },
       { opacity: 1, x: 0, duration: 0.8, delay: 0.2 }
     )
@@ -134,7 +136,7 @@ export function Navigation() {
     if (activeLink && indicator && navLinksContainerRef.current) {
       const containerRect = navLinksContainerRef.current.getBoundingClientRect()
       const linkRect = activeLink.getBoundingClientRect()
-      
+
       gsap.to(indicator, {
         x: linkRect.left - containerRect.left,
         width: linkRect.width,
@@ -169,12 +171,14 @@ export function Navigation() {
       >
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
           <div className="flex items-center justify-between">
-            <a
-              href="#hero"
-              className="nav-logo group text-xl sm:text-2xl font-black text-foreground tracking-tighter transition-all lg:whitespace-nowrap shrink-0"
-            >
-              ALEX <span className="text-primary">VICENTE</span>
-            </a>
+            <Magnetic strength={0.3}>
+              <a
+                href="#hero"
+                className="nav-logo group text-xl sm:text-2xl font-black text-foreground tracking-tighter transition-all lg:whitespace-nowrap shrink-0"
+              >
+                ALEX <span className="text-primary">VICENTE</span>
+              </a>
+            </Magnetic>
 
             <div
               ref={navLinksContainerRef}
@@ -187,17 +191,18 @@ export function Navigation() {
               {navItems.map((item, index) => {
                 const isActive = activeSection === item.href.substring(1)
                 return (
-                  <a
-                    key={item.name}
-                    ref={(el) => { navLinksRefs.current[index] = el; }}
-                    href={item.href}
-                    className={`nav-item group relative text-[10px] font-black uppercase tracking-[0.15em] transition-colors duration-300 whitespace-nowrap ${
-                      isActive ? 'text-primary' : 'text-foreground/40 hover:text-foreground'
-                    }`}
-                  >
-                    <span className="mr-1 text-[9px] opacity-30 font-mono">0{index + 1}.</span>
-                    {item.name}
-                  </a>
+                  <Magnetic key={item.name} strength={0.2}>
+                    <a
+                      ref={(el) => { navLinksRefs.current[index] = el; }}
+                      href={item.href}
+                      className={`nav-item group relative text-[10px] font-black uppercase tracking-[0.15em] transition-colors duration-300 whitespace-nowrap ${
+                        isActive ? 'text-primary' : 'text-foreground/40 hover:text-foreground'
+                      }`}
+                    >
+                      <span className="mr-1 text-[9px] opacity-30 font-mono">0{index + 1}.</span>
+                      {item.name}
+                    </a>
+                  </Magnetic>
                 )
               })}
             </div>

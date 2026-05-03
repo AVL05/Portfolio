@@ -88,10 +88,10 @@ export function Contact() {
       className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-background relative overflow-hidden text-foreground"
     >
       <div className="max-w-7xl mx-auto relative z-10">
-        <RevealHeader 
-          title={`06. ${t.contact.title}`} 
-          subtitle={t.contact.subtitle} 
-          description={t.contact.desc} 
+        <RevealHeader
+          title={t.contact.title}
+          subtitle={t.contact.subtitle}
+          description={t.contact.desc}
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-20">

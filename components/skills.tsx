@@ -26,13 +26,13 @@ const skillCategories_es = [
     description: 'Construcción de interfaces modernas, adaptativas y altamente interactivas enfocadas en la experiencia de usuario.',
     icon: Globe,
     skills: [
-      { name: 'HTML5', color: '#E34F26', icon: SiHtml5 },
-      { name: 'CSS3', color: '#1572B6', icon: SiCss },
-      { name: 'JavaScript', color: '#F7DF1E', icon: SiJavascript },
-      { name: 'React', color: '#61DAFB', icon: SiReact },
-      { name: 'Vue.js', color: '#4FC08D', icon: SiVuedotjs },
-      { name: 'Tailwind CSS', color: '#06B6D4', icon: SiTailwindcss },
-      { name: 'Bootstrap', color: '#7952B3', icon: SiBootstrap },
+      { name: 'HTML5', url: 'https://developer.mozilla.org/es/docs/Web/HTML', icon: SiHtml5 },
+      { name: 'CSS3', url: 'https://developer.mozilla.org/es/docs/Web/CSS', icon: SiCss },
+      { name: 'JavaScript', url: 'https://developer.mozilla.org/es/docs/Web/JavaScript', icon: SiJavascript },
+      { name: 'React', url: 'https://react.dev/', icon: SiReact },
+      { name: 'Vue.js', url: 'https://vuejs.org/', icon: SiVuedotjs },
+      { name: 'Tailwind CSS', url: 'https://tailwindcss.com/', icon: SiTailwindcss },
+      { name: 'Bootstrap', url: 'https://getbootstrap.com/', icon: SiBootstrap },
     ],
   },
   {
@@ -40,11 +40,11 @@ const skillCategories_es = [
     description: 'Gestión de datos, lógica de servidor y herramientas de control de versiones para un flujo de trabajo eficiente.',
     icon: Database,
     skills: [
-      { name: 'PHP / Laravel', color: '#FF2D20', icon: SiLaravel },
-      { name: 'MySQL', color: '#4479A1', icon: SiMysql },
-      { name: 'Electron', color: '#47848F', icon: SiElectron },
-      { name: 'Git', color: '#F05032', icon: SiGit },
-      { name: 'GitHub', color: '#181717', icon: SiGithub },
+      { name: 'PHP / Laravel', url: 'https://laravel.com/', icon: SiLaravel },
+      { name: 'MySQL', url: 'https://www.mysql.com/', icon: SiMysql },
+      { name: 'Electron', url: 'https://www.electronjs.org/', icon: SiElectron },
+      { name: 'Git', url: 'https://git-scm.com/', icon: SiGit },
+      { name: 'GitHub', url: 'https://github.com/', icon: SiGithub },
     ],
   },
   {
@@ -52,11 +52,11 @@ const skillCategories_es = [
     description: 'Edición de fotografía, diseño editorial y post-producción de vídeo como parte de mi visión creativa personal.',
     icon: PenTool,
     skills: [
-      { name: 'Photoshop', color: '#31A8FF', icon: DiPhotoshop },
-      { name: 'Illustrator', color: '#FF9A00', icon: DiIllustrator },
-      { name: 'InDesign', color: '#FF3366', icon: Layers },
-      { name: 'Lightroom', color: '#31A8FF', icon: Camera },
-      { name: 'Premiere Pro', color: '#9999FF', icon: Video },
+      { name: 'Photoshop', url: 'https://www.adobe.com/es/products/photoshop.html', icon: DiPhotoshop },
+      { name: 'Illustrator', url: 'https://www.adobe.com/es/products/illustrator.html', icon: DiIllustrator },
+      { name: 'InDesign', url: 'https://www.adobe.com/es/products/indesign.html', icon: Layers },
+      { name: 'Lightroom', url: 'https://www.adobe.com/es/products/photoshop-lightroom.html', icon: Camera },
+      { name: 'Premiere Pro', url: 'https://www.adobe.com/es/products/premiere.html', icon: Video },
     ],
   }
 ]
@@ -67,13 +67,13 @@ const skillCategories_en = [
     description: 'Building modern, adaptive and highly interactive interfaces focused on user experience.',
     icon: Globe,
     skills: [
-      { name: 'HTML5', color: '#E34F26', icon: SiHtml5 },
-      { name: 'CSS3', color: '#1572B6', icon: SiCss },
-      { name: 'JavaScript', color: '#F7DF1E', icon: SiJavascript },
-      { name: 'React', color: '#61DAFB', icon: SiReact },
-      { name: 'Vue.js', color: '#4FC08D', icon: SiVuedotjs },
-      { name: 'Tailwind CSS', color: '#06B6D4', icon: SiTailwindcss },
-      { name: 'Bootstrap', color: '#7952B3', icon: SiBootstrap },
+      { name: 'HTML5', url: 'https://developer.mozilla.org/en-US/docs/Web/HTML', icon: SiHtml5 },
+      { name: 'CSS3', url: 'https://developer.mozilla.org/en-US/docs/Web/CSS', icon: SiCss },
+      { name: 'JavaScript', url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript', icon: SiJavascript },
+      { name: 'React', url: 'https://react.dev/', icon: SiReact },
+      { name: 'Vue.js', url: 'https://vuejs.org/', icon: SiVuedotjs },
+      { name: 'Tailwind CSS', url: 'https://tailwindcss.com/', icon: SiTailwindcss },
+      { name: 'Bootstrap', url: 'https://getbootstrap.com/', icon: SiBootstrap },
     ],
   },
   {
@@ -81,11 +81,11 @@ const skillCategories_en = [
     description: 'Data management, server logic and version control tools for an efficient workflow.',
     icon: Database,
     skills: [
-      { name: 'PHP / Laravel', color: '#FF2D20', icon: SiLaravel },
-      { name: 'MySQL', color: '#4479A1', icon: SiMysql },
-      { name: 'Electron', color: '#47848F', icon: SiElectron },
-      { name: 'Git', color: '#F05032', icon: SiGit },
-      { name: 'GitHub', color: '#181717', icon: SiGithub },
+      { name: 'PHP / Laravel', url: 'https://laravel.com/', icon: SiLaravel },
+      { name: 'MySQL', url: 'https://www.mysql.com/', icon: SiMysql },
+      { name: 'Electron', url: 'https://www.electronjs.org/', icon: SiElectron },
+      { name: 'Git', url: 'https://git-scm.com/', icon: SiGit },
+      { name: 'GitHub', url: 'https://github.com/', icon: SiGithub },
     ],
   },
   {
@@ -93,16 +93,19 @@ const skillCategories_en = [
     description: 'Photo editing, editorial design and video post-production as part of my personal creative vision.',
     icon: PenTool,
     skills: [
-      { name: 'Photoshop', color: '#31A8FF', icon: DiPhotoshop },
-      { name: 'Illustrator', color: '#FF9A00', icon: DiIllustrator },
-      { name: 'InDesign', color: '#FF3366', icon: Layers },
-      { name: 'Lightroom', color: '#31A8FF', icon: Camera },
-      { name: 'Premiere Pro', color: '#9999FF', icon: Video },
+      { name: 'Photoshop', url: 'https://www.adobe.com/products/photoshop.html', icon: DiPhotoshop },
+      { name: 'Illustrator', url: 'https://www.adobe.com/products/illustrator.html', icon: DiIllustrator },
+      { name: 'InDesign', url: 'https://www.adobe.com/products/indesign.html', icon: Layers },
+      { name: 'Lightroom', url: 'https://www.adobe.com/products/photoshop-lightroom.html', icon: Camera },
+      { name: 'Premiere Pro', url: 'https://www.adobe.com/products/premiere.html', icon: Video },
     ],
   }
 ]
 
 import { RevealHeader } from '@/components/reveal-header'
+import { Magnetic } from '@/components/magnetic'
+import { LiquidReveal } from '@/components/liquid-reveal'
+
 
 export function Skills() {
   const { t, language } = useLanguage()
@@ -135,47 +138,56 @@ export function Skills() {
       className="section-padding bg-background relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <RevealHeader 
-          title={t.skills.title} 
-          subtitle={t.skills.subtitle} 
-          description={t.skills.desc} 
+        <RevealHeader
+          title={t.skills.title}
+          subtitle={t.skills.subtitle}
+          description={t.skills.desc}
         />
 
         <div className="categories-grid grid grid-cols-1 lg:grid-cols-3 gap-8">
           {skillCategories.map((cat, i) => (
-            <div key={cat.title} className="category-card group">
-              <div className="h-full dev-border p-10 rounded-[3rem] space-y-10 transition-all duration-700 hover:border-primary/40 hover:bg-card/40 hover:shadow-[0_0_50px_rgba(var(--primary),0.05)] relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl -mr-16 -mt-16 group-hover:bg-primary/10 transition-colors" />
+            <LiquidReveal key={cat.title}>
+              <div className="category-card group h-full">
+                <div className="h-full premium-card p-10 space-y-10 transition-all duration-700 relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl -mr-16 -mt-16 group-hover:bg-primary/20 transition-all duration-700" />
 
-                <header className="space-y-6 relative z-10">
-                  <div className="w-16 h-16 rounded-2xl bg-secondary/50 border border-border flex items-center justify-center text-primary group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
-                    <cat.icon className="h-8 w-8" />
-                  </div>
-                  <div className="space-y-4">
-                    <h3 className="text-2xl font-black text-foreground tracking-tight group-hover:text-primary transition-colors">{cat.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed font-medium">
+                  <div className="relative z-10 space-y-8">
+                    <div className="flex items-center gap-6 group/header">
+                      <div className="w-16 h-16 rounded-[1.5rem] bg-primary/10 flex items-center justify-center text-primary group-hover/header:bg-primary group-hover/header:text-primary-foreground transition-all duration-500 border border-primary/20 shadow-[0_0_25px_rgba(var(--color-primary),0.15)]">
+                        <cat.icon className="h-8 w-8" />
+                      </div>
+                      <h3 className="text-3xl font-black text-foreground tracking-tighter leading-tight group-hover/header:text-primary transition-colors">{cat.title}</h3>
+                    </div>
+
+                    <p className="text-muted-foreground text-[15px] font-medium leading-relaxed h-14">
                       {cat.description}
                     </p>
-                  </div>
-                </header>
 
-                <div className="grid grid-cols-2 gap-x-4 gap-y-6 pt-8 border-t border-border/50 relative z-10">
-                  {cat.skills.map(skill => (
-                    <div key={skill.name} className="flex items-center gap-4 group/skill">
-                      <div className="p-2 rounded-lg bg-secondary/30 group-hover/skill:bg-primary/10 transition-colors">
-                        <skill.icon
-                          className="h-4 w-4 text-muted-foreground/40 group-hover/skill:text-primary transition-colors"
-                          style={{ fill: 'currentColor' }}
-                        />
-                      </div>
-                      <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-muted-foreground/60 group-hover/skill:text-foreground transition-colors">
-                        {skill.name}
-                      </span>
+                    <div className="grid grid-cols-2 gap-x-4 gap-y-6 pt-10 border-t border-white/5">
+                      {cat.skills.map(skill => (
+                        <a 
+                          key={skill.name} 
+                          href={skill.url} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="flex items-center gap-4 group/skill cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-xl transition-all"
+                        >
+                          <div className="p-2.5 rounded-xl bg-white/5 group-hover/skill:bg-primary/20 transition-all border border-white/5 group-hover/skill:border-primary/30">
+                            <skill.icon
+                              className="h-4 w-4 text-muted-foreground group-hover/skill:text-primary transition-colors"
+                              style={{ fill: 'currentColor' }}
+                            />
+                          </div>
+                          <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-muted-foreground group-hover/skill:text-foreground transition-colors">
+                            {skill.name}
+                          </span>
+                        </a>
+                      ))}
                     </div>
-                  ))}
+                  </div>
                 </div>
               </div>
-            </div>
+            </LiquidReveal>
           ))}
         </div>
       </div>

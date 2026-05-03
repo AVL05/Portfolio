@@ -26,23 +26,23 @@
 }
 
 .dark {
-  /* Terminal / Matrix Elite Theme */
-  --background: oklch(0.08 0.01 150); /* Deep Obsidian with Green Tint */
+  /* Terminal / Matrix Elite Theme - Refined for better visibility */
+  --background: oklch(0.12 0.01 150); /* Slightly lighter obsidian */
   --foreground: oklch(0.98 0.01 150);
-  --card: oklch(0.11 0.02 150);
+  --card: oklch(0.18 0.02 150); /* More visible cards */
   --card-foreground: oklch(0.98 0.01 150);
-  --popover: oklch(0.11 0.02 150);
+  --popover: oklch(0.18 0.02 150);
   --popover-foreground: oklch(0.98 0.01 150);
   --primary: oklch(0.88 0.24 152); /* Neon Terminal Green */
   --primary-foreground: oklch(0.1 0.1 150);
-  --secondary: oklch(0.15 0.04 150);
+  --secondary: oklch(0.22 0.04 150); /* Lighter secondary */
   --secondary-foreground: oklch(0.98 0.01 150);
-  --muted: oklch(0.13 0.03 150);
-  --muted-foreground: oklch(0.6 0.08 150);
-  --accent: oklch(0.7 0.22 190); /* Cyber Cyan */
+  --muted: oklch(0.2 0.03 150);
+  --muted-foreground: oklch(0.75 0.05 150); /* Much lighter muted text */
+  --accent: oklch(0.75 0.2 190); /* Brighter Cyan */
   --accent-foreground: oklch(0.08 0.04 150);
-  --border: oklch(0.18 0.05 150);
-  --input: oklch(0.18 0.05 150);
+  --border: oklch(0.25 0.05 150); /* More visible borders */
+  --input: oklch(0.25 0.05 150);
   --ring: oklch(0.88 0.24 152);
 }
 
@@ -105,16 +105,60 @@
   }
 
   .glass {
-    @apply bg-card/20 backdrop-blur-xl border border-border/20;
-  }
-
-  .text-balance {
-    text-wrap: balance;
+    @apply bg-card/20 backdrop-blur-3xl border border-white/10;
+    box-shadow:
+      0 8px 32px 0 rgba(0, 0, 0, 0.3),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.05);
   }
 
   .dev-border {
-    @apply border border-border/40 bg-card/50 backdrop-blur-md;
-    box-shadow: 0 0 0 1px oklch(from var(--primary) l c h / 0.05);
+    @apply border border-border/40 bg-card/60 backdrop-blur-2xl transition-all duration-500;
+    box-shadow:
+      0 0 0 1px oklch(from var(--primary) l c h / 0.05),
+      0 20px 40px -10px rgba(0, 0, 0, 0.6);
+  }
+
+  .premium-card {
+    @apply relative overflow-hidden rounded-[2.5rem] bg-linear-to-br from-card/90 to-card/60 backdrop-blur-3xl border border-white/10 transition-all duration-700;
+    box-shadow:
+      0 30px 60px -12px rgba(0, 0, 0, 0.7),
+      inset 0 1px 1px 0 rgba(255, 255, 255, 0.05),
+      inset 0 0 40px 0 rgba(var(--color-primary), 0.02);
+  }
+
+  .premium-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.02;
+    pointer-events: none;
+  }
+
+  .premium-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), oklch(from var(--primary) l c h / 0.15), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+  }
+
+  .premium-card:hover::before {
+    opacity: 1;
+  }
+
+  .premium-card:hover {
+    @apply border-primary/40 -translate-y-3;
+    box-shadow:
+      0 40px 80px -20px rgba(0, 0, 0, 0.6),
+      0 0 20px oklch(from var(--primary) l c h / 0.1);
+  }
+
+  .text-display {
+    @apply font-black tracking-tighter leading-[0.9] text-balance;
+    font-variation-settings: "wght" 900, "wdth" 100;
   }
 
   .magnetic-area {
@@ -170,11 +214,6 @@
     background: oklch(from var(--primary) l c h / 0.3);
   }
 
-  /* Selection styling */
-  ::selection {
-    background: oklch(from var(--primary) l c h / 0.2);
-    color: var(--primary);
-  }
 
   /* Global Section Padding */
   .section-padding {

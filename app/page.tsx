@@ -14,7 +14,7 @@ const Projects = dynamicLoader(() => import("@/components/projects").then((mod) 
 const Photography = dynamicLoader(() => import("@/components/photography").then((mod) => mod.Photography));
 const Experience = dynamicLoader(() => import("@/components/experience").then((mod) => mod.Experience));
 const Contact = dynamicLoader(() => import("@/components/contact").then((mod) => mod.Contact));
-
+const CommandMenu = dynamicLoader(() => import("@/components/command-menu").then((mod) => mod.CommandMenu), { ssr: false });
 
 export default function Home() {
   return (
@@ -22,6 +22,8 @@ export default function Home() {
       <AnimatedBackground />
 
       <Navigation />
+      <CommandMenu />
+
       <main className="relative z-10">
         <Hero />
         <About />

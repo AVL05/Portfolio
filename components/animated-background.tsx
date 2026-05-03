@@ -1,70 +1,101 @@
-"use client";
+'use client'
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from 'react'
+import { gsap } from '@/lib/gsap'
 
 export function AnimatedBackground() {
-  const [isClient, setIsClient] = useState(false);
+  const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
-    setIsClient(true);
-  }, []);
+    const canvas = canvasRef.current
+    if (!canvas) return
 
-  if (!isClient) return null;
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+
+    let w: number, h: number
+    const circles: { x: number; y: number; r: number; color: string; vx: number; vy: number }[] = []
+
+    const resolveColor = (variable: string, opacity: number) => {
+      if (typeof window === 'undefined') return 'rgba(0,0,0,0)'
+
+      // 1. Resolve CSS variable to a color string (could be oklch, rgb, etc.)
+      const temp = document.createElement('div')
+      temp.style.color = variable
+      document.body.appendChild(temp)
+      const colorStr = getComputedStyle(temp).color
+      document.body.removeChild(temp)
+
+      // 2. Use a hidden canvas to convert that string to RGBA data
+      const tempCanvas = document.createElement('canvas')
+      tempCanvas.width = 1
+      tempCanvas.height = 1
+      const tempCtx = tempCanvas.getContext('2d')
+      if (!tempCtx) return 'rgba(0,0,0,0)'
+
+      tempCtx.fillStyle = colorStr
+      tempCtx.fillRect(0, 0, 1, 1)
+      const [r, g, b] = tempCtx.getImageData(0, 0, 1, 1).data
+      return `rgba(${r}, ${g}, ${b}, ${opacity})`
+    }
+
+    const init = () => {
+      w = canvas.width = window.innerWidth
+      h = canvas.height = window.innerHeight
+      circles.length = 0
+
+      const color1 = resolveColor('var(--primary)', 0.1)
+      const color2 = resolveColor('var(--accent)', 0.1)
+
+      for (let i = 0; i < 6; i++) {
+        circles.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: Math.random() * 400 + 200,
+          color: i % 2 === 0 ? color1 : color2,
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: (Math.random() - 0.5) * 0.5,
+        })
+      }
+    }
+
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h)
+      ctx.globalCompositeOperation = 'screen'
+
+      circles.forEach((c) => {
+        c.x += c.vx
+        c.y += c.vy
+
+        if (c.x < -c.r) c.x = w + c.r
+        if (c.x > w + c.r) c.x = -c.r
+        if (c.y < -c.r) c.y = h + c.r
+        if (c.y > h + c.r) c.y = -c.r
+
+        const gradient = ctx.createRadialGradient(c.x, c.y, 0, c.x, c.y, c.r)
+        gradient.addColorStop(0, c.color)
+        gradient.addColorStop(1, 'transparent')
+
+        ctx.fillStyle = gradient
+        ctx.beginPath()
+        ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2)
+        ctx.fill()
+      })
+
+      requestAnimationFrame(draw)
+    }
+
+    init()
+    draw()
+
+    window.addEventListener('resize', init)
+    return () => window.removeEventListener('resize', init)
+  }, [])
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-      {/* Gradient overlays */}
-      <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-accent/5" />
-      <div className="absolute inset-0 bg-gradient-radial from-transparent via-background/50 to-background" />
-
-      {/* Animated particles using efficient CSS */}
-      <div className="absolute inset-0">
-        {[...Array(8)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute rounded-full bg-primary/5 animate-float-slow"
-            style={{
-              width: `${Math.random() * 3 + 2}px`,
-              height: `${Math.random() * 3 + 2}px`,
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 10}s`,
-              animationDuration: `${Math.random() * 25 + 20}s`,
-              opacity: Math.random() * 0.2,
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Subtle grid pattern */}
-      <div
-        className="absolute inset-0 opacity-[0.01]"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(var(--color-primary), 0.3) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(var(--color-primary), 0.3) 1px, transparent 1px)
-          `,
-          backgroundSize: "100px 100px",
-        }}
-      />
-
-      <style jsx global>{`
-        @keyframes float-slow {
-          0%,
-          100% {
-            transform: translate(0, 0);
-          }
-          33% {
-            transform: translate(30px, -50px);
-          }
-          66% {
-            transform: translate(-20px, 20px);
-          }
-        }
-        .animate-float-slow {
-          animation: float-slow linear infinite;
-        }
-      `}</style>
-    </div>
-  );
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 pointer-events-none z-0"
+    />
+  )
 }

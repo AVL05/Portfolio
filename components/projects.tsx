@@ -11,6 +11,10 @@ import {
   DialogContent,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import { Magnetic } from '@/components/magnetic'
+import { LiquidReveal } from '@/components/liquid-reveal'
+
+
 
 const smallImageProjects = [
   'Llibret Falla el Molí 24/25',
@@ -19,21 +23,67 @@ const smallImageProjects = [
 
 function ProjectCard({ project, index, t }: { project: any; index: number, t: any }) {
   const cardRef = useRef<HTMLDivElement>(null)
+  const innerRef = useRef<HTMLDivElement>(null)
   const projectNumber = (index + 1).toString().padStart(2, '0')
+
+  useGSAP(() => {
+    const el = cardRef.current
+    const inner = innerRef.current
+    if (!el || !inner) return
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY } = e
+      const { left, top, width, height } = el.getBoundingClientRect()
+      const x = clientX - left
+      const y = clientY - top
+      const centerX = width / 2
+      const centerY = height / 2
+      const rotateX = (y - centerY) / 10
+      const rotateY = (centerX - x) / 10
+
+      gsap.to(inner, {
+        rotateX,
+        rotateY,
+        duration: 0.5,
+        ease: 'power2.out',
+        perspective: 1000
+      })
+    }
+
+    const handleMouseLeave = () => {
+      gsap.to(inner, {
+        rotateX: 0,
+        rotateY: 0,
+        duration: 0.5,
+        ease: 'power2.out'
+      })
+    }
+
+    el.addEventListener('mousemove', handleMouseMove)
+    el.addEventListener('mouseleave', handleMouseLeave)
+
+    return () => {
+      el.removeEventListener('mousemove', handleMouseMove)
+      el.removeEventListener('mouseleave', handleMouseLeave)
+    }
+  }, { scope: cardRef })
 
   return (
     <Dialog>
       <DialogTrigger asChild>
         <div
           ref={cardRef}
-          className="project-card group relative h-full cursor-pointer "
+          className="project-card group relative h-full cursor-pointer perspective-1000"
         >
-          <div className="relative h-full flex flex-col bg-card/50 border border-border overflow-hidden rounded-[2.5rem] transition-all duration-700 hover:border-primary/30 group-hover:-translate-y-2">
+          <div
+            ref={innerRef}
+            className="premium-card h-full flex flex-col preserve-3d"
+          >
             <div className="absolute top-8 left-8 z-30 font-mono text-xs text-muted-foreground/50 tracking-widest uppercase">
               Project <span className="text-primary font-bold">{projectNumber}</span>
             </div>
 
-            <div className="relative aspect-[16/11] overflow-hidden">
+            <div className="relative aspect-16/11 overflow-hidden">
                <Image
                 src={project.image || '/placeholder.svg'}
                 alt={project.title}
@@ -41,7 +91,7 @@ function ProjectCard({ project, index, t }: { project: any; index: number, t: an
                 className={`transition-all duration-1000 ease-out group-hover:scale-105 ${smallImageProjects.includes(project.title) ? 'p-8 object-contain' : 'object-cover'}`}
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-linear-to-t from-background via-background/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-500" />
 
               <div className="absolute top-8 right-8 z-30 flex flex-col items-end gap-2">
                 <div className="px-3 py-1 bg-secondary/80 border border-border rounded-full">
@@ -95,7 +145,7 @@ function ProjectCard({ project, index, t }: { project: any; index: number, t: an
             <div className="space-y-10">
               <div className="space-y-4">
                 <div className="text-primary font-mono text-[10px] uppercase tracking-[0.4em] font-bold">{t.projects.concept}</div>
-                <h2 className="text-3xl lg:text-5xl font-black text-foreground tracking-tighter leading-none">{project.title}</h2>
+                <h2 className="text-display text-4xl lg:text-6xl text-foreground">{project.title}</h2>
                 <div className="text-white/30 text-xs font-mono">{project.type}</div>
               </div>
 
@@ -132,6 +182,14 @@ function ProjectCard({ project, index, t }: { project: any; index: number, t: an
         </div>
       </DialogContent>
     </Dialog>
+  )
+}
+
+function ProjectCardWrapper({ project, index, t }: { project: any; index: number, t: any }) {
+  return (
+    <LiquidReveal>
+      <ProjectCard project={project} index={index} t={t} />
+    </LiquidReveal>
   )
 }
 
@@ -172,14 +230,14 @@ export function Projects() {
 
   return (
     <section id="projects" ref={containerRef} className="section-padding bg-background relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-primary/5 [mask-image:linear-gradient(to_left,black,transparent)] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-primary/5 mask-[linear-gradient(to_left,black,transparent)] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-16 sm:mb-0">
-          <RevealHeader 
-            title={t.projects.title} 
-            subtitle={t.projects.subtitle} 
-            className="mb-0 sm:mb-0" 
+          <RevealHeader
+            title={t.projects.title}
+            subtitle={t.projects.subtitle}
+            className="mb-0 sm:mb-0"
           />
 
           <div className="flex gap-4 mb-16">
@@ -197,7 +255,7 @@ export function Projects() {
 
         <div className="projects-grid grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
           {filteredProjects.map((project, index) => (
-            <ProjectCard key={project.title} project={project} index={index} t={t} />
+            <ProjectCardWrapper key={project.title} project={project} index={index} t={t} />
           ))}
         </div>
       </div>

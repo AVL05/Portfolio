@@ -28,16 +28,25 @@ export function RevealHeader({ title, subtitle, description, className = "" }: R
       { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out' }
     )
     .fromTo(q('.header-subtitle .char'),
-      { opacity: 0, y: 30, rotateX: -45 },
-      { opacity: 1, y: 0, rotateX: 0, stagger: 0.01, duration: 0.6, ease: 'power4.out' },
+      {
+        opacity: 0,
+        filter: 'blur(10px)'
+      },
+      {
+        opacity: 1,
+        filter: 'blur(0px)',
+        stagger: 0.02,
+        duration: 1.2,
+        ease: 'expo.out'
+      },
       "-=0.3"
     )
 
     if (description) {
       tl.fromTo(q('.header-description'),
-        { opacity: 0, y: 15 },
-        { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' },
-        "-=0.4"
+        { opacity: 0, y: 15, filter: 'blur(5px)' },
+        { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.6, ease: 'power2.out' },
+        "-=0.8"
       )
     }
   }, { scope: containerRef })
@@ -45,13 +54,17 @@ export function RevealHeader({ title, subtitle, description, className = "" }: R
   return (
     <header ref={containerRef} className={`mb-24 sm:mb-32 space-y-6 ${className}`}>
       <div className="header-line flex items-center gap-4 text-primary font-mono text-sm tracking-[0.3em] uppercase">
-        <span className="w-8 h-[1px] bg-primary/50" />
+        <span className="w-8 h-px bg-primary/50" />
         {title}
       </div>
-      <h2 className="header-subtitle text-4xl sm:text-7xl font-black text-foreground tracking-tighter leading-none overflow-hidden">
-        {subtitle.split('').map((char, i) => (
-          <span key={i} className="char inline-block">
-            {char === ' ' ? '\u00A0' : char}
+      <h2 className="header-subtitle text-4xl sm:text-7xl font-black text-foreground tracking-tighter leading-tight pb-2">
+        {subtitle.split(' ').map((word, i) => (
+          <span key={i} className="inline-block whitespace-nowrap mr-[0.2em]">
+            {word.split('').map((char, j) => (
+              <span key={j} className="char inline-block">
+                {char}
+              </span>
+            ))}
           </span>
         ))}
       </h2>

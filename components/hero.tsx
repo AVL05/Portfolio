@@ -6,51 +6,7 @@ import { FaGithub, FaLinkedin } from 'react-icons/fa6'
 import { gsap, useGSAP } from '@/lib/gsap'
 import { useLanguage } from '@/lib/language-context'
 
-const MagneticLink = ({ children, href, className = "" }: { children: React.ReactNode, href: string, className?: string }) => {
-  const linkRef = useRef<HTMLAnchorElement>(null)
-
-  useGSAP(() => {
-    const link = linkRef.current
-    if (!link) return
-
-    const xTo = gsap.quickTo(link, "x", { duration: 0.8, ease: "power2.out" })
-    const yTo = gsap.quickTo(link, "y", { duration: 0.8, ease: "power2.out" })
-
-    const mouseMove = (e: MouseEvent) => {
-      const { clientX, clientY } = e
-      const { left, top, width, height } = link.getBoundingClientRect()
-      const x = clientX - (left + width / 2)
-      const y = clientY - (top + height / 2)
-      xTo(x * 0.15) // Reduced force
-      yTo(y * 0.15) // Reduced force
-    }
-
-    const mouseLeave = () => {
-      xTo(0)
-      yTo(0)
-    }
-
-    link.addEventListener("mousemove", mouseMove)
-    link.addEventListener("mouseleave", mouseLeave)
-
-    return () => {
-      link.removeEventListener("mousemove", mouseMove)
-      link.removeEventListener("mouseleave", mouseLeave)
-    }
-  }, { scope: linkRef })
-
-  return (
-    <a
-      ref={linkRef}
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`inline-block translate-z-0 ${className}`}
-    >
-      {children}
-    </a>
-  )
-}
+import { Magnetic } from '@/components/magnetic'
 
 export function Hero() {
   const { t } = useLanguage()
@@ -63,28 +19,51 @@ export function Hero() {
 
     // 1. Entrance Animation
     tl.fromTo(q('.reveal-char'),
-      { y: 50, opacity: 0, rotateX: -45 },
-      { y: 0, opacity: 1, rotateX: 0, stagger: 0.015, duration: 0.8, ease: 'power4.out' }
+      { opacity: 0, filter: 'blur(10px)' },
+      {
+        opacity: 1,
+        filter: 'blur(0px)',
+        stagger: 0.03,
+        duration: 1.2,
+        ease: 'expo.out',
+        onStart: () => {
+          // Custom Scramble Effect
+          q('.reveal-char').forEach((el, i) => {
+            const originalChar = el.textContent
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*"
+            let iterations = 0
+
+            const interval = setInterval(() => {
+              el.textContent = chars[Math.floor(Math.random() * chars.length)]
+              iterations++
+              if (iterations > 10 + i * 2) {
+                el.textContent = originalChar
+                clearInterval(interval)
+              }
+            }, 50)
+          })
+        }
+      }
     )
     .fromTo(q('.hero-badge'),
-      { opacity: 0, scale: 0.8, rotateX: 45 },
-      { opacity: 1, scale: 1, rotateX: 0, duration: 0.8, ease: 'back.out(1.7)' },
-      "-=0.6"
+      { opacity: 0, scale: 0.5, rotateY: 180 },
+      { opacity: 1, scale: 1, rotateY: 0, duration: 1.2, ease: 'elastic.out(1, 0.3)' },
+      "-=1"
     )
     .fromTo(q('.hero-description'),
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.8 },
-      "-=0.5"
+      { opacity: 0, x: -30, filter: 'blur(5px)' },
+      { opacity: 1, x: 0, filter: 'blur(0px)', duration: 1, ease: 'power3.out' },
+      "-=0.8"
     )
     .fromTo(q('.social-magnetic'),
-      { opacity: 0, y: 20, stagger: 0.05 },
-      { opacity: 1, y: 0, duration: 0.6, ease: 'back.out(2)' },
-      "-=0.4"
+      { opacity: 0, scale: 0, stagger: 0.1 },
+      { opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(2)' },
+      "-=0.6"
     )
     .fromTo(q('.scroll-indicator'),
-      { opacity: 0, y: 10 },
-      { opacity: 1, y: 0, duration: 0.6 },
-      "-=0.2"
+      { opacity: 0, y: 50 },
+      { opacity: 1, y: 0, duration: 1, ease: 'power4.out' },
+      "-=0.4"
     )
 
     // 3. Mouse Interaction (Subtle Parallax)
@@ -92,30 +71,21 @@ export function Hero() {
       const { clientX, clientY } = e
       const xPos = (clientX / window.innerWidth - 0.5)
       const yPos = (clientY / window.innerHeight - 0.5)
-      
-      // Char Parallax
-      gsap.to(q('.reveal-char'), {
-        x: (i) => xPos * (5 + i * 0.5),
-        y: (i) => yPos * (5 + i * 0.5),
-        duration: 2,
-        ease: 'power2.out',
-      })
 
       // Background Glows Parallax
       gsap.to(q('.hero-glow'), {
-        x: xPos * 50,
-        y: yPos * 50,
-        duration: 3,
-        ease: 'power2.out',
+        x: xPos * 100,
+        y: yPos * 100,
+        duration: 2.5,
+        ease: 'power3.out',
         stagger: 0.1
       })
 
-      // Grid (More subtle)
+      // Grid (Perspective Shift)
       gsap.to(gridRef.current, {
-        rotateX: yPos * 5,
-        rotateY: xPos * -5,
-        x: xPos * 30,
-        y: yPos * 30,
+        rotateX: 45 + yPos * 10,
+        rotateY: xPos * 10,
+        z: xPos * 50,
         duration: 2,
         ease: 'power2.out'
       })
@@ -141,7 +111,7 @@ export function Hero() {
         className="absolute inset-[-100px] bg-grid opacity-[0.1] dark:opacity-20 pointer-events-none"
       />
 
-      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-background/50 to-background pointer-events-none" />
+      <div className="absolute top-0 left-0 w-full h-full bg-linear-to-b from-transparent via-background/50 to-background pointer-events-none" />
 
       {/* Decorative Glows */}
       <div className="hero-glow absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(var(--color-primary),0.05)_0%,transparent_70%)] pointer-events-none opacity-30" />
@@ -150,25 +120,29 @@ export function Hero() {
       <div className="w-full max-w-7xl mx-auto z-10 flex flex-col items-center text-center space-y-12">
 
         {/* Status Badge */}
-        <div className="hero-badge flex items-center gap-3 px-6 py-2 dev-border rounded-full shadow-lg dark:shadow-[0_0_20px_rgba(0,0,0,0.3)]">
+        <div className="hero-badge group flex items-center gap-3 px-6 py-2 dev-border rounded-full shadow-lg dark:shadow-[0_0_20px_rgba(0,0,0,0.3)] cursor-default overflow-hidden relative">
+          <div className="absolute inset-0 bg-primary/10 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
           </span>
-          <span className="text-[10px] sm:text-xs font-mono font-bold tracking-[0.2em] uppercase text-primary/80">
+          <span className="text-[10px] sm:text-xs font-mono font-bold tracking-[0.2em] uppercase text-primary/80 relative z-10">
             {t.hero.status}
           </span>
         </div>
 
         {/* Main Title */}
-        <div className="space-y-4">
-          <h1 className="flex flex-wrap justify-center overflow-hidden py-4 gap-x-[0.3em]">
+        <div className="relative space-y-4 perspective-2000">
+          {/* Cinematic Background Glow */}
+          <div className="absolute inset-0 -z-10 bg-radial from-primary/10 via-transparent to-transparent blur-[120px] scale-150" />
+
+          <h1 className="flex flex-wrap justify-center py-4 gap-x-[0.3em] preserve-3d">
             {name.split(' ').map((word, i) => (
-              <span key={i} className="inline-block whitespace-nowrap">
+              <span key={i} className="inline-block whitespace-nowrap preserve-3d">
                 {word.split('').map((char, j) => (
                   <span
                     key={j}
-                    className="reveal-char inline-block text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-foreground tracking-tighter leading-none"
+                    className="reveal-char inline-block text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-foreground text-display cursor-default"
                   >
                     {char}
                   </span>
@@ -184,33 +158,33 @@ export function Hero() {
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 pt-8">
-          <MagneticLink href="https://github.com/AVL05" className="social-magnetic w-full sm:w-auto">
+          <a href="https://github.com/AVL05" target="_blank" rel="noopener noreferrer" className="social-magnetic w-full sm:w-auto block">
             <div className="group flex items-center justify-center gap-4 px-10 py-5 bg-foreground text-background font-bold rounded-2xl hover:bg-primary hover:text-primary-foreground transition-all duration-500 shadow-xl">
               <FaGithub className="h-5 w-5" />
               <span className="text-sm tracking-tight">GitHub</span>
             </div>
-          </MagneticLink>
+          </a>
 
-          <MagneticLink href="https://www.linkedin.com/in/alex-vicente-lopez/" className="social-magnetic w-full sm:w-auto">
+          <a href="https://www.linkedin.com/in/alex-vicente-lopez/" target="_blank" rel="noopener noreferrer" className="social-magnetic w-full sm:w-auto block">
             <div className="group flex items-center justify-center gap-4 px-10 py-5 bg-card border border-border text-foreground font-bold rounded-2xl hover:border-primary/50 transition-all duration-500">
               <FaLinkedin className="h-5 w-5 text-accent" />
               <span className="text-sm tracking-tight text-muted-foreground group-hover:text-foreground">LinkedIn</span>
             </div>
-          </MagneticLink>
+          </a>
         </div>
 
         {/* Tech Indicators */}
         <div className="hero-description grid grid-cols-2 md:grid-cols-3 gap-8 pt-16 opacity-50">
           <div className="flex items-center gap-3 grayscale hover:grayscale-0 transition-all cursor-default">
-            <Terminal className="h-4 w-4" />
+            <Terminal className="size-4" />
             <span className="text-[10px] font-mono tracking-widest uppercase">Frontend</span>
           </div>
           <div className="flex items-center gap-3 grayscale hover:grayscale-0 transition-all cursor-default">
-            <Code2 className="h-4 w-4" />
+            <Code2 className="size-4" />
             <span className="text-[10px] font-mono tracking-widest uppercase">Backend</span>
           </div>
           <div className="hidden md:flex items-center gap-3 grayscale hover:grayscale-0 transition-all cursor-default">
-            <Sparkles className="h-4 w-4" />
+            <Sparkles className="size-4" />
             <span className="text-[10px] font-mono tracking-widest uppercase">Digital Art</span>
           </div>
         </div>
@@ -228,6 +202,9 @@ export function Hero() {
           <ArrowDown className="scroll-arrow h-4 w-4" />
         </div>
       </a>
+
+      {/* Depth Mask Transition */}
+      <div className="absolute bottom-0 left-0 w-full h-32 bg-linear-to-t from-background to-transparent backdrop-blur-[2px] pointer-events-none z-20" />
     </section>
   )
 }

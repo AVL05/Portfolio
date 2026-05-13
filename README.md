@@ -34,7 +34,27 @@ Este repositorio contiene el código fuente del portafolio personal de **Alex Vi
 ## 🚀 Requisitos mínimos
 
 - **Node.js** >= 18.17.0
-- Gestor de paquetes: **npm** o **pnpm** (recomendada coherencia en el proyecto)
+- Gestor de paquetes: **pnpm** (recomendado)
+
+## 💻 Desarrollo
+
+Instala las dependencias:
+
+```bash
+pnpm install
+```
+
+Ejecuta el servidor de desarrollo:
+
+```bash
+pnpm dev
+```
+
+Genera la build de producción:
+
+```bash
+pnpm build
+```
 
 ## 📁 Estructura resumida
 

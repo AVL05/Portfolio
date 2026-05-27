@@ -29,10 +29,9 @@ interface TimelineItem {
 interface Translation {
   nav: {
     home: string
-    about: string
+    skills: string
     experience: string
     projects: string
-    photography: string
     contact: string
   }
   hero: {
@@ -41,16 +40,6 @@ interface Translation {
     cta_github: string
     cta_linkedin: string
     scroll: string
-  }
-  about: {
-    title: string
-    subtitle: string
-    p1: string
-    p2: string
-    formation: string
-    formation_desc: string
-    terminal: string
-    summary: string
   }
   skills: {
     title: string

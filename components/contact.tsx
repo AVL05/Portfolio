@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { Camera, Mail } from 'lucide-react'
+import { Mail } from 'lucide-react'
 import { FaGithub, FaLinkedin } from 'react-icons/fa6'
 import type React from 'react'
 import { useState } from 'react'
@@ -21,6 +21,7 @@ export function Contact() {
     name: '',
     email: '',
     message: '',
+    botcheck: '',
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | null>(
@@ -59,9 +60,11 @@ export function Contact() {
         },
         body: JSON.stringify({
           access_key: 'd72eeacd-28fc-442b-83bd-b8c383c5997e',
+          subject: 'Nuevo contacto - Portfolio Dev',
           name: formData.name,
           email: formData.email,
           message: formData.message,
+          botcheck: formData.botcheck,
         }),
       })
 
@@ -69,7 +72,7 @@ export function Contact() {
 
       if (data.success) {
         setSubmitStatus('success')
-        setFormData({ name: '', email: '', message: '' })
+        setFormData({ name: '', email: '', message: '', botcheck: '' })
       } else {
         setSubmitStatus('error')
       }
@@ -109,6 +112,15 @@ export function Contact() {
             </div>
 
             <form onSubmit={handleSubmit} className="p-8 sm:p-10 space-y-8">
+              <input
+                type="checkbox"
+                name="botcheck"
+                className="hidden"
+                tabIndex={-1}
+                autoComplete="off"
+                value={formData.botcheck}
+                onChange={(e) => setFormData({ ...formData, botcheck: e.target.checked ? 'true' : '' })}
+              />
               <div className="space-y-4">
                 <label htmlFor="name" className="text-sm font-black uppercase tracking-widest text-primary/80 ml-1">
                   {t.contact.form_name}
@@ -207,30 +219,24 @@ export function Contact() {
                     <div className="p-4 bg-secondary rounded-2xl group-hover:bg-primary group-hover:text-primary-foreground transition-all">
                       <FaLinkedin className="h-6 w-6" />
                     </div>
-                    linkedin / alexvicvicente
+                    linkedin / alex-vicente-lopez
                   </a>
                 </div>
               </div>
 
-              <Card className="p-8 bg-card border-border rounded-3xl mt-12 group hover:border-primary/20 transition-all">
-                <div className="flex flex-col sm:flex-row items-center gap-6">
-                  <div className="p-5 bg-primary/10 rounded-2xl text-primary">
-                    <Camera className="h-8 w-8" />
-                  </div>
-                  <div className="text-center sm:text-left">
-                    <h3 className="text-xl font-bold mb-1 group-hover:text-primary transition-colors">{t.contact.visual_portfolio_title}</h3>
-                    <p className="text-muted-foreground text-sm mb-4">{t.contact.visual_portfolio_desc}</p>
-                    <Button variant="link" asChild className="text-primary font-bold p-0 h-auto hover:text-white transition-colors">
-                      <a href="#photography">{t.contact.visual_portfolio_btn}</a>
-                    </Button>
-                  </div>
-                </div>
-              </Card>
+              <a
+                href="https://alexgallery.alexviclop.workers.dev/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex text-sm font-mono uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors"
+              >
+                {t.contact.visual_portfolio_btn}
+              </a>
             </div>
 
             <footer className="mt-20 pt-10 border-t border-border text-center sm:text-left">
               <p className="text-muted-foreground/30 text-xs font-mono tracking-widest uppercase mb-2">
-                © 2025 Alex Vicente López
+                © 2026 Alex Vicente López
               </p>
               <p className="text-muted-foreground text-sm font-medium">
                 {t.contact.footer_built}

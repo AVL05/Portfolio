@@ -8,11 +8,7 @@ import { Suspense } from "react";
 import "@/lib/raf-polyfill";
 import "./globals.css";
 import { SmoothScroll } from "@/components/smooth-scroll";
-import { NoiseOverlay } from "@/components/noise-overlay";
-import { ScrollProgress } from "@/components/scroll-progress";
-import { ThemeProvider } from "@/components/theme-provider";
 import { LanguageProvider } from "@/lib/language-context";
-
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://aleviclop.vercel.app";
@@ -26,26 +22,26 @@ export const viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "Alex Vicente López - Portfolio",
+    default: "Alex Vicente López - Desarrollador Web",
     template: "%s | Alex Vicente López",
   },
   description:
-    "Desarrollador Web | Fotógrafo Creativo | Diseñador Digital. Transformo ideas en experiencias digitales únicas.",
+    "Portfolio de Alex Vicente López, desarrollador web en formación especializado en React, PHP/Laravel, interfaces cuidadas y productos digitales claros.",
   keywords: [
     "Desarrollador Web",
     "Portfolio",
-    "Fotógrafo",
-    "Diseño Digital",
     "React",
+    "Laravel",
+    "PHP",
     "Next.js",
-    "GSAP",
-    "Animations",
+    "Frontend",
+    "Full-stack junior",
   ],
   authors: [{ name: "Alex Vicente López", url: SITE_URL }],
   openGraph: {
-    title: "Alex Vicente López - Portfolio",
+    title: "Alex Vicente López - Desarrollador Web",
     description:
-      "Desarrollador Web | Fotógrafo Creativo | Diseñador Digital. Transformo ideas en experiencias digitales únicas.",
+      "Portfolio de desarrollador web con proyectos frontend, backend, diseño editorial y una mirada visual apoyada en fotografía.",
     url: SITE_URL,
     siteName: "Alex Vicente López",
     images: [
@@ -53,7 +49,7 @@ export const metadata: Metadata = {
         url: `${SITE_URL}/api/og?lang=es`,
         width: 1200,
         height: 630,
-        alt: "Alex Vicente López — Portfolio",
+        alt: "Alex Vicente López - Portfolio",
       },
     ],
     locale: "es_ES",
@@ -61,12 +57,11 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Alex Vicente López - Portfolio",
+    title: "Alex Vicente López - Desarrollador Web",
     description:
-      "Desarrollador Web | Fotógrafo Creativo | Diseñador Digital. Transformo ideas en experiencias digitales únicas.",
+      "Portfolio de desarrollador web con proyectos frontend, backend y diseño visual.",
     images: [`${SITE_URL}/api/og?lang=es`],
   },
-
   robots: {
     index: true,
     follow: true,
@@ -85,14 +80,13 @@ export const metadata: Metadata = {
   },
 };
 
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className="scroll-smooth overflow-x-hidden" suppressHydrationWarning>
+    <html lang="es" className="dark scroll-smooth overflow-x-hidden" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://va.vercel-scripts.com" />
         <link rel="preconnect" href="https://vitals.vercel-insights.com" />
@@ -104,12 +98,13 @@ export default function RootLayout({
               "@type": "Person",
               name: "Alex Vicente López",
               url: SITE_URL,
-              jobTitle: "Desarrollador Web y Fotógrafo",
+              jobTitle: "Desarrollador Web",
               sameAs: [
                 "https://github.com/AVL05",
                 "https://www.linkedin.com/in/alex-vicente-lopez/",
               ],
-              description: "Desarrollador Web, Fotógrafo Creativo y Diseñador Digital especializado en experiencias digitales únicas.",
+              description:
+                "Desarrollador web en formación especializado en React, PHP/Laravel, interfaces cuidadas y productos digitales claros.",
             }),
           }}
         />
@@ -120,19 +115,11 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <LanguageProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <SmoothScroll>
-              <div className="relative min-h-screen overflow-x-hidden">
-                <ScrollProgress />
-                <Suspense fallback={null}>{children}</Suspense>
-              </div>
-            </SmoothScroll>
-          </ThemeProvider>
+          <SmoothScroll>
+            <div className="relative min-h-screen overflow-x-hidden">
+              <Suspense fallback={null}>{children}</Suspense>
+            </div>
+          </SmoothScroll>
         </LanguageProvider>
         <Analytics />
         <SpeedInsights />

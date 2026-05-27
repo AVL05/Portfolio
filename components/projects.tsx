@@ -2,16 +2,11 @@
 
 import { useRef, useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { Code2, ChevronRight } from 'lucide-react'
+import { ExternalLink } from 'lucide-react'
+import { FaGithub } from 'react-icons/fa6'
 import Image from 'next/image'
 import { gsap, useGSAP } from '@/lib/gsap'
 import { useLanguage } from '@/lib/language-context'
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import { Magnetic } from '@/components/magnetic'
 import { LiquidReveal } from '@/components/liquid-reveal'
 
 
@@ -23,165 +18,72 @@ const smallImageProjects = [
 
 function ProjectCard({ project, index, t }: { project: any; index: number, t: any }) {
   const cardRef = useRef<HTMLDivElement>(null)
-  const innerRef = useRef<HTMLDivElement>(null)
   const projectNumber = (index + 1).toString().padStart(2, '0')
 
-  useGSAP(() => {
-    const el = cardRef.current
-    const inner = innerRef.current
-    if (!el || !inner) return
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const { clientX, clientY } = e
-      const { left, top, width, height } = el.getBoundingClientRect()
-      const x = clientX - left
-      const y = clientY - top
-      const centerX = width / 2
-      const centerY = height / 2
-      const rotateX = (y - centerY) / 10
-      const rotateY = (centerX - x) / 10
-
-      gsap.to(inner, {
-        rotateX,
-        rotateY,
-        duration: 0.5,
-        ease: 'power2.out',
-        perspective: 1000
-      })
-    }
-
-    const handleMouseLeave = () => {
-      gsap.to(inner, {
-        rotateX: 0,
-        rotateY: 0,
-        duration: 0.5,
-        ease: 'power2.out'
-      })
-    }
-
-    el.addEventListener('mousemove', handleMouseMove)
-    el.addEventListener('mouseleave', handleMouseLeave)
-
-    return () => {
-      el.removeEventListener('mousemove', handleMouseMove)
-      el.removeEventListener('mouseleave', handleMouseLeave)
-    }
-  }, { scope: cardRef })
-
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <div
-          ref={cardRef}
-          className="project-card group relative h-full cursor-pointer perspective-1000"
-        >
-          <div
-            ref={innerRef}
-            className="premium-card h-full flex flex-col preserve-3d"
-          >
-            <div className="absolute top-8 left-8 z-30 font-mono text-xs text-muted-foreground/50 tracking-widest uppercase">
-              Project <span className="text-primary font-bold">{projectNumber}</span>
-            </div>
+    <article
+      ref={cardRef}
+      className="project-card group h-full"
+    >
+      <div className="premium-card h-full flex flex-col">
+        <div className="absolute top-6 left-6 z-30 font-mono text-[10px] text-muted-foreground/60 tracking-widest uppercase">
+          Project <span className="text-primary font-bold">{projectNumber}</span>
+        </div>
 
-            <div className="relative aspect-16/11 overflow-hidden">
-               <Image
-                src={project.image || '/placeholder.svg'}
-                alt={project.title}
-                fill
-                className={`transition-all duration-1000 ease-out group-hover:scale-105 ${smallImageProjects.includes(project.title) ? 'p-8 object-contain' : 'object-cover'}`}
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-              <div className="absolute inset-0 bg-linear-to-t from-background via-background/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-500" />
+        <div className="relative aspect-16/10 overflow-hidden">
+          <Image
+            src={project.image || '/placeholder.svg'}
+            alt={project.title}
+            fill
+            className={`transition-all duration-700 ease-out group-hover:scale-[1.025] ${smallImageProjects.includes(project.title) ? 'p-8 object-contain' : 'object-cover'}`}
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+          <div className="absolute inset-0 bg-linear-to-t from-background/85 via-background/10 to-transparent opacity-45 group-hover:opacity-65 transition-opacity duration-300" />
 
-              <div className="absolute top-8 right-8 z-30 flex flex-col items-end gap-2">
-                <div className="px-3 py-1 bg-secondary/80 border border-border rounded-full">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">{project.category}</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="p-10 space-y-4 relative">
-              <h3 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight group-hover:text-primary transition-colors">
-                {project.title}
-              </h3>
-              <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2">
-                {project.description}
-              </p>
-
-              <div className="pt-4 flex items-center justify-between">
-                <div className="flex gap-4">
-                  {project.technologies.slice(0, 2).map((tech: string) => (
-                    <span key={tech} className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">{tech}</span>
-                  ))}
-                </div>
-                <div className="flex items-center gap-2 text-primary font-mono text-[10px] uppercase font-bold tracking-widest opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0 transition-all">
-                  {t.nav.projects} <ChevronRight className="h-3 w-3" />
-                </div>
-              </div>
+          <div className="absolute top-6 right-6 z-30">
+            <div className="px-3 py-1 bg-secondary/80 border border-border rounded-full">
+              <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">{project.category}</span>
             </div>
           </div>
         </div>
-      </DialogTrigger>
 
-      <DialogContent
-        data-lenis-prevent
-        className="max-w-[95vw] lg:max-w-[1200px] bg-background border-border text-foreground p-0 overflow-hidden rounded-[3rem] shadow-2xl"
-      >
-        <div className="grid grid-cols-1 lg:grid-cols-12 max-h-[90vh] overflow-y-auto lg:overflow-hidden">
-          <div className="lg:col-span-7 bg-secondary/20 relative flex items-center justify-center p-12 lg:p-24 border-b lg:border-b-0 lg:border-r border-border">
-            <div className="absolute inset-0 bg-grid opacity-20" />
-            <div className="relative w-full aspect-video drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
-              <Image
-                src={project.image || '/placeholder.svg'}
-                alt={project.title}
-                fill
-                className="object-contain"
-                sizes="(max-width: 1280px) 100vw, 1200px"
-              />
-            </div>
+        <div className="p-8 space-y-6 relative flex flex-col grow">
+          <div className="space-y-4">
+            <h3 className="text-2xl font-bold text-foreground tracking-tight group-hover:text-primary transition-colors">
+              {project.title}
+            </h3>
+            <p className="text-muted-foreground text-sm leading-relaxed">
+              {project.description}
+            </p>
           </div>
 
-          <div className="lg:col-span-5 p-12 lg:p-16 flex flex-col justify-between space-y-12 lg:overflow-y-auto">
-            <div className="space-y-10">
-              <div className="space-y-4">
-                <div className="text-primary font-mono text-[10px] uppercase tracking-[0.4em] font-bold">{t.projects.concept}</div>
-                <h2 className="text-display text-4xl lg:text-6xl text-foreground">{project.title}</h2>
-                <div className="text-white/30 text-xs font-mono">{project.type}</div>
-              </div>
+          <div className="flex flex-wrap gap-2">
+            {project.technologies.map((tech: string) => (
+              <span key={tech} className="px-3 py-1 bg-secondary border border-border rounded-lg text-[10px] font-mono text-muted-foreground uppercase tracking-widest">
+                {tech}
+              </span>
+            ))}
+          </div>
 
-              <p className="text-muted-foreground text-lg leading-relaxed font-medium">
-                {project.description}
-              </p>
-
-              <div className="space-y-6">
-                <div className="flex items-center gap-4 text-muted-foreground/50">
-                  <Code2 className="h-4 w-4" />
-                  <span className="text-[10px] font-mono uppercase tracking-widest">{t.skills.technologies}</span>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {project.technologies.map((tech: string) => (
-                    <div key={tech} className="px-4 py-2 bg-secondary border border-border rounded-xl text-xs font-bold text-muted-foreground">
-                      {tech}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-12 grid grid-cols-2 gap-4">
-              <Button asChild size="lg" className="h-16 bg-primary text-primary-foreground font-black hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(var(--primary),0.2)] rounded-2xl transition-all shadow-xl">
-                <a href={project.link} target="_blank">{t.projects.view_live}</a>
+          <div className="mt-auto flex flex-col sm:flex-row gap-3 pt-2">
+            <Button asChild className="h-11 rounded-xl bg-primary text-primary-foreground font-bold">
+              <a href={project.link} target="_blank" rel="noopener noreferrer">
+                <ExternalLink className="mr-2 h-4 w-4" />
+                {t.projects.view_live}
+              </a>
+            </Button>
+            {project.github && (
+              <Button variant="outline" asChild className="h-11 rounded-xl border-border bg-secondary/40">
+                <a href={project.github} target="_blank" rel="noopener noreferrer">
+                  <FaGithub className="mr-2 h-4 w-4" />
+                  {t.projects.view_code}
+                </a>
               </Button>
-              {project.github && (
-                <Button variant="outline" size="lg" asChild className="h-16 border-border bg-secondary/50 hover:bg-secondary text-foreground rounded-2xl transition-all">
-                  <a href={project.github} target="_blank">{t.projects.view_code}</a>
-                </Button>
-              )}
-            </div>
+            )}
           </div>
         </div>
-      </DialogContent>
-    </Dialog>
+      </div>
+    </article>
   )
 }
 
@@ -230,7 +132,7 @@ export function Projects() {
 
   return (
     <section id="projects" ref={containerRef} className="section-padding bg-background relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-primary/5 mask-[linear-gradient(to_left,black,transparent)] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-primary/3 mask-[linear-gradient(to_left,black,transparent)] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-16 sm:mb-0">
@@ -253,7 +155,7 @@ export function Projects() {
           </div>
         </div>
 
-        <div className="projects-grid grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+        <div className="projects-grid grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
           {filteredProjects.map((project, index) => (
             <ProjectCardWrapper key={project.title} project={project} index={index} t={t} />
           ))}

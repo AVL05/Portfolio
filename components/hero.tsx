@@ -1,15 +1,13 @@
 'use client'
 
 import { useRef } from 'react'
-import { ArrowDown, Terminal, Code2, Sparkles } from 'lucide-react'
+import { ArrowDown, Mail, BriefcaseBusiness } from 'lucide-react'
 import { FaGithub, FaLinkedin } from 'react-icons/fa6'
 import { gsap, useGSAP } from '@/lib/gsap'
 import { useLanguage } from '@/lib/language-context'
 
-import { Magnetic } from '@/components/magnetic'
-
 export function Hero() {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
   const containerRef = useRef<HTMLDivElement>(null)
   const gridRef = useRef<HTMLDivElement>(null)
 
@@ -156,43 +154,37 @@ export function Hero() {
           </h2>
         </div>
 
-        {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 pt-8">
-          <a href="https://github.com/AVL05" target="_blank" rel="noopener noreferrer" className="social-magnetic w-full sm:w-auto block">
-            <div className="group flex items-center justify-center gap-4 px-10 py-5 bg-foreground text-background font-bold rounded-2xl hover:bg-primary hover:text-primary-foreground transition-all duration-500 shadow-xl">
-              <FaGithub className="h-5 w-5" />
-              <span className="text-sm tracking-tight">GitHub</span>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
+          <a href="#projects" className="social-magnetic w-full sm:w-auto block">
+            <div className="group flex items-center justify-center gap-3 px-8 py-4 bg-foreground text-background font-bold rounded-xl hover:bg-primary hover:text-primary-foreground transition-all duration-300 shadow-xl">
+              <BriefcaseBusiness className="h-5 w-5" />
+              <span className="text-sm tracking-tight">{language === 'es' ? 'Ver proyectos' : 'View projects'}</span>
             </div>
           </a>
 
-          <a href="https://www.linkedin.com/in/alex-vicente-lopez/" target="_blank" rel="noopener noreferrer" className="social-magnetic w-full sm:w-auto block">
-            <div className="group flex items-center justify-center gap-4 px-10 py-5 bg-card border border-border text-foreground font-bold rounded-2xl hover:border-primary/50 transition-all duration-500">
-              <FaLinkedin className="h-5 w-5 text-accent" />
-              <span className="text-sm tracking-tight text-muted-foreground group-hover:text-foreground">LinkedIn</span>
+          <a href="#contact" className="social-magnetic w-full sm:w-auto block">
+            <div className="group flex items-center justify-center gap-3 px-8 py-4 bg-card border border-border text-foreground font-bold rounded-xl hover:border-primary/50 transition-all duration-300">
+              <Mail className="h-5 w-5 text-accent" />
+              <span className="text-sm tracking-tight text-muted-foreground group-hover:text-foreground">{language === 'es' ? 'Contactar' : 'Contact'}</span>
             </div>
           </a>
         </div>
 
-        {/* Tech Indicators */}
-        <div className="hero-description grid grid-cols-2 md:grid-cols-3 gap-8 pt-16 opacity-50">
-          <div className="flex items-center gap-3 grayscale hover:grayscale-0 transition-all cursor-default">
-            <Terminal className="size-4" />
-            <span className="text-[10px] font-mono tracking-widest uppercase">Frontend</span>
-          </div>
-          <div className="flex items-center gap-3 grayscale hover:grayscale-0 transition-all cursor-default">
-            <Code2 className="size-4" />
-            <span className="text-[10px] font-mono tracking-widest uppercase">Backend</span>
-          </div>
-          <div className="hidden md:flex items-center gap-3 grayscale hover:grayscale-0 transition-all cursor-default">
-            <Sparkles className="size-4" />
-            <span className="text-[10px] font-mono tracking-widest uppercase">Digital Art</span>
-          </div>
+        <div className="hero-description flex flex-wrap items-center justify-center gap-5 pt-10 text-muted-foreground/60">
+          <a href="https://github.com/AVL05" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest hover:text-primary transition-colors">
+            <FaGithub className="h-4 w-4" />
+            GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/alex-vicente-lopez/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest hover:text-primary transition-colors">
+            <FaLinkedin className="h-4 w-4" />
+            LinkedIn
+          </a>
         </div>
       </div>
 
       {/* Scroll indicator */}
       <a
-  href="#about"
+  href="#projects"
   className="scroll-indicator absolute bottom-12 flex flex-col items-center gap-4 text-muted-foreground/50 hover:text-primary transition-all duration-500 group"
 >
         <span className="text-[10px] font-black uppercase tracking-[0.4em] font-mono group-hover:tracking-[0.6em] transition-all">

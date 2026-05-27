@@ -5,19 +5,16 @@ import { Menu, X } from 'lucide-react'
 import { useEffect, useState, useRef } from 'react'
 import { gsap, useGSAP } from '@/lib/gsap'
 import { useLanguage } from '@/lib/language-context'
-import { ThemeToggle } from './theme-toggle'
 import { LanguageToggle } from './language-toggle'
-import { Magnetic } from './magnetic'
 
 
 export function Navigation() {
   const { t } = useLanguage()
   const navItems = [
     { name: t.nav.home, href: '#hero' },
-    { name: t.nav.about, href: '#about' },
-    { name: t.nav.experience, href: '#experience' },
     { name: t.nav.projects, href: '#projects' },
-    { name: t.nav.photography, href: '#photography' },
+    { name: t.nav.skills, href: '#skills' },
+    { name: t.nav.experience, href: '#experience' },
     { name: t.nav.contact, href: '#contact' },
   ]
   const [isScrolled, setIsScrolled] = useState(false)
@@ -171,14 +168,12 @@ export function Navigation() {
       >
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
           <div className="flex items-center justify-between">
-            <Magnetic strength={0.3}>
-              <a
-                href="#hero"
-                className="nav-logo group text-xl sm:text-2xl font-black text-foreground tracking-tighter transition-all lg:whitespace-nowrap shrink-0"
-              >
-                ALEX <span className="text-primary">VICENTE</span>
-              </a>
-            </Magnetic>
+            <a
+              href="#hero"
+              className="nav-logo group text-xl sm:text-2xl font-black text-foreground tracking-tighter transition-all lg:whitespace-nowrap shrink-0"
+            >
+              ALEX <span className="text-primary">VICENTE</span>
+            </a>
 
             <div
               ref={navLinksContainerRef}
@@ -191,25 +186,22 @@ export function Navigation() {
               {navItems.map((item, index) => {
                 const isActive = activeSection === item.href.substring(1)
                 return (
-                  <Magnetic key={item.name} strength={0.2}>
-                    <a
-                      ref={(el) => { navLinksRefs.current[index] = el; }}
-                      href={item.href}
-                      className={`nav-item group relative text-[10px] font-black uppercase tracking-[0.15em] transition-colors duration-300 whitespace-nowrap ${
-                        isActive ? 'text-primary' : 'text-foreground/40 hover:text-foreground'
-                      }`}
-                    >
-                      <span className="mr-1 text-[9px] opacity-30 font-mono">0{index + 1}.</span>
-                      {item.name}
-                    </a>
-                  </Magnetic>
+                  <a
+                    key={item.name}
+                    ref={(el) => { navLinksRefs.current[index] = el; }}
+                    href={item.href}
+                    className={`nav-item group relative text-[10px] font-black uppercase tracking-[0.15em] transition-colors duration-300 whitespace-nowrap ${
+                      isActive ? 'text-primary' : 'text-foreground/40 hover:text-foreground'
+                    }`}
+                  >
+                    {item.name}
+                  </a>
                 )
               })}
             </div>
 
             <div className="nav-extra hidden xl:flex items-center gap-4 ml-4">
               <LanguageToggle />
-              <ThemeToggle />
             </div>
 
             <div className="xl:hidden flex items-center gap-4">
@@ -242,7 +234,6 @@ export function Navigation() {
                   handleMobileNavClick(item.href)
                 }}
               >
-                <span className="text-lg font-mono text-primary/40 mr-4">0{index + 1}.</span>
                 {item.name}
               </a>
             ))}

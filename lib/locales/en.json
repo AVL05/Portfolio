@@ -1,111 +1,100 @@
 {
   "nav": {
     "home": "Home",
-    "about": "About",
-    "experience": "Experience",
     "projects": "Projects",
-    "photography": "Photography",
+    "skills": "Stack",
+    "experience": "Experience",
     "contact": "Contact"
   },
   "hero": {
-    "status": "Available for new opportunities",
-    "description": "Web Application Development (DAW) student. Building the digital future through clean code, modern design, and a unique creative vision.",
+    "status": "Available for internships and web projects",
+    "description": "Web developer in training, focused on React interfaces, PHP/Laravel backends, and clear, fast, visually polished digital products.",
     "cta_github": "GitHub",
     "cta_linkedin": "LinkedIn",
     "scroll": "Scroll"
   },
-  "about": {
-    "title": "01. About Me",
-    "subtitle": "Coding with purpose and vision.",
-    "p1": "As a student and design enthusiast, my focus is on the intersection of technical functionality and visual excellence.",
-    "p2": "Currently studying Web Application Development, I combine my technical background in systems with a creative sensitivity forged through photography and digital design.",
-    "formation": "Education",
-    "formation_desc": "DAW & IT Systems",
-    "terminal": "Terminal",
-    "summary": "Summary"
-  },
   "skills": {
-    "title": "02. Skills",
-    "subtitle": "Technical Arsenal",
-    "desc": "Mastery of a diverse spectrum of languages and tools to materialize complex visions into tangible realities.",
+    "title": "02. Stack",
+    "subtitle": "Technologies I use",
+    "desc": "Tools I have used to build interfaces, APIs, databases, and visual pieces.",
     "technologies": "Technologies",
     "tools": "Tools"
   },
   "projects": {
-    "title": "03. Projects",
-    "subtitle": "Selected Works",
-    "desc": "A sample of challenges transformed into innovative digital solutions.",
-    "concept": "Concept Study",
-    "view_live": "View Live",
-    "view_code": "View Code",
+    "title": "01. Projects",
+    "subtitle": "What I have built",
+    "desc": "A short selection of web and visual projects with direct links to the result or the code.",
+    "concept": "Project detail",
+    "view_live": "View project",
+    "view_code": "View code",
     "items": [
       {
         "title": "Llibret Falla el Molí 24/25",
-        "description": "An editorial design masterpiece that transcends tradition. Cohesive visual identity for a 100+ page publication, balancing cultural heritage with avant-garde typographic minimalism.",
+        "description": "Editorial design for a 100+ page publication. I defined a consistent visual direction and worked on layout, typography, and production-ready artwork with Adobe tools.",
         "image": "/projects/Falla.svg",
-        "technologies": ["Indesign", "Photoshop", "Illustrator"],
+        "technologies": ["InDesign", "Photoshop", "Illustrator"],
         "category": "Graphic Design",
         "link": "/projects/LLIBRET 24-25.pdf",
-        "type": "Editorial Design"
+        "type": "Editorial design"
       },
       {
-        "title": "El Fogón: Gastronomic Vanguard",
-        "description": "High-impact landing page for a Mediterranean restaurant. Features clean-label aesthetics, fluid GSAP micro-interactions, and a performance-oriented architecture.",
+        "title": "El Fogón: Restaurant landing page",
+        "description": "Landing page for a Mediterranean restaurant built with Next.js, Tailwind CSS, and GSAP. The goal was to present the menu, atmosphere, and visual identity with simple navigation and good loading behavior.",
         "image": "/projects/el-fogon.png",
         "technologies": ["Next.js", "Tailwind CSS", "GSAP"],
         "category": "Web Development",
         "link": "https://prweb02.netlify.app/",
         "github": "https://github.com/AVL05/PRWEB02",
-        "type": "Premium Landing Page"
+        "type": "Landing page"
       },
       {
         "title": "Hotel Management System (API)",
-        "description": "Robust backend and RESTful API for reservation management. Implements complex database architectures ensuring integrity and real-time concurrency.",
+        "description": "API for hotel reservation and data management using PHP, MySQL, and JavaScript. I worked on database structure, endpoints, and basic validation for the management flow.",
         "image": "/projects/api-hotel-cover.png",
         "technologies": ["PHP", "MySQL", "JavaScript"],
         "category": "Web Development",
         "link": "/projects/Demo_API_Hotel.mp4",
         "github": "https://github.com/avl05/API_Hotel",
-        "type": "Backend Architecture"
+        "type": "Backend / API"
       },
       {
-        "title": "Reactive Holiday E-commerce",
-        "description": "Seasonal e-commerce solution focused on conversion and UX. Features a reactive state management system for carts and fluid category navigation.",
+        "title": "Holiday e-commerce",
+        "description": "Seasonal e-commerce application built with Vue, Vite, and Firebase. It includes category navigation, cart behavior, and state management for the purchase flow.",
         "image": "/projects/aitanamora.png",
         "technologies": ["Vue", "Vite", "Firebase"],
         "category": "Web Development",
         "link": "https://aitanamora.vercel.app/",
         "github": "https://github.com/AVL05/Dulces",
-        "type": "eCommerce App"
+        "type": "E-commerce"
       },
       {
-        "title": "Educational XML Architecture",
-        "description": "Full-stack platform for structured markup language teaching. Integrates XML data visualizations with an interface optimized for technical reading.",
+        "title": "Educational XML project",
+        "description": "Educational website for explaining markup languages and XML structure. I built the interface, content organization, and interactive examples with HTML, CSS, JavaScript, and XML.",
         "image": "/projects/xml-project.png",
         "technologies": ["HTML5", "CSS3", "JavaScript", "XML"],
         "category": "Web Development",
         "link": "https://avl05.github.io/web-xml-alex/",
         "github": "https://github.com/avl05/web-xml-alex",
-        "type": "EduTech Platform"
+        "type": "Educational website"
       }
     ]
   },
   "photography": {
     "title": "04. Photography",
-    "subtitle": "/ Creative View",
-    "description": "Explore my world through the lens. Capturing moments, emotions and the beauty that surrounds us.",
+    "subtitle": "/ Visual eye",
+    "description": "A short selection of my photography work. The full gallery lives in alexgallery so each site keeps a clear purpose.",
     "properties": "Properties.RAW",
     "filters": "Filters",
-    "view_full": "View Full Gallery"
+    "view_full": "Open alexgallery"
   },
   "experience": {
-    "title": "05. Journey",
-    "subtitle": "Evolution and progress.",
-    "desc": "A journey forged through continuous training and practical application in real environments.",
+    "title": "03. Journey",
+    "subtitle": "Education and real practice.",
+    "desc": "A path focused on web development, technical support, and applied visual projects.",
     "edu_title": "Academic Education",
     "job_title": "Professional Experience",
-    "cv_title": "Need a more detailed document?",
-    "cv_desc": "Download my full professional resume in PDF format to get a deep insight into my technical capabilities.",
+    "cv_title": "Need more detail?",
+    "cv_desc": "Download my CV in PDF format to review education, experience, stack, and projects with more context.",
     "cv_btn": "DOWNLOAD CV [PDF]",
     "education_list": [
       {
@@ -113,57 +102,57 @@
         "institution": "IES Serra Perenxisa",
         "period": "2024 - 2026",
         "location": "Torrent, Valencia",
-        "description": "Technical specialization in modern web architectures, high-performance database management, and deployment of scalable infrastructures. Practical focus on cutting-edge frameworks and agile methodologies."
+        "description": "Training in frontend and backend development, databases, deployment, and modern web application architecture."
       },
       {
         "title": "IT Systems and Networks",
         "institution": "Enseñanzas Profesionales Sorolla",
         "period": "2022 - 2024",
         "location": "Valencia",
-        "description": "Strong foundations in systems administration, network security, and hardware infrastructure. Critical problem solving and optimization of corporate technology environments."
+        "description": "Technical foundation in systems administration, networks, hardware, support, and incident resolution."
       }
     ],
     "experience_list": [
       {
-        "title": "Web Application Developer (Practicum)",
+        "title": "Web Application Developer (Internship)",
         "company": "Burguet Sistemas",
         "period": "16/04/2026 - 26/05/2026",
         "location": "Xirivella, Valencia",
-        "description": "Converting Java applications to REACT and Electron, and PHP web to REACT and PHP, creation of tables in database."
+        "description": "Migration of Java applications to React and Electron environments, adaptation of PHP websites to React, and support creating database tables."
       },
       {
-        "title": "Visual Identity & Digital Strategy",
-        "company": "Comisiones Culturales",
+        "title": "Visual Identity and Digital Strategy",
+        "company": "Cultural Commissions",
         "period": "2023 - 2025",
         "location": "Valencia, Spain",
-        "description": "Leadership in the digital transformation of visual communication. Art direction of editorial publications, strategic social media management, and creation of high-impact multimedia assets."
+        "description": "Editorial publication design, visual material creation, and digital content management for cultural communication."
       },
       {
-        "title": "IT Support Technician (Practicum)",
+        "title": "IT Support Technician (Internship)",
         "company": "Municipal Support",
         "period": "2024",
         "location": "Carlet, Valencia",
-        "description": "Comprehensive management of technological incidents in public environments. Specialized technical support in hardware and software, ensuring operational continuity of services."
+        "description": "Technical support for hardware, software, and user incidents in a public-sector environment."
       }
     ]
   },
   "contact": {
-    "title": "06. Contact",
-    "subtitle": "/ Let's Connect",
-    "desc": "Have a project in mind or just want to say hello? My digital door is always open.",
-    "form_name": "Your Name",
-    "form_email": "Your Email",
-    "form_message": "Your Message",
-    "form_placeholder_name": "Your Name",
+    "title": "05. Contact",
+    "subtitle": "/ Let's talk",
+    "desc": "If you are looking for a junior profile with technical foundations, visual judgement, and product mindset, send me a message.",
+    "form_name": "Your name",
+    "form_email": "Your email",
+    "form_message": "Your message",
+    "form_placeholder_name": "Your name",
     "form_placeholder_email": "hello@example.com",
-    "form_placeholder_message": "Tell me about your project or idea...",
+    "form_placeholder_message": "Tell me what you need or what opportunity you have in mind...",
     "form_btn_send": "SEND MESSAGE",
     "form_btn_sending": "SENDING...",
-    "form_success": "✓ Message sent successfully! I will get back to you soon.",
-    "links_title": "Direct Links",
-    "visual_portfolio_title": "Visual Portfolio",
-    "visual_portfolio_desc": "Explore my captures and creative vision",
-    "visual_portfolio_btn": "View Gallery →",
-    "footer_built": "Built with passion. Developed with precision."
+    "form_success": "✓ Message sent. I will get back to you soon.",
+    "links_title": "Direct links",
+    "visual_portfolio_title": "Photography portfolio",
+    "visual_portfolio_desc": "Explore my full selection on alexgallery",
+    "visual_portfolio_btn": "Open alexgallery →",
+    "footer_built": "Designed and developed by Alex Vicente."
   }
 }

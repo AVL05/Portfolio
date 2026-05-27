@@ -103,8 +103,6 @@ const skillCategories_en = [
 ]
 
 import { RevealHeader } from '@/components/reveal-header'
-import { Magnetic } from '@/components/magnetic'
-import { LiquidReveal } from '@/components/liquid-reveal'
 
 
 export function Skills() {
@@ -145,49 +143,47 @@ export function Skills() {
         />
 
         <div className="categories-grid grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {skillCategories.map((cat, i) => (
-            <LiquidReveal key={cat.title}>
-              <div className="category-card group h-full">
-                <div className="h-full premium-card p-10 space-y-10 transition-all duration-700 relative overflow-hidden">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl -mr-16 -mt-16 group-hover:bg-primary/20 transition-all duration-700" />
+          {skillCategories.map((cat) => (
+            <div key={cat.title} className="category-card group h-full">
+              <div className="h-full premium-card p-8 space-y-8 transition-all duration-300 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full blur-3xl -mr-12 -mt-12 group-hover:bg-primary/10 transition-all duration-300" />
 
-                  <div className="relative z-10 space-y-8">
-                    <div className="flex items-center gap-6 group/header">
-                      <div className="w-16 h-16 rounded-[1.5rem] bg-primary/10 flex items-center justify-center text-primary group-hover/header:bg-primary group-hover/header:text-primary-foreground transition-all duration-500 border border-primary/20 shadow-[0_0_25px_rgba(var(--color-primary),0.15)]">
-                        <cat.icon className="h-8 w-8" />
-                      </div>
-                      <h3 className="text-3xl font-black text-foreground tracking-tighter leading-tight group-hover/header:text-primary transition-colors">{cat.title}</h3>
+                <div className="relative z-10 space-y-7">
+                  <div className="flex items-center gap-5 group/header">
+                    <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary border border-primary/20">
+                      <cat.icon className="h-7 w-7" />
                     </div>
+                    <h3 className="text-2xl font-black text-foreground tracking-tight leading-tight group-hover/header:text-primary transition-colors">{cat.title}</h3>
+                  </div>
 
-                    <p className="text-muted-foreground text-[15px] font-medium leading-relaxed h-14">
-                      {cat.description}
-                    </p>
+                  <p className="text-muted-foreground text-sm font-medium leading-relaxed min-h-12">
+                    {cat.description}
+                  </p>
 
-                    <div className="grid grid-cols-2 gap-x-4 gap-y-6 pt-10 border-t border-white/5">
-                      {cat.skills.map(skill => (
-                        <a 
-                          key={skill.name} 
-                          href={skill.url} 
-                          target="_blank" 
-                          rel="noopener noreferrer" 
-                          className="flex items-center gap-4 group/skill cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-xl transition-all"
-                        >
-                          <div className="p-2.5 rounded-xl bg-white/5 group-hover/skill:bg-primary/20 transition-all border border-white/5 group-hover/skill:border-primary/30">
-                            <skill.icon
-                              className="h-4 w-4 text-muted-foreground group-hover/skill:text-primary transition-colors"
-                              style={{ fill: 'currentColor' }}
-                            />
-                          </div>
-                          <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-muted-foreground group-hover/skill:text-foreground transition-colors">
-                            {skill.name}
-                          </span>
-                        </a>
-                      ))}
-                    </div>
+                  <div className="grid grid-cols-2 gap-x-4 gap-y-5 pt-8 border-t border-white/5">
+                    {cat.skills.map(skill => (
+                      <a 
+                        key={skill.name} 
+                        href={skill.url} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="flex items-center gap-3 group/skill cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-xl transition-all"
+                      >
+                        <div className="p-2 rounded-lg bg-white/5 group-hover/skill:bg-primary/15 transition-all border border-white/5 group-hover/skill:border-primary/30">
+                          <skill.icon
+                            className="h-4 w-4 text-muted-foreground group-hover/skill:text-primary transition-colors"
+                            style={{ fill: 'currentColor' }}
+                          />
+                        </div>
+                        <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-muted-foreground group-hover/skill:text-foreground transition-colors">
+                          {skill.name}
+                        </span>
+                      </a>
+                    ))}
                   </div>
                 </div>
               </div>
-            </LiquidReveal>
+            </div>
           ))}
         </div>
       </div>

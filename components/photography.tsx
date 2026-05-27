@@ -10,8 +10,7 @@ import { gsap, useGSAP } from '@/lib/gsap'
 
 const photographyLinks = {
   website: 'https://alexgallery.alexviclop.workers.dev/',
-  instagram: 'https://www.instagram.com/raw.vives/',
-  portfolio: 'https://galeria-fotografica.vercel.app/',
+  instagram: 'https://www.instagram.com/aleexx_005/',
 }
 
 import { RevealHeader } from '@/components/reveal-header'
@@ -53,7 +52,7 @@ export function Photography() {
     <section
       id="photography"
       ref={containerRef}
-      className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-background relative overflow-hidden text-foreground"
+      className="py-24 sm:py-28 px-4 sm:px-6 lg:px-8 bg-background relative overflow-hidden text-foreground"
     >
       <div className="max-w-7xl mx-auto relative z-10 section-padding">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-16 sm:mb-0">
@@ -67,7 +66,7 @@ export function Photography() {
             <Button
               variant="outline"
               asChild
-              className="border-primary/20 hover:bg-primary/10 text-primary rounded-full px-8 h-12 font-bold"
+              className="border-primary/20 hover:bg-primary/10 text-primary rounded-xl px-8 h-12 font-bold"
             >
               <a href={photographyLinks.website} target="_blank" rel="noopener noreferrer">
                 <Globe className="mr-2 h-4 w-4" />
@@ -80,7 +79,7 @@ export function Photography() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Main Viewer */}
           <div className="lg:col-span-8 photo-card">
-            <div className="relative overflow-hidden rounded-[2.5rem] bg-card border border-border aspect-video group/img">
+            <div className="relative overflow-hidden rounded-3xl bg-card border border-border aspect-video group/img">
               <Image
                 src={galleryImages[activeIndex].src}
                 alt={galleryImages[activeIndex].label}
@@ -107,7 +106,7 @@ export function Photography() {
               <button
                 key={i}
                 onClick={() => setActiveIndex(i)}
-                className={`photo-card relative h-32 rounded-3xl overflow-hidden border-2 transition-all duration-500 group ${activeIndex === i ? 'border-primary' : 'border-transparent grayscale hover:grayscale-0'}`}
+                className={`photo-card relative h-32 rounded-2xl overflow-hidden border transition-all duration-300 group ${activeIndex === i ? 'border-primary' : 'border-border/40 grayscale hover:grayscale-0'}`}
               >
                 <Image
                   src={img.src}
@@ -129,15 +128,15 @@ export function Photography() {
               href={photographyLinks.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="photo-card mt-auto flex items-center justify-between p-8 bg-secondary/50 rounded-3xl border border-border group hover:border-primary/30 transition-all"
+              className="photo-card mt-auto flex items-center justify-between p-6 bg-secondary/40 rounded-2xl border border-border group hover:border-primary/30 transition-all"
             >
               <div className="flex items-center gap-4">
                 <div className="p-3 bg-card rounded-2xl group-hover:bg-primary group-hover:text-primary-foreground transition-all">
                   <FaInstagram className="h-5 w-5" />
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Follow me</p>
-                  <p className="text-lg font-black tracking-tight">@raw.vives</p>
+                  <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Instagram</p>
+                  <p className="text-lg font-black tracking-tight">@aleexx_005</p>
                 </div>
               </div>
               <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-all translate-x-0 group-hover:translate-x-2" />

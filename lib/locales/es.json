@@ -7,8 +7,8 @@
     "contact": "Contacto"
   },
   "hero": {
-    "status": "Disponible para prácticas y proyectos web",
-    "description": "Desarrollador web en formación, enfocado en interfaces React, backends PHP/Laravel y productos digitales claros, rápidos y cuidados visualmente.",
+    "status": "Buscando oportunidades como desarrollador web",
+    "description": "Desarrollador web junior con base full-stack, enfocado en construir productos digitales claros, rápidos, mantenibles y cuidados en cada detalle.",
     "cta_github": "GitHub",
     "cta_linkedin": "LinkedIn",
     "scroll": "Scroll"
@@ -22,12 +22,70 @@
   },
   "projects": {
     "title": "01. Proyectos",
-    "subtitle": "Lo que he construido",
-    "desc": "Una selección corta de proyectos web y visuales con enlaces directos para ver el resultado o el código.",
+    "subtitle": "Trabajo seleccionado",
+    "desc": "Proyectos donde he trabajado interfaz, flujo de datos, dirección visual o entrega final.",
     "concept": "Detalle del proyecto",
     "view_live": "Ver proyecto",
     "view_code": "Ver código",
     "items": [
+      {
+        "title": "Distrito Gourmet: Web de restaurante",
+        "description": "Proyecto final del curso: una plataforma web de restaurante con menú digital, gestión de platos, panel de administración y gestión de pedidos y reservas. El proyecto reúne las principales operaciones del restaurante en una única aplicación, con un flujo completo diseñado para clientes y personal interno",
+        "image": "/projects/distrito_gourmet.png",
+        "technologies": [
+          "Vite",
+          "Tailwind CSS",
+          "GSAP",
+          "React",
+          "JavaScript",
+          "Laravel",
+          "MySQL",
+          "Docker"
+        ],
+        "category": "Desarrollo Web",
+        "github": "https://github.com/AVL05/distrito-gourmet",
+        "type": "Pagina web"
+      },
+      {
+        "title": "El Fogón: Landing gastronómica",
+        "description": "Landing para restaurante mediterráneo desarrollada con HTML5 y Tailwind CSS. Trabajé dirección visual, jerarquía de contenido, responsive y navegación sencilla.",
+        "image": "/projects/el-fogon.png",
+        "technologies": ["HTML5", "Tailwind CSS", "JavaScript", "Vite"],
+        "category": "Desarrollo Web",
+        "link": "https://prweb02.netlify.app/",
+        "github": "https://github.com/AVL05/PRWEB02",
+        "type": "Landing page"
+      },
+      {
+        "title": "Sistema de Gestión Hotelera (API)",
+        "description": "API para gestionar reservas y datos de hotel con PHP, MySQL y JavaScript. Trabajé estructura de base de datos, endpoints, validación y flujo principal de gestión.",
+        "image": "/projects/api-hotel-cover.png",
+        "technologies": ["PHP", "CSS", "JavaScript"],
+        "category": "Desarrollo Web",
+        "link": "/projects/Demo_API_Hotel.mp4",
+        "github": "https://github.com/avl05/API_Hotel",
+        "type": "Backend / API"
+      },
+      {
+        "title": "E-commerce navideño",
+        "description": "Aplicación de comercio electrónico estacional hecha con Vue y Vite. Incluye navegación por categorías, carrito, gestión de estado y flujo completo de compra.",
+        "image": "/projects/aitanamora.png",
+        "technologies": ["Vue", "Vite"],
+        "category": "Desarrollo Web",
+        "link": "https://aitanamora.vercel.app/",
+        "github": "https://github.com/AVL05/Dulces",
+        "type": "E-commerce"
+      },
+      {
+        "title": "Proyecto educativo XML",
+        "description": "Web educativa para explicar lenguajes de marcado y estructura XML. Desarrollé la interfaz, organización de contenidos y ejemplos interactivos.",
+        "image": "/projects/xml-project.png",
+        "technologies": ["HTML5", "CSS3", "JavaScript", "XML"],
+        "category": "Desarrollo Web",
+        "link": "https://avl05.github.io/web-xml-alex/",
+        "github": "https://github.com/avl05/web-xml-alex",
+        "type": "Web educativa"
+      },
       {
         "title": "Llibret Falla el Molí 24/25",
         "description": "Diseño editorial de una publicación de más de 100 páginas. Definí una línea visual coherente, trabajé composición, tipografía y preparación de artes finales con herramientas Adobe.",
@@ -36,53 +94,13 @@
         "category": "Diseño Gráfico",
         "link": "/projects/LLIBRET 24-25.pdf",
         "type": "Diseño editorial"
-      },
-      {
-        "title": "El Fogón: Landing gastronómica",
-        "description": "Landing page para restaurante mediterráneo desarrollada con Next.js, Tailwind CSS y GSAP. El objetivo fue presentar carta, ambiente y propuesta visual con buena carga y navegación sencilla.",
-        "image": "/projects/el-fogon.png",
-        "technologies": ["Next.js", "Tailwind CSS", "GSAP"],
-        "category": "Desarrollo Web",
-        "link": "https://prweb02.netlify.app/",
-        "github": "https://github.com/AVL05/PRWEB02",
-        "type": "Landing page"
-      },
-      {
-        "title": "Sistema de Gestión Hotelera (API)",
-        "description": "API para gestionar reservas y datos de hotel con PHP, MySQL y JavaScript. Trabajé estructura de base de datos, endpoints y validación básica del flujo de gestión.",
-        "image": "/projects/api-hotel-cover.png",
-        "technologies": ["PHP", "MySQL", "JavaScript"],
-        "category": "Desarrollo Web",
-        "link": "/projects/Demo_API_Hotel.mp4",
-        "github": "https://github.com/avl05/API_Hotel",
-        "type": "Backend / API"
-      },
-      {
-        "title": "E-commerce navideño",
-        "description": "Aplicación de comercio electrónico estacional hecha con Vue, Vite y Firebase. Incluye navegación por categorías, carrito y gestión de estado para el flujo de compra.",
-        "image": "/projects/aitanamora.png",
-        "technologies": ["Vue", "Vite", "Firebase"],
-        "category": "Desarrollo Web",
-        "link": "https://aitanamora.vercel.app/",
-        "github": "https://github.com/AVL05/Dulces",
-        "type": "E-commerce"
-      },
-      {
-        "title": "Proyecto educativo XML",
-        "description": "Web educativa para explicar lenguajes de marcado y estructura XML. Desarrollé la interfaz, organización de contenidos y ejemplos interactivos con HTML, CSS, JavaScript y XML.",
-        "image": "/projects/xml-project.png",
-        "technologies": ["HTML5", "CSS3", "JavaScript", "XML"],
-        "category": "Desarrollo Web",
-        "link": "https://avl05.github.io/web-xml-alex/",
-        "github": "https://github.com/avl05/web-xml-alex",
-        "type": "Web educativa"
       }
     ]
   },
   "photography": {
     "title": "04. Fotografía",
-    "subtitle": "/ Mirada visual",
-    "description": "Una selección breve de mi trabajo fotográfico. La galería completa vive en alexgallery, separada del portfolio dev para mantener cada web con un propósito claro.",
+    "subtitle": "Mirada visual",
+    "description": "Una faceta creativa que complementa mi forma de trabajar: composición, detalle, criterio visual y atención al resultado final.",
     "properties": "Propiedades.RAW",
     "filters": "Filtros",
     "view_full": "Ver alexgallery"

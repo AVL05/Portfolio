@@ -9,7 +9,7 @@ import {
   ChevronRight,
   MapPin,
 } from "lucide-react";
-import { gsap, useGSAP } from "@/lib/gsap";
+import { gsap, prefersReducedMotion, useGSAP } from "@/lib/gsap";
 import { useLanguage } from "@/lib/language-context";
 
 import { RevealHeader } from "@/components/reveal-header";
@@ -23,9 +23,16 @@ export function Experience() {
   useGSAP(
     () => {
       const q = gsap.utils.selector(containerRef);
+      const items = q(".timeline-item");
+      const grid = q(".timeline-grid")[0];
+
+      if (prefersReducedMotion()) {
+        gsap.set(items, { opacity: 1, y: 0 });
+        return;
+      }
 
       gsap.fromTo(
-        q(".timeline-item"),
+        items,
         { opacity: 0, y: 20 },
         {
           opacity: 1,
@@ -34,8 +41,9 @@ export function Experience() {
           duration: 0.8,
           ease: "power3.out",
           scrollTrigger: {
-            trigger: q(".timeline-grid"),
+            trigger: grid,
             start: "top 85%",
+            once: true,
           },
         },
       );
@@ -178,7 +186,7 @@ export function Experience() {
             className="h-20 px-10 bg-primary text-primary-foreground font-black hover:bg-white rounded-3xl transition-all shadow-2xl shrink-0"
           >
             <a
-              href="/curriculum.pdf"
+              href="/CV_Alex_Vicente_Lopez_Desarrollador_Web_Junior.pdf"
               download
               className="flex items-center gap-3"
             >

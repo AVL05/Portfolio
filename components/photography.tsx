@@ -1,150 +1,182 @@
-'use client'
+"use client";
 
-import { useRef, useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { Camera, Globe, ChevronRight } from 'lucide-react'
-import { FaInstagram } from 'react-icons/fa6'
-import Image from 'next/image'
-import { useLanguage } from '@/lib/language-context'
-import { gsap, useGSAP } from '@/lib/gsap'
+import { useRef } from "react";
+import { Button } from "@/components/ui/button";
+import { ExternalLink } from "lucide-react";
+import { FaInstagram } from "react-icons/fa6";
+import Image from "next/image";
+import { useLanguage } from "@/lib/language-context";
+import { gsap, prefersReducedMotion, useGSAP } from "@/lib/gsap";
 
 const photographyLinks = {
-  website: 'https://alexgallery.alexviclop.workers.dev/',
-  instagram: 'https://www.instagram.com/aleexx_005/',
-}
+  website: "https://alexgallery.alexviclop.workers.dev/",
+  instagram: "https://www.instagram.com/aleexx_005/",
+};
 
-import { RevealHeader } from '@/components/reveal-header'
+import { RevealHeader } from "@/components/reveal-header";
 
 export function Photography() {
-  const { t } = useLanguage()
-  const showcaseRef = useRef<HTMLDivElement>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
+  const { t } = useLanguage();
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const galleryImages = [
-    { src: '/photography/hero.webp', label: 'Featured', iso: '100', f: '2.8', exp: '1/250s' },
-    { src: '/photography/landscape.png', label: 'Landscape', iso: '400', f: '8.0', exp: '1/1000s' },
-    { src: '/photography/urban.png', label: 'Urban', iso: '800', f: '1.8', exp: '1/60s' },
-  ]
+    { src: "/photography/hero.webp", label: "Featured" },
+    { src: "/photography/landscape.png", label: "Landscape" },
+    { src: "/photography/urban.png", label: "Urban" },
+  ];
 
-  const [activeIndex, setActiveIndex] = useState(0)
+  useGSAP(
+    () => {
+      const q = gsap.utils.selector(containerRef);
+      const cards = q(".photo-card");
 
-  useGSAP(() => {
-    const q = gsap.utils.selector(containerRef)
-
-    gsap.fromTo(q('.photo-card'),
-      { opacity: 0, scale: 0.9, y: 30 },
-      {
-        opacity: 1,
-        scale: 1,
-        y: 0,
-        stagger: 0.2,
-        duration: 1.2,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top 70%',
-        }
+      if (prefersReducedMotion()) {
+        gsap.set(cards, { opacity: 1, scale: 1, y: 0 });
+        return;
       }
-    )
-  }, { scope: containerRef })
+
+      gsap.fromTo(
+        cards,
+        { opacity: 0, scale: 0.96, y: 30 },
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          stagger: 0.12,
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 70%",
+            once: true,
+          },
+        },
+      );
+    },
+    { scope: containerRef },
+  );
 
   return (
     <section
       id="photography"
       ref={containerRef}
-      className="py-24 sm:py-28 px-4 sm:px-6 lg:px-8 bg-background relative overflow-hidden text-foreground"
+      className="section-padding px-4 sm:px-6 lg:px-8 bg-background relative overflow-hidden text-foreground"
     >
-      <div className="max-w-7xl mx-auto relative z-10 section-padding">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-16 sm:mb-0">
-          <RevealHeader
-            title={t.photography.title}
-            subtitle={t.photography.subtitle}
-            description={t.photography.description}
-          />
+      <div className="absolute inset-x-0 top-1/4 h-px bg-linear-to-r from-transparent via-primary/20 to-transparent" />
 
-          <div className="flex gap-4">
-            <Button
-              variant="outline"
-              asChild
-              className="border-primary/20 hover:bg-primary/10 text-primary rounded-xl px-8 h-12 font-bold"
-            >
-              <a href={photographyLinks.website} target="_blank" rel="noopener noreferrer">
-                <Globe className="mr-2 h-4 w-4" />
-                {t.photography.view_full}
-              </a>
-            </Button>
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-end mb-8 lg:mb-10">
+          <div className="lg:col-span-5">
+            <RevealHeader
+              title={t.photography.title}
+              subtitle={t.photography.subtitle}
+              description={t.photography.description}
+              className="mb-0"
+            />
           </div>
+
+          <figure className="photo-card group relative overflow-hidden rounded-3xl border border-border/70 bg-card lg:col-span-7 aspect-[16/10] lg:aspect-[16/9]">
+            <Image
+              src={galleryImages[0].src}
+              alt={galleryImages[0].label}
+              fill
+              className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.04]"
+              sizes="(max-width: 1024px) 100vw, 760px"
+              priority
+            />
+            <div className="absolute inset-0 bg-linear-to-t from-black/75 via-black/10 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-60" />
+            <figcaption className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5 sm:p-7 text-white">
+              <div>
+                <p className="text-[10px] font-mono uppercase tracking-[0.28em] text-primary">
+                  01
+                </p>
+                <p className="mt-2 text-2xl font-black tracking-tight">
+                  {galleryImages[0].label}
+                </p>
+              </div>
+              <span className="hidden rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[10px] font-mono uppercase tracking-[0.18em] text-white/80 backdrop-blur sm:inline-flex">
+                alexgallery
+              </span>
+            </figcaption>
+          </figure>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          {/* Main Viewer */}
-          <div className="lg:col-span-8 photo-card">
-            <div className="relative overflow-hidden rounded-3xl bg-card border border-border aspect-video group/img">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+          {galleryImages.slice(1).map((image, index) => (
+            <figure
+              key={image.src}
+              className="photo-card group relative overflow-hidden rounded-3xl border border-border/70 bg-card aspect-[16/10] lg:col-span-4"
+            >
               <Image
-                src={galleryImages[activeIndex].src}
-                alt={galleryImages[activeIndex].label}
+                src={image.src}
+                alt={image.label}
                 fill
-                className="object-cover transition-transform duration-3000 group-hover/img:scale-110"
-                sizes="(max-width: 1200px) 100vw, 800px"
+                className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.04]"
+                sizes="(max-width: 1024px) 100vw, 420px"
               />
-              <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-500" />
-
-              <div className="absolute bottom-8 left-8 text-white opacity-0 group-hover/img:opacity-100 translate-y-4 group-hover/img:translate-y-0 transition-all duration-500">
-                <p className="font-mono text-[10px] tracking-[0.4em] uppercase text-primary mb-2">RAW_METADATA</p>
-                <div className="flex gap-6 text-xs font-bold tracking-wider">
-                  <span>ISO {galleryImages[activeIndex].iso}</span>
-                  <span>f/{galleryImages[activeIndex].f}</span>
-                  <span>{galleryImages[activeIndex].exp}</span>
+              <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/10 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-60" />
+              <figcaption className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5 sm:p-7 text-white">
+                <div>
+                  <p className="text-[10px] font-mono uppercase tracking-[0.28em] text-primary">
+                    0{index + 2}
+                  </p>
+                  <p className="mt-2 text-2xl font-black tracking-tight">
+                    {image.label}
+                  </p>
                 </div>
+                <span className="hidden rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[10px] font-mono uppercase tracking-[0.18em] text-white/80 backdrop-blur sm:inline-flex">
+                  Portfolio
+                </span>
+              </figcaption>
+            </figure>
+          ))}
+
+          <div className="photo-card flex flex-col justify-between gap-8 rounded-3xl border border-border/70 bg-secondary/30 p-6 sm:p-8 lg:col-span-4">
+            <div className="flex items-center gap-4">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-card text-primary">
+                <FaInstagram className="h-5 w-5" />
+              </div>
+              <div>
+                <p className="text-xs font-mono uppercase tracking-[0.22em] text-muted-foreground">
+                  Visual portfolio
+                </p>
+                <p className="text-lg font-black tracking-tight">@aleexx_005</p>
               </div>
             </div>
-          </div>
 
-          {/* Thumbnails / Sidebar */}
-          <div className="lg:col-span-4 flex flex-col gap-6">
-            {galleryImages.map((img, i) => (
-              <button
-                key={i}
-                onClick={() => setActiveIndex(i)}
-                className={`photo-card relative h-32 rounded-2xl overflow-hidden border transition-all duration-300 group ${activeIndex === i ? 'border-primary' : 'border-border/40 grayscale hover:grayscale-0'}`}
+            <div className="flex flex-col gap-3">
+              <Button
+                variant="outline"
+                asChild
+                className="border-primary/20 hover:bg-primary/10 text-primary rounded-xl px-6 h-12 font-bold justify-center"
               >
-                <Image
-                  src={img.src}
-                  alt={img.label}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  sizes="(max-width: 1024px) 100vw, 400px"
-                />
-                <div className={`absolute inset-0 ${activeIndex === i ? 'bg-primary/10' : 'bg-black/40 group-hover:bg-black/10'} transition-colors`} />
-                <div className="absolute bottom-4 left-4">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-white drop-shadow-md">
-                    {img.label}
-                  </span>
-                </div>
-              </button>
-            ))}
-
-            <a
-              href={photographyLinks.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="photo-card mt-auto flex items-center justify-between p-6 bg-secondary/40 rounded-2xl border border-border group hover:border-primary/30 transition-all"
-            >
-              <div className="flex items-center gap-4">
-                <div className="p-3 bg-card rounded-2xl group-hover:bg-primary group-hover:text-primary-foreground transition-all">
-                  <FaInstagram className="h-5 w-5" />
-                </div>
-                <div>
-                  <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Instagram</p>
-                  <p className="text-lg font-black tracking-tight">@aleexx_005</p>
-                </div>
-              </div>
-              <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-all translate-x-0 group-hover:translate-x-2" />
-            </a>
+                <a
+                  href={photographyLinks.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <ExternalLink className="mr-2 h-4 w-4" />
+                  {t.photography.view_full}
+                </a>
+              </Button>
+              <Button
+                variant="ghost"
+                asChild
+                className="rounded-xl px-6 h-12 font-bold text-muted-foreground hover:text-foreground justify-center"
+              >
+                <a
+                  href={photographyLinks.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaInstagram className="mr-2 h-4 w-4" />
+                  Instagram
+                </a>
+              </Button>
+            </div>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
-

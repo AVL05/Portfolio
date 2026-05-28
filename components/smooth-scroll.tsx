@@ -1,6 +1,6 @@
-'use client'
+"use client";
 
-import type { ReactNode } from 'react'
+import type { ReactNode } from "react";
 
 /**
  * Simplified Scroll Component.
@@ -8,9 +8,5 @@ import type { ReactNode } from 'react'
  * as per user request to remove "pesadez".
  */
 export function SmoothScroll({ children }: { children: ReactNode }) {
-  return (
-    <div className="contents">
-      {children}
-    </div>
-  )
+  return <div className="contents">{children}</div>;
 }

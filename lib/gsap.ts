@@ -4,7 +4,7 @@ import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import { useGSAP } from '@gsap/react';
 
 if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, useGSAP);
 
   gsap.defaults({
     ease: 'power3.out',
@@ -30,13 +30,25 @@ if (typeof window !== 'undefined') {
       }
     });
 
-    // Refresh on visibility change (tab switch) — helps Brave
-    document.addEventListener('visibilitychange', () => {
-      if (!document.hidden) {
-        setTimeout(() => ScrollTrigger.refresh(), 200);
-      }
-    });
+    const globalKey = '__portfolioGsapVisibilityRefresh';
+    const globalWindow = window as typeof window & Record<string, boolean>;
+
+    if (!globalWindow[globalKey]) {
+      globalWindow[globalKey] = true;
+
+      // Refresh on visibility change (tab switch) — helps Brave
+      document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) {
+          setTimeout(() => ScrollTrigger.refresh(), 200);
+        }
+      });
+    }
   }
 }
 
-export { gsap, ScrollTrigger, ScrollToPlugin, useGSAP };
+function prefersReducedMotion() {
+  return typeof window !== 'undefined'
+    && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+export { gsap, ScrollTrigger, ScrollToPlugin, useGSAP, prefersReducedMotion };

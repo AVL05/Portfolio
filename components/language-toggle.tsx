@@ -2,17 +2,31 @@
 
 import * as React from "react";
 import { useLanguage } from "@/lib/language-context";
-import { Button } from "@/components/ui/button";
 
 export function LanguageToggle() {
-  const { language, setLanguage } = useLanguage();
+  const { language } = useLanguage();
+  const nextLanguage = language === "es" ? "en" : "es";
+  const href = React.useMemo(() => {
+    if (typeof window === "undefined") {
+      return `/api/language?lang=${nextLanguage}&next=/`;
+    }
+
+    const url = new URL(window.location.href);
+    url.searchParams.delete("lang");
+    const next = `${url.pathname}${url.search}${url.hash}`;
+    const params = new URLSearchParams({
+      lang: nextLanguage,
+      next,
+    });
+
+    return `/api/language?${params.toString()}`;
+  }, [nextLanguage]);
 
   return (
-    <Button
-      variant="ghost"
-      size="sm"
-      className="font-mono text-[10px] font-black tracking-widest uppercase px-3 py-1 rounded-full bg-card hover:bg-muted border border-border transition-all hover:border-primary/50"
-      onClick={() => setLanguage(language === "es" ? "en" : "es")}
+    <a
+      href={href}
+      aria-label={language === "es" ? "Switch to English" : "Cambiar a español"}
+      className="inline-flex h-8 items-center justify-center gap-1.5 whitespace-nowrap rounded-full border border-border bg-card/70 px-3 py-1 font-mono text-[10px] font-black uppercase tracking-widest transition-all hover:border-primary/50 hover:bg-muted focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
     >
       <span
         className={language === "es" ? "text-primary" : "text-foreground/40"}
@@ -25,6 +39,6 @@ export function LanguageToggle() {
       >
         EN
       </span>
-    </Button>
+    </a>
   );
 }

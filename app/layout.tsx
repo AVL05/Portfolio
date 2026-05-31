@@ -3,12 +3,13 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import type React from "react";
 import { Suspense } from "react";
 import "@/lib/raf-polyfill";
 import "./globals.css";
 import { SmoothScroll } from "@/components/smooth-scroll";
-import { LanguageProvider } from "@/lib/language-context";
+import { LanguageProvider, type Language } from "@/lib/language-context";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://aleviclop.vercel.app";
@@ -80,13 +81,17 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const cookieLanguage = cookieStore.get("language")?.value;
+  const initialLanguage: Language = cookieLanguage === "en" ? "en" : "es";
+
   return (
-    <html lang="es" className="dark scroll-smooth overflow-x-hidden" suppressHydrationWarning>
+    <html lang={initialLanguage} className="dark scroll-smooth overflow-x-hidden" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://va.vercel-scripts.com" />
         <link rel="preconnect" href="https://vitals.vercel-insights.com" />
@@ -114,7 +119,7 @@ export default function RootLayout({
         style={{ fontFeatureSettings: '"cv11", "ss01", "ss03"' }}
         suppressHydrationWarning
       >
-        <LanguageProvider>
+        <LanguageProvider initialLanguage={initialLanguage}>
           <SmoothScroll>
             <div className="relative min-h-screen overflow-x-hidden">
               <Suspense fallback={null}>{children}</Suspense>

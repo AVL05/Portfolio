@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 import { gsap, prefersReducedMotion, useGSAP } from "@/lib/gsap";
@@ -17,17 +16,14 @@ export function Navigation() {
     { name: t.nav.contact, href: "#contact" },
   ];
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
   const containerRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
-  const mobileMenuRef = useRef<HTMLDivElement>(null);
-  const mobileMenuItemsRef = useRef<(HTMLAnchorElement | null)[]>([]);
   const navLinksContainerRef = useRef<HTMLDivElement>(null);
   const navLinksRefs = useRef<(HTMLAnchorElement | null)[]>([]);
 
-  const { contextSafe } = useGSAP(
+  useGSAP(
     () => {
       if (progressRef.current) {
         gsap.set(progressRef.current, {
@@ -66,57 +62,6 @@ export function Navigation() {
         );
     },
     { scope: containerRef },
-  );
-
-  useGSAP(
-    () => {
-      if (!mobileMenuRef.current) return;
-
-      gsap.killTweensOf([mobileMenuRef.current, mobileMenuItemsRef.current]);
-
-      if (prefersReducedMotion()) {
-        gsap.set(mobileMenuRef.current, { opacity: 1, rotateY: 0 });
-        gsap.set(mobileMenuItemsRef.current.filter(Boolean), {
-          opacity: 1,
-          rotateX: 0,
-          z: 0,
-        });
-        return;
-      }
-
-      if (isMobileMenuOpen) {
-        gsap.set(mobileMenuRef.current, {
-          rotateY: -90,
-          opacity: 0,
-          transformPerspective: 1200,
-          transformOrigin: "right center",
-        });
-        gsap.to(mobileMenuRef.current, {
-          rotateY: 0,
-          opacity: 1,
-          duration: 0.6,
-          ease: "power3.out",
-        });
-        gsap.fromTo(
-          mobileMenuItemsRef.current.filter(Boolean),
-          { opacity: 0, rotateX: 30, z: -30, transformPerspective: 800 },
-          {
-            opacity: 1,
-            rotateX: 0,
-            z: 0,
-            stagger: 0.08,
-            duration: 0.5,
-            ease: "power2.out",
-            delay: 0.2,
-          },
-        );
-      }
-    },
-    {
-      dependencies: [isMobileMenuOpen],
-      scope: containerRef,
-      revertOnUpdate: true,
-    },
   );
 
   const indicatorRef = useRef<HTMLDivElement>(null);
@@ -182,44 +127,32 @@ export function Navigation() {
     }
   }, [activeSection]);
 
-  const handleMobileNavClick = contextSafe((href: string) => {
-    setIsMobileMenuOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      gsap.to(window, {
-        scrollTo: { y: element, offsetY: 80 },
-        duration: prefersReducedMotion() ? 0 : 1.2,
-        ease: "power3.inOut",
-      });
-    }
-  });
-
   return (
     <div ref={containerRef}>
       <nav
         ref={navRef}
-        className={`fixed top-0 left-0 right-0 z-90 transition-all duration-500 ${
+        className={`fixed top-0 left-0 right-0 z-[90] transition-all duration-500 ${
           isScrolled
-            ? "py-4 bg-background/90 backdrop-blur-md border-b border-border"
-            : "py-8 bg-transparent"
+            ? "py-3 bg-background/88 backdrop-blur-xl border-b border-border/70 shadow-[0_12px_40px_-30px_rgba(0,0,0,0.8)]"
+            : "py-6 bg-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             <a
               href="#hero"
-              className="nav-logo group text-xl sm:text-2xl font-black text-foreground tracking-tighter transition-all lg:whitespace-nowrap shrink-0"
+              className="nav-logo group text-lg sm:text-xl font-black text-foreground tracking-tight transition-all lg:whitespace-nowrap shrink-0"
             >
               ALEX <span className="text-primary">VICENTE</span>
             </a>
 
             <div
               ref={navLinksContainerRef}
-              className="hidden xl:flex items-center gap-6 relative"
+              className="hidden xl:flex items-center gap-2 rounded-full border border-border/70 bg-card/50 p-1.5 backdrop-blur-xl relative"
             >
               <div
                 ref={indicatorRef}
-                className="absolute bottom-[-4px] h-[2px] bg-primary"
+                className="absolute inset-y-1.5 rounded-full bg-primary/12 border border-primary/18"
               />
               {navItems.map((item, index) => {
                 const isActive = activeSection === item.href.substring(1);
@@ -230,7 +163,7 @@ export function Navigation() {
                       navLinksRefs.current[index] = el;
                     }}
                     href={item.href}
-                    className={`nav-item group relative text-[10px] font-black uppercase tracking-[0.15em] transition-colors duration-300 whitespace-nowrap ${
+                    className={`nav-item group relative z-10 rounded-full px-3.5 py-2 text-[10px] font-black uppercase tracking-[0.14em] transition-colors duration-300 whitespace-nowrap ${
                       isActive
                         ? "text-primary"
                         : "text-foreground/40 hover:text-foreground"
@@ -248,54 +181,38 @@ export function Navigation() {
 
             <div className="xl:hidden flex items-center gap-4">
               <LanguageToggle />
-              <Button
-                variant="ghost"
-                size="icon"
-                aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
-                className="text-foreground hover:bg-foreground/5 p-0"
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              <a
+                href="#mobile-menu"
+                aria-label="Abrir menú"
+                className="inline-flex size-9 items-center justify-center rounded-md text-foreground transition-all hover:bg-foreground/5 hover:text-primary focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
               >
-                {isMobileMenuOpen ? (
-                  <X className="h-6 w-6" />
-                ) : (
-                  <Menu className="h-6 w-6" />
-                )}
-              </Button>
+                <Menu className="h-6 w-6" />
+              </a>
             </div>
           </div>
         </div>
 
-        {isMobileMenuOpen && (
-          <div
-            ref={mobileMenuRef}
-            className="fixed inset-0 top-0 left-0 w-full h-screen bg-background z-80 xl:hidden flex flex-col items-center justify-center space-y-8"
-          >
-            {navItems.map((item, index) => (
-              <a
-                key={item.name}
-                ref={(el) => {
-                  mobileMenuItemsRef.current[index] = el;
-                }}
-                href={item.href}
-                className="text-4xl sm:text-5xl font-black text-foreground hover:text-primary transition-all tracking-tighter"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleMobileNavClick(item.href);
-                }}
-              >
-                {item.name}
-              </a>
-            ))}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute top-8 right-8 text-foreground scale-150"
-              onClick={() => setIsMobileMenuOpen(false)}
+        <div
+          id="mobile-menu"
+          className="fixed inset-0 z-[100] hidden h-screen w-full flex-col items-center justify-center space-y-7 bg-background px-6 target:flex xl:hidden"
+        >
+          {navItems.map((item) => (
+            <a
+              key={item.name}
+              href={item.href}
+              className="text-center text-4xl font-black tracking-tight text-foreground transition-all hover:text-primary sm:text-5xl"
             >
+              {item.name}
+            </a>
+          ))}
+          <a
+            href="#hero"
+            aria-label="Cerrar menú"
+            className="absolute right-8 top-8 inline-flex size-12 items-center justify-center rounded-full text-foreground transition-all hover:bg-foreground/5 hover:text-primary focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+          >
               <X className="h-8 w-8" />
-            </Button>
-          </div>
-        )}
+          </a>
+        </div>
       </nav>
     </div>
   );

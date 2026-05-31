@@ -108,9 +108,9 @@ export function Contact() {
           description={t.contact.desc}
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-20">
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1fr)] gap-12 sm:gap-16 lg:gap-20">
           <div className="contact-item">
-            <Card className="p-0 overflow-hidden bg-card border-border shadow-2xl rounded-3xl hover:border-primary/20 transition-all">
+            <Card className="p-0 overflow-hidden bg-card/85 border-border shadow-2xl rounded-2xl hover:border-primary/25 transition-all">
               <div className="flex items-center gap-2 px-6 py-4 bg-secondary/50 border-b border-border">
                 <div className="flex gap-1.5">
                   <div className="w-2.5 h-2.5 rounded-full bg-red-400/20"></div>
@@ -122,7 +122,7 @@ export function Contact() {
                 </span>
               </div>
 
-              <form onSubmit={handleSubmit} className="p-8 sm:p-10 space-y-8">
+              <form onSubmit={handleSubmit} className="p-6 sm:p-8 lg:p-10 space-y-7">
                 <input
                   type="checkbox"
                   name="botcheck"
@@ -152,7 +152,7 @@ export function Contact() {
                     onChange={(e) =>
                       setFormData({ ...formData, name: e.target.value })
                     }
-                    className="bg-white/5 border-white/5 focus-visible:ring-primary/50 focus-visible:border-primary placeholder:text-white/20 rounded-2xl py-7 px-6 text-lg font-medium"
+                    className="bg-secondary/50 border-border focus-visible:ring-primary/50 focus-visible:border-primary placeholder:text-muted-foreground/35 rounded-xl py-6 px-5 text-base sm:text-lg font-medium"
                     required
                   />
                 </div>
@@ -172,7 +172,7 @@ export function Contact() {
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
                     }
-                    className="bg-white/5 border-white/5 focus-visible:ring-primary/50 focus-visible:border-primary placeholder:text-white/20 rounded-2xl py-7 px-6 text-lg font-medium"
+                    className="bg-secondary/50 border-border focus-visible:ring-primary/50 focus-visible:border-primary placeholder:text-muted-foreground/35 rounded-xl py-6 px-5 text-base sm:text-lg font-medium"
                     required
                   />
                 </div>
@@ -192,14 +192,14 @@ export function Contact() {
                     onChange={(e) =>
                       setFormData({ ...formData, message: e.target.value })
                     }
-                    className="bg-background border-border focus-visible:ring-primary/50 focus-visible:border-primary placeholder:text-muted-foreground/20 rounded-2xl p-6 text-lg font-medium resize-none"
+                    className="bg-secondary/50 border-border focus-visible:ring-primary/50 focus-visible:border-primary placeholder:text-muted-foreground/35 rounded-xl p-5 text-base sm:text-lg font-medium resize-none"
                     required
                   />
                 </div>
 
                 <Button
                   type="submit"
-                  className="w-full bg-primary text-primary-foreground font-black text-lg py-8 rounded-2xl hover:bg-primary/90 hover:shadow-[0_0_40px_rgba(119,255,150,0.3)] transition-all group"
+                  className="w-full bg-primary text-primary-foreground font-black text-base sm:text-lg py-7 rounded-xl hover:bg-primary/90 hover:shadow-[0_0_32px_rgba(119,255,150,0.2)] transition-all group"
                   disabled={isSubmitting}
                 >
                   {isSubmitting
@@ -217,7 +217,7 @@ export function Contact() {
           </div>
 
           <div className="contact-item flex flex-col justify-between py-4">
-            <div className="space-y-12">
+            <div className="space-y-10">
               <div>
                 <h3 className="text-sm font-black uppercase tracking-[0.3em] text-muted-foreground/30 mb-8 ml-1">
                   {t.contact.links_title}
@@ -225,34 +225,34 @@ export function Contact() {
                 <div className="space-y-6">
                   <a
                     href="mailto:alexviclop@gmail.com"
-                    className="flex items-center gap-6 text-2xl sm:text-3xl font-bold group hover:text-primary transition-colors"
+                    className="flex min-w-0 items-center gap-4 sm:gap-6 text-xl sm:text-2xl xl:text-3xl font-bold group hover:text-primary transition-colors"
                   >
-                    <div className="p-4 bg-secondary rounded-2xl group-hover:bg-primary group-hover:text-primary-foreground transition-all">
+                    <div className="shrink-0 p-4 bg-secondary rounded-xl group-hover:bg-primary group-hover:text-primary-foreground transition-all">
                       <Mail className="h-6 w-6" />
                     </div>
-                    alexviclop@gmail.com
+                    <span className="min-w-0 break-all">alexviclop@gmail.com</span>
                   </a>
                   <a
                     href="https://github.com/AVL05"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-6 text-2xl sm:text-3xl font-bold group hover:text-primary transition-colors"
+                    className="flex min-w-0 items-center gap-4 sm:gap-6 text-xl sm:text-2xl xl:text-3xl font-bold group hover:text-primary transition-colors"
                   >
-                    <div className="p-4 bg-secondary rounded-2xl group-hover:bg-primary group-hover:text-primary-foreground transition-all">
+                    <div className="shrink-0 p-4 bg-secondary rounded-xl group-hover:bg-primary group-hover:text-primary-foreground transition-all">
                       <FaGithub className="h-6 w-6" />
                     </div>
-                    github.com/AVL05
+                    <span className="min-w-0 break-all">github.com/AVL05</span>
                   </a>
                   <a
                     href="https://www.linkedin.com/in/alex-vicente-lopez/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-6 text-2xl sm:text-3xl font-bold group hover:text-primary transition-colors"
+                    className="flex min-w-0 items-center gap-4 sm:gap-6 text-xl sm:text-2xl xl:text-3xl font-bold group hover:text-primary transition-colors"
                   >
-                    <div className="p-4 bg-secondary rounded-2xl group-hover:bg-primary group-hover:text-primary-foreground transition-all">
+                    <div className="shrink-0 p-4 bg-secondary rounded-xl group-hover:bg-primary group-hover:text-primary-foreground transition-all">
                       <FaLinkedin className="h-6 w-6" />
                     </div>
-                    linkedin / alex-vicente-lopez
+                    <span className="min-w-0 break-words">linkedin / alex-vicente-lopez</span>
                   </a>
                 </div>
               </div>

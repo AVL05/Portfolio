@@ -29,12 +29,12 @@ function ProjectCard({
   return (
     <article ref={cardRef} className="project-card group h-full">
       <div className="premium-card h-full flex flex-col">
-        <div className="absolute top-6 left-6 z-30 font-mono text-[10px] text-muted-foreground/60 tracking-widest uppercase">
+        <div className="absolute top-5 left-5 z-30 font-mono text-[10px] text-muted-foreground/70 tracking-widest uppercase">
           Project{" "}
           <span className="text-primary font-bold">{projectNumber}</span>
         </div>
 
-        <div className="relative aspect-16/10 overflow-hidden">
+        <div className="relative aspect-16/10 overflow-hidden bg-secondary">
           <Image
             src={project.image || "/placeholder.svg"}
             alt={project.title}
@@ -42,10 +42,10 @@ function ProjectCard({
             className={`transition-all duration-700 ease-out group-hover:scale-[1.025] ${smallImageProjects.includes(project.title) ? "p-8 object-contain" : "object-cover"}`}
             sizes="(max-width: 768px) 100vw, 50vw"
           />
-          <div className="absolute inset-0 bg-linear-to-t from-background/85 via-background/10 to-transparent opacity-45 group-hover:opacity-65 transition-opacity duration-300" />
+          <div className="absolute inset-0 bg-linear-to-t from-background/90 via-background/10 to-transparent opacity-55 group-hover:opacity-70 transition-opacity duration-300" />
 
-          <div className="absolute top-6 right-6 z-30">
-            <div className="px-3 py-1 bg-secondary/80 border border-border rounded-full">
+          <div className="absolute top-5 right-5 z-30">
+            <div className="max-w-[12rem] px-3 py-1 bg-background/75 border border-border/80 rounded-full backdrop-blur-md">
               <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">
                 {project.category}
               </span>
@@ -53,14 +53,14 @@ function ProjectCard({
           </div>
         </div>
 
-        <div className="p-8 space-y-6 relative flex flex-col grow">
+        <div className="p-6 sm:p-8 space-y-6 relative flex flex-col grow">
           <div className="space-y-4">
             <div className="space-y-2">
               <p className="flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-[0.22em] text-primary/70">
                 <ArrowUpRight className="h-3.5 w-3.5" />
                 {project.type}
               </p>
-              <h3 className="text-2xl font-bold text-foreground tracking-tight group-hover:text-primary transition-colors">
+              <h3 className="text-2xl font-bold text-foreground tracking-tight leading-tight group-hover:text-primary transition-colors">
                 {project.title}
               </h3>
             </div>
@@ -194,19 +194,19 @@ export function Projects() {
       <div className="absolute top-0 right-0 w-1/2 h-full bg-primary/3 mask-[linear-gradient(to_left,black,transparent)] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-16 sm:mb-0">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-10 mb-14 sm:mb-18">
           <RevealHeader
             title={t.projects.title}
             subtitle={t.projects.subtitle}
             className="mb-0 sm:mb-0"
           />
 
-          <div className="flex gap-4 mb-16">
+          <div className="flex w-full flex-wrap gap-2 sm:gap-3 md:w-auto md:justify-end">
             {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`px-6 py-2 rounded-full text-[10px] font-black tracking-[0.2em] uppercase transition-all duration-300 ${activeCategory === category ? "bg-primary text-primary-foreground" : "bg-secondary text-muted-foreground/50 hover:text-foreground"}`}
+                className={`min-h-10 rounded-full px-4 sm:px-5 text-[10px] font-black tracking-[0.16em] uppercase transition-all duration-300 ${activeCategory === category ? "bg-primary text-primary-foreground shadow-[0_12px_30px_-20px_var(--primary)]" : "bg-secondary/70 border border-border/70 text-muted-foreground hover:text-foreground"}`}
               >
                 {category}
               </button>

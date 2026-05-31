@@ -4,45 +4,43 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Premium Light: Soft Slate & Azure hues */
-  --background: oklch(0.98 0.01 240); /* Very soft blue-tinted white */
-  --foreground: oklch(0.18 0.04 240); /* Deep slate for text */
-  --card: oklch(1 0 0); /* Pure white for cards */
+  --background: oklch(0.975 0.01 245);
+  --foreground: oklch(0.18 0.035 245);
+  --card: oklch(0.995 0.004 245);
   --card-foreground: oklch(0.18 0.04 240);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.18 0.04 240);
-  --primary: oklch(0.55 0.15 150); /* Matrix Green Muted */
+  --primary: oklch(0.68 0.18 152);
   --primary-foreground: oklch(0.99 0.01 150);
-  --secondary: oklch(0.94 0.02 240);
+  --secondary: oklch(0.93 0.018 245);
   --secondary-foreground: oklch(0.2 0.04 240);
-  --muted: oklch(0.92 0.01 240); /* Slightly darker muted bg */
+  --muted: oklch(0.9 0.014 245);
   --muted-foreground: oklch(0.45 0.04 240);
-  --accent: oklch(0.6 0.18 200); /* Dev Cyan */
+  --accent: oklch(0.72 0.15 205);
   --accent-foreground: oklch(0.15 0.03 240);
   --border: oklch(0.88 0.03 240);
   --input: oklch(0.88 0.03 240);
   --ring: oklch(0.55 0.15 150);
-  --radius: 0.75rem;
+  --radius: 0.5rem;
 }
 
 .dark {
-  /* Terminal / Matrix Elite Theme - Refined for better visibility */
-  --background: oklch(0.12 0.01 150); /* Slightly lighter obsidian */
-  --foreground: oklch(0.98 0.01 150);
-  --card: oklch(0.18 0.02 150); /* More visible cards */
+  --background: oklch(0.115 0.018 250);
+  --foreground: oklch(0.96 0.012 235);
+  --card: oklch(0.17 0.022 246);
   --card-foreground: oklch(0.98 0.01 150);
   --popover: oklch(0.18 0.02 150);
   --popover-foreground: oklch(0.98 0.01 150);
-  --primary: oklch(0.88 0.24 152); /* Neon Terminal Green */
-  --primary-foreground: oklch(0.1 0.1 150);
-  --secondary: oklch(0.22 0.04 150); /* Lighter secondary */
+  --primary: oklch(0.82 0.21 154);
+  --primary-foreground: oklch(0.12 0.04 155);
+  --secondary: oklch(0.22 0.026 246);
   --secondary-foreground: oklch(0.98 0.01 150);
-  --muted: oklch(0.2 0.03 150);
-  --muted-foreground: oklch(0.75 0.05 150); /* Much lighter muted text */
-  --accent: oklch(0.75 0.2 190); /* Brighter Cyan */
+  --muted: oklch(0.22 0.02 246);
+  --muted-foreground: oklch(0.74 0.035 235);
+  --accent: oklch(0.76 0.16 205);
   --accent-foreground: oklch(0.08 0.04 150);
-  --border: oklch(0.25 0.05 150); /* More visible borders */
-  --input: oklch(0.25 0.05 150);
+  --border: oklch(0.29 0.03 246);
+  --input: oklch(0.27 0.03 246);
   --ring: oklch(0.88 0.24 152);
 }
 
@@ -85,6 +83,11 @@
     width: 100%;
     position: relative;
     text-rendering: optimizeLegibility;
+    background-image:
+      linear-gradient(to bottom, oklch(from var(--foreground) l c h / 0.035) 1px, transparent 1px),
+      linear-gradient(to right, oklch(from var(--foreground) l c h / 0.025) 1px, transparent 1px);
+    background-size: 72px 72px;
+    background-position: center top;
   }
 
   html {
@@ -106,23 +109,23 @@
   }
 
   .glass {
-    @apply bg-card/20 backdrop-blur-3xl border border-white/10;
+    @apply bg-card/55 backdrop-blur-2xl border border-border/60;
     box-shadow:
       0 8px 32px 0 rgba(0, 0, 0, 0.3),
       inset 0 0 0 1px rgba(255, 255, 255, 0.05);
   }
 
   .dev-border {
-    @apply border border-border/50 bg-card/55 backdrop-blur-xl transition-all duration-300;
+    @apply border border-border/70 bg-card/70 backdrop-blur-xl transition-all duration-300;
     box-shadow:
       0 0 0 1px oklch(from var(--primary) l c h / 0.05),
       0 16px 32px -18px rgba(0, 0, 0, 0.65);
   }
 
   .premium-card {
-    @apply relative overflow-hidden rounded-3xl bg-card/75 backdrop-blur-xl border border-border/70 transition-all duration-300;
+    @apply relative overflow-hidden rounded-2xl bg-card/82 backdrop-blur-xl border border-border/70 transition-all duration-300;
     box-shadow:
-      0 24px 48px -28px rgba(0, 0, 0, 0.75),
+      0 18px 44px -30px rgba(0, 0, 0, 0.8),
       inset 0 1px 0 0 rgba(255, 255, 255, 0.04);
   }
 
@@ -150,14 +153,14 @@
   }
 
   .premium-card:hover {
-    @apply border-primary/25 -translate-y-0.5;
+    @apply border-primary/30 -translate-y-0.5;
     box-shadow:
       0 28px 56px -30px rgba(0, 0, 0, 0.68),
       0 0 16px oklch(from var(--primary) l c h / 0.06);
   }
 
   .text-display {
-    @apply font-black tracking-tight sm:tracking-tighter leading-[0.94] sm:leading-[0.9] text-balance;
+    @apply font-black tracking-tight leading-[0.94] sm:leading-[0.9] text-balance;
     font-variation-settings: "wght" 900, "wdth" 100;
   }
 
@@ -221,7 +224,7 @@
 
   /* Global Section Padding */
   .section-padding {
-    @apply py-24 sm:py-32 md:py-40;
+    @apply py-20 sm:py-28 md:py-36;
   }
 
   /* Smooth Link Underlines */
@@ -247,10 +250,10 @@
 
   /* Grid Background Utility */
   .bg-grid {
-    background-size: 50px 50px;
+    background-size: 64px 64px;
     background-image:
-      linear-gradient(to right, oklch(from var(--primary) l c h / 0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, oklch(from var(--primary) l c h / 0.05) 1px, transparent 1px);
+      linear-gradient(to right, oklch(from var(--foreground) l c h / 0.055) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(from var(--foreground) l c h / 0.04) 1px, transparent 1px);
   }
 
   @media (max-width: 640px) {

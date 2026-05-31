@@ -75,7 +75,7 @@ export function Photography() {
             />
           </div>
 
-          <figure className="photo-card group relative overflow-hidden rounded-3xl border border-border/70 bg-card lg:col-span-7 aspect-[16/10] lg:aspect-[16/9]">
+          <figure className="photo-card group relative overflow-hidden rounded-2xl border border-border/70 bg-card lg:col-span-7 aspect-[16/10] lg:aspect-[16/9] shadow-2xl">
             <Image
               src={galleryImages[0].src}
               alt={galleryImages[0].label}
@@ -84,7 +84,7 @@ export function Photography() {
               sizes="(max-width: 1024px) 100vw, 760px"
               priority
             />
-            <div className="absolute inset-0 bg-linear-to-t from-black/75 via-black/10 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-60" />
+          <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/10 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-62" />
             <figcaption className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5 sm:p-7 text-white">
               <div>
                 <p className="text-[10px] font-mono uppercase tracking-[0.28em] text-primary">
@@ -105,7 +105,7 @@ export function Photography() {
           {galleryImages.slice(1).map((image, index) => (
             <figure
               key={image.src}
-              className="photo-card group relative overflow-hidden rounded-3xl border border-border/70 bg-card aspect-[16/10] lg:col-span-4"
+              className="photo-card group relative overflow-hidden rounded-2xl border border-border/70 bg-card aspect-[16/10] lg:col-span-4"
             >
               <Image
                 src={image.src}
@@ -131,9 +131,9 @@ export function Photography() {
             </figure>
           ))}
 
-          <div className="photo-card flex flex-col justify-between gap-8 rounded-3xl border border-border/70 bg-secondary/30 p-6 sm:p-8 lg:col-span-4">
+          <div className="photo-card flex flex-col justify-between gap-8 rounded-2xl border border-border/70 bg-card/70 p-6 sm:p-8 lg:col-span-4">
             <div className="flex items-center gap-4">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-card text-primary">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-secondary text-primary">
                 <FaInstagram className="h-5 w-5" />
               </div>
               <div>

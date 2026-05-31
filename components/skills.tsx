@@ -257,18 +257,16 @@ export function Skills() {
           description={t.skills.desc}
         />
 
-        <div className="categories-grid grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="categories-grid grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
           {skillCategories.map((cat) => (
             <div key={cat.title} className="category-card group h-full">
-              <div className="h-full premium-card p-8 space-y-8 transition-all duration-300 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full blur-3xl -mr-12 -mt-12 group-hover:bg-primary/10 transition-all duration-300" />
-
+              <div className="h-full premium-card p-6 sm:p-8 space-y-8 transition-all duration-300 relative overflow-hidden">
                 <div className="relative z-10 space-y-7">
-                  <div className="flex items-center gap-5 group/header">
-                    <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary border border-primary/20">
+                  <div className="flex items-center gap-4 group/header">
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex shrink-0 items-center justify-center text-primary border border-primary/20">
                       <cat.icon className="h-7 w-7" />
                     </div>
-                    <h3 className="text-2xl font-black text-foreground tracking-tight leading-tight group-hover/header:text-primary transition-colors">
+                    <h3 className="text-xl sm:text-2xl font-black text-foreground tracking-tight leading-tight group-hover/header:text-primary transition-colors">
                       {cat.title}
                     </h3>
                   </div>
@@ -277,22 +275,22 @@ export function Skills() {
                     {cat.description}
                   </p>
 
-                  <div className="grid grid-cols-2 gap-x-4 gap-y-5 pt-8 border-t border-white/5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-x-4 gap-y-4 pt-7 border-t border-border/60">
                     {cat.skills.map((skill) => (
                       <a
                         key={skill.name}
                         href={skill.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-3 group/skill cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-xl transition-all"
+                        className="flex min-w-0 items-center gap-3 group/skill cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-xl transition-all"
                       >
-                        <div className="p-2 rounded-lg bg-white/5 group-hover/skill:bg-primary/15 transition-all border border-white/5 group-hover/skill:border-primary/30">
+                        <div className="p-2 rounded-lg bg-secondary/70 group-hover/skill:bg-primary/15 transition-all border border-border/60 group-hover/skill:border-primary/30">
                           <skill.icon
                             className="h-4 w-4 text-muted-foreground group-hover/skill:text-primary transition-colors"
                             style={{ fill: "currentColor" }}
                           />
                         </div>
-                        <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-muted-foreground group-hover/skill:text-foreground transition-colors">
+                        <span className="truncate text-[10px] font-mono font-bold uppercase tracking-widest text-muted-foreground group-hover/skill:text-foreground transition-colors">
                           {skill.name}
                         </span>
                       </a>

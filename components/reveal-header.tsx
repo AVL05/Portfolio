@@ -81,14 +81,14 @@ export function RevealHeader({
   return (
     <header
       ref={containerRef}
-      className={`mb-24 sm:mb-32 space-y-6 ${className}`}
+      className={`mb-16 sm:mb-20 space-y-5 ${className}`}
     >
-      <div className="header-line flex items-center gap-4 text-primary font-mono text-sm tracking-[0.3em] uppercase">
+      <div className="header-line flex items-center gap-4 text-primary font-mono text-xs sm:text-sm tracking-[0.22em] sm:tracking-[0.28em] uppercase">
         <span className="w-8 h-px bg-primary/50" />
         {title}
       </div>
       <h2
-        className="header-subtitle text-4xl sm:text-7xl font-black text-foreground tracking-tighter leading-tight pb-2"
+        className="header-subtitle text-4xl sm:text-6xl lg:text-7xl font-black text-foreground tracking-tight leading-[0.98] pb-2 max-w-5xl"
         aria-label={subtitle}
       >
         {subtitle.split(" ").map((word, i) => (
@@ -106,7 +106,7 @@ export function RevealHeader({
         ))}
       </h2>
       {description && (
-        <p className="header-description text-muted-foreground text-lg sm:text-xl font-medium max-w-2xl text-balance">
+        <p className="header-description text-muted-foreground text-base sm:text-xl font-medium max-w-2xl text-balance leading-relaxed">
           {description}
         </p>
       )}

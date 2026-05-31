@@ -4,7 +4,7 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import es from "./locales/es.json";
 import en from "./locales/en.json";
 
-type Language = "es" | "en";
+export type Language = "es" | "en";
 
 interface ProjectItem {
   title: string;
@@ -110,19 +110,27 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
   undefined,
 );
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguage] = useState<Language>("es");
+export function LanguageProvider({
+  children,
+  initialLanguage = "es",
+}: {
+  children: React.ReactNode;
+  initialLanguage?: Language;
+}) {
+  const [language, setLanguage] = useState<Language>(initialLanguage);
 
   useEffect(() => {
     const saved = localStorage.getItem("language") as Language;
     if (saved && (saved === "es" || saved === "en")) {
       setLanguage(saved);
+      document.documentElement.lang = saved;
     }
   }, []);
 
   const handleSetLanguage = (lang: Language) => {
     setLanguage(lang);
     localStorage.setItem("language", lang);
+    document.documentElement.lang = lang;
   };
 
   return (

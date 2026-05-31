@@ -67,7 +67,7 @@ export function Experience() {
           description={t.experience.desc}
         />
 
-        <div className="timeline-grid grid grid-cols-1 lg:grid-cols-2 gap-24">
+        <div className="timeline-grid grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20">
           {/* Education */}
           <div className="space-y-16">
             <div className="flex items-center gap-6 group">
@@ -85,22 +85,22 @@ export function Experience() {
 
               {education.map((edu, i) => (
                 <div key={i} className="timeline-item relative pl-20 group">
-                  <div className="absolute left-0 top-2 w-14 h-14 bg-background border border-border rounded-2xl flex items-center justify-center z-10 group-hover:border-primary/50 transition-colors">
+                  <div className="absolute left-0 top-2 w-14 h-14 bg-background border border-border rounded-xl flex items-center justify-center z-10 group-hover:border-primary/50 transition-colors">
                     <span className="text-xs font-mono text-muted-foreground group-hover:text-primary transition-colors">
                       0{i + 1}
                     </span>
                   </div>
                   <div className="space-y-4">
                     <div className="space-y-1">
-                      <div className="flex items-center justify-between gap-4">
-                        <h4 className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors">
+                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4">
+                        <h4 className="text-xl sm:text-2xl font-bold text-foreground leading-tight group-hover:text-primary transition-colors">
                           {edu.title}
                         </h4>
-                        <span className="text-[10px] font-mono text-primary/60 bg-primary/5 px-3 py-1 rounded-full border border-primary/10">
+                        <span className="w-fit shrink-0 text-[10px] font-mono text-primary/70 bg-primary/5 px-3 py-1 rounded-full border border-primary/10">
                           {edu.period}
                         </span>
                       </div>
-                      <div className="flex items-center gap-2 text-muted-foreground text-xs font-mono uppercase tracking-widest">
+                      <div className="flex flex-wrap items-center gap-2 text-muted-foreground text-xs font-mono uppercase tracking-widest">
                         <span className="text-foreground/70 font-bold">
                           {edu.institution}
                         </span>
@@ -136,22 +136,22 @@ export function Experience() {
 
               {experience.map((exp, i) => (
                 <div key={i} className="timeline-item relative pl-20 group">
-                  <div className="absolute left-0 top-2 w-14 h-14 bg-background border border-border rounded-2xl flex items-center justify-center z-10 group-hover:border-primary/50 transition-colors">
+                  <div className="absolute left-0 top-2 w-14 h-14 bg-background border border-border rounded-xl flex items-center justify-center z-10 group-hover:border-primary/50 transition-colors">
                     <span className="text-xs font-mono text-muted-foreground group-hover:text-primary transition-colors">
                       0{i + 1}
                     </span>
                   </div>
                   <div className="space-y-4">
                     <div className="space-y-1">
-                      <div className="flex items-center justify-between gap-4">
-                        <h4 className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors">
+                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4">
+                        <h4 className="text-xl sm:text-2xl font-bold text-foreground leading-tight group-hover:text-primary transition-colors">
                           {exp.title}
                         </h4>
-                        <span className="text-[10px] font-mono text-primary/60 bg-primary/5 px-3 py-1 rounded-full border border-primary/10">
+                        <span className="w-fit shrink-0 text-[10px] font-mono text-primary/70 bg-primary/5 px-3 py-1 rounded-full border border-primary/10">
                           {exp.period}
                         </span>
                       </div>
-                      <div className="flex items-center gap-2 text-muted-foreground text-xs font-mono uppercase tracking-widest">
+                      <div className="flex flex-wrap items-center gap-2 text-muted-foreground text-xs font-mono uppercase tracking-widest">
                         <span className="text-foreground/70 font-bold">
                           {exp.company}
                         </span>
@@ -171,9 +171,9 @@ export function Experience() {
           </div>
         </div>
 
-        <div className="mt-32 p-12 lg:p-20 dev-border rounded-[4rem] bg-card/50 flex flex-col md:flex-row items-center justify-between gap-12 group hover:bg-card/80 transition-all">
+        <div className="mt-24 p-6 sm:p-10 lg:p-14 dev-border rounded-2xl bg-card/60 flex flex-col md:flex-row items-center justify-between gap-8 lg:gap-12 group hover:bg-card/80 transition-all">
           <div className="space-y-4 text-center md:text-left">
-            <h3 className="text-3xl lg:text-4xl font-bold text-foreground tracking-tight">
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground tracking-tight">
               {t.experience.cv_title}
             </h3>
             <p className="text-muted-foreground text-lg font-medium max-w-xl">
@@ -183,7 +183,7 @@ export function Experience() {
           <Button
             asChild
             size="lg"
-            className="h-20 px-10 bg-primary text-primary-foreground font-black hover:bg-white rounded-3xl transition-all shadow-2xl shrink-0"
+            className="h-14 sm:h-16 px-6 sm:px-8 bg-primary text-primary-foreground font-black hover:bg-white rounded-xl transition-all shadow-2xl shrink-0"
           >
             <a
               href="/CV_Alex_Vicente_Lopez_Desarrollador_Web_Junior.pdf"

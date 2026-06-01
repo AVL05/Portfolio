@@ -12,7 +12,7 @@ import { SmoothScroll } from "@/components/smooth-scroll";
 import { LanguageProvider, type Language } from "@/lib/language-context";
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://aleviclop.vercel.app";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://aleviclop.dev";
 
 export const viewport = {
   themeColor: [

@@ -81,7 +81,7 @@ export async function GET(request: Request) {
               color: '#444',
             }}
           >
-            aleviclop.vercel.app
+            aleviclop.dev
           </div>
         </div>
       ),

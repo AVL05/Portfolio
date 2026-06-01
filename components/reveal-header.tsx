@@ -25,10 +25,9 @@ export function RevealHeader({
 
       if (prefersReducedMotion()) {
         gsap.set([q(".header-line"), chars, q(".header-description")], {
-          opacity: 1,
+          autoAlpha: 1,
           x: 0,
           y: 0,
-          filter: "none",
         });
         return;
       }
@@ -42,19 +41,26 @@ export function RevealHeader({
 
       tl.fromTo(
         q(".header-line"),
-        { opacity: 0, x: -10 },
-        { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" },
+        { autoAlpha: 0, x: -10 },
+        {
+          autoAlpha: 1,
+          x: 0,
+          immediateRender: false,
+          duration: 0.5,
+          ease: "power2.out",
+        },
       ).fromTo(
         chars,
         {
-          opacity: 0,
-          filter: "blur(10px)",
+          autoAlpha: 0,
+          y: 12,
         },
         {
-          opacity: 1,
-          filter: "blur(0px)",
+          autoAlpha: 1,
+          y: 0,
+          immediateRender: false,
           stagger: 0.02,
-          duration: 1.2,
+          duration: 0.56,
           ease: "expo.out",
         },
         "-=0.3",
@@ -63,11 +69,11 @@ export function RevealHeader({
       if (description) {
         tl.fromTo(
           q(".header-description"),
-          { opacity: 0, y: 15, filter: "blur(5px)" },
+          { autoAlpha: 0, y: 14 },
           {
-            opacity: 1,
+            autoAlpha: 1,
             y: 0,
-            filter: "blur(0px)",
+            immediateRender: false,
             duration: 0.6,
             ease: "power2.out",
           },
@@ -81,14 +87,14 @@ export function RevealHeader({
   return (
     <header
       ref={containerRef}
-      className={`mb-16 sm:mb-20 space-y-5 ${className}`}
+      className={`mb-14 space-y-5 sm:mb-18 ${className}`}
     >
-      <div className="header-line flex items-center gap-4 text-primary font-mono text-xs sm:text-sm tracking-[0.22em] sm:tracking-[0.28em] uppercase">
-        <span className="w-8 h-px bg-primary/50" />
+      <div className="header-line flex items-center gap-4 font-mono text-xs font-black uppercase tracking-[0.2em] text-primary sm:text-sm sm:tracking-[0.24em]">
+        <span className="h-px w-10 bg-primary/60" />
         {title}
       </div>
       <h2
-        className="header-subtitle text-4xl sm:text-6xl lg:text-7xl font-black text-foreground tracking-tight leading-[0.98] pb-2 max-w-5xl"
+        className="header-subtitle max-w-5xl pb-2 text-4xl font-black leading-[0.98] tracking-normal text-foreground sm:text-6xl lg:text-7xl"
         aria-label={subtitle}
       >
         {subtitle.split(" ").map((word, i) => (
@@ -106,7 +112,7 @@ export function RevealHeader({
         ))}
       </h2>
       {description && (
-        <p className="header-description text-muted-foreground text-base sm:text-xl font-medium max-w-2xl text-balance leading-relaxed">
+        <p className="header-description max-w-2xl text-balance text-base font-medium leading-relaxed text-muted-foreground sm:text-xl">
           {description}
         </p>
       )}

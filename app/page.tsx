@@ -1,28 +1,5 @@
-'use client'
-
-import dynamicLoader from "next/dynamic";
-import { Navigation } from "@/components/navigation";
-import { Hero } from "@/components/hero";
-
-const Skills = dynamicLoader(() => import("@/components/skills").then((mod) => mod.Skills));
-const Projects = dynamicLoader(() => import("@/components/projects").then((mod) => mod.Projects));
-const Photography = dynamicLoader(() => import("@/components/photography").then((mod) => mod.Photography));
-const Experience = dynamicLoader(() => import("@/components/experience").then((mod) => mod.Experience));
-const Contact = dynamicLoader(() => import("@/components/contact").then((mod) => mod.Contact));
+import { HomeClient } from "@/components/home-client";
 
 export default function Home() {
-  return (
-    <div className="min-h-screen relative">
-      <Navigation />
-
-      <main className="relative z-10">
-        <Hero />
-        <Projects />
-        <Skills />
-        <Experience />
-        <Photography />
-        <Contact />
-      </main>
-    </div>
-  );
+  return <HomeClient />;
 }

@@ -24,18 +24,17 @@ export function LiquidReveal({ children, trigger }: LiquidRevealProps) {
       gsap.fromTo(
         el,
         {
-          filter: "blur(30px) contrast(200%)",
-          opacity: 0,
-          scale: 0.8,
-          y: 100,
+          autoAlpha: 0,
+          scale: 0.96,
+          y: 44,
         },
         {
-          filter: "blur(0px) contrast(100%)",
-          opacity: 1,
+          autoAlpha: 1,
           scale: 1,
           y: 0,
-          duration: 1.5,
-          ease: "power4.out",
+          immediateRender: false,
+          duration: 0.72,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: trigger || el,
             start: "top 85%",

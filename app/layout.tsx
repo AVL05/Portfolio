@@ -10,9 +10,17 @@ import "@/lib/raf-polyfill";
 import "./globals.css";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { LanguageProvider, type Language } from "@/lib/language-context";
-
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://aleviclop.dev";
+import {
+  personJsonLd,
+  profilePageJsonLd,
+  SAME_AS,
+  SEO_KEYWORDS,
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_TITLE,
+  SITE_URL,
+  websiteJsonLd,
+} from "@/lib/seo";
 
 export const viewport = {
   themeColor: [
@@ -22,29 +30,23 @@ export const viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+  applicationName: SITE_NAME,
   title: {
-    default: "Alex Vicente López - Desarrollador Web",
+    default: SITE_TITLE,
     template: "%s | Alex Vicente López",
   },
-  description:
-    "Portfolio de Alex Vicente López, desarrollador web en formación especializado en React, PHP/Laravel, interfaces cuidadas y productos digitales claros.",
-  keywords: [
-    "Desarrollador Web",
-    "Portfolio",
-    "React",
-    "Laravel",
-    "PHP",
-    "Next.js",
-    "Frontend",
-    "Full-stack junior",
-  ],
+  description: SITE_DESCRIPTION,
+  keywords: SEO_KEYWORDS,
   authors: [{ name: "Alex Vicente López", url: SITE_URL }],
+  creator: "Alex Vicente López",
+  publisher: "Alex Vicente López",
+  category: "portfolio",
   openGraph: {
-    title: "Alex Vicente López - Desarrollador Web",
-    description:
-      "Portfolio de desarrollador web con proyectos frontend, backend, diseño editorial y una mirada visual apoyada en fotografía.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     url: SITE_URL,
-    siteName: "Alex Vicente López",
+    siteName: SITE_NAME,
     images: [
       {
         url: `${SITE_URL}/api/og?lang=es`,
@@ -58,9 +60,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Alex Vicente López - Desarrollador Web",
-    description:
-      "Portfolio de desarrollador web con proyectos frontend, backend y diseño visual.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     images: [`${SITE_URL}/api/og?lang=es`],
   },
   robots: {
@@ -74,10 +75,22 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  alternates: { canonical: SITE_URL },
+  alternates: {
+    canonical: SITE_URL,
+    languages: {
+      es: SITE_URL,
+      en: SITE_URL,
+      "x-default": SITE_URL,
+    },
+  },
   icons: {
     icon: "/favicon.svg",
     apple: "/favicon.svg",
+  },
+  other: {
+    "profile:first_name": "Alex",
+    "profile:last_name": "Vicente López",
+    "article:author": SAME_AS[1],
   },
 };
 
@@ -98,19 +111,11 @@ export default async function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              name: "Alex Vicente López",
-              url: SITE_URL,
-              jobTitle: "Desarrollador Web",
-              sameAs: [
-                "https://github.com/AVL05",
-                "https://www.linkedin.com/in/alex-vicente-lopez/",
-              ],
-              description:
-                "Desarrollador web en formación especializado en React, PHP/Laravel, interfaces cuidadas y productos digitales claros.",
-            }),
+            __html: JSON.stringify([
+              personJsonLd,
+              websiteJsonLd,
+              profilePageJsonLd,
+            ]),
           }}
         />
       </head>

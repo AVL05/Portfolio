@@ -29,7 +29,7 @@ function ProjectCard({
   return (
     <article ref={cardRef} className="project-card group h-full">
       <div className="premium-card h-full flex flex-col">
-        <div className="absolute top-5 left-5 z-30 font-mono text-[10px] text-muted-foreground/70 tracking-widest uppercase">
+        <div className="absolute left-5 top-5 z-30 font-mono text-[10px] uppercase tracking-widest text-muted-foreground/70">
           Project{" "}
           <span className="text-primary font-bold">{projectNumber}</span>
         </div>
@@ -44,8 +44,8 @@ function ProjectCard({
           />
           <div className="absolute inset-0 bg-linear-to-t from-background/90 via-background/10 to-transparent opacity-55 group-hover:opacity-70 transition-opacity duration-300" />
 
-          <div className="absolute top-5 right-5 z-30">
-            <div className="max-w-[12rem] px-3 py-1 bg-background/75 border border-border/80 rounded-full backdrop-blur-md">
+          <div className="absolute right-5 top-5 z-30">
+            <div className="max-w-[12rem] rounded-xl border border-border/80 bg-background/75 px-3 py-1 backdrop-blur-md">
               <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">
                 {project.category}
               </span>
@@ -53,14 +53,14 @@ function ProjectCard({
           </div>
         </div>
 
-        <div className="p-6 sm:p-8 space-y-6 relative flex flex-col grow">
+        <div className="relative flex grow flex-col space-y-6 p-6 sm:p-8">
           <div className="space-y-4">
             <div className="space-y-2">
               <p className="flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-[0.22em] text-primary/70">
                 <ArrowUpRight className="h-3.5 w-3.5" />
                 {project.type}
               </p>
-              <h3 className="text-2xl font-bold text-foreground tracking-tight leading-tight group-hover:text-primary transition-colors">
+              <h3 className="text-2xl font-bold leading-tight tracking-normal text-foreground transition-colors group-hover:text-primary">
                 {project.title}
               </h3>
             </div>
@@ -73,7 +73,7 @@ function ProjectCard({
             {project.technologies.map((tech: string) => (
               <span
                 key={tech}
-                className="px-3 py-1 bg-secondary border border-border rounded-lg text-[10px] font-mono text-muted-foreground uppercase tracking-widest"
+                className="rounded-xl border border-border bg-secondary px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground"
               >
                 {tech}
               </span>
@@ -84,7 +84,7 @@ function ProjectCard({
             {project.link && (
               <Button
                 asChild
-                className="h-11 rounded-xl bg-primary text-primary-foreground font-bold"
+                className="h-11 rounded-xl bg-primary font-bold text-primary-foreground"
               >
                 <a
                   href={project.link}
@@ -166,6 +166,7 @@ export function Projects() {
         {
           opacity: 1,
           y: 0,
+          immediateRender: false,
           stagger: 0.1,
           duration: 0.8,
           ease: "power3.out",
@@ -189,12 +190,13 @@ export function Projects() {
     <section
       id="projects"
       ref={containerRef}
-      className="section-padding bg-background relative overflow-hidden"
+      className="section-padding relative overflow-hidden bg-background"
     >
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-primary/3 mask-[linear-gradient(to_left,black,transparent)] pointer-events-none" />
+      <div className="pointer-events-none absolute right-0 top-0 h-full w-1/2 bg-primary/3 mask-[linear-gradient(to_left,black,transparent)]" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-border to-transparent" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-10 mb-14 sm:mb-18">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-14 flex flex-col justify-between gap-10 md:flex-row md:items-end sm:mb-18">
           <RevealHeader
             title={t.projects.title}
             subtitle={t.projects.subtitle}
@@ -206,7 +208,7 @@ export function Projects() {
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`min-h-10 rounded-full px-4 sm:px-5 text-[10px] font-black tracking-[0.16em] uppercase transition-all duration-300 ${activeCategory === category ? "bg-primary text-primary-foreground shadow-[0_12px_30px_-20px_var(--primary)]" : "bg-secondary/70 border border-border/70 text-muted-foreground hover:text-foreground"}`}
+                className={`min-h-10 rounded-xl px-4 text-[10px] font-black uppercase tracking-[0.16em] transition-all duration-300 sm:px-5 ${activeCategory === category ? "bg-primary text-primary-foreground shadow-[0_12px_30px_-20px_var(--primary)]" : "border border-border/70 bg-secondary/70 text-muted-foreground hover:text-foreground"}`}
               >
                 {category}
               </button>
@@ -214,7 +216,7 @@ export function Projects() {
           </div>
         </div>
 
-        <div className="projects-grid grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
+        <div className="projects-grid grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-10">
           {filteredProjects.map((project, index) => (
             <ProjectCardWrapper
               key={project.title}

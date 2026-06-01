@@ -3,7 +3,6 @@
 import { useRef } from "react";
 import { ArrowDown, Mail, BriefcaseBusiness } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
-import Image from "next/image";
 import { gsap, prefersReducedMotion, useGSAP } from "@/lib/gsap";
 import { useLanguage } from "@/lib/language-context";
 
@@ -33,7 +32,6 @@ export function Hero() {
             y: 0,
             scale: 1,
             rotateY: 0,
-            filter: "none",
           },
         );
         return;
@@ -45,12 +43,12 @@ export function Hero() {
       // 1. Entrance Animation
       tl.fromTo(
         chars,
-        { opacity: 0, filter: "blur(10px)" },
+        { autoAlpha: 0, y: 18 },
         {
-          opacity: 1,
-          filter: "blur(0px)",
+          autoAlpha: 1,
+          y: 0,
           stagger: 0.03,
-          duration: 1.2,
+          duration: 0.82,
           ease: "expo.out",
           onStart: () => {
             // Custom Scramble Effect
@@ -87,26 +85,25 @@ export function Hero() {
         )
         .fromTo(
           q(".hero-description"),
-          { opacity: 0, x: -30, filter: "blur(5px)" },
+          { autoAlpha: 0, y: 18 },
           {
-            opacity: 1,
-            x: 0,
-            filter: "blur(0px)",
-            duration: 1,
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.72,
             ease: "power3.out",
           },
           "-=0.8",
         )
         .fromTo(
           q(".social-magnetic"),
-          { opacity: 0, scale: 0, stagger: 0.1 },
-          { opacity: 1, scale: 1, duration: 0.8, ease: "back.out(2)" },
+          { autoAlpha: 0, y: 16 },
+          { autoAlpha: 1, y: 0, duration: 0.54, stagger: 0.08, ease: "power3.out" },
           "-=0.6",
         )
         .fromTo(
           q(".scroll-indicator"),
-          { opacity: 0, y: 50 },
-          { opacity: 1, y: 0, duration: 1, ease: "power4.out" },
+          { autoAlpha: 0, y: 24 },
+          { autoAlpha: 1, y: 0, duration: 0.7, ease: "power4.out" },
           "-=0.4",
         );
 
@@ -153,27 +150,26 @@ export function Hero() {
     { scope: containerRef },
   );
 
-  const name = "Alex Vicente";
-  const featuredProject = t.projects.items[0];
+  const name = "Alex Vicente López";
 
   return (
     <section
       id="hero"
       ref={containerRef}
-      className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 bg-background relative overflow-hidden pt-28 pb-16 sm:pt-32 sm:pb-24"
+      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-background px-4 pb-16 pt-32 sm:px-6 sm:pb-24 sm:pt-36 lg:px-8"
     >
       {/* Background elements */}
       <div
         ref={gridRef}
-        className="absolute inset-[-100px] bg-grid opacity-[0.18] dark:opacity-[0.16] pointer-events-none"
+        className="pointer-events-none absolute inset-[-120px] bg-grid opacity-[0.14] dark:opacity-[0.12]"
       />
 
-      <div className="absolute inset-0 bg-linear-to-b from-background/30 via-background/70 to-background pointer-events-none" />
+      <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-background/20 via-background/78 to-background" />
+      <div className="pointer-events-none absolute inset-x-0 top-32 h-px bg-linear-to-r from-transparent via-primary/35 to-transparent" />
 
-      <div className="w-full max-w-7xl mx-auto z-10 grid grid-cols-1 lg:grid-cols-[minmax(0,1.02fr)_minmax(360px,0.78fr)] items-center gap-12 lg:gap-16">
-        <div className="flex flex-col items-start text-left space-y-8 sm:space-y-10">
+      <div className="z-10 mx-auto flex w-full max-w-5xl flex-col items-start space-y-8 text-left sm:space-y-10 lg:pl-8">
           {/* Status Badge */}
-          <div className="hero-badge group flex items-center gap-3 px-4 py-2.5 dev-border rounded-full shadow-lg dark:shadow-[0_0_20px_rgba(0,0,0,0.2)] cursor-default overflow-hidden relative max-w-full">
+          <div className="hero-badge group relative flex max-w-full cursor-default items-center gap-3 overflow-hidden rounded-2xl border border-border/80 bg-card/76 px-4 py-2.5 shadow-lg backdrop-blur-xl">
             <div className="absolute inset-y-0 left-0 w-1 bg-primary" />
             <span className="relative flex h-2 w-2 shrink-0">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
@@ -187,7 +183,7 @@ export function Hero() {
           {/* Main Title */}
           <div className="relative space-y-5 perspective-2000">
             <h1
-              className="flex flex-wrap justify-start py-3 preserve-3d"
+              className="preserve-3d flex flex-wrap justify-start py-3"
               aria-label={name}
             >
               {name.split(" ").map((word, i) => (
@@ -199,7 +195,7 @@ export function Hero() {
                   {word.split("").map((char, j) => (
                     <span
                       key={j}
-                      className="reveal-char hero-title-char inline-block text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-foreground text-display cursor-default"
+                      className="reveal-char hero-title-char inline-block cursor-default text-5xl text-display text-foreground sm:text-7xl md:text-8xl lg:text-[7.8rem]"
                     >
                       {char}
                     </span>
@@ -208,7 +204,7 @@ export function Hero() {
               ))}
             </h1>
 
-            <h2 className="hero-description text-lg sm:text-2xl md:text-3xl text-muted-foreground font-medium tracking-tight max-w-3xl text-balance leading-relaxed sm:leading-snug">
+            <h2 className="hero-description max-w-3xl text-balance text-lg font-medium leading-relaxed tracking-normal text-muted-foreground sm:text-2xl sm:leading-snug md:text-3xl">
               {t.hero.description}
             </h2>
           </div>
@@ -218,30 +214,30 @@ export function Hero() {
               href="#projects"
               className="social-magnetic w-full sm:w-auto block"
             >
-              <div className="group flex items-center justify-center gap-3 px-8 py-4 bg-foreground text-background font-bold rounded-lg hover:bg-primary hover:text-primary-foreground transition-all duration-300 shadow-xl">
+              <div className="group flex items-center justify-center gap-3 rounded-2xl bg-foreground px-8 py-4 font-bold text-background shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary hover:text-primary-foreground">
                 <BriefcaseBusiness className="h-5 w-5" />
-                <span className="text-sm tracking-tight">
+                <span className="text-sm tracking-normal">
                   {language === "es" ? "Ver proyectos" : "View projects"}
                 </span>
               </div>
             </a>
 
             <a href="#contact" className="social-magnetic w-full sm:w-auto block">
-              <div className="group flex items-center justify-center gap-3 px-8 py-4 bg-card/75 border border-border text-foreground font-bold rounded-lg hover:border-primary/50 transition-all duration-300">
+              <div className="group flex items-center justify-center gap-3 rounded-2xl border border-border bg-card/75 px-8 py-4 font-bold text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/50">
                 <Mail className="h-5 w-5 text-accent" />
-                <span className="text-sm tracking-tight text-muted-foreground group-hover:text-foreground">
+                <span className="text-sm tracking-normal text-muted-foreground group-hover:text-foreground">
                   {language === "es" ? "Contactar" : "Contact"}
                 </span>
               </div>
             </a>
           </div>
 
-          <div className="hero-description flex flex-wrap items-center justify-start gap-5 pt-1 text-muted-foreground/70">
+          <div className="flex flex-wrap items-center justify-start gap-3 pt-1">
             <a
               href="https://github.com/AVL05"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest hover:text-primary transition-colors"
+              className="flex items-center gap-2 rounded-xl border border-border/70 bg-card/62 px-3 py-2 text-xs font-mono font-black uppercase tracking-widest text-muted-foreground transition-all hover:border-primary/40 hover:bg-primary/10 hover:text-primary"
             >
               <FaGithub className="h-4 w-4" />
               GitHub
@@ -250,60 +246,29 @@ export function Hero() {
               href="https://www.linkedin.com/in/alex-vicente-lopez/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest hover:text-primary transition-colors"
+              className="flex items-center gap-2 rounded-xl border border-border/70 bg-card/62 px-3 py-2 text-xs font-mono font-black uppercase tracking-widest text-muted-foreground transition-all hover:border-primary/40 hover:bg-primary/10 hover:text-primary"
             >
               <FaLinkedin className="h-4 w-4" />
               LinkedIn
             </a>
           </div>
-        </div>
-
-        <div className="hero-description relative hidden lg:block">
-          <a
-            href="#projects"
-            className="group block rounded-2xl border border-border/70 bg-card/70 p-3 shadow-2xl backdrop-blur-xl transition-all duration-500 hover:-translate-y-1 hover:border-primary/35"
-            aria-label={featuredProject.title}
-          >
-            <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-secondary">
-              <Image
-                src={featuredProject.image}
-                alt={featuredProject.title}
-                fill
-                className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.035]"
-                sizes="440px"
-                priority
-              />
-              <div className="absolute inset-0 bg-linear-to-t from-background/95 via-background/20 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-6">
-                <p className="mb-3 text-[10px] font-mono font-black uppercase tracking-[0.22em] text-primary/90">
-                  {featuredProject.type}
-                </p>
-                <p className="max-w-sm text-2xl font-black leading-tight tracking-tight text-foreground">
-                  {featuredProject.title}
-                </p>
-              </div>
-            </div>
-          </a>
-          <div className="absolute -bottom-5 -left-5 h-28 w-28 border-l border-b border-primary/40" />
-          <div className="absolute -right-5 -top-5 h-28 w-28 border-r border-t border-accent/35" />
-        </div>
       </div>
 
       {/* Scroll indicator */}
       <a
         href="#projects"
-        className="scroll-indicator hidden sm:flex absolute bottom-10 flex-col items-center gap-4 text-muted-foreground/50 hover:text-primary transition-all duration-500 group"
+        className="scroll-indicator group absolute bottom-8 hidden flex-col items-center gap-3 text-muted-foreground transition-all duration-500 hover:text-primary sm:flex"
       >
-        <span className="text-[10px] font-black uppercase tracking-[0.4em] font-mono group-hover:tracking-[0.6em] transition-all">
+        <span className="text-[10px] font-black uppercase tracking-[0.34em] font-mono opacity-80 transition-all group-hover:opacity-100">
           {t.hero.scroll}
         </span>
-        <div className="p-3 border border-border/50 rounded-full group-hover:border-primary/30 group-hover:scale-110 transition-all flex items-center justify-center bg-secondary">
+        <div className="flex items-center justify-center rounded-2xl border border-border/80 bg-card/80 p-3 shadow-lg backdrop-blur transition-all group-hover:scale-105 group-hover:border-primary/45">
           <ArrowDown className="scroll-arrow h-4 w-4" />
         </div>
       </a>
 
       {/* Depth Mask Transition */}
-      <div className="absolute bottom-0 left-0 w-full h-32 bg-linear-to-t from-background to-transparent backdrop-blur-[2px] pointer-events-none z-20" />
+      <div className="pointer-events-none absolute bottom-0 left-0 z-0 h-20 w-full bg-linear-to-t from-background to-transparent" />
     </section>
   );
 }

@@ -21,7 +21,6 @@ export function Navigation() {
   const navRef = useRef<HTMLElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
   const navLinksContainerRef = useRef<HTMLDivElement>(null);
-  const navLinksRefs = useRef<(HTMLAnchorElement | null)[]>([]);
 
   useGSAP(
     () => {
@@ -64,8 +63,6 @@ export function Navigation() {
     { scope: containerRef },
   );
 
-  const indicatorRef = useRef<HTMLDivElement>(null);
-
   // 1. Efficient Active Section Detection (Intersection Observer)
   useEffect(() => {
     const sections = navItems.map((item) => item.href.substring(1));
@@ -104,69 +101,45 @@ export function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // 3. Efficient Indicator Movement (GSAP instead of React State)
-  useGSAP(() => {
-    const activeIndex = navItems.findIndex(
-      (item) => item.href.substring(1) === activeSection,
-    );
-    const activeLink = navLinksRefs.current[activeIndex];
-    const indicator = indicatorRef.current;
-
-    if (activeLink && indicator && navLinksContainerRef.current) {
-      const containerRect =
-        navLinksContainerRef.current.getBoundingClientRect();
-      const linkRect = activeLink.getBoundingClientRect();
-
-      gsap.to(indicator, {
-        x: linkRect.left - containerRect.left,
-        width: linkRect.width,
-        duration: prefersReducedMotion() ? 0 : 0.5,
-        ease: "power3.out",
-        overwrite: "auto",
-      });
-    }
-  }, [activeSection]);
-
   return (
     <div ref={containerRef}>
       <nav
         ref={navRef}
-        className={`fixed top-0 left-0 right-0 z-[90] transition-all duration-500 ${
+        className={`fixed left-0 right-0 top-0 z-[90] transition-all duration-500 ${
           isScrolled
-            ? "py-3 bg-background/88 backdrop-blur-xl border-b border-border/70 shadow-[0_12px_40px_-30px_rgba(0,0,0,0.8)]"
-            : "py-6 bg-transparent"
+            ? "py-3"
+            : "py-5"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
+          <div
+            className={`flex items-center justify-between border px-3.5 py-3 backdrop-blur-2xl transition-all duration-500 sm:px-4 ${
+              isScrolled
+                ? "rounded-2xl border-border/80 bg-background/86 shadow-[0_24px_70px_-46px_rgba(0,0,0,0.92)]"
+                : "rounded-2xl border-border/45 bg-background/34"
+            }`}
+          >
             <a
               href="#hero"
-              className="nav-logo group text-lg sm:text-xl font-black text-foreground tracking-tight transition-all lg:whitespace-nowrap shrink-0"
+              className="nav-logo group shrink-0 text-base font-black tracking-normal text-foreground transition-all sm:text-lg lg:whitespace-nowrap"
             >
               ALEX <span className="text-primary">VICENTE</span>
             </a>
 
             <div
               ref={navLinksContainerRef}
-              className="hidden xl:flex items-center gap-2 rounded-full border border-border/70 bg-card/50 p-1.5 backdrop-blur-xl relative"
+              className="relative hidden items-center justify-center gap-1.5 rounded-2xl border border-border/70 bg-card/62 p-2 backdrop-blur-xl xl:flex"
             >
-              <div
-                ref={indicatorRef}
-                className="absolute inset-y-1.5 rounded-full bg-primary/12 border border-primary/18"
-              />
               {navItems.map((item, index) => {
                 const isActive = activeSection === item.href.substring(1);
                 return (
                   <a
                     key={item.name}
-                    ref={(el) => {
-                      navLinksRefs.current[index] = el;
-                    }}
                     href={item.href}
-                    className={`nav-item group relative z-10 rounded-full px-3.5 py-2 text-[10px] font-black uppercase tracking-[0.14em] transition-colors duration-300 whitespace-nowrap ${
+                    className={`nav-item group relative z-10 inline-flex min-w-[6.75rem] items-center justify-center whitespace-nowrap rounded-xl px-4 py-2.5 text-center text-[11px] font-black uppercase tracking-[0.12em] transition-all duration-300 ${
                       isActive
-                        ? "text-primary"
-                        : "text-foreground/40 hover:text-foreground"
+                        ? "bg-primary text-primary-foreground shadow-[0_10px_26px_-18px_var(--primary)]"
+                        : "text-foreground/72 hover:bg-secondary/70 hover:text-foreground"
                     }`}
                   >
                     {item.name}
@@ -184,7 +157,7 @@ export function Navigation() {
               <a
                 href="#mobile-menu"
                 aria-label="Abrir menú"
-                className="inline-flex size-9 items-center justify-center rounded-md text-foreground transition-all hover:bg-foreground/5 hover:text-primary focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+                className="inline-flex size-9 items-center justify-center rounded-xl text-foreground transition-all hover:bg-foreground/5 hover:text-primary focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
               >
                 <Menu className="h-6 w-6" />
               </a>
@@ -200,7 +173,7 @@ export function Navigation() {
             <a
               key={item.name}
               href={item.href}
-              className="text-center text-4xl font-black tracking-tight text-foreground transition-all hover:text-primary sm:text-5xl"
+              className="text-center text-4xl font-black tracking-normal text-foreground transition-all hover:text-primary sm:text-5xl"
             >
               {item.name}
             </a>
@@ -208,7 +181,7 @@ export function Navigation() {
           <a
             href="#hero"
             aria-label="Cerrar menú"
-            className="absolute right-8 top-8 inline-flex size-12 items-center justify-center rounded-full text-foreground transition-all hover:bg-foreground/5 hover:text-primary focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+            className="absolute right-8 top-8 inline-flex size-12 items-center justify-center rounded-2xl text-foreground transition-all hover:bg-foreground/5 hover:text-primary focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
           >
               <X className="h-8 w-8" />
           </a>

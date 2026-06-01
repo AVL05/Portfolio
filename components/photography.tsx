@@ -9,7 +9,7 @@ import { useLanguage } from "@/lib/language-context";
 import { gsap, prefersReducedMotion, useGSAP } from "@/lib/gsap";
 
 const photographyLinks = {
-  website: "https://alexgallery.alexviclop.workers.dev/",
+  website: "https://gallery.aleviclop.dev/",
   instagram: "https://www.instagram.com/aleexx_005/",
 };
 

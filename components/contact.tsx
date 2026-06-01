@@ -258,7 +258,7 @@ export function Contact() {
               </div>
 
               <a
-                href="https://alexgallery.alexviclop.workers.dev/"
+                href="https://gallery.aleviclop.dev/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex text-sm font-mono uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors"

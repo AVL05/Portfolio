@@ -8,7 +8,6 @@ import {
   Layers,
   Camera,
   Video,
-  Code2,
 } from "lucide-react";
 import { gsap, prefersReducedMotion, useGSAP } from "@/lib/gsap";
 import { useLanguage } from "@/lib/language-context";
@@ -20,7 +19,6 @@ import {
   SiVuedotjs,
   SiTailwindcss,
   SiBootstrap,
-  SiPhp,
   SiLaravel,
   SiMysql,
   SiElectron,

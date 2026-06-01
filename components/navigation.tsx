@@ -66,7 +66,6 @@ export function Navigation() {
   // 1. Efficient Active Section Detection (Intersection Observer)
   useEffect(() => {
     const sections = navItems.map((item) => item.href.substring(1));
-    const observers: IntersectionObserver[] = [];
 
     const observerOptions = {
       root: null,
@@ -130,7 +129,7 @@ export function Navigation() {
               ref={navLinksContainerRef}
               className="relative hidden items-center justify-center gap-1.5 rounded-2xl border border-border/70 bg-card/62 p-2 backdrop-blur-xl xl:flex"
             >
-              {navItems.map((item, index) => {
+              {navItems.map((item) => {
                 const isActive = activeSection === item.href.substring(1);
                 return (
                   <a

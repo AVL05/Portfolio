@@ -11,7 +11,7 @@ const securityHeaders = [
       "font-src 'self' data:",
       "style-src 'self' 'unsafe-inline'",
       "script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com",
-      "connect-src 'self' https://vitals.vercel-insights.com https://va.vercel-scripts.com",
+      "connect-src 'self' https://vitals.vercel-insights.com https://va.vercel-scripts.com https://api.web3forms.com",
       "upgrade-insecure-requests",
     ].join("; "),
   },

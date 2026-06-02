@@ -65,14 +65,12 @@ export function Contact() {
     setSubmitStatus(null);
 
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          access_key: "d72eeacd-28fc-442b-83bd-b8c383c5997e",
-          subject: "Nuevo contacto - Portfolio Dev",
           name: formData.name,
           email: formData.email,
           message: formData.message,
@@ -152,6 +150,7 @@ export function Contact() {
                     type="text"
                     placeholder={t.contact.form_placeholder_name}
                     value={formData.name}
+                    maxLength={120}
                     onChange={(e) =>
                       setFormData({ ...formData, name: e.target.value })
                     }
@@ -172,6 +171,7 @@ export function Contact() {
                     type="email"
                     placeholder={t.contact.form_placeholder_email}
                     value={formData.email}
+                    maxLength={254}
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
                     }
@@ -192,6 +192,7 @@ export function Contact() {
                     placeholder={t.contact.form_placeholder_message}
                     rows={5}
                     value={formData.message}
+                    maxLength={4000}
                     onChange={(e) =>
                       setFormData({ ...formData, message: e.target.value })
                     }

@@ -16,18 +16,14 @@ export function GET(request: NextRequest) {
   const langParam = request.nextUrl.searchParams.get("lang");
   const language: Language = isLanguage(langParam) ? langParam : "es";
   const nextPath = getSafeNextPath(request.nextUrl.searchParams.get("next"));
-  const host = request.headers.get("host") ?? request.nextUrl.host;
-  const protocol =
-    request.headers.get("x-forwarded-proto") ??
-    request.nextUrl.protocol.replace(":", "");
-  const response = NextResponse.redirect(
-    new URL(nextPath, `${protocol}://${host}`),
-  );
+  const response = NextResponse.redirect(new URL(nextPath, request.nextUrl.origin));
 
   response.cookies.set("language", language, {
     path: "/",
     maxAge: 60 * 60 * 24 * 365,
+    httpOnly: true,
     sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
   });
 
   return response;

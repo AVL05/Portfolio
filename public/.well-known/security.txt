@@ -1,0 +1,3 @@
+Contact: mailto:alexviclop@gmail.com
+Preferred-Languages: es, en
+Canonical: https://aleviclop.dev/.well-known/security.txt

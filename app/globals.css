@@ -84,10 +84,12 @@
     position: relative;
     text-rendering: optimizeLegibility;
     background-image:
+      radial-gradient(circle at 16% 10%, oklch(from var(--primary) l c h / 0.12), transparent 28rem),
+      radial-gradient(circle at 84% 14%, oklch(from var(--accent) l c h / 0.11), transparent 30rem),
       linear-gradient(to bottom, oklch(from var(--foreground) l c h / 0.035) 1px, transparent 1px),
       linear-gradient(to right, oklch(from var(--foreground) l c h / 0.026) 1px, transparent 1px),
       linear-gradient(135deg, oklch(from var(--primary) l c h / 0.052), transparent 34%, oklch(from var(--accent) l c h / 0.045));
-    background-size: 80px 80px, 80px 80px, 100% 100%;
+    background-size: 100% 100%, 100% 100%, 80px 80px, 80px 80px, 100% 100%;
     background-position: center top;
   }
 
@@ -110,7 +112,7 @@
   }
 
   .glass {
-    @apply bg-card/62 backdrop-blur-2xl border border-border/70;
+    @apply bg-card/68 backdrop-blur-2xl border border-border/70;
     box-shadow:
       0 8px 32px 0 rgba(0, 0, 0, 0.3),
       inset 0 0 0 1px rgba(255, 255, 255, 0.05);
@@ -166,7 +168,9 @@
   }
 
   .hero-title-char {
-    text-shadow: 0 1px 0 oklch(from var(--accent) l c h / 0.2);
+    text-shadow:
+      0 1px 0 oklch(from var(--accent) l c h / 0.28),
+      0 0 34px oklch(from var(--primary) l c h / 0.06);
   }
 
   .magnetic-area {
@@ -255,6 +259,92 @@
     background-image:
       linear-gradient(to right, oklch(from var(--foreground) l c h / 0.055) 1px, transparent 1px),
       linear-gradient(to bottom, oklch(from var(--foreground) l c h / 0.04) 1px, transparent 1px);
+  }
+
+  .dev-panel {
+    @apply rounded-2xl border border-border/70 bg-card/70 backdrop-blur-xl;
+    box-shadow:
+      0 30px 70px -42px rgba(0, 0, 0, 0.92),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05),
+      0 0 0 1px oklch(from var(--primary) l c h / 0.035);
+  }
+
+  .section-kicker {
+    @apply font-mono text-xs font-black uppercase text-primary;
+    letter-spacing: 0.22em;
+  }
+
+  .hero-3d-stage {
+    perspective: 1200px;
+    transform-style: preserve-3d;
+  }
+
+  .hero-3d-scene {
+    transform-style: preserve-3d;
+    animation: dev-float 8s ease-in-out infinite;
+  }
+
+  .hero-3d-layer {
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+
+  .dev-code-line {
+    @apply h-2 rounded-full bg-foreground/12;
+    box-shadow: 0 0 18px oklch(from var(--primary) l c h / 0.06);
+  }
+
+  .dev-cube {
+    transform-style: preserve-3d;
+    animation: cube-spin 12s linear infinite;
+  }
+
+  .dev-cube > span {
+    @apply absolute inset-0 border border-primary/35 bg-primary/8;
+  }
+
+  .dev-cube > span:nth-child(1) {
+    transform: translateZ(38px);
+  }
+
+  .dev-cube > span:nth-child(2) {
+    transform: rotateY(180deg) translateZ(38px);
+  }
+
+  .dev-cube > span:nth-child(3) {
+    transform: rotateY(90deg) translateZ(38px);
+  }
+
+  .dev-cube > span:nth-child(4) {
+    transform: rotateY(-90deg) translateZ(38px);
+  }
+
+  .dev-cube > span:nth-child(5) {
+    transform: rotateX(90deg) translateZ(38px);
+  }
+
+  .dev-cube > span:nth-child(6) {
+    transform: rotateX(-90deg) translateZ(38px);
+  }
+
+  @keyframes dev-float {
+    0%, 100% {
+      transform: translate3d(0, 0, 0) rotateX(58deg) rotateZ(-10deg);
+    }
+
+    50% {
+      transform: translate3d(0, -14px, 0) rotateX(55deg) rotateZ(-8deg);
+    }
+  }
+
+  @keyframes cube-spin {
+    from {
+      transform: rotateX(-18deg) rotateY(0deg) rotateZ(8deg);
+    }
+
+    to {
+      transform: rotateX(-18deg) rotateY(360deg) rotateZ(8deg);
+    }
   }
 
   @media (max-width: 640px) {

@@ -261,7 +261,8 @@ export function Skills() {
         <div className="categories-grid grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-8">
           {skillCategories.map((cat) => (
             <div key={cat.title} className="category-card group h-full">
-              <div className="premium-card relative h-full space-y-8 overflow-hidden p-6 transition-all duration-300 sm:p-8">
+              <div className="premium-card relative h-full space-y-8 overflow-hidden p-6 transition-all duration-300 transform-gpu [transform-style:preserve-3d] group-hover:[transform:perspective(1000px)_rotateX(1.8deg)_translateY(-6px)] sm:p-8">
+                <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-primary/70 via-accent/60 to-transparent" />
                 <div className="relative z-10 space-y-7">
                   <div className="flex items-center gap-4 group/header">
                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-primary/20 bg-primary/12 text-primary">

@@ -113,7 +113,7 @@ export function Contact() {
 
         <div className="grid grid-cols-1 gap-12 sm:gap-16 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1fr)] lg:gap-20">
           <div className="contact-item">
-            <Card className="overflow-hidden rounded-3xl border-border bg-card/86 p-0 shadow-2xl transition-all hover:border-primary/25">
+            <Card className="dev-panel overflow-hidden p-0 transition-all hover:border-primary/25">
               <div className="flex items-center gap-2 border-b border-border bg-secondary/50 px-6 py-4">
                 <div className="flex gap-1.5">
                   <div className="w-2.5 h-2.5 rounded-full bg-red-400/20"></div>

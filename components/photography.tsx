@@ -132,7 +132,7 @@ export function Photography() {
             </figure>
           ))}
 
-          <div className="photo-card flex flex-col justify-between gap-8 rounded-3xl border border-border/70 bg-card/72 p-6 sm:p-8 lg:col-span-4">
+          <div className="photo-card dev-panel flex flex-col justify-between gap-8 p-6 sm:p-8 lg:col-span-4">
             <div className="flex items-center gap-4">
               <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-secondary text-primary">
                 <FaInstagram className="h-5 w-5" />

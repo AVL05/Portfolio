@@ -28,7 +28,7 @@ function ProjectCard({
 
   return (
     <article ref={cardRef} className="project-card group h-full">
-      <div className="premium-card h-full flex flex-col">
+      <div className="premium-card h-full flex flex-col transform-gpu [transform-style:preserve-3d] group-hover:[transform:perspective(1200px)_rotateX(1.4deg)_rotateY(-1.2deg)_translateY(-6px)]">
         <div className="absolute left-5 top-5 z-30 font-mono text-[10px] uppercase tracking-widest text-muted-foreground/70">
           Project{" "}
           <span className="text-primary font-bold">{projectNumber}</span>
@@ -42,7 +42,7 @@ function ProjectCard({
             className={`transition-all duration-700 ease-out group-hover:scale-[1.025] ${smallImageProjects.includes(project.title) ? "p-8 object-contain" : "object-cover"}`}
             sizes="(max-width: 768px) 100vw, 50vw"
           />
-          <div className="absolute inset-0 bg-linear-to-t from-background/90 via-background/10 to-transparent opacity-55 group-hover:opacity-70 transition-opacity duration-300" />
+          <div className="absolute inset-0 bg-linear-to-t from-background/92 via-background/4 to-transparent opacity-52 group-hover:opacity-66 transition-opacity duration-300" />
 
           <div className="absolute right-5 top-5 z-30">
             <div className="max-w-[12rem] rounded-xl border border-border/80 bg-background/75 px-3 py-1 backdrop-blur-md">
@@ -53,14 +53,14 @@ function ProjectCard({
           </div>
         </div>
 
-        <div className="relative flex grow flex-col space-y-6 p-6 sm:p-8">
+        <div className="relative flex grow flex-col space-y-6 border-t border-border/60 p-6 sm:p-8">
           <div className="space-y-4">
             <div className="space-y-2">
               <p className="flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-[0.22em] text-primary/70">
                 <ArrowUpRight className="h-3.5 w-3.5" />
                 {project.type}
               </p>
-              <h3 className="text-2xl font-bold leading-tight tracking-normal text-foreground transition-colors group-hover:text-primary">
+              <h3 className="text-2xl font-black leading-tight tracking-normal text-foreground transition-colors group-hover:text-primary">
                 {project.title}
               </h3>
             </div>
@@ -216,7 +216,7 @@ export function Projects() {
           </div>
         </div>
 
-        <div className="projects-grid grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-10">
+        <div className="projects-grid grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-10 [&>*:nth-child(2n)]:lg:translate-y-12">
           {filteredProjects.map((project, index) => (
             <ProjectCardWrapper
               key={project.title}

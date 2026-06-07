@@ -172,7 +172,7 @@ export function Experience() {
           </div>
         </div>
 
-        <div className="group mt-24 flex flex-col items-center justify-between gap-8 rounded-3xl border border-border/80 bg-card/68 p-6 transition-all hover:border-primary/30 hover:bg-card/84 sm:p-10 md:flex-row lg:gap-12 lg:p-14">
+        <div className="dev-panel group mt-24 flex flex-col items-center justify-between gap-8 p-6 transition-all hover:border-primary/30 hover:bg-card/84 sm:p-10 md:flex-row lg:gap-12 lg:p-14">
           <div className="space-y-4 text-center md:text-left">
             <h3 className="text-2xl font-bold tracking-normal text-foreground sm:text-3xl lg:text-4xl">
               {t.experience.cv_title}

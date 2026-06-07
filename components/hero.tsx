@@ -10,6 +10,7 @@ export function Hero() {
   const { t, language } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
+  const sceneRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
@@ -25,6 +26,7 @@ export function Hero() {
             q(".hero-description"),
             q(".social-magnetic"),
             q(".scroll-indicator"),
+            q(".hero-3d-layer"),
           ],
           {
             opacity: 1,
@@ -32,6 +34,8 @@ export function Hero() {
             y: 0,
             scale: 1,
             rotateY: 0,
+            rotationX: 0,
+            rotationY: 0,
           },
         );
         return;
@@ -105,6 +109,20 @@ export function Hero() {
           { autoAlpha: 0, y: 24 },
           { autoAlpha: 1, y: 0, duration: 0.7, ease: "power4.out" },
           "-=0.4",
+        )
+        .fromTo(
+          q(".hero-3d-layer"),
+          { autoAlpha: 0, y: 34, z: -120, rotationX: 12 },
+          {
+            autoAlpha: 1,
+            y: 0,
+            z: 0,
+            rotationX: 0,
+            stagger: 0.08,
+            duration: 1,
+            ease: "power4.out",
+          },
+          "-=0.75",
         );
 
       const glowXTo = gsap.quickTo(q(".hero-glow"), "x", {
@@ -115,17 +133,25 @@ export function Hero() {
         duration: 2.5,
         ease: "power3.out",
       });
-      const gridRotateXTo = gsap.quickTo(gridRef.current, "rotateX", {
+      const gridRotateXTo = gsap.quickTo(gridRef.current, "rotationX", {
         duration: 2,
         ease: "power2.out",
       });
-      const gridRotateYTo = gsap.quickTo(gridRef.current, "rotateY", {
+      const gridRotateYTo = gsap.quickTo(gridRef.current, "rotationY", {
         duration: 2,
         ease: "power2.out",
       });
       const gridZTo = gsap.quickTo(gridRef.current, "z", {
         duration: 2,
         ease: "power2.out",
+      });
+      const sceneRotateXTo = gsap.quickTo(sceneRef.current, "rotationX", {
+        duration: 1.8,
+        ease: "power3.out",
+      });
+      const sceneRotateYTo = gsap.quickTo(sceneRef.current, "rotationY", {
+        duration: 1.8,
+        ease: "power3.out",
       });
 
       // 3. Mouse Interaction (Subtle Parallax)
@@ -139,6 +165,8 @@ export function Hero() {
         gridRotateXTo(45 + yPos * 10);
         gridRotateYTo(xPos * 10);
         gridZTo(xPos * 50);
+        sceneRotateXTo(yPos * -5);
+        sceneRotateYTo(xPos * 7);
       };
 
       window.addEventListener("mousemove", handleMouseMove);
@@ -161,13 +189,17 @@ export function Hero() {
       {/* Background elements */}
       <div
         ref={gridRef}
-        className="pointer-events-none absolute inset-[-120px] bg-grid opacity-[0.14] dark:opacity-[0.12]"
+        className="pointer-events-none absolute inset-[-120px] bg-grid opacity-[0.2] dark:opacity-[0.16]"
       />
 
-      <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-background/20 via-background/78 to-background" />
-      <div className="pointer-events-none absolute inset-x-0 top-32 h-px bg-linear-to-r from-transparent via-primary/35 to-transparent" />
+      <div className="hero-glow pointer-events-none absolute left-[14%] top-[18%] h-72 w-72 rounded-full bg-primary/18 blur-3xl" />
+      <div className="pointer-events-none absolute right-[-10rem] top-28 h-[34rem] w-[34rem] rounded-full border border-primary/20" />
+      <div className="pointer-events-none absolute bottom-20 left-[-8rem] h-72 w-72 rounded-full border-[3rem] border-accent/10" />
+      <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-background/10 via-background/72 to-background" />
+      <div className="pointer-events-none absolute inset-x-0 top-32 h-px bg-linear-to-r from-transparent via-primary/45 to-transparent" />
 
-      <div className="z-10 mx-auto flex w-full max-w-5xl flex-col items-start space-y-8 text-left sm:space-y-10 lg:pl-8">
+      <div className="z-10 mx-auto grid w-full max-w-7xl items-center gap-12 lg:grid-cols-[minmax(0,1.12fr)_minmax(18rem,0.58fr)] lg:gap-16">
+        <div className="flex flex-col items-start space-y-6 text-left sm:space-y-7">
           {/* Status Badge */}
           <div className="hero-badge group relative flex max-w-full cursor-default items-center gap-3 overflow-hidden rounded-2xl border border-border/80 bg-card/76 px-4 py-2.5 shadow-lg backdrop-blur-xl">
             <div className="absolute inset-y-0 left-0 w-1 bg-primary" />
@@ -195,7 +227,7 @@ export function Hero() {
                   {word.split("").map((char, j) => (
                     <span
                       key={j}
-                      className="reveal-char hero-title-char inline-block cursor-default text-5xl text-display text-foreground sm:text-7xl md:text-8xl lg:text-[7.8rem]"
+                      className="reveal-char hero-title-char inline-block cursor-default text-5xl text-display text-foreground sm:text-7xl md:text-8xl lg:text-[6.9rem]"
                     >
                       {char}
                     </span>
@@ -204,7 +236,7 @@ export function Hero() {
               ))}
             </h1>
 
-            <h2 className="hero-description max-w-3xl text-balance text-lg font-medium leading-relaxed tracking-normal text-muted-foreground sm:text-2xl sm:leading-snug md:text-3xl">
+            <h2 className="hero-description max-w-3xl text-balance text-lg font-medium leading-relaxed tracking-normal text-muted-foreground sm:text-xl sm:leading-snug md:text-2xl">
               {t.hero.description}
             </h2>
           </div>
@@ -252,6 +284,72 @@ export function Hero() {
               LinkedIn
             </a>
           </div>
+        </div>
+
+        <div className="hero-description hero-3d-stage relative hidden min-h-[34rem] lg:block">
+          <div
+            ref={sceneRef}
+            className="hero-3d-scene absolute inset-0 origin-center"
+            aria-hidden="true"
+          >
+            <div className="hero-3d-layer dev-panel absolute left-6 top-14 h-72 w-[26rem] overflow-hidden p-5 [transform:translateZ(64px)]">
+              <div className="mb-5 flex items-center gap-2 border-b border-border/70 pb-4">
+                <span className="size-2.5 rounded-full bg-primary" />
+                <span className="size-2.5 rounded-full bg-accent/80" />
+                <span className="size-2.5 rounded-full bg-foreground/20" />
+              </div>
+              <div className="grid grid-cols-[0.58fr_1fr] gap-5">
+                <div className="space-y-3 border-r border-border/60 pr-5">
+                  <div className="dev-code-line w-9/12" />
+                  <div className="dev-code-line w-7/12" />
+                  <div className="dev-code-line w-10/12" />
+                  <div className="dev-code-line mt-7 w-6/12 bg-primary/35" />
+                </div>
+                <div className="space-y-3">
+                  <div className="dev-code-line w-11/12 bg-primary/25" />
+                  <div className="dev-code-line w-8/12" />
+                  <div className="dev-code-line w-10/12 bg-accent/25" />
+                  <div className="dev-code-line w-6/12" />
+                  <div className="mt-7 grid grid-cols-3 gap-3">
+                    <div className="h-14 rounded-xl border border-primary/20 bg-primary/8" />
+                    <div className="h-14 rounded-xl border border-accent/20 bg-accent/8" />
+                    <div className="h-14 rounded-xl border border-border/70 bg-secondary/45" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="hero-3d-layer dev-panel absolute right-2 top-0 h-40 w-52 p-4 [transform:translate3d(34px,-6px,150px)_rotateZ(6deg)]">
+              <div className="mb-4 h-2 w-16 rounded-full bg-primary/50" />
+              <div className="space-y-3">
+                <div className="dev-code-line w-full" />
+                <div className="dev-code-line w-8/12 bg-accent/25" />
+                <div className="dev-code-line w-10/12" />
+              </div>
+            </div>
+
+            <div className="hero-3d-layer dev-panel absolute bottom-8 right-10 h-48 w-64 overflow-hidden p-5 [transform:translate3d(0,0,110px)_rotateZ(-5deg)]">
+              <div className="absolute inset-0 bg-grid opacity-20" />
+              <div className="relative z-10 grid grid-cols-4 gap-3">
+                {Array.from({ length: 12 }).map((_, index) => (
+                  <span
+                    key={index}
+                    className="h-10 rounded-lg border border-border/60 bg-secondary/45 shadow-inner"
+                  />
+                ))}
+              </div>
+            </div>
+
+            <div className="hero-3d-layer dev-cube absolute bottom-24 left-1 h-[76px] w-[76px] [transform:translateZ(180px)]">
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Scroll indicator */}

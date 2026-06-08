@@ -43,6 +43,7 @@
           "Docker"
         ],
         "category": "Desarrollo Web",
+        "link": "https://distrito.aleviclop.dev/",
         "github": "https://github.com/AVL05/distrito-gourmet",
         "type": "Pagina web"
       },
@@ -52,7 +53,6 @@
         "image": "/projects/el-fogon.png",
         "technologies": ["HTML5", "Tailwind CSS", "JavaScript", "Vite"],
         "category": "Desarrollo Web",
-        "link": "https://prweb02.netlify.app/",
         "github": "https://github.com/AVL05/PRWEB02",
         "type": "Landing page"
       },

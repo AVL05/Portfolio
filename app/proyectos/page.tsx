@@ -16,7 +16,9 @@ export const metadata: Metadata = {
     url: absoluteUrl("/proyectos"),
     siteName: SITE_NAME,
     type: "website",
-    images: [`${SITE_URL}/api/og?title=Proyectos%20Alex%20Vicente%20L%C3%B3pez`],
+    images: [
+      `${SITE_URL}/api/og?title=Proyectos%20Alex%20Vicente%20L%C3%B3pez`,
+    ],
   },
 };
 

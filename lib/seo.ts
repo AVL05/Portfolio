@@ -28,7 +28,7 @@ export const SEO_KEYWORDS = [
 export const SAME_AS = [
   "https://github.com/AVL05",
   "https://www.linkedin.com/in/alex-vicente-lopez/",
-  "https://www.instagram.com/aleexx_005/",
+  "https://www.instagram.com/aleviclop/",
   "https://gallery.aleviclop.dev/",
 ];
 

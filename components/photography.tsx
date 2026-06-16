@@ -10,7 +10,7 @@ import { gsap, prefersReducedMotion, useGSAP } from "@/lib/gsap";
 
 const photographyLinks = {
   website: "https://gallery.aleviclop.dev/",
-  instagram: "https://www.instagram.com/aleexx_005/",
+  instagram: "https://www.instagram.com/aleviclop/",
 };
 
 import { RevealHeader } from "@/components/reveal-header";
@@ -141,7 +141,7 @@ export function Photography() {
                 <p className="text-xs font-mono uppercase tracking-[0.22em] text-muted-foreground">
                   Visual portfolio
                 </p>
-                <p className="text-lg font-black tracking-normal">@aleexx_005</p>
+                <p className="text-lg font-black tracking-normal">@aleviclop</p>
               </div>
             </div>
 

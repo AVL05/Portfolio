@@ -84,12 +84,13 @@ function ProjectCard({
             {project.link && (
               <Button
                 asChild
-                className="h-11 rounded-xl bg-primary font-bold text-primary-foreground"
+                className="h-11 w-full rounded-xl border border-primary/45 bg-primary font-bold text-primary-foreground shadow-[0_16px_34px_-22px_var(--primary)] hover:bg-primary/90 sm:w-auto"
               >
                 <a
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={`${t.projects.view_live}: ${project.title}`}
                 >
                   <ExternalLink className="mr-2 h-4 w-4" />
                   {t.projects.view_live}

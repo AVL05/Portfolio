@@ -26,6 +26,24 @@ import {
   SiGithub,
 } from "react-icons/si";
 import { DiPhotoshop, DiIllustrator } from "react-icons/di";
+import { RevealHeader } from "@/components/reveal-header";
+
+const allSkills = [
+  { name: "HTML5", icon: SiHtml5 },
+  { name: "CSS3", icon: SiCss },
+  { name: "JavaScript", icon: SiJavascript },
+  { name: "React", icon: SiReact },
+  { name: "Vue.js", icon: SiVuedotjs },
+  { name: "Tailwind CSS", icon: SiTailwindcss },
+  { name: "Bootstrap", icon: SiBootstrap },
+  { name: "Laravel", icon: SiLaravel },
+  { name: "MySQL", icon: SiMysql },
+  { name: "Electron", icon: SiElectron },
+  { name: "Git", icon: SiGit },
+  { name: "GitHub", icon: SiGithub },
+  { name: "Photoshop", icon: DiPhotoshop },
+  { name: "Illustrator", icon: DiIllustrator },
+];
 
 const skillCategories_es = [
   {
@@ -34,33 +52,13 @@ const skillCategories_es = [
       "Construcción de interfaces modernas, adaptativas y altamente interactivas enfocadas en la experiencia de usuario.",
     icon: Globe,
     skills: [
-      {
-        name: "HTML5",
-        url: "https://developer.mozilla.org/es/docs/Web/HTML",
-        icon: SiHtml5,
-      },
-      {
-        name: "CSS3",
-        url: "https://developer.mozilla.org/es/docs/Web/CSS",
-        icon: SiCss,
-      },
-      {
-        name: "JavaScript",
-        url: "https://developer.mozilla.org/es/docs/Web/JavaScript",
-        icon: SiJavascript,
-      },
+      { name: "HTML5", url: "https://developer.mozilla.org/es/docs/Web/HTML", icon: SiHtml5 },
+      { name: "CSS3", url: "https://developer.mozilla.org/es/docs/Web/CSS", icon: SiCss },
+      { name: "JavaScript", url: "https://developer.mozilla.org/es/docs/Web/JavaScript", icon: SiJavascript },
       { name: "React", url: "https://react.dev/", icon: SiReact },
       { name: "Vue.js", url: "https://vuejs.org/", icon: SiVuedotjs },
-      {
-        name: "Tailwind CSS",
-        url: "https://tailwindcss.com/",
-        icon: SiTailwindcss,
-      },
-      {
-        name: "Bootstrap",
-        url: "https://getbootstrap.com/",
-        icon: SiBootstrap,
-      },
+      { name: "Tailwind CSS", url: "https://tailwindcss.com/", icon: SiTailwindcss },
+      { name: "Bootstrap", url: "https://getbootstrap.com/", icon: SiBootstrap },
     ],
   },
   {
@@ -71,11 +69,7 @@ const skillCategories_es = [
     skills: [
       { name: "PHP / Laravel", url: "https://laravel.com/", icon: SiLaravel },
       { name: "MySQL", url: "https://www.mysql.com/", icon: SiMysql },
-      {
-        name: "Electron",
-        url: "https://www.electronjs.org/",
-        icon: SiElectron,
-      },
+      { name: "Electron", url: "https://www.electronjs.org/", icon: SiElectron },
       { name: "Git", url: "https://git-scm.com/", icon: SiGit },
       { name: "GitHub", url: "https://github.com/", icon: SiGithub },
     ],
@@ -86,31 +80,11 @@ const skillCategories_es = [
       "Edición de fotografía, diseño editorial y post-producción de vídeo como parte de mi visión creativa personal.",
     icon: PenTool,
     skills: [
-      {
-        name: "Photoshop",
-        url: "https://www.adobe.com/es/products/photoshop.html",
-        icon: DiPhotoshop,
-      },
-      {
-        name: "Illustrator",
-        url: "https://www.adobe.com/es/products/illustrator.html",
-        icon: DiIllustrator,
-      },
-      {
-        name: "InDesign",
-        url: "https://www.adobe.com/es/products/indesign.html",
-        icon: Layers,
-      },
-      {
-        name: "Lightroom",
-        url: "https://www.adobe.com/es/products/photoshop-lightroom.html",
-        icon: Camera,
-      },
-      {
-        name: "Premiere Pro",
-        url: "https://www.adobe.com/es/products/premiere.html",
-        icon: Video,
-      },
+      { name: "Photoshop", url: "https://www.adobe.com/es/products/photoshop.html", icon: DiPhotoshop },
+      { name: "Illustrator", url: "https://www.adobe.com/es/products/illustrator.html", icon: DiIllustrator },
+      { name: "InDesign", url: "https://www.adobe.com/es/products/indesign.html", icon: Layers },
+      { name: "Lightroom", url: "https://www.adobe.com/es/products/photoshop-lightroom.html", icon: Camera },
+      { name: "Premiere Pro", url: "https://www.adobe.com/es/products/premiere.html", icon: Video },
     ],
   },
 ];
@@ -122,33 +96,13 @@ const skillCategories_en = [
       "Building modern, adaptive and highly interactive interfaces focused on user experience.",
     icon: Globe,
     skills: [
-      {
-        name: "HTML5",
-        url: "https://developer.mozilla.org/en-US/docs/Web/HTML",
-        icon: SiHtml5,
-      },
-      {
-        name: "CSS3",
-        url: "https://developer.mozilla.org/en-US/docs/Web/CSS",
-        icon: SiCss,
-      },
-      {
-        name: "JavaScript",
-        url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
-        icon: SiJavascript,
-      },
+      { name: "HTML5", url: "https://developer.mozilla.org/en-US/docs/Web/HTML", icon: SiHtml5 },
+      { name: "CSS3", url: "https://developer.mozilla.org/en-US/docs/Web/CSS", icon: SiCss },
+      { name: "JavaScript", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript", icon: SiJavascript },
       { name: "React", url: "https://react.dev/", icon: SiReact },
       { name: "Vue.js", url: "https://vuejs.org/", icon: SiVuedotjs },
-      {
-        name: "Tailwind CSS",
-        url: "https://tailwindcss.com/",
-        icon: SiTailwindcss,
-      },
-      {
-        name: "Bootstrap",
-        url: "https://getbootstrap.com/",
-        icon: SiBootstrap,
-      },
+      { name: "Tailwind CSS", url: "https://tailwindcss.com/", icon: SiTailwindcss },
+      { name: "Bootstrap", url: "https://getbootstrap.com/", icon: SiBootstrap },
     ],
   },
   {
@@ -159,11 +113,7 @@ const skillCategories_en = [
     skills: [
       { name: "PHP / Laravel", url: "https://laravel.com/", icon: SiLaravel },
       { name: "MySQL", url: "https://www.mysql.com/", icon: SiMysql },
-      {
-        name: "Electron",
-        url: "https://www.electronjs.org/",
-        icon: SiElectron,
-      },
+      { name: "Electron", url: "https://www.electronjs.org/", icon: SiElectron },
       { name: "Git", url: "https://git-scm.com/", icon: SiGit },
       { name: "GitHub", url: "https://github.com/", icon: SiGithub },
     ],
@@ -174,41 +124,47 @@ const skillCategories_en = [
       "Photo editing, editorial design and video post-production as part of my personal creative vision.",
     icon: PenTool,
     skills: [
-      {
-        name: "Photoshop",
-        url: "https://www.adobe.com/products/photoshop.html",
-        icon: DiPhotoshop,
-      },
-      {
-        name: "Illustrator",
-        url: "https://www.adobe.com/products/illustrator.html",
-        icon: DiIllustrator,
-      },
-      {
-        name: "InDesign",
-        url: "https://www.adobe.com/products/indesign.html",
-        icon: Layers,
-      },
-      {
-        name: "Lightroom",
-        url: "https://www.adobe.com/products/photoshop-lightroom.html",
-        icon: Camera,
-      },
-      {
-        name: "Premiere Pro",
-        url: "https://www.adobe.com/products/premiere.html",
-        icon: Video,
-      },
+      { name: "Photoshop", url: "https://www.adobe.com/products/photoshop.html", icon: DiPhotoshop },
+      { name: "Illustrator", url: "https://www.adobe.com/products/illustrator.html", icon: DiIllustrator },
+      { name: "InDesign", url: "https://www.adobe.com/products/indesign.html", icon: Layers },
+      { name: "Lightroom", url: "https://www.adobe.com/products/photoshop-lightroom.html", icon: Camera },
+      { name: "Premiere Pro", url: "https://www.adobe.com/products/premiere.html", icon: Video },
     ],
   },
 ];
 
-import { RevealHeader } from "@/components/reveal-header";
+function SkillMarquee() {
+  const doubled = [...allSkills, ...allSkills];
+
+  return (
+    <div className="relative mb-16 overflow-hidden py-4">
+      {/* Fade masks on edges */}
+      <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-24 bg-linear-to-r from-background to-transparent" />
+      <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-24 bg-linear-to-l from-background to-transparent" />
+
+      <div className="flex animate-marquee whitespace-nowrap" style={{ willChange: "transform" }}>
+        {doubled.map((skill, i) => (
+          <div
+            key={i}
+            className="mx-5 inline-flex shrink-0 items-center gap-3 rounded-2xl border border-border/70 bg-card/60 px-5 py-3 backdrop-blur"
+          >
+            <skill.icon
+              className="h-5 w-5 text-muted-foreground"
+              style={{ fill: "currentColor" }}
+            />
+            <span className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">
+              {skill.name}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export function Skills() {
   const { t, language } = useLanguage();
-  const skillCategories =
-    language === "es" ? skillCategories_es : skillCategories_en;
+  const skillCategories = language === "es" ? skillCategories_es : skillCategories_en;
   const containerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
@@ -249,7 +205,7 @@ export function Skills() {
       ref={containerRef}
       className="section-padding relative overflow-hidden bg-background"
     >
-      <div className="pointer-events-none absolute inset-x-0 top-1/2 h-px bg-linear-to-r from-transparent via-accent/25 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 top-1/2 h-px bg-linear-to-r from-transparent via-accent/20 to-transparent" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <RevealHeader
@@ -257,6 +213,8 @@ export function Skills() {
           subtitle={t.skills.subtitle}
           description={t.skills.desc}
         />
+
+        <SkillMarquee />
 
         <div className="categories-grid grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-8">
           {skillCategories.map((cat) => (

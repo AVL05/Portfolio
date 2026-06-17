@@ -137,8 +137,8 @@ export function Navigation() {
                     href={item.href}
                     className={`nav-item group relative z-10 inline-flex min-w-[6.75rem] items-center justify-center whitespace-nowrap rounded-xl px-4 py-2.5 text-center text-[11px] font-black uppercase tracking-[0.12em] transition-all duration-300 ${
                       isActive
-                        ? "bg-primary text-primary-foreground shadow-[0_10px_26px_-18px_var(--primary)]"
-                        : "text-foreground/72 hover:bg-secondary/70 hover:text-foreground"
+                        ? "bg-primary text-primary-foreground shadow-[0_10px_26px_-14px_var(--primary)]"
+                        : "text-foreground/65 hover:bg-secondary/70 hover:text-foreground"
                     }`}
                   >
                     {item.name}

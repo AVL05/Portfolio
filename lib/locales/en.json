@@ -14,14 +14,14 @@
     "scroll": "Scroll"
   },
   "skills": {
-    "title": "02. Stack",
+    "title": "Stack",
     "subtitle": "Technologies I use",
     "desc": "Tools I have used to build interfaces, APIs, databases, and visual pieces.",
     "technologies": "Technologies",
     "tools": "Tools"
   },
   "projects": {
-    "title": "01. Projects",
+    "title": "Projects",
     "subtitle": "Selected work",
     "desc": "Projects where I handled interface, data flow, visual direction, or production delivery.",
     "concept": "Project detail",
@@ -98,7 +98,7 @@
     ]
   },
   "photography": {
-    "title": "04. Photography",
+    "title": "Photography",
     "subtitle": "Visual eye",
     "description": "A creative side that complements how I work: composition, detail, visual judgement, and attention to the final result.",
     "properties": "Properties.RAW",
@@ -106,7 +106,7 @@
     "view_full": "Open alexgallery"
   },
   "experience": {
-    "title": "03. Journey",
+    "title": "Journey",
     "subtitle": "Education and real practice.",
     "desc": "A path focused on web development, technical support, and applied visual projects.",
     "edu_title": "Academic Education",
@@ -155,7 +155,7 @@
     ]
   },
   "contact": {
-    "title": "05. Contact",
+    "title": "Contact",
     "subtitle": "/ Let's talk",
     "desc": "If you are looking for a junior profile with technical foundations, visual judgement, and product mindset, send me a message.",
     "form_name": "Your name",

@@ -14,14 +14,14 @@
     "scroll": "Scroll"
   },
   "skills": {
-    "title": "02. Stack",
+    "title": "Stack",
     "subtitle": "Tecnologías que uso",
     "desc": "Herramientas con las que he construido interfaces, APIs, bases de datos y piezas visuales.",
     "technologies": "Tecnologías",
     "tools": "Herramientas"
   },
   "projects": {
-    "title": "01. Proyectos",
+    "title": "Proyectos",
     "subtitle": "Trabajo seleccionado",
     "desc": "Proyectos donde he trabajado interfaz, flujo de datos, dirección visual o entrega final.",
     "concept": "Detalle del proyecto",
@@ -98,7 +98,7 @@
     ]
   },
   "photography": {
-    "title": "04. Fotografía",
+    "title": "Fotografía",
     "subtitle": "Mirada visual",
     "description": "Una faceta creativa que complementa mi forma de trabajar: composición, detalle, criterio visual y atención al resultado final.",
     "properties": "Propiedades.RAW",
@@ -106,7 +106,7 @@
     "view_full": "Ver alexgallery"
   },
   "experience": {
-    "title": "03. Trayectoria",
+    "title": "Trayectoria",
     "subtitle": "Formación y práctica real.",
     "desc": "Un recorrido centrado en desarrollo web, soporte técnico y proyectos visuales aplicados.",
     "edu_title": "Formación Académica",
@@ -155,7 +155,7 @@
     ]
   },
   "contact": {
-    "title": "05. Contacto",
+    "title": "Contacto",
     "subtitle": "/ Hablemos",
     "desc": "Si buscas un perfil junior con base técnica, sensibilidad visual y ganas de construir producto, escríbeme.",
     "form_name": "Tu nombre",

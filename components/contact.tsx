@@ -7,12 +7,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Mail } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import type React from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useLanguage } from "@/lib/language-context";
-
 import { RevealHeader } from "@/components/reveal-header";
 import { gsap, prefersReducedMotion, useGSAP } from "@/lib/gsap";
-import { useRef } from "react";
 
 export function Contact() {
   const { t } = useLanguage();
@@ -24,9 +22,7 @@ export function Contact() {
     botcheck: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<"success" | "error" | null>(
-    null,
-  );
+  const [submitStatus, setSubmitStatus] = useState<"success" | "error" | null>(null);
 
   useGSAP(
     () => {
@@ -67,9 +63,7 @@ export function Contact() {
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           access_key: "d72eeacd-28fc-442b-83bd-b8c383c5997e",
           subject: "Nuevo contacto - Portfolio Dev",
@@ -81,15 +75,13 @@ export function Contact() {
       });
 
       const data = await response.json();
-
       if (data.success) {
         setSubmitStatus("success");
         setFormData({ name: "", email: "", message: "", botcheck: "" });
       } else {
         setSubmitStatus("error");
       }
-    } catch (error) {
-      console.error("Error submitting form:", error);
+    } catch {
       setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
@@ -100,9 +92,9 @@ export function Contact() {
     <section
       id="contact"
       ref={containerRef}
-      className="relative overflow-hidden bg-background px-4 py-24 text-foreground sm:px-6 sm:py-32 lg:px-8"
+      className="relative overflow-hidden bg-background px-4 py-24 sm:px-6 sm:py-32 lg:px-8"
     >
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-border to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-border/50 to-transparent" />
 
       <div className="relative z-10 mx-auto max-w-7xl">
         <RevealHeader
@@ -111,21 +103,10 @@ export function Contact() {
           description={t.contact.desc}
         />
 
-        <div className="grid grid-cols-1 gap-12 sm:gap-16 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1fr)] lg:gap-20">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1fr)] lg:gap-16">
           <div className="contact-item">
-            <Card className="dev-panel overflow-hidden p-0 transition-all hover:border-primary/25">
-              <div className="flex items-center gap-2 border-b border-border bg-secondary/50 px-6 py-4">
-                <div className="flex gap-1.5">
-                  <div className="w-2.5 h-2.5 rounded-full bg-red-400/20"></div>
-                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/20"></div>
-                  <div className="w-2.5 h-2.5 rounded-full bg-green-400/20"></div>
-                </div>
-                <span className="ml-4 text-xs font-mono text-muted-foreground/50 truncate flex-1 uppercase tracking-widest font-bold">
-                  send_message.sh
-                </span>
-              </div>
-
-              <form onSubmit={handleSubmit} className="space-y-7 p-6 sm:p-8 lg:p-10">
+            <Card className="dev-panel overflow-hidden">
+              <form onSubmit={handleSubmit} className="space-y-6 p-6 sm:p-8">
                 <input
                   type="checkbox"
                   name="botcheck"
@@ -134,17 +115,12 @@ export function Contact() {
                   autoComplete="off"
                   value={formData.botcheck}
                   onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      botcheck: e.target.checked ? "true" : "",
-                    })
+                    setFormData({ ...formData, botcheck: e.target.checked ? "true" : "" })
                   }
                 />
-                <div className="space-y-4">
-                  <label
-                    htmlFor="name"
-                    className="ml-1 text-sm font-black uppercase tracking-widest text-primary/80"
-                  >
+
+                <div className="space-y-2">
+                  <label htmlFor="name" className="ml-0.5 block text-xs font-bold uppercase tracking-widest text-primary/75">
                     {t.contact.form_name}
                   </label>
                   <Input
@@ -153,19 +129,14 @@ export function Contact() {
                     placeholder={t.contact.form_placeholder_name}
                     value={formData.name}
                     maxLength={120}
-                    onChange={(e) =>
-                      setFormData({ ...formData, name: e.target.value })
-                    }
-                    className="rounded-2xl border-border bg-secondary/50 px-5 py-6 text-base font-medium placeholder:text-muted-foreground/45 focus-visible:border-primary focus-visible:ring-primary/50 sm:text-lg"
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="rounded-xl border-border/70 bg-secondary/50 px-4 py-5 text-base placeholder:text-muted-foreground/40 focus-visible:border-primary focus-visible:ring-primary/40"
                     required
                   />
                 </div>
 
-                <div className="space-y-4">
-                  <label
-                    htmlFor="email"
-                    className="ml-1 text-sm font-black uppercase tracking-widest text-primary/80"
-                  >
+                <div className="space-y-2">
+                  <label htmlFor="email" className="ml-0.5 block text-xs font-bold uppercase tracking-widest text-primary/75">
                     {t.contact.form_email}
                   </label>
                   <Input
@@ -174,19 +145,14 @@ export function Contact() {
                     placeholder={t.contact.form_placeholder_email}
                     value={formData.email}
                     maxLength={254}
-                    onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
-                    }
-                    className="rounded-2xl border-border bg-secondary/50 px-5 py-6 text-base font-medium placeholder:text-muted-foreground/45 focus-visible:border-primary focus-visible:ring-primary/50 sm:text-lg"
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="rounded-xl border-border/70 bg-secondary/50 px-4 py-5 text-base placeholder:text-muted-foreground/40 focus-visible:border-primary focus-visible:ring-primary/40"
                     required
                   />
                 </div>
 
-                <div className="space-y-4">
-                  <label
-                    htmlFor="message"
-                    className="ml-1 text-sm font-black uppercase tracking-widest text-primary/80"
-                  >
+                <div className="space-y-2">
+                  <label htmlFor="message" className="ml-0.5 block text-xs font-bold uppercase tracking-widest text-primary/75">
                     {t.contact.form_message}
                   </label>
                   <Textarea
@@ -195,87 +161,92 @@ export function Contact() {
                     rows={5}
                     value={formData.message}
                     maxLength={4000}
-                    onChange={(e) =>
-                      setFormData({ ...formData, message: e.target.value })
-                    }
-                    className="resize-none rounded-2xl border-border bg-secondary/50 p-5 text-base font-medium placeholder:text-muted-foreground/45 focus-visible:border-primary focus-visible:ring-primary/50 sm:text-lg"
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    className="resize-none rounded-xl border-border/70 bg-secondary/50 p-4 text-base placeholder:text-muted-foreground/40 focus-visible:border-primary focus-visible:ring-primary/40"
                     required
                   />
                 </div>
 
                 <Button
                   type="submit"
-                  className="group w-full rounded-2xl bg-primary py-7 text-base font-black text-primary-foreground transition-all hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-[0_0_32px_rgba(119,255,150,0.2)] sm:text-lg"
+                  className="group w-full rounded-xl bg-primary py-6 text-sm font-bold text-primary-foreground transition-all hover:-translate-y-0.5 hover:bg-primary/90 active:scale-[0.99]"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting
-                    ? t.contact.form_btn_sending
-                    : t.contact.form_btn_send}
+                  {isSubmitting ? t.contact.form_btn_sending : t.contact.form_btn_send}
                 </Button>
 
                 {submitStatus === "success" && (
-                  <p className="text-sm text-primary font-bold text-center animate-pulse">
+                  <p className="text-center text-sm font-medium text-primary">
                     {t.contact.form_success}
+                  </p>
+                )}
+                {submitStatus === "error" && (
+                  <p className="text-center text-sm font-medium text-destructive">
+                    Algo salió mal. Intenta de nuevo.
                   </p>
                 )}
               </form>
             </Card>
           </div>
 
-          <div className="contact-item flex flex-col justify-between py-4">
-            <div className="space-y-10">
-              <div>
-                <h3 className="text-sm font-black uppercase tracking-[0.3em] text-muted-foreground/30 mb-8 ml-1">
-                  {t.contact.links_title}
-                </h3>
-                <div className="space-y-6">
-                  <a
-                    href="mailto:alexviclop@gmail.com"
-                    className="group flex min-w-0 items-center gap-4 text-xl font-bold transition-colors hover:text-primary sm:gap-6 sm:text-2xl xl:text-3xl"
-                  >
-                    <div className="shrink-0 rounded-2xl bg-secondary p-4 transition-all group-hover:bg-primary group-hover:text-primary-foreground">
-                      <Mail className="h-6 w-6" />
-                    </div>
-                    <span className="min-w-0 break-all">alexviclop@gmail.com</span>
-                  </a>
-                  <a
-                    href="https://github.com/AVL05"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex min-w-0 items-center gap-4 text-xl font-bold transition-colors hover:text-primary sm:gap-6 sm:text-2xl xl:text-3xl"
-                  >
-                    <div className="shrink-0 rounded-2xl bg-secondary p-4 transition-all group-hover:bg-primary group-hover:text-primary-foreground">
-                      <FaGithub className="h-6 w-6" />
-                    </div>
-                    <span className="min-w-0 break-all">github.com/AVL05</span>
-                  </a>
-                  <a
-                    href="https://www.linkedin.com/in/alex-vicente-lopez/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex min-w-0 items-center gap-4 text-xl font-bold transition-colors hover:text-primary sm:gap-6 sm:text-2xl xl:text-3xl"
-                  >
-                    <div className="shrink-0 rounded-2xl bg-secondary p-4 transition-all group-hover:bg-primary group-hover:text-primary-foreground">
-                      <FaLinkedin className="h-6 w-6" />
-                    </div>
-                    <span className="min-w-0 break-words">linkedin / alex-vicente-lopez</span>
-                  </a>
-                </div>
+          <div className="contact-item flex flex-col justify-between py-2">
+            <div className="space-y-8">
+              <p className="text-xs font-bold uppercase tracking-[0.26em] text-muted-foreground/40">
+                {t.contact.links_title}
+              </p>
+              <div className="space-y-5">
+                <a
+                  href="mailto:alexviclop@gmail.com"
+                  className="group flex min-w-0 items-center gap-4 text-xl font-bold transition-colors hover:text-primary sm:text-2xl"
+                >
+                  <div className="shrink-0 rounded-xl border border-border/70 bg-secondary p-3.5 transition-all group-hover:border-primary/40 group-hover:bg-primary group-hover:text-primary-foreground">
+                    <Mail className="h-5 w-5" />
+                  </div>
+                  <span className="min-w-0 break-all text-foreground group-hover:text-primary transition-colors">
+                    alexviclop@gmail.com
+                  </span>
+                </a>
+                <a
+                  href="https://github.com/AVL05"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex min-w-0 items-center gap-4 text-xl font-bold transition-colors sm:text-2xl"
+                >
+                  <div className="shrink-0 rounded-xl border border-border/70 bg-secondary p-3.5 transition-all group-hover:border-primary/40 group-hover:bg-primary group-hover:text-primary-foreground">
+                    <FaGithub className="h-5 w-5" />
+                  </div>
+                  <span className="min-w-0 break-all text-foreground group-hover:text-primary transition-colors">
+                    github.com/AVL05
+                  </span>
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/alex-vicente-lopez/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex min-w-0 items-center gap-4 text-xl font-bold transition-colors sm:text-2xl"
+                >
+                  <div className="shrink-0 rounded-xl border border-border/70 bg-secondary p-3.5 transition-all group-hover:border-primary/40 group-hover:bg-primary group-hover:text-primary-foreground">
+                    <FaLinkedin className="h-5 w-5" />
+                  </div>
+                  <span className="min-w-0 text-foreground group-hover:text-primary transition-colors">
+                    linkedin/alex-vicente-lopez
+                  </span>
+                </a>
               </div>
 
               <a
                 href="https://gallery.aleviclop.dev/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex text-sm font-mono uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors"
+                className="inline-flex text-xs font-mono uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors"
               >
                 {t.contact.visual_portfolio_btn}
               </a>
             </div>
 
-            <footer className="mt-20 border-t border-border pt-10 text-center sm:text-left">
-              <p className="text-muted-foreground/30 text-xs font-mono tracking-widest uppercase mb-2">
-                © 2026 Alex Vicente López
+            <footer className="mt-16 border-t border-border/50 pt-8 text-center sm:text-left">
+              <p className="text-muted-foreground/30 text-xs font-mono tracking-widest uppercase mb-1">
+                &copy; 2026 Alex Vicente Lopez
               </p>
               <p className="text-muted-foreground text-sm font-medium">
                 {t.contact.footer_built}

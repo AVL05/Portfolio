@@ -71,8 +71,8 @@ export function Navigation() {
           <div
             className={`flex items-center justify-between border px-3.5 py-2.5 backdrop-blur-2xl transition-all duration-500 sm:px-4 ${
               isScrolled
-                ? "rounded-2xl border-border/80 bg-background/88 shadow-[0_20px_60px_-40px_rgba(0,0,0,0.88)]"
-                : "rounded-2xl border-border/40 bg-background/30"
+                ? "rounded-2xl border-border/70 bg-background/92 shadow-[0_20px_70px_-30px_rgba(0,0,0,0.92),inset_0_1px_0_rgba(255,255,255,0.05)]"
+                : "rounded-2xl border-border/35 bg-background/20"
             }`}
           >
             <a

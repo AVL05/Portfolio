@@ -1,12 +1,10 @@
 "use client";
 
-import { useRef } from "react";
 import {
   Globe,
   Database,
   PenTool,
 } from "lucide-react";
-import { gsap, prefersReducedMotion, useGSAP } from "@/lib/gsap";
 import { useLanguage } from "@/lib/language-context";
 import {
   SiHtml5,
@@ -44,8 +42,7 @@ const allSkills = [
 const skillCategories_es = [
   {
     title: "Frontend Development",
-    description:
-      "Interfaces modernas, adaptativas y altamente interactivas enfocadas en la experiencia de usuario.",
+    description: "Interfaces modernas, adaptativas y altamente interactivas enfocadas en la experiencia de usuario.",
     icon: Globe,
     accent: "primary",
     skills: [
@@ -60,8 +57,7 @@ const skillCategories_es = [
   },
   {
     title: "Backend & Tools",
-    description:
-      "Gestión de datos, lógica de servidor y control de versiones.",
+    description: "Gestión de datos, lógica de servidor y control de versiones.",
     icon: Database,
     accent: "accent",
     skills: [
@@ -74,8 +70,7 @@ const skillCategories_es = [
   },
   {
     title: "Creative Tools",
-    description:
-      "Edición de fotografía, diseño editorial y post-producción de vídeo.",
+    description: "Edición de fotografía, diseño editorial y post-producción de vídeo.",
     icon: PenTool,
     accent: "muted",
     skills: [
@@ -89,8 +84,7 @@ const skillCategories_es = [
 const skillCategories_en = [
   {
     title: "Frontend Development",
-    description:
-      "Modern, adaptive and interactive interfaces focused on user experience.",
+    description: "Modern, adaptive and interactive interfaces focused on user experience.",
     icon: Globe,
     accent: "primary",
     skills: [
@@ -105,8 +99,7 @@ const skillCategories_en = [
   },
   {
     title: "Backend & Tools",
-    description:
-      "Data management, server logic and version control.",
+    description: "Data management, server logic and version control.",
     icon: Database,
     accent: "accent",
     skills: [
@@ -119,8 +112,7 @@ const skillCategories_en = [
   },
   {
     title: "Creative Tools",
-    description:
-      "Photo editing, editorial design and video post-production.",
+    description: "Photo editing, editorial design and video post-production.",
     icon: PenTool,
     accent: "muted",
     skills: [
@@ -134,17 +126,17 @@ const skillCategories_en = [
 function SkillMarquee() {
   const doubled = [...allSkills, ...allSkills];
   return (
-    <div className="relative mb-14 overflow-hidden py-3">
-      <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-20 bg-linear-to-r from-background to-transparent" />
-      <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-20 bg-linear-to-l from-background to-transparent" />
+    <div className="relative mb-16 overflow-hidden py-4">
+      <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-32 bg-linear-to-r from-background to-transparent" />
+      <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-32 bg-linear-to-l from-background to-transparent" />
       <div className="flex animate-marquee whitespace-nowrap" style={{ willChange: "transform" }}>
         {doubled.map((skill, i) => (
           <div
             key={i}
-            className="mx-4 inline-flex shrink-0 items-center gap-2.5 rounded-xl border border-border/60 bg-card/55 px-4 py-2.5 backdrop-blur"
+            className="mx-3 inline-flex shrink-0 items-center gap-2.5 rounded-xl border border-border/50 bg-card/60 px-4 py-3 backdrop-blur-sm transition-colors hover:border-primary/30 hover:bg-primary/5"
           >
-            <skill.icon className="h-4 w-4 text-muted-foreground" style={{ fill: "currentColor" }} />
-            <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-muted-foreground">
+            <skill.icon className="h-4 w-4 text-muted-foreground/70" style={{ fill: "currentColor" }} />
+            <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-muted-foreground/70">
               {skill.name}
             </span>
           </div>
@@ -178,71 +170,20 @@ function SkillItem({ skill }: { skill: { name: string; url: string; icon: any } 
 export function Skills() {
   const { t, language } = useLanguage();
   const skillCategories = language === "es" ? skillCategories_es : skillCategories_en;
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useGSAP(
-    () => {
-      const q = gsap.utils.selector(containerRef);
-      const cards = q(".category-card");
-      const grid = q(".categories-grid")[0];
-      const heading = q(".skills-heading")[0];
-
-      if (prefersReducedMotion()) {
-        gsap.set([heading, cards], { opacity: 1, y: 0, x: 0 });
-        return;
-      }
-
-      gsap.fromTo(
-        heading,
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1,
-          y: 0,
-          immediateRender: false,
-          duration: 0.7,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: heading,
-            start: "top 85%",
-            once: true,
-          },
-        },
-      );
-
-      gsap.fromTo(
-        cards,
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          immediateRender: false,
-          stagger: 0.12,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: grid,
-            start: "top 82%",
-            once: true,
-          },
-        },
-      );
-    },
-    { scope: containerRef },
-  );
-
   const [frontend, backend, creative] = skillCategories;
 
   return (
     <section
       id="skills"
-      ref={containerRef}
-      className="section-padding relative overflow-hidden bg-background"
+      className="section-padding relative overflow-hidden bg-background section-alt-bg"
     >
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-border/50 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 glow-divider" />
+      <div className="pointer-events-none absolute right-[8%] top-[15%] h-[30rem] w-[30rem] rounded-full bg-accent/5 blur-[100px]" />
+      <div className="pointer-events-none absolute left-[5%] bottom-[15%] h-[24rem] w-[24rem] rounded-full bg-primary/6 blur-[80px]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="skills-heading mb-14 sm:mb-16 space-y-4">
-          <h2 className="text-4xl font-black leading-[0.98] tracking-normal text-foreground sm:text-6xl lg:text-7xl">
+        <div className="mb-14 sm:mb-16 space-y-5">
+          <h2 className="text-4xl font-black leading-[0.94] tracking-normal text-foreground sm:text-6xl lg:text-7xl xl:text-8xl">
             {t.skills.subtitle}
           </h2>
           <p className="max-w-2xl text-base font-medium leading-relaxed text-muted-foreground sm:text-lg">
@@ -252,9 +193,9 @@ export function Skills() {
 
         <SkillMarquee />
 
-        <div className="categories-grid grid grid-cols-1 gap-5 lg:grid-cols-12 lg:gap-6">
+        <div className="grid grid-cols-1 gap-5 lg:grid-cols-12 lg:gap-6">
           {/* Frontend - large */}
-          <div className="category-card lg:col-span-7 group h-full">
+          <div className="lg:col-span-7 group h-full">
             <div className="premium-card relative h-full space-y-6 overflow-hidden p-6 sm:p-8">
               <div className="absolute inset-x-0 top-0 h-0.5 bg-linear-to-r from-primary via-primary/60 to-transparent" />
               <div className="flex items-center gap-4">
@@ -277,7 +218,7 @@ export function Skills() {
           </div>
 
           {/* Backend - medium */}
-          <div className="category-card lg:col-span-5 group h-full">
+          <div className="lg:col-span-5 group h-full">
             <div className="premium-card relative h-full space-y-6 overflow-hidden p-6 sm:p-8">
               <div className="absolute inset-x-0 top-0 h-0.5 bg-linear-to-r from-accent via-accent/60 to-transparent" />
               <div className="flex items-center gap-4">
@@ -299,8 +240,8 @@ export function Skills() {
             </div>
           </div>
 
-          {/* Creative - full width, horizontal */}
-          <div className="category-card lg:col-span-12 group">
+          {/* Creative - full width */}
+          <div className="lg:col-span-12 group">
             <div className="premium-card relative overflow-hidden p-6 sm:p-8">
               <div className="absolute inset-x-0 top-0 h-0.5 bg-linear-to-r from-muted-foreground/40 via-muted-foreground/20 to-transparent" />
               <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:gap-10">
@@ -312,9 +253,7 @@ export function Skills() {
                     <h3 className="text-lg font-black tracking-normal text-foreground sm:text-xl">
                       {creative.title}
                     </h3>
-                    <p className="text-xs font-medium text-muted-foreground mt-0.5">
-                      {language === "es" ? "Hobby" : "Hobby"}
-                    </p>
+                    <p className="text-xs font-medium text-muted-foreground mt-0.5">Hobby</p>
                   </div>
                 </div>
                 <p className="text-sm font-medium leading-relaxed text-muted-foreground lg:max-w-xs xl:max-w-sm">

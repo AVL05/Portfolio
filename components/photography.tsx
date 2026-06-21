@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef } from "react";
-import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
 import { FaInstagram } from "react-icons/fa6";
 import Image from "next/image";
@@ -14,54 +13,24 @@ const photographyLinks = {
 };
 
 export function Photography() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
       const q = gsap.utils.selector(containerRef);
-      const heading = q(".photo-heading")[0];
-      const content = q(".photo-content");
+      if (prefersReducedMotion()) return;
 
-      if (prefersReducedMotion()) {
-        gsap.set([heading, content], { opacity: 1, y: 0 });
-        return;
-      }
-
-      gsap.fromTo(
-        heading,
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1,
-          y: 0,
-          immediateRender: false,
-          duration: 0.7,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 80%",
-            once: true,
-          },
+      gsap.to(q(".photo-img"), {
+        y: -60,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1.8,
         },
-      );
-
-      gsap.fromTo(
-        content,
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          immediateRender: false,
-          stagger: 0.12,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 75%",
-            once: true,
-          },
-        },
-      );
+      });
     },
     { scope: containerRef },
   );
@@ -70,71 +39,119 @@ export function Photography() {
     <section
       id="photography"
       ref={containerRef}
-      className="section-padding relative overflow-hidden bg-background px-4 sm:px-6 lg:px-8"
+      className="relative overflow-hidden bg-background"
     >
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-border/50 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 glow-divider" />
 
-      <div className="relative z-10 mx-auto max-w-7xl">
-        <div className="photo-heading mb-10 sm:mb-12 space-y-4">
-          <h2 className="text-4xl font-black leading-[0.98] tracking-normal text-foreground sm:text-6xl lg:text-7xl">
-            {t.photography.subtitle}
-          </h2>
-          <p className="max-w-xl text-base font-medium leading-relaxed text-muted-foreground sm:text-lg">
-            {t.photography.description}
-          </p>
+      {/* Full-width cinematic image */}
+      <div className="relative h-[70vh] min-h-[480px] max-h-[700px] w-full overflow-hidden">
+        <div className="photo-img absolute inset-[-10%] top-[-5%]">
+          <Image
+            src="/photography/hero.webp"
+            alt="Fotografía - Alex Vicente"
+            fill
+            className="object-cover object-center"
+            sizes="100vw"
+            priority
+          />
         </div>
 
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_auto]">
-          <figure className="photo-content group relative overflow-hidden rounded-2xl border border-border/60 bg-card">
-            <div className="relative aspect-[16/9]">
-              <Image
-                src="/photography/hero.webp"
-                alt="Fotografía - Alex Vicente"
-                fill
-                className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.04]"
-                sizes="(max-width: 1024px) 100vw, 860px"
-                priority
-              />
-              <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-50" />
-            </div>
-          </figure>
+        {/* Overlays */}
+        <div className="absolute inset-0 bg-linear-to-r from-background/95 via-background/50 to-background/10" />
+        <div className="absolute inset-0 bg-linear-to-t from-background via-transparent to-transparent" />
 
-          <div className="photo-content flex flex-col justify-between gap-8 p-0 lg:w-56 xl:w-64">
-            <div className="space-y-2">
-              <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-border/60 bg-secondary text-muted-foreground">
-                  <FaInstagram className="h-4 w-4" />
-                </div>
-                <div>
-                  <p className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">Instagram</p>
-                  <p className="text-base font-black tracking-normal">@aleviclop</p>
-                </div>
-              </div>
+        {/* Text overlay — left side */}
+        <div className="absolute inset-0 flex items-end pb-14 px-6 sm:px-10 lg:px-16">
+          <div className="max-w-2xl space-y-6">
+            {/* Eyebrow */}
+            <div className="photo-in flex items-center gap-3">
+              <span className="h-px w-8 bg-primary/60" />
+              <span className="font-mono text-[10px] uppercase tracking-[0.28em] text-primary/70">
+                {t.photography.subtitle}
+              </span>
             </div>
 
-            <div className="flex flex-col gap-3">
-              <Button
-                variant="outline"
-                asChild
-                className="h-11 justify-center rounded-xl border-primary/25 font-bold text-primary hover:bg-primary/8 hover:border-primary/40"
+            {/* Big heading */}
+            <h2 className="photo-in text-5xl font-black leading-[0.9] tracking-normal text-foreground sm:text-6xl lg:text-7xl xl:text-8xl">
+              {t.photography.title
+                .split(" ")
+                .map((word: string, i: number) => (
+                  <span
+                    key={i}
+                    className={`block ${i === 1 ? "text-primary" : ""}`}
+                  >
+                    {word}
+                  </span>
+                ))}
+            </h2>
+
+            {/* Description */}
+            <p className="photo-in max-w-md text-sm font-medium leading-relaxed text-muted-foreground sm:text-base">
+              {t.photography.description}
+            </p>
+
+            {/* CTAs */}
+            <div className="photo-in flex flex-wrap gap-3">
+              <a
+                href={photographyLinks.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-2.5 rounded-xl border border-primary/35 bg-primary/10 px-5 py-3 text-xs font-bold uppercase tracking-[0.14em] text-primary backdrop-blur-sm transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:border-primary"
               >
-                <a href={photographyLinks.website} target="_blank" rel="noopener noreferrer">
-                  <ExternalLink className="mr-2 h-4 w-4" />
-                  {t.photography.view_full}
-                </a>
-              </Button>
-              <Button
-                variant="ghost"
-                asChild
-                className="h-11 justify-center rounded-xl font-bold text-muted-foreground hover:text-foreground"
+                <ExternalLink className="h-3.5 w-3.5 transition-transform duration-300 group-hover:rotate-12" />
+                {t.photography.view_full}
+              </a>
+              <a
+                href={photographyLinks.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 rounded-xl border border-border/50 bg-background/40 px-5 py-3 text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground backdrop-blur-sm transition-all duration-300 hover:border-border hover:text-foreground"
               >
-                <a href={photographyLinks.instagram} target="_blank" rel="noopener noreferrer">
-                  <FaInstagram className="mr-2 h-4 w-4" />
-                  Instagram
-                </a>
-              </Button>
+                <FaInstagram className="h-3.5 w-3.5" />
+                @aleviclop
+              </a>
             </div>
           </div>
+        </div>
+
+        {/* Right-side film-grain texture */}
+        <div className="pointer-events-none absolute inset-0 mix-blend-overlay opacity-20"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`,
+            backgroundSize: "180px",
+          }}
+        />
+      </div>
+
+      {/* Bottom strip — stats + gallery hint */}
+      <div className="relative z-10 border-t border-border/30 bg-background/60 backdrop-blur-sm">
+        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-6 py-8 sm:flex-row sm:items-center sm:px-10 lg:px-16">
+          <div className="photo-in flex items-center gap-8 sm:gap-12">
+            {[
+              { val: "2022", label: language === "es" ? "Desde" : "Since" },
+              { val: "35mm", label: language === "es" ? "Formato" : "Format" },
+              { val: "Film", label: language === "es" ? "Estilo" : "Style" },
+            ].map((item) => (
+              <div key={item.label} className="flex flex-col gap-0.5">
+                <span className="font-mono text-xl font-black text-foreground sm:text-2xl">
+                  {item.val}
+                </span>
+                <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-muted-foreground/50">
+                  {item.label}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          <a
+            href={photographyLinks.website}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="photo-in group flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground/50 transition-colors hover:text-primary"
+          >
+            <span>{language === "es" ? "Ver galería completa" : "View full gallery"}</span>
+            <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
+          </a>
         </div>
       </div>
     </section>

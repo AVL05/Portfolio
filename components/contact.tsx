@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -7,14 +8,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { Mail } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import type React from "react";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { useLanguage } from "@/lib/language-context";
 import { RevealHeader } from "@/components/reveal-header";
-import { gsap, prefersReducedMotion, useGSAP } from "@/lib/gsap";
-
 export function Contact() {
   const { t } = useLanguage();
-  const containerRef = useRef<HTMLDivElement>(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -24,36 +22,6 @@ export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"success" | "error" | null>(null);
 
-  useGSAP(
-    () => {
-      const q = gsap.utils.selector(containerRef);
-      const items = q(".contact-item");
-
-      if (prefersReducedMotion()) {
-        gsap.set(items, { opacity: 1, y: 0 });
-        return;
-      }
-
-      gsap.fromTo(
-        items,
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1,
-          y: 0,
-          immediateRender: false,
-          stagger: 0.1,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 75%",
-            once: true,
-          },
-        },
-      );
-    },
-    { scope: containerRef },
-  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -91,10 +59,10 @@ export function Contact() {
   return (
     <section
       id="contact"
-      ref={containerRef}
       className="relative overflow-hidden bg-background px-4 py-24 sm:px-6 sm:py-32 lg:px-8"
     >
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-border/50 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 glow-divider" />
+      <div className="pointer-events-none absolute right-[5%] top-[20%] h-[40rem] w-[40rem] rounded-full bg-primary/6 blur-[130px]" />
 
       <div className="relative z-10 mx-auto max-w-7xl">
         <RevealHeader
@@ -248,9 +216,15 @@ export function Contact() {
               <p className="text-muted-foreground/30 text-xs font-mono tracking-widest uppercase mb-1">
                 &copy; 2026 Alex Vicente Lopez
               </p>
-              <p className="text-muted-foreground text-sm font-medium">
+              <p className="text-muted-foreground text-sm font-medium mb-4">
                 {t.contact.footer_built}
               </p>
+              <Link
+                href="/legal"
+                className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground/40 transition-colors hover:text-primary"
+              >
+                Aviso Legal &amp; Privacidad
+              </Link>
             </footer>
           </div>
         </div>

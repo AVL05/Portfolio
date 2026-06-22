@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { Mail, BriefcaseBusiness } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
-import { gsap, prefersReducedMotion, useGSAP } from "@/lib/gsap";
+import { gsap, ScrollTrigger, prefersReducedMotion, useGSAP } from "@/lib/gsap";
 import { useLanguage } from "@/lib/language-context";
 import { MagneticButton } from "@/components/magnetic-button";
 import Image from "next/image";

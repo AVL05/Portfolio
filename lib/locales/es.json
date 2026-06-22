@@ -167,6 +167,7 @@
     "form_btn_send": "ENVIAR MENSAJE",
     "form_btn_sending": "ENVIANDO...",
     "form_success": "✓ Mensaje enviado. Te responderé pronto.",
+    "form_error": "Algo salió mal. Inténtalo de nuevo.",
     "links_title": "Enlaces directos",
     "visual_portfolio_title": "Portfolio fotográfico",
     "visual_portfolio_desc": "Explora mi selección completa en alexgallery",

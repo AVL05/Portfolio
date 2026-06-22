@@ -1,10 +1,12 @@
 "use client";
 
 import { Menu, X } from "lucide-react";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { gsap, prefersReducedMotion, useGSAP } from "@/lib/gsap";
 import { useLanguage } from "@/lib/language-context";
 import { LanguageToggle } from "./language-toggle";
+
+const SECTION_IDS = ["hero", "projects", "skills", "experience", "contact"];
 
 export function Navigation() {
   const { t } = useLanguage();
@@ -17,7 +19,10 @@ export function Navigation() {
   ];
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const closeMenu = useCallback(() => setIsMenuOpen(false), []);
 
   useGSAP(
     () => {
@@ -35,7 +40,6 @@ export function Navigation() {
   );
 
   useEffect(() => {
-    const sections = navItems.map((item) => item.href.substring(1));
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -44,7 +48,7 @@ export function Navigation() {
       },
       { rootMargin: "-20% 0px -70% 0px", threshold: 0 },
     );
-    sections.forEach((id) => {
+    SECTION_IDS.forEach((id) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
     });
@@ -59,6 +63,22 @@ export function Navigation() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeMenu();
+    };
+    if (isMenuOpen) {
+      document.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen, closeMenu]);
 
   return (
     <div ref={containerRef}>
@@ -107,39 +127,50 @@ export function Navigation() {
 
             <div className="xl:hidden flex items-center gap-3">
               <LanguageToggle />
-              <a
-                href="#mobile-menu"
+              <button
+                type="button"
                 aria-label="Abrir menú"
+                aria-expanded={isMenuOpen}
+                aria-controls="mobile-menu"
+                onClick={() => setIsMenuOpen(true)}
                 className="inline-flex size-9 items-center justify-center rounded-xl border border-border/60 text-muted-foreground transition-all hover:border-primary/35 hover:text-primary"
               >
                 <Menu className="h-5 w-5" />
-              </a>
+              </button>
             </div>
           </div>
         </div>
-
-        <div
-          id="mobile-menu"
-          className="fixed inset-0 z-[100] hidden h-screen w-full flex-col items-center justify-center space-y-8 bg-background/97 backdrop-blur-2xl px-6 target:flex xl:hidden"
-        >
-          {navItems.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              className="text-center text-4xl font-black tracking-normal text-foreground transition-all hover:text-primary sm:text-5xl"
-            >
-              {item.name}
-            </a>
-          ))}
-          <a
-            href="#hero"
-            aria-label="Cerrar menú"
-            className="absolute right-6 top-6 inline-flex size-11 items-center justify-center rounded-xl border border-border/60 text-foreground transition-all hover:border-primary/40 hover:text-primary"
-          >
-            <X className="h-6 w-6" />
-          </a>
-        </div>
       </nav>
+
+      {/* Mobile menu overlay */}
+      <div
+        id="mobile-menu"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menú de navegación"
+        className={`fixed inset-0 z-[100] flex h-screen w-full flex-col items-center justify-center space-y-8 bg-background/97 backdrop-blur-2xl px-6 transition-all duration-300 xl:hidden ${
+          isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        {navItems.map((item) => (
+          <a
+            key={item.name}
+            href={item.href}
+            onClick={closeMenu}
+            className="text-center text-4xl font-black tracking-normal text-foreground transition-all hover:text-primary sm:text-5xl"
+          >
+            {item.name}
+          </a>
+        ))}
+        <button
+          type="button"
+          aria-label="Cerrar menú"
+          onClick={closeMenu}
+          className="absolute right-6 top-6 inline-flex size-11 items-center justify-center rounded-xl border border-border/60 text-foreground transition-all hover:border-primary/40 hover:text-primary"
+        >
+          <X className="h-6 w-6" />
+        </button>
+      </div>
     </div>
   );
 }

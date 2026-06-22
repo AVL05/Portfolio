@@ -90,6 +90,7 @@ interface Translation {
     form_btn_send: string;
     form_btn_sending: string;
     form_success: string;
+    form_error: string;
     links_title: string;
     visual_portfolio_title: string;
     visual_portfolio_desc: string;

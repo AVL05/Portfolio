@@ -14,8 +14,24 @@ const smallImageProjects = [
   "Arquitectura XML Educativa",
 ];
 
+interface Project {
+  title: string;
+  description: string;
+  image?: string;
+  technologies: string[];
+  category: string;
+  link?: string;
+  github?: string;
+  type: string;
+}
+
+interface SlideTranslations {
+  view_live: string;
+  view_code: string;
+}
+
 /* ── Single slide card ─────────────────────────────────────── */
-function SlideCard({ project, t, featured = false }: { project: any; t: any; featured?: boolean }) {
+function SlideCard({ project, t, featured = false }: { project: Project; t: SlideTranslations; featured?: boolean }) {
   return (
     <div
       className={`group relative flex-shrink-0 snap-start overflow-hidden rounded-2xl border border-border/60 bg-card transition-all duration-500 hover:border-primary/40
@@ -84,7 +100,7 @@ function SlideCard({ project, t, featured = false }: { project: any; t: any; fea
               >
                 <a href={project.link} target="_blank" rel="noopener noreferrer">
                   <ExternalLink className="mr-1.5 h-3 w-3" />
-                  {t.projects.view_live}
+                  {t.view_live}
                 </a>
               </Button>
             )}
@@ -97,7 +113,7 @@ function SlideCard({ project, t, featured = false }: { project: any; t: any; fea
               >
                 <a href={project.github} target="_blank" rel="noopener noreferrer">
                   <FaGithub className="mr-1.5 h-3 w-3" />
-                  {t.projects.view_code}
+                  {t.view_code}
                 </a>
               </Button>
             )}
@@ -153,10 +169,17 @@ export function Projects() {
   useEffect(() => {
     const el = trackRef.current;
     if (!el) return;
+    el.scrollLeft = 0;
+    updateScrollState();
+  }, [activeCategory, updateScrollState]);
+
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
     el.addEventListener("scroll", updateScrollState, { passive: true });
     updateScrollState();
     return () => el.removeEventListener("scroll", updateScrollState);
-  }, [updateScrollState, filteredProjects.length]);
+  }, [updateScrollState]);
 
   /* ── Arrow navigation ──────────────────────────────────────── */
   const scrollBy = useCallback((dir: 1 | -1) => {
@@ -257,9 +280,9 @@ export function Projects() {
           onMouseUp={stopDrag}
           onMouseLeave={stopDrag}
         >
-          {filteredProjects.map((project: any, i: number) => (
+          {filteredProjects.map((project: Project, i: number) => (
             <div key={project.title} className="proj-slide flex-shrink-0">
-              <SlideCard project={project} t={t} featured={i === 0} />
+              <SlideCard project={project} t={t.projects} featured={i === 0} />
             </div>
           ))}
           {/* Trailing gap */}

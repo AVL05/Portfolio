@@ -150,7 +150,7 @@ export function Contact() {
                 )}
                 {submitStatus === "error" && (
                   <p className="text-center text-sm font-medium text-destructive">
-                    Algo salió mal. Intenta de nuevo.
+                    {t.contact.form_error}
                   </p>
                 )}
               </form>

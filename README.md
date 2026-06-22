@@ -1,88 +1,60 @@
-# Portafolio
+# Portfolio — Alex Vicente López
 
-**Portafolio profesional de Alex Vicente López — creado con Next.js, React y TypeScript.**
+**Portfolio profesional** construido con Next.js 16, React 19 y TypeScript. Disponible en [aleviclop.dev](https://aleviclop.dev).
 
 ---
 
-## 📌 Resumen
+## Stack
 
-Este repositorio contiene el código fuente del portafolio personal de **Alex Vicente López**. El objetivo principal es mostrar proyectos, experiencia, habilidades y formas de contacto de forma clara, accesible y moderna.
+| Capa | Tecnología |
+|------|-----------|
+| Framework | Next.js 16 (App Router) |
+| UI | React 19 + TypeScript |
+| Estilos | Tailwind CSS v4 + PostCSS |
+| Animaciones | GSAP 3 + @gsap/react (ScrollTrigger, ScrollToPlugin) |
+| Tipografía | Geist Sans / Geist Mono |
+| Componentes | Radix UI (primitivas) |
+| Iconos | Lucide React + react-icons |
+| Formulario | Web3Forms API |
+| Analytics | Vercel Analytics + Speed Insights |
+| Lint | ESLint + @typescript-eslint |
 
-## ✨ Características principales
+## Requisitos
 
-- Interfaz responsiva y enfocada en accesibilidad.
-- Navegación con Next.js App Router y componentes reutilizables.
-- Formularios con validación y notificaciones amigables.
-- Galería y sección de fotografía protegida por derechos de autor.
-- Animaciones y transiciones suaves para mejorar la experiencia de usuario.
-- Componentes de UI y patrones consistentes para fácil mantenimiento.
+- **Node.js** 22.x
+- **pnpm** (obligatorio)
 
-## 🛠 Tecnologías
-
-- **Next.js** (App Router)
-- **React**
-- **TypeScript**
-- **Tailwind CSS + PostCSS**
-- **ESLint + @typescript-eslint**
-- **Framer Motion**
-- **Radix UI**
-- **Embla Carousel**
-- **Recharts**
-- **Sonner**
-- **Lucide Icons**
-
-## 🚀 Requisitos mínimos
-
-- **Node.js** >= 18.17.0
-- Gestor de paquetes: **pnpm** (recomendado)
-
-## 💻 Desarrollo
-
-Instala las dependencias:
+## Desarrollo
 
 ```bash
 pnpm install
+pnpm dev      # servidor de desarrollo (webpack, no Turbopack)
+pnpm build    # build de producción
+pnpm lint     # ESLint
 ```
 
-Ejecuta el servidor de desarrollo:
+## Estructura
 
-```bash
-pnpm dev
+```
+app/          — Rutas y layout (Next App Router)
+components/   — Secciones y componentes UI
+lib/          — GSAP, contexto de idioma, SEO, utilidades
+lib/locales/  — Traducciones ES / EN
+public/       — Assets estáticos (imágenes, CV, favicons)
 ```
 
-Genera la build de producción:
+## Secciones
 
-```bash
-pnpm build
-```
+`Navigation → Hero → Projects → Skills → Experience → Photography → Contact`
 
-## 📁 Estructura resumida
+Todas las secciones respetan `prefers-reduced-motion`. El idioma (ES/EN) se persiste en cookie + localStorage.
 
-- `app/` — Rutas y páginas (Next App Router)
-- `components/` — Componentes reutilizables
-- `hooks/` — Hooks personalizados
-- `lib/` — Utilidades y helpers
-- `public/` — Recursos estáticos (imágenes, fotografías, favicons)
-- `styles/` — Estilos globales
+## Derechos de autor
 
-## ⚠️ Derechos y uso del contenido
+Todo el contenido (código, diseño, imágenes y fotografías) es propiedad de **Alex Vicente López**. Queda prohibida su copia, reproducción o redistribución sin autorización escrita.
 
-**Todo el contenido de este repositorio (código, diseño, imágenes y fotografías)** está protegido por derechos de autor. Queda terminantemente prohibida la copia, reproducción, modificación, publicación o redistribución del contenido o de las fotografías sin el permiso por escrito del autor.
-
-Para solicitar permisos de uso o reproducciones, contacta a:
-
-**Alex Vicente López — alexviclop@gmail.com**
-
-Consulta el archivo de licencia `LICENSE.md` para los términos completos.
+Contacto: **alexviclop@gmail.com** — Licencia completa en `LICENSE.md`.
 
 ---
 
-## 📞 Autor
-
-**Alex Vicente López**
-
-Email: **alexviclop@gmail.com**
-
----
-
-_Última actualización: 2026_
+&copy; 2026 Alex Vicente López

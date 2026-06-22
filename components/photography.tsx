@@ -19,7 +19,11 @@ export function Photography() {
   useGSAP(
     () => {
       const q = gsap.utils.selector(containerRef);
-      if (prefersReducedMotion()) return;
+
+      if (prefersReducedMotion()) {
+        gsap.set([q(".photo-img"), q(".photo-in")], { opacity: 1, y: 0, autoAlpha: 1 });
+        return;
+      }
 
       gsap.to(q(".photo-img"), {
         y: -60,
@@ -31,6 +35,23 @@ export function Photography() {
           scrub: 1.8,
         },
       });
+
+      gsap.fromTo(
+        q(".photo-in"),
+        { autoAlpha: 0, y: 28 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          stagger: 0.1,
+          duration: 0.85,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 78%",
+            once: true,
+          },
+        },
+      );
     },
     { scope: containerRef },
   );

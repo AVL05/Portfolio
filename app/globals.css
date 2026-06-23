@@ -256,6 +256,42 @@
     animation: marquee 35s linear infinite;
   }
 
+  /* Solo translate (compositado en GPU) — sin scale para no re-rasterizar el blur. */
+  @keyframes aurora-drift {
+    0%   { transform: translate3d(0, 0, 0); }
+    33%  { transform: translate3d(5%, -4%, 0); }
+    66%  { transform: translate3d(-4%, 5%, 0); }
+    100% { transform: translate3d(0, 0, 0); }
+  }
+
+  .animate-aurora {
+    animation: aurora-drift 20s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  .animate-aurora-slow {
+    animation: aurora-drift 28s ease-in-out infinite reverse;
+    will-change: transform;
+  }
+
+  /* En móvil el blur grande es caro: dejamos los blobs estáticos. */
+  @media (max-width: 767px) {
+    .animate-aurora,
+    .animate-aurora-slow {
+      animation: none;
+      will-change: auto;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-aurora,
+    .animate-aurora-slow,
+    .animate-marquee {
+      animation: none;
+      will-change: auto;
+    }
+  }
+
   @media (max-width: 640px) {
     .premium-card {
       @apply rounded-2xl;

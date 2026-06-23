@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { gsap, prefersReducedMotion, useGSAP } from "@/lib/gsap";
+import { gsap, prefersReducedMotion, isFinePointer, useGSAP } from "@/lib/gsap";
 
 interface MagneticButtonProps {
   children: React.ReactNode;
@@ -15,7 +15,7 @@ export function MagneticButton({ children, className = "", strength = 0.38 }: Ma
   useGSAP(
     () => {
       const el = ref.current;
-      if (!el || prefersReducedMotion()) return;
+      if (!el || prefersReducedMotion() || !isFinePointer()) return;
 
       const onMove = (e: MouseEvent) => {
         const bounds = el.getBoundingClientRect();

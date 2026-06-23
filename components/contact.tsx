@@ -8,11 +8,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Mail } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import type React from "react";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { gsap, prefersReducedMotion, useGSAP } from "@/lib/gsap";
 import { useLanguage } from "@/lib/language-context";
 import { RevealHeader } from "@/components/reveal-header";
 export function Contact() {
   const { t } = useLanguage();
+  const containerRef = useRef<HTMLElement>(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -56,9 +58,37 @@ export function Contact() {
     }
   };
 
+  useGSAP(
+    () => {
+      const q = gsap.utils.selector(containerRef);
+      const items = q(".contact-item");
+      if (!items.length) return;
+
+      if (prefersReducedMotion()) {
+        gsap.set(items, { autoAlpha: 1, y: 0 });
+        return;
+      }
+
+      gsap.fromTo(
+        items,
+        { autoAlpha: 0, y: 48 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.9,
+          ease: "power3.out",
+          stagger: 0.15,
+          scrollTrigger: { trigger: containerRef.current, start: "top 70%", once: true },
+        },
+      );
+    },
+    { scope: containerRef },
+  );
+
   return (
     <section
       id="contact"
+      ref={containerRef}
       className="relative overflow-hidden bg-background px-4 py-24 sm:px-6 sm:py-32 lg:px-8"
     >
       <div className="pointer-events-none absolute inset-x-0 top-0 glow-divider" />

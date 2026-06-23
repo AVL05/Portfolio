@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Briefcase,
@@ -8,16 +9,92 @@ import {
   ChevronRight,
   MapPin,
 } from "lucide-react";
+import { gsap, prefersReducedMotion, useGSAP } from "@/lib/gsap";
 import { useLanguage } from "@/lib/language-context";
 
 export function Experience() {
   const { t } = useLanguage();
   const education = t.experience.education_list;
   const experience = t.experience.experience_list;
+  const containerRef = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      const q = gsap.utils.selector(containerRef);
+      const words = q(".exp-word");
+      const items = q(".timeline-item");
+      const lines = q(".timeline-line");
+
+      if (prefersReducedMotion()) {
+        gsap.set([words, items, q(".exp-desc"), q(".exp-cta")], {
+          autoAlpha: 1, x: 0, y: 0,
+        });
+        gsap.set(lines, { scaleY: 1 });
+        return;
+      }
+
+      gsap
+        .timeline({
+          scrollTrigger: { trigger: containerRef.current, start: "top 78%", once: true },
+        })
+        .fromTo(
+          words,
+          { yPercent: 115, autoAlpha: 0 },
+          { yPercent: 0, autoAlpha: 1, duration: 0.9, ease: "expo.out", stagger: 0.07 },
+        )
+        .fromTo(
+          q(".exp-desc"),
+          { autoAlpha: 0, y: 16 },
+          { autoAlpha: 1, y: 0, duration: 0.6, ease: "power3.out" },
+          "-=0.5",
+        );
+
+      // Líneas del timeline que se dibujan de arriba a abajo
+      lines.forEach((line) => {
+        gsap.fromTo(
+          line,
+          { scaleY: 0, transformOrigin: "top" },
+          {
+            scaleY: 1,
+            ease: "none",
+            scrollTrigger: { trigger: line, start: "top 85%", end: "bottom 60%", scrub: 1 },
+          },
+        );
+      });
+
+      // Items del timeline en cascada desde la izquierda
+      gsap.fromTo(
+        items,
+        { autoAlpha: 0, x: -32 },
+        {
+          autoAlpha: 1,
+          x: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          stagger: 0.12,
+          scrollTrigger: { trigger: q(".timeline-grid")[0], start: "top 75%", once: true },
+        },
+      );
+
+      gsap.fromTo(
+        q(".exp-cta"),
+        { autoAlpha: 0, y: 40 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: { trigger: q(".exp-cta")[0], start: "top 88%", once: true },
+        },
+      );
+    },
+    { scope: containerRef },
+  );
 
   return (
     <section
       id="experience"
+      ref={containerRef}
       className="section-padding relative overflow-hidden bg-background"
     >
       <div className="pointer-events-none absolute inset-x-0 top-0 glow-divider" />
@@ -25,10 +102,20 @@ export function Experience() {
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="experience-heading mb-14 sm:mb-16 space-y-5">
-          <h2 className="text-4xl font-black leading-[0.94] tracking-normal text-foreground sm:text-6xl lg:text-7xl xl:text-8xl">
-            {t.experience.subtitle}
+          <h2
+            className="text-4xl font-black leading-[0.94] tracking-normal text-foreground sm:text-6xl lg:text-7xl xl:text-8xl"
+            aria-label={t.experience.subtitle}
+          >
+            {t.experience.subtitle.split(" ").map((word: string, i: number) => (
+              <span
+                key={i}
+                className="mr-[0.25em] inline-block overflow-hidden pb-[0.12em] align-bottom"
+              >
+                <span className="exp-word inline-block">{word}</span>
+              </span>
+            ))}
           </h2>
-          <p className="max-w-2xl text-base font-medium leading-relaxed text-muted-foreground sm:text-lg">
+          <p className="exp-desc max-w-2xl text-base font-medium leading-relaxed text-muted-foreground sm:text-lg">
             {t.experience.desc}
           </p>
         </div>
@@ -123,7 +210,7 @@ export function Experience() {
           </div>
         </div>
 
-        <div className="dev-panel mt-20 flex flex-col items-center justify-between gap-8 p-6 transition-all hover:border-primary/30 sm:p-10 md:flex-row lg:gap-12 lg:p-12">
+        <div className="exp-cta dev-panel mt-20 flex flex-col items-center justify-between gap-8 p-6 transition-all hover:border-primary/30 sm:p-10 md:flex-row lg:gap-12 lg:p-12">
           <div className="space-y-3 text-center md:text-left">
             <h3 className="text-2xl font-bold tracking-normal text-foreground sm:text-3xl">
               {t.experience.cv_title}

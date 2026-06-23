@@ -21,6 +21,7 @@ export function Navigation() {
   const [activeSection, setActiveSection] = useState("hero");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const progressRef = useRef<HTMLDivElement>(null);
 
   const closeMenu = useCallback(() => setIsMenuOpen(false), []);
 
@@ -59,6 +60,11 @@ export function Navigation() {
     const handleScroll = () => {
       const scrolled = window.scrollY > 20;
       setIsScrolled((prev) => (prev !== scrolled ? scrolled : prev));
+      const bar = progressRef.current;
+      if (bar) {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.transform = `scaleX(${max > 0 ? window.scrollY / max : 0})`;
+      }
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -82,6 +88,13 @@ export function Navigation() {
 
   return (
     <div ref={containerRef}>
+      <div className="fixed left-0 right-0 top-0 z-[95] h-0.5 bg-transparent">
+        <div
+          ref={progressRef}
+          className="h-full origin-left bg-linear-to-r from-primary via-primary to-accent shadow-[0_0_12px_oklch(from_var(--primary)_l_c_h_/_0.6)]"
+          style={{ transform: "scaleX(0)" }}
+        />
+      </div>
       <nav
         className={`fixed left-0 right-0 top-0 z-[90] transition-all duration-500 ${
           isScrolled ? "py-3" : "py-4"

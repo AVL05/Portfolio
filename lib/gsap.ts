@@ -51,4 +51,14 @@ function prefersReducedMotion() {
     && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
-export { gsap, ScrollTrigger, ScrollToPlugin, useGSAP, prefersReducedMotion };
+/**
+ * True solo en dispositivos con puntero fino y hover real (ratón / trackpad).
+ * Se usa para desactivar efectos caros (tilt, magnético) en táctiles, donde
+ * además no aportan nada.
+ */
+function isFinePointer() {
+  return typeof window !== 'undefined'
+    && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+}
+
+export { gsap, ScrollTrigger, ScrollToPlugin, useGSAP, prefersReducedMotion, isFinePointer };

@@ -5,9 +5,10 @@ import { Button } from "@/components/ui/button";
 import { ExternalLink, ArrowLeft, ArrowRight } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
 import Image from "next/image";
-import { gsap } from "@/lib/gsap";
+import { gsap, prefersReducedMotion, useGSAP } from "@/lib/gsap";
 import { useLanguage } from "@/lib/language-context";
 import { RevealHeader } from "@/components/reveal-header";
+import { useTilt } from "@/lib/use-tilt";
 
 const smallImageProjects = [
   "Llibret Falla el Molí 24/25",
@@ -32,9 +33,11 @@ interface SlideTranslations {
 
 /* ── Single slide card ─────────────────────────────────────── */
 function SlideCard({ project, t, featured = false }: { project: Project; t: SlideTranslations; featured?: boolean }) {
+  const tiltRef = useTilt<HTMLDivElement>({ max: 5, spotlight: false });
   return (
     <div
-      className={`group relative flex-shrink-0 snap-start overflow-hidden rounded-2xl border border-border/60 bg-card transition-all duration-500 hover:border-primary/40
+      ref={tiltRef}
+      className={`group relative flex-shrink-0 snap-start overflow-hidden rounded-2xl border border-border/60 bg-card transition-[border-color,box-shadow] duration-500 hover:border-primary/40 hover:shadow-[0_40px_80px_-40px_rgba(0,0,0,0.85),0_0_40px_-12px_oklch(from_var(--primary)_l_c_h_/_0.2)]
         ${featured ? "w-[min(520px,85vw)]" : "w-[min(400px,80vw)]"}`}
       style={{ height: "clamp(480px,60vh,620px)" }}
     >
@@ -148,23 +151,37 @@ export function Projects() {
   const [activeCategory, setActiveCategory] = useState(categories[0]);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
-  const [progress, setProgress] = useState(0);
+  const progressBarRef = useRef<HTMLDivElement>(null);
+  const rafId = useRef<number | null>(null);
 
   const filteredProjects = projects.filter((project: any) => {
     if (activeCategory === categories[0]) return true;
     return project.category === activeCategory;
   });
 
-  /* ── Scroll state sync ─────────────────────────────────────── */
+  /* ── Scroll state sync (sin re-render por frame) ───────────── */
   const updateScrollState = useCallback(() => {
     const el = trackRef.current;
     if (!el) return;
     const { scrollLeft: sl, scrollWidth, clientWidth } = el;
     const max = scrollWidth - clientWidth;
+    // La barra de progreso se actualiza directamente en el DOM → 0 re-renders.
+    if (progressBarRef.current) {
+      progressBarRef.current.style.transform = `scaleX(${max > 0 ? sl / max : 0})`;
+    }
+    // Los estados booleanos solo cambian en los extremos; React descarta si no varían.
     setCanScrollLeft(sl > 8);
     setCanScrollRight(sl < max - 8);
-    setProgress(max > 0 ? sl / max : 0);
   }, []);
+
+  /* Lectura de scroll throttleada con rAF para evitar tirones. */
+  const onScroll = useCallback(() => {
+    if (rafId.current != null) return;
+    rafId.current = requestAnimationFrame(() => {
+      rafId.current = null;
+      updateScrollState();
+    });
+  }, [updateScrollState]);
 
   useEffect(() => {
     const el = trackRef.current;
@@ -176,10 +193,13 @@ export function Projects() {
   useEffect(() => {
     const el = trackRef.current;
     if (!el) return;
-    el.addEventListener("scroll", updateScrollState, { passive: true });
+    el.addEventListener("scroll", onScroll, { passive: true });
     updateScrollState();
-    return () => el.removeEventListener("scroll", updateScrollState);
-  }, [updateScrollState]);
+    return () => {
+      el.removeEventListener("scroll", onScroll);
+      if (rafId.current != null) cancelAnimationFrame(rafId.current);
+    };
+  }, [onScroll, updateScrollState]);
 
   /* ── Arrow navigation ──────────────────────────────────────── */
   const scrollBy = useCallback((dir: 1 | -1) => {
@@ -219,6 +239,34 @@ export function Projects() {
     trackRef.current.style.userSelect = "";
   };
 
+  /* ── Entrada en cascada de las tarjetas ────────────────────── */
+  useGSAP(
+    () => {
+      const q = gsap.utils.selector(containerRef);
+      const slides = q(".proj-slide");
+      if (!slides.length) return;
+
+      if (prefersReducedMotion()) {
+        gsap.set(slides, { autoAlpha: 1, y: 0, scale: 1 });
+        return;
+      }
+
+      gsap.fromTo(
+        slides,
+        { autoAlpha: 0, y: 56, scale: 0.95 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.85,
+          ease: "power3.out",
+          stagger: 0.1,
+          scrollTrigger: { trigger: trackRef.current, start: "top 82%", once: true },
+        },
+      );
+    },
+    { scope: containerRef, dependencies: [activeCategory] },
+  );
 
   return (
     <section
@@ -269,11 +317,12 @@ export function Projects() {
           ref={trackRef}
           className="flex gap-7 overflow-x-auto px-6 pb-4 sm:px-8 lg:px-10"
           style={{
-            scrollSnapType: "x mandatory",
+            scrollSnapType: "x proximity",
             WebkitOverflowScrolling: "touch",
             scrollbarWidth: "none",
             msOverflowStyle: "none",
             cursor: "grab",
+            scrollBehavior: "auto",
           }}
           onMouseDown={onMouseDown}
           onMouseMove={onMouseMove}
@@ -296,8 +345,9 @@ export function Projects() {
           {/* Progress bar */}
           <div className="h-px flex-1 max-w-xs rounded-full bg-border/30 overflow-hidden">
             <div
-              className="h-full bg-primary/60 rounded-full transition-all duration-300 origin-left"
-              style={{ transform: `scaleX(${progress})`, transformOrigin: "left" }}
+              ref={progressBarRef}
+              className="h-full bg-primary/60 rounded-full origin-left will-change-transform"
+              style={{ transform: "scaleX(0)", transformOrigin: "left" }}
             />
           </div>
 

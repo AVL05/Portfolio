@@ -6,6 +6,7 @@ import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import { gsap, ScrollTrigger, prefersReducedMotion, useGSAP } from "@/lib/gsap";
 import { useLanguage } from "@/lib/language-context";
 import { MagneticButton } from "@/components/magnetic-button";
+import { MountainParallax } from "@/components/mountain-parallax";
 import Image from "next/image";
 
 const heroProjects = [
@@ -143,10 +144,12 @@ export function Hero() {
     >
       <div className="pointer-events-none absolute inset-0 bg-grid opacity-[0.14] dark:opacity-[0.09]" />
 
-      <div className="pointer-events-none absolute left-[3%] top-[5%] h-[44rem] w-[44rem] rounded-full bg-primary/7 blur-[130px]" />
-      <div className="pointer-events-none absolute right-[0%] bottom-[5%] h-[36rem] w-[36rem] rounded-full bg-accent/5 blur-[110px]" />
-      <div className="pointer-events-none absolute left-[35%] top-[55%] h-[28rem] w-[28rem] rounded-full bg-primary/4 blur-[90px]" />
+      <div className="animate-aurora pointer-events-none absolute left-[3%] top-[5%] h-[44rem] w-[44rem] rounded-full bg-primary/7 blur-[130px]" />
+      <div className="animate-aurora-slow pointer-events-none absolute right-[0%] bottom-[5%] h-[36rem] w-[36rem] rounded-full bg-accent/5 blur-[110px]" />
+      <div className="animate-aurora pointer-events-none absolute left-[35%] top-[55%] h-[28rem] w-[28rem] rounded-full bg-primary/4 blur-[90px]" />
       <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-background/5 via-transparent to-background/60" />
+
+      <MountainParallax />
 
       <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-10 lg:grid-cols-[1fr_0.60fr] lg:gap-14">
         <div className="flex flex-col items-start space-y-8">

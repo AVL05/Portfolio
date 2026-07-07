@@ -6,6 +6,19 @@
     "experience": "Experiencia",
     "contact": "Contacto"
   },
+  "palette": {
+    "placeholder": "Escribe un comando o busca...",
+    "empty": "Sin resultados",
+    "nav_group": "Navegación",
+    "actions_group": "Acciones",
+    "action_lang": "Cambiar idioma a English",
+    "action_cv": "Descargar CV",
+    "action_gallery": "Abrir galería de fotografía",
+    "action_email": "Enviar un email",
+    "footer_nav": "navegar",
+    "footer_select": "abrir",
+    "footer_close": "cerrar"
+  },
   "hero": {
     "status": "Buscando oportunidades como desarrollador web",
     "description": "Desarrollador web junior con base full-stack, enfocado en construir productos digitales claros, rápidos, mantenibles y cuidados en cada detalle.",

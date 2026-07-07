@@ -5,6 +5,35 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { gsap, prefersReducedMotion, useGSAP } from "@/lib/gsap";
 import { useLanguage } from "@/lib/language-context";
 import { LanguageToggle } from "./language-toggle";
+import { OPEN_PALETTE_EVENT } from "./command-palette";
+
+const SCRAMBLE_POOL = "ABCDEFGHIJKLMNOPQRSTUVWXYZ</>{}#";
+
+/* Efecto de descodificación sobre el texto de un enlace al hacer hover. */
+function scrambleText(el: HTMLElement) {
+  if (prefersReducedMotion() || el.dataset.scrambling === "1") return;
+  const original = el.dataset.label ?? el.textContent ?? "";
+  el.dataset.label = original;
+  el.dataset.scrambling = "1";
+  let frame = 0;
+  const iv = setInterval(() => {
+    frame++;
+    const fixed = Math.ceil(frame / 2);
+    el.textContent = original
+      .split("")
+      .map((ch, i) =>
+        i < fixed || ch === " "
+          ? ch
+          : SCRAMBLE_POOL[Math.floor(Math.random() * SCRAMBLE_POOL.length)],
+      )
+      .join("");
+    if (fixed >= original.length) {
+      el.textContent = original;
+      delete el.dataset.scrambling;
+      clearInterval(iv);
+    }
+  }, 32);
+}
 
 const SECTION_IDS = ["hero", "projects", "skills", "experience", "contact"];
 
@@ -20,6 +49,11 @@ export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMac, setIsMac] = useState(false);
+
+  useEffect(() => {
+    setIsMac(/mac/i.test(navigator.platform));
+  }, []);
   const containerRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
 
@@ -110,9 +144,10 @@ export function Navigation() {
           >
             <a
               href="#hero"
-              className="nav-logo group shrink-0 font-mono text-sm font-black tracking-[0.12em] uppercase text-foreground transition-colors hover:text-primary"
+              className="nav-logo group shrink-0 font-mono text-sm font-black tracking-[0.08em] text-foreground transition-colors hover:text-primary"
             >
-              AVL
+              <span className="text-primary/60">~/</span>avl
+              <span className="animate-caret text-primary">_</span>
             </a>
 
             <div className="relative hidden items-center justify-center gap-1 rounded-xl border border-border/60 bg-card/55 p-1.5 backdrop-blur-xl xl:flex">
@@ -127,14 +162,29 @@ export function Navigation() {
                         ? "bg-primary text-primary-foreground shadow-[0_8px_20px_-10px_var(--primary)]"
                         : "text-muted-foreground hover:bg-secondary/80 hover:text-foreground"
                     }`}
+                    onMouseEnter={(e) => {
+                      const label = e.currentTarget.querySelector<HTMLElement>(".nav-label");
+                      if (label) scrambleText(label);
+                    }}
                   >
-                    {item.name}
+                    <span className="nav-label" data-label={item.name}>
+                      {item.name}
+                    </span>
                   </a>
                 );
               })}
             </div>
 
             <div className="nav-extra hidden xl:flex items-center gap-3">
+              <button
+                type="button"
+                aria-label="Abrir paleta de comandos"
+                onClick={() => window.dispatchEvent(new CustomEvent(OPEN_PALETTE_EVENT))}
+                className="inline-flex items-center gap-1.5 rounded-xl border border-border/60 bg-secondary/50 px-2.5 py-2 font-mono text-[10px] font-bold text-muted-foreground transition-all hover:border-primary/35 hover:text-primary"
+              >
+                <kbd className="tracking-tight">{isMac ? "⌘" : "Ctrl"}</kbd>
+                <kbd>K</kbd>
+              </button>
               <LanguageToggle />
             </div>
 

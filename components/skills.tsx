@@ -137,7 +137,7 @@ const skillCategories_en = [
 function SkillMarquee() {
   const doubled = [...allSkills, ...allSkills];
   return (
-    <div className="relative mb-16 overflow-hidden py-4">
+    <div className="marquee-group relative mb-16 overflow-hidden py-4">
       <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-32 bg-linear-to-r from-background to-transparent" />
       <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-32 bg-linear-to-l from-background to-transparent" />
       <div className="flex animate-marquee whitespace-nowrap" style={{ willChange: "transform" }}>

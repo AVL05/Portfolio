@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import dynamic from "next/dynamic";
 import { Mail, BriefcaseBusiness } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import { gsap, ScrollTrigger, prefersReducedMotion, useGSAP } from "@/lib/gsap";
@@ -8,6 +9,12 @@ import { useLanguage } from "@/lib/language-context";
 import { MagneticButton } from "@/components/magnetic-button";
 import { MountainParallax } from "@/components/mountain-parallax";
 import Image from "next/image";
+
+// Fondo WebGL (Three.js) — solo cliente, cargado tras el render inicial.
+const HeroWebGL = dynamic(
+  () => import("@/components/hero-webgl").then((m) => m.HeroWebGL),
+  { ssr: false },
+);
 
 const heroProjects = [
   { src: "/projects/distrito_gourmet.png", alt: "Distrito Gourmet" },
@@ -144,6 +151,8 @@ export function Hero() {
     >
       <div className="pointer-events-none absolute inset-0 bg-grid opacity-[0.14] dark:opacity-[0.09]" />
 
+      <HeroWebGL />
+
       <div className="animate-aurora pointer-events-none absolute left-[3%] top-[5%] h-[44rem] w-[44rem] rounded-full bg-primary/7 blur-[130px]" />
       <div className="animate-aurora-slow pointer-events-none absolute right-[0%] bottom-[5%] h-[36rem] w-[36rem] rounded-full bg-accent/5 blur-[110px]" />
       <div className="animate-aurora pointer-events-none absolute left-[35%] top-[55%] h-[28rem] w-[28rem] rounded-full bg-primary/4 blur-[90px]" />
@@ -225,7 +234,7 @@ export function Hero() {
 
           {/* Animated stat counters */}
           <div className="hero-fade flex items-center gap-8 border-t border-border/30 pt-6 w-full sm:w-auto">
-            {stats.map((stat, i) => (
+            {stats.map((stat) => (
               <div key={stat.label} className="hero-stat flex flex-col gap-0.5">
                 <span className="hero-stat-val font-mono text-2xl font-black text-foreground sm:text-3xl">
                   0{stat.suffix}

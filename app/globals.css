@@ -199,6 +199,26 @@
     letter-spacing: 0.18em;
   }
 
+  ::selection {
+    background: oklch(from var(--primary) l c h / 0.30);
+    color: var(--foreground);
+  }
+
+  @keyframes caret-blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+
+  .animate-caret {
+    animation: caret-blink 1.1s steps(1) infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-caret {
+      animation: none;
+    }
+  }
+
   ::-webkit-scrollbar {
     width: 5px;
   }
@@ -254,6 +274,13 @@
 
   .animate-marquee {
     animation: marquee 35s linear infinite;
+  }
+
+  /* Pausa la cinta al pasar el ratón para poder leer los logos con calma. */
+  @media (hover: hover) and (pointer: fine) {
+    .marquee-group:hover .animate-marquee {
+      animation-play-state: paused;
+    }
   }
 
   /* Solo translate (compositado en GPU) — sin scale para no re-rasterizar el blur. */

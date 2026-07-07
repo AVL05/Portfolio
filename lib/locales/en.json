@@ -6,6 +6,19 @@
     "experience": "Experience",
     "contact": "Contact"
   },
+  "palette": {
+    "placeholder": "Type a command or search...",
+    "empty": "No results",
+    "nav_group": "Navigation",
+    "actions_group": "Actions",
+    "action_lang": "Cambiar idioma a Español",
+    "action_cv": "Download CV",
+    "action_gallery": "Open photography gallery",
+    "action_email": "Send an email",
+    "footer_nav": "navigate",
+    "footer_select": "open",
+    "footer_close": "close"
+  },
   "hero": {
     "status": "Looking for web developer opportunities",
     "description": "Junior web developer with a full-stack foundation, focused on building clear, fast, maintainable digital products with careful attention to detail.",

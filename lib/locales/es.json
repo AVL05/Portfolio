@@ -24,7 +24,7 @@
     "description": "Desarrollador web junior con base full-stack, enfocado en construir productos digitales claros, rápidos, mantenibles y cuidados en cada detalle.",
     "cta_github": "GitHub",
     "cta_linkedin": "LinkedIn",
-    "scroll": "Scroll"
+    "scroll": "Desplazar"
   },
   "skills": {
     "title": "Stack",
@@ -38,12 +38,14 @@
     "subtitle": "Trabajo seleccionado",
     "desc": "Proyectos donde he trabajado interfaz, flujo de datos, dirección visual o entrega final.",
     "concept": "Detalle del proyecto",
-    "view_live": "Ver proyecto",
+    "view_live": "Ver demo",
     "view_code": "Ver código",
+    "role_label": "Mi parte",
+    "outcome_label": "Resultado",
     "items": [
       {
         "title": "Distrito Gourmet: Web de restaurante",
-        "description": "Proyecto final del curso: una plataforma web de restaurante con menú digital, gestión de platos, panel de administración y gestión de pedidos y reservas. El proyecto reúne las principales operaciones del restaurante en una única aplicación, con un flujo completo diseñado para clientes y personal interno",
+        "description": "Proyecto final del curso: una plataforma web de restaurante con menú digital, gestión de platos, panel de administración y gestión de pedidos y reservas. Reúne las principales operaciones del restaurante en una única aplicación, con un flujo completo para clientes y personal interno.",
         "image": "/projects/distrito_gourmet.png",
         "technologies": [
           "Vite",
@@ -58,7 +60,9 @@
         "category": "Desarrollo Web",
         "link": "https://distrito.aleviclop.dev/",
         "github": "https://github.com/AVL05/distrito-gourmet",
-        "type": "Pagina web"
+        "type": "Página web",
+        "role": "Construí el frontend en React, conecté flujos con Laravel y trabajé el panel de administración, reservas, pedidos y presentación visual.",
+        "outcome": "Demo completa con operaciones reales de restaurante: menú, carrito, reservas, administración y despliegue público."
       },
       {
         "title": "El Fogón: Landing gastronómica",
@@ -67,7 +71,9 @@
         "technologies": ["HTML5", "Tailwind CSS", "JavaScript", "Vite"],
         "category": "Desarrollo Web",
         "github": "https://github.com/AVL05/PRWEB02",
-        "type": "Landing page"
+        "type": "Landing page",
+        "role": "Definí la jerarquía visual, estructura responsive, navegación y composición de una landing gastronómica clara.",
+        "outcome": "Página ligera y directa para presentar carta, identidad visual y llamada a reserva sin complejidad innecesaria."
       },
       {
         "title": "Sistema de Gestión Hotelera (API)",
@@ -77,7 +83,9 @@
         "category": "Desarrollo Web",
         "link": "/projects/Demo_API_Hotel.mp4",
         "github": "https://github.com/avl05/API_Hotel",
-        "type": "Backend / API"
+        "type": "Backend / API",
+        "role": "Diseñé la base de datos, endpoints principales, validaciones y flujo de gestión de reservas.",
+        "outcome": "API funcional para consultar, crear y gestionar datos hoteleros con una estructura mantenible."
       },
       {
         "title": "E-commerce navideño",
@@ -87,7 +95,9 @@
         "category": "Desarrollo Web",
         "link": "https://aitanamora.vercel.app/",
         "github": "https://github.com/AVL05/Dulces",
-        "type": "E-commerce"
+        "type": "E-commerce",
+        "role": "Implementé navegación por categorías, carrito y gestión de estado en una experiencia de compra estacional.",
+        "outcome": "Flujo de compra navegable y desplegado, útil para demostrar interacción, estado y estructura frontend."
       },
       {
         "title": "Proyecto educativo XML",
@@ -97,7 +107,9 @@
         "category": "Desarrollo Web",
         "link": "https://avl05.github.io/web-xml-alex/",
         "github": "https://github.com/avl05/web-xml-alex",
-        "type": "Web educativa"
+        "type": "Web educativa",
+        "role": "Organicé contenidos técnicos, ejemplos y navegación para explicar XML de forma visual y progresiva.",
+        "outcome": "Recurso educativo publicado, con contenido estructurado y fácil de seguir para estudiantes."
       },
       {
         "title": "Llibret Falla el Molí 24/25",
@@ -106,7 +118,9 @@
         "technologies": ["InDesign", "Photoshop", "Illustrator"],
         "category": "Diseño Gráfico",
         "link": "/projects/LLIBRET 24-25.pdf",
-        "type": "Diseño editorial"
+        "type": "Diseño editorial",
+        "role": "Trabajé dirección visual, composición editorial, tipografía y preparación de artes finales.",
+        "outcome": "Publicación extensa y coherente que muestra criterio visual aplicable también a interfaces web."
       }
     ]
   },
@@ -179,12 +193,16 @@
     "form_placeholder_message": "Cuéntame qué necesitas o qué oportunidad tienes en mente...",
     "form_btn_send": "ENVIAR MENSAJE",
     "form_btn_sending": "ENVIANDO...",
-    "form_success": "✓ Mensaje enviado. Te responderé pronto.",
+    "form_success": "Mensaje enviado. Te responderé pronto.",
     "form_error": "Algo salió mal. Inténtalo de nuevo.",
     "links_title": "Enlaces directos",
+    "availability_title": "Disponible para oportunidades junior",
+    "availability_desc": "Puedes escribirme directamente por email o descargar el CV si quieres revisar mi formación, stack y proyectos antes de contactar.",
+    "cv_btn": "Descargar CV",
+    "email_btn": "Enviar email",
     "visual_portfolio_title": "Portfolio fotográfico",
-    "visual_portfolio_desc": "Explora mi selección completa en alexgallery",
-    "visual_portfolio_btn": "Abrir alexgallery →",
+    "visual_portfolio_desc": "Explora mi selección completa en alexgallery.",
+    "visual_portfolio_btn": "Abrir alexgallery",
     "footer_built": "Diseñado y desarrollado por Alex Vicente."
   }
 }

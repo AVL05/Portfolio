@@ -104,7 +104,11 @@ export default async function RootLayout({
   const initialLanguage: Language = cookieLanguage === "en" ? "en" : "es";
 
   return (
-    <html lang={initialLanguage} className="dark scroll-smooth overflow-x-hidden" suppressHydrationWarning>
+    <html
+      lang={initialLanguage}
+      className="dark scroll-smooth overflow-x-hidden"
+      suppressHydrationWarning
+    >
       <head>
         <link rel="preconnect" href="https://va.vercel-scripts.com" />
         <link rel="preconnect" href="https://vitals.vercel-insights.com" />

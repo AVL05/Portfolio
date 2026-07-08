@@ -24,9 +24,14 @@ export function RevealHeader({
       const words = q(".rh-word");
 
       if (prefersReducedMotion()) {
-        gsap.set([words, q(".rh-kicker-line"), q(".rh-kicker-text"), q(".rh-desc")], {
-          autoAlpha: 1, y: 0, scaleX: 1,
-        });
+        gsap.set(
+          [words, q(".rh-kicker-line"), q(".rh-kicker-text"), q(".rh-desc")],
+          {
+            autoAlpha: 1,
+            y: 0,
+            scaleX: 1,
+          },
+        );
         return;
       }
 
@@ -37,7 +42,12 @@ export function RevealHeader({
       tl.fromTo(
         q(".rh-kicker-line"),
         { scaleX: 0 },
-        { scaleX: 1, duration: 0.7, ease: "power3.out", transformOrigin: "left" },
+        {
+          scaleX: 1,
+          duration: 0.7,
+          ease: "power3.out",
+          transformOrigin: "left",
+        },
       )
         .fromTo(
           q(".rh-kicker-text"),
@@ -48,7 +58,13 @@ export function RevealHeader({
         .fromTo(
           words,
           { yPercent: 115, autoAlpha: 0 },
-          { yPercent: 0, autoAlpha: 1, duration: 0.95, ease: "expo.out", stagger: 0.08 },
+          {
+            yPercent: 0,
+            autoAlpha: 1,
+            duration: 0.95,
+            ease: "expo.out",
+            stagger: 0.08,
+          },
           "-=0.35",
         )
         .fromTo(
@@ -63,12 +79,12 @@ export function RevealHeader({
 
   return (
     <header ref={ref} className={`mb-14 space-y-5 sm:mb-18 ${className}`}>
-      <div className="flex items-center gap-4 font-mono text-xs font-black uppercase tracking-[0.2em] text-primary sm:text-sm sm:tracking-[0.24em]">
+      <div className="flex items-center gap-4 font-mono text-xs font-black uppercase tracking-[0.16em] text-primary sm:text-sm sm:tracking-[0.2em]">
         <span className="rh-kicker-line h-px w-10 bg-primary/60" />
         <span className="rh-kicker-text">{title}</span>
       </div>
       <h2
-        className="max-w-5xl pb-2 text-4xl font-black leading-[0.98] tracking-normal text-foreground sm:text-6xl lg:text-7xl"
+        className="max-w-5xl pb-2 text-4xl font-black leading-[0.96] tracking-normal text-foreground sm:text-6xl lg:text-7xl"
         aria-label={subtitle}
       >
         {subtitle.split(" ").map((word, i) => (
@@ -81,7 +97,7 @@ export function RevealHeader({
         ))}
       </h2>
       {description && (
-        <p className="rh-desc max-w-2xl text-balance text-base font-medium leading-relaxed text-muted-foreground sm:text-xl">
+        <p className="rh-desc max-w-2xl text-pretty text-base font-medium leading-relaxed text-muted-foreground sm:text-lg">
           {description}
         </p>
       )}

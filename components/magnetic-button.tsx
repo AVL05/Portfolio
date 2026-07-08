@@ -9,7 +9,11 @@ interface MagneticButtonProps {
   strength?: number;
 }
 
-export function MagneticButton({ children, className = "", strength = 0.38 }: MagneticButtonProps) {
+export function MagneticButton({
+  children,
+  className = "",
+  strength = 0.38,
+}: MagneticButtonProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   useGSAP(
@@ -30,7 +34,12 @@ export function MagneticButton({ children, className = "", strength = 0.38 }: Ma
       };
 
       const onLeave = () => {
-        gsap.to(el, { x: 0, y: 0, duration: 0.75, ease: "elastic.out(1, 0.45)" });
+        gsap.to(el, {
+          x: 0,
+          y: 0,
+          duration: 0.75,
+          ease: "elastic.out(1, 0.45)",
+        });
       };
 
       el.addEventListener("mousemove", onMove);
@@ -45,7 +54,10 @@ export function MagneticButton({ children, className = "", strength = 0.38 }: Ma
   );
 
   return (
-    <div ref={ref} className={`inline-block will-change-transform ${className}`}>
+    <div
+      ref={ref}
+      className={`inline-block will-change-transform ${className}`}
+    >
       {children}
     </div>
   );

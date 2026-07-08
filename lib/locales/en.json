@@ -38,8 +38,10 @@
     "subtitle": "Selected work",
     "desc": "Projects where I handled interface, data flow, visual direction, or production delivery.",
     "concept": "Project detail",
-    "view_live": "View project",
+    "view_live": "Open demo",
     "view_code": "View code",
+    "role_label": "My part",
+    "outcome_label": "Outcome",
     "items": [
       {
         "title": "Distrito Gourmet: Restaurant web app",
@@ -58,7 +60,9 @@
         "category": "Web Development",
         "link": "https://distrito.aleviclop.dev/",
         "github": "https://github.com/AVL05/distrito-gourmet",
-        "type": "Web app"
+        "type": "Web app",
+        "role": "Built the React frontend, connected flows with Laravel, and worked on the admin panel, reservations, orders, and visual presentation.",
+        "outcome": "Complete public demo with real restaurant operations: menu, cart, reservations, admin flows, and deployment."
       },
       {
         "title": "El Fogón: Restaurant landing page",
@@ -67,7 +71,9 @@
         "technologies": ["Next.js", "Tailwind CSS", "GSAP"],
         "category": "Web Development",
         "github": "https://github.com/AVL05/PRWEB02",
-        "type": "Landing page"
+        "type": "Landing page",
+        "role": "Defined the visual hierarchy, responsive structure, navigation, and composition for a restaurant landing page.",
+        "outcome": "Lightweight page for presenting menu, visual identity, and reservation intent without unnecessary complexity."
       },
       {
         "title": "Hotel Management System (API)",
@@ -77,7 +83,9 @@
         "category": "Web Development",
         "link": "/projects/Demo_API_Hotel.mp4",
         "github": "https://github.com/avl05/API_Hotel",
-        "type": "Backend / API"
+        "type": "Backend / API",
+        "role": "Designed the database structure, main endpoints, validation rules, and reservation management flow.",
+        "outcome": "Functional API for querying, creating, and managing hotel data with a maintainable structure."
       },
       {
         "title": "Holiday e-commerce",
@@ -87,7 +95,9 @@
         "category": "Web Development",
         "link": "https://aitanamora.vercel.app/",
         "github": "https://github.com/AVL05/Dulces",
-        "type": "E-commerce"
+        "type": "E-commerce",
+        "role": "Implemented category navigation, cart behavior, and state management for a seasonal shopping experience.",
+        "outcome": "Deployed shopping flow that demonstrates interaction, frontend state, and application structure."
       },
       {
         "title": "Educational XML project",
@@ -97,7 +107,9 @@
         "category": "Web Development",
         "link": "https://avl05.github.io/web-xml-alex/",
         "github": "https://github.com/avl05/web-xml-alex",
-        "type": "Educational website"
+        "type": "Educational website",
+        "role": "Organized technical content, examples, and navigation to explain XML in a visual and progressive way.",
+        "outcome": "Published educational resource with structured content that is easy for students to follow."
       },
       {
         "title": "Llibret Falla el Molí 24/25",
@@ -106,7 +118,9 @@
         "technologies": ["InDesign", "Photoshop", "Illustrator"],
         "category": "Graphic Design",
         "link": "/projects/LLIBRET 24-25.pdf",
-        "type": "Editorial design"
+        "type": "Editorial design",
+        "role": "Worked on visual direction, editorial composition, typography, and production-ready artwork.",
+        "outcome": "Large coherent publication that shows visual judgement also applicable to web interfaces."
       }
     ]
   },
@@ -179,12 +193,16 @@
     "form_placeholder_message": "Tell me what you need or what opportunity you have in mind...",
     "form_btn_send": "SEND MESSAGE",
     "form_btn_sending": "SENDING...",
-    "form_success": "✓ Message sent. I will get back to you soon.",
+    "form_success": "Message sent. I will get back to you soon.",
     "form_error": "Something went wrong. Please try again.",
     "links_title": "Direct links",
+    "availability_title": "Available for junior developer opportunities",
+    "availability_desc": "You can email me directly or download the CV if you want to review my education, stack, and projects before getting in touch.",
+    "cv_btn": "Download CV",
+    "email_btn": "Send email",
     "visual_portfolio_title": "Photography portfolio",
-    "visual_portfolio_desc": "Explore my full selection on alexgallery",
-    "visual_portfolio_btn": "Open alexgallery →",
+    "visual_portfolio_desc": "Explore my full selection on alexgallery.",
+    "visual_portfolio_btn": "Open alexgallery",
     "footer_built": "Designed and developed by Alex Vicente."
   }
 }

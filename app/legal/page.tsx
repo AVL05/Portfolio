@@ -117,7 +117,8 @@ export default function LegalPage() {
             Legal
           </h1>
           <p className="text-muted-foreground text-base font-medium leading-relaxed max-w-xl">
-            Aviso legal, condiciones de uso, política de privacidad y política de cookies de este sitio web.
+            Aviso legal, condiciones de uso, política de privacidad y política
+            de cookies de este sitio web.
           </p>
         </div>
 
@@ -143,7 +144,11 @@ export default function LegalPage() {
         {/* Sections */}
         <div className="space-y-16">
           {sections.map((section) => (
-            <section key={section.id} id={section.id} className="scroll-mt-28 space-y-6">
+            <section
+              key={section.id}
+              id={section.id}
+              className="scroll-mt-28 space-y-6"
+            >
               <div className="flex items-center gap-4">
                 <span className="h-px flex-1 max-w-[3rem] bg-primary/40" />
                 <h2 className="text-2xl font-black tracking-normal text-foreground sm:text-3xl">
@@ -162,7 +167,10 @@ export default function LegalPage() {
               {section.subsections && (
                 <div className="space-y-6">
                   {section.subsections.map((sub) => (
-                    <div key={sub.title} className="rounded-2xl border border-border/40 bg-card/30 p-6">
+                    <div
+                      key={sub.title}
+                      className="rounded-2xl border border-border/40 bg-card/30 p-6"
+                    >
                       <h3 className="mb-3 text-base font-bold tracking-normal text-foreground">
                         {sub.title}
                       </h3>

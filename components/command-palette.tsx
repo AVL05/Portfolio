@@ -55,12 +55,48 @@ export function CommandPalette() {
 
   const items = useMemo<PaletteItem[]>(
     () => [
-      { id: "home", label: t.nav.home, group: "nav", icon: Home, action: () => goTo("#hero") },
-      { id: "projects", label: t.nav.projects, group: "nav", icon: FolderGit2, action: () => goTo("#projects") },
-      { id: "skills", label: t.nav.skills, group: "nav", icon: Layers, action: () => goTo("#skills") },
-      { id: "experience", label: t.nav.experience, group: "nav", icon: Briefcase, action: () => goTo("#experience") },
-      { id: "photography", label: t.photography.title, group: "nav", icon: Camera, action: () => goTo("#photography") },
-      { id: "contact", label: t.nav.contact, group: "nav", icon: Mail, action: () => goTo("#contact") },
+      {
+        id: "home",
+        label: t.nav.home,
+        group: "nav",
+        icon: Home,
+        action: () => goTo("#hero"),
+      },
+      {
+        id: "projects",
+        label: t.nav.projects,
+        group: "nav",
+        icon: FolderGit2,
+        action: () => goTo("#projects"),
+      },
+      {
+        id: "skills",
+        label: t.nav.skills,
+        group: "nav",
+        icon: Layers,
+        action: () => goTo("#skills"),
+      },
+      {
+        id: "experience",
+        label: t.nav.experience,
+        group: "nav",
+        icon: Briefcase,
+        action: () => goTo("#experience"),
+      },
+      {
+        id: "photography",
+        label: t.photography.title,
+        group: "nav",
+        icon: Camera,
+        action: () => goTo("#photography"),
+      },
+      {
+        id: "contact",
+        label: t.nav.contact,
+        group: "nav",
+        icon: Mail,
+        action: () => goTo("#contact"),
+      },
       {
         id: "lang",
         label: t.palette.action_lang,
@@ -92,7 +128,11 @@ export function CommandPalette() {
         group: "actions",
         icon: FaGithub,
         action: () => {
-          window.open("https://github.com/AVL05", "_blank", "noopener,noreferrer");
+          window.open(
+            "https://github.com/AVL05",
+            "_blank",
+            "noopener,noreferrer",
+          );
           close();
         },
       },
@@ -103,7 +143,11 @@ export function CommandPalette() {
         group: "actions",
         icon: FaLinkedin,
         action: () => {
-          window.open("https://www.linkedin.com/in/alex-vicente-lopez/", "_blank", "noopener,noreferrer");
+          window.open(
+            "https://www.linkedin.com/in/alex-vicente-lopez/",
+            "_blank",
+            "noopener,noreferrer",
+          );
           close();
         },
       },
@@ -114,7 +158,11 @@ export function CommandPalette() {
         group: "actions",
         icon: ExternalLink,
         action: () => {
-          window.open("https://gallery.aleviclop.dev/", "_blank", "noopener,noreferrer");
+          window.open(
+            "https://gallery.aleviclop.dev/",
+            "_blank",
+            "noopener,noreferrer",
+          );
           close();
         },
       },
@@ -291,15 +339,21 @@ export function CommandPalette() {
         {/* Footer hints */}
         <div className="flex items-center gap-4 border-t border-border/60 bg-secondary/30 px-4 py-2.5">
           <span className="flex items-center gap-1.5 font-mono text-[10px] text-muted-foreground/50">
-            <kbd className="rounded border border-border/60 bg-secondary/60 px-1 py-px">↑↓</kbd>
+            <kbd className="rounded border border-border/60 bg-secondary/60 px-1 py-px">
+              ↑↓
+            </kbd>
             {t.palette.footer_nav}
           </span>
           <span className="flex items-center gap-1.5 font-mono text-[10px] text-muted-foreground/50">
-            <kbd className="rounded border border-border/60 bg-secondary/60 px-1 py-px">↵</kbd>
+            <kbd className="rounded border border-border/60 bg-secondary/60 px-1 py-px">
+              ↵
+            </kbd>
             {t.palette.footer_select}
           </span>
           <span className="flex items-center gap-1.5 font-mono text-[10px] text-muted-foreground/50">
-            <kbd className="rounded border border-border/60 bg-secondary/60 px-1 py-px">esc</kbd>
+            <kbd className="rounded border border-border/60 bg-secondary/60 px-1 py-px">
+              esc
+            </kbd>
             {t.palette.footer_close}
           </span>
         </div>

@@ -10,7 +10,8 @@ import * as THREE from "three";
  * Optimizado y respetuoso:
  *  - Respeta prefers-reduced-motion (no monta nada, deja el fondo estático).
  *  - Pausa el bucle de render cuando el hero sale del viewport (IntersectionObserver).
- *  - Cap de DPR a 2 y de partículas según ancho para no ahogar móviles.
+ *  - No se monta en móvil; el hero conserva profundidad con CSS.
+ *  - Cap de DPR a 2 y de partículas según ancho para no ahogar equipos modestos.
  *  - Limpieza completa de geometría, material, renderer y listeners al desmontar.
  */
 
@@ -138,6 +139,7 @@ export function HeroWebGL() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (window.innerWidth < 768) return;
 
     const mount = mountRef.current;
     if (!mount) return;
@@ -159,8 +161,8 @@ export function HeroWebGL() {
     renderer.setSize(width, height);
     mount.appendChild(renderer.domElement);
 
-    // Nº de partículas según ancho (móvil ligero, escritorio generoso).
-    const count = width < 640 ? 2600 : width < 1280 ? 5000 : 8000;
+    // Nº de partículas según ancho: suficiente presencia sin castigar portátiles.
+    const count = width < 1280 ? 4200 : 6500;
 
     const positions = new Float32Array(count * 3);
     const scales = new Float32Array(count);
@@ -274,7 +276,7 @@ export function HeroWebGL() {
     <div
       ref={mountRef}
       aria-hidden="true"
-      className="pointer-events-none absolute inset-0 z-0 opacity-90 [mask-image:radial-gradient(ellipse_85%_75%_at_55%_42%,black,transparent_88%)]"
+      className="pointer-events-none absolute inset-0 z-0 opacity-25 [mask-image:radial-gradient(ellipse_70%_55%_at_66%_42%,black,transparent_82%)]"
     />
   );
 }

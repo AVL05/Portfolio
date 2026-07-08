@@ -6,11 +6,21 @@ import { Hero } from "@/components/hero";
 import { CommandPalette } from "@/components/command-palette";
 import type { ReactNode } from "react";
 
-const Skills = dynamicLoader(() => import("@/components/skills").then((mod) => mod.Skills));
-const Projects = dynamicLoader(() => import("@/components/projects").then((mod) => mod.Projects));
-const Photography = dynamicLoader(() => import("@/components/photography").then((mod) => mod.Photography));
-const Experience = dynamicLoader(() => import("@/components/experience").then((mod) => mod.Experience));
-const Contact = dynamicLoader(() => import("@/components/contact").then((mod) => mod.Contact));
+const Skills = dynamicLoader(() =>
+  import("@/components/skills").then((mod) => mod.Skills),
+);
+const Projects = dynamicLoader(() =>
+  import("@/components/projects").then((mod) => mod.Projects),
+);
+const Photography = dynamicLoader(() =>
+  import("@/components/photography").then((mod) => mod.Photography),
+);
+const Experience = dynamicLoader(() =>
+  import("@/components/experience").then((mod) => mod.Experience),
+);
+const Contact = dynamicLoader(() =>
+  import("@/components/contact").then((mod) => mod.Contact),
+);
 
 export function HomeClient({ children }: { children?: ReactNode }) {
   return (

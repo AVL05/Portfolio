@@ -49,6 +49,11 @@ export const INDEXABLE_ROUTES = [
     changeFrequency: "monthly" as const,
   },
   {
+    path: "/proyectos/distrito-gourmet",
+    priority: 0.82,
+    changeFrequency: "monthly" as const,
+  },
+  {
     path: "/fotografia",
     priority: 0.75,
     changeFrequency: "monthly" as const,

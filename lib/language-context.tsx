@@ -15,9 +15,11 @@ interface ProjectItem {
   link?: string;
   github?: string;
   type: string;
+  role?: string;
+  outcome?: string;
 }
 
-interface TimelineItem {
+export interface TimelineItem {
   title: string;
   institution?: string;
   company?: string;
@@ -80,6 +82,8 @@ interface Translation {
     concept: string;
     view_live: string;
     view_code: string;
+    role_label: string;
+    outcome_label: string;
     items: ProjectItem[];
   };
   photography: {
@@ -105,6 +109,10 @@ interface Translation {
     form_success: string;
     form_error: string;
     links_title: string;
+    availability_title: string;
+    availability_desc: string;
+    cv_btn: string;
+    email_btn: string;
     visual_portfolio_title: string;
     visual_portfolio_desc: string;
     visual_portfolio_btn: string;
@@ -112,7 +120,7 @@ interface Translation {
   };
 }
 
-const translations: Record<Language, any> = { es, en };
+const translations: Record<Language, Translation> = { es, en };
 
 interface LanguageContextType {
   language: Language;
@@ -152,7 +160,7 @@ export function LanguageProvider({
       value={{
         language,
         setLanguage: handleSetLanguage,
-        t: translations[language] as Translation,
+        t: translations[language],
       }}
     >
       {children}

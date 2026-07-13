@@ -276,7 +276,7 @@ export function Experience() {
             className="h-13 shrink-0 rounded-xl bg-primary px-7 font-bold text-primary-foreground shadow-xl transition-all hover:-translate-y-0.5 hover:bg-primary/90 sm:h-14 sm:px-8"
           >
             <a
-              href="/CV_Alex_Vicente_Lopez_Desarrollador_Web_Junior.pdf"
+              href="/cv/CV_Alex_Vicente_Lopez_General_A4.pdf"
               download
               className="flex items-center gap-3"
             >

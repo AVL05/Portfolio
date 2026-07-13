@@ -2,9 +2,9 @@ export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://aleviclop.dev";
 
 export const SITE_NAME = "Alex Vicente López";
-export const SITE_TITLE = "Alex Vicente López | Desarrollador Web y Portfolio";
+export const SITE_TITLE = "Alex Vicente López | Desarrollador Full Stack";
 export const SITE_DESCRIPTION =
-  "Portfolio oficial de Alex Vicente López, también conocido como Alex Vicente, desarrollador web especializado en React, Next.js, Laravel, interfaces cuidadas y productos digitales.";
+  "Portfolio de Alex Vicente López, desarrollador full-stack en Valencia con experiencia en React, Next.js, Laravel, PHP, MySQL e interfaces de producto.";
 
 export const SEO_KEYWORDS = [
   "Alex Vicente López",
@@ -27,12 +27,17 @@ export const SEO_KEYWORDS = [
 
 export const SAME_AS = [
   "https://github.com/AVL05",
-  "https://www.linkedin.com/in/alex-vicente-lopez/",
+  "https://www.linkedin.com/in/aleviclop/",
   "https://www.instagram.com/aleviclop/",
   "https://gallery.aleviclop.dev/",
 ];
 
 export const INDEXABLE_ROUTES = [
+  {
+    path: "/proyectos/raw-manager",
+    priority: 0.84,
+    changeFrequency: "monthly" as const,
+  },
   {
     path: "/",
     priority: 1,
@@ -77,9 +82,9 @@ export const personJsonLd = {
   alternateName: ["Alex Vicente", "Alex Vicente Lopez", "aleviclop", "AVL05"],
   url: SITE_URL,
   email: "mailto:alexviclop@gmail.com",
-  jobTitle: "Desarrollador Web",
+  jobTitle: "Desarrollador Full Stack",
   description:
-    "Alex Vicente López es un desarrollador web en formación con base full-stack, experiencia en React, Next.js, Laravel, PHP, interfaces cuidadas y proyectos visuales.",
+    "Alex Vicente López es Técnico Superior en Desarrollo de Aplicaciones Web y desarrollador full-stack con experiencia práctica en React, PHP, Electron, Laravel y MySQL.",
   image: `${SITE_URL}/api/og?lang=es`,
   sameAs: SAME_AS,
   knowsAbout: [
@@ -97,7 +102,7 @@ export const personJsonLd = {
   ],
   hasOccupation: {
     "@type": "Occupation",
-    name: "Desarrollador web",
+    name: "Desarrollador full-stack",
     skills:
       "React, Next.js, TypeScript, Laravel, PHP, MySQL, Tailwind CSS, GSAP, diseño de interfaces",
   },

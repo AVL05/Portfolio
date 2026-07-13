@@ -115,7 +115,7 @@ export function CommandPalette() {
         icon: FileText,
         action: () => {
           const a = document.createElement("a");
-          a.href = "/CV_Alex_Vicente_Lopez.pdf";
+          a.href = "/cv/CV_Alex_Vicente_Lopez_General_A4.pdf";
           a.download = "";
           a.click();
           close();
@@ -139,12 +139,12 @@ export function CommandPalette() {
       {
         id: "linkedin",
         label: "LinkedIn",
-        hint: "alex-vicente-lopez",
+        hint: "aleviclop",
         group: "actions",
         icon: FaLinkedin,
         action: () => {
           window.open(
-            "https://www.linkedin.com/in/alex-vicente-lopez/",
+            "https://www.linkedin.com/in/aleviclop/",
             "_blank",
             "noopener,noreferrer",
           );

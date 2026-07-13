@@ -20,8 +20,8 @@
     "footer_close": "close"
   },
   "hero": {
-    "status": "Looking for web developer opportunities",
-    "description": "Junior web developer with a full-stack foundation, focused on building clear, fast, maintainable digital products with careful attention to detail.",
+    "status": "Available for full-stack opportunities",
+    "description": "Web Application Development graduate with hands-on React, PHP, and Electron experience. I build maintainable full-stack applications around real workflows.",
     "cta_github": "GitHub",
     "cta_linkedin": "LinkedIn",
     "scroll": "Scroll"
@@ -43,6 +43,17 @@
     "role_label": "My part",
     "outcome_label": "Outcome",
     "items": [
+      {
+        "title": "RAW Manager: workspace for photographers",
+        "description": "A full-stack platform that brings clients, sessions, quotes, invoices, galleries, equipment, and production planning into one workspace.",
+        "image": "/projects/raw-manager-cover.svg",
+        "technologies": ["React 19", "Vite", "Tailwind CSS", "Laravel 13", "Sanctum", "MySQL", "PWA"],
+        "category": "Web Development",
+        "github": "https://github.com/AVL05/raw-manager",
+        "type": "Full-stack app / PWA",
+        "role": "Designed and implemented the complete product: interface, state, API, authentication, data model, and business workflows.",
+        "outcome": "One focused workspace that replaces scattered tools throughout the complete photography assignment lifecycle."
+      },
       {
         "title": "Distrito Gourmet: Restaurant web app",
         "description": "Final course project: a restaurant web platform with a digital menu, dish management, an admin panel, and order and reservation management. The project brings the main restaurant operations into a single application, with a complete flow designed for customers and internal staff.",

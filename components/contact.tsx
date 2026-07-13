@@ -227,7 +227,7 @@ export function Contact() {
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   <a
-                    href="/CV_Alex_Vicente_Lopez.pdf"
+                    href="/cv/CV_Alex_Vicente_Lopez_General_A4.pdf"
                     download
                     className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-primary-foreground transition-all hover:-translate-y-0.5 hover:bg-primary/90"
                   >
@@ -241,6 +241,11 @@ export function Contact() {
                     <Mail className="h-4 w-4" />
                     {t.contact.email_btn}
                   </a>
+                </div>
+                <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 font-mono text-[10px] font-bold uppercase tracking-[0.1em] text-primary/80">
+                  <a href="/cv/CV_Alex_Vicente_Lopez_Full_Stack_A4.pdf" download className="hover:text-primary hover:underline">Full Stack</a>
+                  <a href="/cv/CV_Alex_Vicente_Lopez_Frontend_React_A4.pdf" download className="hover:text-primary hover:underline">Frontend React</a>
+                  <a href="/cv/CV_Alex_Vicente_Lopez_Backend_Laravel_PHP_A4.pdf" download className="hover:text-primary hover:underline">Backend Laravel/PHP</a>
                 </div>
               </div>
               <div className="space-y-5">
@@ -269,7 +274,7 @@ export function Contact() {
                   </span>
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/alex-vicente-lopez/"
+                  href="https://www.linkedin.com/in/aleviclop/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group flex min-w-0 items-center gap-4 text-xl font-bold transition-colors sm:text-2xl"
@@ -278,7 +283,7 @@ export function Contact() {
                     <FaLinkedin className="h-5 w-5" />
                   </div>
                   <span className="min-w-0 text-foreground group-hover:text-primary transition-colors">
-                    linkedin/alex-vicente-lopez
+                    linkedin/aleviclop
                   </span>
                 </a>
               </div>

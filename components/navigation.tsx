@@ -198,7 +198,7 @@ export function Navigation() {
 
             <div className="nav-extra hidden items-center gap-3 xl:flex">
               <a
-                href="/CV_Alex_Vicente_Lopez.pdf"
+                href="/cv/CV_Alex_Vicente_Lopez_General_A4.pdf"
                 download
                 className="inline-flex items-center gap-1.5 rounded-lg border border-primary/35 bg-primary/10 px-3 py-2 font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-primary transition-all hover:bg-primary hover:text-primary-foreground"
               >

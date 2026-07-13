@@ -52,9 +52,11 @@ function ProjectCard({
     ? "object-contain p-8 sm:p-10"
     : "object-cover";
   const caseStudyHref =
-    project.github === "https://github.com/AVL05/distrito-gourmet"
-      ? "/proyectos/distrito-gourmet"
-      : undefined;
+    project.github === "https://github.com/AVL05/raw-manager"
+      ? "/proyectos/raw-manager"
+      : project.github === "https://github.com/AVL05/distrito-gourmet"
+        ? "/proyectos/distrito-gourmet"
+        : undefined;
 
   return (
     <article

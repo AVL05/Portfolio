@@ -16,9 +16,9 @@ const HeroWebGL = dynamic(
 );
 
 const heroProjects = [
+  { src: "/projects/raw-manager-cover.svg", alt: "RAW Manager" },
   { src: "/projects/distrito_gourmet.png", alt: "Distrito Gourmet" },
   { src: "/projects/el-fogon.png", alt: "El Fogon" },
-  { src: "/projects/aitanamora.png", alt: "E-commerce" },
   { src: "/projects/api-hotel-cover.png", alt: "API Hotel" },
 ];
 
@@ -222,8 +222,8 @@ export function Hero() {
           <div className="hero-fade mt-5 flex w-full flex-col gap-4 border-l border-border/70 pl-5 sm:max-w-2xl">
             <span className="font-mono text-[11px] font-bold uppercase tracking-[0.24em] text-primary">
               {language === "es"
-                ? "Desarrollador Web & Diseñador"
-                : "Web Developer & Designer"}
+                ? "Desarrollador Full Stack"
+                : "Full-Stack Developer"}
             </span>
             <p className="max-w-xl text-balance text-lg font-medium leading-relaxed text-muted-foreground sm:text-xl">
               {t.hero.description}
@@ -251,7 +251,7 @@ export function Hero() {
 
           <div className="hero-fade mt-4 flex flex-wrap items-center gap-3">
             <a
-              href="/CV_Alex_Vicente_Lopez.pdf"
+              href="/cv/CV_Alex_Vicente_Lopez_General_A4.pdf"
               download
               className="flex items-center gap-2 rounded-lg border border-primary/35 bg-primary/10 px-3 py-2 text-[11px] font-mono font-bold uppercase tracking-widest text-primary transition-all hover:bg-primary hover:text-primary-foreground"
             >
@@ -268,7 +268,7 @@ export function Hero() {
               GitHub
             </a>
             <a
-              href="https://www.linkedin.com/in/alex-vicente-lopez/"
+              href="https://www.linkedin.com/in/aleviclop/"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 rounded-lg border border-border/60 bg-card/45 px-3 py-2 text-[11px] font-mono font-bold uppercase tracking-widest text-muted-foreground transition-all hover:border-primary/45 hover:text-primary"

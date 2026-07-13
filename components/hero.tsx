@@ -75,6 +75,7 @@ export function Hero() {
 
       /* ── Load-in animation ──────────────────────────────────── */
       const scrambleIntervals: ReturnType<typeof setInterval>[] = [];
+      const enableTitleScramble = window.matchMedia("(min-width: 640px)").matches;
       const tl = gsap.timeline({ defaults: { ease: "expo.out" } });
 
       tl.fromTo(
@@ -86,6 +87,8 @@ export function Hero() {
           stagger: 0.025,
           duration: 0.82,
           onStart: () => {
+            if (!enableTitleScramble) return;
+
             chars.forEach((el, i) => {
               const orig = el.textContent;
               const pool = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";

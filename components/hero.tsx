@@ -251,7 +251,7 @@ export function Hero() {
 
           <div className="hero-fade mt-4 flex flex-wrap items-center gap-3">
             <a
-              href="/CV_Alex_Vicente_Lopez_Desarrollador_Web_Junior.pdf"
+              href="/CV_Alex_Vicente_Lopez.pdf"
               download
               className="flex items-center gap-2 rounded-lg border border-primary/35 bg-primary/10 px-3 py-2 text-[11px] font-mono font-bold uppercase tracking-widest text-primary transition-all hover:bg-primary hover:text-primary-foreground"
             >

@@ -115,7 +115,7 @@ export function CommandPalette() {
         icon: FileText,
         action: () => {
           const a = document.createElement("a");
-          a.href = "/CV_Alex_Vicente_Lopez_Desarrollador_Web_Junior.pdf";
+          a.href = "/CV_Alex_Vicente_Lopez.pdf";
           a.download = "";
           a.click();
           close();

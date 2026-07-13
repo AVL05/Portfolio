@@ -227,7 +227,7 @@ export function Contact() {
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   <a
-                    href="/CV_Alex_Vicente_Lopez_Desarrollador_Web_Junior.pdf"
+                    href="/CV_Alex_Vicente_Lopez.pdf"
                     download
                     className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-primary-foreground transition-all hover:-translate-y-0.5 hover:bg-primary/90"
                   >

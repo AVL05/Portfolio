@@ -20,23 +20,23 @@
     "footer_close": "cerrar"
   },
   "hero": {
-    "status": "Disponible para oportunidades full-stack",
-    "description": "Técnico Superior en DAW con experiencia práctica en React, PHP y Electron. Construyo aplicaciones full-stack claras, mantenibles y orientadas a resolver flujos reales.",
+    "status": "Disponible para oportunidades frontend · Valencia / remoto",
+    "description": "Diseño y desarrollo interfaces React y Next.js con criterio visual, accesibilidad y atención al detalle. Mi base full-stack me permite conectar producto, API y entrega sin perder de vista la experiencia.",
     "cta_github": "GitHub",
     "cta_linkedin": "LinkedIn",
     "scroll": "Desplazar"
   },
   "skills": {
     "title": "Stack",
-    "subtitle": "Tecnologías que uso",
-    "desc": "Herramientas con las que he construido interfaces, APIs, bases de datos y piezas visuales.",
+    "subtitle": "Cómo construyo interfaces",
+    "desc": "Frontend como especialidad; producto, backend y dirección visual como contexto para tomar mejores decisiones.",
     "technologies": "Tecnologías",
     "tools": "Herramientas"
   },
   "projects": {
     "title": "Proyectos",
-    "subtitle": "Trabajo seleccionado",
-    "desc": "Proyectos donde he trabajado interfaz, flujo de datos, dirección visual o entrega final.",
+    "subtitle": "Interfaces con intención.",
+    "desc": "Casos donde conecto dirección visual, interacción y arquitectura frontend con flujos reales de producto.",
     "concept": "Detalle del proyecto",
     "view_live": "Ver demo",
     "view_code": "Ver código",
@@ -195,7 +195,7 @@
   "contact": {
     "title": "Contacto",
     "subtitle": "/ Hablemos",
-    "desc": "Si buscas un perfil junior con base técnica, sensibilidad visual y ganas de construir producto, escríbeme.",
+    "desc": "Si buscas un perfil frontend junior que cuide tanto la interfaz como el producto que hay detrás, hablemos.",
     "form_name": "Tu nombre",
     "form_email": "Tu email",
     "form_message": "Tu mensaje",

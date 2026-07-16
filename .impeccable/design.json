@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-16T13:42:51.9629283+02:00",
+  "title": "Design System: Alex Vicente Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "background": {
+        "role": "neutral",
+        "displayName": "Workshop Black",
+        "canonical": "oklch(0.105 0.012 58)",
+        "tonalRamp": ["oklch(0.15 0.012 58)", "oklch(0.25 0.012 58)", "oklch(0.35 0.012 58)", "oklch(0.47 0.012 58)", "oklch(0.59 0.012 58)", "oklch(0.71 0.012 58)", "oklch(0.83 0.012 58)", "oklch(0.95 0.012 58)"]
+      },
+      "primary": {
+        "role": "primary",
+        "displayName": "Interface Copper",
+        "canonical": "oklch(0.72 0.115 42)",
+        "tonalRamp": ["oklch(0.15 0.115 42)", "oklch(0.27 0.115 42)", "oklch(0.39 0.115 42)", "oklch(0.51 0.115 42)", "oklch(0.63 0.115 42)", "oklch(0.75 0.115 42)", "oklch(0.87 0.09 42)", "oklch(0.95 0.05 42)"]
+      },
+      "accent": {
+        "role": "secondary",
+        "displayName": "Availability Green",
+        "canonical": "oklch(0.74 0.09 138)",
+        "tonalRamp": ["oklch(0.15 0.09 138)", "oklch(0.27 0.09 138)", "oklch(0.39 0.09 138)", "oklch(0.51 0.09 138)", "oklch(0.63 0.09 138)", "oklch(0.75 0.09 138)", "oklch(0.87 0.07 138)", "oklch(0.95 0.04 138)"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Name and dominant section headlines." },
+      "body": { "displayName": "Body", "purpose": "Recruiter-facing value, decisions, and project context." },
+      "label": { "displayName": "Technical Label", "purpose": "Short metadata and categories only." }
+    },
+    "shadows": [
+      { "name": "ambient-card", "value": "0 22px 54px -34px rgba(0,0,0,.85)", "purpose": "Featured surfaces only." }
+    ],
+    "motion": [
+      { "name": "entrance-expo", "value": "expo.out", "purpose": "One hero entrance and short list choreography only." },
+      { "name": "interaction-fast", "value": "300ms ease-out", "purpose": "Hover and focus feedback." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Main recruiter action for cases and contact.",
+      "html": "<button class=\"ds-btn-primary\">VIEW CASES</button>",
+      "css": ".ds-btn-primary{background:var(--primary);color:var(--primary-foreground);padding:16px 28px;border:0;border-radius:12px;font:700 14px var(--font-geist-sans);transition:transform .3s ease,filter .3s ease}.ds-btn-primary:hover{transform:translateY(-2px);filter:brightness(1.05)}.ds-btn-primary:focus-visible{outline:3px solid var(--ring);outline-offset:3px}.ds-btn-primary:active{transform:translateY(0)}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "description": "Lower-emphasis contact or external action.",
+      "html": "<button class=\"ds-btn-secondary\">LET'S TALK</button>",
+      "css": ".ds-btn-secondary{background:var(--card);color:var(--foreground);padding:16px 28px;border:1px solid var(--border);border-radius:12px;font:700 14px var(--font-geist-sans);transition:transform .3s ease,border-color .3s ease}.ds-btn-secondary:hover{transform:translateY(-2px);border-color:var(--primary)}.ds-btn-secondary:focus-visible{outline:3px solid var(--ring);outline-offset:3px}.ds-btn-secondary:active{transform:translateY(0)}"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "description": "Accessible contact form field.",
+      "html": "<input class=\"ds-input\" placeholder=\"Your email\" />",
+      "css": ".ds-input{background:var(--secondary);color:var(--foreground);padding:14px 16px;border:1px solid var(--border);border-radius:8px;font:500 16px var(--font-geist-sans)}.ds-input:hover{border-color:var(--muted-foreground)}.ds-input:focus-visible{outline:3px solid var(--ring);outline-offset:2px;border-color:var(--primary)}"
+    },
+    {
+      "name": "Project Chip",
+      "kind": "chip",
+      "description": "Compact project category or technology label.",
+      "html": "<span class=\"ds-chip\">REACT 19</span>",
+      "css": ".ds-chip{display:inline-flex;background:var(--secondary);color:var(--muted-foreground);padding:8px 10px;border:1px solid var(--border);border-radius:8px;font:700 10px var(--font-geist-mono);letter-spacing:.1em}"
+    },
+    {
+      "name": "Project Index Row",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Uniform image-and-content row used for every project, alternating direction on desktop.",
+      "html": "<article class=\"ds-project-row\"><div class=\"ds-project-visual\"></div><div class=\"ds-project-copy\"><small>FULL CASE STUDY</small><h3>RAW Manager</h3><p>A focused workspace for photographers.</p><a href=\"#\">VIEW CASE</a></div></article>",
+      "css": ".ds-project-row{display:grid;grid-template-columns:.9fr 1.1fr;background:var(--card);color:var(--foreground);border:1px solid var(--border);border-radius:12px;overflow:hidden}.ds-project-visual{min-height:320px;background:var(--secondary)}.ds-project-copy{display:flex;flex-direction:column;justify-content:center;padding:32px}.ds-project-copy small{color:var(--primary);font:700 10px var(--font-geist-mono);letter-spacing:.12em}.ds-project-copy h3{margin:16px 0 8px;font:900 28px var(--font-geist-sans)}.ds-project-copy p{color:var(--muted-foreground);font:500 16px/1.6 var(--font-geist-sans)}.ds-project-copy a{display:inline-block;margin-top:18px;color:var(--primary);font:700 13px var(--font-geist-sans)}.ds-project-copy a:focus-visible{outline:3px solid var(--ring);outline-offset:3px}@media(max-width:767px){.ds-project-row{grid-template-columns:1fr}.ds-project-visual{min-height:210px}.ds-project-copy{padding:24px}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Interface Workshop",
+    "overview": "El portfolio se comporta como un taller digital: oscuro, preciso y material, con señales visuales que muestran cómo se construye una interfaz. La composición combina escala tipográfica, proyectos reales y movimiento técnico sin convertir la página en una demostración de efectos.",
+    "keyCharacteristics": ["Frontend-first y orientado a casos reales.", "Oscuro con acento cobre y un segundo acento verde funcional.", "Tipografía de gran escala compensada con texto cómodo y directo.", "Movimiento expresivo, siempre opcional mediante reducción de movimiento."],
+    "rules": [
+      { "name": "The Evidence Rule", "body": "El color primario señala acciones y decisiones importantes; nunca compensa contenido débil.", "section": "colors" },
+      { "name": "The Motion Budget Rule", "body": "Una entrada orquestada en el hero, una entrada breve por lista y microinteracciones de estado. No se animan secciones completas por costumbre ni se acumulan efectos simultáneos.", "section": "overview" },
+      { "name": "The Mono Ratio Rule", "body": "Geist Mono nunca se usa como cuerpo de texto ni como sustituto automático de personalidad técnica.", "section": "typography" },
+      { "name": "The Surface Rule", "body": "Una superficie en reposo usa borde o sombra, nunca ambos como decoración dominante.", "section": "elevation" }
+    ],
+    "dos": ["presentar primero el trabajo frontend y usar full-stack como contexto.", "mostrar imágenes reales, decisiones y resultados verificables.", "probar cada cambio a 390px y 1440px con movimiento reducido."],
+    "donts": ["convertir el portfolio en una plantilla SaaS genérica.", "usar glassmorphism, brillos, contadores y tarjetas repetidas sin contenido real como identidad.", "añadir efectos que compitan con los proyectos o perjudiquen rendimiento y accesibilidad.", "volver ambiguo si el perfil es frontend, diseñador o backend."]
+  }
+}

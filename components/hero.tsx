@@ -35,21 +35,21 @@ export function Hero() {
     return () => query.removeEventListener("change", update);
   }, []);
 
-  const stats = [
+  const proofPoints = [
     {
-      value: 6,
-      suffix: "+",
-      label: language === "es" ? "Proyectos" : "Projects",
+      label: "Frontend",
+      detail: "React · Next.js · TypeScript",
     },
     {
-      value: 14,
-      suffix: "+",
-      label: language === "es" ? "Tecnologías" : "Technologies",
+      label: language === "es" ? "Experiencia" : "Experience",
+      detail:
+        language === "es"
+          ? "UX · Accesibilidad · Motion"
+          : "UX · Accessibility · Motion",
     },
     {
-      value: 2,
-      suffix: "",
-      label: language === "es" ? "Años DAW" : "Years DAW",
+      label: "Full stack",
+      detail: "Laravel · MySQL · APIs",
     },
   ];
 
@@ -60,22 +60,17 @@ export function Hero() {
       const reduce = prefersReducedMotion();
 
       if (reduce) {
-        gsap.set([chars, q(".hero-fade"), q(".hero-visual"), q(".hero-stat")], {
+        gsap.set([chars, q(".hero-fade"), q(".hero-visual"), q(".hero-proof")], {
           opacity: 1,
           x: 0,
           y: 0,
           scale: 1,
           autoAlpha: 1,
         });
-        q(".hero-stat-val").forEach((el: Element, i) => {
-          (el as HTMLElement).textContent = stats[i].value + stats[i].suffix;
-        });
         return;
       }
 
       /* ── Load-in animation ──────────────────────────────────── */
-      const scrambleIntervals: ReturnType<typeof setInterval>[] = [];
-      const enableTitleScramble = window.matchMedia("(min-width: 640px)").matches;
       const tl = gsap.timeline({ defaults: { ease: "expo.out" } });
 
       tl.fromTo(
@@ -86,25 +81,6 @@ export function Hero() {
           y: 0,
           stagger: 0.025,
           duration: 0.82,
-          onStart: () => {
-            if (!enableTitleScramble) return;
-
-            chars.forEach((el, i) => {
-              const orig = el.textContent;
-              const pool = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-              let iter = 0;
-              const iv = setInterval(() => {
-                (el as HTMLElement).textContent =
-                  pool[Math.floor(Math.random() * pool.length)];
-                iter++;
-                if (iter > 8 + i * 2) {
-                  (el as HTMLElement).textContent = orig;
-                  clearInterval(iv);
-                }
-              }, 46);
-              scrambleIntervals.push(iv);
-            });
-          },
         },
       )
         .fromTo(
@@ -126,7 +102,7 @@ export function Hero() {
           "-=0.95",
         )
         .fromTo(
-          q(".hero-stat"),
+          q(".hero-proof"),
           { autoAlpha: 0, y: 10 },
           {
             autoAlpha: 1,
@@ -137,23 +113,6 @@ export function Hero() {
           },
           "-=0.6",
         );
-
-      /* ── Counter animation ───────────────────────────────────── */
-      const statEls = q(".hero-stat-val");
-      stats.forEach((stat, i) => {
-        const el = statEls[i] as HTMLElement;
-        if (!el) return;
-        const proxy = { val: 0 };
-        gsap.to(proxy, {
-          val: stat.value,
-          duration: 1.8,
-          delay: 0.9 + i * 0.14,
-          ease: "power2.out",
-          onUpdate() {
-            el.textContent = Math.round(proxy.val) + stat.suffix;
-          },
-        });
-      });
 
       /* ── Subtle title float on scroll ─────────────────────── */
       const titleWords = q(".hero-word");
@@ -171,7 +130,6 @@ export function Hero() {
       }
 
       return () => {
-        scrambleIntervals.forEach(clearInterval);
         ScrollTrigger.getAll().forEach((st) => {
           if (st.vars.trigger === containerRef.current) st.kill();
         });
@@ -225,8 +183,8 @@ export function Hero() {
           <div className="hero-fade mt-5 flex w-full flex-col gap-4 border-l border-border/70 pl-5 sm:max-w-2xl">
             <span className="font-mono text-[11px] font-bold uppercase tracking-[0.24em] text-primary">
               {language === "es"
-                ? "Desarrollador Full Stack"
-                : "Full-Stack Developer"}
+                ? "Frontend Developer · React & Next.js"
+                : "Frontend Developer · React & Next.js"}
             </span>
             <p className="max-w-xl text-balance text-lg font-medium leading-relaxed text-muted-foreground sm:text-xl">
               {t.hero.description}
@@ -238,7 +196,9 @@ export function Hero() {
               <a href="#projects">
                 <div className="group relative flex items-center justify-center gap-2.5 overflow-hidden rounded-xl bg-primary px-7 py-4 text-sm font-bold text-primary-foreground shadow-[0_22px_45px_-24px_rgba(0,0,0,0.85)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/90 active:scale-[0.98]">
                   <BriefcaseBusiness className="h-4 w-4 shrink-0" />
-                  {language === "es" ? "Ver proyectos" : "View projects"}
+                  {language === "es"
+                    ? "Ver casos de interfaz"
+                    : "View interface cases"}
                 </div>
               </a>
             </MagneticButton>
@@ -281,17 +241,17 @@ export function Hero() {
             </a>
           </div>
 
-          <div className="hero-fade mt-7 grid w-full max-w-xl grid-cols-3 border-y border-border/45">
-            {stats.map((stat) => (
+          <div className="hero-fade mt-7 grid w-full max-w-2xl grid-cols-1 border-y border-border/45 sm:grid-cols-3">
+            {proofPoints.map((point) => (
               <div
-                key={stat.label}
-                className="hero-stat flex flex-col gap-1 border-r border-border/45 px-4 py-5 last:border-r-0 sm:px-6"
+                key={point.label}
+                className="hero-proof flex items-baseline justify-between gap-4 border-b border-border/45 px-4 py-4 last:border-b-0 sm:block sm:border-b-0 sm:border-r sm:px-5 sm:py-5 sm:last:border-r-0"
               >
-                <span className="hero-stat-val font-mono text-2xl font-black text-foreground sm:text-3xl">
-                  0{stat.suffix}
+                <span className="font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-primary">
+                  {point.label}
                 </span>
-                <span className="text-[10px] font-mono uppercase tracking-[0.16em] text-muted-foreground/60">
-                  {stat.label}
+                <span className="text-right text-xs font-bold text-foreground/85 sm:mt-2 sm:block sm:text-left">
+                  {point.detail}
                 </span>
               </div>
             ))}
@@ -315,6 +275,7 @@ export function Hero() {
                     src={project.src}
                     alt={project.alt}
                     fill
+                    loading={i === 0 ? "eager" : "lazy"}
                     className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
                     sizes="(max-width: 1280px) 22vw, 290px"
                   />

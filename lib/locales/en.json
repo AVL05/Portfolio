@@ -20,23 +20,23 @@
     "footer_close": "close"
   },
   "hero": {
-    "status": "Available for full-stack opportunities",
-    "description": "Web Application Development graduate with hands-on React, PHP, and Electron experience. I build maintainable full-stack applications around real workflows.",
+    "status": "Available for frontend roles · Valencia / remote",
+    "description": "I design and build React and Next.js interfaces with visual judgment, accessibility, and close attention to detail. My full-stack foundation helps me connect product, API, and delivery without losing sight of the experience.",
     "cta_github": "GitHub",
     "cta_linkedin": "LinkedIn",
     "scroll": "Scroll"
   },
   "skills": {
     "title": "Stack",
-    "subtitle": "Technologies I use",
-    "desc": "Tools I have used to build interfaces, APIs, databases, and visual pieces.",
+    "subtitle": "How I build interfaces",
+    "desc": "Frontend as my specialty; product, backend, and visual direction as context for better decisions.",
     "technologies": "Technologies",
     "tools": "Tools"
   },
   "projects": {
     "title": "Projects",
-    "subtitle": "Selected work",
-    "desc": "Projects where I handled interface, data flow, visual direction, or production delivery.",
+    "subtitle": "Interfaces with intent.",
+    "desc": "Case studies connecting visual direction, interaction, and frontend architecture to real product workflows.",
     "concept": "Project detail",
     "view_live": "Open demo",
     "view_code": "View code",
@@ -195,7 +195,7 @@
   "contact": {
     "title": "Contact",
     "subtitle": "/ Let's talk",
-    "desc": "If you are looking for a junior profile with technical foundations, visual judgement, and product mindset, send me a message.",
+    "desc": "If you need a junior frontend developer who cares about both the interface and the product behind it, let's talk.",
     "form_name": "Your name",
     "form_email": "Your email",
     "form_message": "Your message",

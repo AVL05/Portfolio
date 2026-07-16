@@ -27,8 +27,9 @@ export function RevealHeader({
         gsap.set(
           [words, q(".rh-kicker-line"), q(".rh-kicker-text"), q(".rh-desc")],
           {
-            autoAlpha: 1,
+            x: 0,
             y: 0,
+            yPercent: 0,
             scaleX: 1,
           },
         );
@@ -41,37 +42,36 @@ export function RevealHeader({
 
       tl.fromTo(
         q(".rh-kicker-line"),
-        { scaleX: 0 },
+        { scaleX: 0.45 },
         {
           scaleX: 1,
-          duration: 0.7,
-          ease: "power3.out",
+          duration: 0.4,
+          ease: "expo.out",
           transformOrigin: "left",
         },
       )
         .fromTo(
           q(".rh-kicker-text"),
-          { autoAlpha: 0, x: -10 },
-          { autoAlpha: 1, x: 0, duration: 0.5 },
-          "-=0.45",
+          { x: -6 },
+          { x: 0, duration: 0.35, ease: "expo.out" },
+          "-=0.3",
         )
         .fromTo(
           words,
-          { yPercent: 115, autoAlpha: 0 },
+          { yPercent: 28 },
           {
             yPercent: 0,
-            autoAlpha: 1,
-            duration: 0.95,
+            duration: 0.55,
             ease: "expo.out",
-            stagger: 0.08,
+            stagger: 0.04,
           },
-          "-=0.35",
+          "-=0.28",
         )
         .fromTo(
           q(".rh-desc"),
-          { autoAlpha: 0, y: 16 },
-          { autoAlpha: 1, y: 0, duration: 0.7, ease: "power3.out" },
-          "-=0.6",
+          { y: 8 },
+          { y: 0, duration: 0.4, ease: "expo.out" },
+          "-=0.35",
         );
     },
     { scope: ref },

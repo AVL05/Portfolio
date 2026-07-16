@@ -15,17 +15,15 @@ import * as THREE from "three";
  *  - Limpieza completa de geometría, material, renderer y listeners al desmontar.
  */
 
-// Lee un token oklch del CSS y lo pasa a THREE.Color (que entiende oklch()).
+// Three.js no interpreta OKLCH: conserva el token cuando es compatible y usa
+// un equivalente sRGB explícito para los tokens OKLCH del tema.
 function tokenColor(name: string, fallback: string): THREE.Color {
   if (typeof window === "undefined") return new THREE.Color(fallback);
   const raw = getComputedStyle(document.documentElement)
     .getPropertyValue(name)
     .trim();
-  try {
-    return new THREE.Color(raw || fallback);
-  } catch {
-    return new THREE.Color(fallback);
-  }
+  if (!raw || raw.startsWith("oklch(")) return new THREE.Color(fallback);
+  return new THREE.Color(raw);
 }
 
 const vertexShader = /* glsl */ `
@@ -199,8 +197,8 @@ export function HeroWebGL() {
         uMouse: { value: new THREE.Vector2(0, 0) },
         uSize: { value: 7.0 },
         uPixelRatio: { value: dpr },
-        uColorA: { value: tokenColor("--primary", "#3ad4d4") },
-        uColorB: { value: tokenColor("--accent", "#f0b45a") },
+        uColorA: { value: tokenColor("--primary", "#e58b6f") },
+        uColorB: { value: tokenColor("--accent", "#9bc982") },
       },
     });
 
@@ -232,20 +230,22 @@ export function HeroWebGL() {
     const io = new IntersectionObserver(
       ([entry]) => {
         visible = entry.isIntersecting;
-        if (visible) clock.start();
+        if (visible) timer.reset();
       },
       { threshold: 0 },
     );
     io.observe(mount);
 
     // ── Bucle ──────────────────────────────────────────────────────
-    const clock = new THREE.Clock();
+    const timer = new THREE.Timer();
+    timer.connect(document);
     let raf = 0;
-    const tick = () => {
+    const tick = (timestamp?: number) => {
       raf = requestAnimationFrame(tick);
       if (!visible) return;
 
-      const t = clock.getElapsedTime();
+      timer.update(timestamp);
+      const t = timer.getElapsed();
       mouse.lerp(target, 0.05);
       material.uniforms.uTime.value = t;
       material.uniforms.uMouse.value.copy(mouse);
@@ -260,6 +260,7 @@ export function HeroWebGL() {
 
     return () => {
       cancelAnimationFrame(raf);
+      timer.dispose();
       io.disconnect();
       window.removeEventListener("pointermove", onPointerMove);
       window.removeEventListener("resize", onResize);

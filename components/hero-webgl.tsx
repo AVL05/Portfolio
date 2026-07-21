@@ -15,14 +15,16 @@ import * as THREE from "three";
  *  - Limpieza completa de geometría, material, renderer y listeners al desmontar.
  */
 
-// Three.js no interpreta OKLCH: conserva el token cuando es compatible y usa
-// un equivalente sRGB explícito para los tokens OKLCH del tema.
+// Three.js no interpreta los espacios perceptuales modernos que puede devolver
+// getComputedStyle: conserva formatos CSS clásicos y usa un sRGB explícito.
 function tokenColor(name: string, fallback: string): THREE.Color {
   if (typeof window === "undefined") return new THREE.Color(fallback);
   const raw = getComputedStyle(document.documentElement)
     .getPropertyValue(name)
     .trim();
-  if (!raw || raw.startsWith("oklch(")) return new THREE.Color(fallback);
+  if (!raw || /^(oklch|oklab|lch|lab)\(/i.test(raw)) {
+    return new THREE.Color(fallback);
+  }
   return new THREE.Color(raw);
 }
 

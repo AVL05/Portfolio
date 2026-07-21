@@ -25,6 +25,8 @@ export const SEO_KEYWORDS = [
   "full-stack junior",
   "fotografía",
   "diseño digital",
+  "raw.vives",
+  "archivo fotográfico editorial",
 ];
 
 export const SAME_AS = [
@@ -35,6 +37,11 @@ export const SAME_AS = [
 ];
 
 export const INDEXABLE_ROUTES = [
+  {
+    path: "/proyectos/raw-vives",
+    priority: 0.92,
+    changeFrequency: "monthly" as const,
+  },
   {
     path: "/proyectos/raw-manager",
     priority: 0.84,

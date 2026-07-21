@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, ChevronDown } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { gsap, prefersReducedMotion, useGSAP } from "@/lib/gsap";
 import { useLanguage } from "@/lib/language-context";
 
@@ -145,6 +145,7 @@ function ProjectScene({
 export function Projects() {
   const { language, t } = useLanguage();
   const containerRef = useRef<HTMLElement>(null);
+  const [archiveOpen, setArchiveOpen] = useState(false);
   const projects = t.projects.items as Project[];
   const featured = featuredIndexes.map((index) => projects[index]).filter(Boolean);
   const archive = projects.filter((_, index) => !featuredIndexes.includes(index));
@@ -217,8 +218,15 @@ export function Projects() {
       ))}
 
       <div className="border-y border-border/55 bg-[#0d0d0b] px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
-        <details className="group/archive mx-auto max-w-[100rem]">
-          <summary className="flex min-h-16 cursor-pointer list-none items-end justify-between gap-6 focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-primary [&::-webkit-details-marker]:hidden">
+        <details
+          className="group/archive mx-auto max-w-[100rem]"
+          onToggle={(event) => setArchiveOpen(event.currentTarget.open)}
+        >
+          <summary
+            aria-controls="archive-projects"
+            aria-expanded={archiveOpen}
+            className="flex min-h-16 cursor-pointer list-none items-end justify-between gap-6 focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-primary [&::-webkit-details-marker]:hidden"
+          >
             <div>
               <p className="section-kicker">{language === "es" ? "Trabajo secundario" : "Secondary work"}</p>
               <h3 className="mt-3 text-4xl font-black tracking-[-.05em] sm:text-6xl">
@@ -230,7 +238,11 @@ export function Projects() {
               <ChevronDown className="h-4 w-4 transition-transform group-open/archive:rotate-180" />
             </span>
           </summary>
-          <div className="mt-10 border-t border-border/55">
+          <div
+            id="archive-projects"
+            aria-hidden={!archiveOpen}
+            className={`mt-10 border-t border-border/55 ${archiveOpen ? "block" : "hidden"}`}
+          >
               {archive.map((project, index) => (
                 <article key={project.title} className="group grid gap-3 border-b border-border/55 py-5 transition-colors hover:border-primary/65 sm:grid-cols-[3rem_minmax(0,1.4fr)_minmax(0,.8fr)_auto] sm:items-center">
                   <span className="font-mono text-[10px] text-muted-foreground">{String(index + 5).padStart(2, "0")}</span>

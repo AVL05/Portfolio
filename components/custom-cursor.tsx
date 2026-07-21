@@ -48,13 +48,22 @@ export function CustomCursor() {
       const onLeave = () => {
         cursor.dataset.visible = "false";
       };
+      const onScroll = () => {
+        activeState = "";
+        cursor.dataset.state = "";
+        cursor.dataset.visible = "false";
+        cursor.textContent = "";
+        scaleTo(0.42);
+      };
 
       window.addEventListener("pointermove", onMove, { passive: true });
+      window.addEventListener("scroll", onScroll, { passive: true });
       document.documentElement.addEventListener("mouseleave", onLeave);
       cleanupRef.current = () => {
         document.documentElement.classList.remove("custom-cursor-enabled");
         gsap.killTweensOf(cursor);
         window.removeEventListener("pointermove", onMove);
+        window.removeEventListener("scroll", onScroll);
         document.documentElement.removeEventListener("mouseleave", onLeave);
       };
     }, [language]);

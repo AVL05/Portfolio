@@ -62,7 +62,7 @@
         "outcome": "Release reproducible de portfolio con 56 tests backend y 33 frontend, Docker, CI y una arquitectura documentada."
       },
       {
-        "title": "Distrito Gourmet: Web de restaurante",
+        "title": "Distrito Gourmet",
         "description": "Aplicación full-stack de restaurante con carta digital, carrito, reservas, pedidos y paneles operativos para administración, sala y cocina.",
         "image": "/projects/distrito_gourmet.png",
         "technologies": [

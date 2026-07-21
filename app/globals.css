@@ -334,16 +334,6 @@
   }
 }
 
-@view-transition {
-  navigation: auto;
-}
-
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation-duration: 420ms;
-  animation-timing-function: cubic-bezier(.22, 1, .36, 1);
-}
-
 .skip-link {
   position: fixed;
   left: 1rem;
@@ -495,6 +485,4 @@
     animation-iteration-count: 1 !important;
     transition-duration: .01ms !important;
   }
-  ::view-transition-old(root),
-  ::view-transition-new(root) { animation: none; }
 }

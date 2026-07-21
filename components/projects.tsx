@@ -21,6 +21,7 @@ interface Project {
   type: string;
   role?: string;
   outcome?: string;
+  caseStudyHref?: string;
 }
 
 const containedImages = new Set([
@@ -54,12 +55,7 @@ function ProjectCard({
         project.image?.includes("api-hotel-cover")
       ? "object-contain"
       : "object-cover";
-  const caseStudyHref =
-    project.github === "https://github.com/AVL05/raw-manager"
-      ? "/proyectos/raw-manager"
-      : project.github === "https://github.com/AVL05/distrito-gourmet"
-        ? "/proyectos/distrito-gourmet"
-        : undefined;
+  const caseStudyHref = project.caseStudyHref;
   const reverseLayout = index % 2 === 1;
 
   return (

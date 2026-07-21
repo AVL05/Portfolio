@@ -17,6 +17,7 @@ interface ProjectItem {
   type: string;
   role?: string;
   outcome?: string;
+  caseStudyHref?: string;
 }
 
 export interface TimelineItem {

@@ -44,12 +44,32 @@
     "outcome_label": "Outcome",
     "items": [
       {
+        "title": "raw.vives",
+        "description": "An editorial photography archive connecting visual narrative, exploration, series, motion, and accessibility in a statically generated bilingual experience.",
+        "image": "/projects/raw-vives/raw-vives-hero.webp",
+        "technologies": [
+          "Next.js 16",
+          "React 19",
+          "TypeScript",
+          "Tailwind CSS 4",
+          "GSAP"
+        ],
+        "category": "Web Development",
+        "link": "https://gallery.aleviclop.dev/",
+        "github": "https://github.com/AVL05/alexgallery",
+        "caseStudyHref": "/proyectos/raw-vives",
+        "type": "Editorial visual archive",
+        "role": "Led and implemented product, architecture, curation, motion, accessibility, localized SEO, and continuous delivery.",
+        "outcome": "30 photographs and 3 series span 81 static pages, supported by 105 tests and a controlled Cloudflare Workers deployment."
+      },
+      {
         "title": "RAW Manager: workspace for photographers",
         "description": "A full-stack platform that brings clients, sessions, quotes, invoices, galleries, equipment, and production planning into one workspace.",
         "image": "/projects/raw-manager-cover.svg",
         "technologies": ["React 19", "Vite", "Tailwind CSS", "Laravel 13", "Sanctum", "MySQL", "PWA"],
         "category": "Web Development",
         "github": "https://github.com/AVL05/raw-manager",
+        "caseStudyHref": "/proyectos/raw-manager",
         "type": "Full-stack app / PWA",
         "role": "Designed and implemented the complete product: interface, state, API, authentication, data model, and business workflows.",
         "outcome": "One focused workspace that replaces scattered tools throughout the complete photography assignment lifecycle."
@@ -71,6 +91,7 @@
         "category": "Web Development",
         "link": "https://distrito.aleviclop.dev/",
         "github": "https://github.com/AVL05/distrito-gourmet",
+        "caseStudyHref": "/proyectos/distrito-gourmet",
         "type": "Web app",
         "role": "Built the React frontend, connected flows with Laravel, and worked on the admin panel, reservations, orders, and visual presentation.",
         "outcome": "Complete public demo with real restaurant operations: menu, cart, reservations, admin flows, and deployment."
@@ -136,12 +157,12 @@
     ]
   },
   "photography": {
-    "title": "Photography",
-    "subtitle": "Visual eye",
-    "description": "A creative side that complements how I work: composition, detail, visual judgement, and attention to the final result.",
+    "title": "raw.vives",
+    "subtitle": "Editorial visual archive",
+    "description": "My public photography archive: 30 images arranged as a bilingual narrative with series, search, and accessible detail pages.",
     "properties": "Properties.RAW",
     "filters": "Filters",
-    "view_full": "Open alexgallery"
+    "view_full": "Open raw.vives"
   },
   "experience": {
     "title": "Journey",

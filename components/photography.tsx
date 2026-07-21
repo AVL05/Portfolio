@@ -102,8 +102,12 @@ export function Photography() {
         <div className="photo-in relative w-full max-w-[58rem] lg:justify-self-start">
           <div className="photo-img relative aspect-[16/10] overflow-hidden rounded-xl border border-border/70 bg-secondary shadow-[0_40px_90px_-55px_rgba(0,0,0,0.95)]">
             <Image
-              src="/photography/hero.webp"
-              alt="Fotografía de portfolio de Alex Vicente"
+              src="/projects/raw-vives/raw-vives-hero.webp"
+              alt={
+                language === "es"
+                  ? "Hero del archivo fotográfico editorial raw.vives"
+                  : "Hero of the raw.vives editorial photography archive"
+              }
               fill
               className="object-cover object-center"
               sizes="(max-width: 1024px) 100vw, 62vw"
@@ -111,7 +115,7 @@ export function Photography() {
             <div className="absolute inset-0 bg-linear-to-t from-background/50 via-transparent to-transparent" />
           </div>
           <div className="absolute -bottom-5 left-5 rounded-lg border border-border/65 bg-background/82 px-4 py-3 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-muted-foreground backdrop-blur-xl">
-            RAW / 35mm / 2022
+            RAW.VIVES / ES—EN
           </div>
         </div>
       </div>
@@ -128,9 +132,9 @@ export function Photography() {
         <div className="mx-auto flex max-w-[92rem] flex-col items-start justify-between gap-6 px-6 py-8 sm:flex-row sm:items-center sm:px-10 lg:px-12">
           <div className="photo-in flex items-center gap-8 sm:gap-12">
             {[
-              { val: "2022", label: language === "es" ? "Desde" : "Since" },
-              { val: "35mm", label: language === "es" ? "Formato" : "Format" },
-              { val: "Film", label: language === "es" ? "Estilo" : "Style" },
+              { val: "30", label: language === "es" ? "Fotos" : "Photos" },
+              { val: "3", label: language === "es" ? "Series" : "Series" },
+              { val: "ES/EN", label: language === "es" ? "Idiomas" : "Languages" },
             ].map((item) => (
               <div key={item.label} className="flex flex-col gap-0.5">
                 <span className="font-mono text-xl font-black text-foreground sm:text-2xl">

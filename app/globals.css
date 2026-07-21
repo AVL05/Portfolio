@@ -459,6 +459,33 @@
     min-height: 100dvh;
     padding-block: 3rem;
   }
+
+  .photography-cinema .photo-frame-square {
+    width: min(24vw, 38dvh);
+  }
+
+  .photography-cinema .photo-frame-landscape {
+    width: min(36vw, 57dvh);
+  }
+
+  .photography-cinema .photo-frame-wide {
+    width: min(35vw, 61dvh);
+  }
+}
+
+@media (min-width: 900px) and (max-height: 800px) {
+  .photography-cinema .photo-stage {
+    padding-block: 2rem;
+  }
+
+  .photography-cinema #photography-title {
+    font-size: clamp(3.75rem, 7vw, 6.5rem);
+    line-height: .8;
+  }
+
+  .photography-cinema .photo-rail {
+    margin-top: 1.5rem;
+  }
 }
 
 .case-study > section:first-child {

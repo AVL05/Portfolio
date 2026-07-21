@@ -454,14 +454,20 @@
   outline-offset: 4px;
 }
 
+.photography-cinema .photo-stage {
+  min-height: 100dvh;
+  padding-block: 5rem;
+}
+
 @media (min-width: 900px) and (prefers-reduced-motion: no-preference) {
   .photography-cinema {
-    min-height: 310dvh;
+    min-height: 250dvh;
   }
 
   .photography-cinema .photo-stage {
-    position: sticky;
-    top: 0;
+    height: 100dvh;
+    min-height: 100dvh;
+    padding-block: 3rem;
   }
 }
 

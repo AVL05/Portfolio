@@ -7,10 +7,51 @@ import { gsap, prefersReducedMotion, useGSAP } from "@/lib/gsap";
 import { useLanguage } from "@/lib/language-context";
 
 const frames = [
-  { src: "/photography/hero.webp", series: "Atlantic / 01", position: "object-center" },
-  { src: "/projects/raw-vives/raw-vives-series.webp", series: "Series / 02", position: "object-cover" },
-  { src: "/projects/raw-vives/raw-vives-detail.webp", series: "Detail / 03", position: "object-cover" },
-  { src: "/projects/raw-vives/raw-vives-fullscreen.webp", series: "Immersion / 04", position: "object-cover" },
+  {
+    src: "/photography/selected/coastal-solitude.webp",
+    series: { es: "Archivo visual / 01", en: "Visual archive / 01" },
+    alt: { es: "Gaviota frente a un acantilado oscuro", en: "Seagull facing a dark coastal cliff" },
+    frame: "w-[78vw] sm:w-[52vw] min-[900px]:w-[24vw]",
+    ratio: "aspect-square",
+    position: "object-center",
+    sizes: "(max-width: 640px) 78vw, (max-width: 899px) 52vw, 24vw",
+  },
+  {
+    src: "/photography/selected/night-transit.webp",
+    series: { es: "Estudio nocturno / 02", en: "Night study / 02" },
+    alt: { es: "Tranvía y peatones cruzando un puente de noche", en: "Tram and pedestrians crossing a bridge at night" },
+    frame: "w-[88vw] sm:w-[72vw] min-[900px]:w-[36vw]",
+    ratio: "aspect-[3/2]",
+    position: "object-center",
+    sizes: "(max-width: 640px) 88vw, (max-width: 899px) 72vw, 36vw",
+  },
+  {
+    src: "/photography/selected/shoreline-study.webp",
+    series: { es: "Estudio de orilla / 03", en: "Shoreline study / 03" },
+    alt: { es: "Pies descalzos junto al agua en blanco y negro", en: "Bare feet by the water in black and white" },
+    frame: "w-[78vw] sm:w-[50vw] min-[900px]:w-[24vw]",
+    ratio: "aspect-square",
+    position: "object-center",
+    sizes: "(max-width: 640px) 78vw, (max-width: 899px) 50vw, 24vw",
+  },
+  {
+    src: "/photography/selected/urban-geometry.webp",
+    series: { es: "Geometría urbana / 04", en: "Urban geometry / 04" },
+    alt: { es: "Ventana y marcas geométricas sobre un muro de ladrillo", en: "Window and geometric marks on a brick wall" },
+    frame: "w-[88vw] sm:w-[68vw] min-[900px]:w-[35vw]",
+    ratio: "aspect-[8/5]",
+    position: "object-center",
+    sizes: "(max-width: 640px) 88vw, (max-width: 899px) 68vw, 35vw",
+  },
+  {
+    src: "/photography/selected/street-colour.webp",
+    series: { es: "Estudio de color / 05", en: "Colour study / 05" },
+    alt: { es: "Coche clásico granate avanzando por una calle soleada", en: "Burgundy classic car moving through a sunlit street" },
+    frame: "w-[88vw] sm:w-[70vw] min-[900px]:w-[35vw]",
+    ratio: "aspect-[8/5]",
+    position: "object-center",
+    sizes: "(max-width: 640px) 88vw, (max-width: 899px) 70vw, 35vw",
+  },
 ];
 
 export function Photography() {
@@ -35,6 +76,9 @@ export function Photography() {
             trigger: containerRef.current,
             start: "top top",
             end: "bottom bottom",
+            pin: stage,
+            pinSpacing: false,
+            anticipatePin: 1,
             scrub: 0.8,
             invalidateOnRefresh: true,
           },
@@ -47,7 +91,7 @@ export function Photography() {
 
   return (
     <section id="photography" ref={containerRef} aria-labelledby="photography-title" className="photography-cinema relative bg-[#e9e5dc] text-[#11110f]">
-      <div className="photo-stage flex min-h-[100dvh] flex-col justify-center overflow-hidden py-20 md:py-24">
+      <div className="photo-stage flex flex-col justify-center overflow-hidden">
         <header className="mx-auto grid w-full max-w-[100rem] gap-8 px-4 sm:px-6 md:grid-cols-[.85fr_1.15fr] md:items-end lg:px-8">
           <div>
             <p className="font-mono text-[10px] font-bold uppercase tracking-[.2em] text-[#9b4e32]">02 / Visual practice</p>
@@ -61,29 +105,28 @@ export function Photography() {
             </p>
             <p className="mt-5 max-w-[58ch] text-sm font-medium leading-relaxed text-black/62 sm:text-base">
               {language === "es"
-                ? "Composición, ritmo, luz y silencio visual aplicados también a la interfaz. Una selección breve del archivo raw.vives."
-                : "Composition, rhythm, light, and visual silence applied to interface work too. A short selection from the raw.vives archive."}
+                ? "La composición, el ritmo y la luz que trabajo detrás de la cámara también definen cómo diseño una interfaz. Esta es una selección de mi archivo visual."
+                : "The composition, rhythm and light I explore behind the camera also shape the way I design interfaces. This is a selection from my visual archive."}
             </p>
           </div>
         </header>
 
-        <div className="photo-rail mt-14 overflow-x-auto overscroll-x-contain [scrollbar-width:none] md:overflow-visible">
-          <div className="photo-track flex w-max snap-x snap-mandatory gap-4 px-4 will-change-transform sm:gap-6 sm:px-6 md:snap-none lg:px-8">
-          {frames.map((frame, index) => (
-            <figure key={frame.src} className="w-[82vw] shrink-0 snap-center sm:w-[64vw] md:[scroll-snap-align:none] lg:w-[52vw]">
-              <div className="relative aspect-[4/3] overflow-hidden bg-black" data-cursor="gallery">
+        <div className="photo-rail mt-14 overflow-x-auto overscroll-x-contain [scrollbar-width:none] min-[900px]:mt-10 min-[900px]:overflow-visible">
+          <div className="photo-track flex w-max snap-x snap-mandatory gap-4 px-4 will-change-transform sm:gap-6 sm:px-6 min-[900px]:snap-none lg:px-8">
+          {frames.map((frame) => (
+            <figure key={frame.src} className={`${frame.frame} shrink-0 snap-center min-[900px]:[scroll-snap-align:none]`}>
+              <div className={`relative ${frame.ratio} overflow-hidden bg-black`} data-cursor="gallery">
                 <Image
                   src={frame.src}
-                  alt={`${frame.series} — raw.vives`}
+                  alt={frame.alt[language]}
                   fill
                   loading="lazy"
-                  className={`${frame.position} transition-transform duration-700 ease-out hover:scale-[1.015]`}
-                  sizes="(max-width: 640px) 82vw, (max-width: 1024px) 64vw, 52vw"
+                  className={`${frame.position} object-cover transition-transform duration-700 ease-out motion-safe:hover:scale-[1.015]`}
+                  sizes={frame.sizes}
                 />
               </div>
-              <figcaption className="mt-3 flex items-center justify-between border-t border-black/25 pt-3 font-mono text-[9px] font-semibold uppercase tracking-[.16em] text-black/58">
-                <span>{String(index + 1).padStart(2, "0")} / {frame.series}</span>
-                <span>Valencia · raw.vives</span>
+              <figcaption className="mt-3 border-t border-black/25 pt-3 font-mono text-[9px] font-semibold uppercase tracking-[.16em] text-black/58">
+                {frame.series[language]}
               </figcaption>
             </figure>
           ))}

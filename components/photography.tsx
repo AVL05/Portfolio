@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
-import { useRef } from "react";
+import { ArrowUp, ArrowUpRight } from "lucide-react";
+import { useRef, type PointerEvent as ReactPointerEvent } from "react";
 import { gsap, prefersReducedMotion, useGSAP } from "@/lib/gsap";
 import { useLanguage } from "@/lib/language-context";
 
@@ -53,6 +53,161 @@ const frames = [
     sizes: "(max-width: 640px) 88vw, (max-width: 899px) 70vw, 35vw",
   },
 ];
+
+const ARCHIVE_URL = "https://gallery.aleviclop.dev/";
+const SWIPE_THRESHOLD = 80;
+
+type SwipeState = {
+  pointerId: number;
+  startX: number;
+  startY: number;
+  locked: boolean;
+  moved: boolean;
+};
+
+function ArchiveLink({ language }: { language: "es" | "en" }) {
+  const linkRef = useRef<HTMLAnchorElement>(null);
+  const arrowRef = useRef<SVGSVGElement>(null);
+  const gestureRef = useRef<SwipeState | null>(null);
+  const suppressClickRef = useRef(false);
+  const touchInputRef = useRef(false);
+  const navigatingRef = useRef(false);
+  const reducedMotionRef = useRef(false);
+
+  const renderProgress = (progress: number, distance: number) => {
+    const link = linkRef.current;
+    const arrow = arrowRef.current;
+    if (!link) return;
+
+    const reduced = reducedMotionRef.current;
+    const offset = -Math.min(reduced ? 32 : 56, distance * (reduced ? 0.35 : 0.55));
+    link.style.transition = "none";
+    link.style.transform = `translate3d(0, ${offset}px, 0) scale(${reduced ? 1 : 1 - progress * 0.015})`;
+    link.style.opacity = String(1 - progress * (reduced ? 0.06 : 0.14));
+    if (arrow) {
+      arrow.style.transform = `translate3d(0, ${-progress * (reduced ? 4 : 10)}px, 0)`;
+      arrow.style.opacity = String(0.45 + progress * 0.55);
+    }
+  };
+
+  const resetCard = () => {
+    const link = linkRef.current;
+    const arrow = arrowRef.current;
+    if (!link) return;
+
+    const duration = reducedMotionRef.current ? "0ms" : "180ms";
+    link.style.transition = `transform ${duration} cubic-bezier(.2,.8,.2,1), opacity ${duration} ease-out`;
+    link.style.transform = "translate3d(0, 0, 0) scale(1)";
+    link.style.opacity = "1";
+    if (arrow) {
+      arrow.style.transition = `transform ${duration} cubic-bezier(.2,.8,.2,1), opacity ${duration} ease-out`;
+      arrow.style.transform = "translate3d(0, 0, 0)";
+      arrow.style.opacity = "0.55";
+    }
+  };
+
+  const onPointerDown = (event: ReactPointerEvent<HTMLAnchorElement>) => {
+    touchInputRef.current = event.pointerType === "touch";
+    suppressClickRef.current = false;
+    if (event.pointerType !== "touch" || !event.isPrimary || navigatingRef.current) return;
+
+    reducedMotionRef.current = prefersReducedMotion();
+    gestureRef.current = {
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+      locked: false,
+      moved: false,
+    };
+  };
+
+  const onPointerMove = (event: ReactPointerEvent<HTMLAnchorElement>) => {
+    const gesture = gestureRef.current;
+    if (!gesture || gesture.pointerId !== event.pointerId || navigatingRef.current) return;
+
+    const deltaX = event.clientX - gesture.startX;
+    const deltaY = event.clientY - gesture.startY;
+    const horizontal = Math.abs(deltaX);
+    const upward = Math.max(0, -deltaY);
+
+    if (Math.hypot(deltaX, deltaY) > 8) {
+      gesture.moved = true;
+      suppressClickRef.current = true;
+    }
+
+    if (!gesture.locked) {
+      if (horizontal > upward || deltaY >= -10) return;
+      if (upward < horizontal * 1.35) return;
+      gesture.locked = true;
+    }
+
+    event.preventDefault();
+    renderProgress(Math.min(1, upward / SWIPE_THRESHOLD), upward);
+  };
+
+  const finishGesture = (event: ReactPointerEvent<HTMLAnchorElement>) => {
+    const gesture = gestureRef.current;
+    if (!gesture || gesture.pointerId !== event.pointerId) return;
+
+    const deltaX = event.clientX - gesture.startX;
+    const upward = Math.max(0, gesture.startY - event.clientY);
+    const completed = gesture.locked && upward >= SWIPE_THRESHOLD && upward > Math.abs(deltaX) * 1.35;
+    gestureRef.current = null;
+
+    if (!completed) {
+      resetCard();
+      return;
+    }
+
+    navigatingRef.current = true;
+    suppressClickRef.current = true;
+    const delay = reducedMotionRef.current ? 0 : 120;
+    renderProgress(1, SWIPE_THRESHOLD + 28);
+    window.setTimeout(() => window.location.assign(ARCHIVE_URL), delay);
+  };
+
+  const cancelGesture = () => {
+    if (gestureRef.current?.moved) suppressClickRef.current = true;
+    gestureRef.current = null;
+    resetCard();
+  };
+
+  return (
+    <a
+      ref={linkRef}
+      data-cursor="external"
+      href={ARCHIVE_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={finishGesture}
+      onPointerCancel={cancelGesture}
+      onClick={(event) => {
+        if (navigatingRef.current || suppressClickRef.current) {
+          event.preventDefault();
+          return;
+        }
+        if (touchInputRef.current && event.detail !== 0) {
+          event.preventDefault();
+          window.location.assign(ARCHIVE_URL);
+        }
+      }}
+      style={{ touchAction: "pan-x pan-up" }}
+      className="group flex aspect-square w-full max-w-80 flex-col justify-between border border-black/35 p-6 transition-colors hover:bg-[#11110f] hover:text-[#e9e5dc] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black sm:p-8"
+    >
+      <span className="font-mono text-[10px] uppercase tracking-[.18em]">raw.vives / 30 photographs</span>
+      <span className="text-4xl font-black leading-none tracking-[-.05em] sm:text-5xl">Explore<br />archive</span>
+      <span className="flex items-end justify-between gap-4">
+        <span className="max-w-36 font-mono text-[9px] font-semibold uppercase leading-relaxed tracking-[.14em] min-[900px]:hidden">
+          {language === "es" ? "Desliza hacia arriba para explorar" : "Swipe up to explore"}
+        </span>
+        <ArrowUp ref={arrowRef} aria-hidden="true" className="h-5 w-5 opacity-55 min-[900px]:hidden" />
+        <ArrowUpRight aria-hidden="true" className="hidden h-6 w-6 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1 min-[900px]:block" />
+      </span>
+    </a>
+  );
+}
 
 export function Photography() {
   const { language } = useLanguage();
@@ -131,18 +286,8 @@ export function Photography() {
             </figure>
           ))}
 
-          <div className="flex w-[70vw] shrink-0 items-center justify-center sm:w-[42vw] lg:w-[28vw]">
-            <a
-              data-cursor="external"
-              href="https://gallery.aleviclop.dev/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex aspect-square w-full max-w-80 flex-col justify-between border border-black/35 p-6 transition-colors hover:bg-[#11110f] hover:text-[#e9e5dc] sm:p-8"
-            >
-              <span className="font-mono text-[10px] uppercase tracking-[.18em]">raw.vives / 30 photographs</span>
-              <span className="text-4xl font-black leading-none tracking-[-.05em] sm:text-5xl">Explore<br />archive</span>
-              <ArrowUpRight className="h-6 w-6 self-end transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
-            </a>
+          <div className="flex w-[70vw] shrink-0 snap-center items-center justify-center sm:w-[42vw] min-[900px]:[scroll-snap-align:none] lg:w-[28vw]">
+            <ArchiveLink language={language} />
           </div>
           </div>
         </div>

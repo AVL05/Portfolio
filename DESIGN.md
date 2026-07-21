@@ -6,7 +6,7 @@ colors:
   foreground: "oklch(0.94 0.013 86)"
   surface: "oklch(0.145 0.014 58)"
   primary: "oklch(0.72 0.115 42)"
-  accent: "oklch(0.74 0.09 138)"
+  accent: "oklch(0.72 0.115 42)"
   muted: "oklch(0.68 0.012 82)"
   border: "oklch(0.30 0.014 58)"
 typography:
@@ -51,16 +51,16 @@ components:
 
 ## Overview
 
-**Creative North Star: "The Interface Workshop"**
+**Creative North Star: "Visual Systems / Quiet Cinema"**
 
-El portfolio se comporta como un taller digital: oscuro, preciso y material, con señales visuales que muestran cómo se construye una interfaz. La composición combina escala tipográfica, proyectos reales y movimiento técnico sin convertir la página en una demostración de efectos.
+El portfolio se comporta como una secuencia editorial: oscuro, preciso y material. Fotografía real, tipografía de gran escala y movimiento ligado al scroll construyen profundidad sin convertir la página en una demostración de efectos.
 
 La identidad rechaza los portfolios tecnológicos genéricos construidos como una plantilla SaaS y la estética de IA basada en glassmorphism, brillos, contadores y tarjetas repetidas sin contenido real.
 
 **Key Characteristics:**
 
 - Frontend-first y orientado a casos reales.
-- Oscuro con acento cobre y un segundo acento verde funcional.
+- Carbón y marfil con un único acento cobre controlado.
 - Tipografía de gran escala compensada con texto cómodo y directo.
 - Movimiento expresivo, siempre opcional mediante reducción de movimiento.
 
@@ -127,9 +127,9 @@ La profundidad se construye principalmente con contraste tonal y bordes. Las som
 
 Barra persistente compacta, con sección activa reconocible, acceso inmediato al CV e idioma. En móvil se convierte en un diálogo de navegación con cierre por teclado.
 
-### Project Index
+### Project Scenes
 
-Los proyectos se muestran como filas editoriales de igual peso y altura. En escritorio, imagen y contenido alternan de lado para crear ritmo sin cambiar la jerarquía; en móvil, todas las filas mantienen el mismo orden vertical. La entrada usa únicamente desplazamiento y escala sutil, con un stagger total inferior a medio segundo.
+Cuatro proyectos principales se muestran como escenas amplias con imagen, rol, stack y enlaces. En escritorio, máscara, escala y movimiento tipográfico responden al scroll; en móvil se convierten en bloques naturales sin parallax. El resto vive en un archivo editorial compacto.
 
 ## Do's and Don'ts
 

@@ -1,163 +1,107 @@
 "use client";
 
-import { useRef } from "react";
-import { ExternalLink } from "lucide-react";
-import { FaInstagram } from "react-icons/fa6";
 import Image from "next/image";
-import { useLanguage } from "@/lib/language-context";
+import { ArrowUpRight } from "lucide-react";
+import { useRef } from "react";
 import { gsap, prefersReducedMotion, useGSAP } from "@/lib/gsap";
+import { useLanguage } from "@/lib/language-context";
 
-const photographyLinks = {
-  website: "https://gallery.aleviclop.dev/",
-  instagram: "https://www.instagram.com/aleviclop/",
-};
+const frames = [
+  { src: "/photography/hero.webp", series: "Atlantic / 01", position: "object-center" },
+  { src: "/projects/raw-vives/raw-vives-series.webp", series: "Series / 02", position: "object-cover" },
+  { src: "/projects/raw-vives/raw-vives-detail.webp", series: "Detail / 03", position: "object-cover" },
+  { src: "/projects/raw-vives/raw-vives-fullscreen.webp", series: "Immersion / 04", position: "object-cover" },
+];
 
 export function Photography() {
-  const { t, language } = useLanguage();
-  const containerRef = useRef<HTMLDivElement>(null);
+  const { language } = useLanguage();
+  const containerRef = useRef<HTMLElement>(null);
 
   useGSAP(
     () => {
+      if (prefersReducedMotion()) return;
       const q = gsap.utils.selector(containerRef);
+      const track = q(".photo-track")[0] as HTMLElement | undefined;
+      const stage = q(".photo-stage")[0] as HTMLElement | undefined;
+      if (!track || !stage) return;
 
-      if (prefersReducedMotion()) {
-        gsap.set([q(".photo-img"), q(".photo-in")], {
-          opacity: 1,
-          y: 0,
-          autoAlpha: 1,
-        });
-        return;
-      }
-
-      gsap.to(q(".photo-img"), {
-        y: -60,
-        ease: "none",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1.8,
-        },
-      });
-
-      gsap.fromTo(
-        q(".photo-in"),
-        { autoAlpha: 0, y: 28 },
-        {
-          autoAlpha: 1,
-          y: 0,
-          stagger: 0.1,
-          duration: 0.85,
-          ease: "power3.out",
+      const mm = gsap.matchMedia();
+      mm.add("(min-width: 900px)", () => {
+        const distance = () => Math.max(0, track.scrollWidth - window.innerWidth + 64);
+        gsap.to(track, {
+          x: () => -distance(),
+          ease: "none",
           scrollTrigger: {
             trigger: containerRef.current,
-            start: "top 78%",
-            once: true,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 0.8,
+            invalidateOnRefresh: true,
           },
-        },
-      );
+        });
+      });
+      return () => mm.revert();
     },
     { scope: containerRef },
   );
 
   return (
-    <section
-      id="photography"
-      ref={containerRef}
-      className="relative overflow-hidden bg-background"
-    >
-      <div className="pointer-events-none absolute inset-x-0 top-0 glow-divider" />
-
-      <div className="relative mx-auto grid max-w-[92rem] gap-10 px-4 py-20 sm:px-6 sm:py-28 lg:grid-cols-[minmax(320px,0.82fr)_minmax(0,1.18fr)] lg:items-center lg:px-10 xl:px-12">
-        <div className="photo-in max-w-xl space-y-6 lg:justify-self-end">
-          <p className="section-kicker">{t.photography.subtitle}</p>
-          <h2 className="text-5xl font-black leading-[0.9] tracking-normal text-foreground sm:text-6xl lg:text-7xl">
-            {t.photography.title}
-          </h2>
-          <p className="max-w-md text-base font-medium leading-relaxed text-muted-foreground">
-            {t.photography.description}
-          </p>
-          <div className="flex flex-wrap gap-3 pt-1">
-            <a
-              href={photographyLinks.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2.5 rounded-lg bg-primary px-5 py-3 text-xs font-bold uppercase tracking-[0.14em] text-primary-foreground transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/90"
-            >
-              <ExternalLink className="h-3.5 w-3.5 transition-transform duration-300 group-hover:rotate-12" />
-              {t.photography.view_full}
-            </a>
-            <a
-              href={photographyLinks.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 rounded-lg border border-border/60 bg-card/50 px-5 py-3 text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground backdrop-blur-sm transition-all duration-300 hover:border-primary/45 hover:text-foreground"
-            >
-              <FaInstagram className="h-3.5 w-3.5" />
-              @aleviclop
-            </a>
+    <section id="photography" ref={containerRef} aria-labelledby="photography-title" className="photography-cinema relative bg-[#e9e5dc] text-[#11110f]">
+      <div className="photo-stage flex min-h-[100dvh] flex-col justify-center overflow-hidden py-20 md:py-24">
+        <header className="mx-auto grid w-full max-w-[100rem] gap-8 px-4 sm:px-6 md:grid-cols-[.85fr_1.15fr] md:items-end lg:px-8">
+          <div>
+            <p className="font-mono text-[10px] font-bold uppercase tracking-[.2em] text-[#9b4e32]">02 / Visual practice</p>
+            <h2 id="photography-title" className="mt-5 text-[clamp(4rem,10vw,9rem)] font-black leading-[.78] tracking-[-.075em]">See<br />differently.</h2>
           </div>
-        </div>
-
-        <div className="photo-in relative w-full max-w-[58rem] lg:justify-self-start">
-          <div className="photo-img relative aspect-[16/10] overflow-hidden rounded-xl border border-border/70 bg-secondary shadow-[0_40px_90px_-55px_rgba(0,0,0,0.95)]">
-            <Image
-              src="/projects/raw-vives/raw-vives-hero.webp"
-              alt={
-                language === "es"
-                  ? "Hero del archivo fotográfico editorial raw.vives"
-                  : "Hero of the raw.vives editorial photography archive"
-              }
-              fill
-              className="object-cover object-center"
-              sizes="(max-width: 1024px) 100vw, 62vw"
-            />
-            <div className="absolute inset-0 bg-linear-to-t from-background/50 via-transparent to-transparent" />
+          <div className="max-w-2xl md:justify-self-end">
+            <p className="text-balance text-2xl font-semibold leading-tight tracking-[-.03em] sm:text-3xl lg:text-4xl">
+              {language === "es"
+                ? "El código da forma a la estructura. La fotografía da forma a mi manera de verla."
+                : "Code shapes the structure. Photography shapes the way I see it."}
+            </p>
+            <p className="mt-5 max-w-[58ch] text-sm font-medium leading-relaxed text-black/62 sm:text-base">
+              {language === "es"
+                ? "Composición, ritmo, luz y silencio visual aplicados también a la interfaz. Una selección breve del archivo raw.vives."
+                : "Composition, rhythm, light, and visual silence applied to interface work too. A short selection from the raw.vives archive."}
+            </p>
           </div>
-          <div className="absolute -bottom-5 left-5 rounded-lg border border-border/65 bg-background/82 px-4 py-3 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-muted-foreground backdrop-blur-xl">
-            RAW.VIVES / ES—EN
-          </div>
-        </div>
-      </div>
+        </header>
 
-      <div
-        className="pointer-events-none absolute inset-0 mix-blend-overlay opacity-20"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`,
-          backgroundSize: "180px",
-        }}
-      />
-
-      <div className="relative z-10 border-t border-border/30 bg-background/60 backdrop-blur-sm">
-        <div className="mx-auto flex max-w-[92rem] flex-col items-start justify-between gap-6 px-6 py-8 sm:flex-row sm:items-center sm:px-10 lg:px-12">
-          <div className="photo-in flex items-center gap-8 sm:gap-12">
-            {[
-              { val: "30", label: language === "es" ? "Fotos" : "Photos" },
-              { val: "3", label: language === "es" ? "Series" : "Series" },
-              { val: "ES/EN", label: language === "es" ? "Idiomas" : "Languages" },
-            ].map((item) => (
-              <div key={item.label} className="flex flex-col gap-0.5">
-                <span className="font-mono text-xl font-black text-foreground sm:text-2xl">
-                  {item.val}
-                </span>
-                <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-muted-foreground/50">
-                  {item.label}
-                </span>
+        <div className="photo-rail mt-14 overflow-x-auto overscroll-x-contain [scrollbar-width:none] md:overflow-visible">
+          <div className="photo-track flex w-max snap-x snap-mandatory gap-4 px-4 will-change-transform sm:gap-6 sm:px-6 md:snap-none lg:px-8">
+          {frames.map((frame, index) => (
+            <figure key={frame.src} className="w-[82vw] shrink-0 snap-center sm:w-[64vw] md:[scroll-snap-align:none] lg:w-[52vw]">
+              <div className="relative aspect-[4/3] overflow-hidden bg-black" data-cursor="gallery">
+                <Image
+                  src={frame.src}
+                  alt={`${frame.series} — raw.vives`}
+                  fill
+                  loading="lazy"
+                  className={`${frame.position} transition-transform duration-700 ease-out hover:scale-[1.015]`}
+                  sizes="(max-width: 640px) 82vw, (max-width: 1024px) 64vw, 52vw"
+                />
               </div>
-            ))}
-          </div>
+              <figcaption className="mt-3 flex items-center justify-between border-t border-black/25 pt-3 font-mono text-[9px] font-semibold uppercase tracking-[.16em] text-black/58">
+                <span>{String(index + 1).padStart(2, "0")} / {frame.series}</span>
+                <span>Valencia · raw.vives</span>
+              </figcaption>
+            </figure>
+          ))}
 
-          <a
-            href={photographyLinks.website}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="photo-in group inline-flex items-center gap-2 rounded-lg border border-primary/35 bg-primary/10 px-4 py-3 font-mono text-[10px] font-black uppercase tracking-[0.18em] text-primary transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary hover:text-primary-foreground"
-          >
-            <span>
-              {language === "es" ? "Ver galería completa" : "View full gallery"}
-            </span>
-            <ExternalLink className="h-3.5 w-3.5 transition-transform duration-300 group-hover:rotate-12" />
-          </a>
+          <div className="flex w-[70vw] shrink-0 items-center justify-center sm:w-[42vw] lg:w-[28vw]">
+            <a
+              data-cursor="external"
+              href="https://gallery.aleviclop.dev/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex aspect-square w-full max-w-80 flex-col justify-between border border-black/35 p-6 transition-colors hover:bg-[#11110f] hover:text-[#e9e5dc] sm:p-8"
+            >
+              <span className="font-mono text-[10px] uppercase tracking-[.18em]">raw.vives / 30 photographs</span>
+              <span className="text-4xl font-black leading-none tracking-[-.05em] sm:text-5xl">Explore<br />archive</span>
+              <ArrowUpRight className="h-6 w-6 self-end transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
+            </a>
+          </div>
+          </div>
         </div>
       </div>
     </section>

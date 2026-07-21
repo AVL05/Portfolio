@@ -52,7 +52,7 @@ docs/         — Integración, operación y copy reutilizable
 
 ## Secciones
 
-`Navigation → Hero → Projects → Skills → Experience → Photography → Contact`
+`Navigation → Hero → Project scenes → Photography → Capabilities → Experience → Contact`
 
 Todas las secciones respetan `prefers-reduced-motion`. El idioma (ES/EN) se persiste en cookie + localStorage.
 

@@ -3,12 +3,13 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import type React from "react";
 import { Suspense } from "react";
 import "@/lib/raf-polyfill";
 import "./globals.css";
 import { SmoothScroll } from "@/components/smooth-scroll";
+import { CustomCursor } from "@/components/custom-cursor";
 import { LanguageProvider, type Language } from "@/lib/language-context";
 import {
   personJsonLd,
@@ -24,8 +25,8 @@ import {
 
 export const viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+    { media: "(prefers-color-scheme: light)", color: "#e9e5dc" },
+    { media: "(prefers-color-scheme: dark)", color: "#0b0b09" },
   ],
 };
 
@@ -101,7 +102,14 @@ export default async function RootLayout({
 }>) {
   const cookieStore = await cookies();
   const cookieLanguage = cookieStore.get("language")?.value;
-  const initialLanguage: Language = cookieLanguage === "en" ? "en" : "es";
+  const requestHeaders = await headers();
+  const browserLanguage = requestHeaders.get("accept-language") ?? "";
+  const initialLanguage: Language =
+    cookieLanguage === "es" || cookieLanguage === "en"
+      ? cookieLanguage
+      : /(^|,)\s*es(?:-|;|,|$)/i.test(browserLanguage)
+        ? "es"
+        : "en";
 
   return (
     <html
@@ -129,6 +137,10 @@ export default async function RootLayout({
         suppressHydrationWarning
       >
         <LanguageProvider initialLanguage={initialLanguage}>
+          <a href="#main-content" className="skip-link">
+            {initialLanguage === "es" ? "Saltar al contenido" : "Skip to content"}
+          </a>
+          <CustomCursor />
           <SmoothScroll>
             <div className="relative min-h-screen overflow-x-hidden">
               <Suspense fallback={null}>{children}</Suspense>

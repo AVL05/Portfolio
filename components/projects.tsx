@@ -1,19 +1,17 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
-import { Button } from "@/components/ui/button";
+import { useRef } from "react";
 import { gsap, prefersReducedMotion, useGSAP } from "@/lib/gsap";
 import { useLanguage } from "@/lib/language-context";
-import { RevealHeader } from "@/components/reveal-header";
 
 interface Project {
   title: string;
   description: string;
-  image?: string;
+  image: string;
   technologies: string[];
   category: string;
   link?: string;
@@ -24,302 +22,211 @@ interface Project {
   caseStudyHref?: string;
 }
 
-const containedImages = new Set([
-  "Llibret Falla el Molí 24/25",
-  "Arquitectura XML Educativa",
-  "Educational XML project",
-]);
+const featuredIndexes = [0, 1, 2, 7];
 
-function ProjectCard({
+const viewTransitionName = (project: Project) =>
+  `project-${project.caseStudyHref?.split("/").pop() ?? "editorial"}`;
+
+function ProjectScene({
   project,
-  viewLive,
-  viewCode,
-  roleLabel,
-  outcomeLabel,
-  caseStudyLabel,
-  caseStudyBadge,
   index,
+  total,
+  language,
 }: {
   project: Project;
-  viewLive: string;
-  viewCode: string;
-  roleLabel: string;
-  outcomeLabel: string;
-  caseStudyLabel: string;
-  caseStudyBadge: string;
   index: number;
+  total: number;
+  language: "es" | "en";
 }) {
-  const imageClass = containedImages.has(project.title)
-    ? "object-contain p-8 sm:p-10"
-    : project.image?.includes("raw-manager-cover") ||
-        project.image?.includes("api-hotel-cover")
-      ? "object-contain"
-      : "object-cover";
-  const caseStudyHref = project.caseStudyHref;
-  const reverseLayout = index % 2 === 1;
+  const media = (
+    <div
+      className="scene-media relative h-full min-h-[44dvh] overflow-hidden bg-[#171714] will-change-transform md:min-h-[68dvh]"
+      style={{ viewTransitionName: viewTransitionName(project) }}
+    >
+      <Image
+        src={project.image}
+        alt={project.title}
+        fill
+        className={`scene-image will-change-transform ${
+          project.image.includes("raw-manager") || project.image.includes("Falla")
+            ? "object-contain p-[8%]"
+            : "object-cover"
+        }`}
+        sizes="(max-width: 900px) 100vw, 64vw"
+        priority={index === 0}
+      />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_45%,rgba(8,8,7,.62))]" />
+      <span className="absolute left-4 top-4 border border-white/20 bg-black/38 px-3 py-2 font-mono text-[9px] uppercase tracking-[.18em] text-white backdrop-blur-md sm:left-6 sm:top-6">
+        {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+      </span>
+    </div>
+  );
 
   return (
-    <article
-      className="project-row group grid overflow-hidden rounded-xl border border-border/65 bg-card/82 transition-colors duration-300 hover:border-primary/45 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]"
-    >
-      <div
-        className={`project-visual relative aspect-[16/10] overflow-hidden bg-secondary lg:aspect-auto lg:min-h-[360px] ${
-          reverseLayout ? "lg:order-2" : ""
-        }`}
-      >
-        <Image
-          src={project.image || "/placeholder.svg"}
-          alt={project.title}
-          fill
-          className={`${imageClass} transition-transform duration-500 ease-out group-hover:scale-[1.025]`}
-          sizes="(max-width: 1024px) 100vw, 45vw"
-        />
-        <div className="absolute inset-0 bg-linear-to-t from-background/55 via-transparent to-transparent transition-opacity duration-300 group-hover:opacity-75" />
-        <div className="absolute left-4 top-4 rounded-md border border-border/60 bg-background/70 px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-muted-foreground backdrop-blur-md">
-          {String(index + 1).padStart(2, "0")} / {project.type}
-        </div>
-      </div>
-
-      <div className="flex min-w-0 flex-col justify-between gap-6 p-5 sm:p-7 lg:min-h-[360px] lg:p-9">
-        <div className="space-y-4">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="rounded-md bg-secondary px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-primary">
-              {project.category}
-            </span>
-            {caseStudyHref && (
-              <span className="rounded-md border border-border/70 px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-muted-foreground">
-                {caseStudyBadge}
-              </span>
-            )}
-          </div>
-
-          <h3 className="text-balance text-2xl font-black leading-tight text-foreground sm:text-3xl lg:min-h-[4.5rem]">
+    <article className="project-scene relative border-t border-border/55 py-10 sm:py-14 md:min-h-[96dvh] md:py-20">
+      <div className="mx-auto grid max-w-[100rem] gap-6 px-4 sm:px-6 md:grid-cols-[minmax(280px,.55fr)_minmax(0,1.45fr)] md:items-center lg:px-8">
+        <div className="scene-copy z-10 flex flex-col md:pr-6">
+          <p className="font-mono text-[9px] font-bold uppercase tracking-[.2em] text-primary">
+            {project.type} / {project.category}
+          </p>
+          <h3 className="mt-5 text-[clamp(2.8rem,7vw,7.5rem)] font-black leading-[.82] tracking-[-.065em] text-foreground">
             {project.title}
           </h3>
-          <p className="max-w-2xl overflow-hidden text-sm font-medium leading-relaxed text-muted-foreground [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] sm:text-base lg:[-webkit-line-clamp:2]">
+          <p className="mt-6 max-w-[50ch] text-base font-medium leading-relaxed text-foreground/68 sm:text-lg">
             {project.description}
           </p>
-          {(project.role || project.outcome) && (
-            <dl className="grid border-y border-border/45 sm:grid-cols-2">
-              {project.role && (
-                <div className="py-3 sm:pr-4">
-                  <dt className="mb-1.5 font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-primary/80">
-                    {roleLabel}
-                  </dt>
-                  <dd className="overflow-hidden text-xs font-medium leading-relaxed text-foreground/82 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2]">
-                    {project.role}
-                  </dd>
-                </div>
-              )}
-              {project.outcome && (
-                <div className="border-t border-border/45 py-3 sm:border-l sm:border-t-0 sm:pl-4">
-                  <dt className="mb-1.5 font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-primary/80">
-                    {outcomeLabel}
-                  </dt>
-                  <dd className="overflow-hidden text-xs font-medium leading-relaxed text-foreground/82 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2]">
-                    {project.outcome}
-                  </dd>
-                </div>
-              )}
-            </dl>
-          )}
-        </div>
 
-        <div className="space-y-4">
-          <div className="flex flex-wrap gap-2">
-            {project.technologies.slice(0, 5).map((tech) => (
-              <span
-                key={tech}
-                className="rounded-md border border-border/55 bg-background/35 px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-muted-foreground"
-              >
-                {tech}
-              </span>
+          {project.role && (
+            <div className="mt-7 border-l border-primary pl-4">
+              <p className="font-mono text-[9px] uppercase tracking-[.18em] text-muted-foreground">
+                {language === "es" ? "Responsabilidad" : "Responsibility"}
+              </p>
+              <p className="mt-2 max-w-[52ch] text-sm font-medium leading-relaxed text-foreground/82">
+                {project.role}
+              </p>
+            </div>
+          )}
+
+          <div className="mt-7 flex flex-wrap gap-x-4 gap-y-2 font-mono text-[9px] font-semibold uppercase tracking-[.13em] text-muted-foreground">
+            {project.technologies.slice(0, 6).map((technology) => (
+              <span key={technology}>{technology}</span>
             ))}
           </div>
 
-          <div className="flex flex-wrap gap-2">
-            {caseStudyHref && (
-              <Button
-                asChild
-                size="sm"
-                className="group/cta min-h-11 rounded-lg bg-primary px-4 text-primary-foreground hover:bg-primary/90"
+          <div className="mt-8 flex flex-wrap items-center gap-5">
+            {project.caseStudyHref && (
+              <Link
+                data-cursor="project"
+                href={project.caseStudyHref}
+                className="group inline-flex min-h-12 items-center gap-6 border-b border-foreground pb-1 text-xs font-bold uppercase tracking-[.12em] text-foreground transition-colors hover:border-primary hover:text-primary"
               >
-                <Link href={caseStudyHref}>
-                  {caseStudyLabel}
-                  <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5" />
-                </Link>
-              </Button>
+                {language === "es" ? "Abrir caso" : "Open case"}
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Link>
             )}
             {project.link && (
-              <Button
-                asChild
-                size="sm"
-                className={`group/cta min-h-11 rounded-lg px-4 ${
-                  caseStudyHref
-                    ? "border border-border/70 bg-background/25 text-foreground hover:border-primary/45 hover:bg-primary/10 hover:text-primary"
-                    : "bg-primary text-primary-foreground hover:bg-primary/90"
-                }`}
-              >
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`${viewLive}: ${project.title}`}
-                >
-                  {viewLive}
-                  <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5" />
-                </a>
-              </Button>
+              <a data-cursor="external" href={project.link} target="_blank" rel="noopener noreferrer" className="cinema-link text-[10px]">
+                {language === "es" ? "Producto" : "Live"} <ArrowUpRight />
+              </a>
             )}
             {project.github && (
-              <Button
-                asChild
-                variant="outline"
-                size="sm"
-                className="min-h-11 rounded-lg border-border/70 bg-background/25 px-4"
-              >
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`${viewCode}: ${project.title}`}
-                >
-                  <FaGithub className="h-3.5 w-3.5" />
-                  {viewCode}
-                </a>
-              </Button>
+              <a data-cursor="external" href={project.github} target="_blank" rel="noopener noreferrer" className="cinema-link text-[10px]">
+                <FaGithub /> GitHub
+              </a>
             )}
           </div>
         </div>
+
+        {project.caseStudyHref ? (
+          <Link data-cursor="project" href={project.caseStudyHref} aria-label={`${language === "es" ? "Abrir caso" : "Open case"}: ${project.title}`} className="scene-link block">
+            {media}
+          </Link>
+        ) : (
+          <a data-cursor="external" href={project.link} target="_blank" rel="noopener noreferrer" aria-label={project.title} className="scene-link block">
+            {media}
+          </a>
+        )}
       </div>
     </article>
   );
 }
 
 export function Projects() {
+  const { language, t } = useLanguage();
   const containerRef = useRef<HTMLElement>(null);
-  const { t, language } = useLanguage();
   const projects = t.projects.items as Project[];
-  const categories = useMemo(
-    () =>
-      language === "es"
-        ? ["Todos", "Desarrollo Web", "Diseño Gráfico"]
-        : ["All", "Web Development", "Graphic Design"],
-    [language],
-  );
-  const [activeCategory, setActiveCategory] = useState(categories[0]);
-
-  useEffect(() => {
-    setActiveCategory(categories[0]);
-  }, [language, categories]);
-
-  const filteredProjects = projects.filter((project) =>
-    activeCategory === categories[0]
-      ? true
-      : project.category === activeCategory,
-  );
+  const featured = featuredIndexes.map((index) => projects[index]).filter(Boolean);
+  const archive = projects.filter((_, index) => !featuredIndexes.includes(index));
 
   useGSAP(
     () => {
       const q = gsap.utils.selector(containerRef);
-      const rows = q(".project-row");
-      const visuals = q(".project-visual");
-
       if (prefersReducedMotion()) {
-        gsap.set(rows, { y: 0 });
-        gsap.set(visuals, { scale: 1 });
+        gsap.set([q(".scene-media"), q(".scene-image"), q(".scene-copy")], {
+          clearProps: "opacity,visibility,transform,clipPath",
+          autoAlpha: 1,
+        });
         return;
       }
 
-      const timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 74%",
-          once: true,
-        },
+      const mm = gsap.matchMedia();
+      mm.add("(min-width: 768px)", () => {
+        q(".project-scene").forEach((scene) => {
+          const media = scene.querySelector(".scene-media");
+          const image = scene.querySelector(".scene-image");
+          const copy = scene.querySelector(".scene-copy");
+          gsap
+            .timeline({
+              scrollTrigger: {
+                trigger: scene,
+                start: "top 88%",
+                end: "bottom 12%",
+                scrub: 1,
+              },
+            })
+            .fromTo(media, { clipPath: "inset(8% 7% 8% 7%)" }, { clipPath: "inset(0% 0% 0% 0%)", ease: "none" }, 0)
+            .fromTo(image, { scale: 1.12 }, { scale: 1.01, ease: "none" }, 0)
+            .fromTo(copy, { y: 70 }, { y: -25, ease: "none" }, 0);
+        });
       });
-
-      timeline
-        .fromTo(
-          rows,
-          { y: 24 },
+      mm.add("(max-width: 767px)", () => {
+        gsap.fromTo(
+          q(".project-scene"),
+          { autoAlpha: 0, y: 28 },
           {
+            autoAlpha: 1,
             y: 0,
-            duration: 0.65,
-            ease: "expo.out",
-            stagger: 0.06,
-          },
-        )
-        .fromTo(
-          visuals,
-          { scale: 0.985 },
-          {
-            scale: 1,
             duration: 0.7,
-            ease: "expo.out",
             stagger: 0.06,
+            scrollTrigger: { trigger: containerRef.current, start: "top 75%", once: true },
           },
-          0,
         );
+      });
+      return () => mm.revert();
     },
-    {
-      scope: containerRef,
-      dependencies: [activeCategory],
-      revertOnUpdate: true,
-    },
+    { scope: containerRef, dependencies: [language], revertOnUpdate: true },
   );
 
   return (
-    <section
-      id="projects"
-      ref={containerRef}
-      className="section-padding relative overflow-hidden bg-background"
-    >
-      <div className="pointer-events-none absolute inset-x-0 top-0 glow-divider" />
-      <div className="pointer-events-none absolute right-[-12rem] top-24 h-[34rem] w-[34rem] rounded-full bg-primary/7 blur-[120px]" />
+    <section id="projects" ref={containerRef} aria-labelledby="projects-title" className="relative bg-background">
+      <header className="mx-auto grid max-w-[100rem] gap-6 px-4 pb-16 pt-24 sm:px-6 sm:pb-24 sm:pt-32 md:grid-cols-[.7fr_1.3fr] md:items-end lg:px-8">
+        <div>
+          <p className="section-kicker">01 / Selected work</p>
+          <h2 id="projects-title" className="mt-5 text-[clamp(4rem,12vw,11rem)] font-black leading-[.75] tracking-[-.075em]">
+            Work
+          </h2>
+        </div>
+        <p className="max-w-[52ch] text-lg font-medium leading-relaxed text-foreground/68 md:justify-self-end md:text-xl">
+          {t.projects.desc}
+        </p>
+      </header>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-10 flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <RevealHeader
-            title={t.projects.title}
-            subtitle={t.projects.subtitle}
-            description={t.projects.desc}
-            className="mb-0"
-          />
-          <div className="flex flex-wrap gap-2 md:justify-end">
-            {categories.map((category) => (
-              <button
-                key={category}
-                type="button"
-                onClick={() => setActiveCategory(category)}
-                className={`min-h-11 rounded-lg px-4 py-2 font-mono text-[10px] font-bold uppercase tracking-[0.14em] transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-primary/50 ${
-                  activeCategory === category
-                    ? "bg-primary text-primary-foreground"
-                    : "border border-border/70 bg-card/55 text-muted-foreground hover:border-primary/45 hover:text-foreground"
-                }`}
-              >
-                {category}
-              </button>
+      {featured.map((project, index) => (
+        <ProjectScene key={project.title} project={project} index={index} total={featured.length} language={language} />
+      ))}
+
+      <div className="border-y border-border/55 bg-[#0d0d0b] px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+        <div className="mx-auto max-w-[100rem]">
+          <div className="mb-10 flex items-end justify-between gap-6">
+            <div>
+              <p className="section-kicker">{language === "es" ? "Trabajo secundario" : "Secondary work"}</p>
+              <h3 className="mt-3 text-4xl font-black tracking-[-.05em] sm:text-6xl">Archive</h3>
+            </div>
+            <span className="font-mono text-[10px] uppercase tracking-[.18em] text-muted-foreground">{archive.length} entries</span>
+          </div>
+          <div className="border-t border-border/55">
+            {archive.map((project, index) => (
+              <article key={project.title} className="group grid gap-3 border-b border-border/55 py-5 transition-colors hover:border-primary/65 sm:grid-cols-[3rem_minmax(0,1.4fr)_minmax(0,.8fr)_auto] sm:items-center">
+                <span className="font-mono text-[10px] text-muted-foreground">{String(index + 5).padStart(2, "0")}</span>
+                <h4 className="text-xl font-bold tracking-[-.025em] sm:text-2xl">{project.title}</h4>
+                <span className="font-mono text-[9px] uppercase tracking-[.14em] text-muted-foreground">{project.technologies.slice(0, 3).join(" · ")}</span>
+                <div className="flex gap-4">
+                  {project.link && <a data-cursor="external" href={project.link} target="_blank" rel="noopener noreferrer" aria-label={`${project.title}: live`}><ArrowUpRight className="h-4 w-4" /></a>}
+                  {project.github && <a data-cursor="external" href={project.github} target="_blank" rel="noopener noreferrer" aria-label={`${project.title}: GitHub`}><FaGithub className="h-4 w-4" /></a>}
+                </div>
+              </article>
             ))}
           </div>
-        </div>
-
-        <div className="space-y-5 sm:space-y-6">
-          {filteredProjects.map((project, index) => (
-            <ProjectCard
-              key={project.title}
-              project={project}
-              viewLive={t.projects.view_live}
-              viewCode={t.projects.view_code}
-              roleLabel={t.projects.role_label}
-              outcomeLabel={t.projects.outcome_label}
-              caseStudyLabel={language === "es" ? "Ver caso" : "View case"}
-              caseStudyBadge={
-                language === "es" ? "Caso completo" : "Full case study"
-              }
-              index={index}
-            />
-          ))}
         </div>
       </div>
     </section>

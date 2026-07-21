@@ -28,3 +28,23 @@ export function GET(request: NextRequest) {
 
   return response;
 }
+
+export async function POST(request: NextRequest) {
+  const payload = (await request.json().catch(() => null)) as
+    | { language?: string }
+    | null;
+  const requestedLanguage = payload?.language ?? null;
+  if (!isLanguage(requestedLanguage)) {
+    return NextResponse.json({ error: "Unsupported language" }, { status: 400 });
+  }
+
+  const response = NextResponse.json({ language: requestedLanguage });
+  response.cookies.set("language", requestedLanguage, {
+    path: "/",
+    maxAge: 60 * 60 * 24 * 365,
+    httpOnly: true,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+  });
+  return response;
+}

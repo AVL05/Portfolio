@@ -31,3 +31,9 @@ skills-lock.json
 
 # playwright mcp test artifacts
 /.playwright-mcp
+
+# local photography exports (production uses curated tracked assets)
+/public/photography/400/
+/public/photography/800/
+/public/photography/1200/
+/public/photography/original/

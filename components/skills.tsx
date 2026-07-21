@@ -1,404 +1,64 @@
 "use client";
 
 import { useRef } from "react";
-import { Globe, Database, PenTool } from "lucide-react";
 import { gsap, prefersReducedMotion, useGSAP } from "@/lib/gsap";
 import { useLanguage } from "@/lib/language-context";
-import { TiltCard } from "@/components/tilt-card";
-import {
-  SiHtml5,
-  SiCss,
-  SiJavascript,
-  SiTypescript,
-  SiReact,
-  SiNextdotjs,
-  SiVuedotjs,
-  SiTailwindcss,
-  SiBootstrap,
-  SiLaravel,
-  SiMysql,
-  SiElectron,
-  SiGit,
-  SiGithub,
-} from "react-icons/si";
-import { DiPhotoshop, DiIllustrator } from "react-icons/di";
 
-const skillCategories_es = [
-  {
-    title: "Frontend Development",
-    description:
-      "Interfaces modernas, adaptativas y altamente interactivas enfocadas en la experiencia de usuario.",
-    icon: Globe,
-    accent: "primary",
-    skills: [
-      {
-        name: "HTML5",
-        url: "https://developer.mozilla.org/es/docs/Web/HTML",
-        icon: SiHtml5,
-      },
-      {
-        name: "CSS3",
-        url: "https://developer.mozilla.org/es/docs/Web/CSS",
-        icon: SiCss,
-      },
-      {
-        name: "JavaScript",
-        url: "https://developer.mozilla.org/es/docs/Web/JavaScript",
-        icon: SiJavascript,
-      },
-      {
-        name: "TypeScript",
-        url: "https://www.typescriptlang.org/",
-        icon: SiTypescript,
-      },
-      { name: "React", url: "https://react.dev/", icon: SiReact },
-      { name: "Next.js", url: "https://nextjs.org/", icon: SiNextdotjs },
-      { name: "Vue.js", url: "https://vuejs.org/", icon: SiVuedotjs },
-      {
-        name: "Tailwind CSS",
-        url: "https://tailwindcss.com/",
-        icon: SiTailwindcss,
-      },
-      {
-        name: "Bootstrap",
-        url: "https://getbootstrap.com/",
-        icon: SiBootstrap,
-      },
-    ],
-  },
-  {
-    title: "Backend & Tools",
-    description: "Gestión de datos, lógica de servidor y control de versiones.",
-    icon: Database,
-    accent: "accent",
-    skills: [
-      { name: "PHP / Laravel", url: "https://laravel.com/", icon: SiLaravel },
-      { name: "MySQL", url: "https://www.mysql.com/", icon: SiMysql },
-      {
-        name: "Electron",
-        url: "https://www.electronjs.org/",
-        icon: SiElectron,
-      },
-      { name: "Git", url: "https://git-scm.com/", icon: SiGit },
-      { name: "GitHub", url: "https://github.com/", icon: SiGithub },
-    ],
-  },
-  {
-    title: "Creative Tools",
-    description:
-      "Edición de fotografía, diseño editorial y post-producción de vídeo.",
-    icon: PenTool,
-    accent: "muted",
-    skills: [
-      {
-        name: "Photoshop",
-        url: "https://www.adobe.com/es/products/photoshop.html",
-        icon: DiPhotoshop,
-      },
-      {
-        name: "Illustrator",
-        url: "https://www.adobe.com/es/products/illustrator.html",
-        icon: DiIllustrator,
-      },
-      {
-        name: "InDesign",
-        url: "https://www.adobe.com/es/products/indesign.html",
-        icon: PenTool,
-      },
-    ],
-  },
+const groups = [
+  { area: "Frontend", stack: "React · Next.js · TypeScript · JavaScript · HTML · CSS", proof: "raw.vives · RAW Manager · Distrito Gourmet" },
+  { area: "Interaction", stack: "GSAP · ScrollTrigger · View Transitions · responsive UI", proof: "raw.vives · aleviclop.dev" },
+  { area: "Backend", stack: "Laravel · PHP · MySQL · REST APIs · Sanctum", proof: "RAW Manager · Distrito Gourmet · API Hotel" },
+  { area: "Tools", stack: "Git · GitHub · Vite · Docker · Electron · PWA", proof: "Product delivery · version control" },
+  { area: "Design & Visual", stack: "Photoshop · Illustrator · InDesign · photography", proof: "raw.vives · Llibret Falla el Molí" },
 ];
-
-const skillCategories_en = [
-  {
-    title: "Frontend Development",
-    description:
-      "Modern, adaptive and interactive interfaces focused on user experience.",
-    icon: Globe,
-    accent: "primary",
-    skills: [
-      {
-        name: "HTML5",
-        url: "https://developer.mozilla.org/en-US/docs/Web/HTML",
-        icon: SiHtml5,
-      },
-      {
-        name: "CSS3",
-        url: "https://developer.mozilla.org/en-US/docs/Web/CSS",
-        icon: SiCss,
-      },
-      {
-        name: "JavaScript",
-        url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
-        icon: SiJavascript,
-      },
-      {
-        name: "TypeScript",
-        url: "https://www.typescriptlang.org/",
-        icon: SiTypescript,
-      },
-      { name: "React", url: "https://react.dev/", icon: SiReact },
-      { name: "Next.js", url: "https://nextjs.org/", icon: SiNextdotjs },
-      { name: "Vue.js", url: "https://vuejs.org/", icon: SiVuedotjs },
-      {
-        name: "Tailwind CSS",
-        url: "https://tailwindcss.com/",
-        icon: SiTailwindcss,
-      },
-      {
-        name: "Bootstrap",
-        url: "https://getbootstrap.com/",
-        icon: SiBootstrap,
-      },
-    ],
-  },
-  {
-    title: "Backend & Tools",
-    description: "Data management, server logic and version control.",
-    icon: Database,
-    accent: "accent",
-    skills: [
-      { name: "PHP / Laravel", url: "https://laravel.com/", icon: SiLaravel },
-      { name: "MySQL", url: "https://www.mysql.com/", icon: SiMysql },
-      {
-        name: "Electron",
-        url: "https://www.electronjs.org/",
-        icon: SiElectron,
-      },
-      { name: "Git", url: "https://git-scm.com/", icon: SiGit },
-      { name: "GitHub", url: "https://github.com/", icon: SiGithub },
-    ],
-  },
-  {
-    title: "Creative Tools",
-    description: "Photo editing, editorial design and video post-production.",
-    icon: PenTool,
-    accent: "muted",
-    skills: [
-      {
-        name: "Photoshop",
-        url: "https://www.adobe.com/products/photoshop.html",
-        icon: DiPhotoshop,
-      },
-      {
-        name: "Illustrator",
-        url: "https://www.adobe.com/products/illustrator.html",
-        icon: DiIllustrator,
-      },
-      {
-        name: "InDesign",
-        url: "https://www.adobe.com/products/indesign.html",
-        icon: PenTool,
-      },
-    ],
-  },
-];
-
-function SkillItem({
-  skill,
-}: {
-  skill: { name: string; url: string; icon: any };
-}) {
-  return (
-    <a
-      href={skill.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group/skill flex min-w-0 items-center gap-3 rounded-xl outline-none transition-all focus-visible:ring-2 focus-visible:ring-primary/50"
-    >
-      <div className="rounded-xl border border-border/60 bg-secondary/70 p-2 transition-all group-hover/skill:border-primary/30 group-hover/skill:bg-primary/10">
-        <skill.icon
-          className="h-4 w-4 text-muted-foreground group-hover/skill:text-primary transition-colors"
-          style={{ fill: "currentColor" }}
-        />
-      </div>
-      <span className="truncate text-[10px] font-mono font-bold uppercase tracking-widest text-muted-foreground group-hover/skill:text-foreground transition-colors">
-        {skill.name}
-      </span>
-    </a>
-  );
-}
 
 export function Skills() {
-  const { t, language } = useLanguage();
-  const skillCategories =
-    language === "es" ? skillCategories_es : skillCategories_en;
-  const [frontend, backend, creative] = skillCategories;
+  const { language } = useLanguage();
   const containerRef = useRef<HTMLElement>(null);
 
   useGSAP(
     () => {
-      const q = gsap.utils.selector(containerRef);
-      const words = q(".sk-word");
-      const cards = q(".sk-card");
-
+      const rows = gsap.utils.selector(containerRef)(".capability-row");
       if (prefersReducedMotion()) {
-        gsap.set([words, cards, q(".sk-desc")], {
-          autoAlpha: 1,
-          y: 0,
-          scale: 1,
-        });
+        gsap.set(rows, { autoAlpha: 1, y: 0 });
         return;
       }
-
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 78%",
-            once: true,
-          },
-        })
-        .fromTo(
-          words,
-          { yPercent: 115, autoAlpha: 0 },
-          {
-            yPercent: 0,
-            autoAlpha: 1,
-            duration: 0.9,
-            ease: "expo.out",
-            stagger: 0.07,
-          },
-        )
-        .fromTo(
-          q(".sk-desc"),
-          { autoAlpha: 0, y: 16 },
-          { autoAlpha: 1, y: 0, duration: 0.6, ease: "power3.out" },
-          "-=0.5",
-        )
-        .fromTo(
-          cards,
-          { autoAlpha: 0, y: 64, scale: 0.94 },
-          {
-            autoAlpha: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.9,
-            ease: "power3.out",
-            stagger: 0.13,
-          },
-          "-=0.35",
-        );
+      gsap.fromTo(rows, { autoAlpha: 0, y: 24 }, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.7,
+        stagger: 0.07,
+        ease: "power3.out",
+        scrollTrigger: { trigger: containerRef.current, start: "top 72%", once: true },
+      });
     },
     { scope: containerRef },
   );
 
   return (
-    <section
-      id="skills"
-      ref={containerRef}
-      className="section-padding relative overflow-hidden bg-background section-alt-bg"
-    >
-      <div className="pointer-events-none absolute inset-x-0 top-0 glow-divider" />
-      <div className="pointer-events-none absolute right-[-10rem] top-[12%] h-[30rem] w-[30rem] rounded-full bg-accent/6 blur-[110px]" />
-
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-14 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
-          <div className="space-y-5">
-            <p className="section-kicker">{t.skills.title}</p>
-            <h2
-              className="text-4xl font-black leading-[0.94] tracking-normal text-foreground sm:text-6xl lg:text-7xl"
-              aria-label={t.skills.subtitle}
-            >
-              {t.skills.subtitle.split(" ").map((word, i) => (
-                <span
-                  key={i}
-                  className="mr-[0.25em] inline-block overflow-hidden pb-[0.12em] align-bottom"
-                >
-                  <span className="sk-word inline-block">{word}</span>
-                </span>
-              ))}
-            </h2>
+    <section id="about" ref={containerRef} aria-labelledby="capabilities-title" className="relative bg-background px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:py-40">
+      <div className="mx-auto max-w-[100rem]">
+        <header className="grid gap-8 border-b border-border/60 pb-12 md:grid-cols-[.75fr_1.25fr] md:items-end">
+          <div>
+            <p className="section-kicker">03 / Capabilities</p>
+            <h2 id="capabilities-title" className="mt-5 text-[clamp(3.8rem,9vw,9rem)] font-black leading-[.78] tracking-[-.075em]">Built<br />with intent.</h2>
           </div>
-          <p className="sk-desc max-w-2xl text-base font-medium leading-relaxed text-muted-foreground sm:text-lg lg:justify-self-end">
-            {t.skills.desc}
+          <p className="max-w-[58ch] text-lg font-medium leading-relaxed text-foreground/66 md:justify-self-end md:text-xl">
+            {language === "es"
+              ? "Frontend como especialidad. Producto, backend y dirección visual como contexto para tomar mejores decisiones y entregar experiencias completas."
+              : "Frontend as my specialty. Product, backend, and visual direction as context for better decisions and complete delivery."}
           </p>
-        </div>
+        </header>
 
-        <div className="grid grid-cols-1 gap-5 lg:grid-cols-12 lg:gap-6">
-          {/* Frontend - large */}
-          <div className="sk-card lg:col-span-7 group h-full">
-            <TiltCard
-              max={3}
-              className="premium-card relative h-full space-y-6 overflow-hidden p-6 sm:p-8"
-            >
-              <div className="absolute inset-x-0 top-0 h-0.5 bg-linear-to-r from-primary via-primary/60 to-transparent" />
-              <div className="flex items-center gap-4">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-primary/20 bg-primary/10 text-primary">
-                  <frontend.icon className="h-5 w-5" />
-                </div>
-                <h3 className="text-lg font-black tracking-normal text-foreground group-hover:text-primary transition-colors sm:text-xl">
-                  {frontend.title}
-                </h3>
-              </div>
-              <p className="text-sm font-medium leading-relaxed text-muted-foreground">
-                {frontend.description}
-              </p>
-              <div className="grid grid-cols-2 gap-3 border-t border-border/50 pt-5 sm:grid-cols-3">
-                {frontend.skills.map((skill) => (
-                  <SkillItem key={skill.name} skill={skill} />
-                ))}
-              </div>
-            </TiltCard>
-          </div>
-
-          {/* Backend - medium */}
-          <div className="sk-card lg:col-span-5 group h-full">
-            <TiltCard
-              max={3}
-              className="premium-card relative h-full space-y-6 overflow-hidden p-6 sm:p-8"
-            >
-              <div className="absolute inset-x-0 top-0 h-0.5 bg-linear-to-r from-accent via-accent/60 to-transparent" />
-              <div className="flex items-center gap-4">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-accent/20 bg-accent/10 text-accent">
-                  <backend.icon className="h-5 w-5" />
-                </div>
-                <h3 className="text-lg font-black tracking-normal text-foreground group-hover:text-primary transition-colors sm:text-xl">
-                  {backend.title}
-                </h3>
-              </div>
-              <p className="text-sm font-medium leading-relaxed text-muted-foreground">
-                {backend.description}
-              </p>
-              <div className="grid grid-cols-1 gap-3 border-t border-border/50 pt-5 sm:grid-cols-2">
-                {backend.skills.map((skill) => (
-                  <SkillItem key={skill.name} skill={skill} />
-                ))}
-              </div>
-            </TiltCard>
-          </div>
-
-          <div className="sk-card lg:col-span-12 group">
-            <TiltCard
-              max={2}
-              className="premium-card relative overflow-hidden p-6 sm:p-8"
-            >
-              <div className="absolute inset-x-0 top-0 h-0.5 bg-linear-to-r from-muted-foreground/40 via-muted-foreground/20 to-transparent" />
-              <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:gap-10">
-                <div className="flex items-center gap-4 shrink-0">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-border/60 bg-secondary text-muted-foreground">
-                    <creative.icon className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-black tracking-normal text-foreground sm:text-xl">
-                      {creative.title}
-                    </h3>
-                    <p className="text-xs font-medium text-muted-foreground mt-0.5">
-                      Hobby
-                    </p>
-                  </div>
-                </div>
-                <p className="text-sm font-medium leading-relaxed text-muted-foreground lg:max-w-xs xl:max-w-sm">
-                  {creative.description}
-                </p>
-                <div className="flex flex-wrap gap-3 border-t border-border/50 pt-5 lg:border-t-0 lg:border-l lg:pl-10 lg:pt-0">
-                  {creative.skills.map((skill) => (
-                    <SkillItem key={skill.name} skill={skill} />
-                  ))}
-                </div>
-              </div>
-            </TiltCard>
-          </div>
+        <div>
+          {groups.map((group, index) => (
+            <article key={group.area} className="capability-row grid gap-4 border-b border-border/55 py-7 sm:grid-cols-[3rem_minmax(150px,.55fr)_minmax(0,1.2fr)_minmax(180px,.7fr)] sm:items-baseline sm:py-9">
+              <span className="font-mono text-[10px] text-primary">0{index + 1}</span>
+              <h3 className="text-2xl font-black tracking-[-.04em] sm:text-3xl">{group.area}</h3>
+              <p className="text-base font-semibold leading-relaxed text-foreground/82 sm:text-lg">{group.stack}</p>
+              <p className="font-mono text-[9px] uppercase leading-relaxed tracking-[.12em] text-muted-foreground">{group.proof}</p>
+            </article>
+          ))}
         </div>
       </div>
     </section>

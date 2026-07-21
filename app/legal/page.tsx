@@ -97,7 +97,7 @@ Los contenidos de este sitio web (textos, imágenes, diseño, código fuente y d
 
 export default function LegalPage() {
   return (
-    <main className="relative min-h-screen bg-background px-4 pb-24 pt-32 sm:px-6 lg:px-8">
+    <main id="main-content" className="relative min-h-screen bg-background px-4 pb-24 pt-32 sm:px-6 lg:px-8">
       <div className="pointer-events-none absolute inset-0 bg-grid opacity-[0.06]" />
       <div className="pointer-events-none absolute left-[10%] top-[5%] h-[30rem] w-[30rem] rounded-full bg-primary/6 blur-[100px]" />
 

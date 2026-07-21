@@ -99,7 +99,7 @@ export function RawVivesCaseStudy() {
   const t = copy[language];
 
   return (
-    <main className="min-h-screen overflow-hidden bg-background text-foreground">
+    <main id="main-content" className="case-study min-h-screen overflow-hidden bg-background text-foreground">
       <section className="relative px-4 pb-16 pt-6 sm:px-6 lg:px-8">
         <div className="pointer-events-none absolute inset-0 bg-grid opacity-[0.05]" />
         <div className="relative z-10 mx-auto max-w-7xl">
@@ -119,7 +119,7 @@ export function RawVivesCaseStudy() {
               </div>
             </div>
             <figure className="relative aspect-[16/10] overflow-hidden rounded-xl border border-border/65 bg-card shadow-[0_35px_90px_-45px_rgba(0,0,0,.95)]">
-              <Image src="/projects/raw-vives/raw-vives-hero.webp" alt={language === "es" ? "Hero de raw.vives con los acantilados de Moher" : "raw.vives hero featuring the Cliffs of Moher"} fill className="object-cover" priority sizes="(max-width:1024px) 100vw, 640px" />
+              <Image src="/projects/raw-vives/raw-vives-hero.webp" alt={language === "es" ? "Hero de raw.vives con los acantilados de Moher" : "raw.vives hero featuring the Cliffs of Moher"} fill className="object-cover" priority sizes="(max-width:1024px) 100vw, 640px" style={{ viewTransitionName: "project-raw-vives" }} />
             </figure>
           </div>
 

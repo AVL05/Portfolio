@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 };
 
 export default function RawManagerCaseStudyPage() {
-  return <main className="min-h-screen overflow-hidden bg-background text-foreground">
+  return <main id="main-content" className="case-study min-h-screen overflow-hidden bg-background text-foreground">
     <section className="relative px-4 pb-16 pt-6 sm:px-6 lg:px-8">
       <div className="pointer-events-none absolute inset-0 bg-grid opacity-[0.05]" />
       <div className="relative z-10 mx-auto max-w-7xl">
@@ -33,7 +33,7 @@ export default function RawManagerCaseStudyPage() {
           <div><p className="section-kicker mb-5">Caso de estudio / Producto full-stack</p><h1 className="text-5xl font-black leading-[.9] sm:text-7xl lg:text-8xl">RAW Manager</h1><p className="mt-7 max-w-3xl text-lg font-medium leading-relaxed text-muted-foreground sm:text-xl">Un sistema operativo para fotógrafos que reúne negocio, producción y planificación en una aplicación coherente, evitando hojas de cálculo y herramientas aisladas.</p>
             <div className="mt-8 flex flex-wrap gap-3"><a href={githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-bold text-primary-foreground hover:bg-primary/90"><FaGithub className="h-4 w-4" />Ver código</a></div>
           </div>
-          <div className="relative aspect-[8/5] overflow-hidden rounded-xl border border-border/65 bg-card"><Image src="/projects/raw-manager-cover.svg" alt="Vista conceptual de RAW Manager" fill className="object-cover" priority sizes="(max-width:1024px) 100vw, 560px" /></div>
+          <div className="relative aspect-[8/5] overflow-hidden rounded-xl border border-border/65 bg-card" style={{ viewTransitionName: "project-raw-manager" }}><Image src="/projects/raw-manager-cover.svg" alt="Vista conceptual de RAW Manager" fill className="object-cover" priority sizes="(max-width:1024px) 100vw, 560px" /></div>
         </div>
       </div>
     </section>

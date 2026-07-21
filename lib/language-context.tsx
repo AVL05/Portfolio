@@ -154,6 +154,11 @@ export function LanguageProvider({
     setLanguage(lang);
     localStorage.setItem("language", lang);
     document.documentElement.lang = lang;
+    void fetch("/api/language", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ language: lang }),
+    });
   };
 
   return (

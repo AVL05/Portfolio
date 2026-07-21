@@ -28,12 +28,12 @@ export function HomeClient({ children }: { children?: ReactNode }) {
       <Navigation />
       <CommandPalette />
 
-      <main className="relative z-10">
+      <main id="main-content" className="relative z-10">
         <Hero />
         <Projects />
+        <Photography />
         <Skills />
         <Experience />
-        <Photography />
         <Contact />
         {children}
       </main>

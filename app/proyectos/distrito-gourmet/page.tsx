@@ -131,7 +131,7 @@ export const metadata: Metadata = {
 
 export default function DistritoGourmetCaseStudyPage() {
   return (
-    <main className="min-h-screen overflow-hidden bg-background text-foreground">
+    <main id="main-content" className="case-study min-h-screen overflow-hidden bg-background text-foreground">
       <section className="relative px-4 pb-16 pt-6 sm:px-6 lg:px-8">
         <div className="pointer-events-none absolute inset-0 bg-grid opacity-[0.05]" />
         <div className="pointer-events-none absolute right-[-14rem] top-[-10rem] h-[34rem] w-[34rem] rounded-full bg-primary/10 blur-[120px]" />
@@ -190,7 +190,7 @@ export default function DistritoGourmetCaseStudyPage() {
               </div>
             </div>
 
-            <aside className="rounded-xl border border-border/65 bg-card/70 p-5 backdrop-blur-xl">
+            <aside className="rounded-xl border border-border/65 bg-card/70 p-5 backdrop-blur-xl" style={{ viewTransitionName: "project-distrito-gourmet" }}>
               <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-border/60 bg-secondary">
                 <Image
                   src="/projects/distrito_gourmet.png"

@@ -10,7 +10,9 @@
     "build": "next build",
     "dev": "next dev --webpack",
     "lint": "eslint .",
-    "start": "next start"
+    "start": "next start",
+    "test": "node --test tests/raw-vives-integration.test.mjs",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

@@ -3,6 +3,13 @@ name: CI
 on:
   push:
     branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: portfolio-${{ github.ref }}
+  cancel-in-progress: true
   pull_request:
     branches: [main]
 
@@ -11,13 +18,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: "22"
           cache: "pnpm"
@@ -30,4 +37,10 @@ jobs:
         run: pnpm lint
 
       - name: Type Check
-        run: pnpm exec tsc --noEmit
+        run: pnpm typecheck
+
+      - name: Tests
+        run: pnpm test
+
+      - name: Build
+        run: pnpm build

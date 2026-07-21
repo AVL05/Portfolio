@@ -1,5 +1,5 @@
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://aleviclop.dev";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.aleviclop.dev";
 
 export const SITE_NAME = "Alex Vicente López";
 export const SITE_TITLE = "Alex Vicente López | Frontend Developer";

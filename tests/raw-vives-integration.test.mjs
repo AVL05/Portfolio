@@ -29,6 +29,7 @@ test("case study metadata and sitemap entry are indexable", () => {
   assert.match(route, /twitter:/);
   assert.match(route, /application\/ld\+json/);
   assert.match(seo, /path: "\/proyectos\/raw-vives"/);
+  assert.match(seo, /https:\/\/www\.aleviclop\.dev/);
 });
 
 test("case study CTAs and bilingual accessibility copy exist", () => {

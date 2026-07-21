@@ -19,7 +19,7 @@ Los archivos de `public/projects/raw-vives/` proceden de producción el 21-07-20
 
 ## SEO y enlaces
 
-El caso tiene canonical propio, Open Graph, Twitter Card y `CreativeWork` JSON-LD. `/proyectos/raw-vives` se añade al sitemap del portfolio. No existen canonicals cruzadas: el portfolio indexa el caso y raw.vives conserva sus URLs canónicas en su dominio.
+El caso tiene canonical propio, Open Graph, Twitter Card y `CreativeWork` JSON-LD. `/proyectos/raw-vives` se añade al sitemap del portfolio. Los canonicals usan `www.aleviclop.dev`, destino final del redirect del dominio desnudo; raw.vives conserva sus URLs canónicas en su dominio.
 
 ## Actualización
 

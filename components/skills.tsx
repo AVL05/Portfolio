@@ -4,17 +4,18 @@ import { useRef } from "react";
 import { gsap, prefersReducedMotion, useGSAP } from "@/lib/gsap";
 import { useLanguage } from "@/lib/language-context";
 
-const groups = [
-  { area: "Frontend", stack: "React · Next.js · TypeScript · JavaScript · HTML · CSS", proof: "raw.vives · RAW Manager · Distrito Gourmet" },
-  { area: "Interaction", stack: "GSAP · ScrollTrigger · View Transitions · responsive UI", proof: "raw.vives · aleviclop.dev" },
-  { area: "Backend", stack: "Laravel · PHP · MySQL · REST APIs · Sanctum", proof: "RAW Manager · Distrito Gourmet · API Hotel" },
-  { area: "Tools", stack: "Git · GitHub · Vite · Docker · Electron · PWA", proof: "Product delivery · version control" },
-  { area: "Design & Visual", stack: "Photoshop · Illustrator · InDesign · photography", proof: "raw.vives · Llibret Falla el Molí" },
+const getGroups = (language: "es" | "en") => [
+  { area: "Frontend", stack: "React · Next.js · TypeScript · JavaScript · HTML · CSS · Tailwind", proof: "raw.vives · LumaFlow Studio · Distrito Gourmet" },
+  { area: language === "es" ? "Interacción" : "Interaction", stack: "GSAP · ScrollTrigger · View Transitions · responsive UI · accessibility", proof: "raw.vives · aleviclop.dev" },
+  { area: "Backend", stack: "Laravel · PHP · MySQL · REST APIs · Sanctum", proof: "LumaFlow Studio · Distrito Gourmet · API Hotel" },
+  { area: "Workflow", stack: "Git · GitHub · Bitbucket · testing · CI/CD · Vercel · Docker", proof: language === "es" ? "Entrega · equipo · control de versiones" : "Delivery · teamwork · version control" },
+  { area: language === "es" ? "Diseño y producción visual" : "Design & Visual Production", stack: "Photoshop · Illustrator · InDesign · Lightroom · photography", proof: "raw.vives · Llibret Falla el Molí" },
 ];
 
 export function Skills() {
   const { language } = useLanguage();
   const containerRef = useRef<HTMLElement>(null);
+  const groups = getGroups(language);
 
   useGSAP(
     () => {
@@ -40,14 +41,19 @@ export function Skills() {
       <div className="mx-auto max-w-[100rem]">
         <header className="grid gap-8 border-b border-border/60 pb-12 md:grid-cols-[.75fr_1.25fr] md:items-end">
           <div>
-            <p className="section-kicker">03 / Capabilities</p>
-            <h2 id="capabilities-title" className="mt-5 text-[clamp(3.8rem,9vw,9rem)] font-black leading-[.78] tracking-[-.075em]">Built<br />with intent.</h2>
+            <p className="section-kicker">{language === "es" ? "02 / Perfil y capacidades" : "02 / Profile & capabilities"}</p>
+            <h2 id="capabilities-title" className="mt-5 text-[clamp(3.8rem,9vw,9rem)] font-black leading-[.78] tracking-[-.075em]">
+              {language === "es" ? <>Frontend<br />con criterio.</> : <>Built<br />with intent.</>}
+            </h2>
           </div>
-          <p className="max-w-[58ch] text-lg font-medium leading-relaxed text-foreground/66 md:justify-self-end md:text-xl">
-            {language === "es"
-              ? "Frontend como especialidad. Producto, backend y dirección visual como contexto para tomar mejores decisiones y entregar experiencias completas."
-              : "Frontend as my specialty. Product, backend, and visual direction as context for better decisions and complete delivery."}
-          </p>
+          <div className="max-w-[58ch] space-y-4 text-lg font-medium leading-relaxed text-foreground/66 md:justify-self-end md:text-xl">
+            <p>{language === "es"
+              ? "Técnico Superior en Desarrollo de Aplicaciones Web, especializado en frontend y con base full-stack. Construyo interfaces mantenibles conectando producto, API, accesibilidad y entrega."
+              : "Web Application Development graduate focused on frontend, with a full-stack foundation. I build maintainable interfaces by connecting product, APIs, accessibility, and delivery."}</p>
+            <p className="text-sm text-muted-foreground sm:text-base">{language === "es"
+              ? "Trabajo desde Valencia y en remoto. La fotografía aporta composición y criterio visual; el código sigue siendo el centro de mi perfil profesional."
+              : "Based in Valencia and available remotely. Photography informs composition and visual judgment; frontend engineering remains the core of my professional profile."}</p>
+          </div>
         </header>
 
         <div>

@@ -7,7 +7,7 @@
 ## Datos utilizados
 
 - 30 fotografías y 3 series editoriales.
-- 81 páginas estáticas y 105 tests en el build de producción auditado.
+- 73 rutas estáticas y 67 tests en el build validado.
 - Next.js 16, React 19, TypeScript, Tailwind CSS 4, GSAP, Three.js, Lenis, Cloudflare Workers y GitHub Actions.
 - ES/EN, SEO localizado, reduced motion, archivo, filtros, fichas, fullscreen y navegación contextual.
 

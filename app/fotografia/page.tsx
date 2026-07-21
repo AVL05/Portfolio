@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 export default function PhotographyPage() {
   return (
     <SeoPageShell
-      eyebrow="Fotografia"
+      eyebrow="Fotografía"
       title="Fotografía y mirada visual de Alex Vicente López"
       description="La fotografía forma parte de la identidad digital de Alex Vicente López y refuerza su forma de trabajar interfaces, composición, detalle y narrativa visual."
       sections={[

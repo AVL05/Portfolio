@@ -30,8 +30,8 @@ export default function ProjectsPage() {
       description="Selección de proyectos de Alex Vicente López en desarrollo web, aplicaciones full-stack, APIs, ecommerce, landings, diseño editorial e interfaces digitales."
       sections={[
         {
-          title: "RAW Manager",
-          body: "Aplicación full-stack y PWA para fotógrafos, con gestión de clientes, sesiones, presupuestos, facturas, galerías, equipo y planificación sobre React, Laravel y MySQL.",
+          title: "LumaFlow Studio",
+          body: "Plataforma full-stack para estudios fotográficos: planificación, CRM, finanzas, entregas e IA local sobre React, Laravel y MySQL, respaldada por 89 tests.",
         },
         {
           title: "Distrito Gourmet",

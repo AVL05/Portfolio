@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, ChevronDown } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
 import { useRef } from "react";
 import { gsap, prefersReducedMotion, useGSAP } from "@/lib/gsap";
@@ -22,7 +22,7 @@ interface Project {
   caseStudyHref?: string;
 }
 
-const featuredIndexes = [0, 1, 2, 7];
+const featuredIndexes = [0, 1, 2, 6];
 
 const viewTransitionName = (project: Project) =>
   `project-${project.caseStudyHref?.split("/").pop() ?? "editorial"}`;
@@ -83,6 +83,17 @@ function ProjectScene({
               </p>
               <p className="mt-2 max-w-[52ch] text-sm font-medium leading-relaxed text-foreground/82">
                 {project.role}
+              </p>
+            </div>
+          )}
+
+          {project.outcome && (
+            <div className="mt-5 border-l border-foreground/28 pl-4">
+              <p className="font-mono text-[9px] uppercase tracking-[.18em] text-muted-foreground">
+                {language === "es" ? "Resultado verificable" : "Verified outcome"}
+              </p>
+              <p className="mt-2 max-w-[52ch] text-sm font-medium leading-relaxed text-foreground/72">
+                {project.outcome}
               </p>
             </div>
           )}
@@ -206,28 +217,33 @@ export function Projects() {
       ))}
 
       <div className="border-y border-border/55 bg-[#0d0d0b] px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
-        <div className="mx-auto max-w-[100rem]">
-          <div className="mb-10 flex items-end justify-between gap-6">
+        <details className="group/archive mx-auto max-w-[100rem]">
+          <summary className="flex min-h-16 cursor-pointer list-none items-end justify-between gap-6 focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-primary [&::-webkit-details-marker]:hidden">
             <div>
               <p className="section-kicker">{language === "es" ? "Trabajo secundario" : "Secondary work"}</p>
-              <h3 className="mt-3 text-4xl font-black tracking-[-.05em] sm:text-6xl">Archive</h3>
+              <h3 className="mt-3 text-4xl font-black tracking-[-.05em] sm:text-6xl">
+                {language === "es" ? "Archivo" : "Archive"}
+              </h3>
             </div>
-            <span className="font-mono text-[10px] uppercase tracking-[.18em] text-muted-foreground">{archive.length} entries</span>
+            <span className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[.18em] text-muted-foreground">
+              {archive.length} {language === "es" ? "proyectos" : "projects"}
+              <ChevronDown className="h-4 w-4 transition-transform group-open/archive:rotate-180" />
+            </span>
+          </summary>
+          <div className="mt-10 border-t border-border/55">
+              {archive.map((project, index) => (
+                <article key={project.title} className="group grid gap-3 border-b border-border/55 py-5 transition-colors hover:border-primary/65 sm:grid-cols-[3rem_minmax(0,1.4fr)_minmax(0,.8fr)_auto] sm:items-center">
+                  <span className="font-mono text-[10px] text-muted-foreground">{String(index + 5).padStart(2, "0")}</span>
+                  <h4 className="text-xl font-bold tracking-[-.025em] sm:text-2xl">{project.title}</h4>
+                  <span className="font-mono text-[9px] uppercase tracking-[.14em] text-muted-foreground">{project.technologies.slice(0, 3).join(" · ")}</span>
+                  <div className="flex gap-2">
+                    {project.link && <a className="inline-flex min-h-11 min-w-11 items-center justify-center" data-cursor="external" href={project.link} target="_blank" rel="noopener noreferrer" aria-label={`${project.title}: ${language === "es" ? "abrir proyecto" : "open project"}`}><ArrowUpRight className="h-5 w-5" /></a>}
+                    {project.github && <a className="inline-flex min-h-11 min-w-11 items-center justify-center" data-cursor="external" href={project.github} target="_blank" rel="noopener noreferrer" aria-label={`${project.title}: GitHub`}><FaGithub className="h-5 w-5" /></a>}
+                  </div>
+                </article>
+              ))}
           </div>
-          <div className="border-t border-border/55">
-            {archive.map((project, index) => (
-              <article key={project.title} className="group grid gap-3 border-b border-border/55 py-5 transition-colors hover:border-primary/65 sm:grid-cols-[3rem_minmax(0,1.4fr)_minmax(0,.8fr)_auto] sm:items-center">
-                <span className="font-mono text-[10px] text-muted-foreground">{String(index + 5).padStart(2, "0")}</span>
-                <h4 className="text-xl font-bold tracking-[-.025em] sm:text-2xl">{project.title}</h4>
-                <span className="font-mono text-[9px] uppercase tracking-[.14em] text-muted-foreground">{project.technologies.slice(0, 3).join(" · ")}</span>
-                <div className="flex gap-4">
-                  {project.link && <a data-cursor="external" href={project.link} target="_blank" rel="noopener noreferrer" aria-label={`${project.title}: live`}><ArrowUpRight className="h-4 w-4" /></a>}
-                  {project.github && <a data-cursor="external" href={project.github} target="_blank" rel="noopener noreferrer" aria-label={`${project.title}: GitHub`}><FaGithub className="h-4 w-4" /></a>}
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
+        </details>
       </div>
     </section>
   );

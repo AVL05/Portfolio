@@ -19,9 +19,11 @@ test("raw.vives is the primary localized project", () => {
     assert.equal(project.github, "https://github.com/AVL05/alexgallery");
     assert.match(project.outcome, /30/);
     assert.match(project.outcome, /3/);
-    assert.match(project.outcome, /81/);
-    assert.match(project.outcome, /105/);
+    assert.match(project.outcome, /static|estático/i);
   }
+  assert.match(content, /73/);
+  assert.match(content, /67/);
+  assert.doesNotMatch(content, /81 páginas|81 static|105 tests/i);
 });
 
 test("case study metadata and sitemap entry are indexable", () => {

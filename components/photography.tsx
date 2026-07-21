@@ -56,6 +56,7 @@ const frames = [
 
 const ARCHIVE_URL = "https://gallery.aleviclop.dev/";
 const SWIPE_THRESHOLD = 80;
+const DIRECTION_RATIO = 1.2;
 
 type SwipeState = {
   pointerId: number;
@@ -68,6 +69,7 @@ type SwipeState = {
 function ArchiveLink({ language }: { language: "es" | "en" }) {
   const linkRef = useRef<HTMLAnchorElement>(null);
   const arrowRef = useRef<SVGSVGElement>(null);
+  const gestureLabelRef = useRef<HTMLSpanElement>(null);
   const gestureRef = useRef<SwipeState | null>(null);
   const suppressClickRef = useRef(false);
   const touchInputRef = useRef(false);
@@ -88,6 +90,11 @@ function ArchiveLink({ language }: { language: "es" | "en" }) {
       arrow.style.transform = `translate3d(0, ${-progress * (reduced ? 4 : 10)}px, 0)`;
       arrow.style.opacity = String(0.45 + progress * 0.55);
     }
+    if (gestureLabelRef.current) {
+      gestureLabelRef.current.textContent = progress >= 1
+        ? language === "es" ? "Suelta para abrir" : "Release to open"
+        : language === "es" ? "Desliza hacia arriba para abrir" : "Swipe up to open";
+    }
   };
 
   const resetCard = () => {
@@ -103,6 +110,11 @@ function ArchiveLink({ language }: { language: "es" | "en" }) {
       arrow.style.transition = `transform ${duration} cubic-bezier(.2,.8,.2,1), opacity ${duration} ease-out`;
       arrow.style.transform = "translate3d(0, 0, 0)";
       arrow.style.opacity = "0.55";
+    }
+    if (gestureLabelRef.current) {
+      gestureLabelRef.current.textContent = language === "es"
+        ? "Desliza hacia arriba para abrir"
+        : "Swipe up to open";
     }
   };
 
@@ -137,7 +149,7 @@ function ArchiveLink({ language }: { language: "es" | "en" }) {
 
     if (!gesture.locked) {
       if (horizontal > upward || deltaY >= -10) return;
-      if (upward < horizontal * 1.35) return;
+      if (upward < horizontal * DIRECTION_RATIO) return;
       gesture.locked = true;
     }
 
@@ -151,7 +163,7 @@ function ArchiveLink({ language }: { language: "es" | "en" }) {
 
     const deltaX = event.clientX - gesture.startX;
     const upward = Math.max(0, gesture.startY - event.clientY);
-    const completed = gesture.locked && upward >= SWIPE_THRESHOLD && upward > Math.abs(deltaX) * 1.35;
+    const completed = gesture.locked && upward >= SWIPE_THRESHOLD && upward > Math.abs(deltaX) * DIRECTION_RATIO;
     gestureRef.current = null;
 
     if (!completed) {
@@ -177,8 +189,6 @@ function ArchiveLink({ language }: { language: "es" | "en" }) {
       ref={linkRef}
       data-cursor="external"
       href={ARCHIVE_URL}
-      target="_blank"
-      rel="noopener noreferrer"
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={finishGesture}
@@ -196,11 +206,15 @@ function ArchiveLink({ language }: { language: "es" | "en" }) {
       style={{ touchAction: "pan-x pan-up" }}
       className="group flex aspect-square w-full max-w-80 flex-col justify-between border border-black/35 p-6 transition-colors hover:bg-[#11110f] hover:text-[#e9e5dc] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black sm:p-8"
     >
-      <span className="font-mono text-[10px] uppercase tracking-[.18em]">raw.vives / 30 photographs</span>
-      <span className="text-4xl font-black leading-none tracking-[-.05em] sm:text-5xl">Explore<br />archive</span>
+      <span className="font-mono text-[10px] uppercase tracking-[.18em]">
+        {language === "es" ? "raw.vives / 30 fotografías" : "raw.vives / 30 photographs"}
+      </span>
+      <span className="text-4xl font-black leading-none tracking-[-.05em] sm:text-5xl">
+        {language === "es" ? <>Explorar<br />archivo</> : <>Explore<br />archive</>}
+      </span>
       <span className="flex items-end justify-between gap-4">
-        <span className="max-w-36 font-mono text-[9px] font-semibold uppercase leading-relaxed tracking-[.14em] min-[900px]:hidden">
-          {language === "es" ? "Desliza hacia arriba para explorar" : "Swipe up to explore"}
+        <span ref={gestureLabelRef} className="max-w-36 font-mono text-[9px] font-semibold uppercase leading-relaxed tracking-[.14em] min-[900px]:hidden">
+          {language === "es" ? "Desliza hacia arriba para abrir" : "Swipe up to open"}
         </span>
         <ArrowUp ref={arrowRef} aria-hidden="true" className="h-5 w-5 opacity-55 min-[900px]:hidden" />
         <ArrowUpRight aria-hidden="true" className="hidden h-6 w-6 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1 min-[900px]:block" />
@@ -249,7 +263,9 @@ export function Photography() {
       <div className="photo-stage flex flex-col justify-center overflow-hidden">
         <header className="mx-auto grid w-full max-w-[100rem] gap-8 px-4 sm:px-6 md:grid-cols-[.85fr_1.15fr] md:items-end lg:px-8">
           <div>
-            <p className="font-mono text-[10px] font-bold uppercase tracking-[.2em] text-[#9b4e32]">02 / Visual practice</p>
+            <p className="font-mono text-[10px] font-bold uppercase tracking-[.2em] text-[#9b4e32]">
+              {language === "es" ? "04 / Práctica visual" : "04 / Visual practice"}
+            </p>
             <h2 id="photography-title" className="mt-5 text-[clamp(4rem,10vw,9rem)] font-black leading-[.78] tracking-[-.075em]">See<br />differently.</h2>
           </div>
           <div className="max-w-2xl md:justify-self-end">

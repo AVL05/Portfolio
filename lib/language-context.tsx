@@ -27,6 +27,7 @@ export interface TimelineItem {
   period: string;
   location: string;
   description: string;
+  highlights?: string[];
 }
 
 interface Translation {
@@ -36,19 +37,6 @@ interface Translation {
     experience: string;
     projects: string;
     contact: string;
-  };
-  palette: {
-    placeholder: string;
-    empty: string;
-    nav_group: string;
-    actions_group: string;
-    action_lang: string;
-    action_cv: string;
-    action_gallery: string;
-    action_email: string;
-    footer_nav: string;
-    footer_select: string;
-    footer_close: string;
   };
   hero: {
     status: string;

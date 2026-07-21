@@ -14,10 +14,10 @@ export function Navigation() {
   const triggerRef = useRef<HTMLButtonElement>(null);
 
   const navItems = [
-    { name: "Work", href: "#projects" },
-    { name: "About", href: "#about" },
-    { name: "Experience", href: "#experience" },
-    { name: "Contact", href: "#contact" },
+    { name: language === "es" ? "Proyectos" : "Work", href: "#projects" },
+    { name: language === "es" ? "Sobre mí" : "About", href: "#about" },
+    { name: language === "es" ? "Experiencia" : "Experience", href: "#experience" },
+    { name: language === "es" ? "Contacto" : "Contact", href: "#contact" },
   ];
   const closeMenu = useCallback(() => setIsMenuOpen(false), []);
 
@@ -77,7 +77,7 @@ export function Navigation() {
     <>
       <nav aria-label={language === "es" ? "Navegación principal" : "Main navigation"} className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${isScrolled ? "border-b border-border/50 bg-background/88 backdrop-blur-xl" : "bg-transparent"}`}>
         <div className="mx-auto flex h-[4.5rem] max-w-[100rem] items-center justify-between px-4 sm:px-6 lg:px-8">
-          <a href="#hero" className="inline-flex min-h-11 min-w-11 items-center font-mono text-sm font-black uppercase tracking-[-.05em]" aria-label="Alex Vicente — home">
+          <a href="#hero" className="inline-flex min-h-11 min-w-11 items-center font-mono text-sm font-black uppercase tracking-[-.05em]" aria-label={language === "es" ? "AV. — Alex Vicente — inicio" : "AV. — Alex Vicente — home"}>
             AV<span className="text-primary">.</span>
           </a>
 
@@ -117,7 +117,7 @@ export function Navigation() {
           ))}
         </div>
         <div className="flex items-center justify-between font-mono text-[9px] uppercase tracking-[.16em] text-white/55">
-          <span>Valencia / Remote</span><span>2026</span>
+          <span>{language === "es" ? "Valencia / Remoto" : "Valencia / Remote"}</span><span>2026</span>
         </div>
       </div>
     </>

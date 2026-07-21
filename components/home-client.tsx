@@ -3,7 +3,6 @@
 import dynamicLoader from "next/dynamic";
 import { Navigation } from "@/components/navigation";
 import { Hero } from "@/components/hero";
-import { CommandPalette } from "@/components/command-palette";
 import type { ReactNode } from "react";
 
 const Skills = dynamicLoader(() =>
@@ -26,14 +25,13 @@ export function HomeClient({ children }: { children?: ReactNode }) {
   return (
     <div className="min-h-screen relative">
       <Navigation />
-      <CommandPalette />
 
       <main id="main-content" className="relative z-10">
         <Hero />
         <Projects />
-        <Photography />
         <Skills />
         <Experience />
+        <Photography />
         <Contact />
         {children}
       </main>

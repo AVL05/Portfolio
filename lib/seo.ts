@@ -2,9 +2,9 @@ export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://www.aleviclop.dev";
 
 export const SITE_NAME = "Alex Vicente López";
-export const SITE_TITLE = "Alex Vicente | Creative Frontend Developer";
+export const SITE_TITLE = "Alex Vicente | Frontend Developer · React & Next.js";
 export const SITE_DESCRIPTION =
-  "Portfolio de Alex Vicente, Creative Frontend Developer en Valencia especializado en React, Next.js, TypeScript, interfaces interactivas y dirección visual.";
+  "Portfolio de Alex Vicente, Frontend Developer en Valencia especializado en React, Next.js y TypeScript, con experiencia full-stack y criterio visual.";
 
 export const SEO_KEYWORDS = [
   "Alex Vicente López",
@@ -43,7 +43,7 @@ export const INDEXABLE_ROUTES = [
     changeFrequency: "monthly" as const,
   },
   {
-    path: "/proyectos/raw-manager",
+    path: "/proyectos/lumaflow-studio",
     priority: 0.84,
     changeFrequency: "monthly" as const,
   },
@@ -91,9 +91,9 @@ export const personJsonLd = {
   alternateName: ["Alex Vicente", "Alex Vicente Lopez", "aleviclop", "AVL05"],
   url: SITE_URL,
   email: "mailto:alexviclop@gmail.com",
-  jobTitle: "Creative Frontend Developer",
+  jobTitle: "Frontend Developer",
   description:
-    "Alex Vicente López es Creative Frontend Developer y Técnico Superior en Desarrollo de Aplicaciones Web, especializado en React, Next.js, TypeScript e interfaces interactivas.",
+    "Alex Vicente López es Frontend Developer y Técnico Superior en Desarrollo de Aplicaciones Web, especializado en React, Next.js, TypeScript e interfaces accesibles listas para producción.",
   image: `${SITE_URL}/api/og?lang=es`,
   sameAs: SAME_AS,
   knowsAbout: [
@@ -111,7 +111,7 @@ export const personJsonLd = {
   ],
   hasOccupation: {
     "@type": "Occupation",
-    name: "Creative Frontend Developer",
+    name: "Frontend Developer",
     skills:
       "React, Next.js, TypeScript, Laravel, PHP, MySQL, Tailwind CSS, GSAP, diseño de interfaces",
   },

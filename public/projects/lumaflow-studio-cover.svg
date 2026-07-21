@@ -1,0 +1,37 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">LumaFlow Studio product overview</title>
+  <desc id="desc">Conceptual interface showing connected photography studio workflows.</desc>
+  <defs>
+    <linearGradient id="bg" x1="120" y1="20" x2="1480" y2="980" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#151411"/><stop offset="1" stop-color="#090A0B"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="820" y1="160" x2="1450" y2="820" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D99058"/><stop offset="1" stop-color="#83543A"/>
+    </linearGradient>
+    <pattern id="grid" width="52" height="52" patternUnits="userSpaceOnUse"><path d="M52 0H0V52" stroke="#FFF" stroke-opacity=".035"/></pattern>
+  </defs>
+  <rect width="1600" height="1000" rx="44" fill="url(#bg)"/>
+  <rect width="1600" height="1000" rx="44" fill="url(#grid)"/>
+  <circle cx="1370" cy="115" r="330" fill="#D99058" fill-opacity=".09"/>
+  <text x="96" y="116" fill="#D99058" font-family="Arial, sans-serif" font-size="23" font-weight="700" letter-spacing="7">LUMAFLOW / STUDIO</text>
+  <text x="96" y="202" fill="#F4F0E8" font-family="Arial, sans-serif" font-size="70" font-weight="800" letter-spacing="-3">The studio workflow.</text>
+  <text x="96" y="270" fill="#F4F0E8" font-family="Arial, sans-serif" font-size="70" font-weight="800" letter-spacing="-3">Connected and private.</text>
+  <text x="101" y="320" fill="#9D998F" font-family="Arial, sans-serif" font-size="22">PLANNING · CLIENTS · FINANCE · DELIVERY · LOCAL AI</text>
+  <rect x="96" y="388" width="1408" height="500" rx="28" fill="#121313" stroke="#FFFFFF" stroke-opacity=".12"/>
+  <rect x="96" y="388" width="235" height="500" rx="28" fill="#0D0E0E"/>
+  <circle cx="151" cy="446" r="20" fill="url(#accent)"/>
+  <text x="184" y="454" fill="#F4F0E8" font-family="Arial, sans-serif" font-size="18" font-weight="700">LumaFlow Studio</text>
+  <g fill="#85837D" font-family="Arial, sans-serif" font-size="16"><text x="137" y="526">Overview</text><text x="137" y="582">Calendar</text><text x="137" y="638">Clients</text><text x="137" y="694">Finance</text><text x="137" y="750">Deliveries</text><text x="137" y="806">Local AI</text></g>
+  <rect x="119" y="495" width="188" height="45" rx="10" fill="#D99058" fill-opacity=".12"/><rect x="119" y="495" width="4" height="45" rx="2" fill="#D99058"/>
+  <text x="378" y="457" fill="#F4F0E8" font-family="Arial, sans-serif" font-size="27" font-weight="700">Studio overview</text>
+  <text x="378" y="493" fill="#85837D" font-family="Arial, sans-serif" font-size="15">Real workflows, one documented system.</text>
+  <g>
+    <rect x="378" y="535" width="320" height="135" rx="18" fill="#1B1B19" stroke="#FFFFFF" stroke-opacity=".08"/><text x="405" y="575" fill="#A5A198" font-family="Arial, sans-serif" font-size="15">SESSIONS</text><text x="405" y="635" fill="#F4F0E8" font-family="Arial, sans-serif" font-size="32" font-weight="700">Plan</text><path d="M583 630C612 615 631 625 674 574" stroke="#D99058" stroke-width="5" stroke-linecap="round"/>
+    <rect x="720" y="535" width="320" height="135" rx="18" fill="#1B1B19" stroke="#FFFFFF" stroke-opacity=".08"/><text x="747" y="575" fill="#A5A198" font-family="Arial, sans-serif" font-size="15">CLIENTS</text><text x="747" y="635" fill="#F4F0E8" font-family="Arial, sans-serif" font-size="32" font-weight="700">Track</text><circle cx="998" cy="620" r="21" fill="#D99058" fill-opacity=".18" stroke="#D99058"/>
+    <rect x="1062" y="535" width="390" height="135" rx="18" fill="#1B1B19" stroke="#FFFFFF" stroke-opacity=".08"/><text x="1089" y="575" fill="#A5A198" font-family="Arial, sans-serif" font-size="15">DELIVERIES</text><text x="1089" y="635" fill="#F4F0E8" font-family="Arial, sans-serif" font-size="32" font-weight="700">Review</text>
+  </g>
+  <rect x="378" y="696" width="662" height="152" rx="18" fill="#1B1B19" stroke="#FFFFFF" stroke-opacity=".08"/><text x="405" y="738" fill="#F4F0E8" font-family="Arial, sans-serif" font-size="18" font-weight="700">Connected workflow</text><text x="405" y="783" fill="#8F8C85" font-family="Arial, sans-serif" font-size="15">Calendar · tasks · quotes · invoices · galleries</text><text x="405" y="817" fill="#8F8C85" font-family="Arial, sans-serif" font-size="15">Owner-scoped data and documented API boundaries</text>
+  <rect x="1062" y="696" width="390" height="152" rx="18" fill="url(#accent)"/><text x="1093" y="742" fill="#17120F" font-family="Arial, sans-serif" font-size="16" font-weight="700">PRIVACY-FIRST</text><text x="1093" y="794" fill="#FFF9F1" font-family="Arial, sans-serif" font-size="26" font-weight="700">Local AI / WebGPU</text>
+  <text x="96" y="945" fill="#77746E" font-family="Arial, sans-serif" font-size="16" letter-spacing="3">REACT 19 · LARAVEL 13 · MYSQL · WEBGPU</text>
+  <text x="1504" y="945" text-anchor="end" fill="#D99058" font-family="Arial, sans-serif" font-size="16" font-weight="700" letter-spacing="3">AVL05 / 2026</text>
+</svg>

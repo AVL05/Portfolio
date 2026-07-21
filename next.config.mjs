@@ -13,7 +13,6 @@ const securityHeaders = [
       "img-src 'self' data: blob:",
       "font-src 'self' data:",
       "style-src 'self' 'unsafe-inline'",
-      // React Fast Refresh (dev) necesita 'unsafe-eval'; en producción se mantiene estricto.
       `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://va.vercel-scripts.com`,
       "connect-src 'self' https://vitals.vercel-insights.com https://va.vercel-scripts.com https://api.web3forms.com",
       shouldUpgradeInsecureRequests ? "upgrade-insecure-requests" : "",
@@ -51,15 +50,21 @@ const securityHeaders = [
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* typescript: {
-    ignoreBuildErrors: true,
-  }, */
   images: {
     formats: ["image/avif", "image/webp"],
   },
   output: "standalone",
   trailingSlash: false,
   poweredByHeader: false,
+  async redirects() {
+    return [
+      {
+        source: "/proyectos/raw-manager",
+        destination: "/proyectos/lumaflow-studio",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

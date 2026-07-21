@@ -121,6 +121,7 @@ export function Experience() {
     <section
       id="experience"
       ref={containerRef}
+      aria-labelledby="experience-title"
       className="section-padding relative overflow-hidden bg-background"
     >
       <div className="pointer-events-none absolute inset-x-0 top-0 glow-divider" />
@@ -131,6 +132,7 @@ export function Experience() {
           <div className="space-y-5">
             <p className="section-kicker">{t.experience.title}</p>
             <h2
+              id="experience-title"
               className="text-4xl font-black leading-[0.94] tracking-normal text-foreground sm:text-6xl lg:text-7xl"
               aria-label={t.experience.subtitle}
             >
@@ -253,6 +255,16 @@ export function Experience() {
                       <p className="text-muted-foreground/80 text-sm leading-relaxed">
                         {exp.description}
                       </p>
+                      {exp.highlights?.length ? (
+                        <ul className="space-y-2 border-t border-border/45 pt-3">
+                          {exp.highlights.map((highlight) => (
+                            <li key={highlight} className="flex gap-2.5 text-sm leading-relaxed text-muted-foreground/85">
+                              <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                              {highlight}
+                            </li>
+                          ))}
+                        </ul>
+                      ) : null}
                     </div>
                   </div>
                 </div>
@@ -276,7 +288,7 @@ export function Experience() {
             className="h-13 shrink-0 rounded-xl bg-primary px-7 font-bold text-primary-foreground shadow-xl transition-all hover:-translate-y-0.5 hover:bg-primary/90 sm:h-14 sm:px-8"
           >
             <a
-              href="/cv/CV_Alex_Vicente_Lopez_General_A4.pdf"
+              href="/cv/CV_Alex_Vicente_Lopez_Frontend_React_A4.pdf"
               download
               className="flex items-center gap-3"
             >

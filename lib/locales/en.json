@@ -6,22 +6,9 @@
     "experience": "Experience",
     "contact": "Contact"
   },
-  "palette": {
-    "placeholder": "Type a command or search...",
-    "empty": "No results",
-    "nav_group": "Navigation",
-    "actions_group": "Actions",
-    "action_lang": "Cambiar idioma a Español",
-    "action_cv": "Download CV",
-    "action_gallery": "Open photography gallery",
-    "action_email": "Send an email",
-    "footer_nav": "navigate",
-    "footer_select": "open",
-    "footer_close": "close"
-  },
   "hero": {
     "status": "Available for frontend roles · Valencia / remote",
-    "description": "I design and build React and Next.js interfaces with visual judgment, accessibility, and close attention to detail. My full-stack foundation helps me connect product, API, and delivery without losing sight of the experience.",
+    "description": "I build polished, accessible, production-ready interfaces with React, Next.js, and TypeScript. My full-stack foundation in Laravel, PHP, and MySQL helps me connect product, APIs, and delivery.",
     "cta_github": "GitHub",
     "cta_linkedin": "LinkedIn",
     "scroll": "Scroll"
@@ -60,23 +47,23 @@
         "caseStudyHref": "/proyectos/raw-vives",
         "type": "Editorial visual archive",
         "role": "Led and implemented product, architecture, curation, motion, accessibility, localized SEO, and continuous delivery.",
-        "outcome": "30 photographs and 3 series span 81 static pages, supported by 105 tests and a controlled Cloudflare Workers deployment."
+        "outcome": "30 photographs, 3 series, and bilingual detail pages ship as a static site with CI, accessibility checks, and controlled Cloudflare Workers deployment."
       },
       {
-        "title": "RAW Manager: workspace for photographers",
-        "description": "A full-stack platform that brings clients, sessions, quotes, invoices, galleries, equipment, and production planning into one workspace.",
-        "image": "/projects/raw-manager-cover.svg",
-        "technologies": ["React 19", "Vite", "Tailwind CSS", "Laravel 13", "Sanctum", "MySQL", "PWA"],
+        "title": "LumaFlow Studio",
+        "description": "A full-stack workflow platform for photography studios: clients, sessions, calendar, quotes, invoices, galleries, and privacy-first local AI assistance.",
+        "image": "/projects/lumaflow-studio-cover.svg",
+        "technologies": ["React 19", "Laravel 13", "MySQL", "Sanctum", "WebGPU", "PWA"],
         "category": "Web Development",
-        "github": "https://github.com/AVL05/raw-manager",
-        "caseStudyHref": "/proyectos/raw-manager",
-        "type": "Full-stack app / PWA",
-        "role": "Designed and implemented the complete product: interface, state, API, authentication, data model, and business workflows.",
-        "outcome": "One focused workspace that replaces scattered tools throughout the complete photography assignment lifecycle."
+        "github": "https://github.com/AVL05/lumaflow-studio",
+        "caseStudyHref": "/proyectos/lumaflow-studio",
+        "type": "Full-stack product / PWA",
+        "role": "Designed and implemented the frontend, API, authentication, multi-user data model, business workflows, local AI, and technical documentation.",
+        "outcome": "Reproducible portfolio release with 56 backend tests, 33 frontend tests, Docker, CI, and documented architecture."
       },
       {
         "title": "Distrito Gourmet: Restaurant web app",
-        "description": "Final course project: a restaurant web platform with a digital menu, dish management, an admin panel, and order and reservation management. The project brings the main restaurant operations into a single application, with a complete flow designed for customers and internal staff.",
+        "description": "A full-stack restaurant application with a digital menu, cart, reservations, orders, and operational panels for administration, front of house, and kitchen.",
         "image": "/projects/distrito_gourmet.png",
         "technologies": [
           "Vite",
@@ -132,18 +119,6 @@
         "outcome": "Deployed shopping flow that demonstrates interaction, frontend state, and application structure."
       },
       {
-        "title": "Educational XML project",
-        "description": "Educational site for explaining markup languages and XML structure. I built the interface, content organization, and interactive examples.",
-        "image": "/projects/xml-project.png",
-        "technologies": ["HTML5", "CSS3", "JavaScript", "XML"],
-        "category": "Web Development",
-        "link": "https://avl05.github.io/web-xml-alex/",
-        "github": "https://github.com/avl05/web-xml-alex",
-        "type": "Educational website",
-        "role": "Organized technical content, examples, and navigation to explain XML in a visual and progressive way.",
-        "outcome": "Published educational resource with structured content that is easy for students to follow."
-      },
-      {
         "title": "Llibret Falla el Molí 24/25",
         "description": "Editorial design for a 100+ page publication. I defined a consistent visual direction and worked on layout, typography, and production-ready artwork with Adobe tools.",
         "image": "/projects/Falla.svg",
@@ -165,9 +140,9 @@
     "view_full": "Open raw.vives"
   },
   "experience": {
-    "title": "Journey",
-    "subtitle": "Education and real practice.",
-    "desc": "A path focused on web development, technical support, and applied visual projects.",
+    "title": "03 / Experience",
+    "subtitle": "Real work and technical foundations.",
+    "desc": "Professional experience building React interfaces, integrating PHP applications, contributing to Electron software, and resolving incidents, backed by web development and systems training.",
     "edu_title": "Academic Education",
     "job_title": "Professional Experience",
     "cv_title": "Need more detail?",
@@ -195,28 +170,30 @@
         "company": "Burguet Sistemas",
         "period": "16/04/2026 - 26/05/2026",
         "location": "Xirivella, Valencia",
-        "description": "Migration of Java applications to React and Electron environments, adaptation of PHP websites to React, and support creating database tables."
-      },
-      {
-        "title": "Visual Identity and Digital Strategy",
-        "company": "Cultural Commissions",
-        "period": "2023 - 2025",
-        "location": "Valencia, Spain",
-        "description": "Editorial publication design, visual material creation, and digital content management for cultural communication."
+        "description": "Development and maintenance of internal products in a hybrid professional environment.",
+        "highlights": [
+          "Built React interfaces for a corporate intranet integrated with PHP.",
+          "Contributed to a React and Electron desktop application for parking management.",
+          "Resolved incidents and collaborated through Git and Bitbucket."
+        ]
       },
       {
         "title": "IT Support Technician (Internship)",
-        "company": "Municipal Support",
-        "period": "2024",
+        "company": "Ajuntament de Carlet",
+        "period": "03/2024 - 06/2024",
         "location": "Carlet, Valencia",
-        "description": "Technical support for hardware, software, and user incidents in a public-sector environment."
+        "description": "On-site technical support for municipal workstations and infrastructure.",
+        "highlights": [
+          "Prepared, installed, and maintained hardware, software, and operating systems.",
+          "Supported basic systems administration and rack infrastructure organization."
+        ]
       }
     ]
   },
   "contact": {
     "title": "Contact",
     "subtitle": "/ Let's talk",
-    "desc": "If you need a junior frontend developer who cares about both the interface and the product behind it, let's talk.",
+    "desc": "I am looking for frontend opportunities where I can contribute with React, Next.js, TypeScript, visual judgment, and product thinking.",
     "form_name": "Your name",
     "form_email": "Your email",
     "form_message": "Your message",
@@ -228,13 +205,13 @@
     "form_success": "Message sent. I will get back to you soon.",
     "form_error": "Something went wrong. Please try again.",
     "links_title": "Direct links",
-    "availability_title": "Available for junior developer opportunities",
-    "availability_desc": "You can email me directly or download the CV if you want to review my education, stack, and projects before getting in touch.",
+    "availability_title": "Available for frontend opportunities",
+    "availability_desc": "React, Next.js, and TypeScript as my specialty; full-stack foundations, visual judgment, and product thinking to support better delivery.",
     "cv_btn": "Download CV",
     "email_btn": "Send email",
     "visual_portfolio_title": "Photography portfolio",
-    "visual_portfolio_desc": "Explore my full selection on alexgallery.",
-    "visual_portfolio_btn": "Open alexgallery",
+    "visual_portfolio_desc": "Explore the complete photography archive on raw.vives.",
+    "visual_portfolio_btn": "Open raw.vives",
     "footer_built": "Designed and developed by Alex Vicente."
   }
 }

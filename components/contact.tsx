@@ -13,7 +13,7 @@ import { gsap, prefersReducedMotion, useGSAP } from "@/lib/gsap";
 import { useLanguage } from "@/lib/language-context";
 import { RevealHeader } from "@/components/reveal-header";
 export function Contact() {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
   const containerRef = useRef<HTMLElement>(null);
   const [formData, setFormData] = useState({
     name: "",
@@ -135,6 +135,7 @@ export function Contact() {
                   <Input
                     id="name"
                     type="text"
+                    autoComplete="name"
                     placeholder={t.contact.form_placeholder_name}
                     value={formData.name}
                     maxLength={120}
@@ -156,6 +157,7 @@ export function Contact() {
                   <Input
                     id="email"
                     type="email"
+                    autoComplete="email"
                     placeholder={t.contact.form_placeholder_email}
                     value={formData.email}
                     maxLength={254}
@@ -199,12 +201,12 @@ export function Contact() {
                 </Button>
 
                 {submitStatus === "success" && (
-                  <p className="rounded-lg border border-primary/25 bg-primary/10 px-4 py-3 text-center text-sm font-medium text-primary">
+                  <p role="status" className="rounded-lg border border-primary/25 bg-primary/10 px-4 py-3 text-center text-sm font-medium text-primary">
                     {t.contact.form_success}
                   </p>
                 )}
                 {submitStatus === "error" && (
-                  <p className="rounded-lg border border-destructive/25 bg-destructive/10 px-4 py-3 text-center text-sm font-medium text-destructive">
+                  <p role="alert" className="rounded-lg border border-destructive/25 bg-destructive/10 px-4 py-3 text-center text-sm font-medium text-destructive">
                     {t.contact.form_error}
                   </p>
                 )}
@@ -227,25 +229,20 @@ export function Contact() {
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   <a
-                    href="/cv/CV_Alex_Vicente_Lopez_General_A4.pdf"
+                    href="/cv/CV_Alex_Vicente_Lopez_Frontend_React_A4.pdf"
                     download
-                    className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-primary-foreground transition-all hover:-translate-y-0.5 hover:bg-primary/90"
+                    className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-primary-foreground transition-all hover:-translate-y-0.5 hover:bg-primary/90"
                   >
                     <FileText className="h-4 w-4" />
                     {t.contact.cv_btn}
                   </a>
                   <a
                     href="mailto:alexviclop@gmail.com"
-                    className="inline-flex items-center gap-2 rounded-lg border border-primary/35 bg-background/35 px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-primary transition-all hover:-translate-y-0.5 hover:bg-primary hover:text-primary-foreground"
+                    className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-primary/35 bg-background/35 px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-primary transition-all hover:-translate-y-0.5 hover:bg-primary hover:text-primary-foreground"
                   >
                     <Mail className="h-4 w-4" />
                     {t.contact.email_btn}
                   </a>
-                </div>
-                <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 font-mono text-[10px] font-bold uppercase tracking-[0.1em] text-primary/80">
-                  <a href="/cv/CV_Alex_Vicente_Lopez_Full_Stack_A4.pdf" download className="hover:text-primary hover:underline">Full Stack</a>
-                  <a href="/cv/CV_Alex_Vicente_Lopez_Frontend_React_A4.pdf" download className="hover:text-primary hover:underline">Frontend React</a>
-                  <a href="/cv/CV_Alex_Vicente_Lopez_Backend_Laravel_PHP_A4.pdf" download className="hover:text-primary hover:underline">Backend Laravel/PHP</a>
                 </div>
               </div>
               <div className="space-y-5">
@@ -299,7 +296,7 @@ export function Contact() {
                   href="https://gallery.aleviclop.dev/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-lg border border-primary/30 bg-primary/10 px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-primary transition-all hover:bg-primary hover:text-primary-foreground"
+                  className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-primary/30 bg-primary/10 px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-primary transition-all hover:bg-primary hover:text-primary-foreground"
                 >
                   {t.contact.visual_portfolio_btn}
                   <ArrowUpRight className="h-3.5 w-3.5" />
@@ -316,9 +313,9 @@ export function Contact() {
               </p>
               <Link
                 href="/legal"
-                className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground/40 transition-colors hover:text-primary"
+                className="inline-flex min-h-11 items-center text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground/40 transition-colors hover:text-primary"
               >
-                Aviso Legal &amp; Privacidad
+                {language === "es" ? "Aviso legal y privacidad" : "Legal notice & privacy"}
               </Link>
             </footer>
           </div>

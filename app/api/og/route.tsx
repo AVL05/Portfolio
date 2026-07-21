@@ -4,10 +4,10 @@ export const runtime = "edge";
 
 const translations = {
   es: {
-    subtitle: "Portafolio y Fotografía",
+    subtitle: "Frontend Developer · React · Next.js",
   },
   en: {
-    subtitle: "Portfolio & Photography",
+    subtitle: "Frontend Developer · React · Next.js",
   },
 };
 
@@ -90,9 +90,8 @@ export async function GET(request: Request) {
         height: 630,
       },
     );
-  } catch (e: any) {
-    console.error(`${e.message}`);
-    return new Response(`Failed to generate the image`, {
+  } catch {
+    return new Response("Failed to generate the image", {
       status: 500,
     });
   }

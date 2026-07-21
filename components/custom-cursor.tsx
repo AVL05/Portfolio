@@ -2,16 +2,10 @@
 
 import { useCallback, useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
-
-const labels: Record<string, string> = {
-  project: "OPEN",
-  external: "↗",
-  gallery: "EXPLORE",
-  drag: "DRAG",
-  contact: "HELLO",
-};
+import { useLanguage } from "@/lib/language-context";
 
 export function CustomCursor() {
+  const { language } = useLanguage();
   const cleanupRef = useRef<(() => void) | null>(null);
 
   const setCursorRef = useCallback((cursor: HTMLDivElement | null) => {
@@ -41,6 +35,13 @@ export function CustomCursor() {
         if (state === activeState) return;
         activeState = state;
         cursor.dataset.state = state;
+        const labels: Record<string, string> = {
+          project: language === "es" ? "ABRIR" : "OPEN",
+          external: "↗",
+          gallery: language === "es" ? "EXPLORAR" : "EXPLORE",
+          drag: language === "es" ? "ARRASTRAR" : "DRAG",
+          contact: language === "es" ? "HOLA" : "HELLO",
+        };
         cursor.textContent = labels[state] ?? "";
         scaleTo(state ? 1 : 0.42);
       };
@@ -56,7 +57,7 @@ export function CustomCursor() {
         window.removeEventListener("pointermove", onMove);
         document.documentElement.removeEventListener("mouseleave", onLeave);
       };
-    }, []);
+    }, [language]);
 
   useEffect(() => () => cleanupRef.current?.(), []);
 

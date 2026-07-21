@@ -8,7 +8,6 @@ import type React from "react";
 import { Suspense } from "react";
 import "@/lib/raf-polyfill";
 import "./globals.css";
-import { SmoothScroll } from "@/components/smooth-scroll";
 import { CustomCursor } from "@/components/custom-cursor";
 import { LanguageProvider, type Language } from "@/lib/language-context";
 import {
@@ -100,6 +99,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isVercel = process.env.VERCEL === "1";
   const cookieStore = await cookies();
   const cookieLanguage = cookieStore.get("language")?.value;
   const requestHeaders = await headers();
@@ -118,8 +118,8 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <link rel="preconnect" href="https://va.vercel-scripts.com" />
-        <link rel="preconnect" href="https://vitals.vercel-insights.com" />
+        {isVercel ? <link rel="preconnect" href="https://va.vercel-scripts.com" /> : null}
+        {isVercel ? <link rel="preconnect" href="https://vitals.vercel-insights.com" /> : null}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -141,14 +141,12 @@ export default async function RootLayout({
             {initialLanguage === "es" ? "Saltar al contenido" : "Skip to content"}
           </a>
           <CustomCursor />
-          <SmoothScroll>
-            <div className="relative min-h-screen overflow-x-hidden">
-              <Suspense fallback={null}>{children}</Suspense>
-            </div>
-          </SmoothScroll>
+          <div className="relative min-h-screen overflow-x-hidden">
+            <Suspense fallback={null}>{children}</Suspense>
+          </div>
         </LanguageProvider>
-        <Analytics />
-        <SpeedInsights />
+        {isVercel ? <Analytics /> : null}
+        {isVercel ? <SpeedInsights /> : null}
       </body>
     </html>
   );

@@ -26,18 +26,18 @@ export function Hero() {
         .fromTo(
           q(".hero-mask-line"),
           { yPercent: 115 },
-          { yPercent: 0, duration: 1.15, stagger: 0.09 },
+          { yPercent: 0, duration: 0.8, stagger: 0.07 },
         )
         .fromTo(
           q(".hero-reveal"),
           { autoAlpha: 0, y: 18 },
-          { autoAlpha: 1, y: 0, duration: 0.75, stagger: 0.07 },
-          "-=0.75",
+          { autoAlpha: 1, y: 0, duration: 0.5, stagger: 0.05 },
+          "-=0.55",
         )
         .fromTo(
           q(".hero-frame"),
           { scale: 1.08 },
-          { scale: 1, duration: 1.4, ease: "power3.out" },
+          { scale: 1, duration: 0.95, ease: "power3.out" },
           0,
         );
 
@@ -74,11 +74,6 @@ export function Hero() {
     { scope: containerRef },
   );
 
-  const copy =
-    language === "es"
-      ? "Diseño y desarrollo interfaces React y Next.js donde dirección visual, accesibilidad y arquitectura trabajan como un solo sistema."
-      : "I design and build React and Next.js interfaces where visual direction, accessibility, and architecture work as one system.";
-
   return (
     <section
       id="hero"
@@ -97,6 +92,7 @@ export function Hero() {
             }
             fill
             priority
+            fetchPriority="high"
             className="object-cover object-center"
             sizes="(max-width: 1024px) 100vw, 69vw"
           />
@@ -104,7 +100,7 @@ export function Hero() {
         </div>
         <div className="absolute inset-0 border border-white/14" />
         <span className="absolute bottom-4 right-4 hidden font-mono text-[9px] uppercase tracking-[.2em] text-white/65 sm:block">
-          raw.vives / 2022—2025
+          {language === "es" ? "Fotografía de Alex Vicente" : "Photograph by Alex Vicente"}
         </span>
       </div>
 
@@ -130,10 +126,10 @@ export function Hero() {
         <div className="hero-copy mt-7 grid gap-7 border-t border-border/70 pt-5 will-change-transform md:grid-cols-[minmax(0,.72fr)_minmax(280px,.5fr)_auto] md:items-end">
           <div className="hero-reveal">
             <p className="font-mono text-[10px] font-bold uppercase tracking-[.18em] text-primary">
-              Creative Frontend Developer
+              Frontend Developer · React / Next.js
             </p>
             <p className="mt-3 max-w-[58ch] text-base font-medium leading-relaxed text-foreground/76 sm:text-lg">
-              {copy}
+              {t.hero.description}
             </p>
           </div>
 
@@ -145,7 +141,7 @@ export function Hero() {
               <FaLinkedin /> LinkedIn
             </a>
             <a data-cursor="contact" href="mailto:alexviclop@gmail.com" className="cinema-link">
-              <Mail /> Contact
+              <Mail /> {language === "es" ? "Contacto" : "Contact"}
             </a>
             <a href="/cv/CV_Alex_Vicente_Lopez_Frontend_React_A4.pdf" download className="cinema-link">
               <FileText /> CV

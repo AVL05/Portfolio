@@ -14,7 +14,7 @@ raw.vives combina dirección visual, curación y arquitectura frontend para pres
 
 ## CV
 
-raw.vives — Dirección y desarrollo de un archivo fotográfico editorial bilingüe con Next.js, TypeScript y Cloudflare Workers; 30 fotografías, 3 series, 81 páginas estáticas y 105 tests.
+raw.vives — Dirección y desarrollo de un archivo fotográfico editorial bilingüe con Next.js, TypeScript y Cloudflare Workers; 30 fotografías, 3 series, 73 rutas estáticas y 67 tests.
 
 ## LinkedIn
 
@@ -22,7 +22,7 @@ He publicado raw.vives, un archivo fotográfico editorial pensado como producto,
 
 ## Técnica
 
-Next.js App Router genera 81 páginas estáticas localizadas. Configuraciones centrales modelan curación, motion y series; 105 tests validan datos y navegación. GitHub Actions controla la entrega a Cloudflare Workers con credenciales de mínimo privilegio.
+Next.js App Router genera 73 rutas estáticas localizadas. Configuraciones centrales modelan curación, motion y series; 67 tests validan datos y navegación. GitHub Actions controla la entrega a Cloudflare Workers con credenciales de mínimo privilegio.
 
 ## Tecnologías
 

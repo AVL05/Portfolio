@@ -23,13 +23,13 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <SeoPageShell
-      eyebrow="Sobre mi"
+      eyebrow="Sobre mí"
       title="Sobre Alex Vicente López"
-      description="Alex Vicente López es un desarrollador web en formación con base full-stack, experiencia práctica en React, Electron, PHP, Laravel y proyectos digitales con atención al detalle visual."
+      description="Alex Vicente López es Frontend Developer con formación en DAW, base full-stack y experiencia práctica construyendo interfaces con React, Next.js y TypeScript."
       sections={[
         {
           title: "Perfil profesional",
-          body: "El portfolio de Alex Vicente López centraliza su trabajo como desarrollador web junior, combinando programación frontend, backend, diseño de interfaces y criterio visual aplicado a productos digitales.",
+          body: "Alex se especializa en frontend con React, Next.js y TypeScript. Su trabajo combina implementación accesible, criterio de producto y dirección visual aplicada a interfaces reales.",
         },
         {
           title: "Formación técnica",

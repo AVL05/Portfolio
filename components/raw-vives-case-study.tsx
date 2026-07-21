@@ -42,16 +42,16 @@ const copy = {
     quality: "Accesibilidad, rendimiento y SEO",
     qualityItems: ["Contenido visible sin depender de animaciones", "Teclado, foco, alt localizado y reduced motion", "Imágenes responsivas, lazy loading y dimensiones reservadas", "Canonical, hreflang, Open Graph y sitemap localizado"],
     delivery: "CI/CD y Cloudflare",
-    deliveryText: "GitHub Actions valida tipos, lint, 105 tests, build y exportación antes de desplegar el sitio estático en Cloudflare Workers con un token limitado al Worker y su ruta.",
+    deliveryText: "GitHub Actions valida tipos, lint, 67 tests, build y exportación antes de desplegar el sitio estático en Cloudflare Workers con un token limitado al Worker y su ruta.",
     decisions: "Retos, decisiones y compromisos",
     decisionsText: "Se priorizaron relaciones fotográficas verificables, una única configuración por sistema y progressive enhancement. Se descartaron carruseles, scroll horizontal, nuevos shaders y efectos por tarjeta para proteger claridad, memoria y restauración de navegación.",
     results: "Resultados medidos",
-    resultsText: "El resultado publicado contiene 30 fotografías, 3 series editoriales, 81 páginas estáticas y 105 tests. No se atribuyen tráfico, conversiones ni feedback no medidos.",
+    resultsText: "El resultado validado contiene 30 fotografías, 3 series editoriales, 73 rutas estáticas y 67 tests. No se atribuyen tráfico, conversiones ni feedback no medidos.",
     learnings: "Aprendizajes",
     learningItems: ["La curación aporta más continuidad que añadir contenido", "El motion funciona mejor como gramática que como colección de efectos", "La navegación contextual necesita un fallback directo y estable"],
     gallery: "Producto publicado",
     next: "Siguiente caso",
-    nextTitle: "RAW Manager",
+    nextTitle: "LumaFlow Studio",
     nextText: "Un producto full-stack para organizar el trabajo profesional de fotografía.",
   },
   en: {
@@ -78,16 +78,16 @@ const copy = {
     quality: "Accessibility, performance, and SEO",
     qualityItems: ["Content remains visible without animation", "Keyboard, focus, localized alt text, and reduced motion", "Responsive images, lazy loading, and reserved dimensions", "Canonical, hreflang, Open Graph, and localized sitemap"],
     delivery: "CI/CD and Cloudflare",
-    deliveryText: "GitHub Actions validates types, lint, 105 tests, build, and export before deploying the static site to Cloudflare Workers with a token limited to the Worker and its route.",
+    deliveryText: "GitHub Actions validates types, lint, 67 tests, build, and export before deploying the static site to Cloudflare Workers with a token limited to the Worker and its route.",
     decisions: "Challenges, decisions, and trade-offs",
     decisionsText: "The work prioritised verifiable photographic relationships, one central configuration per system, and progressive enhancement. Carousels, horizontal scrolling, new shaders, and per-card effects were rejected to protect clarity, memory, and navigation restoration.",
     results: "Measured results",
-    resultsText: "The published result contains 30 photographs, 3 editorial series, 81 static pages, and 105 tests. No unmeasured traffic, conversion, or feedback claims are included.",
+    resultsText: "The validated result contains 30 photographs, 3 editorial series, 73 static routes, and 67 tests. No unmeasured traffic, conversion, or feedback claims are included.",
     learnings: "Learnings",
     learningItems: ["Curation creates more continuity than adding content", "Motion works better as a grammar than a collection of effects", "Contextual navigation needs a stable direct-access fallback"],
     gallery: "Published product",
     next: "Next case",
-    nextTitle: "RAW Manager",
+    nextTitle: "LumaFlow Studio",
     nextText: "A full-stack product for organising professional photography work.",
   },
 } as const;
@@ -124,7 +124,7 @@ export function RawVivesCaseStudy() {
           </div>
 
           <dl className="mt-12 grid grid-cols-2 border-y border-border/55 sm:grid-cols-4">
-            {[["30", language === "es" ? "Fotografías" : "Photographs"], ["3", language === "es" ? "Series" : "Series"], ["81", language === "es" ? "Páginas estáticas" : "Static pages"], ["105", "Tests"]].map(([value, label]) => <div key={label} className="border-border/55 px-3 py-5 first:pl-0 sm:border-r sm:last:border-r-0"><dt className="font-mono text-2xl font-black text-primary sm:text-3xl">{value}</dt><dd className="mt-1 text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">{label}</dd></div>)}
+            {[["30", language === "es" ? "Fotografías" : "Photographs"], ["3", language === "es" ? "Series" : "Series"], ["73", language === "es" ? "Rutas estáticas" : "Static routes"], ["67", "Tests"]].map(([value, label]) => <div key={label} className="border-border/55 px-3 py-5 first:pl-0 sm:border-r sm:last:border-r-0"><dt className="font-mono text-2xl font-black text-primary sm:text-3xl">{value}</dt><dd className="mt-1 text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">{label}</dd></div>)}
           </dl>
         </div>
       </section>
@@ -146,7 +146,7 @@ export function RawVivesCaseStudy() {
 
       <section className="px-4 py-16 sm:px-6 lg:px-8"><div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[.9fr_1.1fr]"><div><p className="section-kicker mb-4">{t.results}</p><h2 className="text-3xl font-black leading-tight sm:text-5xl">{language === "es" ? "Resultados verificables, sin métricas decorativas." : "Verifiable results, without decorative metrics."}</h2><p className="mt-5 font-medium leading-relaxed text-muted-foreground">{t.resultsText}</p></div><div className="rounded-xl border border-border/65 bg-card/62 p-7"><h3 className="text-2xl font-black">{t.learnings}</h3><ol className="mt-5 space-y-4">{t.learningItems.map((item,index) => <li key={item} className="flex gap-4 font-medium text-muted-foreground"><span className="font-mono text-xs font-black text-primary">0{index + 1}</span>{item}</li>)}</ol></div></div></section>
 
-      <section className="px-4 py-20 sm:px-6 lg:px-8"><div className="mx-auto grid max-w-7xl gap-8 rounded-xl border border-primary/30 bg-primary/8 p-7 sm:p-10 lg:grid-cols-[1fr_auto] lg:items-end"><div><p className="section-kicker mb-4">{t.next}</p><h2 className="text-4xl font-black sm:text-6xl">{t.nextTitle}</h2><p className="mt-4 max-w-2xl font-medium text-muted-foreground">{t.nextText}</p></div><Link href="/proyectos/raw-manager" className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-bold text-primary-foreground hover:bg-primary/90">{language === "es" ? "Ver siguiente caso" : "View next case"}<ArrowUpRight className="h-4 w-4" /></Link></div></section>
+      <section className="px-4 py-20 sm:px-6 lg:px-8"><div className="mx-auto grid max-w-7xl gap-8 rounded-xl border border-primary/30 bg-primary/8 p-7 sm:p-10 lg:grid-cols-[1fr_auto] lg:items-end"><div><p className="section-kicker mb-4">{t.next}</p><h2 className="text-4xl font-black sm:text-6xl">{t.nextTitle}</h2><p className="mt-4 max-w-2xl font-medium text-muted-foreground">{t.nextText}</p></div><Link href="/proyectos/lumaflow-studio" className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-bold text-primary-foreground hover:bg-primary/90">{language === "es" ? "Ver siguiente caso" : "View next case"}<ArrowUpRight className="h-4 w-4" /></Link></div></section>
     </main>
   );
 }

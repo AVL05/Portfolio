@@ -2,6 +2,10 @@
 
 **Portfolio profesional** construido con Next.js 16, React 19 y TypeScript. Disponible en [aleviclop.dev](https://aleviclop.dev).
 
+Proyecto principal: [raw.vives](https://gallery.aleviclop.dev/), un archivo fotográfico editorial bilingüe con 30 fotografías, 3 series y una [página de caso de estudio](https://aleviclop.dev/proyectos/raw-vives).
+
+![raw.vives en producción](public/projects/raw-vives/raw-vives-hero.webp)
+
 ---
 
 ## Stack
@@ -31,6 +35,8 @@ pnpm install
 pnpm dev      # servidor de desarrollo (webpack, no Turbopack)
 pnpm build    # build de producción
 pnpm lint     # ESLint
+pnpm typecheck
+pnpm test
 ```
 
 ## Estructura
@@ -41,6 +47,7 @@ components/   — Secciones y componentes UI
 lib/          — GSAP, contexto de idioma, SEO, utilidades
 lib/locales/  — Traducciones ES / EN
 public/       — Assets estáticos (imágenes, CV, favicons)
+docs/         — Integración, operación y copy reutilizable
 ```
 
 ## Secciones
@@ -48,6 +55,10 @@ public/       — Assets estáticos (imágenes, CV, favicons)
 `Navigation → Hero → Projects → Skills → Experience → Photography → Contact`
 
 Todas las secciones respetan `prefers-reduced-motion`. El idioma (ES/EN) se persiste en cookie + localStorage.
+
+## Despliegue
+
+La rama `main` se valida con GitHub Actions y se publica en Vercel mediante la integración del repositorio. El rollback consiste en restaurar el deployment estable desde Vercel o revertir el commit publicado y volver a ejecutar CI.
 
 ## Derechos de autor
 

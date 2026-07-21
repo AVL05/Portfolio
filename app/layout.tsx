@@ -83,10 +83,6 @@ export const metadata: Metadata = {
       "x-default": SITE_URL,
     },
   },
-  icons: {
-    icon: "/favicon.svg",
-    apple: "/favicon.svg",
-  },
   other: {
     "profile:first_name": "Alex",
     "profile:last_name": "Vicente López",

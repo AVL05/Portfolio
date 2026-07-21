@@ -6,7 +6,7 @@ import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
 import { useLanguage, type Language } from "@/lib/language-context";
 
-export type LocalizedText = Record<Language, string>;
+type LocalizedText = Record<Language, string>;
 
 export interface ProjectCaseStudyData {
   title: string;

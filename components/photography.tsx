@@ -111,8 +111,8 @@ export function Photography() {
           </div>
         </header>
 
-        <div className="photo-rail mt-14 overflow-x-auto overscroll-x-contain [scrollbar-width:none] min-[900px]:mt-10 min-[900px]:overflow-visible">
-          <div className="photo-track flex w-max snap-x snap-mandatory gap-4 px-4 will-change-transform sm:gap-6 sm:px-6 min-[900px]:snap-none lg:px-8">
+        <div className="photo-rail mt-14 snap-x snap-mandatory overflow-x-auto overscroll-x-contain [scrollbar-width:none] min-[900px]:mt-10 min-[900px]:snap-none min-[900px]:overflow-visible">
+          <div className="photo-track flex w-max gap-4 px-4 will-change-transform sm:gap-6 sm:px-6 lg:px-8">
           {frames.map((frame) => (
             <figure key={frame.src} className={`${frame.frame} shrink-0 snap-center min-[900px]:[scroll-snap-align:none]`}>
               <div className={`relative ${frame.ratio} overflow-hidden bg-black`} data-cursor="gallery">

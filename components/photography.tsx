@@ -206,14 +206,14 @@ function ArchiveLink({ language }: { language: "es" | "en" }) {
       style={{ touchAction: "pan-x pan-up" }}
       className="group flex aspect-square w-full max-w-80 flex-col justify-between border border-black/35 p-6 transition-colors hover:bg-[#11110f] hover:text-[#e9e5dc] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black sm:p-8"
     >
-      <span className="font-mono text-[10px] uppercase tracking-[.18em]">
+      <span className="font-mono text-[11px] uppercase tracking-[.14em]">
         {language === "es" ? "raw.vives / 30 fotografías" : "raw.vives / 30 photographs"}
       </span>
       <span className="text-4xl font-black leading-none tracking-[-.05em] sm:text-5xl">
         {language === "es" ? <>Explorar<br />archivo</> : <>Explore<br />archive</>}
       </span>
       <span className="flex items-end justify-between gap-4">
-        <span ref={gestureLabelRef} className="max-w-36 font-mono text-[9px] font-semibold uppercase leading-relaxed tracking-[.14em] min-[900px]:hidden">
+        <span ref={gestureLabelRef} className="max-w-40 font-mono text-[11px] font-semibold uppercase leading-relaxed tracking-[.11em] min-[900px]:hidden">
           {language === "es" ? "Desliza hacia arriba para abrir" : "Swipe up to open"}
         </span>
         <ArrowUp ref={arrowRef} aria-hidden="true" className="h-5 w-5 opacity-55 min-[900px]:hidden" />
@@ -263,10 +263,12 @@ export function Photography() {
       <div className="photo-stage flex flex-col justify-center overflow-hidden">
         <header className="mx-auto grid w-full max-w-[100rem] gap-8 px-4 sm:px-6 md:grid-cols-[.85fr_1.15fr] md:items-end lg:px-8">
           <div>
-            <p className="font-mono text-[10px] font-bold uppercase tracking-[.2em] text-[#9b4e32]">
+            <p className="font-mono text-[11px] font-bold uppercase tracking-[.15em] text-[#85412d]">
               {language === "es" ? "04 / Práctica visual" : "04 / Visual practice"}
             </p>
-            <h2 id="photography-title" className="mt-5 text-[clamp(4rem,10vw,9rem)] font-black leading-[.78] tracking-[-.075em]">See<br />differently.</h2>
+            <h2 id="photography-title" className="mt-5 text-[clamp(4rem,10vw,9rem)] font-black leading-[.78] tracking-[-.075em]">
+              {language === "es" ? <>Otra<br />mirada.</> : <>See<br />differently.</>}
+            </h2>
           </div>
           <div className="max-w-2xl md:justify-self-end">
             <p className="text-balance text-2xl font-semibold leading-tight tracking-[-.03em] sm:text-3xl lg:text-4xl">
@@ -296,7 +298,7 @@ export function Photography() {
                   sizes={frame.sizes}
                 />
               </div>
-              <figcaption className="mt-3 border-t border-black/25 pt-3 font-mono text-[9px] font-semibold uppercase tracking-[.16em] text-black/58">
+              <figcaption className="mt-3 border-t border-black/25 pt-3 font-mono text-[11px] font-semibold uppercase tracking-[.12em] text-black/75">
                 {frame.series[language]}
               </figcaption>
             </figure>

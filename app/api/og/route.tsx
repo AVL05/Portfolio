@@ -4,7 +4,7 @@ export const runtime = "edge";
 
 const translations = {
   es: {
-    subtitle: "Frontend Developer · React · Next.js",
+    subtitle: "Desarrollador frontend · React · Next.js",
   },
   en: {
     subtitle: "Frontend Developer · React · Next.js",

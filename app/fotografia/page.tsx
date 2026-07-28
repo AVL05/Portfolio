@@ -1,49 +1,66 @@
-import type { Metadata } from "next";
 import { SeoPageShell } from "@/components/seo-page-shell";
-import { absoluteUrl, SITE_NAME, SITE_URL } from "@/lib/seo";
+import { createLocalizedMetadata } from "@/lib/seo";
+import { getRequestLanguage } from "@/lib/request-language";
 
-export const metadata: Metadata = {
-  title: "Fotografía de Alex Vicente López",
-  description:
-    "Portfolio fotográfico de Alex Vicente López: composición, mirada visual, fotografía urbana, paisaje y criterio estético aplicado a proyectos digitales.",
-  alternates: {
-    canonical: absoluteUrl("/fotografia"),
-  },
-  openGraph: {
-    title: "Fotografía de Alex Vicente López",
-    description:
-      "Galería y mirada visual de Alex Vicente López, conectada con su trabajo digital y de desarrollo web.",
-    url: absoluteUrl("/fotografia"),
-    siteName: SITE_NAME,
-    type: "website",
-    images: [
-      `${SITE_URL}/api/og?title=Fotograf%C3%ADa%20Alex%20Vicente%20L%C3%B3pez`,
-    ],
-  },
-};
+export async function generateMetadata() {
+  return createLocalizedMetadata({
+    language: await getRequestLanguage(),
+    path: "/fotografia",
+    copy: {
+      es: {
+        title: "Fotografía de Alex Vicente López",
+        description:
+          "Portfolio fotográfico de Alex Vicente López: composición, fotografía urbana, paisaje y criterio visual aplicado a proyectos digitales.",
+      },
+      en: {
+        title: "Photography by Alex Vicente López",
+        description:
+          "Alex Vicente López’s photography portfolio: composition, urban photography, landscapes, and visual judgment applied to digital work.",
+      },
+    },
+  });
+}
 
 export default function PhotographyPage() {
   return (
     <SeoPageShell
-      eyebrow="Fotografía"
-      title="Fotografía y mirada visual de Alex Vicente López"
-      description="La fotografía forma parte de la identidad digital de Alex Vicente López y refuerza su forma de trabajar interfaces, composición, detalle y narrativa visual."
+      eyebrow={{ es: "Fotografía", en: "Photography" }}
+      title={{
+        es: "Fotografía y mirada visual de Alex Vicente López",
+        en: "Alex Vicente López’s photography and visual perspective",
+      }}
+      description={{
+        es: "La fotografía forma parte de la identidad digital de Alex Vicente López y refuerza su forma de trabajar interfaces, composición, detalle y narrativa visual.",
+        en: "Photography is part of Alex Vicente López’s digital identity and informs how he approaches interfaces, composition, detail, and visual narrative.",
+      }}
       sections={[
         {
-          title: "Galería fotográfica",
-          body: "La galería pública está disponible en gallery.aleviclop.dev y reúne una selección visual vinculada a composición, paisaje, entorno urbano y edición fotográfica.",
+          title: { es: "Galería fotográfica", en: "Photography gallery" },
+          body: {
+            es: "La galería pública está disponible en gallery.aleviclop.dev y reúne una selección visual vinculada a composición, paisaje, entorno urbano y edición fotográfica.",
+            en: "The public gallery at gallery.aleviclop.dev presents a visual selection focused on composition, landscapes, urban environments, and photographic editing.",
+          },
         },
         {
-          title: "Criterio visual",
-          body: "El trabajo fotográfico de Alex Vicente López complementa su portfolio técnico con atención a encuadre, jerarquía, ritmo visual y calidad del resultado final.",
+          title: { es: "Criterio visual", en: "Visual judgment" },
+          body: {
+            es: "El trabajo fotográfico de Alex Vicente López complementa su portfolio técnico con atención a encuadre, jerarquía, ritmo visual y calidad del resultado final.",
+            en: "Alex Vicente López’s photography complements his technical portfolio through attention to framing, hierarchy, visual rhythm, and final quality.",
+          },
         },
         {
-          title: "Diseño digital",
-          body: "La experiencia en fotografía y diseño editorial se traslada a interfaces web más cuidadas, con mejor dirección visual y decisiones de composición más precisas.",
+          title: { es: "Diseño digital", en: "Digital design" },
+          body: {
+            es: "La experiencia en fotografía y diseño editorial se traslada a interfaces web más cuidadas, con mejor dirección visual y decisiones de composición más precisas.",
+            en: "Experience in photography and editorial design translates into more considered web interfaces, stronger visual direction, and more precise composition.",
+          },
         },
         {
-          title: "Identidad creativa",
-          body: "Alex Vicente combina desarrollo web y fotografía para construir una presencia digital reconocible bajo el dominio aleviclop.dev y la galería gallery.aleviclop.dev.",
+          title: { es: "Identidad creativa", en: "Creative identity" },
+          body: {
+            es: "Alex Vicente combina desarrollo web y fotografía para construir una presencia digital reconocible bajo el dominio aleviclop.dev y la galería gallery.aleviclop.dev.",
+            en: "Alex Vicente combines web development and photography to build a recognizable digital presence across aleviclop.dev and gallery.aleviclop.dev.",
+          },
         },
       ]}
     />

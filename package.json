@@ -11,7 +11,7 @@
     "dev": "next dev --webpack",
     "lint": "eslint .",
     "start": "next start",
-    "test": "node --test tests/raw-vives-integration.test.mjs",
+    "test": "node --test",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

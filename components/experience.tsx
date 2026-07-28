@@ -124,7 +124,6 @@ export function Experience() {
       aria-labelledby="experience-title"
       className="section-padding relative overflow-hidden bg-background"
     >
-      <div className="pointer-events-none absolute inset-x-0 top-0 glow-divider" />
       <div className="pointer-events-none absolute left-[-12rem] top-[28%] h-[32rem] w-[32rem] rounded-full bg-primary/6 blur-[110px]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -179,13 +178,13 @@ export function Experience() {
                   <div className="absolute left-0 top-1.5 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-border/60 bg-background transition-all duration-300 group-hover:border-primary/60">
                     <div className="h-2.5 w-2.5 rounded-full bg-border/60 ring-1 ring-border/30 transition-all duration-300 group-hover:bg-primary group-hover:ring-primary/40" />
                   </div>
-                  <div className="rounded-xl border border-transparent p-4 transition-colors duration-300 group-hover:border-border/55 group-hover:bg-card/45">
+                  <div className="rounded-lg border border-transparent p-4 transition-colors duration-300 group-hover:border-border/55 group-hover:bg-card/45">
                     <div className="space-y-3">
                       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-4">
                         <h4 className="text-lg font-bold leading-tight tracking-normal text-foreground transition-colors group-hover:text-primary sm:text-xl">
                           {edu.title}
                         </h4>
-                        <span className="w-fit shrink-0 rounded-lg border border-primary/15 bg-primary/6 px-2.5 py-0.5 font-mono text-[10px] text-primary/75">
+                        <span className="w-fit shrink-0 rounded-md border border-primary/20 bg-primary/8 px-2.5 py-1 font-mono text-[11px] text-primary">
                           {edu.period}
                         </span>
                       </div>
@@ -233,13 +232,13 @@ export function Experience() {
                   <div className="absolute left-0 top-1.5 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-border/60 bg-background transition-all duration-300 group-hover:border-primary/60">
                     <div className="h-2.5 w-2.5 rounded-full bg-border/60 ring-1 ring-border/30 transition-all duration-300 group-hover:bg-primary group-hover:ring-primary/40" />
                   </div>
-                  <div className="rounded-xl border border-transparent p-4 transition-colors duration-300 group-hover:border-border/55 group-hover:bg-card/45">
+                  <div className="rounded-lg border border-transparent p-4 transition-colors duration-300 group-hover:border-border/55 group-hover:bg-card/45">
                     <div className="space-y-3">
                       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-4">
                         <h4 className="text-lg font-bold leading-tight tracking-normal text-foreground transition-colors group-hover:text-primary sm:text-xl">
                           {exp.title}
                         </h4>
-                        <span className="w-fit shrink-0 rounded-lg border border-primary/15 bg-primary/6 px-2.5 py-0.5 font-mono text-[10px] text-primary/75">
+                        <span className="w-fit shrink-0 rounded-md border border-primary/20 bg-primary/8 px-2.5 py-1 font-mono text-[11px] text-primary">
                           {exp.period}
                         </span>
                       </div>
@@ -285,7 +284,7 @@ export function Experience() {
           <Button
             asChild
             size="lg"
-            className="h-13 shrink-0 rounded-xl bg-primary px-7 font-bold text-primary-foreground shadow-xl transition-all hover:-translate-y-0.5 hover:bg-primary/90 sm:h-14 sm:px-8"
+            className="h-13 shrink-0 rounded-lg bg-primary px-7 font-bold text-primary-foreground transition-all hover:-translate-y-0.5 hover:bg-primary/90 active:translate-y-0 sm:h-14 sm:px-8"
           >
             <a
               href="/cv/CV_Alex_Vicente_Lopez_Frontend_React_A4.pdf"

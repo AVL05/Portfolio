@@ -1,6 +1,9 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { flushSync } from "react-dom";
+import { useRouter } from "next/navigation";
+import { ScrollTrigger } from "@/lib/gsap";
 import es from "./locales/es.json";
 import en from "./locales/en.json";
 
@@ -97,6 +100,9 @@ interface Translation {
     form_btn_sending: string;
     form_success: string;
     form_error: string;
+    form_error_name: string;
+    form_error_email: string;
+    form_error_message: string;
     links_title: string;
     availability_title: string;
     availability_desc: string;
@@ -121,6 +127,12 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
   undefined,
 );
 
+type ViewTransitionDocument = Document & {
+  startViewTransition?: (update: () => void) => {
+    finished: Promise<void>;
+  };
+};
+
 export function LanguageProvider({
   children,
   initialLanguage = "es",
@@ -129,23 +141,52 @@ export function LanguageProvider({
   initialLanguage?: Language;
 }) {
   const [language, setLanguage] = useState<Language>(initialLanguage);
+  const router = useRouter();
 
   useEffect(() => {
     const saved = localStorage.getItem("language") as Language;
     if (saved && (saved === "es" || saved === "en")) {
       setLanguage(saved);
       document.documentElement.lang = saved;
+      window.requestAnimationFrame(() => ScrollTrigger.refresh());
+      if (saved !== initialLanguage) {
+        void fetch("/api/language", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ language: saved }),
+        }).then((response) => {
+          if (response.ok) router.refresh();
+        });
+      }
     }
-  }, []);
+  }, [initialLanguage, router]);
 
   const handleSetLanguage = (lang: Language) => {
-    setLanguage(lang);
+    if (lang === language) return;
+
+    const updateLanguage = () => {
+      flushSync(() => setLanguage(lang));
+      document.documentElement.lang = lang;
+      window.requestAnimationFrame(() => ScrollTrigger.refresh());
+    };
+    const transitionDocument = document as ViewTransitionDocument;
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (transitionDocument.startViewTransition && !reduceMotion) {
+      transitionDocument.startViewTransition(updateLanguage);
+    } else {
+      updateLanguage();
+    }
+
     localStorage.setItem("language", lang);
-    document.documentElement.lang = lang;
     void fetch("/api/language", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ language: lang }),
+    }).then((response) => {
+      if (response.ok) router.refresh();
     });
   };
 

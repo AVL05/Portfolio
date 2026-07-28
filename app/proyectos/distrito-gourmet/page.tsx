@@ -1,22 +1,31 @@
-import type { Metadata } from "next";
 import { ProjectCaseStudy, type ProjectCaseStudyData } from "@/components/project-case-study";
-import { absoluteUrl, SITE_NAME, SITE_URL } from "@/lib/seo";
+import { createLocalizedMetadata, SITE_URL } from "@/lib/seo";
+import { getRequestLanguage } from "@/lib/request-language";
 
 const projectUrl = "/proyectos/distrito-gourmet";
 const demoUrl = "https://distrito.aleviclop.dev/";
 const githubUrl = "https://github.com/AVL05/distrito-gourmet";
 
-export const metadata: Metadata = {
-  title: "Distrito Gourmet - Caso de estudio",
-  description: "Caso de estudio de una aplicación full-stack para restaurante creada con React, Laravel y MySQL.",
-  alternates: { canonical: absoluteUrl(projectUrl) },
-  openGraph: {
-    title: "Distrito Gourmet - Caso de estudio",
-    description: "Producto full-stack con carta, pedidos, reservas, administración y API REST.",
-    url: absoluteUrl(projectUrl), siteName: SITE_NAME, type: "article",
-    images: [`${SITE_URL}/projects/distrito_gourmet.png`],
-  },
-};
+export async function generateMetadata() {
+  return createLocalizedMetadata({
+    language: await getRequestLanguage(),
+    path: projectUrl,
+    type: "article",
+    image: `${SITE_URL}/projects/distrito_gourmet.png`,
+    copy: {
+      es: {
+        title: "Distrito Gourmet - Caso de estudio",
+        description:
+          "Caso de estudio de una aplicación full-stack para restaurante creada con React, Laravel y MySQL.",
+      },
+      en: {
+        title: "Distrito Gourmet - Case study",
+        description:
+          "Case study of a full-stack restaurant application built with React, Laravel, and MySQL.",
+      },
+    },
+  });
+}
 
 const data: ProjectCaseStudyData = {
   title: "Distrito Gourmet",

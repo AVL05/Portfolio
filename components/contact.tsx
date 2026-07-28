@@ -12,9 +12,16 @@ import { useRef, useState } from "react";
 import { gsap, prefersReducedMotion, useGSAP } from "@/lib/gsap";
 import { useLanguage } from "@/lib/language-context";
 import { RevealHeader } from "@/components/reveal-header";
+
+type ContactField = "name" | "email" | "message";
+type ContactFormErrors = Partial<Record<ContactField, true>>;
+
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export function Contact() {
   const { language, t } = useLanguage();
   const containerRef = useRef<HTMLElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -25,9 +32,77 @@ export function Contact() {
   const [submitStatus, setSubmitStatus] = useState<"success" | "error" | null>(
     null,
   );
+  const [formErrors, setFormErrors] = useState<ContactFormErrors>({});
+
+  const isFieldInvalid = (field: ContactField, value: string) => {
+    const normalizedValue = value.trim();
+
+    if (field === "name" && normalizedValue.length < 2) {
+      return true;
+    }
+    if (field === "email" && !EMAIL_PATTERN.test(normalizedValue)) {
+      return true;
+    }
+    if (field === "message" && normalizedValue.length < 20) {
+      return true;
+    }
+
+    return false;
+  };
+
+  const getFieldError = (field: ContactField) =>
+    ({
+      name: t.contact.form_error_name,
+      email: t.contact.form_error_email,
+      message: t.contact.form_error_message,
+    })[field];
+
+  const updateField = (field: ContactField, value: string) => {
+    setFormData((current) => ({ ...current, [field]: value }));
+
+    if (formErrors[field] && !isFieldInvalid(field, value)) {
+      setFormErrors((current) => {
+        const next = { ...current };
+        delete next[field];
+        return next;
+      });
+    }
+  };
+
+  const validateOnBlur = (field: ContactField) => {
+    if (!formData[field].trim()) return;
+
+    const hasError = isFieldInvalid(field, formData[field]);
+    setFormErrors((current) => {
+      const next = { ...current };
+      if (hasError) next[field] = true;
+      else delete next[field];
+      return next;
+    });
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const nextErrors = (["name", "email", "message"] as ContactField[]).reduce(
+      (errors, field) => {
+        if (isFieldInvalid(field, formData[field])) errors[field] = true;
+        return errors;
+      },
+      {} as ContactFormErrors,
+    );
+
+    if (Object.keys(nextErrors).length) {
+      setFormErrors(nextErrors);
+      setSubmitStatus(null);
+      const firstInvalidField = Object.keys(nextErrors)[0] as ContactField;
+      window.requestAnimationFrame(() => {
+        formRef.current
+          ?.querySelector<HTMLElement>(`[name="${firstInvalidField}"]`)
+          ?.focus();
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitStatus(null);
 
@@ -37,17 +112,22 @@ export function Contact() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           access_key: "d72eeacd-28fc-442b-83bd-b8c383c5997e",
-          subject: "Nuevo contacto - Portfolio Dev",
+          subject:
+            language === "es"
+              ? "Nuevo contacto - Portfolio Dev"
+              : "New contact - Developer portfolio",
           name: formData.name,
           email: formData.email,
           message: formData.message,
           botcheck: formData.botcheck,
         }),
+        signal: AbortSignal.timeout(12_000),
       });
 
-      const data = await response.json();
-      if (data.success) {
+      const data = (await response.json()) as { success?: boolean };
+      if (response.ok && data.success) {
         setSubmitStatus("success");
+        setFormErrors({});
         setFormData({ name: "", email: "", message: "", botcheck: "" });
       } else {
         setSubmitStatus("error");
@@ -96,7 +176,6 @@ export function Contact() {
       ref={containerRef}
       className="relative overflow-hidden bg-background px-4 py-24 sm:px-6 sm:py-36 lg:px-8"
     >
-      <div className="pointer-events-none absolute inset-x-0 top-0 glow-divider" />
       <div className="pointer-events-none absolute right-[-12rem] top-[15%] h-[40rem] w-[40rem] rounded-full bg-primary/7 blur-[130px]" />
 
       <div className="relative z-10 mx-auto max-w-7xl">
@@ -109,12 +188,18 @@ export function Contact() {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14">
           <div className="contact-item">
             <Card className="dev-panel overflow-hidden py-0">
-              <form onSubmit={handleSubmit} className="space-y-6 p-5 sm:p-8">
+              <form
+                ref={formRef}
+                onSubmit={handleSubmit}
+                className="space-y-6 p-5 sm:p-8"
+                noValidate
+              >
                 <input
                   type="checkbox"
                   name="botcheck"
                   className="hidden"
                   tabIndex={-1}
+                  aria-hidden="true"
                   autoComplete="off"
                   value={formData.botcheck}
                   onChange={(e) =>
@@ -134,17 +219,27 @@ export function Contact() {
                   </label>
                   <Input
                     id="name"
+                    name="name"
                     type="text"
                     autoComplete="name"
                     placeholder={t.contact.form_placeholder_name}
                     value={formData.name}
+                    minLength={2}
                     maxLength={120}
-                    onChange={(e) =>
-                      setFormData({ ...formData, name: e.target.value })
-                    }
-                    className="rounded-lg border-border/70 bg-secondary/50 px-4 py-5 text-base placeholder:text-muted-foreground/40 focus-visible:border-primary focus-visible:ring-primary/40"
+                    aria-invalid={Boolean(formErrors.name)}
+                    aria-describedby={formErrors.name ? "name-error" : undefined}
+                    onBlur={() => validateOnBlur("name")}
+                    onChange={(e) => updateField("name", e.target.value)}
+                    className="rounded-lg border-border/70 bg-secondary/50 px-4 py-5 text-base placeholder:text-muted-foreground/70 focus-visible:border-primary focus-visible:ring-primary/40"
                     required
                   />
+                  <p
+                    id="name-error"
+                    className="min-h-5 text-sm font-medium text-destructive"
+                    aria-live="polite"
+                  >
+                    {formErrors.name ? getFieldError("name") : ""}
+                  </p>
                 </div>
 
                 <div className="space-y-2">
@@ -156,17 +251,27 @@ export function Contact() {
                   </label>
                   <Input
                     id="email"
+                    name="email"
                     type="email"
+                    inputMode="email"
                     autoComplete="email"
                     placeholder={t.contact.form_placeholder_email}
                     value={formData.email}
                     maxLength={254}
-                    onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
-                    }
-                    className="rounded-lg border-border/70 bg-secondary/50 px-4 py-5 text-base placeholder:text-muted-foreground/40 focus-visible:border-primary focus-visible:ring-primary/40"
+                    aria-invalid={Boolean(formErrors.email)}
+                    aria-describedby={formErrors.email ? "email-error" : undefined}
+                    onBlur={() => validateOnBlur("email")}
+                    onChange={(e) => updateField("email", e.target.value)}
+                    className="rounded-lg border-border/70 bg-secondary/50 px-4 py-5 text-base placeholder:text-muted-foreground/70 focus-visible:border-primary focus-visible:ring-primary/40"
                     required
                   />
+                  <p
+                    id="email-error"
+                    className="min-h-5 text-sm font-medium text-destructive"
+                    aria-live="polite"
+                  >
+                    {formErrors.email ? getFieldError("email") : ""}
+                  </p>
                 </div>
 
                 <div className="space-y-2">
@@ -178,22 +283,33 @@ export function Contact() {
                   </label>
                   <Textarea
                     id="message"
+                    name="message"
                     placeholder={t.contact.form_placeholder_message}
                     rows={5}
                     value={formData.message}
+                    minLength={20}
                     maxLength={4000}
-                    onChange={(e) =>
-                      setFormData({ ...formData, message: e.target.value })
-                    }
-                    className="resize-none rounded-lg border-border/70 bg-secondary/50 p-4 text-base placeholder:text-muted-foreground/40 focus-visible:border-primary focus-visible:ring-primary/40"
+                    aria-invalid={Boolean(formErrors.message)}
+                    aria-describedby={formErrors.message ? "message-error" : undefined}
+                    onBlur={() => validateOnBlur("message")}
+                    onChange={(e) => updateField("message", e.target.value)}
+                    className="resize-none rounded-lg border-border/70 bg-secondary/50 p-4 text-base placeholder:text-muted-foreground/70 focus-visible:border-primary focus-visible:ring-primary/40"
                     required
                   />
+                  <p
+                    id="message-error"
+                    className="min-h-5 text-sm font-medium text-destructive"
+                    aria-live="polite"
+                  >
+                    {formErrors.message ? getFieldError("message") : ""}
+                  </p>
                 </div>
 
                 <Button
                   type="submit"
                   className="group w-full rounded-lg bg-primary py-6 text-sm font-bold text-primary-foreground transition-all hover:-translate-y-0.5 hover:bg-primary/90 active:scale-[0.99]"
                   disabled={isSubmitting}
+                  aria-busy={isSubmitting}
                 >
                   {isSubmitting
                     ? t.contact.form_btn_sending
@@ -214,12 +330,12 @@ export function Contact() {
             </Card>
           </div>
 
-          <div className="contact-item flex flex-col justify-between rounded-xl border border-border/60 bg-card/40 p-5 py-6 backdrop-blur-sm sm:p-8">
+          <div className="contact-item flex flex-col justify-between rounded-lg border border-border/60 bg-card/40 p-5 py-6 sm:p-8">
             <div className="space-y-8">
-              <p className="text-xs font-bold uppercase tracking-[0.26em] text-muted-foreground/40">
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">
                 {t.contact.links_title}
               </p>
-              <div className="rounded-xl border border-primary/25 bg-primary/10 p-5">
+              <div className="rounded-lg border border-primary/25 bg-primary/10 p-5">
                 <div className="mb-3 flex items-center gap-2 text-sm font-bold text-primary">
                   <CheckCircle2 className="h-4 w-4" />
                   {t.contact.availability_title}
@@ -285,7 +401,7 @@ export function Contact() {
                 </a>
               </div>
 
-              <div className="rounded-xl border border-border/60 bg-background/35 p-5">
+              <div className="rounded-lg border border-border/60 bg-background/35 p-5">
                 <p className="mb-2 text-sm font-bold text-foreground">
                   {t.contact.visual_portfolio_title}
                 </p>
@@ -305,7 +421,7 @@ export function Contact() {
             </div>
 
             <footer className="mt-16 border-t border-border/50 pt-8 text-center sm:text-left">
-              <p className="text-muted-foreground/30 text-xs font-mono tracking-widest uppercase mb-1">
+              <p className="mb-1 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground">
                 &copy; 2026 Alex Vicente López
               </p>
               <p className="text-muted-foreground text-sm font-medium mb-4">
@@ -313,7 +429,7 @@ export function Contact() {
               </p>
               <Link
                 href="/legal"
-                className="inline-flex min-h-11 items-center text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground/40 transition-colors hover:text-primary"
+                className="inline-flex min-h-11 items-center font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground transition-colors hover:text-primary"
               >
                 {language === "es" ? "Aviso legal y privacidad" : "Legal notice & privacy"}
               </Link>

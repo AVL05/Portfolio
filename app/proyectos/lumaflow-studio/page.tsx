@@ -1,33 +1,40 @@
-import type { Metadata } from "next";
 import { ProjectCaseStudy, type ProjectCaseStudyData } from "@/components/project-case-study";
-import { absoluteUrl, SITE_NAME, SITE_URL } from "@/lib/seo";
+import { createLocalizedMetadata, SITE_URL } from "@/lib/seo";
+import { getRequestLanguage } from "@/lib/request-language";
 
 const projectUrl = "/proyectos/lumaflow-studio";
 const githubUrl = "https://github.com/AVL05/lumaflow-studio";
 
-export const metadata: Metadata = {
-  title: "LumaFlow Studio - Caso de estudio",
-  description: "Caso de estudio de LumaFlow Studio, plataforma full-stack para estudios fotográficos creada con React, Laravel, MySQL, PWA e IA local mediante WebGPU.",
-  alternates: { canonical: absoluteUrl(projectUrl) },
-  openGraph: {
-    title: "LumaFlow Studio - Caso de estudio",
-    description: "Arquitectura, producto y decisiones de una plataforma full-stack para gestionar el flujo completo de un estudio fotográfico.",
-    url: absoluteUrl(projectUrl),
-    siteName: SITE_NAME,
+export async function generateMetadata() {
+  return createLocalizedMetadata({
+    language: await getRequestLanguage(),
+    path: projectUrl,
     type: "article",
-    images: [`${SITE_URL}/projects/lumaflow-studio-cover.svg`],
-  },
-};
+    image: `${SITE_URL}/projects/lumaflow-studio-cover.svg`,
+    copy: {
+      es: {
+        title: "LumaFlow Studio - Caso de estudio",
+        description:
+          "Caso de estudio de una plataforma full-stack para estudios fotográficos creada con React, Laravel, MySQL, PWA e IA local.",
+      },
+      en: {
+        title: "LumaFlow Studio - Case study",
+        description:
+          "Case study of a full-stack photography studio platform built with React, Laravel, MySQL, PWA, and local AI.",
+      },
+    },
+  });
+}
 
 const data: ProjectCaseStudyData = {
   title: "LumaFlow Studio",
   eyebrow: { es: "Caso de estudio / Producto full-stack", en: "Case study / Full-stack product" },
   summary: {
-    es: "Plataforma de workflow para fotógrafos que conecta planificación, CRM, finanzas, entregas y asistencia local con IA sin convertir el proyecto en un SaaS ficticio.",
+    es: "Plataforma de flujo de trabajo para fotógrafos que conecta planificación, CRM, finanzas, entregas y asistencia local con IA sin convertir el proyecto en un SaaS ficticio.",
     en: "A workflow platform for photographers connecting planning, CRM, finance, delivery, and local AI assistance without presenting the project as a fictional SaaS.",
   },
   role: {
-    es: "Diseñé y desarrollé el producto completo: interfaz React, API Laravel, autenticación, modelo de datos multiusuario, módulos de negocio, IA local, testing y documentación.",
+    es: "Diseñé y desarrollé el producto completo: interfaz React, API Laravel, autenticación, modelo de datos multiusuario, módulos de negocio, IA local, pruebas y documentación.",
     en: "I designed and built the complete product: React interface, Laravel API, authentication, multi-user data model, business modules, local AI, testing, and documentation.",
   },
   image: "/projects/lumaflow-studio-cover.svg",
@@ -58,10 +65,10 @@ const data: ProjectCaseStudyData = {
     { es: "WebLLM y modelos WebGPU cargados solo cuando el usuario activa IA.", en: "WebLLM and WebGPU models loaded only when the user enables AI." },
   ],
   uxDecisions: [
-    { es: "Dashboard y calendario priorizan tareas, sesiones y entregas que requieren acción.", en: "Dashboard and calendar prioritize tasks, sessions, and deliveries requiring action." },
+    { es: "El panel y el calendario priorizan tareas, sesiones y entregas que requieren acción.", en: "Dashboard and calendar prioritize tasks, sessions, and deliveries requiring action." },
     { es: "Búsqueda global y atajos reducen navegación repetitiva.", en: "Global search and shortcuts reduce repetitive navigation." },
     { es: "Estados de sistema hacen visibles API, datos, almacenamiento e IA opcional.", en: "System status makes API, data, storage, and optional AI visible." },
-    { es: "La PWA conserva un shell offline; los modelos pesados siguen bajo demanda.", en: "The PWA keeps an offline shell while heavy models remain on demand." },
+    { es: "La PWA conserva una estructura base sin conexión; los modelos pesados siguen bajo demanda.", en: "The PWA keeps an offline shell while heavy models remain on demand." },
   ],
   architecture: { es: "SPA React y API Laravel independientes, conectadas por HTTP y respaldadas por MySQL.", en: "Independent React SPA and Laravel API connected over HTTP and backed by MySQL." },
   challenge: { es: "Mantener coherencia entre muchos módulos sin convertir controladores, estado o navegación en puntos de acoplamiento difíciles de probar.", en: "Keeping many modules coherent without turning controllers, state, or navigation into tightly coupled, hard-to-test bottlenecks." },

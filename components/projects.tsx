@@ -56,7 +56,7 @@ function ProjectScene({
         priority={index === 0}
       />
       <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_45%,rgba(8,8,7,.62))]" />
-      <span className="absolute left-4 top-4 border border-white/20 bg-black/38 px-3 py-2 font-mono text-[9px] uppercase tracking-[.18em] text-white backdrop-blur-md sm:left-6 sm:top-6">
+      <span className="absolute left-4 top-4 border border-white/20 bg-black/55 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-[.14em] text-white sm:left-6 sm:top-6">
         {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
       </span>
     </div>
@@ -66,7 +66,7 @@ function ProjectScene({
     <article className="project-scene relative border-t border-border/55 py-10 sm:py-14 md:min-h-[96dvh] md:py-20">
       <div className="mx-auto grid max-w-[100rem] gap-6 px-4 sm:px-6 md:grid-cols-[minmax(280px,.55fr)_minmax(0,1.45fr)] md:items-center lg:px-8">
         <div className="scene-copy z-10 flex flex-col md:pr-6">
-          <p className="font-mono text-[9px] font-bold uppercase tracking-[.2em] text-primary">
+          <p className="font-mono text-[11px] font-bold uppercase tracking-[.15em] text-primary">
             {project.type} / {project.category}
           </p>
           <h3 className="mt-5 text-[clamp(2.8rem,7vw,7.5rem)] font-black leading-[.82] tracking-[-.065em] text-foreground">
@@ -78,7 +78,7 @@ function ProjectScene({
 
           {project.role && (
             <div className="mt-7 border-l border-primary pl-4">
-              <p className="font-mono text-[9px] uppercase tracking-[.18em] text-muted-foreground">
+              <p className="font-mono text-[11px] uppercase tracking-[.14em] text-muted-foreground">
                 {language === "es" ? "Responsabilidad" : "Responsibility"}
               </p>
               <p className="mt-2 max-w-[52ch] text-sm font-medium leading-relaxed text-foreground/82">
@@ -89,7 +89,7 @@ function ProjectScene({
 
           {project.outcome && (
             <div className="mt-5 border-l border-foreground/28 pl-4">
-              <p className="font-mono text-[9px] uppercase tracking-[.18em] text-muted-foreground">
+              <p className="font-mono text-[11px] uppercase tracking-[.14em] text-muted-foreground">
                 {language === "es" ? "Resultado verificable" : "Verified outcome"}
               </p>
               <p className="mt-2 max-w-[52ch] text-sm font-medium leading-relaxed text-foreground/72">
@@ -98,7 +98,7 @@ function ProjectScene({
             </div>
           )}
 
-          <div className="mt-7 flex flex-wrap gap-x-4 gap-y-2 font-mono text-[9px] font-semibold uppercase tracking-[.13em] text-muted-foreground">
+          <div className="mt-7 flex flex-wrap gap-x-4 gap-y-2 font-mono text-[11px] font-semibold uppercase tracking-[.11em] text-muted-foreground">
             {project.technologies.slice(0, 6).map((technology) => (
               <span key={technology}>{technology}</span>
             ))}
@@ -116,12 +116,12 @@ function ProjectScene({
               </Link>
             )}
             {project.link && (
-              <a data-cursor="external" href={project.link} target="_blank" rel="noopener noreferrer" className="cinema-link text-[10px]">
+              <a data-cursor="external" href={project.link} target="_blank" rel="noopener noreferrer" className="cinema-link text-[11px]">
                 {language === "es" ? "Producto" : "Live"} <ArrowUpRight />
               </a>
             )}
             {project.github && (
-              <a data-cursor="external" href={project.github} target="_blank" rel="noopener noreferrer" className="cinema-link text-[10px]">
+              <a data-cursor="external" href={project.github} target="_blank" rel="noopener noreferrer" className="cinema-link text-[11px]">
                 <FaGithub /> GitHub
               </a>
             )}
@@ -233,7 +233,7 @@ export function Projects() {
                 {language === "es" ? "Archivo" : "Archive"}
               </h3>
             </div>
-            <span className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[.18em] text-muted-foreground">
+            <span className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[.14em] text-muted-foreground">
               {archive.length} {language === "es" ? "proyectos" : "projects"}
               <ChevronDown className="h-4 w-4 transition-transform group-open/archive:rotate-180" />
             </span>
@@ -245,9 +245,9 @@ export function Projects() {
           >
               {archive.map((project, index) => (
                 <article key={project.title} className="group grid gap-3 border-b border-border/55 py-5 transition-colors hover:border-primary/65 sm:grid-cols-[3rem_minmax(0,1.4fr)_minmax(0,.8fr)_auto] sm:items-center">
-                  <span className="font-mono text-[10px] text-muted-foreground">{String(index + 5).padStart(2, "0")}</span>
+                  <span className="font-mono text-[11px] text-muted-foreground">{String(index + 5).padStart(2, "0")}</span>
                   <h4 className="text-xl font-bold tracking-[-.025em] sm:text-2xl">{project.title}</h4>
-                  <span className="font-mono text-[9px] uppercase tracking-[.14em] text-muted-foreground">{project.technologies.slice(0, 3).join(" · ")}</span>
+                  <span className="font-mono text-[11px] uppercase tracking-[.11em] text-muted-foreground">{project.technologies.slice(0, 3).join(" · ")}</span>
                   <div className="flex gap-2">
                     {project.link && <a className="inline-flex min-h-11 min-w-11 items-center justify-center" data-cursor="external" href={project.link} target="_blank" rel="noopener noreferrer" aria-label={`${project.title}: ${language === "es" ? "abrir proyecto" : "open project"}`}><ArrowUpRight className="h-5 w-5" /></a>}
                     {project.github && <a className="inline-flex min-h-11 min-w-11 items-center justify-center" data-cursor="external" href={project.github} target="_blank" rel="noopener noreferrer" aria-label={`${project.title}: GitHub`}><FaGithub className="h-5 w-5" /></a>}

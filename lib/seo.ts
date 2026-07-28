@@ -2,9 +2,10 @@ export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://www.aleviclop.dev";
 
 export const SITE_NAME = "Alex Vicente López";
-export const SITE_TITLE = "Alex Vicente | Frontend Developer · React & Next.js";
+export const SITE_TITLE =
+  "Alex Vicente | Desarrollador frontend · React y Next.js";
 export const SITE_DESCRIPTION =
-  "Portfolio de Alex Vicente, Frontend Developer en Valencia especializado en React, Next.js y TypeScript, con experiencia full-stack y criterio visual.";
+  "Portfolio de Alex Vicente, desarrollador frontend en Valencia especializado en React, Next.js y TypeScript, con experiencia full-stack y criterio visual.";
 
 export const SEO_KEYWORDS = [
   "Alex Vicente López",
@@ -83,6 +84,47 @@ export function absoluteUrl(path = "/") {
   return new URL(path, SITE_URL).toString();
 }
 
+export function createLocalizedMetadata({
+  language,
+  path,
+  copy,
+  type = "website",
+  image,
+}: {
+  language: Language;
+  path: string;
+  copy: Record<Language, { title: string; description: string }>;
+  type?: "website" | "article" | "profile";
+  image?: string;
+}): Metadata {
+  const localized = copy[language];
+  const imageUrl =
+    image ??
+    `${SITE_URL}/api/og?lang=${language}&title=${encodeURIComponent(localized.title)}`;
+
+  return {
+    title: localized.title,
+    description: localized.description,
+    alternates: { canonical: absoluteUrl(path) },
+    openGraph: {
+      title: localized.title,
+      description: localized.description,
+      url: absoluteUrl(path),
+      siteName: SITE_NAME,
+      type,
+      locale: language === "es" ? "es_ES" : "en_GB",
+      alternateLocale: language === "es" ? ["en_GB"] : ["es_ES"],
+      images: [imageUrl],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: localized.title,
+      description: localized.description,
+      images: [imageUrl],
+    },
+  };
+}
+
 export const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -93,7 +135,7 @@ export const personJsonLd = {
   email: "mailto:alexviclop@gmail.com",
   jobTitle: "Frontend Developer",
   description:
-    "Alex Vicente López es Frontend Developer y Técnico Superior en Desarrollo de Aplicaciones Web, especializado en React, Next.js, TypeScript e interfaces accesibles listas para producción.",
+    "Alex Vicente López es desarrollador frontend y Técnico Superior en Desarrollo de Aplicaciones Web, especializado en React, Next.js, TypeScript e interfaces accesibles listas para producción.",
   image: `${SITE_URL}/api/og?lang=es`,
   sameAs: SAME_AS,
   knowsAbout: [
@@ -152,3 +194,5 @@ export const profilePageJsonLd = {
     "@id": `${SITE_URL}/#alex-vicente-lopez`,
   },
 };
+import type { Metadata } from "next";
+import type { Language } from "@/lib/language-context";

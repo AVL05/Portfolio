@@ -94,18 +94,18 @@ export function Hero() {
             priority
             fetchPriority="high"
             className="object-cover object-center"
-            sizes="(max-width: 1024px) 100vw, 69vw"
+            sizes="(max-width: 1024px) calc(100vw - 1.5rem), 38vw"
           />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,8,7,.08),rgba(8,8,7,.5))]" />
         </div>
         <div className="absolute inset-0 border border-white/14" />
-        <span className="absolute bottom-4 right-4 hidden font-mono text-[9px] uppercase tracking-[.2em] text-white/65 sm:block">
+        <span className="absolute right-4 top-4 hidden bg-black/55 px-2 py-1 font-mono text-[11px] font-semibold uppercase tracking-[.16em] text-white sm:block">
           {language === "es" ? "Fotografía de Alex Vicente" : "Photograph by Alex Vicente"}
         </span>
       </div>
 
       <div className="relative z-10 mx-auto flex min-h-[100dvh] max-w-[100rem] flex-col px-4 pb-6 pt-24 sm:px-6 sm:pb-8 lg:px-8 lg:pt-28">
-        <div className="hero-reveal flex items-center justify-between gap-4 font-mono text-[9px] font-semibold uppercase tracking-[.18em] text-foreground/68 sm:text-[10px]">
+        <div className="hero-reveal flex items-center justify-between gap-4 font-mono text-[11px] font-semibold uppercase tracking-[.14em] text-foreground/76">
           <span>{t.hero.status}</span>
           <span className="hidden md:block">React · Next.js · TypeScript · GSAP</span>
         </div>
@@ -125,8 +125,10 @@ export function Hero() {
 
         <div className="hero-copy mt-7 grid gap-7 border-t border-border/70 pt-5 will-change-transform md:grid-cols-[minmax(0,.72fr)_minmax(280px,.5fr)_auto] md:items-end">
           <div className="hero-reveal">
-            <p className="font-mono text-[10px] font-bold uppercase tracking-[.18em] text-primary">
-              Frontend Developer · React / Next.js
+            <p className="font-mono text-[11px] font-bold uppercase tracking-[.15em] text-primary">
+              {language === "es"
+                ? "Desarrollador frontend · React / Next.js"
+                : "Frontend Developer · React / Next.js"}
             </p>
             <p className="mt-3 max-w-[58ch] text-base font-medium leading-relaxed text-foreground/76 sm:text-lg">
               {t.hero.description}
@@ -158,7 +160,7 @@ export function Hero() {
           </a>
         </div>
 
-        <div className="hero-scroll hero-reveal mt-6 flex items-center gap-2 font-mono text-[9px] uppercase tracking-[.18em] text-muted-foreground md:absolute md:bottom-7 md:left-8">
+        <div className="hero-scroll hero-reveal mt-6 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[.14em] text-muted-foreground md:absolute md:bottom-7 md:left-8">
           <ArrowDown className="h-3.5 w-3.5" />
           {t.hero.scroll} / 01—05
         </div>

@@ -2,7 +2,7 @@
   "nav": {
     "home": "Inicio",
     "projects": "Proyectos",
-    "skills": "Stack",
+    "skills": "Tecnologías",
     "experience": "Experiencia",
     "contact": "Contacto"
   },
@@ -14,9 +14,9 @@
     "scroll": "Desplazar"
   },
   "skills": {
-    "title": "Stack",
+    "title": "Tecnologías",
     "subtitle": "Cómo construyo interfaces",
-    "desc": "Frontend como especialidad; producto, backend y dirección visual como contexto para tomar mejores decisiones.",
+    "desc": "Desarrollo frontend como especialidad; producto, backend y dirección visual como contexto para tomar mejores decisiones.",
     "technologies": "Tecnologías",
     "tools": "Herramientas"
   },
@@ -146,7 +146,7 @@
     "edu_title": "Formación Académica",
     "job_title": "Experiencia Profesional",
     "cv_title": "¿Necesitas más detalle?",
-    "cv_desc": "Descarga mi CV en PDF para revisar formación, experiencia, stack y proyectos con más contexto.",
+    "cv_desc": "Descarga mi CV en PDF para revisar formación, experiencia, tecnologías y proyectos con más contexto.",
     "cv_btn": "DESCARGAR CV [PDF]",
     "education_list": [
       {
@@ -204,6 +204,9 @@
     "form_btn_sending": "ENVIANDO...",
     "form_success": "Mensaje enviado. Te responderé pronto.",
     "form_error": "Algo salió mal. Inténtalo de nuevo.",
+    "form_error_name": "Escribe un nombre de al menos 2 caracteres.",
+    "form_error_email": "Introduce un email válido, por ejemplo nombre@empresa.com.",
+    "form_error_message": "Escribe un mensaje de al menos 20 caracteres.",
     "links_title": "Enlaces directos",
     "availability_title": "Disponible para oportunidades frontend",
     "availability_desc": "React, Next.js y TypeScript como especialidad; base full-stack, criterio visual y atención al producto como apoyo para entregar mejor.",

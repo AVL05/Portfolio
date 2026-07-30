@@ -197,11 +197,17 @@ export function Navigation() {
         <div className="mx-auto flex h-[4.5rem] max-w-[100rem] items-center justify-between px-4 sm:px-6 lg:px-8">
           <a href="#hero" className="inline-flex min-h-11 min-w-11 items-center font-mono text-sm font-black uppercase tracking-[-.05em]" aria-label={language === "es" ? "AV. — Alex Vicente — inicio" : "AV. — Alex Vicente — home"}>
             AV<span className="text-primary">.</span>
+            <span
+              aria-hidden="true"
+              className="ml-2 border-l border-border/70 pl-2 text-[11px] font-semibold tracking-[.12em] text-muted-foreground"
+            >
+              V4
+            </span>
           </a>
 
           <div className="hidden items-center gap-7 lg:flex">
             {navItems.map((item) => (
-              <a key={item.href} href={item.href} aria-current={activeSection === item.href.slice(1) ? "location" : undefined} className={`relative py-2 font-mono text-xs font-semibold uppercase tracking-[.14em] transition-colors ${activeSection === item.href.slice(1) ? "text-primary" : "text-foreground/72 hover:text-foreground"}`}>
+              <a key={item.href} href={item.href} aria-current={activeSection === item.href.slice(1) ? "location" : undefined} className={`relative inline-flex min-h-11 items-center font-mono text-xs font-semibold uppercase tracking-[.14em] transition-colors ${activeSection === item.href.slice(1) ? "text-primary" : "text-foreground/72 hover:text-foreground"}`}>
                 {item.name}
                 <span
                   aria-hidden="true"
@@ -229,7 +235,12 @@ export function Navigation() {
 
       <div ref={menuRef} id="mobile-navigation" role="dialog" aria-modal="true" aria-label={language === "es" ? "Menú" : "Menu"} aria-hidden={!isMenuOpen} className="invisible fixed inset-0 z-[60] flex min-h-[100dvh] flex-col bg-[#0b0b09] px-5 pb-7 pt-5 opacity-0 lg:hidden">
         <div className="flex items-center justify-between">
-          <span className="font-mono text-sm font-black">AV<span className="text-primary">.</span></span>
+          <span className="inline-flex items-center font-mono text-sm font-black">
+            AV<span className="text-primary">.</span>
+            <span className="ml-2 border-l border-white/20 pl-2 text-[11px] font-semibold tracking-[.12em] text-white/55">
+              V4
+            </span>
+          </span>
           <button type="button" onClick={closeMenu} aria-label={language === "es" ? "Cerrar menú" : "Close menu"} className="inline-flex size-11 items-center justify-center border border-white/20">
             <X className="h-5 w-5" />
           </button>

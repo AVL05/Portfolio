@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, ChevronDown } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
 import { useRef, useState } from "react";
 import { gsap, prefersReducedMotion, useGSAP } from "@/lib/gsap";
@@ -145,10 +145,20 @@ function ProjectScene({
 export function Projects() {
   const { language, t } = useLanguage();
   const containerRef = useRef<HTMLElement>(null);
-  const [archiveOpen, setArchiveOpen] = useState(false);
+  const [activeArchiveIndex, setActiveArchiveIndex] = useState(0);
   const projects = t.projects.items as Project[];
   const featured = featuredIndexes.map((index) => projects[index]).filter(Boolean);
   const archive = projects.filter((_, index) => !featuredIndexes.includes(index));
+  const activeArchiveProject = archive[activeArchiveIndex];
+  const archivePreviewHref =
+    activeArchiveProject?.link ?? activeArchiveProject?.github;
+  const archivePreviewLabel = activeArchiveProject?.link
+    ? language === "es"
+      ? "Ver demo"
+      : "View demo"
+    : language === "es"
+      ? "Ver código"
+      : "View code";
 
   useGSAP(
     () => {
@@ -218,44 +228,166 @@ export function Projects() {
       ))}
 
       <div className="border-y border-border/55 bg-[#0d0d0b] px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
-        <details
-          className="group/archive mx-auto max-w-[100rem]"
-          onToggle={(event) => setArchiveOpen(event.currentTarget.open)}
-        >
-          <summary
-            aria-controls="archive-projects"
-            aria-expanded={archiveOpen}
-            className="flex min-h-16 cursor-pointer list-none items-end justify-between gap-6 focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-primary [&::-webkit-details-marker]:hidden"
-          >
+        <div className="mx-auto max-w-[100rem]">
+          <header className="flex items-end justify-between gap-6">
             <div>
-              <p className="section-kicker">{language === "es" ? "Trabajo secundario" : "Secondary work"}</p>
+              <p className="section-kicker">
+                {language === "es" ? "Trabajo secundario" : "Secondary work"}
+              </p>
               <h3 className="mt-3 text-4xl font-black tracking-[-.05em] sm:text-6xl">
                 {language === "es" ? "Archivo" : "Archive"}
               </h3>
             </div>
-            <span className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[.14em] text-muted-foreground">
-              {archive.length} {language === "es" ? "proyectos" : "projects"}
-              <ChevronDown className="h-4 w-4 transition-transform group-open/archive:rotate-180" />
-            </span>
-          </summary>
-          <div
-            id="archive-projects"
-            aria-hidden={!archiveOpen}
-            className={`mt-10 border-t border-border/55 ${archiveOpen ? "block" : "hidden"}`}
-          >
-              {archive.map((project, index) => (
-                <article key={project.title} className="group grid gap-3 border-b border-border/55 py-5 transition-colors hover:border-primary/65 sm:grid-cols-[3rem_minmax(0,1.4fr)_minmax(0,.8fr)_auto] sm:items-center">
-                  <span className="font-mono text-[11px] text-muted-foreground">{String(index + 5).padStart(2, "0")}</span>
-                  <h4 className="text-xl font-bold tracking-[-.025em] sm:text-2xl">{project.title}</h4>
-                  <span className="font-mono text-[11px] uppercase tracking-[.11em] text-muted-foreground">{project.technologies.slice(0, 3).join(" · ")}</span>
-                  <div className="flex gap-2">
-                    {project.link && <a className="inline-flex min-h-11 min-w-11 items-center justify-center" data-cursor="external" href={project.link} target="_blank" rel="noopener noreferrer" aria-label={`${project.title}: ${language === "es" ? "abrir proyecto" : "open project"}`}><ArrowUpRight className="h-5 w-5" /></a>}
-                    {project.github && <a className="inline-flex min-h-11 min-w-11 items-center justify-center" data-cursor="external" href={project.github} target="_blank" rel="noopener noreferrer" aria-label={`${project.title}: GitHub`}><FaGithub className="h-5 w-5" /></a>}
+            <div className="text-right">
+              <span className="block font-mono text-[11px] uppercase tracking-[.14em] text-muted-foreground">
+                {archive.length} {language === "es" ? "proyectos" : "projects"}
+              </span>
+              <span className="mt-2 hidden font-mono text-[11px] uppercase tracking-[.12em] text-foreground/45 lg:block">
+                {language === "es"
+                  ? "Pasa el cursor o usa Tab para explorar"
+                  : "Hover or use Tab to explore"}
+              </span>
+            </div>
+          </header>
+
+          <div className="mt-10 grid gap-10 border-t border-border/55 pt-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(22rem,.8fr)] lg:gap-16 lg:pt-10">
+            <div>
+              {archive.map((project, index) => {
+                const isActive = activeArchiveIndex === index;
+
+                return (
+                  <article
+                    key={project.title}
+                    onMouseEnter={() => setActiveArchiveIndex(index)}
+                    onFocusCapture={() => setActiveArchiveIndex(index)}
+                    className={`group/archive-row border-b py-6 transition-colors ${
+                      isActive
+                        ? "border-primary/70"
+                        : "border-border/55 hover:border-primary/45"
+                    }`}
+                  >
+                    <div className="relative mb-5 aspect-[16/10] overflow-hidden bg-[#171714] lg:hidden">
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 1024px) calc(100vw - 2rem), 1px"
+                      />
+                    </div>
+
+                    <div className="grid gap-4 sm:grid-cols-[3rem_minmax(0,1fr)_auto] sm:items-start">
+                      <span className="pt-1 font-mono text-[11px] text-muted-foreground">
+                        {String(index + 5).padStart(2, "0")}
+                      </span>
+
+                      <div>
+                        <p className="font-mono text-[11px] uppercase tracking-[.12em] text-primary">
+                          {project.type}
+                        </p>
+                        <h4 className="mt-2 text-xl font-bold tracking-[-.025em] transition-colors group-hover/archive-row:text-primary group-focus-within/archive-row:text-primary sm:text-2xl">
+                          {project.title}
+                        </h4>
+                        <p className="mt-3 max-w-[60ch] text-sm font-medium leading-relaxed text-foreground/62">
+                          {project.description}
+                        </p>
+                        <p className="mt-4 font-mono text-[11px] uppercase tracking-[.11em] text-muted-foreground">
+                          {project.technologies.slice(0, 3).join(" · ")}
+                        </p>
+                      </div>
+
+                      <div className="flex flex-wrap gap-2 sm:justify-end">
+                        {project.link && (
+                          <a
+                            className="inline-flex min-h-11 items-center justify-center gap-2 border border-border/55 px-3 font-mono text-[11px] font-bold uppercase tracking-[.1em] transition-[border-color,color,transform] hover:-translate-y-0.5 hover:border-primary hover:text-primary active:translate-y-0 motion-reduce:transform-none"
+                            data-cursor="external"
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`${project.title}: ${
+                              language === "es"
+                                ? "abrir proyecto"
+                                : "open project"
+                            }`}
+                          >
+                            <ArrowUpRight className="h-5 w-5" />
+                            Demo
+                          </a>
+                        )}
+                        {project.github && (
+                          <a
+                            className="inline-flex min-h-11 items-center justify-center gap-2 border border-border/55 px-3 font-mono text-[11px] font-bold uppercase tracking-[.1em] transition-[border-color,color,transform] hover:-translate-y-0.5 hover:border-primary hover:text-primary active:translate-y-0 motion-reduce:transform-none"
+                            data-cursor="external"
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`${project.title}: GitHub`}
+                          >
+                            <FaGithub className="h-5 w-5" />
+                            GitHub
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+
+            <aside className="archive-preview hidden self-start lg:sticky lg:top-28 lg:block">
+              {activeArchiveProject && archivePreviewHref && (
+                <a
+                  href={archivePreviewHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-cursor="external"
+                  aria-label={`${archivePreviewLabel}: ${activeArchiveProject.title}`}
+                  className="group/archive-preview block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+                >
+                  <div className="relative aspect-[4/3] overflow-hidden border border-border/55 bg-[#171714] transition-colors duration-300 group-hover/archive-preview:border-primary/70">
+                    {archive.map((project, index) => (
+                      <div
+                        key={project.title}
+                        className={`absolute inset-0 transition-[opacity,transform] duration-500 ease-[cubic-bezier(.2,.8,.2,1)] motion-reduce:transform-none motion-reduce:transition-none ${
+                          activeArchiveIndex === index
+                            ? "scale-100 opacity-100"
+                            : "scale-[1.025] opacity-0"
+                        }`}
+                      >
+                        <Image
+                          src={project.image}
+                          alt=""
+                          fill
+                          className="object-cover transition-transform duration-700 ease-[cubic-bezier(.2,.8,.2,1)] group-hover/archive-preview:scale-[1.025] motion-reduce:transform-none motion-reduce:transition-none"
+                          sizes="(max-width: 1024px) 1px, 38vw"
+                        />
+                        <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_55%,rgba(8,8,7,.76))]" />
+                      </div>
+                    ))}
+                    <span className="absolute left-4 top-4 border border-white/20 bg-black/60 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-[.14em] text-white">
+                      {language === "es" ? "Vista previa" : "Preview"} /{" "}
+                      {String(activeArchiveIndex + 5).padStart(2, "0")}
+                    </span>
+                    <div className="absolute inset-x-5 bottom-5 flex items-end justify-between gap-5">
+                      <div>
+                        <p className="font-mono text-[11px] uppercase tracking-[.12em] text-white/68">
+                          {activeArchiveProject.type}
+                        </p>
+                        <p className="mt-1 text-xl font-bold tracking-[-.025em] text-white">
+                          {activeArchiveProject.title}
+                        </p>
+                      </div>
+                      <span className="inline-flex shrink-0 items-center gap-2 border-b border-white/55 pb-1 font-mono text-[11px] font-bold uppercase tracking-[.12em] text-white transition-colors group-hover/archive-preview:border-primary group-hover/archive-preview:text-primary">
+                        {archivePreviewLabel}
+                        <ArrowUpRight className="h-4 w-4 transition-transform group-hover/archive-preview:-translate-y-0.5 group-hover/archive-preview:translate-x-0.5 motion-reduce:transform-none" />
+                      </span>
+                    </div>
                   </div>
-                </article>
-              ))}
+                </a>
+              )}
+            </aside>
           </div>
-        </details>
+        </div>
       </div>
     </section>
   );

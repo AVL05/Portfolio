@@ -1,4 +1,4 @@
-# Portfolio — Alex Vicente López
+# Portfolio v4 — Alex Vicente López
 
 **Portfolio profesional** construido con Next.js 16, React 19 y TypeScript. Disponible en [aleviclop.dev](https://aleviclop.dev).
 
@@ -37,6 +37,7 @@ pnpm build    # build de producción
 pnpm lint     # ESLint
 pnpm typecheck
 pnpm test
+pnpm test:e2e # Playwright: navegación, idiomas, archivo y formulario
 ```
 
 ## Estructura

@@ -264,6 +264,9 @@
   left: 1rem;
   top: 1rem;
   z-index: 120;
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
   transform: translateY(-180%);
   background: var(--foreground);
   color: var(--background);
@@ -349,7 +352,7 @@
 @media (min-width: 1024px) and (max-height: 800px) {
   .hero-cinema .hero-title-a,
   .hero-cinema .hero-title-b {
-    font-size: 10.5vw;
+    font-size: 10vw;
   }
   .hero-cinema .hero-copy {
     margin-top: 1rem;
@@ -358,9 +361,6 @@
   .hero-cinema .hero-copy p {
     font-size: .9rem;
     line-height: 1.45;
-  }
-  .hero-cinema .hero-scroll {
-    display: none;
   }
 }
 

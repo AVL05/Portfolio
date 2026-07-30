@@ -79,7 +79,8 @@ export function Hero() {
       id="hero"
       ref={containerRef}
       aria-labelledby="hero-title"
-      className="hero-cinema relative min-h-[100dvh] overflow-hidden bg-background"
+      data-portfolio-version="4"
+      className="hero-cinema relative min-h-[max(100dvh,48rem)] overflow-hidden bg-background"
     >
       <div className="hero-visual absolute inset-x-3 top-20 h-[52dvh] overflow-hidden sm:inset-x-6 sm:h-[58dvh] lg:inset-x-[31vw] lg:bottom-12 lg:top-24 lg:h-auto">
         <div className="hero-frame absolute inset-0 will-change-transform">
@@ -99,25 +100,29 @@ export function Hero() {
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,8,7,.08),rgba(8,8,7,.5))]" />
         </div>
         <div className="absolute inset-0 border border-white/14" />
-        <span className="absolute right-4 top-4 hidden bg-black/55 px-2 py-1 font-mono text-[11px] font-semibold uppercase tracking-[.16em] text-white sm:block">
+        <span className="absolute right-4 top-14 hidden bg-black/55 px-2 py-1 font-mono text-[11px] font-semibold uppercase tracking-[.16em] text-white sm:block">
           {language === "es" ? "Fotografía de Alex Vicente" : "Photograph by Alex Vicente"}
         </span>
       </div>
 
-      <div className="relative z-10 mx-auto flex min-h-[100dvh] max-w-[100rem] flex-col px-4 pb-6 pt-24 sm:px-6 sm:pb-8 lg:px-8 lg:pt-28">
+      <div className="relative z-10 mx-auto flex min-h-[max(100dvh,48rem)] max-w-[100rem] flex-col px-4 pb-6 pt-24 sm:px-6 sm:pb-8 lg:pl-8 lg:pr-20 lg:pt-28">
         <div className="hero-reveal flex items-center justify-between gap-4 font-mono text-[11px] font-semibold uppercase tracking-[.14em] text-foreground/76">
           <span>{t.hero.status}</span>
-          <span className="hidden md:block">React · Next.js · TypeScript · GSAP</span>
+          <span className="hidden items-center gap-4 md:flex">
+            <span className="text-primary">Portfolio / V4</span>
+            <span aria-hidden="true" className="h-px w-8 bg-border" />
+            React · Next.js · TypeScript · GSAP
+          </span>
         </div>
 
         <h1 id="hero-title" className="mt-[33dvh] lg:mt-auto">
           <span className="block overflow-hidden">
-            <span className="hero-mask-line hero-title-a block whitespace-nowrap text-[18vw] font-black uppercase leading-[.72] tracking-[-.085em] text-foreground will-change-transform lg:text-[12.7vw]">
+            <span className="hero-mask-line hero-title-a block whitespace-nowrap text-[18vw] font-black uppercase leading-[.72] tracking-[-.085em] text-foreground will-change-transform lg:text-[12vw]">
               Alex
             </span>
           </span>
           <span className="block overflow-hidden text-right">
-            <span className="hero-mask-line hero-title-b block whitespace-nowrap text-[18vw] font-black uppercase leading-[.76] tracking-[-.085em] text-foreground will-change-transform lg:text-[12.7vw]">
+            <span className="hero-mask-line hero-title-b block whitespace-nowrap text-[18vw] font-black uppercase leading-[.76] tracking-[-.085em] text-foreground will-change-transform lg:text-[12vw]">
               Vicente
             </span>
           </span>
@@ -160,9 +165,12 @@ export function Hero() {
           </a>
         </div>
 
-        <div className="hero-scroll hero-reveal mt-6 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[.14em] text-muted-foreground md:absolute md:bottom-7 md:left-8">
-          <ArrowDown className="h-3.5 w-3.5" />
-          {t.hero.scroll} / 01—05
+        <div className="hero-scroll hero-reveal mt-6 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[.14em] text-muted-foreground lg:absolute lg:right-7 lg:top-1/2 lg:mt-0 lg:-translate-y-1/2 lg:flex-col lg:gap-3">
+          <ArrowDown className="h-3.5 w-3.5 lg:h-4 lg:w-4" />
+          <span className="lg:rotate-180 lg:[writing-mode:vertical-rl]">
+            {t.hero.scroll} / 01—05
+          </span>
+          <span aria-hidden="true" className="hidden h-12 w-px bg-border lg:block" />
         </div>
       </div>
     </section>

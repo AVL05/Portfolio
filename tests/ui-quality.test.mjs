@@ -73,3 +73,35 @@ test("focus, LCP image, and localized Open Graph contracts remain explicit", () 
   assert.match(layout, /alternateLocale/);
   assert.match(seo, /alternateLocale/);
 });
+
+test("portfolio v4 keeps the hero controls aligned and overlap-safe", () => {
+  const hero = read("components/hero.tsx");
+  const navigation = read("components/navigation.tsx");
+  const languageToggle = read("components/language-toggle.tsx");
+  const packageJson = JSON.parse(read("package.json"));
+
+  assert.equal(packageJson.version, "4.0.0");
+  assert.match(hero, /data-portfolio-version="4"/);
+  assert.match(hero, /lg:\[writing-mode:vertical-rl\]/);
+  assert.doesNotMatch(hero, /md:bottom-7 md:left-8/);
+  assert.match(languageToggle, /absolute left-1 top-1 size-9/);
+  assert.match(languageToggle, /translate-x-9/);
+  assert.match(navigation, /\bV4\b/);
+});
+
+test("secondary work stays visible with responsive hover and focus previews", () => {
+  const projects = read("components/projects.tsx");
+
+  assert.doesNotMatch(projects, /<details|<summary|archiveOpen/);
+  assert.match(projects, /className="archive-preview/);
+  assert.match(projects, /onMouseEnter=\{\(\) => setActiveArchiveIndex\(index\)\}/);
+  assert.match(projects, /onFocusCapture=\{\(\) => setActiveArchiveIndex\(index\)\}/);
+  assert.match(projects, /motion-reduce:transition-none/);
+  assert.match(projects, /sizes="\(max-width: 1024px\) 1px, 38vw"/);
+  assert.match(projects, /Pasa el cursor o usa Tab para explorar/);
+  assert.match(projects, /Hover or use Tab to explore/);
+  assert.match(projects, /aria-label=\{`\$\{archivePreviewLabel\}: \$\{activeArchiveProject\.title\}`\}/);
+  assert.match(projects, /Ver código/);
+  assert.match(projects, /View code/);
+  assert.doesNotMatch(projects, /aria-hidden="true"\s+className="archive-preview/);
+});

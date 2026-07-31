@@ -89,7 +89,6 @@
         "image": "/projects/el-fogon.png",
         "technologies": ["HTML5", "Tailwind CSS", "JavaScript", "Vite"],
         "category": "Desarrollo Web",
-        "github": "https://github.com/AVL05/PRWEB02",
         "type": "Landing page",
         "role": "Definí la jerarquía visual, estructura responsive, navegación y composición de una landing gastronómica clara.",
         "outcome": "Página ligera y directa para presentar carta, identidad visual y llamada a reserva sin complejidad innecesaria."

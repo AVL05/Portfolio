@@ -142,6 +142,72 @@ function ProjectScene({
   );
 }
 
+function ArchivePreviewContent({
+  activeIndex,
+  archive,
+  isLinked,
+  label,
+  language,
+  project,
+}: {
+  activeIndex: number;
+  archive: Project[];
+  isLinked: boolean;
+  label: string;
+  language: "es" | "en";
+  project: Project;
+}) {
+  return (
+    <div className="relative aspect-[4/3] overflow-hidden border border-border/55 bg-[#171714] transition-colors duration-300 group-hover/archive-preview:border-primary/70">
+      {archive.map((archiveProject, index) => (
+        <div
+          key={archiveProject.title}
+          className={`absolute inset-0 transition-[opacity,transform] duration-500 ease-[cubic-bezier(.2,.8,.2,1)] motion-reduce:transform-none motion-reduce:transition-none ${
+            activeIndex === index
+              ? "scale-100 opacity-100"
+              : "scale-[1.025] opacity-0"
+          }`}
+        >
+          <Image
+            src={archiveProject.image}
+            alt=""
+            fill
+            className="object-cover transition-transform duration-700 ease-[cubic-bezier(.2,.8,.2,1)] group-hover/archive-preview:scale-[1.025] motion-reduce:transform-none motion-reduce:transition-none"
+            sizes="(max-width: 1024px) 1px, 38vw"
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_55%,rgba(8,8,7,.76))]" />
+        </div>
+      ))}
+      <span className="absolute left-4 top-4 border border-white/20 bg-black/60 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-[.14em] text-white">
+        {language === "es" ? "Vista previa" : "Preview"} /{" "}
+        {String(activeIndex + 5).padStart(2, "0")}
+      </span>
+      <div className="absolute inset-x-5 bottom-5 flex items-end justify-between gap-5">
+        <div>
+          <p className="font-mono text-[11px] uppercase tracking-[.12em] text-white/68">
+            {project.type}
+          </p>
+          <p className="mt-1 text-xl font-bold tracking-[-.025em] text-white">
+            {project.title}
+          </p>
+        </div>
+        <span
+          className={
+            isLinked
+              ? "inline-flex min-h-11 shrink-0 items-center gap-2 border-b border-white/55 pb-1 font-mono text-[11px] font-bold uppercase tracking-[.12em] text-white transition-colors group-hover/archive-preview:border-primary group-hover/archive-preview:text-primary"
+              : "inline-flex min-h-11 shrink-0 items-center font-mono text-[11px] font-bold uppercase tracking-[.12em] text-white/68"
+          }
+        >
+          {label}
+          {isLinked ? (
+            <ArrowUpRight className="h-4 w-4 transition-transform group-hover/archive-preview:-translate-y-0.5 group-hover/archive-preview:translate-x-0.5 motion-reduce:transform-none" />
+          ) : null}
+        </span>
+      </div>
+    </div>
+  );
+}
+
 export function Projects() {
   const { language, t } = useLanguage();
   const containerRef = useRef<HTMLElement>(null);
@@ -156,9 +222,13 @@ export function Projects() {
     ? language === "es"
       ? "Ver demo"
       : "View demo"
-    : language === "es"
-      ? "Ver código"
-      : "View code";
+    : activeArchiveProject?.github
+      ? language === "es"
+        ? "Ver código"
+        : "View code"
+      : language === "es"
+        ? "Proyecto privado"
+        : "Private project";
 
   useGSAP(
     () => {
@@ -208,6 +278,17 @@ export function Projects() {
     },
     { scope: containerRef, dependencies: [language], revertOnUpdate: true },
   );
+
+  const archivePreviewContent = activeArchiveProject ? (
+    <ArchivePreviewContent
+      activeIndex={activeArchiveIndex}
+      archive={archive}
+      isLinked={Boolean(archivePreviewHref)}
+      label={archivePreviewLabel}
+      language={language}
+      project={activeArchiveProject}
+    />
+  ) : null;
 
   return (
     <section id="projects" ref={containerRef} aria-labelledby="projects-title" className="relative bg-background">
@@ -335,7 +416,7 @@ export function Projects() {
             </div>
 
             <aside className="archive-preview hidden self-start lg:sticky lg:top-28 lg:block">
-              {activeArchiveProject && archivePreviewHref && (
+              {activeArchiveProject && archivePreviewHref ? (
                 <a
                   href={archivePreviewHref}
                   target="_blank"
@@ -344,46 +425,12 @@ export function Projects() {
                   aria-label={`${archivePreviewLabel}: ${activeArchiveProject.title}`}
                   className="group/archive-preview block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
                 >
-                  <div className="relative aspect-[4/3] overflow-hidden border border-border/55 bg-[#171714] transition-colors duration-300 group-hover/archive-preview:border-primary/70">
-                    {archive.map((project, index) => (
-                      <div
-                        key={project.title}
-                        className={`absolute inset-0 transition-[opacity,transform] duration-500 ease-[cubic-bezier(.2,.8,.2,1)] motion-reduce:transform-none motion-reduce:transition-none ${
-                          activeArchiveIndex === index
-                            ? "scale-100 opacity-100"
-                            : "scale-[1.025] opacity-0"
-                        }`}
-                      >
-                        <Image
-                          src={project.image}
-                          alt=""
-                          fill
-                          className="object-cover transition-transform duration-700 ease-[cubic-bezier(.2,.8,.2,1)] group-hover/archive-preview:scale-[1.025] motion-reduce:transform-none motion-reduce:transition-none"
-                          sizes="(max-width: 1024px) 1px, 38vw"
-                        />
-                        <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_55%,rgba(8,8,7,.76))]" />
-                      </div>
-                    ))}
-                    <span className="absolute left-4 top-4 border border-white/20 bg-black/60 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-[.14em] text-white">
-                      {language === "es" ? "Vista previa" : "Preview"} /{" "}
-                      {String(activeArchiveIndex + 5).padStart(2, "0")}
-                    </span>
-                    <div className="absolute inset-x-5 bottom-5 flex items-end justify-between gap-5">
-                      <div>
-                        <p className="font-mono text-[11px] uppercase tracking-[.12em] text-white/68">
-                          {activeArchiveProject.type}
-                        </p>
-                        <p className="mt-1 text-xl font-bold tracking-[-.025em] text-white">
-                          {activeArchiveProject.title}
-                        </p>
-                      </div>
-                      <span className="inline-flex shrink-0 items-center gap-2 border-b border-white/55 pb-1 font-mono text-[11px] font-bold uppercase tracking-[.12em] text-white transition-colors group-hover/archive-preview:border-primary group-hover/archive-preview:text-primary">
-                        {archivePreviewLabel}
-                        <ArrowUpRight className="h-4 w-4 transition-transform group-hover/archive-preview:-translate-y-0.5 group-hover/archive-preview:translate-x-0.5 motion-reduce:transform-none" />
-                      </span>
-                    </div>
-                  </div>
+                  {archivePreviewContent}
                 </a>
+              ) : (
+                <div className="group/archive-preview">
+                  {archivePreviewContent}
+                </div>
               )}
             </aside>
           </div>

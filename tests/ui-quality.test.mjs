@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { extname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { test } from "node:test";
@@ -74,6 +74,11 @@ test("focus, LCP image, and localized Open Graph contracts remain explicit", () 
   assert.match(seo, /alternateLocale/);
 });
 
+test("the branded PNG is the only App Router icon", () => {
+  assert.equal(existsSync(join(root, "app/icon.png")), true);
+  assert.equal(existsSync(join(root, "app/icon.svg")), false);
+});
+
 test("portfolio v4 keeps the hero controls aligned and overlap-safe", () => {
   const hero = read("components/hero.tsx");
   const navigation = read("components/navigation.tsx");
@@ -91,6 +96,8 @@ test("portfolio v4 keeps the hero controls aligned and overlap-safe", () => {
 
 test("secondary work stays visible with responsive hover and focus previews", () => {
   const projects = read("components/projects.tsx");
+  const es = read("lib/locales/es.json");
+  const en = read("lib/locales/en.json");
 
   assert.doesNotMatch(projects, /<details|<summary|archiveOpen/);
   assert.match(projects, /className="archive-preview/);
@@ -103,5 +110,9 @@ test("secondary work stays visible with responsive hover and focus previews", ()
   assert.match(projects, /aria-label=\{`\$\{archivePreviewLabel\}: \$\{activeArchiveProject\.title\}`\}/);
   assert.match(projects, /Ver código/);
   assert.match(projects, /View code/);
+  assert.match(projects, /Proyecto privado/);
+  assert.match(projects, /Private project/);
+  assert.doesNotMatch(es, /github\.com\/AVL05\/PRWEB02/);
+  assert.doesNotMatch(en, /github\.com\/AVL05\/PRWEB02/);
   assert.doesNotMatch(projects, /aria-hidden="true"\s+className="archive-preview/);
 });

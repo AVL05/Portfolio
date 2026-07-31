@@ -96,6 +96,7 @@ test("validates the contact form and handles a successful response", async ({
 
 test("serves the CV and local project media", async ({ request }) => {
   for (const path of [
+    "/icon.png",
     "/cv/CV_Alex_Vicente_Lopez_Frontend_React_A4.pdf",
     "/projects/Demo_API_Hotel.mp4",
     "/projects/LLIBRET%2024-25.pdf",

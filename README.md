@@ -43,12 +43,12 @@ pnpm test:e2e # Playwright: navegación, idiomas, archivo y formulario
 ## Estructura
 
 ```
-app/          — Rutas y layout (Next App Router)
+app/          — Rutas, layout, metadata y favicon (Next App Router)
 components/   — Secciones y componentes UI
 lib/          — GSAP, contexto de idioma, SEO, utilidades
 lib/locales/  — Traducciones ES / EN
-public/       — Assets estáticos (imágenes, CV, favicons)
-docs/         — Integración, operación y copy reutilizable
+public/       — Assets estáticos publicados (imágenes, documentos y CV)
+docs/         — Integración y operación
 ```
 
 ## Secciones

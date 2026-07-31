@@ -22,6 +22,11 @@ yarn-error.log*
 # vercel
 .vercel
 
+# local editor and agent artifacts
+/.vscode/
+/.impeccable/
+/CLAUDE.md
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

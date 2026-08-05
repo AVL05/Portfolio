@@ -217,7 +217,7 @@ export function Navigation() {
 
           <div className="flex items-center gap-3">
             <LanguageToggle />
-            <a href="/cv/CV_Alex_Vicente_Lopez_Frontend_React_A4.pdf" download className="hidden min-h-11 items-center gap-2 border border-border/70 px-3 font-mono text-[11px] font-bold uppercase tracking-[.12em] transition-colors hover:border-primary hover:text-primary sm:inline-flex">
+          <a href="/cv/CV_Alex_Vicente_Lopez.pdf" download className="hidden min-h-11 items-center gap-2 border border-border/70 px-3 font-mono text-[11px] font-bold uppercase tracking-[.12em] transition-colors hover:border-primary hover:text-primary sm:inline-flex">
               <FileText className="h-3.5 w-3.5" /> CV
             </a>
             <button ref={triggerRef} type="button" aria-expanded={isMenuOpen} aria-controls="mobile-navigation" aria-label={language === "es" ? "Abrir menú" : "Open menu"} onClick={() => setIsMenuOpen(true)} className="inline-flex size-11 items-center justify-center border border-border/70 lg:hidden">

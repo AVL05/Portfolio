@@ -287,7 +287,7 @@ export function Experience() {
             className="h-13 shrink-0 rounded-lg bg-primary px-7 font-bold text-primary-foreground transition-all hover:-translate-y-0.5 hover:bg-primary/90 active:translate-y-0 sm:h-14 sm:px-8"
           >
             <a
-              href="/cv/CV_Alex_Vicente_Lopez_Frontend_React_A4.pdf"
+              href="/cv/CV_Alex_Vicente_Lopez.pdf"
               download
               className="flex items-center gap-3"
             >

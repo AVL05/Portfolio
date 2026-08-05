@@ -149,7 +149,7 @@ export function Hero() {
             <a data-cursor="contact" href="mailto:alexviclop@gmail.com" className="cinema-link">
               <Mail /> {language === "es" ? "Contacto" : "Contact"}
             </a>
-            <a href="/cv/CV_Alex_Vicente_Lopez_Frontend_React_A4.pdf" download className="cinema-link">
+          <a href="/cv/CV_Alex_Vicente_Lopez.pdf" download className="cinema-link">
               <FileText /> CV
             </a>
           </div>

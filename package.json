@@ -43,7 +43,7 @@
     "postcss": "latest",
     "tailwindcss": "latest",
     "tw-animate-css": "latest",
-    "typescript": "latest"
+    "typescript": "5.7.3"
   },
   "pnpm": {
     "overrides": {

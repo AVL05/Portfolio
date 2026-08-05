@@ -53,7 +53,6 @@ const nextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
   },
-  output: "standalone",
   trailingSlash: false,
   poweredByHeader: false,
   async redirects() {

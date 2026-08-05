@@ -3,9 +3,9 @@ export const SITE_URL =
 
 export const SITE_NAME = "Alex Vicente López";
 export const SITE_TITLE =
-  "Alex Vicente | Desarrollador frontend · React y Next.js";
+  "Alex Vicente López | Full-Stack Developer";
 export const SITE_DESCRIPTION =
-  "Portfolio de Alex Vicente, desarrollador frontend en Valencia especializado en React, Next.js y TypeScript, con experiencia full-stack y criterio visual.";
+  "Portfolio de Alex Vicente López, Full-Stack Developer en Valencia. Desarrollo aplicaciones web completas, funcionales y preparadas para producción.";
 
 export const SEO_KEYWORDS = [
   "Alex Vicente López",
@@ -21,9 +21,9 @@ export const SEO_KEYWORDS = [
   "Laravel",
   "PHP",
   "frontend",
-  "frontend developer Valencia",
-  "desarrollador React Valencia",
-  "full-stack junior",
+  "full-stack developer Valencia",
+  "desarrollador full-stack Valencia",
+  "desarrollador de aplicaciones web",
   "fotografía",
   "diseño digital",
   "raw.vives",
@@ -34,7 +34,7 @@ export const SAME_AS = [
   "https://github.com/AVL05",
   "https://www.linkedin.com/in/aleviclop/",
   "https://www.instagram.com/aleviclop/",
-  "https://gallery.aleviclop.dev/",
+  "https://rawvives.aleviclop.dev/",
 ];
 
 export const INDEXABLE_ROUTES = [
@@ -133,9 +133,9 @@ export const personJsonLd = {
   alternateName: ["Alex Vicente", "Alex Vicente Lopez", "aleviclop", "AVL05"],
   url: SITE_URL,
   email: "mailto:alexviclop@gmail.com",
-  jobTitle: "Frontend Developer",
+  jobTitle: "Full-Stack Developer",
   description:
-    "Alex Vicente López es desarrollador frontend y Técnico Superior en Desarrollo de Aplicaciones Web, especializado en React, Next.js, TypeScript e interfaces accesibles listas para producción.",
+    "Alex Vicente López es Full-Stack Developer y Técnico Superior en Desarrollo de Aplicaciones Web. Construye aplicaciones web completas y preparadas para producción.",
   image: `${SITE_URL}/api/og?lang=es`,
   sameAs: SAME_AS,
   knowsAbout: [
@@ -153,7 +153,7 @@ export const personJsonLd = {
   ],
   hasOccupation: {
     "@type": "Occupation",
-    name: "Frontend Developer",
+    name: "Full-Stack Developer",
     skills:
       "React, Next.js, TypeScript, Laravel, PHP, MySQL, Tailwind CSS, GSAP, diseño de interfaces",
   },
@@ -174,7 +174,11 @@ export const websiteJsonLd = {
   "@type": "WebSite",
   "@id": `${SITE_URL}/#website`,
   name: SITE_NAME,
-  alternateName: ["Portfolio de Alex Vicente López", "aleviclop.dev"],
+  alternateName: [
+    "Alex Vicente Lopez",
+    "Portfolio de Alex Vicente López",
+    "aleviclop.dev",
+  ],
   url: SITE_URL,
   inLanguage: ["es", "en"],
   publisher: {

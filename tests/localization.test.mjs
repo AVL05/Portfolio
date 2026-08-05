@@ -43,15 +43,15 @@ test("known mixed-language surfaces select copy from the active language", () =>
   const legal = read("components/legal-page-content.tsx");
   const og = read("app/api/og/route.tsx");
 
-  assert.match(hero, /Desarrollador frontend/);
-  assert.match(hero, /Frontend Developer/);
+  assert.match(hero, /Desarrollador Full-Stack/);
+  assert.match(hero, /Full-Stack Developer/);
   assert.match(photography, /Otra/);
   assert.match(photography, /See/);
   assert.doesNotMatch(notFound, /Inicio \/ Home|Proyectos \/ Work/);
   assert.match(seoShell, /useLanguage/);
   assert.match(legal, /Aviso legal/);
   assert.match(legal, /Legal notice/);
-  assert.match(og, /Desarrollador frontend/);
+  assert.match(og, /Full-Stack Developer/);
 });
 
 test("language changes update document language and use an accessible transition", () => {
@@ -60,4 +60,15 @@ test("language changes update document language and use an accessible transition
   assert.match(context, /document\.documentElement\.lang = lang/);
   assert.match(context, /startViewTransition/);
   assert.match(context, /prefers-reduced-motion/);
+});
+
+test("public positioning consistently presents Alex as full-stack", () => {
+  const layout = read("app/layout.tsx");
+  const seo = read("lib/seo.ts");
+  const about = read("app/sobre-mi/page.tsx");
+  const publicPositioning = [layout, seo, about, JSON.stringify(es), JSON.stringify(en)].join("\n");
+
+  assert.match(publicPositioning, /Full-Stack Developer/);
+  assert.doesNotMatch(publicPositioning, /Frontend Developer|Desarrollador frontend/);
+  assert.doesNotMatch(publicPositioning, /especializad|speciali[sz]/i);
 });

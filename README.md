@@ -1,72 +1,131 @@
-# Portfolio v4 — Alex Vicente López
+# Alex Vicente López — Portfolio
 
-**Portfolio profesional** construido con Next.js 16, React 19 y TypeScript. Disponible en [aleviclop.dev](https://aleviclop.dev).
+Portfolio profesional de [Alex Vicente López](https://www.aleviclop.dev), Full-Stack Developer en Valencia. Presenta proyectos web completos, casos de estudio, experiencia profesional y trabajo fotográfico mediante una experiencia bilingüe, accesible y preparada para producción.
 
-Proyecto principal: [raw.vives](https://gallery.aleviclop.dev/), un archivo fotográfico editorial bilingüe con 30 fotografías, 3 series y una [página de caso de estudio](https://aleviclop.dev/proyectos/raw-vives).
+[Ver portfolio](https://www.aleviclop.dev) · [Explorar raw.vives](https://rawvives.aleviclop.dev) · [GitHub](https://github.com/AVL05) · [LinkedIn](https://www.linkedin.com/in/aleviclop/)
 
-![raw.vives en producción](public/projects/raw-vives/raw-vives-hero.webp)
+![Vista principal del caso de estudio raw.vives](public/projects/raw-vives/raw-vives-hero.webp)
 
----
+## Características
+
+- Presentación profesional en español e inglés con preferencia persistente.
+- Casos de estudio para productos full-stack, aplicaciones web y proyectos editoriales.
+- Contenido responsive con navegación accesible y objetivos táctiles adecuados.
+- Animaciones GSAP compatibles con `prefers-reduced-motion`.
+- SEO localizado con canonical, sitemap, robots, Open Graph, Twitter Cards y JSON-LD.
+- Formulario de contacto con validación accesible y entrega mediante Web3Forms.
+- Analytics y métricas de rendimiento mediante Vercel Analytics y Speed Insights.
 
 ## Stack
 
-| Capa | Tecnología |
-|------|-----------|
-| Framework | Next.js 16 (App Router) |
-| UI | React 19 + TypeScript |
-| Estilos | Tailwind CSS v4 + PostCSS |
-| Animaciones | GSAP 3 + @gsap/react (ScrollTrigger, ScrollToPlugin) |
-| Tipografía | Geist Sans / Geist Mono |
-| Componentes | Radix UI (primitivas) |
-| Iconos | Lucide React + react-icons |
-| Formulario | Web3Forms API |
-| Analytics | Vercel Analytics + Speed Insights |
-| Lint | ESLint + @typescript-eslint |
+| Área | Tecnologías |
+| --- | --- |
+| Framework | Next.js 16, App Router, React 19 |
+| Lenguaje | TypeScript |
+| Estilos | Tailwind CSS 4, PostCSS |
+| Movimiento | GSAP, `@gsap/react`, ScrollTrigger, ScrollToPlugin |
+| UI | Radix UI, Lucide, React Icons, Geist |
+| Calidad | ESLint, TypeScript, Node Test Runner, Playwright |
+| Plataforma | Vercel, GitHub Actions |
+
+## Arquitectura
+
+```text
+app/            Rutas, layouts, metadata, sitemap, robots y endpoints
+components/     Secciones del portfolio y componentes reutilizables
+components/ui/  Primitivas compartidas de interfaz
+hooks/          Hooks reutilizables de React
+lib/            Idiomas, SEO, GSAP y utilidades comunes
+lib/locales/    Catálogos de contenido en español e inglés
+public/         Imágenes, documentos, favicon y recursos publicados
+tests/          Pruebas de integración y contratos del producto
+tests/e2e/      Flujos de navegador con Playwright
+docs/           Documentación técnica específica
+```
+
+La aplicación mantiene separadas las responsabilidades de presentación, estado bilingüe, animación y SEO. Las rutas públicas reutilizan los helpers de `lib/seo.ts` para conservar canonicals y metadata coherentes.
+
+## Rutas principales
+
+| Ruta | Contenido |
+| --- | --- |
+| `/` | Portfolio completo |
+| `/sobre-mi` | Perfil profesional |
+| `/proyectos` | Índice de proyectos |
+| `/proyectos/raw-vives` | Caso de estudio de raw.vives |
+| `/proyectos/lumaflow-studio` | Caso de estudio de LumaFlow Studio |
+| `/proyectos/distrito-gourmet` | Caso de estudio de Distrito Gourmet |
+| `/fotografia` | Perfil y archivo fotográfico |
+| `/contacto` | Información de contacto |
+| `/legal` | Aviso legal y privacidad |
 
 ## Requisitos
 
-- **Node.js** 22.x
-- **pnpm** (obligatorio)
+- Node.js 22.x
+- pnpm 10.x
 
-## Desarrollo
+## Instalación y desarrollo
 
 ```bash
-pnpm install
-pnpm dev      # servidor de desarrollo (webpack, no Turbopack)
-pnpm build    # build de producción
-pnpm lint     # ESLint
+pnpm install --frozen-lockfile
+pnpm dev
+```
+
+El servidor de desarrollo usa webpack. La aplicación estará disponible en la URL indicada por Next.js.
+
+## Comandos
+
+| Comando | Descripción |
+| --- | --- |
+| `pnpm dev` | Inicia el entorno local de desarrollo |
+| `pnpm lint` | Ejecuta ESLint sobre el repositorio |
+| `pnpm typecheck` | Valida TypeScript sin emitir archivos |
+| `pnpm test` | Ejecuta las pruebas de integración con `node:test` |
+| `pnpm test:e2e` | Ejecuta los flujos E2E de Playwright |
+| `pnpm build` | Genera el build optimizado de producción |
+| `pnpm start` | Sirve un build de producción existente |
+
+## Validación
+
+Antes de publicar cambios deben completarse estas comprobaciones:
+
+```bash
+pnpm lint
 pnpm typecheck
 pnpm test
-pnpm test:e2e # Playwright: navegación, idiomas, archivo y formulario
+pnpm build
+pnpm test:e2e
 ```
 
-## Estructura
+Las pruebas cubren paridad ES/EN, contratos SEO, recursos publicados, accesibilidad básica, navegación, cambio de idioma, formulario de contacto y comportamiento responsive.
 
-```
-app/          — Rutas, layout, metadata y favicon (Next App Router)
-components/   — Secciones y componentes UI
-lib/          — GSAP, contexto de idioma, SEO, utilidades
-lib/locales/  — Traducciones ES / EN
-public/       — Assets estáticos publicados (imágenes, documentos y CV)
-docs/         — Integración y operación
-```
+## SEO y descubrimiento
 
-## Secciones
+El portfolio expone:
 
-`Navigation → Hero → Project scenes → Photography → Capabilities → Experience → Contact`
+- metadata localizada y URL canonical bajo `www.aleviclop.dev`;
+- datos estructurados `Person`, `WebSite` y `ProfilePage`;
+- `robots.txt` abierto a rastreadores y referencia al sitemap;
+- `sitemap.xml` con todas las rutas públicas indexables;
+- favicon público y estable en `/favicon.png`;
+- enlaces internos a las páginas de perfil, proyectos, fotografía y contacto.
 
-Todas las secciones respetan `prefers-reduced-motion`. El idioma (ES/EN) se persiste en cookie + localStorage.
+Los motores de búsqueda mantienen índices independientes. La publicación técnica facilita el descubrimiento, pero la incorporación y posición final dependen de cada buscador.
 
 ## Despliegue
 
-La rama `main` se valida con GitHub Actions y se publica en Vercel mediante la integración del repositorio. El rollback consiste en restaurar el deployment estable desde Vercel o revertir el commit publicado y volver a ejecutar CI.
+Los cambios enviados a `main` activan GitHub Actions y la integración de Vercel. El workflow de CI ejecuta lint, tipos, tests, build y Playwright; Vercel construye y publica la aplicación mediante su integración con el repositorio.
 
-## Derechos de autor
+La URL canónica puede configurarse mediante `NEXT_PUBLIC_SITE_URL`; si no se define, se usa `https://www.aleviclop.dev`.
 
-Todo el contenido (código, diseño, imágenes y fotografías) es propiedad de **Alex Vicente López**. Queda prohibida su copia, reproducción o redistribución sin autorización escrita.
+## Seguridad y contenido
 
-Contacto: **alexviclop@gmail.com** — Licencia completa en `LICENSE.md`.
+- No deben versionarse archivos `.env`, secretos, fotografías RAW ni exportaciones temporales.
+- Los recursos publicados deben residir en `public/` y estar referenciados por el código o la documentación.
+- El contenido, código, diseño e imágenes pertenecen a Alex Vicente López salvo indicación expresa.
 
----
+## Licencia y contacto
 
-&copy; 2026 Alex Vicente López
+Consulta [LICENSE.md](LICENSE.md) para conocer las condiciones de uso.
+
+Contacto profesional: [alexviclop@gmail.com](mailto:alexviclop@gmail.com)

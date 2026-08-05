@@ -34,7 +34,7 @@ export default async function RawVivesCaseStudyPage() {
     "@type": "CreativeWork",
     name: "raw.vives",
     description: metadataCopy[language].description,
-    url: "https://gallery.aleviclop.dev/",
+    url: "https://rawvives.aleviclop.dev/",
     image,
     inLanguage: ["es", "en"],
     author: { "@type": "Person", name: "Alex Vicente", url: absoluteUrl("/") },

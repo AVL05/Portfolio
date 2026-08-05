@@ -409,7 +409,7 @@ export function Contact() {
                   {t.contact.visual_portfolio_desc}
                 </p>
                 <a
-                  href="https://gallery.aleviclop.dev/"
+                  href="https://rawvives.aleviclop.dev/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-primary/30 bg-primary/10 px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-primary transition-all hover:bg-primary hover:text-primary-foreground"
@@ -421,6 +421,25 @@ export function Contact() {
             </div>
 
             <footer className="mt-16 border-t border-border/50 pt-8 text-center sm:text-left">
+              <nav
+                aria-label={language === "es" ? "Páginas del portfolio" : "Portfolio pages"}
+                className="mb-6 flex flex-wrap justify-center gap-x-5 gap-y-2 sm:justify-start"
+              >
+                {[
+                  { href: "/sobre-mi", es: "Sobre mí", en: "About" },
+                  { href: "/proyectos", es: "Proyectos", en: "Projects" },
+                  { href: "/fotografia", es: "Fotografía", en: "Photography" },
+                  { href: "/contacto", es: "Contacto", en: "Contact" },
+                ].map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="inline-flex min-h-11 items-center font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground transition-colors hover:text-primary"
+                  >
+                    {item[language]}
+                  </Link>
+                ))}
+              </nav>
               <p className="mb-1 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground">
                 &copy; 2026 Alex Vicente López
               </p>

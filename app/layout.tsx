@@ -34,11 +34,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const title =
     language === "es"
       ? SITE_TITLE
-      : "Alex Vicente | Frontend Developer · React & Next.js";
+      : "Alex Vicente López | Full-Stack Developer";
   const description =
     language === "es"
       ? SITE_DESCRIPTION
-      : "Portfolio of Alex Vicente, a frontend developer in Valencia specializing in React, Next.js, and TypeScript, with full-stack experience and strong visual judgment.";
+      : "Portfolio of Alex Vicente López, a Full-Stack Developer in Valencia. I build complete, functional, production-ready web applications.";
 
   return {
     metadataBase: new URL(SITE_URL),
@@ -53,6 +53,11 @@ export async function generateMetadata(): Promise<Metadata> {
     creator: "Alex Vicente López",
     publisher: "Alex Vicente López",
     category: "portfolio",
+    icons: {
+      icon: [{ url: "/favicon.png", type: "image/png", sizes: "1254x1254" }],
+      shortcut: "/favicon.png",
+      apple: "/favicon.png",
+    },
     openGraph: {
       title,
       description,
@@ -113,6 +118,7 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         {isVercel ? <link rel="preconnect" href="https://va.vercel-scripts.com" /> : null}
         {isVercel ? <link rel="preconnect" href="https://vitals.vercel-insights.com" /> : null}
         <script
@@ -123,18 +129,18 @@ export default async function RootLayout({
                 ...personJsonLd,
                 jobTitle:
                   initialLanguage === "es"
-                    ? "Desarrollador frontend"
-                    : "Frontend Developer",
+                    ? "Desarrollador Full-Stack"
+                    : "Full-Stack Developer",
                 description:
                   initialLanguage === "es"
                     ? personJsonLd.description
-                    : "Alex Vicente López is a frontend developer specializing in React, Next.js, TypeScript, and accessible production-ready interfaces.",
+                    : "Alex Vicente López is a Full-Stack Developer and Web Application Development graduate. He builds complete, production-ready web applications.",
                 hasOccupation: {
                   ...personJsonLd.hasOccupation,
                   name:
                     initialLanguage === "es"
-                      ? "Desarrollador frontend"
-                      : "Frontend Developer",
+                      ? "Desarrollador Full-Stack"
+                      : "Full-Stack Developer",
                 },
               },
               websiteJsonLd,
@@ -143,11 +149,11 @@ export default async function RootLayout({
                 name:
                   initialLanguage === "es"
                     ? profilePageJsonLd.name
-                    : "Alex Vicente López - Frontend developer profile",
+                    : "Alex Vicente López - Full-Stack Developer profile",
                 description:
                   initialLanguage === "es"
                     ? profilePageJsonLd.description
-                    : "Professional frontend development profile of Alex Vicente López.",
+                    : "Professional Full-Stack Developer profile of Alex Vicente López.",
                 inLanguage: initialLanguage,
               },
             ]),

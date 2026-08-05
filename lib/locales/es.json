@@ -7,8 +7,8 @@
     "contact": "Contacto"
   },
   "hero": {
-    "status": "Disponible para oportunidades frontend · Valencia / remoto",
-    "description": "Desarrollo interfaces pulidas, accesibles y listas para producción con React, Next.js y TypeScript. Mi base full-stack en Laravel, PHP y MySQL me ayuda a conectar producto, API y entrega.",
+    "status": "Disponible para oportunidades full-stack · Valencia / remoto",
+    "description": "Desarrollo aplicaciones web completas, accesibles y listas para producción, desde la interfaz hasta la API y la base de datos.",
     "cta_github": "GitHub",
     "cta_linkedin": "LinkedIn",
     "scroll": "Desplazar"
@@ -16,14 +16,14 @@
   "skills": {
     "title": "Tecnologías",
     "subtitle": "Cómo construyo interfaces",
-    "desc": "Desarrollo frontend como especialidad; producto, backend y dirección visual como contexto para tomar mejores decisiones.",
+    "desc": "Desarrollo full-stack con criterio de producto, accesibilidad y dirección visual.",
     "technologies": "Tecnologías",
     "tools": "Herramientas"
   },
   "projects": {
     "title": "Proyectos",
     "subtitle": "Interfaces con intención.",
-    "desc": "Casos donde conecto dirección visual, interacción y arquitectura frontend con flujos reales de producto.",
+    "desc": "Casos donde conecto dirección visual, arquitectura y desarrollo full-stack con flujos reales de producto.",
     "concept": "Detalle del proyecto",
     "view_live": "Ver demo",
     "view_code": "Ver código",
@@ -42,7 +42,7 @@
           "GSAP"
         ],
         "category": "Desarrollo Web",
-        "link": "https://gallery.aleviclop.dev/",
+        "link": "https://rawvives.aleviclop.dev/",
         "github": "https://github.com/AVL05/alexgallery",
         "caseStudyHref": "/proyectos/raw-vives",
         "type": "Archivo visual editorial",
@@ -192,7 +192,7 @@
   "contact": {
     "title": "Contacto",
     "subtitle": "/ Hablemos",
-    "desc": "Estoy buscando oportunidades frontend donde pueda aportar React, Next.js, TypeScript, criterio visual y atención al producto.",
+    "desc": "Busco oportunidades full-stack donde aportar desarrollo web completo, criterio visual y atención al producto.",
     "form_name": "Tu nombre",
     "form_email": "Tu email",
     "form_message": "Tu mensaje",
@@ -207,8 +207,8 @@
     "form_error_email": "Introduce un email válido, por ejemplo nombre@empresa.com.",
     "form_error_message": "Escribe un mensaje de al menos 20 caracteres.",
     "links_title": "Enlaces directos",
-    "availability_title": "Disponible para oportunidades frontend",
-    "availability_desc": "React, Next.js y TypeScript como especialidad; base full-stack, criterio visual y atención al producto como apoyo para entregar mejor.",
+    "availability_title": "Disponible para oportunidades full-stack",
+    "availability_desc": "Desarrollo aplicaciones completas conectando interfaz, API, datos y entrega.",
     "cv_btn": "Descargar CV",
     "email_btn": "Enviar email",
     "visual_portfolio_title": "Portfolio fotográfico",

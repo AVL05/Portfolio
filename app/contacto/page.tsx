@@ -10,12 +10,12 @@ export async function generateMetadata() {
       es: {
         title: "Contacto de Alex Vicente López",
         description:
-          "Contacto profesional de Alex Vicente López para oportunidades frontend, proyectos web y colaboraciones digitales.",
+          "Contacto profesional de Alex Vicente López para oportunidades full-stack, proyectos web y colaboraciones digitales.",
       },
       en: {
         title: "Contact Alex Vicente López",
         description:
-          "Professional contact details for Alex Vicente López regarding frontend roles, web projects, and digital collaborations.",
+          "Professional contact details for Alex Vicente López regarding full-stack roles, web projects, and digital collaborations.",
       },
     },
   });
@@ -30,8 +30,8 @@ export default function ContactPage() {
         en: "Contact Alex Vicente López",
       }}
       description={{
-        es: "Página de contacto de Alex Vicente López para oportunidades como desarrollador web junior, colaboraciones digitales y proyectos relacionados con interfaces, frontend, backend o diseño visual.",
-        en: "Contact Alex Vicente López about junior web development roles, digital collaborations, and projects involving interfaces, frontend, backend, or visual design.",
+        es: "Página de contacto de Alex Vicente López para oportunidades como desarrollador full-stack junior, colaboraciones digitales y proyectos web completos.",
+        en: "Contact Alex Vicente López about junior full-stack development roles, digital collaborations, and complete web projects.",
       }}
       sections={[
         {
@@ -51,8 +51,8 @@ export default function ContactPage() {
         {
           title: { es: "GitHub", en: "GitHub" },
           body: {
-            es: "En GitHub, Alex Vicente aparece como AVL05 y comparte repositorios relacionados con desarrollo web, proyectos formativos, APIs y aplicaciones frontend.",
-            en: "On GitHub, Alex Vicente appears as AVL05 and shares repositories covering web development, educational projects, APIs, and frontend applications.",
+            es: "En GitHub, Alex Vicente aparece como AVL05 y comparte repositorios relacionados con desarrollo web, proyectos formativos, APIs y aplicaciones full-stack.",
+            en: "On GitHub, Alex Vicente appears as AVL05 and shares repositories covering web development, educational projects, APIs, and full-stack applications.",
           },
         },
         {

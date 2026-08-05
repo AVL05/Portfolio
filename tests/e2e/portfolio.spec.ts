@@ -24,7 +24,7 @@ test("renders without horizontal overflow and switches language", async ({
   await expect(
     page.getByRole("button", { name: "Switch to Spanish" }),
   ).toBeVisible();
-  await expect(page.getByText("Available for frontend roles")).toBeVisible();
+  await expect(page.getByText("Available for full-stack roles")).toBeVisible();
 });
 
 test("keeps the archive visible and previews work accessibly", async ({
@@ -96,7 +96,7 @@ test("validates the contact form and handles a successful response", async ({
 
 test("serves the CV and local project media", async ({ request }) => {
   for (const path of [
-    "/icon.png",
+    "/favicon.png",
     "/cv/CV_Alex_Vicente_Lopez_Frontend_React_A4.pdf",
     "/projects/Demo_API_Hotel.mp4",
     "/projects/LLIBRET%2024-25.pdf",

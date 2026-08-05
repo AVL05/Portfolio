@@ -197,12 +197,6 @@ export function Navigation() {
         <div className="mx-auto flex h-[4.5rem] max-w-[100rem] items-center justify-between px-4 sm:px-6 lg:px-8">
           <a href="#hero" className="inline-flex min-h-11 min-w-11 items-center font-mono text-sm font-black uppercase tracking-[-.05em]" aria-label={language === "es" ? "AV. — Alex Vicente — inicio" : "AV. — Alex Vicente — home"}>
             AV<span className="text-primary">.</span>
-            <span
-              aria-hidden="true"
-              className="ml-2 border-l border-border/70 pl-2 text-[11px] font-semibold tracking-[.12em] text-muted-foreground"
-            >
-              V4
-            </span>
           </a>
 
           <div className="hidden items-center gap-7 lg:flex">
@@ -237,9 +231,6 @@ export function Navigation() {
         <div className="flex items-center justify-between">
           <span className="inline-flex items-center font-mono text-sm font-black">
             AV<span className="text-primary">.</span>
-            <span className="ml-2 border-l border-white/20 pl-2 text-[11px] font-semibold tracking-[.12em] text-white/55">
-              V4
-            </span>
           </span>
           <button type="button" onClick={closeMenu} aria-label={language === "es" ? "Cerrar menú" : "Close menu"} className="inline-flex size-11 items-center justify-center border border-white/20">
             <X className="h-5 w-5" />

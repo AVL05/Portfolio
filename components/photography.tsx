@@ -54,7 +54,7 @@ const frames = [
   },
 ];
 
-const ARCHIVE_URL = "https://gallery.aleviclop.dev/";
+const ARCHIVE_URL = "https://rawvives.aleviclop.dev/";
 const SWIPE_THRESHOLD = 80;
 const DIRECTION_RATIO = 1.2;
 

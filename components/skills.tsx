@@ -48,11 +48,11 @@ export function Skills() {
           </div>
           <div className="max-w-[58ch] space-y-4 text-lg font-medium leading-relaxed text-foreground/66 md:justify-self-end md:text-xl">
             <p>{language === "es"
-              ? "Técnico Superior en Desarrollo de Aplicaciones Web, especializado en frontend y con base full-stack. Construyo interfaces mantenibles conectando producto, API, accesibilidad y entrega."
-              : "Web Application Development graduate focused on frontend, with a full-stack foundation. I build maintainable interfaces by connecting product, APIs, accessibility, and delivery."}</p>
+              ? "Técnico Superior en Desarrollo de Aplicaciones Web. Construyo productos full-stack mantenibles conectando interfaz, API, datos, accesibilidad y entrega."
+              : "Web Application Development graduate. I build maintainable full-stack products connecting interfaces, APIs, data, accessibility, and delivery."}</p>
             <p className="text-sm text-muted-foreground sm:text-base">{language === "es"
               ? "Trabajo desde Valencia y en remoto. La fotografía aporta composición y criterio visual; el código sigue siendo el centro de mi perfil profesional."
-              : "Based in Valencia and available remotely. Photography informs composition and visual judgment; frontend engineering remains the core of my professional profile."}</p>
+              : "Based in Valencia and available remotely. Photography informs composition and visual judgment; software development remains the core of my professional profile."}</p>
           </div>
         </header>
 

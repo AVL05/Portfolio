@@ -6,7 +6,7 @@ import { ArrowLeft, ArrowUpRight, Check, ExternalLink } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
 import { useLanguage } from "@/lib/language-context";
 
-const productionUrl = "https://gallery.aleviclop.dev/";
+const productionUrl = "https://rawvives.aleviclop.dev/";
 const repositoryUrl = "https://github.com/AVL05/alexgallery";
 
 const media = [

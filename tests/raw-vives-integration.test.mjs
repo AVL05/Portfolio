@@ -14,7 +14,7 @@ test("raw.vives is the primary localized project", () => {
   for (const locale of [es, en]) {
     const project = locale.projects.items[0];
     assert.equal(project.title, "raw.vives");
-    assert.equal(project.link, "https://gallery.aleviclop.dev/");
+    assert.equal(project.link, "https://rawvives.aleviclop.dev/");
     assert.equal(project.caseStudyHref, "/proyectos/raw-vives");
     assert.equal(project.github, "https://github.com/AVL05/alexgallery");
     assert.match(project.outcome, /30/);

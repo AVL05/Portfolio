@@ -37,8 +37,8 @@ export default function PhotographyPage() {
         {
           title: { es: "Galería fotográfica", en: "Photography gallery" },
           body: {
-            es: "La galería pública está disponible en gallery.aleviclop.dev y reúne una selección visual vinculada a composición, paisaje, entorno urbano y edición fotográfica.",
-            en: "The public gallery at gallery.aleviclop.dev presents a visual selection focused on composition, landscapes, urban environments, and photographic editing.",
+            es: "La galería pública está disponible en rawvives.aleviclop.dev y reúne una selección visual vinculada a composición, paisaje, entorno urbano y edición fotográfica.",
+            en: "The public gallery at rawvives.aleviclop.dev presents a visual selection focused on composition, landscapes, urban environments, and photographic editing.",
           },
         },
         {
@@ -58,8 +58,8 @@ export default function PhotographyPage() {
         {
           title: { es: "Identidad creativa", en: "Creative identity" },
           body: {
-            es: "Alex Vicente combina desarrollo web y fotografía para construir una presencia digital reconocible bajo el dominio aleviclop.dev y la galería gallery.aleviclop.dev.",
-            en: "Alex Vicente combines web development and photography to build a recognizable digital presence across aleviclop.dev and gallery.aleviclop.dev.",
+            es: "Alex Vicente combina desarrollo web y fotografía para construir una presencia digital reconocible bajo el dominio aleviclop.dev y la galería rawvives.aleviclop.dev.",
+            en: "Alex Vicente combines web development and photography to build a recognizable digital presence across aleviclop.dev and rawvives.aleviclop.dev.",
           },
         },
       ]}

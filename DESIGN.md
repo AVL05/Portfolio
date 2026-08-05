@@ -1,6 +1,6 @@
 ---
 name: Alex Vicente Portfolio
-description: A precise and creative frontend portfolio built around real product work
+description: A precise and creative full-stack portfolio built around real product work
 colors:
   background: "oklch(0.105 0.012 58)"
   foreground: "oklch(0.94 0.013 86)"
@@ -47,7 +47,7 @@ components:
     padding: "24px"
 ---
 
-# Design System: Alex Vicente Portfolio v4
+# Design System: Alex Vicente Portfolio
 
 ## Overview
 
@@ -59,7 +59,7 @@ La identidad rechaza los portfolios tecnológicos genéricos construidos como un
 
 **Key Characteristics:**
 
-- Frontend-first y orientado a casos reales.
+- Full-stack y orientado a casos reales.
 - Carbón y marfil con un único acento cobre controlado.
 - Tipografía de gran escala compensada con texto cómodo y directo.
 - Movimiento expresivo, siempre opcional mediante reducción de movimiento.
@@ -135,7 +135,7 @@ Cuatro proyectos principales se muestran como escenas amplias con imagen, rol, s
 
 ### Do:
 
-- **Do** presentar primero el trabajo frontend y usar full-stack como contexto.
+- **Do** presentar el alcance full-stack mediante trabajo real y verificable.
 - **Do** mostrar imágenes reales, decisiones y resultados verificables.
 - **Do** probar cada cambio a 390px y 1440px con movimiento reducido.
 
@@ -144,4 +144,4 @@ Cuatro proyectos principales se muestran como escenas amplias con imagen, rol, s
 - **Don't** convertir el portfolio en una plantilla SaaS genérica.
 - **Don't** usar glassmorphism, brillos, contadores y tarjetas repetidas sin contenido real como identidad.
 - **Don't** añadir efectos que compitan con los proyectos o perjudiquen rendimiento y accesibilidad.
-- **Don't** volver ambiguo si el perfil es frontend, diseñador o backend.
+- **Don't** reducir el perfil a una sola capa del desarrollo web.

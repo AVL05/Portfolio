@@ -1,13 +1,11 @@
 import { ImageResponse } from "next/og";
 
-export const runtime = "edge";
-
 const translations = {
   es: {
-    subtitle: "Desarrollador frontend · React · Next.js",
+    subtitle: "Full-Stack Developer",
   },
   en: {
-    subtitle: "Frontend Developer · React · Next.js",
+    subtitle: "Full-Stack Developer",
   },
 };
 

@@ -2,7 +2,7 @@
 
 ## Arquitectura
 
-`raw.vives` se mantiene como producto independiente en `gallery.aleviclop.dev`. El portfolio no carga su aplicación ni la incrusta: presenta datos verificados, capturas optimizadas y enlaces externos. La tarjeta principal enlaza a `/proyectos/raw-vives`, a producción y al repositorio público.
+`raw.vives` se mantiene como producto independiente en `rawvives.aleviclop.dev`. El portfolio no carga su aplicación ni la incrusta: presenta datos verificados, capturas optimizadas y enlaces externos. La tarjeta principal enlaza a `/proyectos/raw-vives`, a producción y al repositorio público.
 
 ## Datos utilizados
 

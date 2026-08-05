@@ -74,24 +74,45 @@ test("focus, LCP image, and localized Open Graph contracts remain explicit", () 
   assert.match(seo, /alternateLocale/);
 });
 
-test("the branded PNG is the only App Router icon", () => {
-  assert.equal(existsSync(join(root, "app/icon.png")), true);
+test("the branded PNG uses a stable crawlable favicon URL", () => {
+  const layout = read("app/layout.tsx");
+
+  assert.equal(existsSync(join(root, "public/favicon.png")), true);
+  assert.equal(existsSync(join(root, "app/icon.png")), false);
   assert.equal(existsSync(join(root, "app/icon.svg")), false);
+  assert.match(layout, /icon: \[\{ url: "\/favicon\.png"/);
+  assert.match(layout, /shortcut: "\/favicon\.png"/);
 });
 
-test("portfolio v4 keeps the hero controls aligned and overlap-safe", () => {
+test("search crawlers can discover the public profile routes", () => {
+  const layout = read("app/layout.tsx");
+  const robots = read("app/robots.ts");
+  const sitemap = read("app/sitemap.ts");
+  const seo = read("lib/seo.ts");
+  const contact = read("components/contact.tsx");
+
+  assert.match(layout, /rel="sitemap"/);
+  assert.match(robots, /userAgent: "\*"/);
+  assert.match(robots, /allow: "\/"/);
+  assert.match(robots, /host: SITE_URL/);
+  assert.match(sitemap, /INDEXABLE_ROUTES/);
+  assert.match(seo, /Alex Vicente Lopez/);
+  for (const route of ["sobre-mi", "proyectos", "fotografia", "contacto"]) {
+    assert.match(contact, new RegExp(`href: "\\/${route}"`));
+  }
+});
+
+test("the portfolio keeps the hero controls aligned and overlap-safe", () => {
   const hero = read("components/hero.tsx");
   const navigation = read("components/navigation.tsx");
   const languageToggle = read("components/language-toggle.tsx");
-  const packageJson = JSON.parse(read("package.json"));
 
-  assert.equal(packageJson.version, "4.0.0");
-  assert.match(hero, /data-portfolio-version="4"/);
+  assert.doesNotMatch(hero, /data-portfolio|Portfolio \/ [A-Z]\d+/);
+  assert.doesNotMatch(navigation, />\s*V\d+\s*</);
   assert.match(hero, /lg:\[writing-mode:vertical-rl\]/);
   assert.doesNotMatch(hero, /md:bottom-7 md:left-8/);
   assert.match(languageToggle, /absolute left-1 top-1 size-9/);
   assert.match(languageToggle, /translate-x-9/);
-  assert.match(navigation, /\bV4\b/);
 });
 
 test("secondary work stays visible with responsive hover and focus previews", () => {

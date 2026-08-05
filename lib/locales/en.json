@@ -7,8 +7,8 @@
     "contact": "Contact"
   },
   "hero": {
-    "status": "Available for frontend roles · Valencia / remote",
-    "description": "I build polished, accessible, production-ready interfaces with React, Next.js, and TypeScript. My full-stack foundation in Laravel, PHP, and MySQL helps me connect product, APIs, and delivery.",
+    "status": "Available for full-stack roles · Valencia / remote",
+    "description": "I build complete, accessible, production-ready web applications, from interface to API and database.",
     "cta_github": "GitHub",
     "cta_linkedin": "LinkedIn",
     "scroll": "Scroll"
@@ -16,14 +16,14 @@
   "skills": {
     "title": "Stack",
     "subtitle": "How I build interfaces",
-    "desc": "Frontend as my specialty; product, backend, and visual direction as context for better decisions.",
+    "desc": "Full-stack development with product judgment, accessibility, and visual direction.",
     "technologies": "Technologies",
     "tools": "Tools"
   },
   "projects": {
     "title": "Projects",
     "subtitle": "Interfaces with intent.",
-    "desc": "Case studies connecting visual direction, interaction, and frontend architecture to real product workflows.",
+    "desc": "Case studies connecting visual direction, architecture, and full-stack development to real product workflows.",
     "concept": "Project detail",
     "view_live": "Open demo",
     "view_code": "View code",
@@ -42,7 +42,7 @@
           "GSAP"
         ],
         "category": "Web Development",
-        "link": "https://gallery.aleviclop.dev/",
+        "link": "https://rawvives.aleviclop.dev/",
         "github": "https://github.com/AVL05/alexgallery",
         "caseStudyHref": "/proyectos/raw-vives",
         "type": "Editorial visual archive",
@@ -192,7 +192,7 @@
   "contact": {
     "title": "Contact",
     "subtitle": "/ Let's talk",
-    "desc": "I am looking for frontend opportunities where I can contribute with React, Next.js, TypeScript, visual judgment, and product thinking.",
+    "desc": "I am looking for full-stack opportunities where I can contribute complete web development, visual judgment, and product thinking.",
     "form_name": "Your name",
     "form_email": "Your email",
     "form_message": "Your message",
@@ -207,8 +207,8 @@
     "form_error_email": "Enter a valid email address, for example name@company.com.",
     "form_error_message": "Enter a message with at least 20 characters.",
     "links_title": "Direct links",
-    "availability_title": "Available for frontend opportunities",
-    "availability_desc": "React, Next.js, and TypeScript as my specialty; full-stack foundations, visual judgment, and product thinking to support better delivery.",
+    "availability_title": "Available for full-stack opportunities",
+    "availability_desc": "I build complete applications connecting interfaces, APIs, data, and delivery.",
     "cv_btn": "Download CV",
     "email_btn": "Send email",
     "visual_portfolio_title": "Photography portfolio",

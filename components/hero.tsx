@@ -79,7 +79,6 @@ export function Hero() {
       id="hero"
       ref={containerRef}
       aria-labelledby="hero-title"
-      data-portfolio-version="4"
       className="hero-cinema relative min-h-[max(100dvh,48rem)] overflow-hidden bg-background"
     >
       <div className="hero-visual absolute inset-x-3 top-20 h-[52dvh] overflow-hidden sm:inset-x-6 sm:h-[58dvh] lg:inset-x-[31vw] lg:bottom-12 lg:top-24 lg:h-auto">
@@ -109,7 +108,7 @@ export function Hero() {
         <div className="hero-reveal flex items-center justify-between gap-4 font-mono text-[11px] font-semibold uppercase tracking-[.14em] text-foreground/76">
           <span>{t.hero.status}</span>
           <span className="hidden items-center gap-4 md:flex">
-            <span className="text-primary">Portfolio / V4</span>
+            <span className="text-primary">Portfolio</span>
             <span aria-hidden="true" className="h-px w-8 bg-border" />
             React · Next.js · TypeScript · GSAP
           </span>
@@ -132,8 +131,8 @@ export function Hero() {
           <div className="hero-reveal">
             <p className="font-mono text-[11px] font-bold uppercase tracking-[.15em] text-primary">
               {language === "es"
-                ? "Desarrollador frontend · React / Next.js"
-                : "Frontend Developer · React / Next.js"}
+                ? "Desarrollador Full-Stack"
+                : "Full-Stack Developer"}
             </p>
             <p className="mt-3 max-w-[58ch] text-base font-medium leading-relaxed text-foreground/76 sm:text-lg">
               {t.hero.description}

@@ -11,12 +11,12 @@ export async function generateMetadata() {
       es: {
         title: "Sobre Alex Vicente López",
         description:
-          "Perfil profesional de Alex Vicente López, desarrollador frontend en Valencia con base full-stack y criterio visual.",
+          "Perfil profesional de Alex Vicente López, Full-Stack Developer en Valencia con experiencia construyendo aplicaciones web completas.",
       },
       en: {
         title: "About Alex Vicente López",
         description:
-          "Professional profile of Alex Vicente López, a Valencia-based frontend developer with a full-stack foundation and strong visual judgment.",
+          "Professional profile of Alex Vicente López, a Valencia-based Full-Stack Developer building complete web applications.",
       },
     },
   });
@@ -28,15 +28,15 @@ export default function AboutPage() {
       eyebrow={{ es: "Sobre mí", en: "About" }}
       title={{ es: "Sobre Alex Vicente López", en: "About Alex Vicente López" }}
       description={{
-        es: "Alex Vicente López es desarrollador frontend con formación en DAW, base full-stack y experiencia práctica construyendo interfaces con React, Next.js y TypeScript.",
-        en: "Alex Vicente López is a frontend developer with a Web Application Development qualification, a full-stack foundation, and practical experience building interfaces with React, Next.js, and TypeScript.",
+        es: "Alex Vicente López es Full-Stack Developer con formación en DAW y experiencia práctica construyendo aplicaciones web de principio a fin.",
+        en: "Alex Vicente López is a Full-Stack Developer with a Web Application Development qualification and practical experience building complete web applications.",
       }}
       sections={[
         {
           title: { es: "Perfil profesional", en: "Professional profile" },
           body: {
-            es: "Alex se especializa en frontend con React, Next.js y TypeScript. Su trabajo combina implementación accesible, criterio de producto y dirección visual aplicada a interfaces reales.",
-            en: "Alex specializes in frontend development with React, Next.js, and TypeScript. His work combines accessible implementation, product judgment, and visual direction applied to real interfaces.",
+            es: "Alex diseña y desarrolla productos web completos, desde la interfaz hasta la API, los datos y la entrega. Su trabajo combina implementación accesible, criterio de producto y dirección visual.",
+            en: "Alex designs and develops complete web products, from interface to API, data, and delivery. His work combines accessible implementation, product judgment, and visual direction.",
           },
         },
         {

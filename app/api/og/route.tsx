@@ -2,10 +2,10 @@ import { ImageResponse } from "next/og";
 
 const translations = {
   es: {
-    subtitle: "Full-Stack Developer",
+    subtitle: "Full-Stack Developer · Freelance",
   },
   en: {
-    subtitle: "Full-Stack Developer",
+    subtitle: "Freelance Full-Stack Developer",
   },
 };
 

@@ -34,11 +34,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const title =
     language === "es"
       ? SITE_TITLE
-      : "Alex Vicente López | Full-Stack Developer";
+      : "Alex Vicente López | Freelance Full-Stack Developer";
   const description =
     language === "es"
       ? SITE_DESCRIPTION
-      : "Portfolio of Alex Vicente López, a Full-Stack Developer in Valencia. I build complete, functional, production-ready web applications.";
+      : "Portfolio of Alex Vicente López, a freelance Full-Stack Developer in Valencia. I build complete, functional, production-ready web applications.";
 
   return {
     metadataBase: new URL(SITE_URL),
@@ -129,18 +129,18 @@ export default async function RootLayout({
                 ...personJsonLd,
                 jobTitle:
                   initialLanguage === "es"
-                    ? "Desarrollador Full-Stack"
-                    : "Full-Stack Developer",
+                    ? "Desarrollador Full-Stack freelance"
+                    : "Freelance Full-Stack Developer",
                 description:
                   initialLanguage === "es"
                     ? personJsonLd.description
-                    : "Alex Vicente López is a Full-Stack Developer and Web Application Development graduate. He builds complete, production-ready web applications.",
+                    : "Alex Vicente López is a freelance Full-Stack Developer and Web Application Development graduate. He builds complete web applications for clients and teams.",
                 hasOccupation: {
                   ...personJsonLd.hasOccupation,
                   name:
                     initialLanguage === "es"
-                      ? "Desarrollador Full-Stack"
-                      : "Full-Stack Developer",
+                      ? "Desarrollador Full-Stack freelance"
+                      : "Freelance Full-Stack Developer",
                 },
               },
               websiteJsonLd,
@@ -149,11 +149,11 @@ export default async function RootLayout({
                 name:
                   initialLanguage === "es"
                     ? profilePageJsonLd.name
-                    : "Alex Vicente López - Full-Stack Developer profile",
+                    : "Alex Vicente López - Freelance Full-Stack Developer profile",
                 description:
                   initialLanguage === "es"
                     ? profilePageJsonLd.description
-                    : "Professional Full-Stack Developer profile of Alex Vicente López.",
+                    : "Professional freelance Full-Stack Developer profile of Alex Vicente López.",
                 inLanguage: initialLanguage,
               },
             ]),

@@ -51,8 +51,8 @@ export function Skills() {
               ? "Técnico Superior en Desarrollo de Aplicaciones Web. Construyo productos full-stack mantenibles conectando interfaz, API, datos, accesibilidad y entrega."
               : "Web Application Development graduate. I build maintainable full-stack products connecting interfaces, APIs, data, accessibility, and delivery."}</p>
             <p className="text-sm text-muted-foreground sm:text-base">{language === "es"
-              ? "Trabajo desde Valencia y en remoto. La fotografía aporta composición y criterio visual; el código sigue siendo el centro de mi perfil profesional."
-              : "Based in Valencia and available remotely. Photography informs composition and visual judgment; software development remains the core of my professional profile."}</p>
+              ? "Trabajo como freelance desde Valencia y en remoto. La fotografía aporta composición y criterio visual; el código sigue siendo el centro de mi perfil profesional."
+              : "I work freelance from Valencia and remotely. Photography informs composition and visual judgment; software development remains the core of my professional profile."}</p>
           </div>
         </header>
 

@@ -3,9 +3,9 @@ export const SITE_URL =
 
 export const SITE_NAME = "Alex Vicente López";
 export const SITE_TITLE =
-  "Alex Vicente López | Full-Stack Developer";
+  "Alex Vicente López | Full-Stack Developer Freelance";
 export const SITE_DESCRIPTION =
-  "Portfolio de Alex Vicente López, Full-Stack Developer en Valencia. Desarrollo aplicaciones web completas, funcionales y preparadas para producción.";
+  "Portfolio de Alex Vicente López, desarrollador Full-Stack freelance en Valencia. Creo aplicaciones web completas, funcionales y preparadas para producción.";
 
 export const SEO_KEYWORDS = [
   "Alex Vicente López",
@@ -23,6 +23,8 @@ export const SEO_KEYWORDS = [
   "frontend",
   "full-stack developer Valencia",
   "desarrollador full-stack Valencia",
+  "desarrollador full-stack freelance Valencia",
+  "freelance web developer Valencia",
   "desarrollador de aplicaciones web",
   "fotografía",
   "diseño digital",
@@ -133,9 +135,9 @@ export const personJsonLd = {
   alternateName: ["Alex Vicente", "Alex Vicente Lopez", "aleviclop", "AVL05"],
   url: SITE_URL,
   email: "mailto:alexviclop@gmail.com",
-  jobTitle: "Full-Stack Developer",
+  jobTitle: "Freelance Full-Stack Developer",
   description:
-    "Alex Vicente López es Full-Stack Developer y Técnico Superior en Desarrollo de Aplicaciones Web. Construye aplicaciones web completas y preparadas para producción.",
+    "Alex Vicente López es desarrollador Full-Stack freelance y Técnico Superior en Desarrollo de Aplicaciones Web. Construye aplicaciones web completas para clientes y equipos.",
   image: `${SITE_URL}/api/og?lang=es`,
   sameAs: SAME_AS,
   knowsAbout: [
@@ -153,7 +155,7 @@ export const personJsonLd = {
   ],
   hasOccupation: {
     "@type": "Occupation",
-    name: "Full-Stack Developer",
+    name: "Freelance Full-Stack Developer",
     skills:
       "React, Next.js, TypeScript, Laravel, PHP, MySQL, Tailwind CSS, GSAP, diseño de interfaces",
   },

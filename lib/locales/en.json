@@ -7,7 +7,7 @@
     "contact": "Contact"
   },
   "hero": {
-    "status": "Available for full-stack roles · Valencia / remote",
+    "status": "Available for freelance projects and full-stack roles · Valencia / remote",
     "description": "I build complete, accessible, production-ready web applications, from interface to API and database.",
     "cta_github": "GitHub",
     "cta_linkedin": "LinkedIn",
@@ -192,7 +192,7 @@
   "contact": {
     "title": "Contact",
     "subtitle": "/ Let's talk",
-    "desc": "I am looking for full-stack opportunities where I can contribute complete web development, visual judgment, and product thinking.",
+    "desc": "Available for freelance projects and full-stack opportunities where I can contribute complete web development, visual judgment, and product thinking.",
     "form_name": "Your name",
     "form_email": "Your email",
     "form_message": "Your message",
@@ -207,8 +207,8 @@
     "form_error_email": "Enter a valid email address, for example name@company.com.",
     "form_error_message": "Enter a message with at least 20 characters.",
     "links_title": "Direct links",
-    "availability_title": "Available for full-stack opportunities",
-    "availability_desc": "I build complete applications connecting interfaces, APIs, data, and delivery.",
+    "availability_title": "Available for freelance projects and full-stack opportunities",
+    "availability_desc": "I build complete applications for clients and teams, connecting interfaces, APIs, data, and delivery.",
     "cv_btn": "Download CV",
     "email_btn": "Send email",
     "visual_portfolio_title": "Photography portfolio",

@@ -24,7 +24,9 @@ test("renders without horizontal overflow and switches language", async ({
   await expect(
     page.getByRole("button", { name: "Switch to Spanish" }),
   ).toBeVisible();
-  await expect(page.getByText("Available for full-stack roles")).toBeVisible();
+  await expect(
+    page.getByText("Available for freelance projects and full-stack roles"),
+  ).toBeVisible();
 });
 
 test("keeps the archive visible and previews work accessibly", async ({

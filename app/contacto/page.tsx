@@ -10,12 +10,12 @@ export async function generateMetadata() {
       es: {
         title: "Contacto de Alex Vicente López",
         description:
-          "Contacto profesional de Alex Vicente López para oportunidades full-stack, proyectos web y colaboraciones digitales.",
+          "Contacto profesional de Alex Vicente López para proyectos freelance, oportunidades full-stack y colaboraciones digitales.",
       },
       en: {
         title: "Contact Alex Vicente López",
         description:
-          "Professional contact details for Alex Vicente López regarding full-stack roles, web projects, and digital collaborations.",
+          "Professional contact details for Alex Vicente López regarding freelance projects, full-stack roles, and digital collaborations.",
       },
     },
   });
@@ -30,15 +30,15 @@ export default function ContactPage() {
         en: "Contact Alex Vicente López",
       }}
       description={{
-        es: "Página de contacto de Alex Vicente López para oportunidades como desarrollador full-stack junior, colaboraciones digitales y proyectos web completos.",
-        en: "Contact Alex Vicente López about junior full-stack development roles, digital collaborations, and complete web projects.",
+        es: "Contacta con Alex Vicente López para proyectos freelance, oportunidades como desarrollador full-stack y aplicaciones web completas.",
+        en: "Contact Alex Vicente López about freelance projects, full-stack development roles, and complete web applications.",
       }}
       sections={[
         {
           title: { es: "Correo electrónico", en: "Email" },
           body: {
-            es: "Puedes contactar con Alex Vicente López por email en alexviclop@gmail.com para oportunidades profesionales, prácticas, proyectos web o colaboraciones digitales.",
-            en: "Contact Alex Vicente López at alexviclop@gmail.com about professional roles, internships, web projects, or digital collaborations.",
+            es: "Puedes contactar con Alex Vicente López por email en alexviclop@gmail.com para proyectos freelance, oportunidades profesionales o colaboraciones digitales.",
+            en: "Contact Alex Vicente López at alexviclop@gmail.com about freelance projects, professional roles, or digital collaborations.",
           },
         },
         {

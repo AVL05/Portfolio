@@ -7,7 +7,7 @@
     "contact": "Contacto"
   },
   "hero": {
-    "status": "Disponible para oportunidades full-stack · Valencia / remoto",
+    "status": "Disponible para proyectos freelance y oportunidades full-stack · Valencia / remoto",
     "description": "Desarrollo aplicaciones web completas, accesibles y listas para producción, desde la interfaz hasta la API y la base de datos.",
     "cta_github": "GitHub",
     "cta_linkedin": "LinkedIn",
@@ -192,7 +192,7 @@
   "contact": {
     "title": "Contacto",
     "subtitle": "/ Hablemos",
-    "desc": "Busco oportunidades full-stack donde aportar desarrollo web completo, criterio visual y atención al producto.",
+    "desc": "Disponible para proyectos freelance y oportunidades full-stack donde aportar desarrollo web completo, criterio visual y atención al producto.",
     "form_name": "Tu nombre",
     "form_email": "Tu email",
     "form_message": "Tu mensaje",
@@ -207,8 +207,8 @@
     "form_error_email": "Introduce un email válido, por ejemplo nombre@empresa.com.",
     "form_error_message": "Escribe un mensaje de al menos 20 caracteres.",
     "links_title": "Enlaces directos",
-    "availability_title": "Disponible para oportunidades full-stack",
-    "availability_desc": "Desarrollo aplicaciones completas conectando interfaz, API, datos y entrega.",
+    "availability_title": "Disponible para proyectos freelance y oportunidades full-stack",
+    "availability_desc": "Desarrollo aplicaciones completas para clientes y equipos, conectando interfaz, API, datos y entrega.",
     "cv_btn": "Descargar CV",
     "email_btn": "Enviar email",
     "visual_portfolio_title": "Portfolio fotográfico",

@@ -1,6 +1,6 @@
 # Alex Vicente López — Portfolio
 
-Portfolio profesional de [Alex Vicente López](https://www.aleviclop.dev), Full-Stack Developer en Valencia. Presenta proyectos web completos, casos de estudio, experiencia profesional y trabajo fotográfico mediante una experiencia bilingüe, accesible y preparada para producción.
+Portfolio profesional de [Alex Vicente López](https://www.aleviclop.dev), Full-Stack Developer freelance en Valencia. Presenta proyectos web completos, casos de estudio, experiencia profesional y trabajo fotográfico mediante una experiencia bilingüe, accesible y preparada para producción.
 
 [Ver portfolio](https://www.aleviclop.dev) · [Explorar raw.vives](https://rawvives.aleviclop.dev) · [GitHub](https://github.com/AVL05) · [LinkedIn](https://www.linkedin.com/in/aleviclop/)
 

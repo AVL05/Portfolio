@@ -62,13 +62,14 @@ test("language changes update document language and use an accessible transition
   assert.match(context, /prefers-reduced-motion/);
 });
 
-test("public positioning consistently presents Alex as full-stack", () => {
+test("public positioning consistently presents Alex as full-stack and freelance", () => {
   const layout = read("app/layout.tsx");
   const seo = read("lib/seo.ts");
   const about = read("app/sobre-mi/page.tsx");
   const publicPositioning = [layout, seo, about, JSON.stringify(es), JSON.stringify(en)].join("\n");
 
   assert.match(publicPositioning, /Full-Stack Developer/);
+  assert.match(publicPositioning, /freelance/i);
   assert.doesNotMatch(publicPositioning, /Frontend Developer|Desarrollador frontend/);
   assert.doesNotMatch(publicPositioning, /especializad|speciali[sz]/i);
 });

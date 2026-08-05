@@ -11,12 +11,12 @@ export async function generateMetadata() {
       es: {
         title: "Sobre Alex Vicente López",
         description:
-          "Perfil profesional de Alex Vicente López, Full-Stack Developer en Valencia con experiencia construyendo aplicaciones web completas.",
+          "Perfil profesional de Alex Vicente López, desarrollador Full-Stack freelance en Valencia con experiencia construyendo aplicaciones web completas.",
       },
       en: {
         title: "About Alex Vicente López",
         description:
-          "Professional profile of Alex Vicente López, a Valencia-based Full-Stack Developer building complete web applications.",
+          "Professional profile of Alex Vicente López, a Valencia-based freelance Full-Stack Developer building complete web applications.",
       },
     },
   });
@@ -28,15 +28,15 @@ export default function AboutPage() {
       eyebrow={{ es: "Sobre mí", en: "About" }}
       title={{ es: "Sobre Alex Vicente López", en: "About Alex Vicente López" }}
       description={{
-        es: "Alex Vicente López es Full-Stack Developer con formación en DAW y experiencia práctica construyendo aplicaciones web de principio a fin.",
-        en: "Alex Vicente López is a Full-Stack Developer with a Web Application Development qualification and practical experience building complete web applications.",
+        es: "Alex Vicente López es desarrollador Full-Stack freelance con formación en DAW y experiencia práctica construyendo aplicaciones web de principio a fin.",
+        en: "Alex Vicente López is a freelance Full-Stack Developer with a Web Application Development qualification and practical experience building complete web applications.",
       }}
       sections={[
         {
           title: { es: "Perfil profesional", en: "Professional profile" },
           body: {
-            es: "Alex diseña y desarrolla productos web completos, desde la interfaz hasta la API, los datos y la entrega. Su trabajo combina implementación accesible, criterio de producto y dirección visual.",
-            en: "Alex designs and develops complete web products, from interface to API, data, and delivery. His work combines accessible implementation, product judgment, and visual direction.",
+            es: "Alex trabaja como freelance diseñando y desarrollando productos web completos, desde la interfaz hasta la API, los datos y la entrega. Su trabajo combina implementación accesible, criterio de producto y dirección visual.",
+            en: "Alex works freelance, designing and developing complete web products from interface to API, data, and delivery. His work combines accessible implementation, product judgment, and visual direction.",
           },
         },
         {

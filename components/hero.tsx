@@ -131,8 +131,8 @@ export function Hero() {
           <div className="hero-reveal">
             <p className="font-mono text-[11px] font-bold uppercase tracking-[.15em] text-primary">
               {language === "es"
-                ? "Desarrollador Full-Stack"
-                : "Full-Stack Developer"}
+                ? "Desarrollador Full-Stack · Freelance"
+                : "Full-Stack Developer · Freelance"}
             </p>
             <p className="mt-3 max-w-[58ch] text-base font-medium leading-relaxed text-foreground/76 sm:text-lg">
               {t.hero.description}

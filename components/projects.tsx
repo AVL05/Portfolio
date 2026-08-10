@@ -40,14 +40,14 @@ function ProjectScene({
 }) {
   const media = (
     <div
-      className="scene-media relative h-full min-h-[44dvh] overflow-hidden bg-[#171714] will-change-transform md:min-h-[68dvh]"
+      className="scene-media relative h-full min-h-[44dvh] overflow-hidden bg-[#171714] md:min-h-[68dvh]"
       style={{ viewTransitionName: viewTransitionName(project) }}
     >
       <Image
         src={project.image}
         alt={project.title}
         fill
-        className={`scene-image will-change-transform ${
+        className={`scene-image ${
           project.image.includes("raw-manager") || project.image.includes("Falla")
             ? "object-contain p-[8%]"
             : "object-cover"
@@ -64,12 +64,12 @@ function ProjectScene({
 
   return (
     <article className="project-scene relative border-t border-border/55 py-10 sm:py-14 md:min-h-[96dvh] md:py-20">
-      <div className="mx-auto grid max-w-[100rem] gap-6 px-4 sm:px-6 md:grid-cols-[minmax(280px,.55fr)_minmax(0,1.45fr)] md:items-center lg:px-8">
-        <div className="scene-copy z-10 flex flex-col md:pr-6">
+      <div className="mx-auto grid max-w-[100rem] gap-6 px-4 sm:px-6 md:grid-cols-[minmax(280px,.55fr)_minmax(0,1.45fr)] md:items-center md:gap-10 lg:gap-16 lg:px-8">
+        <div className="scene-copy z-10 flex min-w-0 flex-col">
           <p className="font-mono text-[11px] font-bold uppercase tracking-[.15em] text-primary">
             {project.type} / {project.category}
           </p>
-          <h3 className="mt-5 text-[clamp(2.8rem,7vw,7.5rem)] font-black leading-[.82] tracking-[-.065em] text-foreground">
+          <h3 className="mt-5 max-w-full text-balance text-[clamp(2.75rem,4.6vw,5.25rem)] font-black leading-[.84] tracking-[-.06em] text-foreground">
             {project.title}
           </h3>
           <p className="mt-6 max-w-[50ch] text-base font-medium leading-relaxed text-foreground/68 sm:text-lg">
@@ -158,7 +158,7 @@ function ArchivePreviewContent({
   project: Project;
 }) {
   return (
-    <div className="relative aspect-[4/3] overflow-hidden border border-border/55 bg-[#171714] transition-colors duration-300 group-hover/archive-preview:border-primary/70">
+    <div className="relative aspect-[4/3] overflow-hidden border border-primary/70 bg-[#171714] shadow-[0_24px_70px_rgba(0,0,0,.42)]">
       {archive.map((archiveProject, index) => (
         <div
           key={archiveProject.title}
@@ -172,8 +172,8 @@ function ArchivePreviewContent({
             src={archiveProject.image}
             alt=""
             fill
-            className="object-cover transition-transform duration-700 ease-[cubic-bezier(.2,.8,.2,1)] group-hover/archive-preview:scale-[1.025] motion-reduce:transform-none motion-reduce:transition-none"
-            sizes="(max-width: 1024px) 1px, 38vw"
+            className="object-cover"
+            sizes="26rem"
           />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_55%,rgba(8,8,7,.76))]" />
         </div>
@@ -194,13 +194,13 @@ function ArchivePreviewContent({
         <span
           className={
             isLinked
-              ? "inline-flex min-h-11 shrink-0 items-center gap-2 border-b border-white/55 pb-1 font-mono text-[11px] font-bold uppercase tracking-[.12em] text-white transition-colors group-hover/archive-preview:border-primary group-hover/archive-preview:text-primary"
+              ? "inline-flex min-h-11 shrink-0 items-center gap-2 border-b border-primary pb-1 font-mono text-[11px] font-bold uppercase tracking-[.12em] text-primary"
               : "inline-flex min-h-11 shrink-0 items-center font-mono text-[11px] font-bold uppercase tracking-[.12em] text-white/68"
           }
         >
           {label}
           {isLinked ? (
-            <ArrowUpRight className="h-4 w-4 transition-transform group-hover/archive-preview:-translate-y-0.5 group-hover/archive-preview:translate-x-0.5 motion-reduce:transform-none" />
+            <ArrowUpRight className="h-4 w-4" />
           ) : null}
         </span>
       </div>
@@ -211,10 +211,16 @@ function ArchivePreviewContent({
 export function Projects() {
   const { language, t } = useLanguage();
   const containerRef = useRef<HTMLElement>(null);
-  const [activeArchiveIndex, setActiveArchiveIndex] = useState(0);
+  const archivePreviewRef = useRef<HTMLDivElement>(null);
+  const previewXToRef = useRef<ReturnType<typeof gsap.quickTo> | null>(null);
+  const previewYToRef = useRef<ReturnType<typeof gsap.quickTo> | null>(null);
+  const [hoveredArchiveIndex, setHoveredArchiveIndex] = useState<number | null>(
+    null,
+  );
   const projects = t.projects.items as Project[];
   const featured = featuredIndexes.map((index) => projects[index]).filter(Boolean);
   const archive = projects.filter((_, index) => !featuredIndexes.includes(index));
+  const activeArchiveIndex = hoveredArchiveIndex ?? 0;
   const activeArchiveProject = archive[activeArchiveIndex];
   const archivePreviewHref =
     activeArchiveProject?.link ?? activeArchiveProject?.github;
@@ -234,7 +240,7 @@ export function Projects() {
     () => {
       const q = gsap.utils.selector(containerRef);
       if (prefersReducedMotion()) {
-        gsap.set([q(".scene-media"), q(".scene-image"), q(".scene-copy")], {
+        gsap.set(q(".scene-copy"), {
           clearProps: "opacity,visibility,transform,clipPath",
           autoAlpha: 1,
         });
@@ -244,21 +250,21 @@ export function Projects() {
       const mm = gsap.matchMedia();
       mm.add("(min-width: 768px)", () => {
         q(".project-scene").forEach((scene) => {
-          const media = scene.querySelector(".scene-media");
-          const image = scene.querySelector(".scene-image");
           const copy = scene.querySelector(".scene-copy");
-          gsap
-            .timeline({
+          gsap.fromTo(
+            copy,
+            { y: 48 },
+            {
+              y: -12,
+              ease: "none",
               scrollTrigger: {
                 trigger: scene,
                 start: "top 88%",
                 end: "bottom 12%",
                 scrub: 1,
               },
-            })
-            .fromTo(media, { clipPath: "inset(8% 7% 8% 7%)" }, { clipPath: "inset(0% 0% 0% 0%)", ease: "none" }, 0)
-            .fromTo(image, { scale: 1.12 }, { scale: 1.01, ease: "none" }, 0)
-            .fromTo(copy, { y: 70 }, { y: -25, ease: "none" }, 0);
+            },
+          );
         });
       });
       mm.add("(max-width: 767px)", () => {
@@ -279,6 +285,56 @@ export function Projects() {
     { scope: containerRef, dependencies: [language], revertOnUpdate: true },
   );
 
+  useGSAP(
+    () => {
+      const preview = archivePreviewRef.current;
+      if (!preview) return;
+
+      previewXToRef.current = gsap.quickTo(preview, "x", {
+        duration: 0.18,
+        ease: "power3.out",
+      });
+      previewYToRef.current = gsap.quickTo(preview, "y", {
+        duration: 0.18,
+        ease: "power3.out",
+      });
+
+      return () => {
+        previewXToRef.current = null;
+        previewYToRef.current = null;
+      };
+    },
+    { scope: containerRef },
+  );
+
+  const positionArchivePreview = (clientX: number, clientY: number) => {
+    const preview = archivePreviewRef.current;
+    if (!preview) return;
+
+    const { width, height } = preview.getBoundingClientRect();
+    const gap = 24;
+    const edge = 16;
+    const opensRight = clientX + gap + width + edge <= window.innerWidth;
+    const opensBelow = clientY + gap + height + edge <= window.innerHeight;
+    const x = Math.max(
+      edge,
+      Math.min(
+        opensRight ? clientX + gap : clientX - width - gap,
+        window.innerWidth - width - edge,
+      ),
+    );
+    const y = Math.max(
+      edge,
+      Math.min(
+        opensBelow ? clientY + gap : clientY - height - gap,
+        window.innerHeight - height - edge,
+      ),
+    );
+
+    previewXToRef.current?.(x);
+    previewYToRef.current?.(y);
+  };
+
   const archivePreviewContent = activeArchiveProject ? (
     <ArchivePreviewContent
       activeIndex={activeArchiveIndex}
@@ -294,9 +350,11 @@ export function Projects() {
     <section id="projects" ref={containerRef} aria-labelledby="projects-title" className="relative bg-background">
       <header className="mx-auto grid max-w-[100rem] gap-6 px-4 pb-16 pt-24 sm:px-6 sm:pb-24 sm:pt-32 md:grid-cols-[.7fr_1.3fr] md:items-end lg:px-8">
         <div>
-          <p className="section-kicker">01 / Selected work</p>
+          <p className="section-kicker">
+            {language === "es" ? "01 / Proyectos seleccionados" : "01 / Selected work"}
+          </p>
           <h2 id="projects-title" className="mt-5 text-[clamp(4rem,12vw,11rem)] font-black leading-[.75] tracking-[-.075em]">
-            Work
+            {language === "es" ? "Proyectos" : "Work"}
           </h2>
         </div>
         <p className="max-w-[52ch] text-lg font-medium leading-relaxed text-foreground/68 md:justify-self-end md:text-xl">
@@ -325,35 +383,35 @@ export function Projects() {
               </span>
               <span className="mt-2 hidden font-mono text-[11px] uppercase tracking-[.12em] text-foreground/45 lg:block">
                 {language === "es"
-                  ? "Pasa el cursor o usa Tab para explorar"
-                  : "Hover or use Tab to explore"}
+                  ? "Pasa el cursor por un proyecto para previsualizarlo"
+                  : "Hover a project to preview it"}
               </span>
             </div>
           </header>
 
-          <div className="mt-10 grid gap-10 border-t border-border/55 pt-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(22rem,.8fr)] lg:gap-16 lg:pt-10">
+          <div className="mt-10 border-t border-border/55 pt-8 lg:pt-10">
             <div>
               {archive.map((project, index) => {
-                const isActive = activeArchiveIndex === index;
-
                 return (
                   <article
                     key={project.title}
-                    onMouseEnter={() => setActiveArchiveIndex(index)}
-                    onFocusCapture={() => setActiveArchiveIndex(index)}
-                    className={`group/archive-row border-b py-6 transition-colors ${
-                      isActive
-                        ? "border-primary/70"
-                        : "border-border/55 hover:border-primary/45"
-                    }`}
+                    onMouseEnter={(event) => {
+                      setHoveredArchiveIndex(index);
+                      positionArchivePreview(event.clientX, event.clientY);
+                    }}
+                    onMouseMove={(event) =>
+                      positionArchivePreview(event.clientX, event.clientY)
+                    }
+                    onMouseLeave={() => setHoveredArchiveIndex(null)}
+                    className="group/archive-row border-b border-border/55 py-6 transition-colors hover:border-primary/70 focus-within:border-primary/70"
                   >
-                    <div className="relative mb-5 aspect-[16/10] overflow-hidden bg-[#171714] lg:hidden">
+                    <div className="archive-inline-media relative mb-5 aspect-[16/10] overflow-hidden bg-[#171714]">
                       <Image
                         src={project.image}
                         alt={project.title}
                         fill
                         className="object-cover"
-                        sizes="(max-width: 1024px) calc(100vw - 2rem), 1px"
+                        sizes="(max-width: 1023px) calc(100vw - 2rem), 42vw"
                       />
                     </div>
 
@@ -415,27 +473,19 @@ export function Projects() {
               })}
             </div>
 
-            <aside className="archive-preview hidden self-start lg:sticky lg:top-28 lg:block">
-              {activeArchiveProject && archivePreviewHref ? (
-                <a
-                  href={archivePreviewHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-cursor="external"
-                  aria-label={`${archivePreviewLabel}: ${activeArchiveProject.title}`}
-                  className="group/archive-preview block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
-                >
-                  {archivePreviewContent}
-                </a>
-              ) : (
-                <div className="group/archive-preview">
-                  {archivePreviewContent}
-                </div>
-              )}
-            </aside>
           </div>
         </div>
       </div>
+
+      <aside
+        ref={archivePreviewRef}
+        aria-hidden="true"
+        className={`archive-preview archive-floating-preview pointer-events-none fixed left-0 top-0 z-40 w-[min(26rem,calc(100vw-2rem))] transition-opacity duration-150 motion-reduce:transition-none ${
+          hoveredArchiveIndex === null ? "opacity-0" : "opacity-100"
+        }`}
+      >
+        {archivePreviewContent}
+      </aside>
     </section>
   );
 }

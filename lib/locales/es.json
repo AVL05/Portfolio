@@ -210,10 +210,6 @@
     "availability_title": "Disponible para proyectos freelance y oportunidades full-stack",
     "availability_desc": "Desarrollo aplicaciones completas para clientes y equipos, conectando interfaz, API, datos y entrega.",
     "cv_btn": "Descargar CV",
-    "email_btn": "Enviar email",
-    "visual_portfolio_title": "Portfolio fotográfico",
-    "visual_portfolio_desc": "Explora el archivo fotográfico completo en raw.vives.",
-    "visual_portfolio_btn": "Abrir raw.vives",
     "footer_built": "Diseñado y desarrollado por Alex Vicente."
   }
 }

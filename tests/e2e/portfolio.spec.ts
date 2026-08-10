@@ -10,6 +10,9 @@ test("renders without horizontal overflow and switches language", async ({
   await page.goto("/");
 
   await expect(page.getByRole("heading", { name: "Alex Vicente" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Proyectos", exact: true }),
+  ).toBeVisible();
   await expect(page.locator("html")).toHaveAttribute("lang", "es");
 
   const viewport = await page.locator("html").evaluate((element) => ({
@@ -26,6 +29,9 @@ test("renders without horizontal overflow and switches language", async ({
   ).toBeVisible();
   await expect(
     page.getByText("Available for freelance projects and full-stack roles"),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Work", exact: true }),
   ).toBeVisible();
 });
 
@@ -46,21 +52,22 @@ test("keeps the archive visible and previews work accessibly", async ({
         has: page.getByRole("heading", {
           name: "Sistema de Gestión Hotelera (API)",
         }),
-      });
+    });
 
     await hotel.hover();
-    await expect(
-      page.getByRole("link", {
-        name: "Ver demo: Sistema de Gestión Hotelera (API)",
-      }),
-    ).toBeVisible();
+    const preview = page.locator(".archive-floating-preview");
+    await expect(preview).toHaveClass(/opacity-100/);
+    await expect(preview).toContainText("Sistema de Gestión Hotelera (API)");
+
+    await page.mouse.move(8, 8);
+    await expect(preview).toHaveClass(/opacity-0/);
   } else {
     await expect(
       page.getByRole("img", {
         name: "El Fogón: Landing gastronómica",
       }),
     ).toBeVisible();
-    await expect(page.locator(".archive-preview")).toBeHidden();
+    await expect(page.locator(".archive-floating-preview")).toBeHidden();
   }
 });
 
@@ -99,7 +106,7 @@ test("validates the contact form and handles a successful response", async ({
 test("serves the CV and local project media", async ({ request }) => {
   for (const path of [
     "/favicon.png",
-    "/cv/CV_Alex_Vicente_Lopez_Frontend_React_A4.pdf",
+    "/cv/CV_Alex_Vicente_Lopez.pdf",
     "/projects/Demo_API_Hotel.mp4",
     "/projects/LLIBRET%2024-25.pdf",
   ]) {

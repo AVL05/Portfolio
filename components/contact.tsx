@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { ArrowUpRight, CheckCircle2, FileText, Mail } from "lucide-react";
+import { ArrowUpRight, FileText, Mail } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import type React from "react";
 import { useRef, useState } from "react";
@@ -330,92 +330,49 @@ export function Contact() {
             </Card>
           </div>
 
-          <div className="contact-item flex flex-col justify-between rounded-lg border border-border/60 bg-card/40 p-5 py-6 sm:p-8">
-            <div className="space-y-8">
+          <div className="contact-item flex flex-col justify-between border-y border-border/60 py-6 sm:py-8">
+            <div className="space-y-10">
               <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">
                 {t.contact.links_title}
               </p>
-              <div className="rounded-lg border border-primary/25 bg-primary/10 p-5">
-                <div className="mb-3 flex items-center gap-2 text-sm font-bold text-primary">
-                  <CheckCircle2 className="h-4 w-4" />
+              <div className="max-w-xl">
+                <p className="mb-3 text-sm font-bold text-primary">
                   {t.contact.availability_title}
-                </div>
-                <p className="text-sm font-medium leading-relaxed text-foreground/82">
+                </p>
+                <p className="text-base font-medium leading-relaxed text-foreground/72">
                   {t.contact.availability_desc}
                 </p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  <a
-                    href="/cv/CV_Alex_Vicente_Lopez.pdf"
-                    download
-                    className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-primary-foreground transition-all hover:-translate-y-0.5 hover:bg-primary/90"
-                  >
-                    <FileText className="h-4 w-4" />
-                    {t.contact.cv_btn}
-                  </a>
-                  <a
-                    href="mailto:alexviclop@gmail.com"
-                    className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-primary/35 bg-background/35 px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-primary transition-all hover:-translate-y-0.5 hover:bg-primary hover:text-primary-foreground"
-                  >
-                    <Mail className="h-4 w-4" />
-                    {t.contact.email_btn}
-                  </a>
-                </div>
               </div>
-              <div className="space-y-5">
+
+              <a
+                href="mailto:alexviclop@gmail.com"
+                className="group flex min-w-0 items-center gap-4 text-xl font-bold transition-colors hover:text-primary sm:text-2xl"
+              >
+                <span className="shrink-0 rounded-lg border border-border/70 bg-secondary p-3.5 transition-all group-hover:border-primary/40 group-hover:bg-primary group-hover:text-primary-foreground">
+                  <Mail className="h-5 w-5" />
+                </span>
+                <span className="min-w-0 break-all text-foreground transition-colors group-hover:text-primary">
+                  alexviclop@gmail.com
+                </span>
+              </a>
+
+              <div className="flex flex-wrap gap-3">
                 <a
-                  href="mailto:alexviclop@gmail.com"
-                  className="group flex min-w-0 items-center gap-4 text-xl font-bold transition-colors hover:text-primary sm:text-2xl"
+                  href="/cv/CV_Alex_Vicente_Lopez.pdf"
+                  download
+                  className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-primary-foreground transition-all hover:-translate-y-0.5 hover:bg-primary/90"
                 >
-                  <div className="shrink-0 rounded-lg border border-border/70 bg-secondary p-3.5 transition-all group-hover:border-primary/40 group-hover:bg-primary group-hover:text-primary-foreground">
-                    <Mail className="h-5 w-5" />
-                  </div>
-                  <span className="min-w-0 break-all text-foreground group-hover:text-primary transition-colors">
-                    alexviclop@gmail.com
-                  </span>
-                </a>
-                <a
-                  href="https://github.com/AVL05"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex min-w-0 items-center gap-4 text-xl font-bold transition-colors sm:text-2xl"
-                >
-                  <div className="shrink-0 rounded-lg border border-border/70 bg-secondary p-3.5 transition-all group-hover:border-primary/40 group-hover:bg-primary group-hover:text-primary-foreground">
-                    <FaGithub className="h-5 w-5" />
-                  </div>
-                  <span className="min-w-0 break-all text-foreground group-hover:text-primary transition-colors">
-                    github.com/AVL05
-                  </span>
+                  <FileText className="h-4 w-4" />
+                  {t.contact.cv_btn}
                 </a>
                 <a
                   href="https://www.linkedin.com/in/aleviclop/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex min-w-0 items-center gap-4 text-xl font-bold transition-colors sm:text-2xl"
+                  className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-primary/35 bg-background/35 px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-primary transition-all hover:-translate-y-0.5 hover:bg-primary hover:text-primary-foreground"
                 >
-                  <div className="shrink-0 rounded-lg border border-border/70 bg-secondary p-3.5 transition-all group-hover:border-primary/40 group-hover:bg-primary group-hover:text-primary-foreground">
-                    <FaLinkedin className="h-5 w-5" />
-                  </div>
-                  <span className="min-w-0 text-foreground group-hover:text-primary transition-colors">
-                    linkedin/aleviclop
-                  </span>
-                </a>
-              </div>
-
-              <div className="rounded-lg border border-border/60 bg-background/35 p-5">
-                <p className="mb-2 text-sm font-bold text-foreground">
-                  {t.contact.visual_portfolio_title}
-                </p>
-                <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
-                  {t.contact.visual_portfolio_desc}
-                </p>
-                <a
-                  href="https://rawvives.aleviclop.dev/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-primary/30 bg-primary/10 px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-primary transition-all hover:bg-primary hover:text-primary-foreground"
-                >
-                  {t.contact.visual_portfolio_btn}
-                  <ArrowUpRight className="h-3.5 w-3.5" />
+                  <FaLinkedin className="h-4 w-4" />
+                  LinkedIn
                 </a>
               </div>
             </div>
@@ -439,6 +396,31 @@ export function Contact() {
                     {item[language]}
                   </Link>
                 ))}
+              </nav>
+              <nav
+                aria-label={
+                  language === "es" ? "Perfiles externos" : "External profiles"
+                }
+                className="mb-6 flex flex-wrap justify-center gap-3 sm:justify-start"
+              >
+                <a
+                  href="https://github.com/AVL05"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-11 items-center gap-2 font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground transition-colors hover:text-primary"
+                >
+                  <FaGithub className="h-3.5 w-3.5" />
+                  GitHub
+                </a>
+                <a
+                  href="https://rawvives.aleviclop.dev/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-11 items-center gap-2 font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground transition-colors hover:text-primary"
+                >
+                  raw.vives
+                  <ArrowUpRight className="h-3.5 w-3.5" />
+                </a>
               </nav>
               <p className="mb-1 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground">
                 &copy; 2026 Alex Vicente López

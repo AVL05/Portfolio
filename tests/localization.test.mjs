@@ -38,6 +38,7 @@ test("Spanish and English locale catalogs have matching structure", () => {
 test("known mixed-language surfaces select copy from the active language", () => {
   const hero = read("components/hero.tsx");
   const photography = read("components/photography.tsx");
+  const projects = read("components/projects.tsx");
   const notFound = read("app/not-found.tsx");
   const seoShell = read("components/seo-page-shell.tsx");
   const legal = read("components/legal-page-content.tsx");
@@ -47,6 +48,8 @@ test("known mixed-language surfaces select copy from the active language", () =>
   assert.match(hero, /Full-Stack Developer/);
   assert.match(photography, /Otra/);
   assert.match(photography, /See/);
+  assert.match(projects, /Proyectos seleccionados/);
+  assert.match(projects, /Selected work/);
   assert.doesNotMatch(notFound, /Inicio \/ Home|Proyectos \/ Work/);
   assert.match(seoShell, /useLanguage/);
   assert.match(legal, /Aviso legal/);

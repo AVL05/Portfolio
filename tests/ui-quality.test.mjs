@@ -115,25 +115,27 @@ test("the portfolio keeps the hero controls aligned and overlap-safe", () => {
   assert.match(languageToggle, /translate-x-9/);
 });
 
-test("secondary work stays visible with responsive hover and focus previews", () => {
+test("secondary work uses a pointer-following preview without hiding touch media", () => {
   const projects = read("components/projects.tsx");
   const es = read("lib/locales/es.json");
   const en = read("lib/locales/en.json");
 
   assert.doesNotMatch(projects, /<details|<summary|archiveOpen/);
-  assert.match(projects, /className="archive-preview/);
-  assert.match(projects, /onMouseEnter=\{\(\) => setActiveArchiveIndex\(index\)\}/);
-  assert.match(projects, /onFocusCapture=\{\(\) => setActiveArchiveIndex\(index\)\}/);
+  assert.match(projects, /archive-floating-preview/);
+  assert.match(projects, /onMouseEnter=\{\(event\) => \{/);
+  assert.match(projects, /onMouseMove=\{\(event\) =>/);
+  assert.match(projects, /onMouseLeave=\{\(\) => setHoveredArchiveIndex\(null\)\}/);
+  assert.match(projects, /positionArchivePreview/);
+  assert.match(projects, /gsap\.quickTo\(preview, "x"/);
+  assert.match(projects, /archive-inline-media/);
   assert.match(projects, /motion-reduce:transition-none/);
-  assert.match(projects, /sizes="\(max-width: 1024px\) 1px, 38vw"/);
-  assert.match(projects, /Pasa el cursor o usa Tab para explorar/);
-  assert.match(projects, /Hover or use Tab to explore/);
-  assert.match(projects, /aria-label=\{`\$\{archivePreviewLabel\}: \$\{activeArchiveProject\.title\}`\}/);
+  assert.match(projects, /aria-hidden="true"/);
   assert.match(projects, /Ver código/);
   assert.match(projects, /View code/);
   assert.match(projects, /Proyecto privado/);
   assert.match(projects, /Private project/);
   assert.doesNotMatch(es, /github\.com\/AVL05\/PRWEB02/);
   assert.doesNotMatch(en, /github\.com\/AVL05\/PRWEB02/);
-  assert.doesNotMatch(projects, /aria-hidden="true"\s+className="archive-preview/);
+  assert.doesNotMatch(projects, /onFocusCapture/);
+  assert.doesNotMatch(projects, /\{ scale: 1\.12 \}/);
 });

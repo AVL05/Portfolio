@@ -107,10 +107,6 @@ interface Translation {
     availability_title: string;
     availability_desc: string;
     cv_btn: string;
-    email_btn: string;
-    visual_portfolio_title: string;
-    visual_portfolio_desc: string;
-    visual_portfolio_btn: string;
     footer_built: string;
   };
 }

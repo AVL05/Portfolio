@@ -9,7 +9,7 @@ const getGroups = (language: "es" | "en") => [
   { area: language === "es" ? "Interacción" : "Interaction", stack: language === "es" ? "GSAP · ScrollTrigger · transiciones de vista · interfaz adaptable · accesibilidad" : "GSAP · ScrollTrigger · view transitions · responsive UI · accessibility", proof: "raw.vives · aleviclop.dev" },
   { area: language === "es" ? "Desarrollo backend" : "Backend development", stack: "Laravel · PHP · MySQL · APIs REST · Sanctum", proof: "LumaFlow Studio · Distrito Gourmet · API Hotel" },
   { area: language === "es" ? "Flujo de trabajo" : "Workflow", stack: language === "es" ? "Git · GitHub · Bitbucket · pruebas · CI/CD · Vercel · Docker" : "Git · GitHub · Bitbucket · testing · CI/CD · Vercel · Docker", proof: language === "es" ? "Entrega · equipo · control de versiones" : "Delivery · teamwork · version control" },
-  { area: language === "es" ? "Diseño y producción visual" : "Design & visual production", stack: language === "es" ? "Photoshop · Illustrator · InDesign · Lightroom · fotografía" : "Photoshop · Illustrator · InDesign · Lightroom · photography", proof: "raw.vives · Llibret Falla el Molí" },
+  { area: language === "es" ? "Diseño y fotografía" : "Design & photography", stack: language === "es" ? "Composición · tipografía · dirección de arte · Lightroom · Adobe" : "Composition · typography · art direction · Lightroom · Adobe", proof: "raw.vives · Llibret Falla el Molí" },
 ];
 
 export function Skills() {
@@ -48,8 +48,8 @@ export function Skills() {
           </div>
           <div className="max-w-[58ch] space-y-4 text-lg font-medium leading-relaxed text-foreground/66 md:justify-self-end md:text-xl">
             <p>{language === "es"
-              ? "Técnico Superior en Desarrollo de Aplicaciones Web. Construyo productos full-stack mantenibles conectando interfaz, API, datos, accesibilidad y entrega."
-              : "Web Application Development graduate. I build maintainable full-stack products connecting interfaces, APIs, data, accessibility, and delivery."}</p>
+              ? "Me centro en interfaces React y Next.js accesibles, responsive y mantenibles. Mi base en Laravel, PHP y MySQL me permite trabajar con soltura entre APIs, flujos de datos e integración frontend."
+              : "I focus on accessible, responsive, maintainable React and Next.js interfaces. My Laravel, PHP, and MySQL background lets me work comfortably across APIs, data flows, and frontend integration."}</p>
             <p className="text-sm text-muted-foreground sm:text-base">{language === "es"
               ? "Trabajo como freelance desde Valencia y en remoto. La fotografía aporta composición y criterio visual; el código sigue siendo el centro de mi perfil profesional."
               : "I work freelance from Valencia and remotely. Photography informs composition and visual judgment; software development remains the core of my professional profile."}</p>

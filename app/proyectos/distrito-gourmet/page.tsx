@@ -11,7 +11,7 @@ export async function generateMetadata() {
     language: await getRequestLanguage(),
     path: projectUrl,
     type: "article",
-    image: `${SITE_URL}/projects/distrito_gourmet.png`,
+    image: `${SITE_URL}/projects/distrito-gourmet-og.webp`,
     copy: {
       es: {
         title: "Distrito Gourmet - Caso de estudio",
@@ -32,8 +32,8 @@ const data: ProjectCaseStudyData = {
   eyebrow: { es: "Caso de estudio / Producto full-stack", en: "Case study / Full-stack product" },
   summary: { es: "Aplicación para restaurante que conecta carta, pedidos y reservas con un panel operativo propio.", en: "A restaurant application connecting menu, orders, and reservations with its own operations dashboard." },
   role: { es: "Diseñé el producto y desarrollé frontend React, API Laravel, modelo MySQL, flujos de cliente y administración, despliegue y documentación.", en: "I designed the product and built the React frontend, Laravel API, MySQL model, customer and admin flows, deployment, and documentation." },
-  image: "/projects/distrito_gourmet.png",
-  imageAlt: { es: "Interfaz pública de Distrito Gourmet", en: "Distrito Gourmet public interface" },
+  image: "/projects/distrito-gourmet-ui.webp",
+  imageAlt: { es: "Hero de la web de Distrito Gourmet con acceso a carta y reservas", en: "Distrito Gourmet website hero with menu and reservation actions" },
   viewTransitionName: "project-distrito-gourmet",
   stack: ["React 19", "Vite", "Tailwind CSS", "Laravel 12", "PHP 8.2", "MySQL", "Zustand", "React Router", "GSAP", "Docker"],
   github: githubUrl, demo: demoUrl,

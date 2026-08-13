@@ -10,9 +10,7 @@ export function LanguageToggle() {
     <button
       type="button"
       onClick={() => setLanguage(nextLanguage)}
-      aria-label={
-        language === "es" ? "Cambiar a inglés" : "Switch to Spanish"
-      }
+      aria-describedby="language-toggle-description"
       className="group relative inline-grid h-11 grid-cols-[2.25rem_2.25rem] items-center overflow-hidden whitespace-nowrap rounded-lg border border-border bg-card/70 p-1 font-mono text-xs font-black uppercase leading-none tracking-[0.12em] transition-colors hover:border-primary/50 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
     >
       <span
@@ -34,6 +32,9 @@ export function LanguageToggle() {
         }`}
       >
         EN
+      </span>
+      <span id="language-toggle-description" className="sr-only">
+        {language === "es" ? "Cambiar a inglés" : "Switch to Spanish"}
       </span>
     </button>
   );

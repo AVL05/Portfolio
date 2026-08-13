@@ -111,13 +111,13 @@ function ProjectScene({
                 href={project.caseStudyHref}
                 className="group inline-flex min-h-12 items-center gap-6 border-b border-foreground pb-1 text-xs font-bold uppercase tracking-[.12em] text-foreground transition-colors hover:border-primary hover:text-primary"
               >
-                {language === "es" ? "Abrir caso" : "Open case"}
+                {language === "es" ? "Ver caso de estudio" : "View case study"}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             )}
             {project.link && (
               <a data-cursor="external" href={project.link} target="_blank" rel="noopener noreferrer" className="cinema-link text-[11px]">
-                {language === "es" ? "Producto" : "Live"} <ArrowUpRight />
+                {language === "es" ? "Ver sitio" : "Live site"} <ArrowUpRight />
               </a>
             )}
             {project.github && (
@@ -129,11 +129,11 @@ function ProjectScene({
         </div>
 
         {project.caseStudyHref ? (
-          <Link data-cursor="project" href={project.caseStudyHref} aria-label={`${language === "es" ? "Abrir caso" : "Open case"}: ${project.title}`} className="scene-link block">
+          <Link data-cursor="project" href={project.caseStudyHref} aria-label={`${String(index + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")} — ${language === "es" ? "Abrir caso" : "Open case"}: ${project.title}`} className="scene-link block">
             {media}
           </Link>
         ) : (
-          <a data-cursor="external" href={project.link} target="_blank" rel="noopener noreferrer" aria-label={project.title} className="scene-link block">
+          <a data-cursor="external" href={project.link} target="_blank" rel="noopener noreferrer" aria-label={`${String(index + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")} — ${project.title}`} className="scene-link block">
             {media}
           </a>
         )}
@@ -381,7 +381,7 @@ export function Projects() {
               <span className="block font-mono text-[11px] uppercase tracking-[.14em] text-muted-foreground">
                 {archive.length} {language === "es" ? "proyectos" : "projects"}
               </span>
-              <span className="mt-2 hidden font-mono text-[11px] uppercase tracking-[.12em] text-foreground/45 lg:block">
+              <span className="mt-2 hidden font-mono text-[11px] uppercase tracking-[.12em] text-foreground/60 lg:block">
                 {language === "es"
                   ? "Pasa el cursor por un proyecto para previsualizarlo"
                   : "Hover a project to preview it"}
@@ -443,7 +443,7 @@ export function Projects() {
                             href={project.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            aria-label={`${project.title}: ${
+                            aria-label={`Demo — ${project.title}: ${
                               language === "es"
                                 ? "abrir proyecto"
                                 : "open project"
@@ -480,7 +480,7 @@ export function Projects() {
       <aside
         ref={archivePreviewRef}
         aria-hidden="true"
-        className={`archive-preview archive-floating-preview pointer-events-none fixed left-0 top-0 z-40 w-[min(26rem,calc(100vw-2rem))] transition-opacity duration-150 motion-reduce:transition-none ${
+        className={`archive-preview archive-floating-preview pointer-events-none fixed left-0 top-0 z-40 hidden w-[min(26rem,calc(100vw-2rem))] transition-opacity duration-150 motion-reduce:transition-none lg:block ${
           hoveredArchiveIndex === null ? "opacity-0" : "opacity-100"
         }`}
       >

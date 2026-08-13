@@ -114,7 +114,7 @@ export function Hero() {
           </span>
         </div>
 
-        <h1 id="hero-title" className="mt-[33dvh] lg:mt-auto">
+        <h1 id="hero-title" aria-label="Alex Vicente" className="mt-[33dvh] lg:mt-auto">
           <span className="block overflow-hidden">
             <span className="hero-mask-line hero-title-a block whitespace-nowrap text-[18vw] font-black uppercase leading-[.72] tracking-[-.085em] text-foreground will-change-transform lg:text-[12vw]">
               Alex
@@ -131,8 +131,8 @@ export function Hero() {
           <div className="hero-reveal">
             <p className="font-mono text-[11px] font-bold uppercase tracking-[.15em] text-primary">
               {language === "es"
-                ? "Desarrollador Full-Stack · Freelance"
-                : "Full-Stack Developer · Freelance"}
+                ? "Frontend Developer · React / Next.js"
+                : "Frontend Developer · React / Next.js"}
             </p>
             <p className="mt-3 max-w-[58ch] text-base font-medium leading-relaxed text-foreground/76 sm:text-lg">
               {t.hero.description}

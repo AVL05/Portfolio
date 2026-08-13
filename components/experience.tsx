@@ -153,6 +153,75 @@ export function Experience() {
         </div>
 
         <div className="timeline-grid grid grid-cols-1 gap-14 lg:grid-cols-2 lg:gap-18">
+          {/* Experience comes first for recruiter scanning */}
+          <div className="space-y-12">
+            <div className="flex items-center gap-4 border-b border-border/50 pb-5">
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-border/70 bg-secondary text-primary">
+                <Briefcase className="h-6 w-6" />
+              </div>
+              <h3 className="text-2xl font-bold tracking-normal text-foreground">
+                {t.experience.job_title}
+              </h3>
+            </div>
+
+            <div className="relative space-y-10">
+              <div
+                className="timeline-line absolute bottom-4 left-[19px] top-0 w-px"
+                style={{
+                  background:
+                    "linear-gradient(to bottom, oklch(from var(--primary) l c h / 0.55), oklch(from var(--border) l c h / 0.35) 45%, oklch(from var(--border) l c h / 0.08))",
+                }}
+              />
+
+              {experience.map((exp: TimelineItem, i: number) => (
+                <div key={i} className="timeline-item group relative pl-16">
+                  <div className="absolute left-0 top-1.5 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-border/60 bg-background transition-all duration-300 group-hover:border-primary/60">
+                    <div className="h-2.5 w-2.5 rounded-full bg-border/60 ring-1 ring-border/30 transition-all duration-300 group-hover:bg-primary group-hover:ring-primary/40" />
+                  </div>
+                  <div className="rounded-lg border border-transparent p-4 transition-colors duration-300 group-hover:border-border/55 group-hover:bg-card/45">
+                    <div className="space-y-3">
+                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-4">
+                        <h4 className="text-lg font-bold leading-tight tracking-normal text-foreground transition-colors group-hover:text-primary sm:text-xl">
+                          {exp.title}
+                        </h4>
+                        <span className="w-fit shrink-0 rounded-md border border-primary/20 bg-primary/8 px-2.5 py-1 font-mono text-[11px] text-primary">
+                          {exp.period}
+                        </span>
+                      </div>
+                      <div className="flex flex-wrap items-center gap-2 text-muted-foreground text-xs font-mono uppercase tracking-widest">
+                        <span className="text-foreground/70 font-bold">
+                          {exp.company}
+                        </span>
+                        <span className="opacity-30">|</span>
+                        <span className="flex items-center gap-1">
+                          <MapPin className="h-3 w-3" /> {exp.location}
+                        </span>
+                      </div>
+                      <p className="text-muted-foreground/80 text-sm leading-relaxed">
+                        {exp.description}
+                      </p>
+                      {exp.contract ? (
+                        <p className="font-mono text-[11px] font-semibold uppercase tracking-[.12em] text-primary">
+                          {exp.contract}
+                        </p>
+                      ) : null}
+                      {exp.highlights?.length ? (
+                        <ul className="space-y-2 border-t border-border/45 pt-3">
+                          {exp.highlights.map((highlight) => (
+                            <li key={highlight} className="flex gap-2.5 text-sm leading-relaxed text-muted-foreground/85">
+                              <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                              {highlight}
+                            </li>
+                          ))}
+                        </ul>
+                      ) : null}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
           {/* Education */}
           <div className="space-y-12">
             <div className="flex items-center gap-4 border-b border-border/50 pb-5">
@@ -200,70 +269,6 @@ export function Experience() {
                       <p className="text-muted-foreground/80 text-sm leading-relaxed">
                         {edu.description}
                       </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Experience */}
-          <div className="space-y-12">
-            <div className="flex items-center gap-4 border-b border-border/50 pb-5">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-border/70 bg-secondary text-primary">
-                <Briefcase className="h-6 w-6" />
-              </div>
-              <h3 className="text-2xl font-bold tracking-normal text-foreground">
-                {t.experience.job_title}
-              </h3>
-            </div>
-
-            <div className="relative space-y-10">
-              <div
-                className="timeline-line absolute bottom-4 left-[19px] top-0 w-px"
-                style={{
-                  background:
-                    "linear-gradient(to bottom, oklch(from var(--primary) l c h / 0.55), oklch(from var(--border) l c h / 0.35) 45%, oklch(from var(--border) l c h / 0.08))",
-                }}
-              />
-
-              {experience.map((exp: TimelineItem, i: number) => (
-                <div key={i} className="timeline-item group relative pl-16">
-                  <div className="absolute left-0 top-1.5 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-border/60 bg-background transition-all duration-300 group-hover:border-primary/60">
-                    <div className="h-2.5 w-2.5 rounded-full bg-border/60 ring-1 ring-border/30 transition-all duration-300 group-hover:bg-primary group-hover:ring-primary/40" />
-                  </div>
-                  <div className="rounded-lg border border-transparent p-4 transition-colors duration-300 group-hover:border-border/55 group-hover:bg-card/45">
-                    <div className="space-y-3">
-                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-4">
-                        <h4 className="text-lg font-bold leading-tight tracking-normal text-foreground transition-colors group-hover:text-primary sm:text-xl">
-                          {exp.title}
-                        </h4>
-                        <span className="w-fit shrink-0 rounded-md border border-primary/20 bg-primary/8 px-2.5 py-1 font-mono text-[11px] text-primary">
-                          {exp.period}
-                        </span>
-                      </div>
-                      <div className="flex flex-wrap items-center gap-2 text-muted-foreground text-xs font-mono uppercase tracking-widest">
-                        <span className="text-foreground/70 font-bold">
-                          {exp.company}
-                        </span>
-                        <span className="opacity-30">|</span>
-                        <span className="flex items-center gap-1">
-                          <MapPin className="h-3 w-3" /> {exp.location}
-                        </span>
-                      </div>
-                      <p className="text-muted-foreground/80 text-sm leading-relaxed">
-                        {exp.description}
-                      </p>
-                      {exp.highlights?.length ? (
-                        <ul className="space-y-2 border-t border-border/45 pt-3">
-                          {exp.highlights.map((highlight) => (
-                            <li key={highlight} className="flex gap-2.5 text-sm leading-relaxed text-muted-foreground/85">
-                              <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                              {highlight}
-                            </li>
-                          ))}
-                        </ul>
-                      ) : null}
                     </div>
                   </div>
                 </div>

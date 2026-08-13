@@ -1,6 +1,6 @@
 ---
 name: Alex Vicente Portfolio
-description: A precise and creative full-stack portfolio built around real product work
+description: A precise frontend portfolio built around real interface and product work
 colors:
   background: "oklch(0.105 0.012 58)"
   foreground: "oklch(0.94 0.013 86)"
@@ -59,7 +59,7 @@ La identidad rechaza los portfolios tecnológicos genéricos construidos como un
 
 **Key Characteristics:**
 
-- Full-stack y orientado a casos reales.
+- Frontend React/Next.js y orientado a casos reales, con capacidad full-stack secundaria.
 - Carbón y marfil con un único acento cobre controlado.
 - Tipografía de gran escala compensada con texto cómodo y directo.
 - Movimiento expresivo, siempre opcional mediante reducción de movimiento.
@@ -135,7 +135,7 @@ Cuatro proyectos principales se muestran como escenas amplias con imagen, rol, s
 
 ### Do:
 
-- **Do** presentar el alcance full-stack mediante trabajo real y verificable.
+- **Do** presentar primero el trabajo frontend y respaldar la capacidad full-stack con evidencia real.
 - **Do** mostrar imágenes reales, decisiones y resultados verificables.
 - **Do** probar cada cambio a 390px y 1440px con movimiento reducido.
 

@@ -44,8 +44,8 @@ test("known mixed-language surfaces select copy from the active language", () =>
   const legal = read("components/legal-page-content.tsx");
   const og = read("app/api/og/route.tsx");
 
-  assert.match(hero, /Desarrollador Full-Stack/);
-  assert.match(hero, /Full-Stack Developer/);
+  assert.match(hero, /Frontend Developer/);
+  assert.match(hero, /React \/ Next\.js/);
   assert.match(photography, /Otra/);
   assert.match(photography, /See/);
   assert.match(projects, /Proyectos seleccionados/);
@@ -54,7 +54,7 @@ test("known mixed-language surfaces select copy from the active language", () =>
   assert.match(seoShell, /useLanguage/);
   assert.match(legal, /Aviso legal/);
   assert.match(legal, /Legal notice/);
-  assert.match(og, /Full-Stack Developer/);
+  assert.match(og, /Frontend Developer/);
 });
 
 test("language changes update document language and use an accessible transition", () => {
@@ -65,14 +65,30 @@ test("language changes update document language and use an accessible transition
   assert.match(context, /prefers-reduced-motion/);
 });
 
-test("public positioning consistently presents Alex as full-stack and freelance", () => {
+test("public positioning leads with frontend and keeps full-stack as supporting capability", () => {
   const layout = read("app/layout.tsx");
   const seo = read("lib/seo.ts");
   const about = read("app/sobre-mi/page.tsx");
   const publicPositioning = [layout, seo, about, JSON.stringify(es), JSON.stringify(en)].join("\n");
 
-  assert.match(publicPositioning, /Full-Stack Developer/);
+  assert.match(publicPositioning, /Frontend Developer/);
+  assert.match(publicPositioning, /React/);
+  assert.match(publicPositioning, /Next\.js/);
+  assert.match(publicPositioning, /Laravel/);
   assert.match(publicPositioning, /freelance/i);
-  assert.doesNotMatch(publicPositioning, /Frontend Developer|Desarrollador frontend/);
-  assert.doesNotMatch(publicPositioning, /especializad|speciali[sz]/i);
+  assert.doesNotMatch(publicPositioning, /production-ready/i);
+});
+
+test("professional experience precedes education and uses recruiter-friendly dates", () => {
+  const experience = read("components/experience.tsx");
+  const jobPosition = experience.indexOf("{/* Experience comes first");
+  const educationPosition = experience.indexOf("{/* Education */}");
+
+  assert.ok(jobPosition >= 0 && jobPosition < educationPosition);
+  assert.equal(es.experience.experience_list[0].title, "Desarrollador de Aplicaciones Web");
+  assert.equal(es.experience.experience_list[0].contract, "Prácticas");
+  assert.equal(es.experience.experience_list[0].period, "Abr 2026 — May 2026");
+  assert.equal(en.experience.experience_list[0].title, "Web Application Developer");
+  assert.equal(en.experience.experience_list[0].contract, "Internship");
+  assert.equal(en.experience.experience_list[0].period, "Apr 2026 — May 2026");
 });

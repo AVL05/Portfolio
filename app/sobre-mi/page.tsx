@@ -11,12 +11,12 @@ export async function generateMetadata() {
       es: {
         title: "Sobre Alex Vicente López",
         description:
-          "Perfil profesional de Alex Vicente López, desarrollador Full-Stack freelance en Valencia con experiencia construyendo aplicaciones web completas.",
+          "Perfil profesional de Alex Vicente López, Frontend Developer en Valencia centrado en React y Next.js, con experiencia full-stack y disponibilidad freelance.",
       },
       en: {
         title: "About Alex Vicente López",
         description:
-          "Professional profile of Alex Vicente López, a Valencia-based freelance Full-Stack Developer building complete web applications.",
+          "Professional profile of Alex Vicente López, a Valencia-based Frontend Developer focused on React and Next.js with full-stack experience and freelance availability.",
       },
     },
   });
@@ -28,15 +28,15 @@ export default function AboutPage() {
       eyebrow={{ es: "Sobre mí", en: "About" }}
       title={{ es: "Sobre Alex Vicente López", en: "About Alex Vicente López" }}
       description={{
-        es: "Alex Vicente López es desarrollador Full-Stack freelance con formación en DAW y experiencia práctica construyendo aplicaciones web de principio a fin.",
-        en: "Alex Vicente López is a freelance Full-Stack Developer with a Web Application Development qualification and practical experience building complete web applications.",
+        es: "Alex Vicente López es Frontend Developer centrado en React y Next.js. Su formación DAW y experiencia con Laravel, PHP y MySQL le permiten integrar interfaces con APIs y datos reales.",
+        en: "Alex Vicente López is a Frontend Developer focused on React and Next.js. His web development training and Laravel, PHP, and MySQL experience support real API and data integration.",
       }}
       sections={[
         {
           title: { es: "Perfil profesional", en: "Professional profile" },
           body: {
-            es: "Alex trabaja como freelance diseñando y desarrollando productos web completos, desde la interfaz hasta la API, los datos y la entrega. Su trabajo combina implementación accesible, criterio de producto y dirección visual.",
-            en: "Alex works freelance, designing and developing complete web products from interface to API, data, and delivery. His work combines accessible implementation, product judgment, and visual direction.",
+            es: "Alex trabaja principalmente en interfaces React y Next.js: estructura responsive, interacción, accesibilidad y calidad UI. Puede continuar el trabajo en APIs, PHP, Laravel y MySQL cuando el proyecto lo requiere.",
+            en: "Alex works mainly on React and Next.js interfaces: responsive structure, interaction, accessibility, and UI quality. He can continue into APIs, PHP, Laravel, and MySQL when a project requires it.",
           },
         },
         {

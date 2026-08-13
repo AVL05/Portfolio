@@ -10,12 +10,12 @@ export async function generateMetadata() {
       es: {
         title: "Fotografía de Alex Vicente López",
         description:
-          "Portfolio fotográfico de Alex Vicente López: composición, fotografía urbana, paisaje y criterio visual aplicado a proyectos digitales.",
+          "Portfolio fotográfico de Alex Vicente López: composición, fotografía urbana, paisaje y dirección de arte aplicada a interfaces digitales.",
       },
       en: {
         title: "Photography by Alex Vicente López",
         description:
-          "Alex Vicente López’s photography portfolio: composition, urban photography, landscapes, and visual judgment applied to digital work.",
+          "Alex Vicente López’s photography portfolio: composition, urban photography, landscapes, and art direction applied to digital interfaces.",
       },
     },
   });
@@ -42,17 +42,17 @@ export default function PhotographyPage() {
           },
         },
         {
-          title: { es: "Criterio visual", en: "Visual judgment" },
+          title: { es: "Composición", en: "Composition" },
           body: {
-            es: "El trabajo fotográfico de Alex Vicente López complementa su portfolio técnico con atención a encuadre, jerarquía, ritmo visual y calidad del resultado final.",
-            en: "Alex Vicente López’s photography complements his technical portfolio through attention to framing, hierarchy, visual rhythm, and final quality.",
+            es: "El trabajo fotográfico complementa su portfolio técnico con atención a encuadre, jerarquía, ritmo y calidad UI.",
+            en: "His photography complements the technical portfolio through attention to framing, hierarchy, rhythm, and UI quality.",
           },
         },
         {
           title: { es: "Diseño digital", en: "Digital design" },
           body: {
-            es: "La experiencia en fotografía y diseño editorial se traslada a interfaces web más cuidadas, con mejor dirección visual y decisiones de composición más precisas.",
-            en: "Experience in photography and editorial design translates into more considered web interfaces, stronger visual direction, and more precise composition.",
+            es: "La fotografía y el diseño editorial se trasladan a interfaces con decisiones más precisas de tipografía, jerarquía y composición.",
+            en: "Photography and editorial design translate into more precise choices in interface typography, hierarchy, and composition.",
           },
         },
         {

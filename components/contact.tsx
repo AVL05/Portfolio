@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { ArrowUpRight, FileText, Mail } from "lucide-react";
+import { ArrowUpRight, FileText, Mail, MapPin } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import type React from "react";
 import { useRef, useState } from "react";
@@ -341,6 +341,10 @@ export function Contact() {
                 </p>
                 <p className="text-base font-medium leading-relaxed text-foreground/72">
                   {t.contact.availability_desc}
+                </p>
+                <p className="mt-4 flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[.12em] text-muted-foreground">
+                  <MapPin className="h-4 w-4 text-primary" />
+                  {language === "es" ? "Valencia · remoto" : "Valencia · remote"}
                 </p>
               </div>
 

@@ -102,6 +102,23 @@ test("search crawlers can discover the public profile routes", () => {
   }
 });
 
+test("featured case studies expose project-specific social images", () => {
+  const rawVives = read("app/proyectos/raw-vives/page.tsx");
+  const lumaFlow = read("app/proyectos/lumaflow-studio/page.tsx");
+  const distrito = read("app/proyectos/distrito-gourmet/page.tsx");
+
+  assert.match(rawVives, /raw-vives-og\.webp/);
+  assert.match(lumaFlow, /lumaflow-studio-og\.webp/);
+  assert.match(distrito, /distrito-gourmet-og\.webp/);
+  for (const asset of [
+    "public/projects/raw-vives/raw-vives-og.webp",
+    "public/projects/lumaflow-studio-og.webp",
+    "public/projects/distrito-gourmet-og.webp",
+  ]) {
+    assert.equal(existsSync(join(root, asset)), true, asset);
+  }
+});
+
 test("the portfolio keeps the hero controls aligned and overlap-safe", () => {
   const hero = read("components/hero.tsx");
   const navigation = read("components/navigation.tsx");
@@ -138,4 +155,13 @@ test("secondary work uses a pointer-following preview without hiding touch media
   assert.doesNotMatch(en, /github\.com\/AVL05\/PRWEB02/);
   assert.doesNotMatch(projects, /onFocusCapture/);
   assert.doesNotMatch(projects, /\{ scale: 1\.12 \}/);
+});
+
+test("the recruiter view keeps exactly four featured projects plus an archive", () => {
+  const projects = read("components/projects.tsx");
+
+  assert.match(projects, /const featuredIndexes = \[0, 1, 2, 6\]/);
+  assert.match(projects, /archive = projects\.filter/);
+  assert.match(projects, /Ver caso de estudio/);
+  assert.match(projects, /View case study/);
 });

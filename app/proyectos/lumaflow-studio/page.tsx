@@ -10,7 +10,7 @@ export async function generateMetadata() {
     language: await getRequestLanguage(),
     path: projectUrl,
     type: "article",
-    image: `${SITE_URL}/projects/lumaflow-studio-cover.svg`,
+    image: `${SITE_URL}/projects/lumaflow-studio-og.webp`,
     copy: {
       es: {
         title: "LumaFlow Studio - Caso de estudio",

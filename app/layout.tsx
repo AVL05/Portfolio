@@ -34,11 +34,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const title =
     language === "es"
       ? SITE_TITLE
-      : "Alex Vicente López | Freelance Full-Stack Developer";
+      : "Alex Vicente López | Frontend Developer · React / Next.js";
   const description =
     language === "es"
       ? SITE_DESCRIPTION
-      : "Portfolio of Alex Vicente López, a freelance Full-Stack Developer in Valencia. I build complete, functional, production-ready web applications.";
+      : "Portfolio of Alex Vicente López, a Valencia-based Frontend Developer focused on React and Next.js, with Laravel, PHP, and MySQL experience.";
 
   return {
     metadataBase: new URL(SITE_URL),
@@ -129,18 +129,18 @@ export default async function RootLayout({
                 ...personJsonLd,
                 jobTitle:
                   initialLanguage === "es"
-                    ? "Desarrollador Full-Stack freelance"
-                    : "Freelance Full-Stack Developer",
+                    ? "Frontend Developer"
+                    : "Frontend Developer",
                 description:
                   initialLanguage === "es"
                     ? personJsonLd.description
-                    : "Alex Vicente López is a freelance Full-Stack Developer and Web Application Development graduate. He builds complete web applications for clients and teams.",
+                    : "Alex Vicente López is a Frontend Developer focused on React and Next.js, with full-stack experience in Laravel, PHP, and MySQL and freelance availability.",
                 hasOccupation: {
                   ...personJsonLd.hasOccupation,
                   name:
                     initialLanguage === "es"
-                      ? "Desarrollador Full-Stack freelance"
-                      : "Freelance Full-Stack Developer",
+                      ? "Frontend Developer"
+                      : "Frontend Developer",
                 },
               },
               websiteJsonLd,
@@ -149,11 +149,11 @@ export default async function RootLayout({
                 name:
                   initialLanguage === "es"
                     ? profilePageJsonLd.name
-                    : "Alex Vicente López - Freelance Full-Stack Developer profile",
+                    : "Alex Vicente López - Frontend Developer profile",
                 description:
                   initialLanguage === "es"
                     ? profilePageJsonLd.description
-                    : "Professional freelance Full-Stack Developer profile of Alex Vicente López.",
+                    : "Professional Frontend Developer profile of Alex Vicente López, focused on React and Next.js with supporting full-stack experience.",
                 inLanguage: initialLanguage,
               },
             ]),

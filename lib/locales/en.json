@@ -7,8 +7,8 @@
     "contact": "Contact"
   },
   "hero": {
-    "status": "Available for freelance projects and full-stack roles · Valencia / remote",
-    "description": "I build complete, accessible, production-ready web applications, from interface to API and database.",
+    "status": "Available for frontend roles and freelance projects · Valencia / remote",
+    "description": "I build accessible, responsive React and Next.js interfaces connected to real APIs. Laravel, PHP, and MySQL extend my work across the stack.",
     "cta_github": "GitHub",
     "cta_linkedin": "LinkedIn",
     "scroll": "Scroll"
@@ -16,14 +16,14 @@
   "skills": {
     "title": "Stack",
     "subtitle": "How I build interfaces",
-    "desc": "Full-stack development with product judgment, accessibility, and visual direction.",
+    "desc": "React and Next.js frontend work, accessibility, and interface design, supported by backend experience.",
     "technologies": "Technologies",
     "tools": "Tools"
   },
   "projects": {
     "title": "Projects",
     "subtitle": "Interfaces with intent.",
-    "desc": "Case studies connecting visual direction, architecture, and full-stack development to real product workflows.",
+    "desc": "Four featured projects where interface work, architecture, and real workflows are explained through context and verifiable outcomes.",
     "concept": "Project detail",
     "view_live": "Open demo",
     "view_code": "View code",
@@ -32,7 +32,7 @@
     "items": [
       {
         "title": "raw.vives",
-        "description": "An editorial photography archive connecting visual narrative, exploration, series, motion, and accessibility in a statically generated bilingual experience.",
+        "description": "A bilingual editorial photography archive with curated series, individual works, accessible exploration, and static generation.",
         "image": "/projects/raw-vives/raw-vives-hero.webp",
         "technologies": [
           "Next.js 16",
@@ -45,9 +45,9 @@
         "link": "https://rawvives.aleviclop.dev/",
         "github": "https://github.com/AVL05/alexgallery",
         "caseStudyHref": "/proyectos/raw-vives",
-        "type": "Editorial visual archive",
-        "role": "Led and implemented product, architecture, curation, motion, accessibility, localized SEO, and continuous delivery.",
-        "outcome": "30 photographs, 3 series, and bilingual detail pages ship as a static site with CI, accessibility checks, and controlled Cloudflare Workers deployment."
+        "type": "Editorial photography archive",
+        "role": "Designed and implemented the interface, architecture, curation, interaction, accessibility, localized SEO, and CI/CD.",
+        "outcome": "Published bilingual archive with individual pages, curated series, keyboard navigation, localized SEO, tests, and static deployment on Cloudflare Workers."
       },
       {
         "title": "LumaFlow Studio",
@@ -64,7 +64,7 @@
       {
         "title": "Distrito Gourmet",
         "description": "A full-stack restaurant application with a digital menu, cart, reservations, orders, and operational panels for administration, front of house, and kitchen.",
-        "image": "/projects/distrito_gourmet.png",
+        "image": "/projects/distrito-gourmet-ui.webp",
         "technologies": [
           "Vite",
           "Tailwind CSS",
@@ -80,18 +80,18 @@
         "github": "https://github.com/AVL05/distrito-gourmet",
         "caseStudyHref": "/proyectos/distrito-gourmet",
         "type": "Web app",
-        "role": "Built the React frontend, connected flows with Laravel, and worked on the admin panel, reservations, orders, and visual presentation.",
+        "role": "Built the React interface, connected it to Laravel, and worked on administration, reservation, and order flows.",
         "outcome": "Complete public demo with real restaurant operations: menu, cart, reservations, admin flows, and deployment."
       },
       {
         "title": "El Fogón: Restaurant landing page",
-        "description": "Mediterranean restaurant landing built with HTML5, Tailwind CSS, JavaScript, and Vite. I focused on visual direction, content hierarchy, responsive layout, and simple navigation.",
+        "description": "Mediterranean restaurant landing built with HTML5, Tailwind CSS, JavaScript, and Vite. I focused on art direction, content hierarchy, responsive layout, and simple navigation.",
         "image": "/projects/el-fogon.png",
         "technologies": ["HTML5", "Tailwind CSS", "JavaScript", "Vite"],
         "category": "Web Development",
         "type": "Landing page",
-        "role": "Defined the visual hierarchy, responsive structure, navigation, and composition for a restaurant landing page.",
-        "outcome": "Lightweight page for presenting menu, visual identity, and reservation intent without unnecessary complexity."
+        "role": "Defined the hierarchy, responsive structure, navigation, and composition for a restaurant landing page.",
+        "outcome": "Lightweight page for presenting menu, identity, and reservation intent without unnecessary complexity."
       },
       {
         "title": "Hotel Management System (API)",
@@ -119,21 +119,21 @@
       },
       {
         "title": "Llibret Falla el Molí 24/25",
-        "description": "Editorial design for a 100+ page publication. I defined a consistent visual direction and worked on layout, typography, and production-ready artwork with Adobe tools.",
+        "description": "Editorial design for a 100+ page publication. I defined the art direction and worked on layout, typography, and final artwork with Adobe tools.",
         "image": "/projects/Falla.svg",
         "technologies": ["InDesign", "Photoshop", "Illustrator"],
         "category": "Graphic Design",
         "link": "/projects/LLIBRET 24-25.pdf",
         "type": "Editorial design",
-        "role": "Worked on visual direction, editorial composition, typography, and production-ready artwork.",
-        "outcome": "Large coherent publication that shows visual judgement also applicable to web interfaces."
+        "role": "Worked on art direction, editorial composition, typography, and final artwork.",
+        "outcome": "A substantial, coherent publication demonstrating composition and typographic judgment applicable to web interfaces."
       }
     ]
   },
   "photography": {
     "title": "raw.vives",
-    "subtitle": "Editorial visual archive",
-    "description": "My public photography archive: 30 images arranged as a bilingual narrative with series, search, and accessible detail pages.",
+    "subtitle": "Editorial photography archive",
+    "description": "A bilingual photography archive with curated series, individual works, search, and accessible detail pages.",
     "properties": "Properties.RAW",
     "filters": "Filters",
     "view_full": "Open raw.vives"
@@ -165,9 +165,10 @@
     ],
     "experience_list": [
       {
-        "title": "Web Application Developer (Internship)",
+        "title": "Web Application Developer",
+        "contract": "Internship",
         "company": "Burguet Sistemas",
-        "period": "16/04/2026 - 26/05/2026",
+        "period": "Apr 2026 — May 2026",
         "location": "Xirivella, Valencia",
         "description": "Development and maintenance of internal products in a hybrid professional environment.",
         "highlights": [
@@ -177,9 +178,10 @@
         ]
       },
       {
-        "title": "IT Support Technician (Internship)",
+        "title": "IT Support Technician",
+        "contract": "Internship",
         "company": "Ajuntament de Carlet",
-        "period": "03/2024 - 06/2024",
+        "period": "Mar 2024 — Jun 2024",
         "location": "Carlet, Valencia",
         "description": "On-site technical support for municipal workstations and infrastructure.",
         "highlights": [
@@ -192,7 +194,7 @@
   "contact": {
     "title": "Contact",
     "subtitle": "/ Let's talk",
-    "desc": "Available for freelance projects and full-stack opportunities where I can contribute complete web development, visual judgment, and product thinking.",
+    "desc": "Available for frontend roles, small freelance web projects, and collaborations where React, Next.js, and full-stack integration are useful.",
     "form_name": "Your name",
     "form_email": "Your email",
     "form_message": "Your message",
@@ -207,8 +209,8 @@
     "form_error_email": "Enter a valid email address, for example name@company.com.",
     "form_error_message": "Enter a message with at least 20 characters.",
     "links_title": "Direct links",
-    "availability_title": "Available for freelance projects and full-stack opportunities",
-    "availability_desc": "I build complete applications for clients and teams, connecting interfaces, APIs, data, and delivery.",
+    "availability_title": "Available for frontend, freelance, and collaborations",
+    "availability_desc": "I work on React and Next.js interfaces and can integrate them with APIs, PHP, Laravel, and MySQL.",
     "cv_btn": "Download CV",
     "footer_built": "Designed and developed by Alex Vicente."
   }

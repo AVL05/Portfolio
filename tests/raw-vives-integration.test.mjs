@@ -17,13 +17,22 @@ test("raw.vives is the primary localized project", () => {
     assert.equal(project.link, "https://rawvives.aleviclop.dev/");
     assert.equal(project.caseStudyHref, "/proyectos/raw-vives");
     assert.equal(project.github, "https://github.com/AVL05/alexgallery");
-    assert.match(project.outcome, /30/);
-    assert.match(project.outcome, /3/);
     assert.match(project.outcome, /static|estático/i);
+    assert.doesNotMatch(project.description, /\b30\b/);
+    assert.doesNotMatch(project.outcome, /\b30\b/);
   }
-  assert.match(content, /73/);
   assert.match(content, /67/);
   assert.doesNotMatch(content, /81 páginas|81 static|105 tests/i);
+});
+
+test("raw.vives public copy avoids an exact photograph count", () => {
+  const photography = read("components/photography.tsx");
+  const localizedCopy = JSON.stringify([es.photography, en.photography]);
+
+  assert.doesNotMatch(route, /30 (?:fotografías|photographs)/i);
+  assert.doesNotMatch(content, /30 (?:fotografías|photographs)/i);
+  assert.doesNotMatch(photography, /30 (?:fotografías|photographs)/i);
+  assert.doesNotMatch(localizedCopy, /\b30\b/);
 });
 
 test("case study metadata and sitemap entry are indexable", () => {

@@ -8,12 +8,12 @@ const metadataCopy = {
   es: {
     title: "raw.vives - Caso de estudio",
     description:
-      "Caso de estudio de raw.vives, archivo fotográfico editorial bilingüe con 30 fotografías, 3 series, movimiento accesible y despliegue estático.",
+      "Caso de estudio de raw.vives, archivo fotográfico editorial bilingüe con series curadas, obras individuales, interacción accesible y despliegue estático.",
   },
   en: {
     title: "raw.vives - Case study",
     description:
-      "Case study of raw.vives, a bilingual editorial photography archive with 30 photographs, 3 series, accessible motion, and static delivery.",
+      "Case study of raw.vives, a bilingual editorial photography archive with curated series, individual works, accessible interaction, and static deployment.",
   },
 };
 

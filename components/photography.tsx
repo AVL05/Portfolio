@@ -9,7 +9,7 @@ import { useLanguage } from "@/lib/language-context";
 const frames = [
   {
     src: "/photography/selected/coastal-solitude.webp",
-    series: { es: "Archivo visual / 01", en: "Visual archive / 01" },
+    series: { es: "Archivo fotográfico / 01", en: "Photography archive / 01" },
     alt: { es: "Gaviota frente a un acantilado oscuro", en: "Seagull facing a dark coastal cliff" },
     frame: "photo-frame-square w-[78vw] sm:w-[52vw] min-[900px]:w-[24vw]",
     ratio: "aspect-square",
@@ -207,7 +207,7 @@ function ArchiveLink({ language }: { language: "es" | "en" }) {
       className="group flex aspect-square w-full max-w-80 flex-col justify-between border border-black/35 p-6 transition-colors hover:bg-[#11110f] hover:text-[#e9e5dc] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black sm:p-8"
     >
       <span className="font-mono text-[11px] uppercase tracking-[.14em]">
-        {language === "es" ? "raw.vives / 30 fotografías" : "raw.vives / 30 photographs"}
+        {language === "es" ? "raw.vives / archivo bilingüe" : "raw.vives / bilingual archive"}
       </span>
       <span className="text-4xl font-black leading-none tracking-[-.05em] sm:text-5xl">
         {language === "es" ? <>Explorar<br />archivo</> : <>Explore<br />archive</>}
@@ -264,7 +264,7 @@ export function Photography() {
         <header className="mx-auto grid w-full max-w-[100rem] gap-8 px-4 sm:px-6 md:grid-cols-[.85fr_1.15fr] md:items-end lg:px-8">
           <div>
             <p className="font-mono text-[11px] font-bold uppercase tracking-[.15em] text-[#85412d]">
-              {language === "es" ? "04 / Práctica visual" : "04 / Visual practice"}
+              {language === "es" ? "04 / Práctica fotográfica" : "04 / Photographic practice"}
             </p>
             <h2 id="photography-title" className="mt-5 text-[clamp(4rem,10vw,9rem)] font-black leading-[.78] tracking-[-.075em]">
               {language === "es" ? <>Otra<br />mirada.</> : <>See<br />differently.</>}
@@ -278,8 +278,8 @@ export function Photography() {
             </p>
             <p className="mt-5 max-w-[58ch] text-sm font-medium leading-relaxed text-black/62 sm:text-base">
               {language === "es"
-                ? "La composición, el ritmo y la luz que trabajo detrás de la cámara también definen cómo diseño una interfaz. Esta es una selección de mi archivo visual."
-                : "The composition, rhythm and light I explore behind the camera also shape the way I design interfaces. This is a selection from my visual archive."}
+                ? "La composición, el ritmo y la luz que trabajo detrás de la cámara también definen cómo diseño una interfaz. Esta es una selección de mi archivo."
+                : "Composition, rhythm, and light from my photography also inform how I design interfaces. This is a selection from my archive."}
             </p>
           </div>
         </header>

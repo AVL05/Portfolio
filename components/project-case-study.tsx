@@ -45,10 +45,10 @@ const labels = {
     architecture: "Arquitectura",
     challenge: "Desafío",
     solution: "Solución",
-    result: "Resultado",
+    result: "Resultado verificable",
     learnings: "Aprendizajes",
     code: "Ver código",
-    demo: "Abrir producto",
+    demo: "Ver sitio",
   },
   en: {
     back: "Back to projects",
@@ -63,10 +63,10 @@ const labels = {
     architecture: "Architecture",
     challenge: "Challenge",
     solution: "Solution",
-    result: "Result",
+    result: "Verified outcome",
     learnings: "Learnings",
     code: "View code",
-    demo: "Open product",
+    demo: "Live site",
   },
 };
 

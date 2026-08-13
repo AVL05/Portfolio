@@ -10,12 +10,12 @@ export async function generateMetadata() {
       es: {
         title: "Contacto de Alex Vicente López",
         description:
-          "Contacto profesional de Alex Vicente López para proyectos freelance, oportunidades full-stack y colaboraciones digitales.",
+          "Contacto profesional de Alex Vicente López para oportunidades frontend, proyectos web freelance y colaboraciones digitales.",
       },
       en: {
         title: "Contact Alex Vicente López",
         description:
-          "Professional contact details for Alex Vicente López regarding freelance projects, full-stack roles, and digital collaborations.",
+          "Professional contact details for Alex Vicente López regarding frontend roles, freelance web projects, and digital collaborations.",
       },
     },
   });
@@ -30,8 +30,8 @@ export default function ContactPage() {
         en: "Contact Alex Vicente López",
       }}
       description={{
-        es: "Contacta con Alex Vicente López para proyectos freelance, oportunidades como desarrollador full-stack y aplicaciones web completas.",
-        en: "Contact Alex Vicente López about freelance projects, full-stack development roles, and complete web applications.",
+        es: "Contacta con Alex Vicente López para oportunidades frontend, pequeños proyectos web freelance y colaboraciones.",
+        en: "Contact Alex Vicente López about frontend roles, small freelance web projects, and collaborations.",
       }}
       sections={[
         {

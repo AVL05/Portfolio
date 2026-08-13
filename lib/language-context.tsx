@@ -25,6 +25,7 @@ interface ProjectItem {
 
 export interface TimelineItem {
   title: string;
+  contract?: string;
   institution?: string;
   company?: string;
   period: string;

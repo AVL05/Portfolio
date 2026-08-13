@@ -21,14 +21,14 @@ test("renders without horizontal overflow and switches language", async ({
   }));
   expect(viewport.scrollWidth).toBe(viewport.clientWidth);
 
-  await page.getByRole("button", { name: "Cambiar a inglés" }).click();
+  await page.getByRole("button", { name: "ES EN" }).click();
 
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
   await expect(
-    page.getByRole("button", { name: "Switch to Spanish" }),
+    page.getByRole("button", { name: "ES EN" }),
   ).toBeVisible();
   await expect(
-    page.getByText("Available for freelance projects and full-stack roles"),
+    page.getByText("Available for frontend roles and freelance projects"),
   ).toBeVisible();
   await expect(
     page.getByRole("heading", { name: "Work", exact: true }),

@@ -71,7 +71,7 @@ pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-El servidor de desarrollo usa webpack. La aplicación estará disponible en la URL indicada por Next.js.
+El servidor de desarrollo usa Turbopack para reducir la compilación inicial. La aplicación estará disponible en la URL indicada por Next.js. Para diagnosticar diferencias entre compiladores, usa `pnpm dev:webpack`.
 
 ## Comandos
 

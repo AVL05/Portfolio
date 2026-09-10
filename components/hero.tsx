@@ -1,177 +1,88 @@
 "use client";
 
-import Image from "next/image";
+import { CreativeRoomHero } from "./hero-3d/CreativeRoomHero";
 import { ArrowDown, ArrowUpRight, FileText, Mail } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap, prefersReducedMotion, useGSAP } from "@/lib/gsap";
 import { useLanguage } from "@/lib/language-context";
+import styles from "./hero.module.css";
 
 export function Hero() {
   const { language, t } = useLanguage();
   const containerRef = useRef<HTMLElement>(null);
+  const [activeChapter, setActiveChapter] = useState<"monitor" | "camera" | "mountain">("monitor");
+  const copy = t.hero.studio;
 
-  useGSAP(
-    () => {
-      const q = gsap.utils.selector(containerRef);
+  useEffect(() => {
+    const chapters = containerRef.current?.querySelectorAll<HTMLElement>("[data-studio-chapter]");
+    const observer = new IntersectionObserver(entries => {
+      const current = entries.filter(entry => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      const chapter = current?.target.getAttribute("data-studio-chapter");
+      if (chapter === "monitor" || chapter === "camera" || chapter === "mountain") setActiveChapter(chapter);
+    }, { rootMargin: "-20% 0px -45% 0px", threshold: [0, 0.15, 0.3, 0.5, 0.75, 1] });
+    chapters?.forEach(chapter => observer.observe(chapter));
+    return () => observer.disconnect();
+  }, []);
 
-      if (prefersReducedMotion()) {
-        gsap.set(q(".hero-reveal"), { autoAlpha: 1, yPercent: 0 });
-        gsap.set(q(".hero-frame"), { scale: 1 });
-        return;
-      }
+  useGSAP(() => {
+    const q = gsap.utils.selector(containerRef);
+    if (prefersReducedMotion()) return;
+    gsap.timeline({ defaults: { ease: "expo.out" } })
+      .fromTo(q(".hero-mask-line"), { yPercent: 110 }, { yPercent: 0, duration: 0.8, stagger: 0.07 })
+      .fromTo(q(".hero-reveal"), { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: 0.5, stagger: 0.04 }, "-=0.55");
+  }, { scope: containerRef });
 
-      const intro = gsap.timeline({ defaults: { ease: "expo.out" } });
-      intro
-        .fromTo(
-          q(".hero-mask-line"),
-          { yPercent: 115 },
-          { yPercent: 0, duration: 0.8, stagger: 0.07 },
-        )
-        .fromTo(
-          q(".hero-reveal"),
-          { autoAlpha: 0, y: 18 },
-          { autoAlpha: 1, y: 0, duration: 0.5, stagger: 0.05 },
-          "-=0.55",
-        )
-        .fromTo(
-          q(".hero-frame"),
-          { scale: 1.08 },
-          { scale: 1, duration: 0.95, ease: "power3.out" },
-          0,
-        );
-
-      const mm = gsap.matchMedia();
-      mm.add("(min-width: 768px)", () => {
-        gsap
-          .timeline({
-            scrollTrigger: {
-              trigger: containerRef.current,
-              start: "top top",
-              end: "bottom top",
-              scrub: 1.1,
-            },
-          })
-          .to(q(".hero-frame"), { scale: 1.14, yPercent: 7, ease: "none" }, 0)
-          .to(q(".hero-title-a"), { xPercent: -8, ease: "none" }, 0)
-          .to(q(".hero-title-b"), { xPercent: 7, ease: "none" }, 0)
-          .to(q(".hero-copy"), { yPercent: -28, autoAlpha: 0.35, ease: "none" }, 0);
-
-        const visual = q(".hero-visual")[0] as HTMLElement | undefined;
-        if (!visual) return;
-        const xTo = gsap.quickTo(visual, "x", { duration: 0.8, ease: "power3.out" });
-        const yTo = gsap.quickTo(visual, "y", { duration: 0.8, ease: "power3.out" });
-        const onPointerMove = (event: PointerEvent) => {
-          xTo((event.clientX / window.innerWidth - 0.5) * 18);
-          yTo((event.clientY / window.innerHeight - 0.5) * 14);
-        };
-        window.addEventListener("pointermove", onPointerMove, { passive: true });
-        return () => window.removeEventListener("pointermove", onPointerMove);
-      });
-
-      return () => mm.revert();
-    },
-    { scope: containerRef },
-  );
-
-  return (
-    <section
-      id="hero"
-      ref={containerRef}
-      aria-labelledby="hero-title"
-      className="hero-cinema relative min-h-[max(100dvh,48rem)] overflow-hidden bg-background"
-    >
-      <div className="hero-visual absolute inset-x-3 top-20 h-[52dvh] overflow-hidden sm:inset-x-6 sm:h-[58dvh] lg:inset-x-[31vw] lg:bottom-12 lg:top-24 lg:h-auto">
-        <div className="hero-frame absolute inset-0 will-change-transform">
-          <Image
-            src="/photography/hero.webp"
-            alt={
-              language === "es"
-                ? "Acantilados fotografiados por Alex Vicente"
-                : "Cliffs photographed by Alex Vicente"
-            }
-            fill
-            priority
-            fetchPriority="high"
-            className="object-cover object-center"
-            sizes="(max-width: 1024px) calc(100vw - 1.5rem), 38vw"
-          />
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,8,7,.08),rgba(8,8,7,.5))]" />
-        </div>
-        <div className="absolute inset-0 border border-white/14" />
-        <span className="absolute right-4 top-14 hidden bg-black/55 px-2 py-1 font-mono text-[11px] font-semibold uppercase tracking-[.16em] text-white sm:block">
-          {language === "es" ? "Fotografía de Alex Vicente" : "Photograph by Alex Vicente"}
-        </span>
-      </div>
-
-      <div className="relative z-10 mx-auto flex min-h-[max(100dvh,48rem)] max-w-[100rem] flex-col px-4 pb-6 pt-24 sm:px-6 sm:pb-8 lg:pl-8 lg:pr-20 lg:pt-28">
-        <div className="hero-reveal flex items-center justify-between gap-4 font-mono text-[11px] font-semibold uppercase tracking-[.14em] text-foreground/76">
-          <span>{t.hero.status}</span>
-          <span className="hidden items-center gap-4 md:flex">
-            <span className="text-primary">Portfolio</span>
-            <span aria-hidden="true" className="h-px w-8 bg-border" />
-            React · Next.js · TypeScript · GSAP
-          </span>
-        </div>
-
-        <h1 id="hero-title" aria-label="Alex Vicente" className="mt-[33dvh] lg:mt-auto">
-          <span className="block overflow-hidden">
-            <span className="hero-mask-line hero-title-a block whitespace-nowrap text-[18vw] font-black uppercase leading-[.72] tracking-[-.085em] text-foreground will-change-transform lg:text-[12vw]">
-              Alex
-            </span>
-          </span>
-          <span className="block overflow-hidden text-right">
-            <span className="hero-mask-line hero-title-b block whitespace-nowrap text-[18vw] font-black uppercase leading-[.76] tracking-[-.085em] text-foreground will-change-transform lg:text-[12vw]">
-              Vicente
-            </span>
-          </span>
+  return <section id="hero" ref={containerRef} aria-labelledby="hero-title" className={`hero-cinema ${styles.journey}`}>
+    <div className={styles.grid}>
+      <div id="studio-development" data-studio-chapter="monitor" className={styles.intro}>
+        <p className={`hero-reveal ${styles.status}`}><span aria-hidden="true" />{t.hero.status}</p>
+        <p className={`hero-reveal ${styles.role}`}>Frontend Developer · React / Next.js</p>
+        <h1 id="hero-title" aria-label="Alex Vicente" className={styles.title}>
+          <span className={styles.mask}><span className="hero-mask-line">Alex</span></span>
+          <span className={styles.mask}><span className="hero-mask-line">Vicente</span></span>
         </h1>
-
-        <div className="hero-copy mt-7 grid gap-7 border-t border-border/70 pt-5 will-change-transform md:grid-cols-[minmax(0,.72fr)_minmax(280px,.5fr)_auto] md:items-end">
-          <div className="hero-reveal">
-            <p className="font-mono text-[11px] font-bold uppercase tracking-[.15em] text-primary">
-              {language === "es"
-                ? "Frontend Developer · React / Next.js"
-                : "Frontend Developer · React / Next.js"}
-            </p>
-            <p className="mt-3 max-w-[58ch] text-base font-medium leading-relaxed text-foreground/76 sm:text-lg">
-              {t.hero.description}
-            </p>
-          </div>
-
-          <div className="hero-reveal flex flex-wrap gap-x-5 gap-y-3 text-xs font-semibold uppercase tracking-[.08em]">
-            <a data-cursor="external" href="https://github.com/AVL05" target="_blank" rel="noopener noreferrer" className="cinema-link">
-              <FaGithub /> GitHub
-            </a>
-            <a data-cursor="external" href="https://www.linkedin.com/in/aleviclop/" target="_blank" rel="noopener noreferrer" className="cinema-link">
-              <FaLinkedin /> LinkedIn
-            </a>
-            <a data-cursor="contact" href="mailto:alexviclop@gmail.com" className="cinema-link">
-              <Mail /> {language === "es" ? "Contacto" : "Contact"}
-            </a>
-          <a href="/cv/CV_Alex_Vicente_Lopez.pdf" download className="cinema-link">
-              <FileText /> CV
-            </a>
-          </div>
-
-          <a
-            data-cursor="project"
-            href="#projects"
-            className="hero-reveal group inline-flex min-h-12 items-center justify-between gap-8 border border-foreground bg-foreground px-5 text-xs font-bold uppercase tracking-[.12em] text-background transition-colors hover:bg-primary hover:text-primary-foreground md:min-w-52"
-          >
-            {language === "es" ? "Ver proyectos" : "View work"}
-            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+        <p className={`hero-reveal ${styles.description}`}>{t.hero.description}</p>
+        <div className={`hero-reveal ${styles.actions}`}>
+          <a data-cursor="project" href="#projects" className={styles.primary}>
+            {language === "es" ? "Ver proyectos" : "View work"}<ArrowUpRight aria-hidden="true" size={17} />
           </a>
+          <a href="/cv/CV_Alex_Vicente_Lopez.pdf" download className={styles.cv}><FileText aria-hidden="true" size={16} />CV</a>
         </div>
-
-        <div className="hero-scroll hero-reveal mt-6 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[.14em] text-muted-foreground lg:absolute lg:right-7 lg:top-1/2 lg:mt-0 lg:-translate-y-1/2 lg:flex-col lg:gap-3">
-          <ArrowDown className="h-3.5 w-3.5 lg:h-4 lg:w-4" />
-          <span className="lg:rotate-180 lg:[writing-mode:vertical-rl]">
-            {t.hero.scroll} / 01—05
-          </span>
-          <span aria-hidden="true" className="hidden h-12 w-px bg-border lg:block" />
+        <div className={`hero-reveal ${styles.socials}`}>
+          <a href="https://github.com/AVL05" target="_blank" rel="noopener noreferrer" className="cinema-link"><FaGithub aria-hidden="true" />GitHub</a>
+          <a href="https://www.linkedin.com/in/aleviclop/" target="_blank" rel="noopener noreferrer" className="cinema-link"><FaLinkedin aria-hidden="true" />LinkedIn</a>
+          <a href="mailto:alexviclop@gmail.com" className="cinema-link"><Mail aria-hidden="true" size={15} />{language === "es" ? "Contacto" : "Contact"}</a>
         </div>
       </div>
-    </section>
-  );
+
+      <div className={styles.sceneColumn}>
+        <CreativeRoomHero activeHotspot={activeChapter} />
+        <nav className={styles.chapterNav} aria-label={copy.navigation}>
+          {[
+            { id: "studio-development", hotspot: "monitor", label: copy.development },
+            { id: "studio-photography", hotspot: "camera", label: copy.photography },
+            { id: "studio-perspective", hotspot: "mountain", label: copy.perspective },
+          ].map((chapter, index) => <a key={chapter.id} href={`#${chapter.id}`} aria-current={activeChapter === chapter.hotspot ? "step" : undefined}>
+            <span aria-hidden="true">0{index + 1}</span>{chapter.label}
+          </a>)}
+        </nav>
+      </div>
+
+      <article id="studio-photography" data-studio-chapter="camera" className={styles.chapter}>
+        <p className={styles.kicker}>02 / {copy.photography}</p>
+        <h2>{copy.photoTitle}</h2>
+        <p className={styles.description}>{copy.photoDescription}</p>
+        <a className={styles.chapterLink} href="/fotografia">{copy.photoLink}<ArrowUpRight aria-hidden="true" size={17} /></a>
+      </article>
+      <article id="studio-perspective" data-studio-chapter="mountain" className={styles.chapter}>
+        <p className={styles.kicker}>03 / {copy.perspective}</p>
+        <h2>{copy.perspectiveTitle}</h2>
+        <p className={styles.description}>{copy.perspectiveDescription}</p>
+        <a className={styles.chapterLink} href="/sobre-mi">{copy.perspectiveLink}<ArrowUpRight aria-hidden="true" size={17} /></a>
+      </article>
+    </div>
+    <a href="#projects" className={styles.continue}><span>{copy.continue}</span><ArrowDown aria-hidden="true" size={18} /></a>
+  </section>;
 }

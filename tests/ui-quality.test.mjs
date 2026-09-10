@@ -59,7 +59,7 @@ test("contact form exposes localized inline validation", () => {
   assert.match(en, /"form_error_email"/);
 });
 
-test("focus, LCP image, and localized Open Graph contracts remain explicit", () => {
+test("focus, lazy 3D hero, and localized Open Graph contracts remain explicit", () => {
   const globals = read("app/globals.css");
   const hero = read("components/hero.tsx");
   const layout = read("app/layout.tsx");
@@ -67,9 +67,9 @@ test("focus, LCP image, and localized Open Graph contracts remain explicit", () 
 
   assert.match(globals, /:focus-visible/);
   assert.match(globals, /outline: 2px solid var\(--primary\)/);
-  assert.match(hero, /priority/);
-  assert.match(hero, /fetchPriority="high"/);
-  assert.match(hero, /38vw/);
+  assert.match(hero, /<CreativeRoomHero/);
+  assert.match(read("components/hero-3d/CreativeRoomHero.tsx"), /ssr: false/);
+  assert.match(read("components/hero-3d/CreativeRoomScene.tsx"), /frameloop="demand"/);
   assert.match(layout, /alternateLocale/);
   assert.match(seo, /alternateLocale/);
 });
@@ -126,7 +126,11 @@ test("the portfolio keeps the hero controls aligned and overlap-safe", () => {
 
   assert.doesNotMatch(hero, /data-portfolio|Portfolio \/ [A-Z]\d+/);
   assert.doesNotMatch(navigation, />\s*V\d+\s*</);
-  assert.match(hero, /lg:\[writing-mode:vertical-rl\]/);
+  assert.match(hero, /styles\.sceneColumn/);
+  assert.equal((hero.match(/<CreativeRoomHero\b/g) ?? []).length, 1);
+  const heroStyles = read("components/hero.module.css");
+  assert.match(heroStyles, /\.journey\s*\{[^}]*overflow: visible/);
+  assert.match(heroStyles, /\.sceneColumn\s*\{[^}]*position: sticky/);
   assert.doesNotMatch(hero, /md:bottom-7 md:left-8/);
   assert.match(languageToggle, /absolute left-1 top-1 size-9/);
   assert.match(languageToggle, /translate-x-9/);

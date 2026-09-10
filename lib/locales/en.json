@@ -11,7 +11,20 @@
     "description": "I build accessible, responsive React and Next.js interfaces connected to real APIs. Laravel, PHP, and MySQL extend my work across the stack.",
     "cta_github": "GitHub",
     "cta_linkedin": "LinkedIn",
-    "scroll": "Scroll"
+    "scroll": "Scroll",
+    "studio": {
+      "navigation": "Explore my creative space",
+      "development": "Code",
+      "photography": "Photography",
+      "perspective": "Perspective",
+      "photoTitle": "I also tell stories through images.",
+      "photoDescription": "raw.vives brings together my photography. Framing, light and composition: another way of paying attention to detail.",
+      "photoLink": "Explore raw.vives",
+      "perspectiveTitle": "Beyond the screen.",
+      "perspectiveDescription": "Mountains and photography shape the way I see. This space connects that personal side with my work as a developer.",
+      "perspectiveLink": "About me",
+      "continue": "Discover the projects"
+    }
   },
   "skills": {
     "title": "Stack",

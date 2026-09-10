@@ -114,7 +114,7 @@ export default async function RootLayout({
   return (
     <html
       lang={initialLanguage}
-      className="dark scroll-smooth overflow-x-hidden"
+      className="dark scroll-smooth overflow-x-clip"
       suppressHydrationWarning
     >
       <head>
@@ -161,7 +161,7 @@ export default async function RootLayout({
         />
       </head>
       <body
-        className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased bg-background text-foreground overflow-x-hidden`}
+        className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased bg-background text-foreground overflow-x-clip`}
         style={{ fontFeatureSettings: '"cv11", "ss01", "ss03"' }}
         suppressHydrationWarning
       >
@@ -170,7 +170,7 @@ export default async function RootLayout({
             {initialLanguage === "es" ? "Saltar al contenido" : "Skip to content"}
           </a>
           <CustomCursor />
-          <div className="relative min-h-screen overflow-x-hidden">
+          <div className="relative min-h-screen overflow-x-clip">
             <Suspense fallback={null}>{children}</Suspense>
           </div>
         </LanguageProvider>

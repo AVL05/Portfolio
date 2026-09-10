@@ -83,7 +83,7 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    overflow-x: hidden;
+    overflow-x: clip;
     width: 100%;
     position: relative;
     text-rendering: optimizeLegibility;
@@ -97,7 +97,7 @@
 
   html {
     scroll-behavior: smooth;
-    overflow-x: hidden;
+    overflow-x: clip;
     width: 100%;
   }
 
@@ -441,6 +441,12 @@
 .case-study h1,
 .case-study h2 {
   letter-spacing: -.055em;
+}
+
+.hero-cinema:has([aria-modal="true"]),
+#main-content:has(.hero-cinema [aria-modal="true"]) {
+  z-index: 200;
+  overflow: visible;
 }
 
 ::view-transition-old(root) {

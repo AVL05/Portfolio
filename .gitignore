@@ -44,3 +44,6 @@ skills-lock.json
 /public/photography/800/
 /public/photography/1200/
 /public/photography/original/
+
+# Meshy source exports stay local; the scene uses optimized copies.
+/public/hero-3d/models/

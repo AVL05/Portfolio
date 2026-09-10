@@ -1,0 +1,36 @@
+.placeholder { height: clamp(24rem, calc(100dvh - 12rem), 46rem); width: 100%; }
+.viewer { position: relative; width: 100%; height: 100%; overflow: hidden; background: radial-gradient(ellipse at 65% 35%, #302923, #171614 78%); border: 1px solid #ffffff14; border-radius: 10px; color: #f0ece6; }
+.expanded { position: fixed; inset: 0; width: 100vw; height: 100dvh; z-index: 150; border-radius: 0; }
+.caption { position: absolute; z-index: 30; top: 1rem; left: 1rem; display: flex; flex-direction: column; gap: .4rem; pointer-events: none; font-size: .75rem; letter-spacing: .08em; }
+.caption span:last-child { color: #bdb9b3; font-size: .6875rem; }
+.controls { position: absolute; z-index: 30; bottom: 2.75rem; right: 1rem; display: flex; gap: .5rem; }
+.controls button { display: grid; place-items: center; width: 44px; height: 44px; background: #171919b8; border: 1px solid #ffffff1f; border-radius: 8px; cursor: pointer; transition: background 180ms ease, border-color 180ms ease; }
+.controls button:hover { background: #302c26; border-color: #e4b48866; }
+.controls button:disabled { opacity: .4; cursor: default; }
+.controls button:focus-visible { outline: 2px solid #e4b488; outline-offset: 3px; }
+.hint { position: absolute; bottom: .9rem; right: 1rem; left: 1rem; text-align: right; font-size: .6875rem; color: #c6c1b8; pointer-events: none; }
+.fallback { position: absolute; inset: 35% 10%; text-align: center; }
+.loading { position: absolute; top: 4.5rem; left: 1rem; font-size: .75rem; color: #c6c1b8; pointer-events: none; }
+.poster, .scene { position: absolute; inset: 0; transition: opacity 420ms ease; }
+.poster { opacity: 1; pointer-events: none; }
+.poster img { object-fit: contain; }
+.poster[data-ready="true"] { opacity: 0; }
+.scene { opacity: 0; }
+.scene[data-ready="true"] { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .poster, .scene { transition: none; } }
+
+@media (min-width: 1024px) and (max-height: 720px) { .placeholder { height: clamp(18rem, calc(100dvh - 11rem), 36rem); } }
+@media (max-width: 1023px) { .placeholder { height: clamp(24rem, 58vw, 36rem); } }
+@media (max-width: 767px) { .placeholder { height: clamp(22rem, 85vw, 28rem); } .hint { font-size: .6875rem; } }
+@media (prefers-reduced-motion: reduce) { .expanded { animation: none; } }
+
+.hotspot { position: relative; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; outline-offset: 1px; }
+.hotspotMarker { width: 7px; height: 7px; border: 1px solid #ecd3b9; border-radius: 50%; background: #c8a27b; opacity: .22; transform: scale(.8); transition: opacity 220ms ease, transform 220ms ease; }
+.viewer:hover .hotspotMarker, .expanded .hotspotMarker { opacity: .55; }
+.hotspot[data-current] .hotspotMarker { opacity: .85; border-color: #f3dfc9; }
+.hotspot:hover .hotspotMarker, .hotspot:focus-visible .hotspotMarker { opacity: 1; transform: scale(1.15); }
+.hotspot:focus-visible { outline: 2px solid #e4b488; }
+.hotspotLabel { position: absolute; bottom: 42px; left: 50%; transform: translate(-50%, 3px); white-space: nowrap; padding: .45rem .65rem; border: 1px solid #ffffff20; border-radius: 6px; background: #171919; color: #f0ece6; font-size: .6875rem; opacity: 0; pointer-events: none; transition: opacity 180ms ease, transform 180ms ease; }
+.hotspot:hover .hotspotLabel, .hotspot:focus-visible .hotspotLabel { opacity: 1; transform: translate(-50%, 0); }
+@media (hover: none) { .hotspotMarker { opacity: .65; } }
+@media (prefers-reduced-motion: reduce) { .hotspotMarker, .hotspotLabel, .controls button { transition: none; } }

@@ -48,6 +48,19 @@ interface Translation {
     cta_github: string;
     cta_linkedin: string;
     scroll: string;
+    studio: {
+      navigation: string;
+      development: string;
+      photography: string;
+      perspective: string;
+      photoTitle: string;
+      photoDescription: string;
+      photoLink: string;
+      perspectiveTitle: string;
+      perspectiveDescription: string;
+      perspectiveLink: string;
+      continue: string;
+    };
   };
   skills: {
     title: string;

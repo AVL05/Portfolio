@@ -11,12 +11,12 @@ export async function generateMetadata() {
       es: {
         title: "Sobre Alex Vicente López",
         description:
-          "Perfil profesional de Alex Vicente López, Frontend Developer en Valencia centrado en React y Next.js, con experiencia full-stack y disponibilidad freelance.",
+          "Perfil profesional de Alex Vicente López, Frontend / Full-Stack Developer en Valencia centrado en React y Next.js, con experiencia full-stack y disponibilidad freelance.",
       },
       en: {
         title: "About Alex Vicente López",
         description:
-          "Professional profile of Alex Vicente López, a Valencia-based Frontend Developer focused on React and Next.js with full-stack experience and freelance availability.",
+          "Professional profile of Alex Vicente López, a Valencia-based Frontend / Full-Stack Developer focused on React and Next.js with full-stack experience and freelance availability.",
       },
     },
   });
@@ -28,10 +28,17 @@ export default function AboutPage() {
       eyebrow={{ es: "Sobre mí", en: "About" }}
       title={{ es: "Sobre Alex Vicente López", en: "About Alex Vicente López" }}
       description={{
-        es: "Alex Vicente López es Frontend Developer centrado en React y Next.js. Su formación DAW y experiencia con Laravel, PHP y MySQL le permiten integrar interfaces con APIs y datos reales.",
-        en: "Alex Vicente López is a Frontend Developer focused on React and Next.js. His web development training and Laravel, PHP, and MySQL experience support real API and data integration.",
+        es: "Alex Vicente López es Frontend / Full-Stack Developer centrado en React y Next.js. Su formación DAW y experiencia con Laravel, PHP y MySQL le permiten integrar interfaces con APIs y datos reales.",
+        en: "Alex Vicente López is a Frontend / Full-Stack Developer focused on React and Next.js. His web development training and Laravel, PHP, and MySQL experience support real API and data integration.",
       }}
       sections={[
+        {
+          title: { es: "Fuera de la pantalla", en: "Beyond the screen" },
+          body: {
+            es: "La montaña y la fotografía forman parte de mi mirada. Alex Creative Space conecta ese lado personal con el trabajo que hago como desarrollador.",
+            en: "Mountains and photography shape the way I see. Alex Creative Space connects that personal side with my work as a developer.",
+          },
+        },
         {
           title: { es: "Perfil profesional", en: "Professional profile" },
           body: {

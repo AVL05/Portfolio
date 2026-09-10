@@ -17,7 +17,7 @@ export function Navigation() {
 
   const navItems = [
     { name: language === "es" ? "Proyectos" : "Work", href: "#projects" },
-    { name: language === "es" ? "Sobre mí" : "About", href: "#about" },
+    { name: language === "es" ? "Capacidades" : "Capabilities", href: "#about" },
     { name: language === "es" ? "Experiencia" : "Experience", href: "#experience" },
     { name: language === "es" ? "Contacto" : "Contact", href: "#contact" },
   ];

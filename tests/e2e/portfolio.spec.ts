@@ -28,47 +28,20 @@ test("renders without horizontal overflow and switches language", async ({
     page.getByRole("button", { name: "ES EN" }),
   ).toBeVisible();
   await expect(
-    page.getByText("Available for frontend roles and freelance projects"),
+    page.getByText("Available for roles and freelance projects"),
   ).toBeVisible();
   await expect(
     page.getByRole("heading", { name: "Work", exact: true }),
   ).toBeVisible();
 });
 
-test("keeps the archive visible and previews work accessibly", async ({
-  page,
-}, testInfo) => {
+test("keeps secondary projects compact and accessible", async ({ page }) => {
   await page.goto("/");
-
-  const archive = page.getByRole("heading", { name: "Archivo", exact: true });
+  const archive = page.getByRole("heading", { name: "Otros proyectos", exact: true });
   await archive.scrollIntoViewIfNeeded();
   await expect(archive).toBeVisible();
-  await expect(page.locator("details")).toHaveCount(0);
-
-  if (testInfo.project.name === "desktop-chromium") {
-    const hotel = page
-      .getByRole("article")
-      .filter({
-        has: page.getByRole("heading", {
-          name: "Sistema de Gestión Hotelera (API)",
-        }),
-    });
-
-    await hotel.hover();
-    const preview = page.locator(".archive-floating-preview");
-    await expect(preview).toHaveClass(/opacity-100/);
-    await expect(preview).toContainText("Sistema de Gestión Hotelera (API)");
-
-    await page.mouse.move(8, 8);
-    await expect(preview).toHaveClass(/opacity-0/);
-  } else {
-    await expect(
-      page.getByRole("img", {
-        name: "El Fogón: Landing gastronómica",
-      }),
-    ).toBeVisible();
-    await expect(page.locator(".archive-floating-preview")).toBeHidden();
-  }
+  await expect(page.getByRole("img", { name: "El Fogón: Landing gastronómica" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Más código en GitHub" })).toHaveAttribute("href", "https://github.com/AVL05");
 });
 
 test("validates the contact form and handles a successful response", async ({

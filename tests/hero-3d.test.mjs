@@ -22,9 +22,10 @@ test("all four localized hotspots point to existing portfolio destinations", () 
     assert.ok(hotspot.position.every(Number.isFinite));
     if (destination.hash) {
       assert.equal(destination.pathname, "/");
-      assert.equal(destination.hash, "#about");
-      const skills = readFileSync(new URL("../components/skills.tsx", import.meta.url), "utf8");
-      assert.match(skills, /id="about"/);
+      const files = { "#about": "skills", "#projects": "projects", "#photography": "photography" };
+      assert.ok(files[destination.hash]);
+      const section = readFileSync(new URL("../components/" + files[destination.hash] + ".tsx", import.meta.url), "utf8");
+      assert.ok(section.includes('id="' + destination.hash.slice(1) + '"'));
     } else {
       assert.ok(existsSync(new URL(`../app${destination.pathname}/page.tsx`, import.meta.url)));
     }

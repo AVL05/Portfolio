@@ -34,11 +34,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const title =
     language === "es"
       ? SITE_TITLE
-      : "Alex Vicente López | Frontend Developer · React / Next.js";
+      : "Alex Vicente López | Frontend / Full-Stack Developer · React / Next.js";
   const description =
     language === "es"
       ? SITE_DESCRIPTION
-      : "Portfolio of Alex Vicente López, a Valencia-based Frontend Developer focused on React and Next.js, with Laravel, PHP, and MySQL experience.";
+      : "Portfolio of Alex Vicente López, a Valencia-based Frontend / Full-Stack Developer focused on React and Next.js, with Laravel, PHP, and MySQL experience.";
 
   return {
     metadataBase: new URL(SITE_URL),
@@ -129,18 +129,18 @@ export default async function RootLayout({
                 ...personJsonLd,
                 jobTitle:
                   initialLanguage === "es"
-                    ? "Frontend Developer"
-                    : "Frontend Developer",
+                    ? "Frontend / Full-Stack Developer"
+                    : "Frontend / Full-Stack Developer",
                 description:
                   initialLanguage === "es"
                     ? personJsonLd.description
-                    : "Alex Vicente López is a Frontend Developer focused on React and Next.js, with full-stack experience in Laravel, PHP, and MySQL and freelance availability.",
+                    : "Alex Vicente López is a Frontend / Full-Stack Developer focused on React and Next.js, with full-stack experience in Laravel, PHP, and MySQL and freelance availability.",
                 hasOccupation: {
                   ...personJsonLd.hasOccupation,
                   name:
                     initialLanguage === "es"
-                      ? "Frontend Developer"
-                      : "Frontend Developer",
+                      ? "Frontend / Full-Stack Developer"
+                      : "Frontend / Full-Stack Developer",
                 },
               },
               websiteJsonLd,
@@ -149,11 +149,11 @@ export default async function RootLayout({
                 name:
                   initialLanguage === "es"
                     ? profilePageJsonLd.name
-                    : "Alex Vicente López - Frontend Developer profile",
+                    : "Alex Vicente López - Frontend / Full-Stack Developer profile",
                 description:
                   initialLanguage === "es"
                     ? profilePageJsonLd.description
-                    : "Professional Frontend Developer profile of Alex Vicente López, focused on React and Next.js with supporting full-stack experience.",
+                    : "Professional Frontend / Full-Stack Developer profile of Alex Vicente López, focused on React and Next.js with supporting full-stack experience.",
                 inLanguage: initialLanguage,
               },
             ]),

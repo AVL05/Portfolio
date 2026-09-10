@@ -82,8 +82,8 @@ La imagen usa sRGB y recorte proporcional centrado. Una imagen que falla vuelve 
 
 `roomHotspots` concentra posiciones, `href` y etiquetas ES/EN:
 
-- monitor: `/proyectos`;
-- cámara: `/fotografia`, donde se presenta raw.vives;
+- monitor: `/#projects`;
+- cámara: `/#photography`, selección editorial y enlace a raw.vives;
 - PC: `/#about`, sección existente de capacidades;
 - ventana: `/sobre-mi`.
 
@@ -103,11 +103,11 @@ Pendiente de revisión en navegador: ajuste de pantalla, posibles solapamientos 
 
 ### Integración con el scroll de la portada
 
-`components/hero.tsx` presenta tres capítulos: código, fotografía y perspectiva. Desde 1024px, un único visor permanece sticky junto al texto y termina su recorrido antes de los proyectos. Por debajo, el visor vuelve al flujo normal, sin fijar la escena ni bloquear la lectura.
+La hero usa una única composición: copy HTML y dos CTA a la izquierda, Alex Creative Space a la derecha. Por debajo de 1024px el texto precede al visor en flujo normal. Ya no hay capítulos sticky que retrasen los proyectos.
 
-`components/hero.module.css` controla columnas, altura de capítulos, separación superior y breakpoint. Los contenedores del recorrido permiten el sticky; el recorte horizontal de la página usa `overflow-x: clip` para no crear un contenedor de scroll intermedio. Los textos están en `hero.studio` de ambos diccionarios de `lib/locales/`.
+Los cuatro enlaces bajo la escena reutilizan los destinos de roomHotspots y siguen disponibles si WebGL falla. Hover y foco destacan el hotspot correspondiente. El monitor conserva la captura real existente, sustituible desde monitorScreenConfig.texture.
 
-Un IntersectionObserver selecciona el capítulo visible y destaca discretamente su hotspot. No mueve la cámara, no añade Canvas ni un bucle de animación; mantiene la configuración de modelos y el modo expandido existentes. Revisar visualmente el recorrido, la expansión desde cada capítulo y el encuadre en escritorio y móvil antes de publicar.
+Desde 1024px y sin reducción de movimiento, ScrollTrigger desplaza la capa visual hasta un 5%, reduce su escala al 96% y su opacidad al 90%. No hay pinning ni scroll-jacking. El modo expandido revierte ese movimiento: ningún ancestro del diálogo tiene transformaciones. Los valores están centralizados en roomInteractionConfig y el contexto se limpia al cambiar de modo o desmontar.
 
 ### Imagen previa y verificación visual
 

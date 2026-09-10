@@ -9,9 +9,11 @@ import en from "./locales/en.json";
 
 export type Language = "es" | "en";
 
-interface ProjectItem {
+export interface ProjectItem {
   title: string;
   description: string;
+  summary: string;
+  evidence: string[];
   image: string;
   technologies: string[];
   category: string;
@@ -49,20 +51,13 @@ interface Translation {
     cta_linkedin: string;
     scroll: string;
     studio: {
+      destinations: Record<"monitor" | "camera" | "pc" | "mountain", string>;
       navigation: string;
-      development: string;
-      photography: string;
-      perspective: string;
-      photoTitle: string;
-      photoDescription: string;
-      photoLink: string;
-      perspectiveTitle: string;
-      perspectiveDescription: string;
-      perspectiveLink: string;
       continue: string;
     };
   };
   skills: {
+    groups: { area: string; stack: string[] }[];
     title: string;
     subtitle: string;
     desc: string;
@@ -80,6 +75,10 @@ interface Translation {
     cv_btn: string;
     education_list: TimelineItem[];
     experience_list: TimelineItem[];
+  };
+  currently: {
+    title: string;
+    items: { label: string; value: string; href: string }[];
   };
   projects: {
     title: string;
@@ -154,7 +153,8 @@ export function LanguageProvider({
   const router = useRouter();
 
   useEffect(() => {
-    const saved = localStorage.getItem("language") as Language;
+    let saved: string | null = null;
+    try { saved = localStorage.getItem("language"); } catch { /* Storage may be disabled. Keep the SSR locale. */ }
     if (saved && (saved === "es" || saved === "en")) {
       setLanguage(saved);
       document.documentElement.lang = saved;
@@ -166,7 +166,7 @@ export function LanguageProvider({
           body: JSON.stringify({ language: saved }),
         }).then((response) => {
           if (response.ok) router.refresh();
-        });
+        }).catch(() => { /* The current choice remains usable offline. */ });
       }
     }
   }, [initialLanguage, router]);
@@ -190,14 +190,14 @@ export function LanguageProvider({
       updateLanguage();
     }
 
-    localStorage.setItem("language", lang);
+    try { localStorage.setItem("language", lang); } catch { /* Cookie persistence can still succeed. */ }
     void fetch("/api/language", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ language: lang }),
     }).then((response) => {
       if (response.ok) router.refresh();
-    });
+    }).catch(() => { /* Keep the selected language when the network is unavailable. */ });
   };
 
   return (

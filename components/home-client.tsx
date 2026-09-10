@@ -4,6 +4,7 @@ import dynamicLoader from "next/dynamic";
 import { Navigation } from "@/components/navigation";
 import { Hero } from "@/components/hero";
 import type { ReactNode } from "react";
+import { Currently } from "@/components/currently";
 
 const Skills = dynamicLoader(() =>
   import("@/components/skills").then((mod) => mod.Skills),
@@ -32,6 +33,7 @@ export function HomeClient({ children }: { children?: ReactNode }) {
         <Skills />
         <Experience />
         <Photography />
+        <Currently />
         <Contact />
         {children}
       </main>

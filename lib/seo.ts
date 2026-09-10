@@ -3,9 +3,9 @@ export const SITE_URL =
 
 export const SITE_NAME = "Alex Vicente López";
 export const SITE_TITLE =
-  "Alex Vicente López | Frontend Developer · React / Next.js";
+  "Alex Vicente López | Frontend / Full-Stack Developer · React / Next.js";
 export const SITE_DESCRIPTION =
-  "Portfolio de Alex Vicente López, Frontend Developer en Valencia especializado en React y Next.js, con experiencia en Laravel, PHP y MySQL.";
+  "Portfolio de Alex Vicente López, Frontend / Full-Stack Developer en Valencia especializado en React y Next.js, con experiencia en Laravel, PHP y MySQL.";
 
 export const SEO_KEYWORDS = [
   "Alex Vicente López",
@@ -138,9 +138,9 @@ export const personJsonLd = {
   alternateName: ["Alex Vicente", "Alex Vicente Lopez", "aleviclop", "AVL05"],
   url: SITE_URL,
   email: "mailto:alexviclop@gmail.com",
-  jobTitle: "Frontend Developer",
+  jobTitle: "Frontend / Full-Stack Developer",
   description:
-    "Alex Vicente López es Frontend Developer especializado en React y Next.js, con capacidad full-stack en Laravel, PHP y MySQL y disponibilidad freelance.",
+    "Alex Vicente López es Frontend / Full-Stack Developer especializado en React y Next.js, con capacidad full-stack en Laravel, PHP y MySQL y disponibilidad freelance.",
   image: `${SITE_URL}/api/og?lang=es`,
   sameAs: SAME_AS,
   knowsAbout: [
@@ -158,7 +158,7 @@ export const personJsonLd = {
   ],
   hasOccupation: {
     "@type": "Occupation",
-    name: "Frontend Developer",
+    name: "Frontend / Full-Stack Developer",
     skills:
       "React, Next.js, TypeScript, JavaScript, Tailwind CSS, accesibilidad, diseño de interfaces, Laravel, PHP, MySQL",
   },

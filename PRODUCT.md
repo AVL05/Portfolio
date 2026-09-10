@@ -10,7 +10,7 @@ Responsables de contratación, recruiters y equipos de producto que buscan un pe
 
 ## Product Purpose
 
-Presentar a Alex Vicente López como Frontend Developer centrado en React y Next.js, con capacidad full-stack como fortaleza secundaria. El portfolio debe convertir una visita breve en interés por una entrevista mediante casos verificables, una dirección de arte memorable y una propuesta profesional inequívoca.
+Presentar a Alex Vicente López como Frontend / Full-Stack Developer centrado en React y Next.js, con especialización principal en React y Next.js. El portfolio debe convertir una visita breve en interés por una entrevista mediante casos verificables, una dirección de arte memorable y una propuesta profesional inequívoca.
 
 ## Brand Personality
 
@@ -25,7 +25,7 @@ Precisa, creativa y resolutiva. La experiencia debe transmitir curiosidad visual
 
 ## Design Principles
 
-- Frontend como propuesta principal; Laravel, PHP y MySQL como capacidad complementaria demostrada.
+- Especialización en React y Next.js; desarrollo full-stack demostrado con Laravel, PHP y MySQL.
 - Mostrar decisiones y resultados antes que listas de tecnologías.
 - Mantener cuatro proyectos destacados y un archivo secundario. Un proyecto nuevo solo entra si supera a uno de los cuatro; un producto frontend fuerte puede sustituir al Llibret, mientras raw.vives permanece como caso estratégico.
 - Resolver cada caso de estudio con contexto, problema, responsabilidad, construcción y resultado verificable, sin convertirlo en documentación extensa.

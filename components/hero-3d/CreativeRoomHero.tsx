@@ -5,10 +5,11 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Maximize2, Minimize2, RotateCcw } from "lucide-react";
 import { useFullFocus } from "./useFullFocus";
-import { roomPreviewConfig, type RoomHotspotId } from "./roomSceneConfig";
+import { roomPreviewConfig, roomInteractionConfig, type RoomHotspotId } from "./roomSceneConfig";
 import { Component, useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { useLanguage } from "@/lib/language-context";
 import styles from "./creative-room.module.css";
+import { gsap, useGSAP } from "@/lib/gsap";
 
 const Scene = dynamic(() => import("./CreativeRoomScene"), { ssr: false });
 class SceneBoundary extends Component<{ children: ReactNode; onError: () => void }, { failed: boolean }> {
@@ -37,6 +38,21 @@ export function CreativeRoomHero({ activeHotspot = "monitor" }: { activeHotspot?
   const [compact, setCompact] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(true);
   const { expanded, busy, expand, minimize } = useFullFocus(root, frame, reducedMotion);
+  useGSAP(() => {
+    if (expanded) return;
+    const media = gsap.matchMedia();
+    media.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
+      // Animate only the visual layers: transforming a dialog ancestor breaks fixed positioning.
+      gsap.to(root.current?.querySelectorAll("[data-room-visual]") ?? [], {
+        scale: roomInteractionConfig.scrollScale,
+        yPercent: roomInteractionConfig.scrollYPercent,
+        opacity: roomInteractionConfig.scrollOpacity,
+        ease: "none",
+        scrollTrigger: { trigger: frame.current, start: "top top", end: "bottom top", scrub: 0.5 },
+      });
+    });
+    return () => media.revert();
+  }, { scope: root, dependencies: [expanded], revertOnUpdate: true });
   useEffect(() => {
     if (!expanded && pendingHref.current) {
       const href = pendingHref.current;
@@ -90,13 +106,14 @@ export function CreativeRoomHero({ activeHotspot = "monitor" }: { activeHotspot?
     <div ref={root} className={`${styles.viewer} ${expanded ? styles.expanded : ""}`} role={expanded ? "dialog" : "region"}
       aria-modal={expanded || undefined} aria-label="Alex Creative Space">
       <div className={styles.caption}><span>Alex Creative Space</span><span>{es ? "Desarrollo · Fotografía · Montaña" : "Development · Photography · Mountains"}</span></div>
-      <div className={styles.poster} data-ready={ready} aria-hidden="true">
+      <div data-room-visual className={styles.visual}><div className={styles.poster} data-ready={ready} aria-hidden="true">
         <Image src={roomPreviewConfig.src} alt="" fill sizes="(min-width: 1024px) 60vw, 100vw" preload unoptimized />
       </div>
       <div className={styles.scene} data-ready={ready} inert={!ready} aria-hidden={!ready}>
       <SceneBoundary onError={onUnavailable}>
         {active && <Scene expanded={expanded} reset={reset} compact={compact} reducedMotion={reducedMotion} language={language} onNavigate={navigate} activeHotspot={activeHotspot} onReady={onReady} onUnavailable={onUnavailable} />}
       </SceneBoundary>
+      </div>
       </div>
       {!ready && <p className={styles.loading} role="status">{failed
         ? (es ? "Vista previa · El estudio 3D no está disponible" : "Preview · The 3D studio is unavailable")

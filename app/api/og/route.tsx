@@ -2,10 +2,10 @@ import { ImageResponse } from "next/og";
 
 const translations = {
   es: {
-    subtitle: "Frontend Developer · React / Next.js",
+    subtitle: "Frontend / Full-Stack Developer · React / Next.js",
   },
   en: {
-    subtitle: "Frontend Developer · React / Next.js",
+    subtitle: "Frontend / Full-Stack Developer · React / Next.js",
   },
 };
 
@@ -63,9 +63,11 @@ export async function GET(request: Request) {
           </div>
           <div
             style={{
-              fontSize: 30,
+              fontSize: 24,
+              maxWidth: 900,
+              textAlign: "center",
               color: "#888",
-              letterSpacing: "0.1em",
+              letterSpacing: "0.03em",
               textTransform: "uppercase",
             }}
           >

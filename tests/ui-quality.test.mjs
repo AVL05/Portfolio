@@ -130,35 +130,25 @@ test("the portfolio keeps the hero controls aligned and overlap-safe", () => {
   assert.equal((hero.match(/<CreativeRoomHero\b/g) ?? []).length, 1);
   const heroStyles = read("components/hero.module.css");
   assert.match(heroStyles, /\.journey\s*\{[^}]*overflow: visible/);
-  assert.match(heroStyles, /\.sceneColumn\s*\{[^}]*position: sticky/);
+  assert.match(heroStyles, /\.sceneColumn\s*\{[^}]*position: relative/);
   assert.doesNotMatch(hero, /md:bottom-7 md:left-8/);
   assert.match(languageToggle, /absolute left-1 top-1 size-9/);
   assert.match(languageToggle, /translate-x-9/);
 });
 
-test("secondary work uses a pointer-following preview without hiding touch media", () => {
+test("secondary work stays compact with visible media and real destinations", () => {
   const projects = read("components/projects.tsx");
-  const es = read("lib/locales/es.json");
-  const en = read("lib/locales/en.json");
-
-  assert.doesNotMatch(projects, /<details|<summary|archiveOpen/);
-  assert.match(projects, /archive-floating-preview/);
-  assert.match(projects, /onMouseEnter=\{\(event\) => \{/);
-  assert.match(projects, /onMouseMove=\{\(event\) =>/);
-  assert.match(projects, /onMouseLeave=\{\(\) => setHoveredArchiveIndex\(null\)\}/);
-  assert.match(projects, /positionArchivePreview/);
-  assert.match(projects, /gsap\.quickTo\(preview, "x"/);
-  assert.match(projects, /archive-inline-media/);
-  assert.match(projects, /motion-reduce:transition-none/);
-  assert.match(projects, /aria-hidden="true"/);
+  assert.match(projects, /Otros proyectos/);
+  assert.match(projects, /More experiments/);
+  assert.match(projects, /md:grid-cols-3/);
+  assert.match(projects, /project.summary/);
   assert.match(projects, /Ver código/);
   assert.match(projects, /View code/);
   assert.match(projects, /Proyecto privado/);
-  assert.match(projects, /Private project/);
-  assert.doesNotMatch(es, /github\.com\/AVL05\/PRWEB02/);
-  assert.doesNotMatch(en, /github\.com\/AVL05\/PRWEB02/);
-  assert.doesNotMatch(projects, /onFocusCapture/);
-  assert.doesNotMatch(projects, /\{ scale: 1\.12 \}/);
+  assert.doesNotMatch(projects, /archive-floating-preview|onMouseMove|quickTo/);
+  for (const locale of ["es", "en"]) {
+    assert.doesNotMatch(read("lib/locales/" + locale + ".json"), /github\.com\/AVL05\/PRWEB02/);
+  }
 });
 
 test("the recruiter view keeps exactly four featured projects plus an archive", () => {

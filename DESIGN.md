@@ -59,7 +59,7 @@ La identidad rechaza los portfolios tecnológicos genéricos construidos como un
 
 **Key Characteristics:**
 
-- Frontend React/Next.js y orientado a casos reales, con capacidad full-stack secundaria.
+- Frontend React/Next.js y orientado a casos reales, y capacidad full-stack demostrada.
 - Carbón y marfil con un único acento cobre controlado.
 - Tipografía de gran escala compensada con texto cómodo y directo.
 - Movimiento expresivo, siempre opcional mediante reducción de movimiento.
@@ -125,11 +125,11 @@ La profundidad se construye principalmente con contraste tonal y bordes. Las som
 
 ### Navigation
 
-Barra persistente compacta, con sección activa reconocible, acceso inmediato al CV e idioma. En móvil se convierte en un diálogo de navegación con cierre por teclado.
+Barra persistente compacta, con sección activa reconocible, acceso secundario al CV e idioma. En móvil se convierte en un diálogo de navegación con cierre por teclado.
 
 ### Project Scenes
 
-Cuatro proyectos principales se muestran como escenas amplias con imagen, rol, stack y enlaces. En escritorio, máscara, escala y movimiento tipográfico responden al scroll; en móvil se convierten en bloques naturales sin parallax. El resto vive en un archivo editorial compacto.
+Cuatro proyectos principales se muestran como escenas amplias con imagen, rol, stack y enlaces. Una entrada discreta acompaña cada proyecto, sin parallax continuo. El resto vive en un archivo editorial compacto.
 
 ## Do's and Don'ts
 

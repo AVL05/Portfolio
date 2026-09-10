@@ -1,5 +1,6 @@
 .placeholder { height: clamp(24rem, calc(100dvh - 12rem), 46rem); width: 100%; }
-.viewer { position: relative; width: 100%; height: 100%; overflow: hidden; background: radial-gradient(ellipse at 65% 35%, #302923, #171614 78%); border: 1px solid #ffffff14; border-radius: 10px; color: #f0ece6; }
+.viewer { position: relative; width: 100%; height: 100%; overflow: hidden; background: #171614; border-radius: 10px; color: #f0ece6; }
+.visual { position: absolute; inset: 0; }
 .expanded { position: fixed; inset: 0; width: 100vw; height: 100dvh; z-index: 150; border-radius: 0; }
 .caption { position: absolute; z-index: 30; top: 1rem; left: 1rem; display: flex; flex-direction: column; gap: .4rem; pointer-events: none; font-size: .75rem; letter-spacing: .08em; }
 .caption span:last-child { color: #bdb9b3; font-size: .6875rem; }

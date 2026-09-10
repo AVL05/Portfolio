@@ -72,8 +72,8 @@ export const roomCameraConfig = {
   minAzimuthAngle: number; maxAzimuthAngle: number; focusMinDistance: number;
 };
 export const roomHotspots = {
-  monitor: { position: [-0.15, 1.7, -1.02], href: "/proyectos", label: { es: "Explorar proyectos", en: "Explore projects" } },
-  camera: { position: [-0.95, 1.4, -0.72], href: "/fotografia", label: { es: "Fotografía · raw.vives", en: "Photography · raw.vives" } },
+  monitor: { position: [-0.15, 1.7, -1.02], href: "/#projects", label: { es: "Explorar proyectos", en: "Explore projects" } },
+  camera: { position: [-0.95, 1.4, -0.72], href: "/#photography", label: { es: "Fotografía · raw.vives", en: "Photography · raw.vives" } },
   pc: { position: [1.02, 1.7, -0.83], href: "/#about", label: { es: "Stack y desarrollo", en: "Stack and development" } },
   mountain: { position: [2.4, 1.9, 0], href: "/sobre-mi", label: { es: "Sobre mí y mi creatividad", en: "About me and my creativity" } },
 } satisfies Record<string, { position: Vector3Tuple; href: string; label: { es: string; en: string } }>;
@@ -92,6 +92,7 @@ export const monitorScreenConfig: {
 };
 
 export const roomInteractionConfig = {
+  scrollScale: 0.96, scrollYPercent: 5, scrollOpacity: 0.9,
   roomParallax: 0.0125, roomDamping: 7,
   lampVariation: 0.004, lampFrequency: 0.5,
   cameraDuration: 0.85, orbitDamping: 0.07, rotateSpeed: 0.38, zoomSpeed: 0.45,

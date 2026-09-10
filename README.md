@@ -1,6 +1,6 @@
 # Alex Vicente López — Portfolio
 
-Portfolio profesional de [Alex Vicente López](https://www.aleviclop.dev), Frontend Developer centrado en React y Next.js, con experiencia en Laravel, PHP y MySQL y disponibilidad freelance en Valencia. Presenta casos de estudio, experiencia profesional y trabajo fotográfico mediante una experiencia bilingüe y accesible.
+Portfolio profesional de [Alex Vicente López](https://www.aleviclop.dev), Frontend / Full-Stack Developer centrado en React y Next.js, con experiencia en Laravel, PHP y MySQL y disponibilidad freelance en Valencia. Presenta casos de estudio, experiencia profesional y trabajo fotográfico mediante una experiencia bilingüe y accesible.
 
 [Ver portfolio](https://www.aleviclop.dev) · [Explorar raw.vives](https://rawvives.aleviclop.dev) · [GitHub](https://github.com/AVL05) · [LinkedIn](https://www.linkedin.com/in/aleviclop/)
 

@@ -44,8 +44,9 @@ test("known mixed-language surfaces select copy from the active language", () =>
   const legal = read("components/legal-page-content.tsx");
   const og = read("app/api/og/route.tsx");
 
-  assert.match(hero, /Frontend Developer/);
-  assert.match(hero, /React \/ Next\.js/);
+  assert.match(hero, /Frontend \/ Full-Stack Developer/);
+  assert.match(es.hero.description, /React \/ Next\.js/);
+  assert.match(en.hero.description, /React \/ Next\.js/);
   assert.match(photography, /Otra/);
   assert.match(photography, /See/);
   assert.match(projects, /Proyectos seleccionados/);
@@ -54,7 +55,7 @@ test("known mixed-language surfaces select copy from the active language", () =>
   assert.match(seoShell, /useLanguage/);
   assert.match(legal, /Aviso legal/);
   assert.match(legal, /Legal notice/);
-  assert.match(og, /Frontend Developer/);
+  assert.match(og, /Frontend \/ Full-Stack Developer/);
 });
 
 test("language changes update document language and use an accessible transition", () => {
@@ -65,13 +66,13 @@ test("language changes update document language and use an accessible transition
   assert.match(context, /prefers-reduced-motion/);
 });
 
-test("public positioning leads with frontend and keeps full-stack as supporting capability", () => {
+test("public positioning includes full-stack and preserves React and Next.js specialization", () => {
   const layout = read("app/layout.tsx");
   const seo = read("lib/seo.ts");
   const about = read("app/sobre-mi/page.tsx");
   const publicPositioning = [layout, seo, about, JSON.stringify(es), JSON.stringify(en)].join("\n");
 
-  assert.match(publicPositioning, /Frontend Developer/);
+  assert.match(publicPositioning, /Frontend \/ Full-Stack Developer/);
   assert.match(publicPositioning, /React/);
   assert.match(publicPositioning, /Next\.js/);
   assert.match(publicPositioning, /Laravel/);

@@ -7,36 +7,66 @@
     "contact": "Contacto"
   },
   "hero": {
-    "status": "Disponible para oportunidades frontend y proyectos freelance · Valencia / remoto",
-    "description": "Construyo interfaces React y Next.js accesibles, responsive y conectadas a APIs reales. Laravel, PHP y MySQL completan mi capacidad full-stack.",
+    "status": "Disponible para oportunidades y proyectos freelance",
+    "description": "Interfaces cuidadas con React / Next.js. Del diseño a la API, con atención a cada detalle.",
     "cta_github": "GitHub",
     "cta_linkedin": "LinkedIn",
     "scroll": "Desplazar",
     "studio": {
       "navigation": "Recorrido por mi espacio creativo",
-      "development": "Código",
-      "photography": "Fotografía",
-      "perspective": "Perspectiva",
-      "photoTitle": "También cuento historias con imágenes.",
-      "photoDescription": "En raw.vives reúno mi trabajo fotográfico. Encuadre, luz y composición: otra forma de prestar atención a los detalles.",
-      "photoLink": "Explorar raw.vives",
-      "perspectiveTitle": "Fuera de la pantalla.",
-      "perspectiveDescription": "La montaña y la fotografía forman parte de mi mirada. Este espacio conecta ese lado personal con el trabajo que hago como desarrollador.",
-      "perspectiveLink": "Conocer mi perfil",
-      "continue": "Descubrir los proyectos"
+      "continue": "Descubrir los proyectos",
+      "destinations": {
+        "monitor": "Proyectos",
+        "camera": "Fotografía",
+        "pc": "Capacidades",
+        "mountain": "Perspectiva"
+      }
     }
   },
   "skills": {
     "title": "Tecnologías",
     "subtitle": "Cómo construyo interfaces",
-    "desc": "Frontend con React y Next.js, accesibilidad y diseño de interfaces; backend como capacidad complementaria.",
+    "desc": "Una interfaz clara, una base mantenible y una entrega cuidada.",
     "technologies": "Tecnologías",
-    "tools": "Herramientas"
+    "tools": "Herramientas",
+    "groups": [
+      {
+        "area": "Desarrollo",
+        "stack": [
+          "React",
+          "Next.js",
+          "TypeScript",
+          "Laravel",
+          "PHP",
+          "MySQL",
+          "APIs"
+        ]
+      },
+      {
+        "area": "Diseño e interacción",
+        "stack": [
+          "Tailwind",
+          "GSAP",
+          "Accesibilidad",
+          "UI responsive"
+        ]
+      },
+      {
+        "area": "Construcción y entrega",
+        "stack": [
+          "Git",
+          "Docker",
+          "CI/CD",
+          "Vercel",
+          "Testing"
+        ]
+      }
+    ]
   },
   "projects": {
     "title": "Proyectos",
     "subtitle": "Interfaces con intención.",
-    "desc": "Cuatro trabajos destacados donde la interfaz, la arquitectura y los flujos reales se pueden revisar con contexto y resultados verificables.",
+    "desc": "Interfaces, productos y diseño editorial. Cuatro formas de convertir una idea en algo tangible.",
     "concept": "Detalle del proyecto",
     "view_live": "Ver demo",
     "view_code": "Ver código",
@@ -60,33 +90,53 @@
         "caseStudyHref": "/proyectos/raw-vives",
         "type": "Archivo fotográfico editorial",
         "role": "Diseñé e implementé la interfaz, arquitectura, curación, interacción, accesibilidad, SEO localizado y CI/CD.",
-        "outcome": "Archivo bilingüe publicado con fichas individuales, series curadas, navegación por teclado, SEO localizado, tests y despliegue estático en Cloudflare Workers."
+        "outcome": "Archivo bilingüe publicado con fichas individuales, series curadas, navegación por teclado, SEO localizado, tests y despliegue estático en Cloudflare Workers.",
+        "summary": "Archivo fotográfico editorial bilingüe.",
+        "evidence": [
+          "ES / EN",
+          "Despliegue estático",
+          "CI/CD"
+        ]
       },
       {
         "title": "LumaFlow Studio",
         "description": "Plataforma full-stack para gestionar el flujo de un estudio fotográfico: clientes, sesiones, calendario, presupuestos, facturas, galerías y asistencia local con IA.",
         "image": "/projects/lumaflow-studio-cover.svg",
-        "technologies": ["React 19", "Laravel 13", "MySQL", "Sanctum", "WebGPU", "PWA"],
+        "technologies": [
+          "React 19",
+          "Laravel 13",
+          "MySQL",
+          "Sanctum",
+          "WebGPU",
+          "PWA"
+        ],
         "category": "Desarrollo Web",
         "github": "https://github.com/AVL05/lumaflow-studio",
         "caseStudyHref": "/proyectos/lumaflow-studio",
         "type": "Producto full-stack / PWA",
         "role": "Diseñé e implementé frontend, API, autenticación, modelo multiusuario, flujos de negocio, IA local y documentación técnica.",
-        "outcome": "Release reproducible de portfolio con 56 tests backend y 33 frontend, Docker, CI y una arquitectura documentada."
+        "outcome": "Release reproducible de portfolio con 56 tests backend y 33 frontend, Docker, CI y una arquitectura documentada.",
+        "summary": "Plataforma full-stack para estudios de fotografía.",
+        "evidence": [
+          "56 tests backend",
+          "33 tests frontend",
+          "Docker",
+          "CI"
+        ]
       },
       {
         "title": "Distrito Gourmet",
         "description": "Aplicación full-stack de restaurante con carta digital, carrito, reservas, pedidos y paneles operativos para administración, sala y cocina.",
         "image": "/projects/distrito-gourmet-ui.webp",
         "technologies": [
-          "Vite",
-          "Tailwind CSS",
-          "GSAP",
           "React",
-          "JavaScript",
           "Laravel",
           "MySQL",
-          "Docker"
+          "Tailwind CSS",
+          "GSAP",
+          "Docker",
+          "Vite",
+          "JavaScript"
         ],
         "category": "Desarrollo Web",
         "link": "https://distrito.aleviclop.dev/",
@@ -94,52 +144,84 @@
         "caseStudyHref": "/proyectos/distrito-gourmet",
         "type": "Aplicación full-stack",
         "role": "Construí la interfaz React, la conecté con Laravel y trabajé los flujos de administración, reservas y pedidos.",
-        "outcome": "Demo completa con operaciones reales de restaurante: menú, carrito, reservas, administración y despliegue público."
+        "outcome": "Demo completa con operaciones reales de restaurante: menú, carrito, reservas, administración y despliegue público.",
+        "summary": "Carta, reservas y pedidos para un restaurante.",
+        "evidence": [
+          "Demo pública",
+          "Reservas y pedidos"
+        ]
       },
       {
         "title": "El Fogón: Landing gastronómica",
         "description": "Landing para restaurante mediterráneo desarrollada con HTML5 y Tailwind CSS. Trabajé dirección de arte, jerarquía de contenido, responsive y navegación sencilla.",
         "image": "/projects/el-fogon.png",
-        "technologies": ["HTML5", "Tailwind CSS", "JavaScript", "Vite"],
+        "technologies": [
+          "HTML5",
+          "Tailwind CSS",
+          "JavaScript",
+          "Vite"
+        ],
         "category": "Desarrollo Web",
         "type": "Landing page",
         "role": "Definí la jerarquía, estructura responsive, navegación y composición de una landing gastronómica clara.",
-        "outcome": "Página ligera y directa para presentar carta, identidad y llamada a reserva sin complejidad innecesaria."
+        "outcome": "Página ligera y directa para presentar carta, identidad y llamada a reserva sin complejidad innecesaria.",
+        "summary": "Landing para un restaurante mediterráneo.",
+        "evidence": []
       },
       {
         "title": "Sistema de Gestión Hotelera (API)",
         "description": "API para gestionar reservas y datos de hotel con PHP, MySQL y JavaScript. Trabajé estructura de base de datos, endpoints, validación y flujo principal de gestión.",
         "image": "/projects/api-hotel-cover.png",
-        "technologies": ["PHP", "CSS", "JavaScript"],
+        "technologies": [
+          "PHP",
+          "CSS",
+          "JavaScript"
+        ],
         "category": "Desarrollo Web",
         "link": "/projects/Demo_API_Hotel.mp4",
         "github": "https://github.com/avl05/API_Hotel",
         "type": "Backend / API",
         "role": "Diseñé la base de datos, endpoints principales, validaciones y flujo de gestión de reservas.",
-        "outcome": "API funcional para consultar, crear y gestionar datos hoteleros con una estructura mantenible."
+        "outcome": "API funcional para consultar, crear y gestionar datos hoteleros con una estructura mantenible.",
+        "summary": "API para reservas y gestión hotelera.",
+        "evidence": []
       },
       {
         "title": "E-commerce navideño",
         "description": "Aplicación de comercio electrónico estacional hecha con Vue y Vite. Incluye navegación por categorías, carrito, gestión de estado y flujo completo de compra.",
         "image": "/projects/aitanamora.png",
-        "technologies": ["Vue", "Vite"],
+        "technologies": [
+          "Vue",
+          "Vite"
+        ],
         "category": "Desarrollo Web",
         "link": "https://aitanamora.vercel.app/",
         "github": "https://github.com/AVL05/Dulces",
         "type": "E-commerce",
         "role": "Implementé navegación por categorías, carrito y gestión de estado en una experiencia de compra estacional.",
-        "outcome": "Flujo de compra navegable y desplegado, útil para demostrar interacción, estado y estructura frontend."
+        "outcome": "Flujo de compra navegable y desplegado, útil para demostrar interacción, estado y estructura frontend.",
+        "summary": "Tienda estacional con categorías y carrito.",
+        "evidence": []
       },
       {
         "title": "Llibret Falla el Molí 24/25",
         "description": "Diseño editorial de una publicación de más de 100 páginas. Definí la dirección de arte y trabajé composición, tipografía y preparación de originales con herramientas Adobe.",
         "image": "/projects/Falla.svg",
-        "technologies": ["InDesign", "Photoshop", "Illustrator"],
+        "technologies": [
+          "InDesign",
+          "Photoshop",
+          "Illustrator"
+        ],
         "category": "Diseño Gráfico",
         "link": "/projects/LLIBRET 24-25.pdf",
         "type": "Diseño editorial",
         "role": "Trabajé dirección de arte, composición editorial, tipografía y preparación de originales.",
-        "outcome": "Publicación extensa y coherente que demuestra composición y criterio tipográfico aplicables a interfaces web."
+        "outcome": "Publicación extensa y coherente que demuestra composición y criterio tipográfico aplicables a interfaces web.",
+        "summary": "Dirección de arte y diseño de una publicación fallera.",
+        "evidence": [
+          "Más de 100 páginas",
+          "Arte final"
+        ]
       }
     ]
   },
@@ -154,7 +236,7 @@
   "experience": {
     "title": "03 / Experiencia",
     "subtitle": "Trabajo real y base técnica.",
-    "desc": "Experiencia en empresa desarrollando interfaces React, integraciones con PHP, aplicaciones Electron y resolución de incidencias, respaldada por formación DAW y sistemas.",
+    "desc": "Desarrollo en empresa, soporte técnico y formación en aplicaciones web y sistemas.",
     "edu_title": "Formación Académica",
     "job_title": "Experiencia Profesional",
     "cv_title": "¿Necesitas más detalle?",
@@ -206,8 +288,8 @@
   },
   "contact": {
     "title": "Contacto",
-    "subtitle": "/ Hablemos",
-    "desc": "Disponible para oportunidades frontend, pequeños proyectos web freelance y colaboraciones donde aportar React, Next.js y capacidad de integración full-stack.",
+    "subtitle": "¿Tienes una idea? Hablemos.",
+    "desc": "Cuéntame qué quieres construir o qué necesita tu equipo.",
     "form_name": "Tu nombre",
     "form_email": "Tu email",
     "form_message": "Tu mensaje",
@@ -222,9 +304,29 @@
     "form_error_email": "Introduce un email válido, por ejemplo nombre@empresa.com.",
     "form_error_message": "Escribe un mensaje de al menos 20 caracteres.",
     "links_title": "Enlaces directos",
-    "availability_title": "Disponible para frontend, freelance y colaboraciones",
-    "availability_desc": "Trabajo en interfaces React y Next.js y puedo integrarlas con APIs, PHP, Laravel y MySQL.",
+    "availability_title": "Abierto a nuevas oportunidades",
+    "availability_desc": "Oportunidades de desarrollo, proyectos freelance y colaboraciones. Podemos empezar con un mensaje.",
     "cv_btn": "Descargar CV",
     "footer_built": "Diseñado y desarrollado por Alex Vicente."
+  },
+  "currently": {
+    "title": "Actualmente",
+    "items": [
+      {
+        "label": "Construyendo",
+        "value": "Alex Creative Space",
+        "href": "#hero"
+      },
+      {
+        "label": "Explorando",
+        "value": "3D · WebGL",
+        "href": ""
+      },
+      {
+        "label": "Desde",
+        "value": "Valencia",
+        "href": ""
+      }
+    ]
   }
 }

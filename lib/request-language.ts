@@ -1,5 +1,6 @@
 import { cookies, headers } from "next/headers";
 import type { Language } from "@/lib/language-context";
+import { preferredLanguage } from "@/lib/locale-preference";
 
 export async function getRequestLanguage(): Promise<Language> {
   const cookieStore = await cookies();
@@ -12,5 +13,5 @@ export async function getRequestLanguage(): Promise<Language> {
   const requestHeaders = await headers();
   const browserLanguage = requestHeaders.get("accept-language") ?? "";
 
-  return /(^|,)\s*es(?:-|;|,|$)/i.test(browserLanguage) ? "es" : "en";
+  return preferredLanguage(browserLanguage);
 }

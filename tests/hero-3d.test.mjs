@@ -27,7 +27,7 @@ test("all four localized hotspots point to existing portfolio destinations", () 
       const section = readFileSync(new URL("../components/" + files[destination.hash] + ".tsx", import.meta.url), "utf8");
       assert.ok(section.includes('id="' + destination.hash.slice(1) + '"'));
     } else {
-      assert.ok(existsSync(new URL(`../app${destination.pathname}/page.tsx`, import.meta.url)));
+      assert.ok(existsSync(new URL(`../app/(es)${destination.pathname}/page.tsx`, import.meta.url)));
     }
   }
 });

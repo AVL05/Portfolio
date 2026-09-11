@@ -62,6 +62,19 @@ const nextConfig = {
         destination: "/proyectos/lumaflow-studio",
         permanent: true,
       },
+      // Spanish lives at the root: normalize guessed /es/* URLs with
+      // explicit single-hop redirects. Only real ES paths are mapped;
+      // anything else (e.g. /es/projects) correctly stays a 404.
+      // 308 preserves method and signals permanence without chains.
+      { source: "/es", destination: "/", permanent: true },
+      { source: "/es/proyectos", destination: "/proyectos", permanent: true },
+      { source: "/es/proyectos/raw-vives", destination: "/proyectos/raw-vives", permanent: true },
+      { source: "/es/proyectos/lumaflow-studio", destination: "/proyectos/lumaflow-studio", permanent: true },
+      { source: "/es/proyectos/distrito-gourmet", destination: "/proyectos/distrito-gourmet", permanent: true },
+      { source: "/es/sobre-mi", destination: "/sobre-mi", permanent: true },
+      { source: "/es/fotografia", destination: "/fotografia", permanent: true },
+      { source: "/es/contacto", destination: "/contacto", permanent: true },
+      { source: "/es/legal", destination: "/legal", permanent: true },
     ];
   },
   async headers() {
@@ -93,6 +106,9 @@ const nextConfig = {
   },
   experimental: {
     optimizePackageImports: ["react-icons", "lucide-react", "@react-three/drei", "three-stdlib"],
+    // Required for app/global-not-found.tsx: with multiple root layouts
+    // there is no single layout to compose unmatched-URL 404s from.
+    globalNotFound: true,
   },
 };
 

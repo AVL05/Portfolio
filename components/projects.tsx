@@ -31,8 +31,9 @@ function ProjectScene({
     >
       <Image
         src={project.image}
-        alt={project.title}
+        alt={`${project.title} — ${project.summary}`}
         fill
+        priority={index === 0}
         className={`scene-image ${
           project.image.includes("raw-manager") || project.image.includes("Falla")
             ? "object-contain p-[8%]"
@@ -146,7 +147,7 @@ export function Projects() {
       <div className="mt-6 grid gap-6 md:grid-cols-3">
         {archive.map(project => <article key={project.title} className="group border-b border-border/50 pb-6">
           <div className="relative mb-4 aspect-[2/1] overflow-hidden bg-secondary">
-            <Image src={project.image} alt={project.title} fill sizes="(max-width: 767px) 100vw, 33vw" className="object-cover transition-transform duration-300 motion-safe:group-hover:scale-[1.015] motion-reduce:transition-none" />
+            <Image src={project.image} alt={`${project.title} — ${project.summary}`} fill sizes="(max-width: 767px) 100vw, 33vw" loading="lazy" className="object-cover transition-transform duration-300 motion-safe:group-hover:scale-[1.015] motion-reduce:transition-none" />
           </div>
           <h4 className="text-lg font-semibold tracking-tight">{project.title}</h4>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{project.summary}</p>

@@ -5,6 +5,8 @@ import Link from "next/link";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
 import { useLanguage, type Language } from "@/lib/language-context";
+import { localizeHref } from "@/lib/i18n-paths";
+import { LanguageToggle } from "@/components/language-toggle";
 
 type LocalizedText = Record<Language, string>;
 
@@ -31,10 +33,19 @@ export interface ProjectCaseStudyData {
   learnings: LocalizedText[];
 }
 
+export interface AdjacentProject {
+  href: string;
+  title: string;
+}
+
 const labels = {
   es: {
     back: "Volver a proyectos",
     contact: "Contacto",
+    home: "Inicio",
+    projects: "Proyectos",
+    previous: "Proyecto anterior",
+    next: "Siguiente proyecto",
     role: "Mi rol",
     problem: "Problema y contexto",
     goals: "Objetivos",
@@ -53,6 +64,10 @@ const labels = {
   en: {
     back: "Back to projects",
     contact: "Contact",
+    home: "Home",
+    projects: "Projects",
+    previous: "Previous project",
+    next: "Next project",
     role: "My role",
     problem: "Problem and context",
     goals: "Goals",
@@ -83,7 +98,15 @@ function TextList({ items, language }: { items: LocalizedText[]; language: Langu
   );
 }
 
-export function ProjectCaseStudy({ data }: { data: ProjectCaseStudyData }) {
+export function ProjectCaseStudy({
+  data,
+  previous,
+  next,
+}: {
+  data: ProjectCaseStudyData;
+  previous?: AdjacentProject;
+  next?: AdjacentProject;
+}) {
   const { language } = useLanguage();
   const copy = labels[language];
 
@@ -91,9 +114,19 @@ export function ProjectCaseStudy({ data }: { data: ProjectCaseStudyData }) {
     <main id="main-content" className="case-study min-h-screen overflow-hidden bg-background text-foreground">
       <section className="px-4 pb-16 pt-6 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <nav aria-label={language === "es" ? "Navegación del caso" : "Case study navigation"} className="mb-14 flex items-center justify-between border-b border-border/65 py-3">
-            <Link href="/#projects" className="cinema-link font-mono text-[11px] font-bold uppercase tracking-[.13em]"><ArrowLeft />{copy.back}</Link>
-            <Link href="/#contact" className="cinema-link font-mono text-[11px] font-bold uppercase tracking-[.13em]">{copy.contact}<ArrowUpRight /></Link>
+          <nav aria-label={language === "es" ? "Navegación del caso" : "Case study navigation"} className="mb-6 flex items-center justify-between border-b border-border/65 py-3">
+            <Link href={localizeHref("/#projects", language)} className="cinema-link font-mono text-[11px] font-bold uppercase tracking-[.13em]"><ArrowLeft />{copy.back}</Link>
+            <div className="flex items-center gap-3">
+              <Link href={localizeHref("/#contact", language)} className="cinema-link font-mono text-[11px] font-bold uppercase tracking-[.13em]">{copy.contact}<ArrowUpRight /></Link>
+              <LanguageToggle />
+            </div>
+          </nav>
+          <nav aria-label="Breadcrumb" className="mb-14 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[11px] uppercase tracking-[.12em] text-muted-foreground">
+            <Link href={localizeHref("/", language)} className="transition-colors hover:text-primary">{copy.home}</Link>
+            <span aria-hidden="true">/</span>
+            <Link href={localizeHref("/proyectos", language)} className="transition-colors hover:text-primary">{copy.projects}</Link>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page" className="text-foreground">{data.title}</span>
           </nav>
 
           <div className="grid gap-10 lg:grid-cols-[minmax(0,.82fr)_minmax(380px,.68fr)] lg:items-center">
@@ -161,6 +194,23 @@ export function ProjectCaseStudy({ data }: { data: ProjectCaseStudyData }) {
           <div><p className="mb-5 font-mono text-[11px] font-bold uppercase tracking-[.13em] text-muted-foreground">{copy.learnings}</p><TextList items={data.learnings} language={language} /><div className="mt-8 flex flex-wrap gap-4"><a href={data.github} target="_blank" rel="noopener noreferrer" className="cinema-link font-mono text-[11px] font-bold uppercase tracking-[.12em]"><FaGithub />{copy.code}</a>{data.demo ? <a href={data.demo} target="_blank" rel="noopener noreferrer" className="cinema-link font-mono text-[11px] font-bold uppercase tracking-[.12em]">{copy.demo}<ArrowUpRight /></a> : null}</div></div>
         </div>
       </section>
+
+      {previous || next ? (
+        <nav aria-label={language === "es" ? "Otros casos de estudio" : "More case studies"} className="border-t border-border/55 px-4 py-10 sm:px-6 lg:px-8">
+          <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4">
+            {previous ? (
+              <Link href={previous.href} className="cinema-link font-mono text-[11px] font-bold uppercase tracking-[.12em]">
+                <ArrowLeft />{copy.previous}: {previous.title}
+              </Link>
+            ) : <span />}
+            {next ? (
+              <Link href={next.href} className="cinema-link font-mono text-[11px] font-bold uppercase tracking-[.12em]">
+                {copy.next}: {next.title}<ArrowUpRight />
+              </Link>
+            ) : null}
+          </div>
+        </nav>
+      ) : null}
     </main>
   );
 }

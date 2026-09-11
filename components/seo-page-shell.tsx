@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { useLanguage, type Language } from "@/lib/language-context";
+import { localizeHref } from "@/lib/i18n-paths";
+import { LanguageToggle } from "@/components/language-toggle";
 
 type LocalizedText = Record<Language, string>;
 
@@ -20,12 +22,15 @@ export function SeoPageShell({ eyebrow, title, description, sections }: SeoPageS
     <main id="main-content" className="case-study min-h-screen bg-background px-4 pb-20 pt-5 text-foreground sm:px-6 lg:px-8">
       <div className="mx-auto max-w-[100rem]">
         <nav className="flex h-14 items-center justify-between border-b border-border/60">
-          <Link href="/" className="inline-flex min-h-11 items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[.13em] text-foreground/76 transition-colors hover:text-primary">
+          <Link href={localizeHref("/", language)} className="inline-flex min-h-11 items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[.13em] text-foreground/76 transition-colors hover:text-primary">
             <ArrowLeft className="h-3.5 w-3.5" /> Aleviclop.dev
           </Link>
-          <Link href="/#contact" className="inline-flex min-h-11 items-center font-mono text-[11px] font-bold uppercase tracking-[.13em] transition-colors hover:text-primary">
-            {language === "es" ? "Contacto" : "Contact"} ↗
-          </Link>
+          <div className="flex items-center gap-3">
+            <Link href={localizeHref("/#contact", language)} className="inline-flex min-h-11 items-center font-mono text-[11px] font-bold uppercase tracking-[.13em] transition-colors hover:text-primary">
+              {language === "es" ? "Contacto" : "Contact"} ↗
+            </Link>
+            <LanguageToggle />
+          </div>
         </nav>
 
         <header className="grid min-h-[78dvh] gap-8 border-b border-border/60 py-20 md:grid-cols-[.65fr_1.35fr] md:items-end">
@@ -47,9 +52,9 @@ export function SeoPageShell({ eyebrow, title, description, sections }: SeoPageS
         </div>
 
         <div className="mt-16 flex flex-wrap gap-x-8 gap-y-4 font-mono text-[11px] font-bold uppercase tracking-[.12em]">
-          <Link href="/proyectos" className="cinema-link">{language === "es" ? "Proyectos" : "Work"} <ArrowUpRight /></Link>
-          <Link href="/sobre-mi" className="cinema-link">{language === "es" ? "Sobre mí" : "About"} <ArrowUpRight /></Link>
-          <Link href="/fotografia" className="cinema-link">raw.vives <ArrowUpRight /></Link>
+          <Link href={localizeHref("/proyectos", language)} className="cinema-link">{language === "es" ? "Proyectos" : "Work"} <ArrowUpRight /></Link>
+          <Link href={localizeHref("/sobre-mi", language)} className="cinema-link">{language === "es" ? "Sobre mí" : "About"} <ArrowUpRight /></Link>
+          <Link href={localizeHref("/fotografia", language)} className="cinema-link">raw.vives <ArrowUpRight /></Link>
         </div>
       </div>
     </main>

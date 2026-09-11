@@ -11,6 +11,7 @@ import type React from "react";
 import { useRef, useState } from "react";
 import { gsap, prefersReducedMotion, useGSAP } from "@/lib/gsap";
 import { useLanguage } from "@/lib/language-context";
+import { localizeHref } from "@/lib/i18n-paths";
 import { RevealHeader } from "@/components/reveal-header";
 
 type ContactField = "name" | "email" | "message";
@@ -390,7 +391,7 @@ export function Contact() {
                 ].map((item) => (
                   <Link
                     key={item.href}
-                    href={item.href}
+                    href={localizeHref(item.href, language)}
                     className="inline-flex min-h-11 items-center font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground transition-colors hover:text-primary"
                   >
                     {item[language]}

@@ -6,6 +6,7 @@ import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import { useRef, useState } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { useLanguage } from "@/lib/language-context";
+import { localizeHref } from "@/lib/i18n-paths";
 import styles from "./hero.module.css";
 import { roomHotspots, type RoomHotspotId } from "./hero-3d/roomSceneConfig";
 
@@ -52,7 +53,7 @@ export function Hero() {
       <div className={styles.sceneColumn}>
         <CreativeRoomHero activeHotspot={activeHotspot} />
         <nav className={styles.chapterNav} aria-label={copy.navigation}>
-          {(Object.keys(roomHotspots) as RoomHotspotId[]).map((id) => <a key={id} href={roomHotspots[id].href}
+          {(Object.keys(roomHotspots) as RoomHotspotId[]).map((id) => <a key={id} href={localizeHref(roomHotspots[id].href, language)}
             onMouseEnter={() => setActiveHotspot(id)} onFocus={() => setActiveHotspot(id)}>
             {copy.destinations[id]}
           </a>)}

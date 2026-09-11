@@ -1,29 +1,8 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { test } from "node:test";
-import { runInNewContext } from "node:vm";
-import { ModuleKind, transpileModule } from "typescript";
 
 const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url), "utf8");
-const module = { exports: {} };
-runInNewContext(transpileModule(read("lib/locale-preference.ts"), {
-  compilerOptions: { module: ModuleKind.CommonJS },
-}).outputText, module);
-
-test("initial locale respects browser priority and excludes rejected languages", () => {
-  const { preferredLanguage } = module.exports;
-  for (const [header, expected] of [
-    ["es-ES,es;q=0.9,en;q=0.8", "es"],
-    ["en-US,en;q=0.9,es;q=0.3", "en"],
-    ["en;q=0.3,es;q=0.9", "es"],
-    ["es;q=0,en;q=1", "en"],
-    ["fr-FR,es;q=0.5", "en"],
-    ["ES-mx", "es"],
-    ["es;q=invalid,en", "en"],
-    ["", "en"],
-  ]) assert.equal(preferredLanguage(header), expected, header);
-  assert.ok(read("lib/request-language.ts").indexOf("return cookieLanguage") < read("lib/request-language.ts").indexOf("return preferredLanguage"));
-});
 
 test("localized home retains evidence, three capabilities and a factual currently section", () => {
   for (const language of ["es", "en"]) {

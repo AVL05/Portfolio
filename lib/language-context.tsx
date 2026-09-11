@@ -1,9 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from "react";
-import { flushSync } from "react-dom";
-import { useRouter } from "next/navigation";
-import { ScrollTrigger } from "@/lib/gsap";
+import React, { createContext, useContext } from "react";
 import es from "./locales/es.json";
 import en from "./locales/en.json";
 
@@ -128,7 +125,6 @@ const translations: Record<Language, Translation> = { es, en };
 
 interface LanguageContextType {
   language: Language;
-  setLanguage: (lang: Language) => void;
   t: Translation;
 }
 
@@ -136,12 +132,11 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
   undefined,
 );
 
-type ViewTransitionDocument = Document & {
-  startViewTransition?: (update: () => void) => {
-    finished: Promise<void>;
-  };
-};
-
+/**
+ * The language is fixed by the URL (route group) and passed from the
+ * server layout. It never changes client-side: switching language is a
+ * real navigation to the equivalent URL, so SSR and hydration always agree.
+ */
 export function LanguageProvider({
   children,
   initialLanguage = "es",
@@ -149,63 +144,11 @@ export function LanguageProvider({
   children: React.ReactNode;
   initialLanguage?: Language;
 }) {
-  const [language, setLanguage] = useState<Language>(initialLanguage);
-  const router = useRouter();
-
-  useEffect(() => {
-    let saved: string | null = null;
-    try { saved = localStorage.getItem("language"); } catch { /* Storage may be disabled. Keep the SSR locale. */ }
-    if (saved && (saved === "es" || saved === "en")) {
-      setLanguage(saved);
-      document.documentElement.lang = saved;
-      window.requestAnimationFrame(() => ScrollTrigger.refresh());
-      if (saved !== initialLanguage) {
-        void fetch("/api/language", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ language: saved }),
-        }).then((response) => {
-          if (response.ok) router.refresh();
-        }).catch(() => { /* The current choice remains usable offline. */ });
-      }
-    }
-  }, [initialLanguage, router]);
-
-  const handleSetLanguage = (lang: Language) => {
-    if (lang === language) return;
-
-    const updateLanguage = () => {
-      flushSync(() => setLanguage(lang));
-      document.documentElement.lang = lang;
-      window.requestAnimationFrame(() => ScrollTrigger.refresh());
-    };
-    const transitionDocument = document as ViewTransitionDocument;
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
-    if (transitionDocument.startViewTransition && !reduceMotion) {
-      transitionDocument.startViewTransition(updateLanguage);
-    } else {
-      updateLanguage();
-    }
-
-    try { localStorage.setItem("language", lang); } catch { /* Cookie persistence can still succeed. */ }
-    void fetch("/api/language", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ language: lang }),
-    }).then((response) => {
-      if (response.ok) router.refresh();
-    }).catch(() => { /* Keep the selected language when the network is unavailable. */ });
-  };
-
   return (
     <LanguageContext.Provider
       value={{
-        language,
-        setLanguage: handleSetLanguage,
-        t: translations[language],
+        language: initialLanguage,
+        t: translations[initialLanguage],
       }}
     >
       {children}

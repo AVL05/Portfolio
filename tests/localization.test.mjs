@@ -39,7 +39,8 @@ test("known mixed-language surfaces select copy from the active language", () =>
   const hero = read("components/hero.tsx");
   const photography = read("components/photography.tsx");
   const projects = read("components/projects.tsx");
-  const notFound = read("app/not-found.tsx");
+  const notFound = read("app/global-not-found.tsx");
+  const notFoundContent = read("components/not-found-content.tsx");
   const seoShell = read("components/seo-page-shell.tsx");
   const legal = read("components/legal-page-content.tsx");
   const og = read("app/api/og/route.tsx");
@@ -52,25 +53,36 @@ test("known mixed-language surfaces select copy from the active language", () =>
   assert.match(projects, /Proyectos seleccionados/);
   assert.match(projects, /Selected work/);
   assert.doesNotMatch(notFound, /Inicio \/ Home|Proyectos \/ Work/);
+  assert.match(notFound, /robots: \{ index: false/);
+  assert.match(notFoundContent, /usePathname/);
+  assert.match(notFoundContent, /Page not found/);
+  assert.doesNotMatch(notFoundContent, /useLanguage/);
   assert.match(seoShell, /useLanguage/);
   assert.match(legal, /Aviso legal/);
   assert.match(legal, /Legal notice/);
   assert.match(og, /Frontend \/ Full-Stack Developer/);
 });
 
-test("language changes update document language and use an accessible transition", () => {
+test("language switching is a real navigation, never client state", () => {
   const context = read("lib/language-context.tsx");
+  const toggle = read("components/language-toggle.tsx");
 
-  assert.match(context, /document\.documentElement\.lang = lang/);
-  assert.match(context, /startViewTransition/);
-  assert.match(context, /prefers-reduced-motion/);
+  assert.doesNotMatch(context, /localStorage/);
+  assert.doesNotMatch(context, /api\/language/);
+  assert.doesNotMatch(context, /router\.refresh/);
+  assert.doesNotMatch(context, /setLanguage/);
+  assert.match(toggle, /getAlternatePath/);
+  assert.match(toggle, /hrefLang/);
+  assert.doesNotMatch(toggle, /router\.refresh/);
+  assert.doesNotMatch(toggle, /fetch\(/);
 });
 
 test("public positioning includes full-stack and preserves React and Next.js specialization", () => {
-  const layout = read("app/layout.tsx");
+  const layoutEs = read("app/(es)/layout.tsx");
+  const layoutEn = read("app/(en)/layout.tsx");
   const seo = read("lib/seo.ts");
-  const about = read("app/sobre-mi/page.tsx");
-  const publicPositioning = [layout, seo, about, JSON.stringify(es), JSON.stringify(en)].join("\n");
+  const about = read("app/(es)/sobre-mi/page.tsx");
+  const publicPositioning = [layoutEs, layoutEn, seo, about, JSON.stringify(es), JSON.stringify(en)].join("\n");
 
   assert.match(publicPositioning, /Frontend \/ Full-Stack Developer/);
   assert.match(publicPositioning, /React/);

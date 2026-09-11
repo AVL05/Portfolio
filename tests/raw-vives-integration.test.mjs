@@ -6,16 +6,20 @@ const root = new URL("../", import.meta.url);
 const read = (path) => readFileSync(new URL(path, root), "utf8");
 const es = JSON.parse(read("lib/locales/es.json"));
 const en = JSON.parse(read("lib/locales/en.json"));
-const route = read("app/proyectos/raw-vives/page.tsx");
+const route = read("app/(es)/proyectos/raw-vives/page.tsx");
+const routeEn = read("app/(en)/en/projects/raw-vives/page.tsx");
 const content = read("components/raw-vives-case-study.tsx");
 const seo = read("lib/seo.ts");
 
 test("raw.vives is the primary localized project", () => {
+  assert.equal(es.projects.items[0].title, "raw.vives");
+  assert.equal(es.projects.items[0].link, "https://rawvives.aleviclop.dev/");
+  assert.equal(es.projects.items[0].caseStudyHref, "/proyectos/raw-vives");
+  assert.equal(en.projects.items[0].title, "raw.vives");
+  assert.equal(en.projects.items[0].link, "https://rawvives.aleviclop.dev/");
+  assert.equal(en.projects.items[0].caseStudyHref, "/en/projects/raw-vives");
   for (const locale of [es, en]) {
     const project = locale.projects.items[0];
-    assert.equal(project.title, "raw.vives");
-    assert.equal(project.link, "https://rawvives.aleviclop.dev/");
-    assert.equal(project.caseStudyHref, "/proyectos/raw-vives");
     assert.equal(project.github, "https://github.com/AVL05/alexgallery");
     assert.match(project.outcome, /static|estático/i);
     assert.doesNotMatch(project.description, /\b30\b/);
@@ -36,12 +40,16 @@ test("raw.vives public copy avoids an exact photograph count", () => {
 });
 
 test("case study metadata and sitemap entry are indexable", () => {
-  assert.match(route, /createLocalizedMetadata/);
+  assert.match(route, /buildPageMetadata/);
   assert.match(route, /path: "\/proyectos\/raw-vives"/);
+  assert.match(route, /locale: "es"/);
   assert.match(route, /application\/ld\+json/);
-  assert.match(seo, /alternates: \{ canonical:/);
+  assert.match(routeEn, /path: "\/en\/projects\/raw-vives"/);
+  assert.match(routeEn, /locale: "en"/);
+  assert.match(seo, /languageAlternates/);
+  assert.match(seo, /languages:/);
   assert.match(seo, /twitter:/);
-  assert.match(seo, /path: "\/proyectos\/raw-vives"/);
+  assert.match(seo, /"\/proyectos\/raw-vives"/);
   assert.match(seo, /https:\/\/www\.aleviclop\.dev/);
 });
 

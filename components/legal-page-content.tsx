@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { LanguageToggle } from "@/components/language-toggle";
 import { useLanguage, type Language } from "@/lib/language-context";
+import { localizeHref } from "@/lib/i18n-paths";
 
 type LegalSubsection = {
   title: string;
@@ -267,7 +268,7 @@ export function LegalPageContent() {
       <div className="pointer-events-none absolute inset-0 bg-grid opacity-[0.06]" />
       <div className="relative z-10 mx-auto max-w-3xl">
         <div className="mb-12 flex items-center justify-between gap-4">
-          <Link href="/" className="inline-flex min-h-11 items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-primary">
+          <Link href={localizeHref("/", language)} className="inline-flex min-h-11 items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-primary">
             <span className="h-px w-5 bg-current" />
             {content.back}
           </Link>

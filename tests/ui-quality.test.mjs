@@ -62,7 +62,6 @@ test("contact form exposes localized inline validation", () => {
 test("focus, lazy 3D hero, and localized Open Graph contracts remain explicit", () => {
   const globals = read("app/globals.css");
   const hero = read("components/hero.tsx");
-  const layout = read("app/layout.tsx");
   const seo = read("lib/seo.ts");
 
   assert.match(globals, /:focus-visible/);
@@ -70,28 +69,34 @@ test("focus, lazy 3D hero, and localized Open Graph contracts remain explicit", 
   assert.match(hero, /<CreativeRoomHero/);
   assert.match(read("components/hero-3d/CreativeRoomHero.tsx"), /ssr: false/);
   assert.match(read("components/hero-3d/CreativeRoomScene.tsx"), /frameloop="demand"/);
-  assert.match(layout, /alternateLocale/);
   assert.match(seo, /alternateLocale/);
+  assert.match(seo, /buildPageMetadata/);
+  assert.match(read("app/(es)/proyectos/raw-vives/page.tsx"), /type: "article"/);
+  assert.match(read("app/(en)/en/projects/raw-vives/page.tsx"), /type: "article"/);
 });
 
 test("the branded PNG uses a stable crawlable favicon URL", () => {
-  const layout = read("app/layout.tsx");
-
-  assert.equal(existsSync(join(root, "public/favicon.png")), true);
-  assert.equal(existsSync(join(root, "app/icon.png")), false);
-  assert.equal(existsSync(join(root, "app/icon.svg")), false);
-  assert.match(layout, /icon: \[\{ url: "\/favicon\.png"/);
-  assert.match(layout, /shortcut: "\/favicon\.png"/);
+  for (const layout of [read("app/(es)/layout.tsx"), read("app/(en)/layout.tsx")]) {
+    assert.equal(existsSync(join(root, "public/favicon.png")), true);
+    assert.equal(existsSync(join(root, "app/icon.png")), false);
+    assert.equal(existsSync(join(root, "app/icon.svg")), false);
+    assert.match(layout, /icon: \[\{ url: "\/favicon\.png"/);
+    assert.match(layout, /shortcut: "\/favicon\.png"/);
+  }
 });
 
 test("search crawlers can discover the public profile routes", () => {
-  const layout = read("app/layout.tsx");
+  const layoutEs = read("app/(es)/layout.tsx");
+  const layoutEn = read("app/(en)/layout.tsx");
   const robots = read("app/robots.ts");
   const sitemap = read("app/sitemap.ts");
   const seo = read("lib/seo.ts");
   const contact = read("components/contact.tsx");
 
-  assert.match(layout, /rel="sitemap"/);
+  assert.match(layoutEs, /rel="sitemap"/);
+  assert.match(layoutEn, /rel="sitemap"/);
+  assert.match(layoutEs, /lang="es"/);
+  assert.match(layoutEn, /lang="en"/);
   assert.match(robots, /userAgent: "\*"/);
   assert.match(robots, /allow: "\/"/);
   assert.match(robots, /host: SITE_URL/);
@@ -103,11 +108,15 @@ test("search crawlers can discover the public profile routes", () => {
 });
 
 test("featured case studies expose project-specific social images", () => {
-  const rawVives = read("app/proyectos/raw-vives/page.tsx");
-  const lumaFlow = read("app/proyectos/lumaflow-studio/page.tsx");
-  const distrito = read("app/proyectos/distrito-gourmet/page.tsx");
+  const caseContent = read("lib/case-study-content.ts");
+  const rawVives = read("app/(es)/proyectos/raw-vives/page.tsx");
+  const lumaFlow = read("app/(es)/proyectos/lumaflow-studio/page.tsx");
+  const distrito = read("app/(es)/proyectos/distrito-gourmet/page.tsx");
 
-  assert.match(rawVives, /raw-vives-og\.webp/);
+  assert.match(caseContent, /raw-vives-og\.webp/);
+  assert.match(caseContent, /lumaflow-studio-og\.webp/);
+  assert.match(caseContent, /distrito-gourmet-og\.webp/);
+  assert.match(rawVives, /RAW_VIVES_URLS\.image/);
   assert.match(lumaFlow, /lumaflow-studio-og\.webp/);
   assert.match(distrito, /distrito-gourmet-og\.webp/);
   for (const asset of [

@@ -5,6 +5,8 @@ import Link from "next/link";
 import { ArrowLeft, ArrowUpRight, Check, ExternalLink } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
 import { useLanguage } from "@/lib/language-context";
+import { localizeHref } from "@/lib/i18n-paths";
+import { LanguageToggle } from "@/components/language-toggle";
 
 const productionUrl = "https://rawvives.aleviclop.dev/";
 const repositoryUrl = "https://github.com/AVL05/alexgallery";
@@ -104,8 +106,11 @@ export function RawVivesCaseStudy() {
         <div className="pointer-events-none absolute inset-0 bg-grid opacity-[0.05]" />
         <div className="relative z-10 mx-auto max-w-7xl">
           <nav aria-label={t.back} className="mb-12 flex items-center justify-between rounded-lg border border-border/65 bg-card/60 px-4 py-3 sm:mb-16">
-            <Link href="/#projects" className="inline-flex min-h-11 items-center gap-2 font-mono text-xs font-black uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:text-primary"><ArrowLeft className="h-4 w-4" />{t.back}</Link>
-            <a href={productionUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-border/70 px-4 py-2 font-mono text-[11px] font-black uppercase tracking-[0.12em] transition-colors hover:border-primary/45 hover:text-primary">raw.vives <ExternalLink className="h-3.5 w-3.5" /></a>
+            <Link href={localizeHref("/#projects", language)} className="inline-flex min-h-11 items-center gap-2 font-mono text-xs font-black uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:text-primary"><ArrowLeft className="h-4 w-4" />{t.back}</Link>
+            <div className="flex items-center gap-3">
+              <a href={productionUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-border/70 px-4 py-2 font-mono text-[11px] font-black uppercase tracking-[0.12em] transition-colors hover:border-primary/45 hover:text-primary">raw.vives <ExternalLink className="h-3.5 w-3.5" /></a>
+              <LanguageToggle />
+            </div>
           </nav>
 
           <div className="grid gap-10 lg:grid-cols-[minmax(0,.78fr)_minmax(420px,.82fr)] lg:items-center">
@@ -146,7 +151,7 @@ export function RawVivesCaseStudy() {
 
       <section className="px-4 py-16 sm:px-6 lg:px-8"><div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[.9fr_1.1fr]"><div><p className="section-kicker mb-4">{t.results}</p><h2 className="text-3xl font-black leading-tight sm:text-5xl">{language === "es" ? "Resultados verificables, sin métricas decorativas." : "Verifiable results, without decorative metrics."}</h2><p className="mt-5 font-medium leading-relaxed text-muted-foreground">{t.resultsText}</p></div><div className="rounded-lg border border-border/65 bg-card/62 p-7"><h3 className="text-2xl font-black">{t.learnings}</h3><ol className="mt-5 space-y-4">{t.learningItems.map((item,index) => <li key={item} className="flex gap-4 font-medium text-muted-foreground"><span className="font-mono text-xs font-black text-primary">0{index + 1}</span>{item}</li>)}</ol></div></div></section>
 
-      <section className="px-4 py-20 sm:px-6 lg:px-8"><div className="mx-auto grid max-w-7xl gap-8 rounded-lg border border-primary/30 bg-primary/8 p-7 sm:p-10 lg:grid-cols-[1fr_auto] lg:items-end"><div><p className="section-kicker mb-4">{t.next}</p><h2 className="text-4xl font-black sm:text-6xl">{t.nextTitle}</h2><p className="mt-4 max-w-2xl font-medium text-muted-foreground">{t.nextText}</p></div><Link href="/proyectos/lumaflow-studio" className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-bold text-primary-foreground hover:bg-primary/90">{language === "es" ? "Ver siguiente caso" : "View next case"}<ArrowUpRight className="h-4 w-4" /></Link></div></section>
+      <section className="px-4 py-20 sm:px-6 lg:px-8"><div className="mx-auto grid max-w-7xl gap-8 rounded-lg border border-primary/30 bg-primary/8 p-7 sm:p-10 lg:grid-cols-[1fr_auto] lg:items-end"><div><p className="section-kicker mb-4">{t.next}</p><h2 className="text-4xl font-black sm:text-6xl">{t.nextTitle}</h2><p className="mt-4 max-w-2xl font-medium text-muted-foreground">{t.nextText}</p></div><Link href={localizeHref("/proyectos/lumaflow-studio", language)} className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-bold text-primary-foreground hover:bg-primary/90">{language === "es" ? "Ver siguiente caso" : "View next case"}<ArrowUpRight className="h-4 w-4" /></Link></div></section>
     </main>
   );
 }

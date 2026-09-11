@@ -21,12 +21,11 @@ test("renders without horizontal overflow and switches language", async ({
   }));
   expect(viewport.scrollWidth).toBe(viewport.clientWidth);
 
-  await page.getByRole("button", { name: "ES EN" }).click();
+  await page.getByRole("link", { name: "ES EN" }).click();
 
+  await expect(page).toHaveURL(/\/en\/?$/);
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
-  await expect(
-    page.getByRole("button", { name: "ES EN" }),
-  ).toBeVisible();
+  await expect(page.getByRole("link", { name: "ES EN" })).toBeVisible();
   await expect(
     page.getByText("Available for roles and freelance projects"),
   ).toBeVisible();
@@ -56,6 +55,10 @@ test("validates the contact form and handles a successful response", async ({
   });
 
   await page.goto("/#contact");
+  // The submit handler only exists after hydration; under parallel load
+  // the click can otherwise land pre-hydration and trigger a native
+  // reload (?name=&email=...) instead of inline validation.
+  await page.waitForLoadState("networkidle");
   const submit = page.getByRole("button", { name: "ENVIAR MENSAJE" });
   await submit.click();
 

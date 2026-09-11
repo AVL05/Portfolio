@@ -1,11 +1,23 @@
+import type { Metadata } from "next";
+import {
+  getAlternatePath,
+  INDEXABLE_EN_PATHS,
+  INDEXABLE_ES_PATHS,
+  type Locale,
+} from "@/lib/i18n-paths";
+
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://www.aleviclop.dev";
 
 export const SITE_NAME = "Alex Vicente López";
 export const SITE_TITLE =
   "Alex Vicente López | Frontend / Full-Stack Developer · React / Next.js";
+export const EN_SITE_TITLE =
+  "Alex Vicente López | Frontend / Full-Stack Developer · React / Next.js";
 export const SITE_DESCRIPTION =
   "Portfolio de Alex Vicente López, Frontend / Full-Stack Developer en Valencia especializado en React y Next.js, con experiencia en Laravel, PHP y MySQL.";
+export const EN_SITE_DESCRIPTION =
+  "Portfolio of Alex Vicente López, a Valencia-based Frontend / Full-Stack Developer focused on React and Next.js, with Laravel, PHP, and MySQL experience.";
 
 export const SEO_KEYWORDS = [
   "Alex Vicente López",
@@ -42,89 +54,110 @@ export const SAME_AS = [
   "https://rawvives.aleviclop.dev/",
 ];
 
-export const INDEXABLE_ROUTES = [
-  {
-    path: "/proyectos/raw-vives",
-    priority: 0.92,
-    changeFrequency: "monthly" as const,
-  },
-  {
-    path: "/proyectos/lumaflow-studio",
-    priority: 0.84,
-    changeFrequency: "monthly" as const,
-  },
-  {
-    path: "/",
-    priority: 1,
-    changeFrequency: "weekly" as const,
-  },
-  {
-    path: "/sobre-mi",
-    priority: 0.9,
-    changeFrequency: "monthly" as const,
-  },
-  {
-    path: "/proyectos",
-    priority: 0.85,
-    changeFrequency: "monthly" as const,
-  },
-  {
-    path: "/proyectos/distrito-gourmet",
-    priority: 0.82,
-    changeFrequency: "monthly" as const,
-  },
-  {
-    path: "/fotografia",
-    priority: 0.75,
-    changeFrequency: "monthly" as const,
-  },
-  {
-    path: "/contacto",
-    priority: 0.7,
-    changeFrequency: "monthly" as const,
-  },
+export interface IndexableRoute {
+  path: string;
+  locale: Locale;
+  priority: number;
+  changeFrequency: "weekly" | "monthly";
+}
+
+const ROUTE_PRIORITY: Record<string, { priority: number; changeFrequency: "weekly" | "monthly" }> = {
+  "/": { priority: 1, changeFrequency: "weekly" },
+  "/proyectos/raw-vives": { priority: 0.92, changeFrequency: "monthly" },
+  "/sobre-mi": { priority: 0.9, changeFrequency: "monthly" },
+  "/proyectos": { priority: 0.85, changeFrequency: "monthly" },
+  "/proyectos/lumaflow-studio": { priority: 0.84, changeFrequency: "monthly" },
+  "/proyectos/distrito-gourmet": { priority: 0.82, changeFrequency: "monthly" },
+  "/fotografia": { priority: 0.75, changeFrequency: "monthly" },
+  "/contacto": { priority: 0.7, changeFrequency: "monthly" },
+};
+
+/**
+ * Exactly the 16 indexable URLs: 8 ES + 8 EN.
+ * /legal and /en/legal stay noindex and are intentionally excluded.
+ */
+export const INDEXABLE_ROUTES: IndexableRoute[] = [
+  ...INDEXABLE_ES_PATHS.map((path) => ({
+    path,
+    locale: "es" as Locale,
+    priority: ROUTE_PRIORITY[path]?.priority ?? 0.5,
+    changeFrequency: ROUTE_PRIORITY[path]?.changeFrequency ?? ("monthly" as const),
+  })),
+  ...INDEXABLE_EN_PATHS.map((path) => {
+    const esPath = getAlternatePath(path, "es") ?? "/";
+    return {
+      path,
+      locale: "en" as Locale,
+      priority: ROUTE_PRIORITY[esPath]?.priority ?? 0.5,
+      changeFrequency: ROUTE_PRIORITY[esPath]?.changeFrequency ?? ("monthly" as const),
+    };
+  }),
 ];
 
 export function absoluteUrl(path = "/") {
-  return new URL(path, SITE_URL).toString();
+  // Next renders the home canonical without a trailing slash
+  // (trailingSlash: false); normalize here so sitemap, canonical,
+  // hreflang and Open Graph always agree on one URL per page.
+  return new URL(path, SITE_URL).toString().replace(/\/$/, "");
 }
 
-export function createLocalizedMetadata({
-  language,
+/** hreflang set for an indexable URL: self + alternate + x-default (ES). */
+export function languageAlternates(path: string, locale: Locale) {
+  const es = locale === "es" ? path : getAlternatePath(path, "es");
+  const en = locale === "en" ? path : getAlternatePath(path, "en");
+  if (!es || !en) return undefined;
+  return {
+    canonical: absoluteUrl(path),
+    languages: {
+      es: absoluteUrl(es),
+      en: absoluteUrl(en),
+      "x-default": absoluteUrl(es),
+    },
+  };
+}
+
+export function buildPageMetadata({
+  locale,
   path,
-  copy,
+  title,
+  description,
   type = "website",
   image,
 }: {
-  language: Language;
+  locale: Locale;
   path: string;
-  copy: Record<Language, { title: string; description: string }>;
+  title?: string;
+  description: string;
   type?: "website" | "article" | "profile";
   image?: string;
 }): Metadata {
-  const localized = copy[language];
   const imageUrl =
     image ??
-    `${SITE_URL}/api/og?lang=${language}&title=${encodeURIComponent(localized.title)}`;
+    `${SITE_URL}/api/og?lang=${locale}&title=${encodeURIComponent(title ?? SITE_NAME)}`;
+  // Pages without an explicit title (home) inherit the layout default for
+  // <title> but still need an explicit Open Graph / Twitter title.
+  const socialTitle = title ?? SITE_TITLE;
 
   return {
-    title: localized.title,
-    description: localized.description,
-    alternates: { canonical: absoluteUrl(path) },
+    ...(title ? { title } : {}),
+    description,
+    alternates: languageAlternates(path, locale) ?? {
+      canonical: absoluteUrl(path),
+    },
     openGraph: {
-      title: localized.title,
-      description: localized.description,
+      title: socialTitle,
+      description,
       url: absoluteUrl(path),
       siteName: SITE_NAME,
       type,
-      locale: language === "es" ? "es_ES" : "en_GB",
-      alternateLocale: language === "es" ? ["en_GB"] : ["es_ES"],
+      locale: locale === "es" ? "es_ES" : "en_GB",
+      alternateLocale: locale === "es" ? ["en_GB"] : ["es_ES"],
       images: [imageUrl],
     },
     twitter: {
       card: "summary_large_image",
-      title: localized.title,
-      description: localized.description,
+      title: socialTitle,
+      description,
       images: [imageUrl],
     },
   };
@@ -185,7 +218,7 @@ export const websiteJsonLd = {
     "aleviclop.dev",
   ],
   url: SITE_URL,
-  inLanguage: ["es", "en"],
+  // inLanguage is set per localized layout: each page declares one language.
   publisher: {
     "@id": `${SITE_URL}/#alex-vicente-lopez`,
   },
@@ -198,10 +231,23 @@ export const profilePageJsonLd = {
   name: SITE_TITLE,
   url: SITE_URL,
   description: SITE_DESCRIPTION,
-  inLanguage: "es",
+  // inLanguage is set per localized layout: each page declares one language.
   mainEntity: {
     "@id": `${SITE_URL}/#alex-vicente-lopez`,
   },
 };
-import type { Metadata } from "next";
-import type { Language } from "@/lib/language-context";
+
+export function breadcrumbJsonLd(
+  items: Array<{ name: string; path: string }>,
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: absoluteUrl(item.path),
+    })),
+  };
+}

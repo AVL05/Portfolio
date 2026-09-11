@@ -28,7 +28,7 @@
     "geist": "latest",
     "gsap": "latest",
     "lucide-react": "latest",
-    "next": "latest",
+    "next": "16.3.4",
     "react": "latest",
     "react-dom": "latest",
     "react-icons": "latest",
@@ -53,7 +53,7 @@
   "pnpm": {
     "overrides": {
       "postcss": "8.5.25",
-      "sharp": "0.35.3"
+      "sharp": "0.35.4"
     },
     "onlyBuiltDependencies": [
       "esbuild",

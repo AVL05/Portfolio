@@ -45,9 +45,10 @@ test("known mixed-language surfaces select copy from the active language", () =>
   const legal = read("components/legal-page-content.tsx");
   const og = read("app/api/og/route.tsx");
 
-  assert.match(hero, /Frontend \/ Full-Stack Developer/);
-  assert.match(es.hero.description, /React \/ Next\.js/);
-  assert.match(en.hero.description, /React \/ Next\.js/);
+  assert.match(hero, /Desarrollador Full-Stack Junior/);
+  assert.match(hero, /Junior Full-Stack Developer/);
+  assert.match(es.hero.description, /principio a fin/);
+  assert.match(en.hero.description, /end to end/);
   assert.match(photography, /Otra/);
   assert.match(photography, /See/);
   assert.match(projects, /Proyectos seleccionados/);
@@ -60,7 +61,8 @@ test("known mixed-language surfaces select copy from the active language", () =>
   assert.match(seoShell, /useLanguage/);
   assert.match(legal, /Aviso legal/);
   assert.match(legal, /Legal notice/);
-  assert.match(og, /Frontend \/ Full-Stack Developer/);
+  assert.match(og, /Desarrollador Full-Stack Junior/);
+  assert.match(og, /Junior Full-Stack Developer/);
 });
 
 test("language switching is a real navigation, never client state", () => {
@@ -77,18 +79,20 @@ test("language switching is a real navigation, never client state", () => {
   assert.doesNotMatch(toggle, /fetch\(/);
 });
 
-test("public positioning includes full-stack and preserves React and Next.js specialization", () => {
+test("public positioning presents a junior full-stack profile without a frontend-only headline", () => {
   const layoutEs = read("app/(es)/layout.tsx");
   const layoutEn = read("app/(en)/layout.tsx");
   const seo = read("lib/seo.ts");
   const about = read("app/(es)/sobre-mi/page.tsx");
   const publicPositioning = [layoutEs, layoutEn, seo, about, JSON.stringify(es), JSON.stringify(en)].join("\n");
 
-  assert.match(publicPositioning, /Frontend \/ Full-Stack Developer/);
+  assert.match(publicPositioning, /Desarrollador Full-Stack Junior/);
+  assert.match(publicPositioning, /Junior Full-Stack Developer/);
   assert.match(publicPositioning, /React/);
-  assert.match(publicPositioning, /Next\.js/);
   assert.match(publicPositioning, /Laravel/);
   assert.match(publicPositioning, /freelance/i);
+  assert.doesNotMatch(publicPositioning, /Frontend \/ Full-Stack Developer/);
+  assert.doesNotMatch(publicPositioning, /React \/ Next\.js/);
   assert.doesNotMatch(publicPositioning, /production-ready/i);
 });
 
@@ -98,10 +102,12 @@ test("professional experience precedes education and uses recruiter-friendly dat
   const educationPosition = experience.indexOf("{/* Education */}");
 
   assert.ok(jobPosition >= 0 && jobPosition < educationPosition);
-  assert.equal(es.experience.experience_list[0].title, "Desarrollador de Aplicaciones Web");
+  assert.equal(es.experience.experience_list[0].title, "Desarrollador de Aplicaciones Web en prácticas");
   assert.equal(es.experience.experience_list[0].contract, "Prácticas");
-  assert.equal(es.experience.experience_list[0].period, "Abr 2026 — May 2026");
-  assert.equal(en.experience.experience_list[0].title, "Web Application Developer");
+  assert.equal(es.experience.experience_list[0].period, "feb. 2026 — may. 2026");
+  assert.equal(es.experience.experience_list[1].title, "Técnico informático en prácticas");
+  assert.equal(en.experience.experience_list[0].title, "Web Application Developer Intern");
   assert.equal(en.experience.experience_list[0].contract, "Internship");
-  assert.equal(en.experience.experience_list[0].period, "Apr 2026 — May 2026");
+  assert.equal(en.experience.experience_list[0].period, "Feb 2026 — May 2026");
+  assert.equal(en.experience.experience_list[1].title, "IT Technician Intern");
 });

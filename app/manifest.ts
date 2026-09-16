@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Alex Vicente López — Portfolio",
     short_name: "aleviclop.dev",
     description:
-      "Portfolio of Alex Vicente López, Frontend / Full-Stack Developer.",
+      "Portfolio profesional de Alex Vicente López, Desarrollador Full-Stack Junior.",
     start_url: "/",
     scope: "/",
     display: "standalone",

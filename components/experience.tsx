@@ -42,7 +42,7 @@ export function Experience() {
       </div>
       <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-border/55 pt-6">
         <p className="text-sm text-muted-foreground">{t.experience.cv_title}</p>
-        <a href="/cv/CV_Alex_Vicente_Lopez.pdf" download className="cinema-link min-h-11 text-sm"><FileText aria-hidden="true" size={16} />{t.experience.cv_btn}</a>
+        <a href="/cv/CV_Alex_Vicente_Lopez.pdf?v=2026-09" download data-track="cv-download" className="cinema-link min-h-11 text-sm"><FileText aria-hidden="true" size={16} />{t.experience.cv_btn}</a>
       </div>
     </div>
   </section>;

@@ -35,7 +35,7 @@ export function Hero() {
           <span className={styles.mask}><span className="hero-mask-line">Alex</span></span>
           <span className={styles.mask}><span className="hero-mask-line">Vicente</span></span>
         </h1>
-        <p className={`hero-reveal ${styles.role}`}>Frontend / Full-Stack Developer</p>
+        <p className={`hero-reveal ${styles.role}`}>{language === "es" ? "Desarrollador Full-Stack Junior" : "Junior Full-Stack Developer"}</p>
         <p className={`hero-reveal ${styles.description}`}>{t.hero.description}</p>
         <div className={`hero-reveal ${styles.actions}`}>
           <a data-cursor="project" href="#projects" className={styles.primary}>
@@ -46,7 +46,7 @@ export function Hero() {
         <div className={`hero-reveal ${styles.socials}`}>
           <a href="https://github.com/AVL05" target="_blank" rel="noopener noreferrer" className="cinema-link"><FaGithub aria-hidden="true" />GitHub</a>
           <a href="https://www.linkedin.com/in/aleviclop/" target="_blank" rel="noopener noreferrer" className="cinema-link"><FaLinkedin aria-hidden="true" />LinkedIn</a>
-          <a href="/cv/CV_Alex_Vicente_Lopez.pdf" download className="cinema-link"><FileText aria-hidden="true" size={15} />CV</a>
+          <a href="/cv/CV_Alex_Vicente_Lopez.pdf?v=2026-09" download data-track="cv-download" className="cinema-link"><FileText aria-hidden="true" size={15} />CV</a>
         </div>
       </div>
 

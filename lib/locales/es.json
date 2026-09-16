@@ -7,8 +7,8 @@
     "contact": "Contacto"
   },
   "hero": {
-    "status": "Disponible para oportunidades y proyectos freelance",
-    "description": "Interfaces cuidadas con React / Next.js. Del diseño a la API, con atención a cada detalle.",
+    "status": "Disponible para nuevas oportunidades profesionales y proyectos seleccionados",
+    "description": "Desarrollo aplicaciones web y productos digitales de principio a fin, combinando frontend, backend y una base técnica en sistemas.",
     "cta_github": "GitHub",
     "cta_linkedin": "LinkedIn",
     "scroll": "Desplazar",
@@ -25,34 +25,34 @@
   },
   "skills": {
     "title": "Tecnologías",
-    "subtitle": "Cómo construyo interfaces",
-    "desc": "Una interfaz clara, una base mantenible y una entrega cuidada.",
+    "subtitle": "Cómo construyo aplicaciones",
+    "desc": "Tecnologías y herramientas que utilizo para desarrollar, probar y entregar productos web de principio a fin.",
     "technologies": "Tecnologías",
     "tools": "Herramientas",
     "groups": [
       {
-        "area": "Desarrollo",
+        "area": "Frontend",
         "stack": [
           "React",
           "Next.js",
-          "TypeScript",
-          "Laravel",
-          "PHP",
-          "MySQL",
-          "APIs"
-        ]
-      },
-      {
-        "area": "Diseño e interacción",
-        "stack": [
-          "Tailwind",
+          "JavaScript",
+          "Tailwind CSS",
           "GSAP",
           "Accesibilidad",
           "UI responsive"
         ]
       },
       {
-        "area": "Construcción y entrega",
+        "area": "Backend y datos",
+        "stack": [
+          "PHP",
+          "Laravel",
+          "MySQL",
+          "APIs"
+        ]
+      },
+      {
+        "area": "Herramientas y entrega",
         "stack": [
           "Git",
           "Docker",
@@ -60,13 +60,21 @@
           "Vercel",
           "Testing"
         ]
+      },
+      {
+        "area": "IA y experimentación",
+        "stack": [
+          "Inferencia local",
+          "Automatización",
+          "Desarrollo asistido por IA"
+        ]
       }
     ]
   },
   "projects": {
     "title": "Proyectos",
-    "subtitle": "Interfaces con intención.",
-    "desc": "Interfaces, productos y diseño editorial. Cuatro formas de convertir una idea en algo tangible.",
+    "subtitle": "Productos completos, de principio a fin.",
+    "desc": "Selección de proyectos personales y académicos donde he trabajado desarrollo Full-Stack, frontend, backend, APIs y construcción de productos digitales.",
     "concept": "Detalle del proyecto",
     "view_live": "Ver demo",
     "view_code": "Ver código",
@@ -74,28 +82,52 @@
     "outcome_label": "Resultado",
     "items": [
       {
-        "title": "raw.vives",
-        "description": "Archivo fotográfico editorial bilingüe con series curadas, obras individuales, exploración accesible y generación estática.",
-        "image": "/projects/raw-vives/raw-vives-hero.webp",
+        "title": "AI Creative Assistant",
+        "description": "Aplicación de escritorio para analizar contenido multimedia y automatizar parte del proceso creativo mediante modelos de IA ejecutados localmente.",
+        "image": "/projects/ai-creative-assistant-cover.svg",
         "technologies": [
-          "Next.js 16",
-          "React 19",
-          "TypeScript",
-          "Tailwind CSS 4",
-          "GSAP"
+          "Python",
+          "React",
+          "APIs REST",
+          "Inferencia local",
+          "Automatización"
+        ],
+        "category": "Desarrollo Full-Stack",
+        "github": "https://github.com/AVL05/ai-creative-assistant",
+        "type": "Aplicación de escritorio con IA",
+        "role": "Diseño y desarrollo de la arquitectura de la aplicación, integración entre frontend y backend, procesamiento multimedia y experimentación con inferencia local.",
+        "outcome": "Proyecto en desarrollo utilizado también como entorno práctico para aprender desarrollo asistido por IA, agentes, automatización y evaluación de modelos.",
+        "summary": "Análisis multimedia y automatización creativa con IA local.",
+        "evidence": [
+          "IA local",
+          "En desarrollo"
+        ]
+      },
+      {
+        "title": "Distrito Gourmet",
+        "description": "Aplicación web Full-Stack para un restaurante con carta digital, reservas, pedidos y paneles operativos.",
+        "image": "/projects/distrito-gourmet-ui.webp",
+        "technologies": [
+          "React",
+          "Laravel",
+          "MySQL",
+          "Tailwind CSS",
+          "GSAP",
+          "Docker",
+          "Vite",
+          "JavaScript"
         ],
         "category": "Desarrollo Web",
-        "link": "https://rawvives.aleviclop.dev/",
-        "github": "https://github.com/AVL05/alexgallery",
-        "caseStudyHref": "/proyectos/raw-vives",
-        "type": "Archivo fotográfico editorial",
-        "role": "Diseñé e implementé la interfaz, arquitectura, curación, interacción, accesibilidad, SEO localizado y CI/CD.",
-        "outcome": "Archivo bilingüe publicado con fichas individuales, series curadas, navegación por teclado, SEO localizado, tests y despliegue estático en Cloudflare Workers.",
-        "summary": "Archivo fotográfico editorial bilingüe.",
+        "link": "https://distrito.aleviclop.dev/",
+        "github": "https://github.com/AVL05/distrito-gourmet",
+        "caseStudyHref": "/proyectos/distrito-gourmet",
+        "type": "Aplicación full-stack",
+        "role": "Construí la interfaz React, la conecté con Laravel y trabajé los flujos de administración, reservas y pedidos.",
+        "outcome": "Demo completa con operaciones reales de restaurante: menú, carrito, reservas, administración y despliegue público.",
+        "summary": "Carta, reservas y pedidos para un restaurante.",
         "evidence": [
-          "ES / EN",
-          "Despliegue estático",
-          "CI/CD"
+          "Demo pública",
+          "Reservas y pedidos"
         ]
       },
       {
@@ -125,30 +157,28 @@
         ]
       },
       {
-        "title": "Distrito Gourmet",
-        "description": "Aplicación full-stack de restaurante con carta digital, carrito, reservas, pedidos y paneles operativos para administración, sala y cocina.",
-        "image": "/projects/distrito-gourmet-ui.webp",
+        "title": "raw.vives",
+        "description": "Archivo fotográfico editorial bilingüe con series curadas, obras individuales, exploración accesible y generación estática.",
+        "image": "/projects/raw-vives/raw-vives-hero.webp",
         "technologies": [
-          "React",
-          "Laravel",
-          "MySQL",
-          "Tailwind CSS",
-          "GSAP",
-          "Docker",
-          "Vite",
-          "JavaScript"
+          "Next.js 16",
+          "React 19",
+          "TypeScript",
+          "Tailwind CSS 4",
+          "GSAP"
         ],
         "category": "Desarrollo Web",
-        "link": "https://distrito.aleviclop.dev/",
-        "github": "https://github.com/AVL05/distrito-gourmet",
-        "caseStudyHref": "/proyectos/distrito-gourmet",
-        "type": "Aplicación full-stack",
-        "role": "Construí la interfaz React, la conecté con Laravel y trabajé los flujos de administración, reservas y pedidos.",
-        "outcome": "Demo completa con operaciones reales de restaurante: menú, carrito, reservas, administración y despliegue público.",
-        "summary": "Carta, reservas y pedidos para un restaurante.",
+        "link": "https://rawvives.aleviclop.dev/",
+        "github": "https://github.com/AVL05/alexgallery",
+        "caseStudyHref": "/proyectos/raw-vives",
+        "type": "Proyecto web y fotográfico",
+        "role": "Diseñé e implementé la interfaz, arquitectura, curación, interacción, accesibilidad, SEO localizado y CI/CD.",
+        "outcome": "Archivo bilingüe publicado con fichas individuales, series curadas, navegación por teclado, SEO localizado, tests y despliegue estático en Cloudflare Workers.",
+        "summary": "Archivo fotográfico editorial bilingüe.",
         "evidence": [
-          "Demo pública",
-          "Reservas y pedidos"
+          "ES / EN",
+          "Despliegue estático",
+          "CI/CD"
         ]
       },
       {
@@ -260,20 +290,20 @@
     ],
     "experience_list": [
       {
-        "title": "Desarrollador de Aplicaciones Web",
+        "title": "Desarrollador de Aplicaciones Web en prácticas",
         "contract": "Prácticas",
         "company": "Burguet Sistemas",
-        "period": "Abr 2026 — May 2026",
+        "period": "feb. 2026 — may. 2026",
         "location": "Xirivella, Valencia",
-        "description": "Desarrollo y mantenimiento de productos internos en un entorno profesional híbrido.",
+        "description": "Desarrollo y mantenimiento de una intranet corporativa. Colaboración en aplicación de escritorio para gestión de parking. Git y Bitbucket.",
         "highlights": [
-          "Desarrollé interfaces React para una intranet corporativa integrada con PHP.",
-          "Colaboré en una aplicación de escritorio de gestión de parking con React y Electron.",
-          "Resolví incidencias y trabajé de forma coordinada con Git y Bitbucket."
+          "Desarrollo y mantenimiento de una intranet corporativa.",
+          "Colaboración en una aplicación de escritorio para gestión de parking.",
+          "Trabajo coordinado con Git y Bitbucket."
         ]
       },
       {
-        "title": "Técnico de Soporte Informático",
+        "title": "Técnico informático en prácticas",
         "contract": "Prácticas",
         "company": "Ajuntament de Carlet",
         "period": "Mar 2024 — Jun 2024",
@@ -288,24 +318,31 @@
   },
   "contact": {
     "title": "Contacto",
-    "subtitle": "¿Tienes una idea? Hablemos.",
-    "desc": "Cuéntame qué quieres construir o qué necesita tu equipo.",
+    "subtitle": "¿Hablamos?",
+    "desc": "Estoy disponible para oportunidades de desarrollo y proyectos seleccionados.",
     "form_name": "Tu nombre",
     "form_email": "Tu email",
     "form_message": "Tu mensaje",
     "form_placeholder_name": "Tu nombre",
     "form_placeholder_email": "hola@ejemplo.com",
-    "form_placeholder_message": "Cuéntame qué necesitas o qué oportunidad tienes en mente...",
+    "form_placeholder_message": "Cuéntame qué oportunidad tienes en mente o en qué puedo encajar en tu equipo...",
     "form_btn_send": "ENVIAR MENSAJE",
     "form_btn_sending": "ENVIANDO...",
     "form_success": "Mensaje enviado. Te responderé pronto.",
     "form_error": "Algo salió mal. Inténtalo de nuevo.",
+    "form_error_network": "No hay conexión o el envío tardó demasiado. Revisa tu conexión e inténtalo de nuevo: tu mensaje sigue en el formulario.",
+    "form_error_rate": "Has enviado varios mensajes seguidos. Espera unos minutos antes de reintentarlo.",
+    "form_error_config": "El formulario no está disponible ahora mismo. Escríbeme directamente a alexviclop@gmail.com.",
+    "form_retry": "Reintentar envío",
+    "form_fallback": "O escríbeme directamente:",
+    "form_message_count": "caracteres",
+    "form_message_min": "Mínimo 20 caracteres.",
     "form_error_name": "Escribe un nombre de al menos 2 caracteres.",
     "form_error_email": "Introduce un email válido, por ejemplo nombre@empresa.com.",
     "form_error_message": "Escribe un mensaje de al menos 20 caracteres.",
     "links_title": "Enlaces directos",
     "availability_title": "Abierto a nuevas oportunidades",
-    "availability_desc": "Oportunidades de desarrollo, proyectos freelance y colaboraciones. Podemos empezar con un mensaje.",
+    "availability_desc": "Abierto a nuevas oportunidades como Desarrollador Full-Stack Junior, tanto presenciales como híbridas o remotas. También valoro proyectos freelance seleccionados.",
     "cv_btn": "Descargar CV",
     "footer_built": "Diseñado y desarrollado por Alex Vicente."
   },
@@ -314,12 +351,12 @@
     "items": [
       {
         "label": "Construyendo",
-        "value": "Alex Creative Space",
-        "href": "#hero"
+        "value": "AI Creative Assistant",
+        "href": "#projects"
       },
       {
-        "label": "Explorando",
-        "value": "3D · WebGL",
+        "label": "Aprendiendo",
+        "value": "IA aplicada al desarrollo · agentes",
         "href": ""
       },
       {

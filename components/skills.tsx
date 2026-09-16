@@ -35,7 +35,7 @@ export function Skills() {
           <div>
             <p className="section-kicker">{language === "es" ? "02 / Perfil y capacidades" : "02 / Profile & capabilities"}</p>
             <h2 id="capabilities-title" className="mt-5 text-[clamp(3rem,7vw,7rem)] font-black leading-[.98] tracking-[-.075em]">
-              {language === "es" ? <>Interfaces<br />con criterio.</> : <>Built<br />with intent.</>}
+              {language === "es" ? <>De principio<br />a fin.</> : <>End-to-end<br />products.</>}
             </h2>
           </div>
           <p className="max-w-[38ch] text-lg leading-relaxed text-muted-foreground md:justify-self-end">{t.skills.desc}</p>

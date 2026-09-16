@@ -107,7 +107,7 @@ export function CreativeRoomHero({ activeHotspot = "monitor" }: { activeHotspot?
       aria-modal={expanded || undefined} aria-label="Alex Creative Space">
       <div className={styles.caption}><span>Alex Creative Space</span><span>{es ? "Desarrollo · Fotografía · Montaña" : "Development · Photography · Mountains"}</span></div>
       <div data-room-visual className={styles.visual}><div className={styles.poster} data-ready={ready} aria-hidden="true">
-        <Image src={roomPreviewConfig.src} alt="" fill sizes="(min-width: 1024px) 60vw, 100vw" preload unoptimized />
+        <Image src={roomPreviewConfig.src} alt="" fill sizes="(min-width: 1024px) 60vw, 100vw" priority fetchPriority="high" />
       </div>
       <div className={styles.scene} data-ready={ready} inert={!ready} aria-hidden={!ready}>
       <SceneBoundary onError={onUnavailable}>

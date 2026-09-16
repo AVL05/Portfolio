@@ -110,6 +110,13 @@ interface Translation {
     form_btn_sending: string;
     form_success: string;
     form_error: string;
+    form_error_network: string;
+    form_error_rate: string;
+    form_error_config: string;
+    form_retry: string;
+    form_fallback: string;
+    form_message_count: string;
+    form_message_min: string;
     form_error_name: string;
     form_error_email: string;
     form_error_message: string;

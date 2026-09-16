@@ -47,6 +47,7 @@ test("legacy glass and glow surface styles do not return", () => {
 
 test("contact form exposes localized inline validation", () => {
   const contact = read("components/contact.tsx");
+  const route = read("app/api/contact/route.ts");
   const es = read("lib/locales/es.json");
   const en = read("lib/locales/en.json");
 
@@ -54,9 +55,20 @@ test("contact form exposes localized inline validation", () => {
   assert.match(contact, /aria-invalid/);
   assert.match(contact, /aria-describedby/);
   assert.match(contact, /requestAnimationFrame/);
-  assert.match(contact, /AbortSignal\.timeout\(12_000\)/);
+  // El cliente envía a la API propia (sin claves expuestas) con timeout;
+  // el timeout de 12s vive en el servidor para el proveedor upstream.
+  assert.match(contact, /fetch\("\/api\/contact"/);
+  assert.match(contact, /AbortSignal\.timeout\(15_000\)/);
+  assert.match(route, /UPSTREAM_TIMEOUT_MS = 12_000/);
+  assert.match(route, /web3forms/i);
+  assert.doesNotMatch(route, /resend/i);
+  assert.doesNotMatch(contact, /web3forms\.com\/submit/);
+  assert.doesNotMatch(contact, /access_key/);
+  assert.match(contact, /aria-live="polite"/);
   assert.match(es, /"form_error_email"/);
   assert.match(en, /"form_error_email"/);
+  assert.match(es, /"form_error_network"/);
+  assert.match(en, /"form_error_network"/);
 });
 
 test("focus, lazy 3D hero, and localized Open Graph contracts remain explicit", () => {
@@ -163,7 +175,7 @@ test("secondary work stays compact with visible media and real destinations", ()
 test("the recruiter view keeps exactly four featured projects plus an archive", () => {
   const projects = read("components/projects.tsx");
 
-  assert.match(projects, /const featuredIndexes = \[0, 1, 2, 6\]/);
+  assert.match(projects, /const featuredIndexes = \[0, 1, 2, 3\]/);
   assert.match(projects, /archive = projects\.filter/);
   assert.match(projects, /Ver caso de estudio/);
   assert.match(projects, /View case study/);

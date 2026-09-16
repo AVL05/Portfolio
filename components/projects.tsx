@@ -8,7 +8,7 @@ import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { useLanguage, type ProjectItem as Project } from "@/lib/language-context";
 
-const featuredIndexes = [0, 1, 2, 6];
+const featuredIndexes = [0, 1, 2, 3];
 
 const viewTransitionName = (project: Project) =>
   `project-${project.caseStudyHref?.split("/").pop() ?? "editorial"}`;

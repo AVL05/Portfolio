@@ -11,13 +11,13 @@ export const SITE_URL =
 
 export const SITE_NAME = "Alex Vicente López";
 export const SITE_TITLE =
-  "Alex Vicente López | Frontend / Full-Stack Developer · React / Next.js";
+  "Alex Vicente López | Desarrollador Full-Stack Junior";
 export const EN_SITE_TITLE =
-  "Alex Vicente López | Frontend / Full-Stack Developer · React / Next.js";
+  "Alex Vicente López | Junior Full-Stack Developer";
 export const SITE_DESCRIPTION =
-  "Portfolio de Alex Vicente López, Frontend / Full-Stack Developer en Valencia especializado en React y Next.js, con experiencia en Laravel, PHP y MySQL.";
+  "Portfolio de Alex Vicente López, Desarrollador Full-Stack Junior en Valencia con formación en Desarrollo de Aplicaciones Web y Sistemas Microinformáticos y Redes, experiencia profesional y proyectos propios.";
 export const EN_SITE_DESCRIPTION =
-  "Portfolio of Alex Vicente López, a Valencia-based Frontend / Full-Stack Developer focused on React and Next.js, with Laravel, PHP, and MySQL experience.";
+  "Portfolio of Alex Vicente López, Junior Full-Stack Developer in Valencia with training in Web Application Development and IT Systems and Networks, professional experience and personal projects.";
 
 export const SEO_KEYWORDS = [
   "Alex Vicente López",
@@ -32,14 +32,10 @@ export const SEO_KEYWORDS = [
   "Next.js",
   "Laravel",
   "PHP",
-  "frontend",
-  "frontend developer Valencia",
-  "React developer Valencia",
-  "Next.js developer Valencia",
-  "full-stack developer Valencia",
+  "desarrollador full-stack junior Valencia",
+  "junior full-stack developer Valencia",
   "desarrollador full-stack Valencia",
-  "desarrollador full-stack freelance Valencia",
-  "freelance web developer Valencia",
+  "full-stack developer Valencia",
   "desarrollador de aplicaciones web",
   "fotografía",
   "diseño digital",
@@ -171,29 +167,33 @@ export const personJsonLd = {
   alternateName: ["Alex Vicente", "Alex Vicente Lopez", "aleviclop", "AVL05"],
   url: SITE_URL,
   email: "mailto:alexviclop@gmail.com",
-  jobTitle: "Frontend / Full-Stack Developer",
+  jobTitle: "Desarrollador Full-Stack Junior",
   description:
-    "Alex Vicente López es Frontend / Full-Stack Developer especializado en React y Next.js, con capacidad full-stack en Laravel, PHP y MySQL y disponibilidad freelance.",
+    "Alex Vicente López es Desarrollador Full-Stack Junior con formación en Desarrollo de Aplicaciones Web y Sistemas Microinformáticos y Redes, experiencia en desarrollo de software y proyectos propios.",
   image: `${SITE_URL}/api/og?lang=es`,
   sameAs: SAME_AS,
   knowsAbout: [
     "Desarrollo web",
+    "Aplicaciones full-stack",
     "React",
     "Next.js",
-    "TypeScript",
+    "JavaScript",
     "Laravel",
     "PHP",
     "MySQL",
+    "APIs REST",
     "Tailwind CSS",
     "GSAP",
+    "Docker",
+    "IA aplicada",
     "Fotografía",
     "Diseño editorial",
   ],
   hasOccupation: {
     "@type": "Occupation",
-    name: "Frontend / Full-Stack Developer",
+    name: "Desarrollador Full-Stack Junior",
     skills:
-      "React, Next.js, TypeScript, JavaScript, Tailwind CSS, accesibilidad, diseño de interfaces, Laravel, PHP, MySQL",
+      "React, Next.js, JavaScript, Tailwind CSS, Laravel, PHP, MySQL, APIs REST, Git, Docker, accesibilidad, IA aplicada",
   },
   alumniOf: [
     {
@@ -248,6 +248,18 @@ export function breadcrumbJsonLd(
       position: index + 1,
       name: item.name,
       item: absoluteUrl(item.path),
+    })),
+  };
+}
+
+export function faqJsonLd(items: Array<{ question: string; answer: string }>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
     })),
   };
 }

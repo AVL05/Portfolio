@@ -1,6 +1,6 @@
 # Alex Vicente López — Portfolio
 
-Portfolio profesional de [Alex Vicente López](https://www.aleviclop.dev), Frontend / Full-Stack Developer centrado en React y Next.js, con experiencia en Laravel, PHP y MySQL y disponibilidad freelance en Valencia. Presenta casos de estudio, experiencia profesional y trabajo fotográfico mediante una experiencia bilingüe y accesible.
+Portfolio profesional de [Alex Vicente López](https://www.aleviclop.dev), Desarrollador Full-Stack Junior en Valencia con formación en Desarrollo de Aplicaciones Web y Sistemas Microinformáticos y Redes, experiencia profesional y proyectos propios. Presenta casos de estudio, experiencia profesional y trabajo fotográfico mediante una experiencia bilingüe y accesible.
 
 [Ver portfolio](https://www.aleviclop.dev) · [Explorar raw.vives](https://rawvives.aleviclop.dev) · [GitHub](https://github.com/AVL05) · [LinkedIn](https://www.linkedin.com/in/aleviclop/)
 
@@ -9,7 +9,7 @@ Portfolio profesional de [Alex Vicente López](https://www.aleviclop.dev), Front
 ## Características
 
 - Presentación profesional en español e inglés con preferencia persistente.
-- Casos de estudio para interfaces frontend, aplicaciones full-stack y proyectos editoriales.
+- Casos de estudio para aplicaciones full-stack, backend y APIs, y proyectos web y fotográficos.
 - Contenido responsive con navegación accesible y objetivos táctiles adecuados.
 - Animaciones GSAP compatibles con `prefers-reduced-motion`.
 - SEO localizado con canonical, sitemap, robots, Open Graph, Twitter Cards y JSON-LD.
@@ -70,6 +70,17 @@ La aplicación mantiene separadas las responsabilidades de presentación, estado
 pnpm install --frozen-lockfile
 pnpm dev
 ```
+
+El formulario de contacto se envía a `POST /api/contact`, que valida,
+aplica rate-limit y anti-spam (honeypot + time-trap) y reenvía a Web3Forms
+desde el servidor con reintento. Configura la clave solo en el servidor:
+
+```bash
+WEB3FORMS_ACCESS_KEY=tu-clave-aqui
+```
+
+Sin esta variable el formulario responde `503` con alternativa a email
+directo, y el borrador del usuario se conserva en `localStorage`.
 
 El servidor de desarrollo usa Turbopack para reducir la compilación inicial. La aplicación estará disponible en la URL indicada por Next.js. Para diagnosticar diferencias entre compiladores, usa `pnpm dev:webpack`.
 

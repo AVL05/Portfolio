@@ -8,32 +8,87 @@ import { Textarea } from "@/components/ui/textarea";
 import { ArrowUpRight, FileText, Mail } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import type React from "react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap, prefersReducedMotion, useGSAP } from "@/lib/gsap";
 import { useLanguage } from "@/lib/language-context";
 import { localizeHref } from "@/lib/i18n-paths";
 import { RevealHeader } from "@/components/reveal-header";
+import { CONTACT_LIMITS } from "@/lib/contact";
 
 type ContactField = "name" | "email" | "message";
 type ContactFormErrors = Partial<Record<ContactField, true>>;
+type SubmitCode =
+  | "provider_error"
+  | "network_error"
+  | "rate_limited"
+  | "not_configured"
+  | "too_fast"
+  | null;
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const DRAFT_KEY = "portfolio-contact-draft";
+const CV_HREF = "/cv/CV_Alex_Vicente_Lopez.pdf?v=2026-09";
 
 export function Contact() {
   const { language, t } = useLanguage();
   const containerRef = useRef<HTMLElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
+  const statusRef = useRef<HTMLDivElement>(null);
+  const startedAtRef = useRef<number>(Date.now());
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
-    botcheck: "",
+    website: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"success" | "error" | null>(
     null,
   );
+  const [submitCode, setSubmitCode] = useState<SubmitCode>(null);
   const [formErrors, setFormErrors] = useState<ContactFormErrors>({});
+
+  // Restaura el borrador si el usuario recarga o el envío falla: el mensaje nunca se pierde.
+  useEffect(() => {
+    try {
+      const raw = window.localStorage.getItem(DRAFT_KEY);
+      if (!raw) return;
+      const draft = JSON.parse(raw) as Partial<
+        Record<"name" | "email" | "message", string>
+      >;
+      setFormData((current) => ({
+        ...current,
+        name: typeof draft.name === "string" ? draft.name.slice(0, 120) : "",
+        email: typeof draft.email === "string" ? draft.email.slice(0, 254) : "",
+        message:
+          typeof draft.message === "string"
+            ? draft.message.slice(0, CONTACT_LIMITS.messageMax)
+            : "",
+      }));
+    } catch {
+      // Sin almacenamiento disponible: el formulario sigue funcionando.
+    }
+  }, []);
+
+  // Guarda el borrador en cada cambio para no perderlo nunca.
+  useEffect(() => {
+    try {
+      if (!formData.name && !formData.email && !formData.message) {
+        window.localStorage.removeItem(DRAFT_KEY);
+        return;
+      }
+      window.localStorage.setItem(
+        DRAFT_KEY,
+        JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        }),
+      );
+    } catch {
+      // Ignora errores de cuota o modo privado.
+    }
+  }, [formData.name, formData.email, formData.message]);
 
   const isFieldInvalid = (field: ContactField, value: string) => {
     const normalizedValue = value.trim();
@@ -82,6 +137,79 @@ export function Contact() {
     });
   };
 
+  const errorMessageFor = (code: SubmitCode) => {
+    if (code === "rate_limited" || code === "too_fast") {
+      return t.contact.form_error_rate;
+    }
+    if (code === "not_configured") {
+      return t.contact.form_error_config;
+    }
+    if (code === "network_error" || code === "provider_error") {
+      return t.contact.form_error_network;
+    }
+    return t.contact.form_error;
+  };
+
+  const send = async () => {
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+    setSubmitCode(null);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          message: formData.message.trim(),
+          website: formData.website,
+          startedAt: startedAtRef.current,
+          language,
+        }),
+        signal: AbortSignal.timeout(15_000),
+      });
+
+      const data = (await response.json().catch(() => null)) as {
+        ok?: boolean;
+        code?: string;
+      } | null;
+
+      if (response.ok && data?.ok) {
+        setSubmitStatus("success");
+        setSubmitCode(null);
+        setFormErrors({});
+        setFormData({ name: "", email: "", message: "", website: "" });
+        try {
+          window.localStorage.removeItem(DRAFT_KEY);
+        } catch {
+          // Ignora errores de almacenamiento.
+        }
+        startedAtRef.current = Date.now();
+      } else {
+        setSubmitStatus("error");
+        const code = data?.code;
+        setSubmitCode(
+          code === "rate_limited" ||
+          code === "too_fast" ||
+          code === "not_configured" ||
+          code === "provider_error"
+            ? code
+            : "provider_error",
+        );
+      }
+    } catch {
+      // Timeout, sin conexión o respuesta no-JSON: el borrador queda guardado.
+      setSubmitStatus("error");
+      setSubmitCode("network_error");
+    } finally {
+      setIsSubmitting(false);
+      window.requestAnimationFrame(() => {
+        statusRef.current?.focus();
+      });
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const nextErrors = (["name", "email", "message"] as ContactField[]).reduce(
@@ -104,41 +232,10 @@ export function Contact() {
       return;
     }
 
-    setIsSubmitting(true);
-    setSubmitStatus(null);
-
-    try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          access_key: "d72eeacd-28fc-442b-83bd-b8c383c5997e",
-          subject:
-            language === "es"
-              ? "Nuevo contacto - Portfolio Dev"
-              : "New contact - Developer portfolio",
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-          botcheck: formData.botcheck,
-        }),
-        signal: AbortSignal.timeout(12_000),
-      });
-
-      const data = (await response.json()) as { success?: boolean };
-      if (response.ok && data.success) {
-        setSubmitStatus("success");
-        setFormErrors({});
-        setFormData({ name: "", email: "", message: "", botcheck: "" });
-      } else {
-        setSubmitStatus("error");
-      }
-    } catch {
-      setSubmitStatus("error");
-    } finally {
-      setIsSubmitting(false);
-    }
+    await send();
   };
+
+  const messageLength = formData.message.trim().length;
 
   useGSAP(
     () => {
@@ -195,21 +292,21 @@ export function Contact() {
                 className="space-y-6 p-5 sm:p-8"
                 noValidate
               >
-                <input
-                  type="checkbox"
-                  name="botcheck"
-                  className="hidden"
-                  tabIndex={-1}
-                  aria-hidden="true"
-                  autoComplete="off"
-                  value={formData.botcheck}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      botcheck: e.target.checked ? "true" : "",
-                    })
-                  }
-                />
+                {/* Honeypot anti-spam: invisible para personas, irresistible para bots. */}
+                <div aria-hidden="true" className="absolute h-px w-px overflow-hidden">
+                  <label htmlFor="website">Website</label>
+                  <input
+                    id="website"
+                    type="text"
+                    name="website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={formData.website}
+                    onChange={(e) =>
+                      setFormData({ ...formData, website: e.target.value })
+                    }
+                  />
+                </div>
 
                 <div className="space-y-2">
                   <label
@@ -276,12 +373,21 @@ export function Contact() {
                 </div>
 
                 <div className="space-y-2">
-                  <label
-                    htmlFor="message"
-                    className="ml-0.5 block text-xs font-bold uppercase tracking-[0.16em] text-primary/80"
-                  >
-                    {t.contact.form_message}
-                  </label>
+                  <div className="ml-0.5 flex items-baseline justify-between gap-3">
+                    <label
+                      htmlFor="message"
+                      className="block text-xs font-bold uppercase tracking-[0.16em] text-primary/80"
+                    >
+                      {t.contact.form_message}
+                    </label>
+                    <span
+                      id="message-count"
+                      className="font-mono text-[11px] text-muted-foreground tabular-nums"
+                    >
+                      {messageLength}/{CONTACT_LIMITS.messageMax}{" "}
+                      {t.contact.form_message_count}
+                    </span>
+                  </div>
                   <Textarea
                     id="message"
                     name="message"
@@ -289,9 +395,9 @@ export function Contact() {
                     rows={5}
                     value={formData.message}
                     minLength={20}
-                    maxLength={4000}
+                    maxLength={CONTACT_LIMITS.messageMax}
                     aria-invalid={Boolean(formErrors.message)}
-                    aria-describedby={formErrors.message ? "message-error" : undefined}
+                    aria-describedby={`message-count${formErrors.message ? " message-error" : ""}`}
                     onBlur={() => validateOnBlur("message")}
                     onChange={(e) => updateField("message", e.target.value)}
                     className="resize-none rounded-lg border-border/70 bg-secondary/50 p-4 text-base placeholder:text-muted-foreground/70 focus-visible:border-primary focus-visible:ring-primary/40"
@@ -302,7 +408,11 @@ export function Contact() {
                     className="min-h-5 text-sm font-medium text-destructive"
                     aria-live="polite"
                   >
-                    {formErrors.message ? getFieldError("message") : ""}
+                    {formErrors.message
+                      ? getFieldError("message")
+                      : messageLength > 0 && messageLength < 20
+                        ? t.contact.form_message_min
+                        : ""}
                   </p>
                 </div>
 
@@ -317,16 +427,43 @@ export function Contact() {
                     : t.contact.form_btn_send}
                 </Button>
 
-                {submitStatus === "success" && (
-                  <p role="status" className="rounded-lg border border-primary/25 bg-primary/10 px-4 py-3 text-center text-sm font-medium text-primary">
-                    {t.contact.form_success}
-                  </p>
-                )}
-                {submitStatus === "error" && (
-                  <p role="alert" className="rounded-lg border border-destructive/25 bg-destructive/10 px-4 py-3 text-center text-sm font-medium text-destructive">
-                    {t.contact.form_error}
-                  </p>
-                )}
+                <div ref={statusRef} tabIndex={-1} aria-live="polite">
+                  {submitStatus === "success" && (
+                    <p role="status" className="rounded-lg border border-primary/25 bg-primary/10 px-4 py-3 text-center text-sm font-medium text-primary">
+                      {t.contact.form_success}
+                    </p>
+                  )}
+                  {submitStatus === "error" && (
+                    <div role="alert" className="rounded-lg border border-destructive/25 bg-destructive/10 px-4 py-3 text-center">
+                      <p className="text-sm font-medium text-destructive">
+                        {errorMessageFor(submitCode)}
+                      </p>
+                      <div className="mt-3 flex flex-col items-center justify-center gap-2 sm:flex-row">
+                        {submitCode !== "not_configured" && (
+                          <Button
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            onClick={send}
+                            disabled={isSubmitting}
+                            className="min-h-11"
+                          >
+                            {t.contact.form_retry}
+                          </Button>
+                        )}
+                        <p className="text-xs text-muted-foreground">
+                          {t.contact.form_fallback}{" "}
+                          <a
+                            href="mailto:alexviclop@gmail.com"
+                            className="font-semibold text-primary underline underline-offset-2"
+                          >
+                            alexviclop@gmail.com
+                          </a>
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </form>
             </Card>
           </div>
@@ -359,8 +496,9 @@ export function Contact() {
 
               <div className="flex flex-wrap gap-3">
                 <a
-                  href="/cv/CV_Alex_Vicente_Lopez.pdf"
+                  href={CV_HREF}
                   download
+                  data-track="cv-download"
                   className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-primary-foreground transition-all hover:-translate-y-0.5 hover:bg-primary/90"
                 >
                   <FileText className="h-4 w-4" />

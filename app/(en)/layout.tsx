@@ -66,7 +66,7 @@ const enJsonLd = [
   {
     ...personJsonLd,
     description:
-      "Alex Vicente López is a Frontend / Full-Stack Developer focused on React and Next.js, with full-stack experience in Laravel, PHP, and MySQL and freelance availability.",
+      "Alex Vicente López is a Junior Full-Stack Developer with training in Web Application Development and IT Systems and Networks, software development experience and personal projects.",
   },
   {
     ...websiteJsonLd,
@@ -75,10 +75,10 @@ const enJsonLd = [
   {
     ...profilePageJsonLd,
     "@id": `${SITE_URL}/en/#profile-page`,
-    name: "Alex Vicente López - Frontend / Full-Stack Developer profile",
+    name: "Alex Vicente López - Junior Full-Stack Developer profile",
     url: `${SITE_URL}/en`,
     description:
-      "Professional Frontend / Full-Stack Developer profile of Alex Vicente López, focused on React and Next.js with supporting full-stack experience.",
+      "Professional Junior Full-Stack Developer profile of Alex Vicente López, with training in web applications and IT systems plus professional experience.",
     inLanguage: "en",
   },
 ];

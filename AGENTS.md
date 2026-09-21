@@ -1,48 +1,247 @@
 # Repository Guidelines
 
-## Project Structure & Module Organization
+## Project Mission
 
-This is a Next.js 16 App Router portfolio built with React 19 and TypeScript.
+This repository is the professional portfolio of Alex Vicente López. Its primary goal is to present Alex clearly as a **Junior Full-Stack Developer** with real end-to-end work across frontend, backend, APIs, data, systems, and applied AI.
 
-- `app/`: routes, layouts, metadata, global styles, sitemap, and robots files.
-- `components/`: page sections and reusable UI. Shared primitives live in `components/ui/`.
-- `lib/`: language state, GSAP setup, SEO helpers, and other shared utilities. Keep ES/EN content aligned in `lib/locales/`.
+The site should help recruiters and product/engineering teams understand the professional profile, inspect credible project evidence, download the CV, and contact Alex quickly.
+
+Preserve these product truths:
+
+- Lead with full-stack capability and concrete project outcomes, not technology lists.
+- Do not overstate experience, responsibility, metrics, clients, or results.
+- Keep the four primary projects prominent: AI Creative Assistant, Distrito Gourmet, LumaFlow Studio, and raw.vives.
+- Treat raw.vives as a web + photography case study, not as a second profession.
+- Visual ambition must support readability, accessibility, performance, and the work itself.
+- Avoid generic SaaS/AI portfolio aesthetics: gratuitous glassmorphism, glow-heavy UI, counters, repetitive cards, or effects without product value.
+
+For product or visual decisions, consult `PRODUCT.md` and `DESIGN.md` before introducing a new direction.
+
+## Stack and Runtime
+
+Use the existing stack. Do not replace technologies unless explicitly requested.
+
+- Next.js 16.3.4, App Router
+- React 19
+- TypeScript 5.7
+- Tailwind CSS 4
+- GSAP + `@gsap/react`, ScrollTrigger, ScrollToPlugin
+- React Three Fiber / Drei / Three.js
+- Radix UI, Lucide, React Icons, Geist
+- Node.js 22
+- pnpm 10
+- Node `node:test` + Playwright
+- Vercel + GitHub Actions
+
+Package manager is pnpm. Respect `pnpm-lock.yaml`; do not switch to npm, yarn, or bun.
+
+## Repository Map
+
+- `app/`: routes, layouts, metadata, API endpoints, sitemap, robots, global styles.
+- `components/`: page sections and reusable components.
+- `components/ui/`: shared UI primitives.
 - `hooks/`: reusable React hooks.
-- `public/`: production assets, including project media, selected photography, and the downloadable CV.
-- `tests/`: Node test files; current integration coverage is in `raw-vives-integration.test.mjs`.
-- `docs/` and root `PRODUCT.md` / `DESIGN.md`: product, content, and visual direction references.
+- `lib/`: i18n routing, locale state/content, SEO helpers, GSAP setup, and shared utilities.
+- `public/`: production images, project media, downloadable CV, and other published assets.
+- `tests/`: Node integration/contract tests.
+- `tests/e2e/`: Playwright browser tests.
+- `docs/`: technical documentation.
+- `PRODUCT.md`: durable product positioning and content constraints.
+- `DESIGN.md`: visual system, interaction principles, and design rules.
 
-## Build, Test, and Development Commands
+Prefer existing components, hooks, helpers, tokens, and utilities before creating new abstractions.
 
-Use Node.js 22 and pnpm 10.
+## Routing, i18n, and Content
+
+Spanish lives at the root; English lives under `/en`.
+
+Maintain ES/EN parity for public content and navigation. When changing routes, locale behavior, metadata, or indexability:
+
+1. inspect `lib/i18n-paths.ts`;
+2. reuse the existing alternate-path helpers;
+3. keep Spanish and English route pairs aligned;
+4. update relevant tests when contracts change.
+
+Do not create a parallel `/es` site. Existing `/es/*` handling is intentional redirect normalization.
+
+Current SEO contracts include 16 indexable URLs: 8 ES + 8 EN. Legal pages remain noindex and are intentionally excluded from the sitemap/indexable set.
+
+When changing copy, keep claims factual and aligned across ES/EN. Do not invent metrics, employers, responsibilities, testimonials, or project outcomes.
+
+## SEO and Metadata
+
+Use `lib/seo.ts` and existing metadata helpers instead of hand-rolling canonical, hreflang, Open Graph, Twitter, or JSON-LD logic.
+
+Preserve:
+
+- canonical consistency with `https://www.aleviclop.dev` unless `NEXT_PUBLIC_SITE_URL` overrides it;
+- reciprocal ES/EN hreflang;
+- `x-default` pointing to Spanish;
+- sitemap/robots consistency;
+- structured data contracts;
+- noindex behavior for non-indexable routes.
+
+A routing or metadata change is incomplete until its SEO impact is checked.
+
+## UI, Design, and Motion
+
+Follow `DESIGN.md` as the visual authority.
+
+Core direction: **Visual Systems / Quiet Cinema** — dark, precise, editorial, image-led, with controlled copper accent and purposeful motion.
+
+Do not introduce a new visual language casually. In particular, avoid:
+
+- generic SaaS card grids;
+- decorative glassmorphism;
+- gratuitous glow effects;
+- excessive pill UI;
+- repeated card-in-card layouts;
+- motion added only because it is possible.
+
+Motion has a budget: one orchestrated hero entrance, restrained list/section entrances, and purposeful state microinteractions. Avoid continuous parallax or stacked effects unless the existing design explicitly calls for them.
+
+All non-essential motion must respect `prefers-reduced-motion`. Clean up GSAP contexts, observers, listeners, RAF loops, and Three.js resources.
+
+## Accessibility and Responsive Behavior
+
+Target WCAG 2.2 AA.
+
+Preserve:
+
+- keyboard navigation;
+- visible focus states;
+- semantic structure;
+- sufficient contrast;
+- comfortable touch targets;
+- accessible forms and error messaging;
+- reduced-motion alternatives.
+
+For meaningful UI changes, verify at least the representative viewports used by Playwright:
+
+- mobile: 390×844
+- desktop: 1440×900
+
+Do not treat desktop rendering as sufficient evidence for responsive changes.
+
+## Three.js and Rich Media
+
+The home experience and avatar preview use local 3D assets and route-specific CSP allowances.
+
+Before changing Three.js/R3F loading, WASM, blob URLs, image decoding, or CSP:
+
+- inspect `next.config.mjs`;
+- preserve the minimum route-specific permissions required by the existing loaders;
+- do not broaden the global CSP merely to make a local feature work;
+- dispose of geometries, materials, textures, render targets, observers, and animation loops when relevant.
+
+Prefer optimized published assets. Do not commit RAW photographs, temporary exports, unused large originals, or generated working files.
+
+## Contact and Security
+
+The contact flow posts to `/api/contact` and forwards to Web3Forms server-side.
+
+- `WEB3FORMS_ACCESS_KEY` is server-only.
+- Never expose secrets through `NEXT_PUBLIC_*`, client bundles, logs, fixtures, or committed files.
+- Preserve validation, rate limiting, honeypot/time-trap behavior, retry behavior, and the direct-email fallback unless intentionally changing that contract.
+- Never commit `.env` files or credentials.
+
+Security headers and CSP live in `next.config.mjs`. Prefer narrow changes over weakening site-wide policy.
+
+## Coding Conventions
+
+Follow the surrounding code.
+
+- Two-space indentation.
+- Double quotes.
+- Semicolons.
+- PascalCase for React components.
+- camelCase for variables/functions.
+- kebab-case filenames where that convention is already used.
+- Explicit types where inference is unclear.
+
+Keep client components narrowly scoped. Prefer Server Components by default when interactivity is not required.
+
+Do not:
+
+- duplicate logic already provided by a helper or component;
+- add a dependency when the existing stack can reasonably solve the problem;
+- restructure unrelated folders;
+- perform broad refactors while solving a focused task;
+- convert patterns or technologies merely for stylistic preference.
+
+## Development Commands
+
+Use:
 
 ```bash
-pnpm install          # install locked dependencies
-pnpm dev              # run the local Next.js server with webpack
-pnpm lint             # run ESLint across the repository
-pnpm typecheck        # validate TypeScript without emitting files
-pnpm test             # run Node integration tests
-pnpm build            # create the production build
-pnpm start            # serve an existing production build
+pnpm install --frozen-lockfile
+pnpm dev
+pnpm dev:webpack
+pnpm lint
+pnpm typecheck
+pnpm test
+pnpm test:e2e
+pnpm build
+pnpm start
 ```
 
-Before submitting changes, run `pnpm lint`, `pnpm typecheck`, `pnpm test`, and `pnpm build`.
+`pnpm dev` uses Turbopack. Use `pnpm dev:webpack` only when diagnosing compiler-specific behavior.
 
-## Coding Style & Naming Conventions
+## Validation Strategy
 
-Follow the existing TypeScript style: two-space indentation, double quotes, semicolons, and explicit types where inference is unclear. Use PascalCase for React components, camelCase for variables and functions, and kebab-case filenames such as `custom-cursor.tsx`. Prefer existing components, hooks, Tailwind utilities, and GSAP helpers over duplicate abstractions. Keep client components narrowly scoped and clean up animation contexts, observers, and listeners. All motion must respect `prefers-reduced-motion`.
+Validation must be proportional to the change.
 
-## Testing Guidelines
+During implementation:
 
-Tests use Node's built-in `node:test` runner. Name new files `*.test.mjs` and place them in `tests/`. Add focused coverage for routes, localized content, metadata, and asset contracts. No coverage threshold is enforced; regressions affecting published projects or ES/EN parity should include a test.
+1. run the narrowest relevant check first;
+2. run focused tests for the changed contract;
+3. use Playwright/browser verification for behavior that depends on rendering, interaction, responsive layout, or navigation.
 
-## Commit & Pull Request Guidelines
+Before declaring a substantial change ready to publish, run the full quality gate when relevant:
 
-Use Conventional Commits, matching history: `fix(photography): prevent desktop content clipping`. Keep commits focused and written in English. Pull requests should explain the problem, summarize the implementation, list validation commands, and include desktop/mobile screenshots for visual changes. Note any routing, SEO, accessibility, or deployment impact.
+```bash
+pnpm lint
+pnpm typecheck
+pnpm test
+pnpm build
+pnpm test:e2e
+```
 
-## Security & Assets
+Do not claim a command passed unless it was actually executed successfully. Distinguish pre-existing failures from failures introduced by the current change.
 
-Never commit `.env` files, secrets, temporary exports, RAW photographs, or unused large originals. Only reference assets tracked under `public/`. Production deploys from `main` through CI and Vercel; do not force-push or rewrite shared history.
+## Git and Delivery
+
+Work on the current branch unless the user explicitly asks otherwise.
+
+- Do not create or switch branches without instruction.
+- Do not force-push or rewrite shared history.
+- Do not create commits, push, or open PRs unless requested.
+- Use Conventional Commits in English when a commit is requested.
+- Keep commits focused.
+
+For visual changes, include desktop/mobile verification evidence when preparing a PR.
+
+## Working Method
+
+Before editing:
+
+1. inspect the files directly related to the task;
+2. check existing implementations/helpers before creating new ones;
+3. consult `PRODUCT.md` or `DESIGN.md` when the task affects positioning, content, UX, or visual direction;
+4. consult relevant local Next.js documentation when framework behavior is version-sensitive.
+
+While editing:
+
+- make the smallest coherent change;
+- preserve established architecture and contracts;
+- avoid unrelated cleanup;
+- keep ES/EN, SEO, accessibility, and responsive implications in scope when affected.
+
+At completion, report only:
+
+- what changed;
+- relevant validation performed;
+- any material limitation, risk, or follow-up.
 
 <!-- BEGIN:nextjs-agent-rules -->
 

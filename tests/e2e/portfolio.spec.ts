@@ -46,10 +46,10 @@ test("keeps secondary projects compact and accessible", async ({ page }) => {
 test("validates the contact form and handles a successful response", async ({
   page,
 }) => {
-  await page.route("https://api.web3forms.com/submit", async (route) => {
+  await page.route("**/api/contact", async (route) => {
     await route.fulfill({
       contentType: "application/json",
-      body: JSON.stringify({ success: true }),
+      body: JSON.stringify({ ok: true }),
       status: 200,
     });
   });

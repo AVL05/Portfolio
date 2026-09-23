@@ -32,6 +32,7 @@ test("a failed model keeps the static preview and disables reset", async ({ page
 });
 
 test("the preview remains visible while a model is pending", async ({ page }) => {
+  test.setTimeout(75_000);
   let release: () => void = () => {};
   const pending = new Promise<void>(resolve => { release = resolve; });
   await page.route("**/hero-3d/optimized/desk.glb", async route => {

@@ -217,6 +217,17 @@ test("unmatched URLs use the global 404 localized purely from the path", () => {
   assert.match(read("next.config.mjs"), /globalNotFound: true/);
 });
 
+test("uncaught errors use a localized global recovery boundary", () => {
+  assert.equal(existsSync(new URL("app/global-error.tsx", root)), true);
+  const source = read("app/global-error.tsx");
+  assert.match(source, /"use client"/);
+  assert.match(source, /getLocaleFromPathname/);
+  assert.match(source, /onClick=\{retry\}/);
+  assert.match(source, /Algo ha salido mal/);
+  assert.match(source, /Something went wrong/);
+  assert.doesNotMatch(source, /error\.message|error\.stack|error\.digest/);
+});
+
 test("redirects are explicit, single-hop and chain-free", () => {
   const config = read("next.config.mjs");
   assert.doesNotMatch(config, /source: "\/es\/\*"/);

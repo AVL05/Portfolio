@@ -1,177 +1,512 @@
-# Repository Guidelines
+# Portfolio — Repository Instructions
 
-## Project Mission
+## 1. Purpose
 
-This repository is the professional portfolio of Alex Vicente López. Its primary goal is to present Alex clearly as a **Junior Full-Stack Developer** with real end-to-end work across frontend, backend, APIs, data, systems, and applied AI.
+This repository powers the professional portfolio of Alex Vicente López.
 
-The site should help recruiters and product/engineering teams understand the professional profile, inspect credible project evidence, download the CV, and contact Alex quickly.
+Its job is to help recruiters, hiring managers, and product/engineering teams understand Alex quickly as a **Junior Full-Stack Developer** through credible project evidence, professional experience, technical decisions, and clear contact paths.
 
-Preserve these product truths:
+The site is not a generic developer showcase and not a photography-first portfolio.
 
-- Lead with full-stack capability and concrete project outcomes, not technology lists.
-- Do not overstate experience, responsibility, metrics, clients, or results.
-- Keep the four primary projects prominent: AI Creative Assistant, Distrito Gourmet, LumaFlow Studio, and raw.vives.
+### Product truths
+
+Preserve these unless the user explicitly changes the product direction:
+
+- Position Alex primarily as a **Junior Full-Stack Developer**.
+- Show end-to-end capability through real work: frontend, backend, APIs, data, systems, and applied AI.
+- Prefer project decisions and outcomes over technology inventories.
+- Never invent or exaggerate experience, responsibilities, clients, metrics, testimonials, or results.
+- Keep these four projects as the primary portfolio work:
+  - AI Creative Assistant
+  - Distrito Gourmet
+  - LumaFlow Studio
+  - raw.vives
 - Treat raw.vives as a web + photography case study, not as a second profession.
-- Visual ambition must support readability, accessibility, performance, and the work itself.
-- Avoid generic SaaS/AI portfolio aesthetics: gratuitous glassmorphism, glow-heavy UI, counters, repetitive cards, or effects without product value.
+- Keep the path to projects, CV, and contact obvious.
+- Visual ambition must never compromise readability, accessibility, responsive behavior, or performance.
 
-For product or visual decisions, consult `PRODUCT.md` and `DESIGN.md` before introducing a new direction.
+For product positioning and copy decisions, `PRODUCT.md` is authoritative.
 
-## Stack and Runtime
+For visual and interaction decisions, `DESIGN.md` is authoritative.
 
-Use the existing stack. Do not replace technologies unless explicitly requested.
+---
 
-- Next.js 16.3.4, App Router
+## 2. Decision Priority
+
+When instructions appear to conflict, use this order:
+
+1. explicit user request;
+2. existing functional/product contracts;
+3. `PRODUCT.md`;
+4. `DESIGN.md`;
+5. this `AGENTS.md`;
+6. established implementation patterns in nearby code.
+
+Do not introduce a new architecture, design language, route model, localization model, or dependency merely because another approach is preferable in isolation.
+
+---
+
+## 3. Stack
+
+Preserve the existing stack:
+
+- Next.js 16.3.4
+- App Router
 - React 19
 - TypeScript 5.7
 - Tailwind CSS 4
-- GSAP + `@gsap/react`, ScrollTrigger, ScrollToPlugin
-- React Three Fiber / Drei / Three.js
-- Radix UI, Lucide, React Icons, Geist
+- GSAP
+- `@gsap/react`
+- ScrollTrigger
+- ScrollToPlugin
+- React Three Fiber
+- Drei
+- Three.js
+- Radix UI
+- Lucide
+- React Icons
+- Geist
 - Node.js 22
 - pnpm 10
-- Node `node:test` + Playwright
-- Vercel + GitHub Actions
+- Node `node:test`
+- Playwright
+- Vercel
+- GitHub Actions
 
-Package manager is pnpm. Respect `pnpm-lock.yaml`; do not switch to npm, yarn, or bun.
+Use **pnpm only**.
 
-## Repository Map
+Respect `pnpm-lock.yaml`.
 
-- `app/`: routes, layouts, metadata, API endpoints, sitemap, robots, global styles.
-- `components/`: page sections and reusable components.
-- `components/ui/`: shared UI primitives.
-- `hooks/`: reusable React hooks.
-- `lib/`: i18n routing, locale state/content, SEO helpers, GSAP setup, and shared utilities.
-- `public/`: production images, project media, downloadable CV, and other published assets.
-- `tests/`: Node integration/contract tests.
-- `tests/e2e/`: Playwright browser tests.
-- `docs/`: technical documentation.
-- `PRODUCT.md`: durable product positioning and content constraints.
-- `DESIGN.md`: visual system, interaction principles, and design rules.
+Do not migrate package manager, framework, router, styling system, animation stack, or language unless explicitly requested.
 
-Prefer existing components, hooks, helpers, tokens, and utilities before creating new abstractions.
+---
 
-## Routing, i18n, and Content
+## 4. Repository Map
 
-Spanish lives at the root; English lives under `/en`.
+Use this map before searching broadly:
 
-Maintain ES/EN parity for public content and navigation. When changing routes, locale behavior, metadata, or indexability:
+- `app/`
+  Routes, layouts, metadata, API endpoints, sitemap, robots, global styles.
+- `components/`
+  Page sections and reusable components.
+- `components/ui/`
+  Shared UI primitives.
+- `hooks/`
+  Reusable React hooks.
+- `lib/`
+  i18n, SEO, locale/content state, GSAP setup, shared utilities.
+- `lib/locales/`
+  Localized ES/EN content.
+- `public/`
+  Published media, CV, images, icons, 3D assets.
+- `tests/`
+  Node integration and contract tests.
+- `tests/e2e/`
+  Playwright browser tests.
+- `docs/`
+  Technical documentation.
+- `PRODUCT.md`
+  Product positioning and durable content rules.
+- `DESIGN.md`
+  Visual system and interaction authority.
+- `next.config.mjs`
+  Next.js configuration, security headers, CSP, redirects.
+- `lib/i18n-paths.ts`
+  Source of truth for ES/EN route relationships.
+- `lib/seo.ts`
+  SEO URLs, metadata helpers and structured-data contracts.
 
-1. inspect `lib/i18n-paths.ts`;
-2. reuse the existing alternate-path helpers;
-3. keep Spanish and English route pairs aligned;
-4. update relevant tests when contracts change.
+Inspect the smallest relevant part of the repository first. Expand only when the task crosses boundaries.
 
-Do not create a parallel `/es` site. Existing `/es/*` handling is intentional redirect normalization.
+---
 
-Current SEO contracts include 16 indexable URLs: 8 ES + 8 EN. Legal pages remain noindex and are intentionally excluded from the sitemap/indexable set.
+## 5. Routing and Internationalization
 
-When changing copy, keep claims factual and aligned across ES/EN. Do not invent metrics, employers, responsibilities, testimonials, or project outcomes.
+Spanish is the default locale and lives at the root.
 
-## SEO and Metadata
+English lives under `/en`.
 
-Use `lib/seo.ts` and existing metadata helpers instead of hand-rolling canonical, hreflang, Open Graph, Twitter, or JSON-LD logic.
+Examples:
+
+```text
+/                     ↔ /en
+/proyectos            ↔ /en/projects
+/sobre-mi             ↔ /en/about
+/fotografia           ↔ /en/photography
+/contacto             ↔ /en/contact
+```
+
+`lib/i18n-paths.ts` is the source of truth for indexable ES/EN route pairs.
+
+### Rules
+
+- Keep public ES and EN content in parity.
+- Do not create a parallel `/es` site.
+- Existing `/es/*` behavior is intentional redirect normalization.
+- Brand project slugs remain stable across locales.
+- Reuse existing localization helpers.
+- Do not hand-roll alternate-route logic in individual components.
+
+If a change affects routes, navigation, locale switching, metadata, sitemap, canonical URLs, or hreflang, inspect `lib/i18n-paths.ts` first.
+
+---
+
+## 6. SEO Contracts
+
+`lib/seo.ts` and existing metadata helpers are authoritative.
+
+Do not duplicate SEO logic in individual routes.
 
 Preserve:
 
-- canonical consistency with `https://www.aleviclop.dev` unless `NEXT_PUBLIC_SITE_URL` overrides it;
+- canonical consistency;
 - reciprocal ES/EN hreflang;
-- `x-default` pointing to Spanish;
-- sitemap/robots consistency;
-- structured data contracts;
+- `x-default` → Spanish;
+- sitemap/indexability consistency;
+- robots behavior;
+- Open Graph and Twitter metadata;
+- structured data;
 - noindex behavior for non-indexable routes.
 
-A routing or metadata change is incomplete until its SEO impact is checked.
+Current public indexable contract:
 
-## UI, Design, and Motion
+- 8 Spanish URLs;
+- 8 English URLs;
+- 16 indexable URLs total.
 
-Follow `DESIGN.md` as the visual authority.
+Legal routes remain intentionally outside the indexable set.
 
-Core direction: **Visual Systems / Quiet Cinema** — dark, precise, editorial, image-led, with controlled copper accent and purposeful motion.
+Default canonical origin:
 
-Do not introduce a new visual language casually. In particular, avoid:
+```text
+https://www.aleviclop.dev
+```
 
-- generic SaaS card grids;
-- decorative glassmorphism;
-- gratuitous glow effects;
-- excessive pill UI;
-- repeated card-in-card layouts;
-- motion added only because it is possible.
+unless overridden by:
 
-Motion has a budget: one orchestrated hero entrance, restrained list/section entrances, and purposeful state microinteractions. Avoid continuous parallax or stacked effects unless the existing design explicitly calls for them.
+```text
+NEXT_PUBLIC_SITE_URL
+```
 
-All non-essential motion must respect `prefers-reduced-motion`. Clean up GSAP contexts, observers, listeners, RAF loops, and Three.js resources.
+A route or metadata change is incomplete until its SEO consequences are checked.
 
-## Accessibility and Responsive Behavior
+---
 
-Target WCAG 2.2 AA.
+## 7. Content Integrity
+
+All public claims must remain factual.
+
+Do not invent:
+
+- employment history;
+- responsibilities;
+- technologies used in a project;
+- users;
+- revenue;
+- performance gains;
+- conversion metrics;
+- client relationships;
+- testimonials;
+- project outcomes.
+
+When changing professional copy, maintain semantic consistency between Spanish and English.
+
+Do not translate mechanically when that produces unnatural professional language; preserve meaning and positioning.
+
+---
+
+## 8. Design System
+
+`DESIGN.md` is the visual authority.
+
+Creative direction:
+
+**Visual Systems / Quiet Cinema**
+
+The portfolio should feel:
+
+- dark;
+- precise;
+- editorial;
+- image-led;
+- technically controlled;
+- visually distinctive without becoming ornamental.
+
+Primary accent: controlled copper.
+
+Avoid:
+
+- generic SaaS layouts;
+- gratuitous glassmorphism;
+- purple/blue AI gradients;
+- excessive glow;
+- unnecessary pills;
+- metric counters without value;
+- repetitive card grids;
+- cards nested inside cards;
+- effects added only to demonstrate technique.
+
+Do not redesign an existing surface unless the task calls for it.
+
+Prefer extending the current visual language over introducing another one.
+
+---
+
+## 9. Motion
+
+Motion must have a purpose.
+
+Current motion budget:
+
+- one orchestrated hero entrance;
+- restrained section/list entrances;
+- purposeful state microinteractions.
+
+Avoid:
+
+- continuous parallax by default;
+- stacked reveal effects;
+- excessive scroll-linked motion;
+- animation on every section;
+- decorative animation that delays content.
+
+All non-essential motion must respect:
+
+```css
+prefers-reduced-motion
+```
+
+When using GSAP:
+
+- scope animations correctly;
+- clean up GSAP contexts;
+- remove listeners and observers;
+- terminate RAF loops;
+- avoid duplicate ScrollTriggers;
+- avoid layout-thrashing animation properties when a cheaper alternative exists.
+
+---
+
+## 10. React and Next.js
+
+Prefer Server Components unless client-side behavior is actually required.
+
+Keep `"use client"` boundaries narrow.
+
+Do not move code client-side merely for convenience.
+
+Reuse existing:
+
+- components;
+- hooks;
+- helpers;
+- SEO utilities;
+- localization utilities;
+- animation infrastructure.
+
+Before implementing version-sensitive Next.js behavior, consult the local Next.js documentation bundled with the installed version.
+
+Do not rely on remembered behavior when local Next.js 16 documentation contradicts it.
+
+---
+
+## 11. Three.js and Rich Media
+
+The home experience and avatar preview use local 3D assets.
+
+Before changing:
+
+- R3F;
+- Three.js;
+- GLTF loading;
+- WASM;
+- blob URLs;
+- image decoding;
+- route CSP;
+
+inspect `next.config.mjs` and the directly related loader/component.
+
+### Rules
+
+- Keep CSP permissions as narrow as possible.
+- Do not weaken the global CSP to fix a route-specific feature.
+- Dispose of:
+  - geometries;
+  - materials;
+  - textures;
+  - render targets;
+  - observers;
+  - animation loops.
+- Prefer optimized production assets.
+- Do not commit RAW photography.
+- Do not commit temporary renders or generated working files.
+- Do not retain unused large assets.
+
+---
+
+## 12. Contact Flow and Security
+
+The contact form posts to:
+
+```text
+POST /api/contact
+```
+
+and forwards to Web3Forms server-side.
+
+`WEB3FORMS_ACCESS_KEY` is server-only.
+
+Never expose secrets via:
+
+- `NEXT_PUBLIC_*`;
+- client bundles;
+- logs;
+- fixtures;
+- source control.
+
+Preserve unless intentionally modifying the contract:
+
+- validation;
+- rate limiting;
+- honeypot;
+- time trap;
+- retry behavior;
+- direct-email fallback;
+- draft preservation behavior.
+
+Security headers and CSP live in `next.config.mjs`.
+
+Prefer narrow security changes over broad relaxations.
+
+Never commit `.env` files or credentials.
+
+---
+
+## 13. Accessibility
+
+Target:
+
+**WCAG 2.2 AA**
 
 Preserve:
 
+- semantic HTML;
 - keyboard navigation;
-- visible focus states;
-- semantic structure;
+- visible focus;
 - sufficient contrast;
+- accessible names;
+- appropriate heading structure;
 - comfortable touch targets;
-- accessible forms and error messaging;
+- accessible form validation;
+- accessible error states;
 - reduced-motion alternatives.
 
-For meaningful UI changes, verify at least the representative viewports used by Playwright:
+Do not use color as the only error/state indicator.
 
-- mobile: 390×844
-- desktop: 1440×900
+For meaningful UI changes, verify both representative viewports:
 
-Do not treat desktop rendering as sufficient evidence for responsive changes.
+```text
+Mobile:  390 × 844
+Desktop: 1440 × 900
+```
 
-## Three.js and Rich Media
+These match the Playwright configuration.
 
-The home experience and avatar preview use local 3D assets and route-specific CSP allowances.
+Desktop-only verification is not sufficient for responsive UI changes.
 
-Before changing Three.js/R3F loading, WASM, blob URLs, image decoding, or CSP:
+---
 
-- inspect `next.config.mjs`;
-- preserve the minimum route-specific permissions required by the existing loaders;
-- do not broaden the global CSP merely to make a local feature work;
-- dispose of geometries, materials, textures, render targets, observers, and animation loops when relevant.
+## 14. Coding Conventions
 
-Prefer optimized published assets. Do not commit RAW photographs, temporary exports, unused large originals, or generated working files.
+Follow surrounding code.
 
-## Contact and Security
+Default conventions:
 
-The contact flow posts to `/api/contact` and forwards to Web3Forms server-side.
+- two-space indentation;
+- double quotes;
+- semicolons;
+- PascalCase React components;
+- camelCase variables/functions;
+- explicit types where inference is unclear;
+- existing filename conventions.
 
-- `WEB3FORMS_ACCESS_KEY` is server-only.
-- Never expose secrets through `NEXT_PUBLIC_*`, client bundles, logs, fixtures, or committed files.
-- Preserve validation, rate limiting, honeypot/time-trap behavior, retry behavior, and the direct-email fallback unless intentionally changing that contract.
-- Never commit `.env` files or credentials.
-
-Security headers and CSP live in `next.config.mjs`. Prefer narrow changes over weakening site-wide policy.
-
-## Coding Conventions
-
-Follow the surrounding code.
-
-- Two-space indentation.
-- Double quotes.
-- Semicolons.
-- PascalCase for React components.
-- camelCase for variables/functions.
-- kebab-case filenames where that convention is already used.
-- Explicit types where inference is unclear.
-
-Keep client components narrowly scoped. Prefer Server Components by default when interactivity is not required.
+Prefer the smallest coherent implementation.
 
 Do not:
 
-- duplicate logic already provided by a helper or component;
-- add a dependency when the existing stack can reasonably solve the problem;
+- duplicate existing logic;
+- create abstractions for one-off behavior without a real need;
+- add dependencies when the existing stack is sufficient;
 - restructure unrelated folders;
-- perform broad refactors while solving a focused task;
-- convert patterns or technologies merely for stylistic preference.
+- perform opportunistic broad refactors;
+- rewrite functioning code solely for stylistic preference.
 
-## Development Commands
+---
 
-Use:
+## 15. Validation
+
+Validation must be proportional to the change.
+
+### Small isolated change
+
+Run the narrowest relevant validation.
+
+Examples:
+
+```bash
+pnpm lint
+pnpm typecheck
+```
+
+or a focused test.
+
+### Logic / contract change
+
+Run relevant tests in addition to type/lint checks.
+
+### UI / responsive / interaction change
+
+Use browser verification and, when appropriate:
+
+```bash
+pnpm test:e2e
+```
+
+Verify both desktop and mobile behavior.
+
+### Routing / SEO / localization change
+
+Check:
+
+- route mapping;
+- ES/EN parity;
+- metadata;
+- canonical;
+- hreflang;
+- sitemap/indexability contracts;
+- relevant tests.
+
+### Substantial pre-release change
+
+When relevant, use the complete quality gate:
+
+```bash
+pnpm lint
+pnpm typecheck
+pnpm test
+pnpm build
+pnpm test:e2e
+```
+
+Do not run the entire suite unnecessarily for a trivial isolated change.
+
+Never claim a validation passed unless it actually ran successfully.
+
+Separate pre-existing failures from failures introduced by the current work.
+
+---
+
+## 16. Development Commands
 
 ```bash
 pnpm install --frozen-lockfile
@@ -185,63 +520,121 @@ pnpm build
 pnpm start
 ```
 
-`pnpm dev` uses Turbopack. Use `pnpm dev:webpack` only when diagnosing compiler-specific behavior.
+`pnpm dev` uses Turbopack.
 
-## Validation Strategy
+Use `pnpm dev:webpack` only when investigating compiler-specific behavior.
 
-Validation must be proportional to the change.
+Playwright development server defaults to:
 
-During implementation:
-
-1. run the narrowest relevant check first;
-2. run focused tests for the changed contract;
-3. use Playwright/browser verification for behavior that depends on rendering, interaction, responsive layout, or navigation.
-
-Before declaring a substantial change ready to publish, run the full quality gate when relevant:
-
-```bash
-pnpm lint
-pnpm typecheck
-pnpm test
-pnpm build
-pnpm test:e2e
+```text
+http://127.0.0.1:3100
 ```
 
-Do not claim a command passed unless it was actually executed successfully. Distinguish pre-existing failures from failures introduced by the current change.
+---
 
-## Git and Delivery
+## 17. Task Routing
 
-Work on the current branch unless the user explicitly asks otherwise.
+Before editing, identify the task class and inspect only the relevant authorities.
 
-- Do not create or switch branches without instruction.
-- Do not force-push or rewrite shared history.
-- Do not create commits, push, or open PRs unless requested.
-- Use Conventional Commits in English when a commit is requested.
-- Keep commits focused.
+### Copy / professional positioning
 
-For visual changes, include desktop/mobile verification evidence when preparing a PR.
+Read:
 
-## Working Method
+```text
+PRODUCT.md
+relevant locale/content files
+```
 
-Before editing:
+### UI / visual changes
 
-1. inspect the files directly related to the task;
-2. check existing implementations/helpers before creating new ones;
-3. consult `PRODUCT.md` or `DESIGN.md` when the task affects positioning, content, UX, or visual direction;
-4. consult relevant local Next.js documentation when framework behavior is version-sensitive.
+Read:
 
-While editing:
+```text
+DESIGN.md
+target component
+related shared primitives/tokens
+```
 
-- make the smallest coherent change;
-- preserve established architecture and contracts;
-- avoid unrelated cleanup;
-- keep ES/EN, SEO, accessibility, and responsive implications in scope when affected.
+### Routing / i18n
 
-At completion, report only:
+Read:
+
+```text
+lib/i18n-paths.ts
+affected routes/navigation
+relevant tests
+```
+
+### SEO
+
+Read:
+
+```text
+lib/seo.ts
+affected metadata/route
+relevant tests
+```
+
+### Contact/security
+
+Read:
+
+```text
+/api/contact implementation
+next.config.mjs when headers/CSP are involved
+related tests
+```
+
+### Three.js / rich media
+
+Read:
+
+```text
+target R3F/Three component
+asset loader
+next.config.mjs when CSP is involved
+```
+
+Do not scan the entire repository before every task.
+
+---
+
+## 18. Completion Criteria
+
+A task is complete when:
+
+1. the requested behavior is implemented;
+2. established product/architecture contracts remain intact;
+3. relevant validation has passed;
+4. no errors introduced by the change remain;
+5. ES/EN, SEO, accessibility, responsive, security, and motion implications have been checked when applicable.
+
+At completion report only:
 
 - what changed;
-- relevant validation performed;
-- any material limitation, risk, or follow-up.
+- validation actually performed;
+- material limitations, risks, or follow-up.
+
+---
+
+## 19. Git
+
+Work on the current branch.
+
+Do not:
+
+- create or switch branches unless requested;
+- force-push;
+- rewrite shared history;
+- commit;
+- push;
+- create a Pull Request;
+
+unless explicitly requested.
+
+When a commit is requested, use Conventional Commits in English and keep it focused.
+
+---
 
 <!-- BEGIN:nextjs-agent-rules -->
 

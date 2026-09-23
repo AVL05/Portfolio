@@ -13,63 +13,77 @@ export function CustomCursor() {
     cleanupRef.current = null;
     if (!cursor) return;
     const query = window.matchMedia("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)");
-    if (!query.matches) return;
+    let deactivate = () => {};
 
-    document.documentElement.classList.add("custom-cursor-enabled");
-    const xTo = gsap.quickTo(cursor, "x", { duration: 0.24, ease: "power3.out" });
-    const yTo = gsap.quickTo(cursor, "y", { duration: 0.24, ease: "power3.out" });
-    const scaleXTo = gsap.quickTo(cursor, "scaleX", { duration: 0.2, ease: "power2.out" });
-    const scaleYTo = gsap.quickTo(cursor, "scaleY", { duration: 0.2, ease: "power2.out" });
-    const resizeCursor = (value: number) => {
-      scaleXTo(value);
-      scaleYTo(value);
-    };
-    let activeState = "";
+    const syncCursor = () => {
+      deactivate();
+      deactivate = () => {};
+      if (!query.matches) return;
 
-    const onMove = (event: PointerEvent) => {
-      xTo(event.clientX);
-      yTo(event.clientY);
-      const nativeControl = (event.target as HTMLElement).closest("input, textarea, select, [contenteditable='true']");
-      if (nativeControl) {
-        cursor.dataset.visible = "false";
-        return;
-      }
-      cursor.dataset.visible = "true";
-      const target = (event.target as HTMLElement).closest<HTMLElement>("[data-cursor]");
-      const state = target?.dataset.cursor ?? "";
-      if (state === activeState) return;
-      activeState = state;
-      cursor.dataset.state = state;
-      const labels: Record<string, string> = {
-        project: language === "es" ? "ABRIR" : "OPEN",
-        external: "↗",
-        gallery: language === "es" ? "EXPLORAR" : "EXPLORE",
-        drag: language === "es" ? "ARRASTRAR" : "DRAG",
-        contact: language === "es" ? "HOLA" : "HELLO",
+      document.documentElement.classList.add("custom-cursor-enabled");
+      const xTo = gsap.quickTo(cursor, "x", { duration: 0.24, ease: "power3.out" });
+      const yTo = gsap.quickTo(cursor, "y", { duration: 0.24, ease: "power3.out" });
+      const scaleXTo = gsap.quickTo(cursor, "scaleX", { duration: 0.2, ease: "power2.out" });
+      const scaleYTo = gsap.quickTo(cursor, "scaleY", { duration: 0.2, ease: "power2.out" });
+      const resizeCursor = (value: number) => {
+        scaleXTo(value);
+        scaleYTo(value);
       };
-      cursor.textContent = labels[state] ?? "";
-      resizeCursor(state ? 1 : 0.42);
-    };
-    const onLeave = () => {
-      cursor.dataset.visible = "false";
-    };
-    const onScroll = () => {
-      activeState = "";
-      cursor.dataset.state = "";
-      cursor.dataset.visible = "false";
-      cursor.textContent = "";
-      resizeCursor(0.42);
+      let activeState = "";
+
+      const onMove = (event: PointerEvent) => {
+        xTo(event.clientX);
+        yTo(event.clientY);
+        const nativeControl = (event.target as HTMLElement).closest("input, textarea, select, [contenteditable='true']");
+        if (nativeControl) {
+          cursor.dataset.visible = "false";
+          return;
+        }
+        cursor.dataset.visible = "true";
+        const target = (event.target as HTMLElement).closest<HTMLElement>("[data-cursor]");
+        const state = target?.dataset.cursor ?? "";
+        if (state === activeState) return;
+        activeState = state;
+        cursor.dataset.state = state;
+        const labels: Record<string, string> = {
+          project: language === "es" ? "ABRIR" : "OPEN",
+          external: "↗",
+          gallery: language === "es" ? "EXPLORAR" : "EXPLORE",
+          drag: language === "es" ? "ARRASTRAR" : "DRAG",
+          contact: language === "es" ? "HOLA" : "HELLO",
+        };
+        cursor.textContent = labels[state] ?? "";
+        resizeCursor(state ? 1 : 0.42);
+      };
+      const hideCursor = () => {
+        cursor.dataset.visible = "false";
+      };
+      const onScroll = () => {
+        activeState = "";
+        cursor.dataset.state = "";
+        cursor.dataset.visible = "false";
+        cursor.textContent = "";
+        resizeCursor(0.42);
+      };
+
+      window.addEventListener("pointermove", onMove, { passive: true });
+      window.addEventListener("scroll", onScroll, { passive: true });
+      document.documentElement.addEventListener("mouseleave", hideCursor);
+      deactivate = () => {
+        document.documentElement.classList.remove("custom-cursor-enabled");
+        cursor.dataset.visible = "false";
+        gsap.killTweensOf(cursor);
+        window.removeEventListener("pointermove", onMove);
+        window.removeEventListener("scroll", onScroll);
+        document.documentElement.removeEventListener("mouseleave", hideCursor);
+      };
     };
 
-    window.addEventListener("pointermove", onMove, { passive: true });
-    window.addEventListener("scroll", onScroll, { passive: true });
-    document.documentElement.addEventListener("mouseleave", onLeave);
+    query.addEventListener("change", syncCursor);
+    syncCursor();
     cleanupRef.current = () => {
-      document.documentElement.classList.remove("custom-cursor-enabled");
-      gsap.killTweensOf(cursor);
-      window.removeEventListener("pointermove", onMove);
-      window.removeEventListener("scroll", onScroll);
-      document.documentElement.removeEventListener("mouseleave", onLeave);
+      query.removeEventListener("change", syncCursor);
+      deactivate();
     };
   }, [language]);
 

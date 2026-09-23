@@ -74,6 +74,7 @@ test("contact form exposes localized inline validation", () => {
 test("focus, lazy 3D hero, and localized Open Graph contracts remain explicit", () => {
   const globals = read("app/globals.css");
   const hero = read("components/hero.tsx");
+  const cursor = read("components/custom-cursor.tsx");
   const seo = read("lib/seo.ts");
 
   assert.match(globals, /:focus-visible/);
@@ -81,6 +82,8 @@ test("focus, lazy 3D hero, and localized Open Graph contracts remain explicit", 
   assert.match(hero, /<CreativeRoomHero/);
   assert.match(read("components/hero-3d/CreativeRoomHero.tsx"), /ssr: false/);
   assert.match(read("components/hero-3d/CreativeRoomScene.tsx"), /frameloop="demand"/);
+  assert.match(cursor, /query\.addEventListener\("change", syncCursor\)/);
+  assert.match(cursor, /query\.removeEventListener\("change", syncCursor\)/);
   assert.match(seo, /alternateLocale/);
   assert.match(seo, /buildPageMetadata/);
   assert.match(read("app/(es)/proyectos/raw-vives/page.tsx"), /type: "article"/);

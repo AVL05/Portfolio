@@ -8,7 +8,7 @@
   },
   "hero": {
     "status": "Available for new professional opportunities and selected projects",
-    "description": "I build web applications and digital products end to end, combining frontend, backend and a technical background in IT systems.",
+    "description": "I build web applications end to end, from interface to API and data. My background in systems and networks gives me a wider technical perspective.",
     "cta_github": "GitHub",
     "cta_linkedin": "LinkedIn",
     "scroll": "Scroll",
@@ -26,20 +26,22 @@
   "skills": {
     "title": "Stack",
     "subtitle": "How I build applications",
-    "desc": "Technologies and tools I use to develop, test and deliver web products end to end.",
+    "desc": "Web development is my main focus. Interface design, applied AI, and a foundation in systems and networks round out my profile.",
     "technologies": "Technologies",
     "tools": "Tools",
     "groups": [
       {
-        "area": "Frontend",
+        "area": "Web development",
         "stack": [
+          "HTML & CSS",
+          "TypeScript",
           "React",
           "Next.js",
           "JavaScript",
           "Tailwind CSS",
           "GSAP",
           "Accessibility",
-          "Responsive UI"
+          "Responsive design"
         ]
       },
       {
@@ -48,25 +50,60 @@
           "PHP",
           "Laravel",
           "MySQL",
-          "APIs"
+          "REST APIs",
+          "Database design"
         ]
       },
       {
-        "area": "Build & ship",
-        "stack": [
-          "Git",
-          "Docker",
-          "CI/CD",
-          "Vercel",
-          "Testing"
-        ]
-      },
-      {
-        "area": "AI & experimentation",
+        "area": "Applied AI",
         "stack": [
           "Local inference",
           "Automation",
           "AI-assisted development"
+        ]
+      },
+      {
+        "area": "UI/UX & design",
+        "stack": [
+          "Figma",
+          "Interface design",
+          "Prototyping",
+          "Visual hierarchy"
+        ]
+      },
+      {
+        "area": "Development tools",
+        "stack": [
+          "Git & GitHub",
+          "Testing",
+          "Debugging",
+          "Docker",
+          "CI/CD"
+        ]
+      },
+      {
+        "area": "Web deployment",
+        "stack": [
+          "Vercel",
+          "Cloudflare Workers",
+          "DNS & domains",
+          "Production environments"
+        ]
+      },
+      {
+        "area": "Systems · foundation",
+        "stack": [
+          "Windows & Linux",
+          "IT support",
+          "Troubleshooting"
+        ]
+      },
+      {
+        "area": "Networking · fundamentals",
+        "stack": [
+          "TCP/IP · LAN · DNS · DHCP",
+          "IPv4 & Wi-Fi",
+          "Network troubleshooting"
         ]
       }
     ]

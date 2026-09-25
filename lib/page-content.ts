@@ -87,36 +87,36 @@ export const ABOUT_PAGE: IndexPageContent = {
   eyebrow: { es: "Sobre mí", en: "About" },
   title: { es: "Sobre Alex Vicente López", en: "About Alex Vicente López" },
   description: {
-    es: "Soy Desarrollador Full-Stack Junior, titulado en Desarrollo de Aplicaciones Web y con formación previa en Sistemas Microinformáticos y Redes. Tengo experiencia práctica desarrollando y manteniendo aplicaciones en entornos profesionales, además de conocimientos de soporte, sistemas y resolución de incidencias.",
-    en: "I am a Junior Full-Stack Developer with a degree in Web Application Development and previous training in IT Systems and Networks. I have hands-on experience building and maintaining applications in professional environments, plus knowledge of support, systems and incident resolution.",
+    es: "Soy Desarrollador Web Full-Stack Junior. Empecé en Sistemas Microinformáticos y Redes y después me especialicé en Desarrollo de Aplicaciones Web. Hoy construyo aplicaciones desde la interfaz hasta el backend y los datos, con una base técnica que también abarca sistemas, redes y soporte IT.",
+    en: "I am a Junior Full-Stack Web Developer. I started in IT Systems and Networks before specialising in Web Application Development. Today I build applications across interfaces, backend and data, supported by a foundation in systems, networking and IT support.",
   },
   sections: [
     {
-      title: { es: "Proyectos propios", en: "Personal projects" },
+      title: { es: "De sistemas a la web", en: "From systems to the web" },
       body: {
-        es: "Fuera del entorno profesional continúo desarrollando proyectos propios para ampliar conocimientos y enfrentarme a problemas reales de arquitectura, frontend, backend y producto.",
-        en: "Outside professional work I keep building personal projects to expand my knowledge and tackle real problems in architecture, frontend, backend and product.",
+        es: "En SMR aprendí a entender equipos, sistemas operativos, redes, servicios y fundamentos de seguridad, además de resolver incidencias técnicas. Esa base me ayuda a pensar en el entorno donde funciona una aplicación, no solo en su interfaz.",
+        en: "My training in IT Systems and Networks covered hardware, operating systems, networks, services and security fundamentals, alongside technical troubleshooting. That background helps me consider the environment an application runs in, as well as its interface.",
+      },
+    },
+    {
+      title: { es: "Especialización web", en: "Web specialisation" },
+      body: {
+        es: "En DAW pasé de esa base a construir aplicaciones web completas: frontend, backend, APIs, bases de datos e interfaces accesibles. En proyectos como Distrito Gourmet y LumaFlow Studio aplico React, Laravel y MySQL para conectar esas capas.",
+        en: "Web Application Development took me from that foundation to building complete web applications: frontend, backend, APIs, databases and accessible interfaces. Projects such as Distrito Gourmet and LumaFlow Studio bring those layers together with React, Laravel and MySQL.",
+      },
+    },
+    {
+      title: { es: "Diseño y entrega", en: "Design and delivery" },
+      body: {
+        es: "Figma, el prototipado y la jerarquía visual complementan mi trabajo de desarrollo; no son una especialidad independiente. También trabajo con Git y GitHub, pruebas, depuración y despliegues web para llevar los proyectos a producción.",
+        en: "Figma, prototyping and visual hierarchy complement my development work; they are not a separate specialism. I also use Git and GitHub, testing, debugging and web deployment to bring projects into production.",
       },
     },
     {
       title: { es: "IA aplicada", en: "Applied AI" },
       body: {
-        es: "Actualmente estoy profundizando especialmente en inteligencia artificial, agentes y desarrollo asistido por IA como parte de mi evolución como desarrollador.",
-        en: "I am currently going deeper into artificial intelligence, agents and AI-assisted development as part of my growth as a developer.",
-      },
-    },
-    {
-      title: { es: "Visión de sistemas", en: "Systems perspective" },
-      body: {
-        es: "Mi formación en sistemas me aporta una visión más amplia del software: no solo cómo construir una aplicación, sino también el entorno técnico sobre el que funciona.",
-        en: "My systems background gives me a broader view of software: not only how to build an application, but also the technical environment it runs on.",
-      },
-    },
-    {
-      title: { es: "Perfil profesional", en: "Professional profile" },
-      body: {
-        es: "Trabajo en aplicaciones web desde la interfaz hasta la API y los datos, intentando entender el producto como un sistema completo y no como capas aisladas.",
-        en: "I work on web applications from the interface to the API and the data, trying to understand the product as a complete system rather than isolated layers.",
+        es: "Actualmente profundizo en IA aplicada al desarrollo. AI Creative Assistant es mi espacio de trabajo práctico con inferencia local, automatización y desarrollo asistido por IA.",
+        en: "I am currently exploring applied AI in software development. AI Creative Assistant is my hands-on work with local inference, automation and AI-assisted development.",
       },
     },
     {
@@ -129,8 +129,8 @@ export const ABOUT_PAGE: IndexPageContent = {
     {
       title: { es: "Tecnologías principales", en: "Core stack" },
       body: {
-        es: "React, Next.js, JavaScript, PHP, Laravel, MySQL, APIs, Git y Docker para construir, probar y entregar aplicaciones web completas.",
-        en: "React, Next.js, JavaScript, PHP, Laravel, MySQL, APIs, Git and Docker for building, testing and delivering complete web applications.",
+        es: "React, Next.js, TypeScript, JavaScript y Tailwind CSS en la interfaz; PHP, Laravel, MySQL y APIs REST en el servidor; Git, GitHub y Docker en el flujo de desarrollo.",
+        en: "React, Next.js, TypeScript, JavaScript and Tailwind CSS for interfaces; PHP, Laravel, MySQL and REST APIs on the server; Git, GitHub and Docker in my development workflow.",
       },
     },
     {

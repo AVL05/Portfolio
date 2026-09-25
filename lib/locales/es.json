@@ -8,7 +8,7 @@
   },
   "hero": {
     "status": "Disponible para nuevas oportunidades profesionales y proyectos seleccionados",
-    "description": "Desarrollo aplicaciones web y productos digitales de principio a fin, combinando frontend, backend y una base técnica en sistemas.",
+    "description": "Desarrollo aplicaciones web de principio a fin, desde la interfaz hasta la API y los datos. Mi base en sistemas y redes amplía esa perspectiva.",
     "cta_github": "GitHub",
     "cta_linkedin": "LinkedIn",
     "scroll": "Desplazar",
@@ -26,20 +26,22 @@
   "skills": {
     "title": "Tecnologías",
     "subtitle": "Cómo construyo aplicaciones",
-    "desc": "Tecnologías y herramientas que utilizo para desarrollar, probar y entregar productos web de principio a fin.",
+    "desc": "Mi especialidad es el desarrollo web de principio a fin. Diseño de interfaces, IA aplicada y una base en sistemas y redes completan mi perfil.",
     "technologies": "Tecnologías",
     "tools": "Herramientas",
     "groups": [
       {
-        "area": "Frontend",
+        "area": "Desarrollo web",
         "stack": [
+          "HTML y CSS",
+          "TypeScript",
           "React",
           "Next.js",
           "JavaScript",
           "Tailwind CSS",
           "GSAP",
           "Accesibilidad",
-          "UI responsive"
+          "Diseño responsive"
         ]
       },
       {
@@ -48,25 +50,60 @@
           "PHP",
           "Laravel",
           "MySQL",
-          "APIs"
+          "APIs REST",
+          "Diseño de bases de datos"
         ]
       },
       {
-        "area": "Herramientas y entrega",
-        "stack": [
-          "Git",
-          "Docker",
-          "CI/CD",
-          "Vercel",
-          "Testing"
-        ]
-      },
-      {
-        "area": "IA y experimentación",
+        "area": "IA aplicada",
         "stack": [
           "Inferencia local",
           "Automatización",
           "Desarrollo asistido por IA"
+        ]
+      },
+      {
+        "area": "UI/UX y diseño",
+        "stack": [
+          "Figma",
+          "Diseño de interfaces",
+          "Prototipado",
+          "Jerarquía visual"
+        ]
+      },
+      {
+        "area": "Herramientas de desarrollo",
+        "stack": [
+          "Git y GitHub",
+          "Testing",
+          "Depuración",
+          "Docker",
+          "CI/CD"
+        ]
+      },
+      {
+        "area": "Despliegue web",
+        "stack": [
+          "Vercel",
+          "Cloudflare Workers",
+          "DNS y dominios",
+          "Entornos de producción"
+        ]
+      },
+      {
+        "area": "Sistemas · base técnica",
+        "stack": [
+          "Windows y Linux",
+          "Soporte IT",
+          "Resolución de incidencias"
+        ]
+      },
+      {
+        "area": "Redes · fundamentos",
+        "stack": [
+          "TCP/IP · LAN · DNS · DHCP",
+          "IPv4 y Wi-Fi",
+          "Diagnóstico de red"
         ]
       }
     ]

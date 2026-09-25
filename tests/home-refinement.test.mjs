@@ -4,12 +4,15 @@ import { test } from "node:test";
 
 const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url), "utf8");
 
-test("localized home retains evidence, four capability groups and a factual currently section", () => {
+test("localized home retains evidence, eight ordered capability groups and a factual currently section", () => {
   for (const language of ["es", "en"]) {
     const locale = JSON.parse(read(`lib/locales/${language}.json`));
     const projects = locale.projects.items;
     assert.equal(projects.length, 8);
-    assert.equal(locale.skills.groups.length, 4);
+    assert.equal(locale.skills.groups.length, 8);
+    assert.match(locale.skills.groups[0].area, /Desarrollo web|Web development/);
+    assert.ok(locale.skills.groups[3].stack.includes("Figma"));
+    assert.match(locale.skills.groups[7].area, /Redes|Networking/);
     assert.deepEqual(projects[2].evidence.map((text) => text.match(/\d+/)?.[0]).filter(Boolean), ["56", "33"]);
     assert.match(projects[2].outcome, /56/);
     assert.match(projects[2].outcome, /33/);

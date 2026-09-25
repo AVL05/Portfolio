@@ -8,7 +8,7 @@
   },
   "hero": {
     "status": "Disponible para nuevas oportunidades profesionales y proyectos seleccionados",
-    "description": "Desarrollo aplicaciones web de principio a fin, desde la interfaz hasta la API y los datos. Mi base en sistemas y redes amplía esa perspectiva.",
+    "description": "Desarrollo aplicaciones web de principio a fin, desde la interfaz hasta la API y los datos, combinando desarrollo, diseño e IA aplicada.",
     "cta_github": "GitHub",
     "cta_linkedin": "LinkedIn",
     "scroll": "Desplazar",
@@ -26,22 +26,22 @@
   "skills": {
     "title": "Tecnologías",
     "subtitle": "Cómo construyo aplicaciones",
-    "desc": "Mi especialidad es el desarrollo web de principio a fin. Diseño de interfaces, IA aplicada y una base en sistemas y redes completan mi perfil.",
+    "desc": "Mi especialidad es el desarrollo web de principio a fin. El diseño de interfaces, la IA aplicada y mi base técnica en sistemas complementan mi perfil.",
     "technologies": "Tecnologías",
     "tools": "Herramientas",
     "groups": [
       {
         "area": "Desarrollo web",
         "stack": [
-          "HTML y CSS",
-          "TypeScript",
+          "HTML",
+          "CSS",
+          "JavaScript",
           "React",
           "Next.js",
-          "JavaScript",
           "Tailwind CSS",
           "GSAP",
-          "Accesibilidad",
-          "Diseño responsive"
+          "Diseño responsive",
+          "Accesibilidad web"
         ]
       },
       {
@@ -58,23 +58,25 @@
         "area": "IA aplicada",
         "stack": [
           "Inferencia local",
+          "Integración de modelos",
           "Automatización",
           "Desarrollo asistido por IA"
         ]
       },
       {
-        "area": "UI/UX y diseño",
+        "area": "Diseño de interfaces",
         "stack": [
           "Figma",
-          "Diseño de interfaces",
+          "Diseño UI",
           "Prototipado",
           "Jerarquía visual"
         ]
       },
       {
-        "area": "Herramientas de desarrollo",
+        "area": "Desarrollo y workflow",
         "stack": [
-          "Git y GitHub",
+          "Git",
+          "GitHub",
           "Testing",
           "Depuración",
           "Docker",
@@ -85,25 +87,19 @@
         "area": "Despliegue web",
         "stack": [
           "Vercel",
-          "Cloudflare Workers",
-          "DNS y dominios",
-          "Entornos de producción"
+          "Cloudflare",
+          "DNS",
+          "Dominios",
+          "Despliegue en producción"
         ]
       },
       {
-        "area": "Sistemas · base técnica",
+        "area": "Sistemas y soporte",
         "stack": [
-          "Windows y Linux",
-          "Soporte IT",
-          "Resolución de incidencias"
-        ]
-      },
-      {
-        "area": "Redes · fundamentos",
-        "stack": [
-          "TCP/IP · LAN · DNS · DHCP",
-          "IPv4 y Wi-Fi",
-          "Diagnóstico de red"
+          "Windows",
+          "Linux",
+          "Hardware",
+          "Soporte IT"
         ]
       }
     ]
@@ -111,7 +107,7 @@
   "projects": {
     "title": "Proyectos",
     "subtitle": "Productos completos, de principio a fin.",
-    "desc": "Selección de proyectos personales y académicos donde he trabajado desarrollo Full-Stack, frontend, backend, APIs y construcción de productos digitales.",
+    "desc": "Selección de proyectos personales y académicos donde aplico desarrollo web, backend, bases de datos, interfaces e inteligencia artificial.",
     "concept": "Detalle del proyecto",
     "view_live": "Ver demo",
     "view_code": "Ver código",
@@ -315,7 +311,7 @@
         "institution": "IES Serra Perenxisa",
         "period": "2024 - 2026",
         "location": "Torrent, Valencia",
-        "description": "Formación en desarrollo frontend y backend, bases de datos, despliegue y arquitectura de aplicaciones web modernas."
+        "description": "Formación en desarrollo frontend y backend, bases de datos, diseño de interfaces, despliegue y arquitectura de aplicaciones web."
       },
       {
         "title": "Sistemas Microinformáticos y Redes",
@@ -332,7 +328,7 @@
         "company": "Burguet Sistemas",
         "period": "feb. 2026 — may. 2026",
         "location": "Xirivella, Valencia",
-        "description": "Desarrollo y mantenimiento de una intranet corporativa. Colaboración en aplicación de escritorio para gestión de parking. Git y Bitbucket.",
+        "description": "Desarrollo y mantenimiento de una intranet corporativa y colaboración en una aplicación de escritorio para gestión de parking, trabajando con control de versiones mediante Git y Bitbucket.",
         "highlights": [
           "Desarrollo y mantenimiento de una intranet corporativa.",
           "Colaboración en una aplicación de escritorio para gestión de parking.",

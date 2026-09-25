@@ -8,7 +8,7 @@
   },
   "hero": {
     "status": "Available for new professional opportunities and selected projects",
-    "description": "I build web applications end to end, from interface to API and data. My background in systems and networks gives me a wider technical perspective.",
+    "description": "I build web applications end to end, from interface to API and data, combining development, design and applied AI.",
     "cta_github": "GitHub",
     "cta_linkedin": "LinkedIn",
     "scroll": "Scroll",
@@ -26,22 +26,22 @@
   "skills": {
     "title": "Stack",
     "subtitle": "How I build applications",
-    "desc": "Web development is my main focus. Interface design, applied AI, and a foundation in systems and networks round out my profile.",
+    "desc": "Web development is my main focus, from start to finish. Interface design, applied AI and my technical foundation in IT systems complement my profile.",
     "technologies": "Technologies",
     "tools": "Tools",
     "groups": [
       {
         "area": "Web development",
         "stack": [
-          "HTML & CSS",
-          "TypeScript",
+          "HTML",
+          "CSS",
+          "JavaScript",
           "React",
           "Next.js",
-          "JavaScript",
           "Tailwind CSS",
           "GSAP",
-          "Accessibility",
-          "Responsive design"
+          "Responsive design",
+          "Web accessibility"
         ]
       },
       {
@@ -58,23 +58,25 @@
         "area": "Applied AI",
         "stack": [
           "Local inference",
+          "Model integration",
           "Automation",
           "AI-assisted development"
         ]
       },
       {
-        "area": "UI/UX & design",
+        "area": "Interface design",
         "stack": [
           "Figma",
-          "Interface design",
+          "UI design",
           "Prototyping",
           "Visual hierarchy"
         ]
       },
       {
-        "area": "Development tools",
+        "area": "Development workflow",
         "stack": [
-          "Git & GitHub",
+          "Git",
+          "GitHub",
           "Testing",
           "Debugging",
           "Docker",
@@ -85,25 +87,19 @@
         "area": "Web deployment",
         "stack": [
           "Vercel",
-          "Cloudflare Workers",
-          "DNS & domains",
-          "Production environments"
+          "Cloudflare",
+          "DNS",
+          "Domains",
+          "Production deployment"
         ]
       },
       {
-        "area": "Systems · foundation",
+        "area": "Systems & support",
         "stack": [
-          "Windows & Linux",
-          "IT support",
-          "Troubleshooting"
-        ]
-      },
-      {
-        "area": "Networking · fundamentals",
-        "stack": [
-          "TCP/IP · LAN · DNS · DHCP",
-          "IPv4 & Wi-Fi",
-          "Network troubleshooting"
+          "Windows",
+          "Linux",
+          "Hardware",
+          "IT support"
         ]
       }
     ]
@@ -111,7 +107,7 @@
   "projects": {
     "title": "Projects",
     "subtitle": "Complete products, end to end.",
-    "desc": "A selection of personal and academic projects covering full-stack development, frontend, backend, APIs and digital product building.",
+    "desc": "A selection of personal and academic projects where I apply web development, backend, databases, interface design and artificial intelligence.",
     "concept": "Project detail",
     "view_live": "Open demo",
     "view_code": "View code",
@@ -315,7 +311,7 @@
         "institution": "IES Serra Perenxisa",
         "period": "2024 - 2026",
         "location": "Torrent, Valencia",
-        "description": "Training in frontend and backend development, databases, deployment, and modern web application architecture."
+        "description": "Training in frontend and backend development, databases, interface design, deployment and web application architecture."
       },
       {
         "title": "IT Systems and Networks",
@@ -332,7 +328,7 @@
         "company": "Burguet Sistemas",
         "period": "Feb 2026 — May 2026",
         "location": "Xirivella, Valencia",
-        "description": "Development and maintenance of a corporate intranet. Collaboration on a desktop application for parking management. Git and Bitbucket.",
+        "description": "Development and maintenance of a corporate intranet and collaboration on a desktop application for parking management, using Git and Bitbucket for version control.",
         "highlights": [
           "Development and maintenance of a corporate intranet.",
           "Collaboration on a desktop application for parking management.",

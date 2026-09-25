@@ -43,7 +43,7 @@ export function Skills() {
 
         <div>
           {groups.map((group, index) => (
-            <article key={group.area} className={`capability-row grid gap-4 border-b border-border/55 py-7 md:grid-cols-[3rem_minmax(0,.8fr)_minmax(0,1.2fr)] sm:items-baseline sm:py-9 ${index === 0 ? "text-primary" : index >= groups.length - 2 ? "text-foreground/65" : ""}`}>
+            <article key={group.area} className={`capability-row grid gap-4 border-b border-border/55 py-7 md:grid-cols-[3rem_minmax(0,.8fr)_minmax(0,1.2fr)] sm:items-baseline sm:py-9 ${index === 0 ? "text-primary" : index === groups.length - 1 ? "text-foreground/65" : ""}`}>
               <span className="font-mono text-[11px] text-primary">0{index + 1}</span>
               <h3 className={`font-black tracking-[-.04em] ${index === 0 ? "text-3xl sm:text-4xl" : "text-2xl sm:text-3xl"}`}>{group.area}</h3>
               <p className="text-base font-semibold leading-relaxed text-foreground/82 sm:text-lg">{group.stack.join(" · ")}</p>

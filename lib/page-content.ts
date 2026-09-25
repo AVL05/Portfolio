@@ -29,8 +29,8 @@ export const PROJECTS_PAGE: IndexPageContent = {
     en: "Alex Vicente López’s web projects",
   },
   description: {
-    es: "Selección de proyectos personales y académicos donde he trabajado desarrollo Full-Stack, frontend, backend, APIs y construcción de productos digitales.",
-    en: "A selection of personal and academic projects covering full-stack development, frontend, backend, APIs and digital product building.",
+    es: "Selección de proyectos personales y académicos donde aplico desarrollo web, backend, bases de datos, interfaces e inteligencia artificial.",
+    en: "A selection of personal and academic projects where I apply web development, backend, databases, interface design and artificial intelligence.",
   },
   sections: [
     {
@@ -129,8 +129,8 @@ export const ABOUT_PAGE: IndexPageContent = {
     {
       title: { es: "Tecnologías principales", en: "Core stack" },
       body: {
-        es: "React, Next.js, TypeScript, JavaScript y Tailwind CSS en la interfaz; PHP, Laravel, MySQL y APIs REST en el servidor; Git, GitHub y Docker en el flujo de desarrollo.",
-        en: "React, Next.js, TypeScript, JavaScript and Tailwind CSS for interfaces; PHP, Laravel, MySQL and REST APIs on the server; Git, GitHub and Docker in my development workflow.",
+        es: "React, Next.js, JavaScript y Tailwind CSS en la interfaz; PHP, Laravel, MySQL y APIs REST en el servidor; Git, GitHub y Docker en el flujo de desarrollo.",
+        en: "React, Next.js, JavaScript and Tailwind CSS for interfaces; PHP, Laravel, MySQL and REST APIs on the server; Git, GitHub and Docker in my development workflow.",
       },
     },
     {

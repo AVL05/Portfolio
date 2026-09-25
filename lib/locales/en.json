@@ -8,7 +8,7 @@
   },
   "hero": {
     "status": "Available for new professional opportunities and selected projects",
-    "description": "I build web applications end to end, from interface to API and data, combining development, design and applied AI.",
+    "description": "I build web applications end to end, from the interface through the API to the data layer, bringing together development, interface design and applied AI.",
     "cta_github": "GitHub",
     "cta_linkedin": "LinkedIn",
     "scroll": "Scroll",
@@ -26,7 +26,7 @@
   "skills": {
     "title": "Stack",
     "subtitle": "How I build applications",
-    "desc": "Web development is my main focus, from start to finish. Interface design, applied AI and my technical foundation in IT systems complement my profile.",
+    "desc": "I specialise in building web applications end to end. Interface design, applied AI and my background in IT systems round out my skills.",
     "technologies": "Technologies",
     "tools": "Tools",
     "groups": [
@@ -90,7 +90,7 @@
           "Cloudflare",
           "DNS",
           "Domains",
-          "Production deployment"
+          "Deploying to production"
         ]
       },
       {
@@ -107,11 +107,11 @@
   "projects": {
     "title": "Projects",
     "subtitle": "Complete products, end to end.",
-    "desc": "A selection of personal and academic projects where I apply web development, backend, databases, interface design and artificial intelligence.",
+    "desc": "A selection of personal and academic projects showing my work in web development, backend development, databases, interface design and AI.",
     "concept": "Project detail",
     "view_live": "Open demo",
     "view_code": "View code",
-    "role_label": "My part",
+    "role_label": "My role",
     "outcome_label": "Outcome",
     "items": [
       {
@@ -300,8 +300,8 @@
     "title": "03 / Experience",
     "subtitle": "Real work and technical foundations.",
     "desc": "Professional development, technical support and education in web applications and systems.",
-    "edu_title": "Academic Education",
-    "job_title": "Professional Experience",
+    "edu_title": "Education",
+    "job_title": "Professional experience",
     "cv_title": "Need more detail?",
     "cv_desc": "Download my CV in PDF format to review education, experience, stack, and projects with more context.",
     "cv_btn": "DOWNLOAD CV [PDF]",
@@ -311,7 +311,7 @@
         "institution": "IES Serra Perenxisa",
         "period": "2024 - 2026",
         "location": "Torrent, Valencia",
-        "description": "Training in frontend and backend development, databases, interface design, deployment and web application architecture."
+        "description": "Coursework in frontend and backend development, databases, interface design, deployment and web application architecture."
       },
       {
         "title": "IT Systems and Networks",
@@ -328,7 +328,7 @@
         "company": "Burguet Sistemas",
         "period": "Feb 2026 — May 2026",
         "location": "Xirivella, Valencia",
-        "description": "Development and maintenance of a corporate intranet and collaboration on a desktop application for parking management, using Git and Bitbucket for version control.",
+        "description": "Developed and maintained a corporate intranet and contributed to a desktop application for parking management, using Git and Bitbucket for version control.",
         "highlights": [
           "Development and maintenance of a corporate intranet.",
           "Collaboration on a desktop application for parking management.",

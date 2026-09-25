@@ -139,7 +139,7 @@ export function Projects() {
     {featured.map((project, index) => <ProjectScene key={project.title} project={project} index={index} total={featured.length} language={language} />)}
     <div className="mx-auto max-w-[100rem] px-4 pb-16 pt-8 sm:px-6 lg:px-8">
       <div className="flex flex-wrap items-baseline justify-between gap-4 border-t border-border/55 pt-8">
-        <h3 className="text-2xl font-semibold tracking-tight">{language === "es" ? "Otros proyectos" : "More experiments"}</h3>
+        <h3 className="text-2xl font-semibold tracking-tight">{language === "es" ? "Otros proyectos" : "Other projects"}</h3>
         <a href="https://github.com/AVL05" target="_blank" rel="noopener noreferrer" className="cinema-link min-h-11 text-sm">
           <FaGithub aria-hidden="true" />{language === "es" ? "Más código en GitHub" : "More code on GitHub"}<ArrowUpRight aria-hidden="true" />
         </a>

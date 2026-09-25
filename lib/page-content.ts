@@ -30,7 +30,7 @@ export const PROJECTS_PAGE: IndexPageContent = {
   },
   description: {
     es: "Selección de proyectos personales y académicos donde aplico desarrollo web, backend, bases de datos, interfaces e inteligencia artificial.",
-    en: "A selection of personal and academic projects where I apply web development, backend, databases, interface design and artificial intelligence.",
+    en: "A selection of personal and academic projects showing my work in web development, backend development, databases, interface design and AI.",
   },
   sections: [
     {
@@ -88,35 +88,35 @@ export const ABOUT_PAGE: IndexPageContent = {
   title: { es: "Sobre Alex Vicente López", en: "About Alex Vicente López" },
   description: {
     es: "Soy Desarrollador Web Full-Stack Junior. Empecé en Sistemas Microinformáticos y Redes y después me especialicé en Desarrollo de Aplicaciones Web. Hoy construyo aplicaciones desde la interfaz hasta el backend y los datos, con una base técnica que también abarca sistemas, redes y soporte IT.",
-    en: "I am a Junior Full-Stack Web Developer. I started in IT Systems and Networks before specialising in Web Application Development. Today I build applications across interfaces, backend and data, supported by a foundation in systems, networking and IT support.",
+    en: "I am a junior full-stack web developer. I began with IT systems and networking before specialising in web application development. Today I build applications from the interface through the backend to the data layer, drawing on a foundation in systems, networking and IT support.",
   },
   sections: [
     {
       title: { es: "De sistemas a la web", en: "From systems to the web" },
       body: {
         es: "En SMR aprendí a entender equipos, sistemas operativos, redes, servicios y fundamentos de seguridad, además de resolver incidencias técnicas. Esa base me ayuda a pensar en el entorno donde funciona una aplicación, no solo en su interfaz.",
-        en: "My training in IT Systems and Networks covered hardware, operating systems, networks, services and security fundamentals, alongside technical troubleshooting. That background helps me consider the environment an application runs in, as well as its interface.",
+        en: "My IT systems and networking studies covered hardware, operating systems, networks, services and security fundamentals, along with troubleshooting. That foundation helps me understand the environment an application runs in, as well as its interface.",
       },
     },
     {
       title: { es: "Especialización web", en: "Web specialisation" },
       body: {
         es: "En DAW pasé de esa base a construir aplicaciones web completas: frontend, backend, APIs, bases de datos e interfaces accesibles. En proyectos como Distrito Gourmet y LumaFlow Studio aplico React, Laravel y MySQL para conectar esas capas.",
-        en: "Web Application Development took me from that foundation to building complete web applications: frontend, backend, APIs, databases and accessible interfaces. Projects such as Distrito Gourmet and LumaFlow Studio bring those layers together with React, Laravel and MySQL.",
+        en: "I then specialised in web application development, learning to build across the frontend, backend, APIs and databases while making interfaces accessible. In projects such as Distrito Gourmet and LumaFlow Studio, I connect those layers with React, Laravel and MySQL.",
       },
     },
     {
       title: { es: "Diseño y entrega", en: "Design and delivery" },
       body: {
         es: "Figma, el prototipado y la jerarquía visual complementan mi trabajo de desarrollo; no son una especialidad independiente. También trabajo con Git y GitHub, pruebas, depuración y despliegues web para llevar los proyectos a producción.",
-        en: "Figma, prototyping and visual hierarchy complement my development work; they are not a separate specialism. I also use Git and GitHub, testing, debugging and web deployment to bring projects into production.",
+        en: "Figma, prototyping and visual hierarchy support my development work; I do not present design as a separate specialism. I also use Git and GitHub, testing, debugging and web deployment to take projects into production.",
       },
     },
     {
       title: { es: "IA aplicada", en: "Applied AI" },
       body: {
         es: "Actualmente profundizo en IA aplicada al desarrollo. AI Creative Assistant es mi espacio de trabajo práctico con inferencia local, automatización y desarrollo asistido por IA.",
-        en: "I am currently exploring applied AI in software development. AI Creative Assistant is my hands-on work with local inference, automation and AI-assisted development.",
+        en: "I am currently developing my skills in applied AI. AI Creative Assistant gives me hands-on experience with local inference, automation and AI-assisted development.",
       },
     },
     {
@@ -130,28 +130,28 @@ export const ABOUT_PAGE: IndexPageContent = {
       title: { es: "Tecnologías principales", en: "Core stack" },
       body: {
         es: "React, Next.js, JavaScript y Tailwind CSS en la interfaz; PHP, Laravel, MySQL y APIs REST en el servidor; Git, GitHub y Docker en el flujo de desarrollo.",
-        en: "React, Next.js, JavaScript and Tailwind CSS for interfaces; PHP, Laravel, MySQL and REST APIs on the server; Git, GitHub and Docker in my development workflow.",
+        en: "I use React, Next.js, JavaScript and Tailwind CSS for interfaces; PHP, Laravel, MySQL and REST APIs for the backend; and Git, GitHub and Docker in my development workflow.",
       },
     },
     {
       title: { es: "Identidad digital", en: "Digital identity" },
       body: {
         es: "También aparece como Alex Vicente, Alex Vicente Lopez, aleviclop y AVL05 en perfiles técnicos, proyectos de GitHub y contenido relacionado con fotografía y diseño digital.",
-        en: "He also appears as Alex Vicente, Alex Vicente Lopez, aleviclop, and AVL05 across technical profiles, GitHub projects, and photography and digital design content.",
+        en: "You may also find my work under Alex Vicente, Alex Vicente Lopez, aleviclop or AVL05 across technical profiles, GitHub projects, photography and digital design.",
       },
     },
     {
       title: { es: "Disponibilidad", en: "Availability" },
       body: {
         es: "Disponible en Valencia y en remoto para puestos de desarrollo Full-Stack junior, tanto presenciales como híbridos o remotos. Respuesta habitual en 24-48 horas a través del formulario o alexviclop@gmail.com.",
-        en: "Available in Valencia and remotely for junior full-stack development roles, on-site, hybrid or remote. Usual reply within 24-48 hours via the contact form or alexviclop@gmail.com.",
+        en: "I am available for junior full-stack development roles in Valencia or remotely, including on-site and hybrid positions. I usually reply within 24–48 hours via the contact form or at alexviclop@gmail.com.",
       },
     },
     {
       title: { es: "Preguntas frecuentes", en: "Frequently asked questions" },
       body: {
         es: "¿Full-stack? Sí: trabajo desde la interfaz hasta la API y los datos con React, Laravel, PHP y MySQL. ¿Inglés? Nivel de trabajo para documentación y comunicación técnica. ¿Freelance? Valoro proyectos seleccionados además de oportunidades de empleo.",
-        en: "Full-stack? Yes: I work from the interface to the API and the data with React, Laravel, PHP and MySQL. English? Working level for documentation and technical communication. Freelance? I consider selected projects alongside employment opportunities.",
+        en: "Full-stack? Yes: I work across interfaces, APIs and data with React, Laravel, PHP and MySQL. English? I can use it for technical documentation and communication. Freelance? I consider selected projects alongside employment opportunities.",
       },
     },
   ],

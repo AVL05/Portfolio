@@ -163,7 +163,7 @@ test("the portfolio keeps the hero controls aligned and overlap-safe", () => {
 test("secondary work stays compact with visible media and real destinations", () => {
   const projects = read("components/projects.tsx");
   assert.match(projects, /Otros proyectos/);
-  assert.match(projects, /More experiments/);
+  assert.match(projects, /Other projects/);
   assert.match(projects, /md:grid-cols-3/);
   assert.match(projects, /project.summary/);
   assert.match(projects, /Ver código/);

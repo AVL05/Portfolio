@@ -1,12 +1,24 @@
 {
   "nav": {
     "home": "Inicio",
+    "about": "Sobre mí",
     "projects": "Proyectos",
     "skills": "Tecnologías",
     "experience": "Experiencia",
     "contact": "Contacto"
   },
   "hero": {
+    "role": "Desarrollador Full-Stack Junior",
+    "location": "Valencia, España",
+    "lines": [
+      "Código.",
+      "Criterio."
+    ],
+    "intro": "Soy Alex Vicente, desarrollador full-stack. Creo aplicaciones que combinan ingeniería, diseño y experiencias digitales.",
+    "work": "Ver proyectos",
+    "cv": "Descargar CV",
+    "profile": "Frontend, backend y datos. De principio a fin.",
+    "experience": "Experiencia y formación",
     "status": "Disponible para nuevas oportunidades profesionales y proyectos seleccionados",
     "description": "Desarrollo aplicaciones web de principio a fin, desde la interfaz hasta la API y los datos, combinando desarrollo, diseño e IA aplicada.",
     "cta_github": "GitHub",
@@ -21,7 +33,12 @@
         "pc": "Capacidades",
         "mountain": "Perspectiva"
       }
-    }
+    },
+    "artLabels": [
+      "Interfaz",
+      "API",
+      "Datos"
+    ]
   },
   "skills": {
     "title": "Tecnologías",
@@ -115,28 +132,6 @@
     "outcome_label": "Resultado",
     "items": [
       {
-        "title": "AI Creative Assistant",
-        "description": "Aplicación de escritorio para analizar contenido multimedia y automatizar parte del proceso creativo mediante modelos de IA ejecutados localmente.",
-        "image": "/projects/ai-creative-assistant-cover.svg",
-        "technologies": [
-          "Python",
-          "React",
-          "APIs REST",
-          "Inferencia local",
-          "Automatización"
-        ],
-        "category": "Desarrollo Full-Stack",
-        "github": "https://github.com/AVL05/ai-creative-assistant",
-        "type": "Aplicación de escritorio con IA",
-        "role": "Diseño y desarrollo de la arquitectura de la aplicación, integración entre frontend y backend, procesamiento multimedia y experimentación con inferencia local.",
-        "outcome": "Proyecto en desarrollo utilizado también como entorno práctico para aprender desarrollo asistido por IA, agentes, automatización y evaluación de modelos.",
-        "summary": "Análisis multimedia y automatización creativa con IA local.",
-        "evidence": [
-          "IA local",
-          "En desarrollo"
-        ]
-      },
-      {
         "title": "Distrito Gourmet",
         "description": "Aplicación web Full-Stack para un restaurante con carta digital, reservas, pedidos y paneles operativos.",
         "image": "/projects/distrito-gourmet-ui.webp",
@@ -161,12 +156,14 @@
         "evidence": [
           "Demo pública",
           "Reservas y pedidos"
-        ]
+        ],
+        "imageCaption": "Captura del sitio publicado",
+        "imageAlt": "Distrito Gourmet — Captura del sitio publicado"
       },
       {
         "title": "LumaFlow Studio",
         "description": "Plataforma full-stack para gestionar el flujo de un estudio fotográfico: clientes, sesiones, calendario, presupuestos, facturas, galerías y asistencia local con IA.",
-        "image": "/projects/lumaflow-studio-cover.svg",
+        "image": "/projects/lumaflow-studio-ai.webp",
         "technologies": [
           "React 19",
           "Laravel 13",
@@ -187,7 +184,9 @@
           "33 tests frontend",
           "Docker",
           "CI"
-        ]
+        ],
+        "imageCaption": "IA local · captura de la interfaz sin modelo instalado",
+        "imageAlt": "LumaFlow Studio — IA local · captura de la interfaz sin modelo instalado"
       },
       {
         "title": "raw.vives",
@@ -212,7 +211,9 @@
           "ES / EN",
           "Despliegue estático",
           "CI/CD"
-        ]
+        ],
+        "imageCaption": "Captura del sitio publicado",
+        "imageAlt": "raw.vives — Captura del sitio publicado"
       },
       {
         "title": "El Fogón: Landing gastronómica",
@@ -382,11 +383,6 @@
   "currently": {
     "title": "Actualmente",
     "items": [
-      {
-        "label": "Construyendo",
-        "value": "AI Creative Assistant",
-        "href": "#projects"
-      },
       {
         "label": "Aprendiendo",
         "value": "IA aplicada al desarrollo · agentes",

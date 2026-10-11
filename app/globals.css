@@ -3,7 +3,50 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ALEVICLOP 2.0 foundation shared by home and featured case studies. */
+.premium-home {
+  --background: #0B0D12;
+  --card: #171A22;
+  --foreground: #F5F3EE;
+  --muted-foreground: #A6AAB7;
+  --primary: #7686FF;
+  --primary-foreground: #0B0D12;
+  --ring: #7686FF;
+  --signal: #FF6542;
+  --border: #373C4B;
+  --space-xs: .5rem;
+  --space-sm: .75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4.5rem;
+  --space-4xl: 6rem;
+  --page-gutter: clamp(1.25rem, 4vw, 4rem);
+  --page-width: 90rem;
+  --header-height: 5.5rem;
+  --type-label: .6875rem;
+  --type-body: clamp(1rem, 1.3vw, 1.125rem);
+  --type-ui: .8125rem;
+  --type-name: clamp(1.5rem, 2.4vw, 2rem);
+  --type-menu: clamp(2.5rem, 9vw, 5rem);
+  --type-hero: clamp(2rem, 8.1vw, 7.75rem);
+  --control-height: 3.5rem;
+  --target-size: 2.75rem;
+  --motion-fast: 140ms;
+  --motion-normal: 240ms;
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  background: var(--background);
+  color: var(--foreground);
+}
+
 :root {
+  --motion-fast: 140ms;
+  --motion-normal: 240ms;
+  --motion-enter: 450ms;
+  --motion-title: 600ms;
+  --motion-reveal: 650ms;
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
   --background: oklch(0.965 0.009 86);
   --foreground: oklch(0.13 0.017 58);
   --card: oklch(0.988 0.007 86);
@@ -184,7 +227,7 @@
     background-color: var(--primary);
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform 0.3s ease;
+    transition: transform var(--motion-normal) var(--ease-out);
   }
 
   .link-underline:hover::after {
@@ -271,10 +314,10 @@
   background: var(--foreground);
   color: var(--background);
   padding: .75rem 1rem;
-  font: 700 .75rem/1 var(--font-geist-mono);
+  font: 400 .75rem/1 var(--font-label), monospace;
   text-transform: uppercase;
   letter-spacing: .12em;
-  transition: transform 180ms ease;
+  transition: none;
 }
 
 .skip-link:focus {
@@ -287,7 +330,7 @@
   align-items: center;
   gap: .45rem;
   color: color-mix(in oklab, var(--foreground) 64%, transparent);
-  transition: color 180ms ease;
+  transition: color var(--motion-fast) var(--ease-out);
 }
 
 .cinema-link svg {
@@ -371,32 +414,55 @@
   overflow: visible;
 }
 
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-group(project-distrito-gourmet),
+::view-transition-group(project-lumaflow-studio),
+::view-transition-group(project-raw-vives) {
+  animation-duration: var(--motion-normal);
+  animation-timing-function: cubic-bezier(.16, 1, .3, 1);
+}
+
 ::view-transition-old(root) {
-  animation: language-out 140ms cubic-bezier(.4, 0, 1, 1) both;
+  animation: language-out var(--motion-fast) var(--ease-out) both;
 }
 
 ::view-transition-new(root) {
-  animation: language-in 260ms cubic-bezier(.16, 1, .3, 1) both;
+  animation: language-in var(--motion-normal) var(--ease-out) both;
 }
 
 @keyframes language-out {
   to {
     opacity: 0;
-    transform: translateY(-4px);
   }
 }
 
 @keyframes language-in {
   from {
     opacity: 0;
-    transform: translateY(6px);
   }
 }
+
+.photo-image { transition: transform var(--motion-normal) var(--ease-out); }
+.premium-home { font-family: var(--font-body), sans-serif; }
+.premium-home :is(h2, h3, h4) { font-family: var(--font-display), sans-serif; font-weight: 500; }
+.premium-home :is(.font-mono, .section-kicker) { font-family: var(--font-label), monospace; font-weight: 400; }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  #photography figure:hover .photo-image { transform: scale(1.015); }
+  .premium-home .continue:hover svg { transform: translateY(2px); }
+}
+.premium-home .continue svg { transition: transform var(--motion-normal) var(--ease-out); }
+.premium-home .continue:focus-visible svg { transform: none; }
+.premium-home form[aria-busy="true"] { cursor: progress; }
+.premium-home form :is(input, textarea):focus-visible { background-color: var(--secondary); }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   ::view-transition-old(root),
-  ::view-transition-new(root) {
+  ::view-transition-new(root),
+  ::view-transition-group(*) {
     animation: none;
   }
   *, *::before, *::after {
@@ -406,3 +472,8 @@
     transition-duration: .01ms !important;
   }
 }
+
+/* ALEVICLOP 2.1 — approved Code / Composition home. */
+.code-home{--background:#10151e;--card:#1c2432;--primary:#adc1ff;--primary-foreground:#10151e;--ring:#adc1ff;--border:#485366;--muted-foreground:#babdc0;--mineral:#292D32}
+.code-home #projects,.code-home #experience{background:var(--mineral)}
+.code-home #projects [data-layout="restaurant"]{background:var(--mineral);color:var(--foreground);--foreground:#F5F3EE;--muted-foreground:#babdc0;--primary:#adc1ff;--work-rule:#485366;--project-surface:#c7baa8}

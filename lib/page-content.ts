@@ -34,13 +34,6 @@ export const PROJECTS_PAGE: IndexPageContent = {
   },
   sections: [
     {
-      title: { es: "AI Creative Assistant", en: "AI Creative Assistant" },
-      body: {
-        es: "Aplicación de escritorio con IA para analizar contenido multimedia y automatizar parte del proceso creativo con modelos ejecutados localmente. Mi entorno práctico para IA aplicada, agentes y automatización.",
-        en: "An AI desktop application for analysing multimedia content and automating parts of the creative workflow with locally executed models. My hands-on environment for applied AI, agents and automation.",
-      },
-    },
-    {
       title: { es: "Distrito Gourmet", en: "Distrito Gourmet" },
       body: {
         es: "Aplicación web Full-Stack para un restaurante con carta digital, reservas, pedidos y paneles operativos, desarrollada con React, Laravel, MySQL y Docker.",
@@ -115,8 +108,8 @@ export const ABOUT_PAGE: IndexPageContent = {
     {
       title: { es: "IA aplicada", en: "Applied AI" },
       body: {
-        es: "Actualmente profundizo en IA aplicada al desarrollo. AI Creative Assistant es mi espacio de trabajo práctico con inferencia local, automatización y desarrollo asistido por IA.",
-        en: "I am currently developing my skills in applied AI. AI Creative Assistant gives me hands-on experience with local inference, automation and AI-assisted development.",
+        es: "Actualmente profundizo en IA aplicada al desarrollo.",
+        en: "I am currently developing my skills in applied AI.",
       },
     },
     {

@@ -45,8 +45,9 @@ test("known mixed-language surfaces select copy from the active language", () =>
   const legal = read("components/legal-page-content.tsx");
   const og = read("app/api/og/route.tsx");
 
-  assert.match(hero, /Desarrollador Full-Stack Junior/);
-  assert.match(hero, /Junior Full-Stack Developer/);
+  assert.match(hero, /copy.role/);
+  assert.equal(es.hero.role, "Desarrollador Full-Stack Junior");
+  assert.equal(en.hero.role, "Junior Full-Stack Developer");
   assert.match(es.hero.description, /principio a fin/);
   assert.match(en.hero.description, /end to end/);
   assert.match(photography, /Otra/);

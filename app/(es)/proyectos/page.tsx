@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SeoPageShell } from "@/components/seo-page-shell";
+import { Projects } from "@/components/projects";
 import { PROJECTS_PAGE } from "@/lib/page-content";
 import { buildPageMetadata } from "@/lib/seo";
 
@@ -19,6 +20,6 @@ export default function ProjectsPage() {
       title={PROJECTS_PAGE.title}
       description={PROJECTS_PAGE.description}
       sections={PROJECTS_PAGE.sections}
-    />
+    ><Projects /></SeoPageShell>
   );
 }

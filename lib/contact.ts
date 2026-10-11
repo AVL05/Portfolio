@@ -8,6 +8,7 @@ export const CONTACT_LIMITS = {
   maxFormAgeMs: 24 * 60 * 60 * 1000,
   rateLimitWindowMs: 10 * 60 * 1000,
   rateLimitMax: 5,
+  submitTimeoutMs: 30_000,
 } as const;
 
 export type ContactField = "name" | "email" | "message";

@@ -12,14 +12,14 @@ const content = read("components/raw-vives-case-study.tsx");
 const seo = read("lib/seo.ts");
 
 test("raw.vives is a featured web and photography project", () => {
-  assert.equal(es.projects.items[3].title, "raw.vives");
-  assert.equal(es.projects.items[3].link, "https://rawvives.aleviclop.dev/");
-  assert.equal(es.projects.items[3].caseStudyHref, "/proyectos/raw-vives");
-  assert.equal(en.projects.items[3].title, "raw.vives");
-  assert.equal(en.projects.items[3].link, "https://rawvives.aleviclop.dev/");
-  assert.equal(en.projects.items[3].caseStudyHref, "/en/projects/raw-vives");
+  assert.equal(es.projects.items[2].title, "raw.vives");
+  assert.equal(es.projects.items[2].link, "https://rawvives.aleviclop.dev/");
+  assert.equal(es.projects.items[2].caseStudyHref, "/proyectos/raw-vives");
+  assert.equal(en.projects.items[2].title, "raw.vives");
+  assert.equal(en.projects.items[2].link, "https://rawvives.aleviclop.dev/");
+  assert.equal(en.projects.items[2].caseStudyHref, "/en/projects/raw-vives");
   for (const locale of [es, en]) {
-    const project = locale.projects.items[3];
+    const project = locale.projects.items[2];
     assert.equal(project.github, "https://github.com/AVL05/alexgallery");
     assert.match(project.outcome, /static|estático/i);
     assert.doesNotMatch(project.description, /\b30\b/);

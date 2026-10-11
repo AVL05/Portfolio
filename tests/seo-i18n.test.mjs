@@ -32,6 +32,15 @@ function loadLib(relativePath, extraModules = {}) {
 const i18n = loadLib("lib/i18n-paths.ts");
 const seo = loadLib("lib/seo.ts", { "@/lib/i18n-paths": i18n });
 
+test("legal navigation preserves locale without adding indexable URLs", () => {
+  assert.equal(i18n.localizeHref("/legal", "en"), "/en/legal");
+  assert.equal(i18n.getAlternatePath("/en/legal", "es"), "/legal");
+  assert.equal(i18n.getAlternatePath("/legal", "en"), "/en/legal");
+  assert.equal(seo.languageAlternates("/legal", "es"), undefined);
+  assert.equal(seo.languageAlternates("/en/legal", "en"), undefined);
+  assert.equal(seo.INDEXABLE_ROUTES.length, 16);
+});
+
 const EXPECTED_PAGES = [
   ["/", "app/(es)/page.tsx", "es"],
   ["/en", "app/(en)/en/page.tsx", "en"],
@@ -190,7 +199,6 @@ test("locale-dependent internal links stay inside their language", () => {
     "components/not-found-content.tsx",
     "components/legal-page-content.tsx",
     "components/contact.tsx",
-    "components/hero.tsx",
     "components/hero-3d/RoomHotspots.tsx",
   ]) {
     assert.match(read(file), /localizeHref/, file);

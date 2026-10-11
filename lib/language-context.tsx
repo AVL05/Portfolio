@@ -12,10 +12,13 @@ export interface ProjectItem {
   summary: string;
   evidence: string[];
   image: string;
+  imageAlt?: string;
+  imageCaption?: string;
   technologies: string[];
   category: string;
   link?: string;
   github?: string;
+  repositoryPrivate?: boolean;
   type: string;
   role?: string;
   outcome?: string;
@@ -40,8 +43,18 @@ interface Translation {
     experience: string;
     projects: string;
     contact: string;
+    about: string;
   };
   hero: {
+    artLabels: string[];
+    role: string;
+    location: string;
+    lines: string[];
+    intro: string;
+    work: string;
+    cv: string;
+    profile: string;
+    experience: string;
     status: string;
     description: string;
     cta_github: string;

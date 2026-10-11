@@ -8,27 +8,26 @@ test("localized home retains evidence, seven ordered capability groups and a fac
   for (const language of ["es", "en"]) {
     const locale = JSON.parse(read(`lib/locales/${language}.json`));
     const projects = locale.projects.items;
-    assert.equal(projects.length, 8);
+    assert.equal(projects.length, 7);
     assert.equal(locale.skills.groups.length, 7);
     assert.match(locale.skills.groups[0].area, /Desarrollo web|Web development/);
     assert.deepEqual(locale.skills.groups[0].stack.slice(0, 3), ["HTML", "CSS", "JavaScript"]);
     assert.ok(!locale.skills.groups[0].stack.includes("TypeScript"));
     assert.ok(locale.skills.groups[3].stack.includes("Figma"));
     assert.match(locale.skills.groups[6].area, /Sistemas|Systems/);
-    assert.deepEqual(projects[2].evidence.map((text) => text.match(/\d+/)?.[0]).filter(Boolean), ["56", "33"]);
-    assert.match(projects[2].outcome, /56/);
-    assert.match(projects[2].outcome, /33/);
-    assert.match(projects[7].description, /100/);
-    assert.equal(projects[0].title, "AI Creative Assistant");
-    assert.equal(projects[1].title, "Distrito Gourmet");
-    assert.equal(projects[2].title, "LumaFlow Studio");
-    assert.equal(projects[3].title, "raw.vives");
+    assert.deepEqual(projects[1].evidence.map((text) => text.match(/\d+/)?.[0]).filter(Boolean), ["56", "33"]);
+    assert.match(projects[1].outcome, /56/);
+    assert.match(projects[1].outcome, /33/);
+    assert.match(projects[6].description, /100/);
+    assert.equal(projects[0].title, "Distrito Gourmet");
+    assert.equal(projects[1].title, "LumaFlow Studio");
+    assert.equal(projects[2].title, "raw.vives");
     for (const project of projects) {
       assert.ok(project.summary.length <= 90);
       assert.ok(project.description.length >= project.summary.length);
     }
-    assert.equal(locale.currently.items[0].value, "AI Creative Assistant");
-    assert.equal(locale.currently.items[2].value, "Valencia");
+    assert.ok(!JSON.stringify(locale).includes("AI Creative Assistant"));
+    assert.equal(locale.currently.items[1].value, "Valencia");
     assert.equal(locale.experience.experience_list.length, 2);
     assert.equal(locale.experience.education_list.length, 2);
     assert.deepEqual(locale.experience.experience_list.map((item) => item.highlights.length), [3, 2]);
@@ -39,7 +38,8 @@ test("home has one hero heading, both primary journeys and natural photography f
   const hero = read("components/hero.tsx");
   assert.equal((hero.match(/<h1\b/g) ?? []).length, 1);
   assert.match(hero, /href="#projects"/);
-  assert.match(hero, /href="#contact"/);
+  assert.match(hero, /download data-track="cv-download"/);
+  assert.match(hero, /href="#experience"/);
   assert.doesNotMatch(hero, /studio-photography|studio-perspective/);
   const home = read("components/home-client.tsx");
   assert.ok(home.indexOf("<Photography />") < home.indexOf("<Currently />"));

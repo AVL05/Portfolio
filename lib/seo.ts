@@ -103,7 +103,7 @@ export function absoluteUrl(path = "/") {
 export function languageAlternates(path: string, locale: Locale) {
   const es = locale === "es" ? path : getAlternatePath(path, "es");
   const en = locale === "en" ? path : getAlternatePath(path, "en");
-  if (!es || !en) return undefined;
+  if (!es || !en || !INDEXABLE_ES_PATHS.includes(es)) return undefined;
   return {
     canonical: absoluteUrl(path),
     languages: {

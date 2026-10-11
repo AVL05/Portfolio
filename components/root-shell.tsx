@@ -1,9 +1,7 @@
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type React from "react";
-import { Suspense } from "react";
 import "@/lib/raf-polyfill";
-import { CustomCursor } from "@/components/custom-cursor";
 import { LanguageProvider } from "@/lib/language-context";
 import type { Locale } from "@/lib/i18n-paths";
 
@@ -28,9 +26,8 @@ export function RootShell({
       <a href="#main-content" className="skip-link">
         {skipLabel}
       </a>
-      <CustomCursor />
       <div className="relative min-h-screen overflow-x-clip">
-        <Suspense fallback={null}>{children}</Suspense>
+        {children}
       </div>
       {isVercel ? <Analytics /> : null}
       {isVercel ? <SpeedInsights /> : null}

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import type { ReactNode } from "react";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { useLanguage, type Language } from "@/lib/language-context";
 import { localizeHref } from "@/lib/i18n-paths";
@@ -13,13 +14,14 @@ interface SeoPageShellProps {
   title: LocalizedText;
   description: LocalizedText;
   sections: Array<{ title: LocalizedText; body: LocalizedText }>;
+  children?: ReactNode;
 }
 
-export function SeoPageShell({ eyebrow, title, description, sections }: SeoPageShellProps) {
+export function SeoPageShell({ eyebrow, title, description, sections, children }: SeoPageShellProps) {
   const { language } = useLanguage();
 
   return (
-    <main id="main-content" className="case-study min-h-screen bg-background px-4 pb-20 pt-5 text-foreground sm:px-6 lg:px-8">
+    <main id="main-content" className={`case-study min-h-screen bg-background px-4 pb-20 pt-5 text-foreground sm:px-6 lg:px-8 ${children ? "premium-home" : ""}`}>
       <div className="mx-auto max-w-[100rem]">
         <nav className="flex h-14 items-center justify-between border-b border-border/60">
           <Link href={localizeHref("/", language)} className="inline-flex min-h-11 items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[.13em] text-foreground/76 transition-colors hover:text-primary">
@@ -41,6 +43,7 @@ export function SeoPageShell({ eyebrow, title, description, sections }: SeoPageS
           </div>
         </header>
 
+        {children}
         <div>
           {sections.map((section, index) => (
             <article key={section.title.es} className="grid gap-4 border-b border-border/55 py-9 md:grid-cols-[3rem_minmax(220px,.6fr)_minmax(0,1fr)] md:items-baseline md:py-12">

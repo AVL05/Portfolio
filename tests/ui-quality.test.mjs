@@ -58,7 +58,7 @@ test("contact form exposes localized inline validation", () => {
   // El cliente envía a la API propia (sin claves expuestas) con timeout;
   // el timeout de 12s vive en el servidor para el proveedor upstream.
   assert.match(contact, /fetch\("\/api\/contact"/);
-  assert.match(contact, /AbortSignal\.timeout\(15_000\)/);
+  assert.match(contact, /AbortSignal\.timeout\(CONTACT_LIMITS\.submitTimeoutMs\)/);
   assert.match(route, /UPSTREAM_TIMEOUT_MS = 12_000/);
   assert.match(route, /web3forms/i);
   assert.doesNotMatch(route, /resend/i);
@@ -71,7 +71,7 @@ test("contact form exposes localized inline validation", () => {
   assert.match(en, /"form_error_network"/);
 });
 
-test("focus, lazy 3D hero, and localized Open Graph contracts remain explicit", () => {
+test("focus, lightweight editorial hero, and localized Open Graph contracts remain explicit", () => {
   const globals = read("app/globals.css");
   const hero = read("components/hero.tsx");
   const cursor = read("components/custom-cursor.tsx");
@@ -79,7 +79,7 @@ test("focus, lazy 3D hero, and localized Open Graph contracts remain explicit", 
 
   assert.match(globals, /:focus-visible/);
   assert.match(globals, /outline: 2px solid var\(--primary\)/);
-  assert.match(hero, /<CreativeRoomHero/);
+  assert.doesNotMatch(hero, /CreativeRoomHero/);
   assert.match(read("components/hero-3d/CreativeRoomHero.tsx"), /ssr: false/);
   assert.match(read("components/hero-3d/CreativeRoomScene.tsx"), /frameloop="demand"/);
   assert.match(cursor, /query\.addEventListener\("change", syncCursor\)/);
@@ -91,6 +91,11 @@ test("focus, lazy 3D hero, and localized Open Graph contracts remain explicit", 
 });
 
 test("the branded PNG uses a stable crawlable favicon URL", () => {
+  const favicon = readFileSync(join(root, "public/favicon.png"));
+  assert.equal(favicon.readUInt32BE(16), 192);
+  assert.equal(favicon.readUInt32BE(20), 192);
+  assert.ok(favicon.length < 10_000, "favicon should not compete with critical resources");
+  assert.match(read("app/manifest.ts"), /sizes: "192x192"/);
   for (const layout of [read("app/(es)/layout.tsx"), read("app/(en)/layout.tsx")]) {
     assert.equal(existsSync(join(root, "public/favicon.png")), true);
     assert.equal(existsSync(join(root, "app/icon.png")), false);
@@ -150,11 +155,12 @@ test("the portfolio keeps the hero controls aligned and overlap-safe", () => {
 
   assert.doesNotMatch(hero, /data-portfolio|Portfolio \/ [A-Z]\d+/);
   assert.doesNotMatch(navigation, />\s*V\d+\s*</);
-  assert.match(hero, /styles\.sceneColumn/);
-  assert.equal((hero.match(/<CreativeRoomHero\b/g) ?? []).length, 1);
+  assert.match(hero, /styles\.summary/);
+  assert.equal((hero.match(/<h1\b/g) ?? []).length, 1);
   const heroStyles = read("components/hero.module.css");
-  assert.match(heroStyles, /\.journey\s*\{[^}]*overflow: visible/);
-  assert.match(heroStyles, /\.sceneColumn\s*\{[^}]*position: relative/);
+  assert.match(heroStyles, /\.hero\s*\{[^}]*overflow:clip/);
+  assert.match(hero, /data-art-stage/);
+  assert.match(heroStyles, /@media\(max-width:767px\)/);
   assert.doesNotMatch(hero, /md:bottom-7 md:left-8/);
   assert.match(languageToggle, /absolute left-1 top-1 size-9/);
   assert.match(languageToggle, /translate-x-9/);
@@ -175,10 +181,10 @@ test("secondary work stays compact with visible media and real destinations", ()
   }
 });
 
-test("the recruiter view keeps exactly four featured projects plus an archive", () => {
+test("the recruiter view keeps exactly three featured projects plus an archive", () => {
   const projects = read("components/projects.tsx");
 
-  assert.match(projects, /const featuredIndexes = \[0, 1, 2, 3\]/);
+  assert.match(projects, /const featuredIndexes = \[0, 1, 2\]/);
   assert.match(projects, /archive = projects\.filter/);
   assert.match(projects, /Ver caso de estudio/);
   assert.match(projects, /View case study/);

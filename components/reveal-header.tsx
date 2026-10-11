@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { gsap, prefersReducedMotion, useGSAP } from "@/lib/gsap";
+import { deferToViewport, gsap, motion, revealTrigger, useGSAP } from "@/lib/gsap";
 
 interface RevealHeaderProps {
   title: string;
@@ -19,61 +19,20 @@ export function RevealHeader({
   const ref = useRef<HTMLElement>(null);
 
   useGSAP(
-    () => {
+    (_, contextSafe) => deferToViewport(ref.current, contextSafe!(() => {
       const q = gsap.utils.selector(ref);
       const words = q(".rh-word");
 
-      if (prefersReducedMotion()) {
-        gsap.set(
-          [words, q(".rh-kicker-line"), q(".rh-kicker-text"), q(".rh-desc")],
-          {
-            x: 0,
-            y: 0,
-            yPercent: 0,
-            scaleX: 1,
-          },
-        );
-        return;
-      }
-
-      const tl = gsap.timeline({
-        scrollTrigger: { trigger: ref.current, start: "top 82%", once: true },
+      const media = gsap.matchMedia();
+      media.add("(prefers-reduced-motion: no-preference)", () => {
+        gsap.timeline({ scrollTrigger: revealTrigger(ref.current) })
+          .from(q(".rh-kicker-line"), { scaleX: .45, duration: motion.duration.enter, ease: motion.ease.reveal, transformOrigin: "left" })
+          .from(q(".rh-kicker-text"), { x: -motion.distance.small, duration: motion.duration.enter, ease: motion.ease.out }, 0)
+          .from(words, { yPercent: 14, duration: motion.duration.title, ease: motion.ease.reveal, stagger: motion.stagger.content }, .08)
+          .from(q(".rh-desc"), { y: motion.distance.small, duration: motion.duration.enter, ease: motion.ease.out }, .16);
       });
-
-      tl.fromTo(
-        q(".rh-kicker-line"),
-        { scaleX: 0.45 },
-        {
-          scaleX: 1,
-          duration: 0.4,
-          ease: "expo.out",
-          transformOrigin: "left",
-        },
-      )
-        .fromTo(
-          q(".rh-kicker-text"),
-          { x: -6 },
-          { x: 0, duration: 0.35, ease: "expo.out" },
-          "-=0.3",
-        )
-        .fromTo(
-          words,
-          { yPercent: 28 },
-          {
-            yPercent: 0,
-            duration: 0.55,
-            ease: "expo.out",
-            stagger: 0.04,
-          },
-          "-=0.28",
-        )
-        .fromTo(
-          q(".rh-desc"),
-          { y: 8 },
-          { y: 0, duration: 0.4, ease: "expo.out" },
-          "-=0.35",
-        );
-    },
+      return () => media.revert();
+    })),
     { scope: ref },
   );
 

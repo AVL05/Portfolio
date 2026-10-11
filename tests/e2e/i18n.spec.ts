@@ -14,7 +14,7 @@ test("spanish URLs always serve spanish, ignoring cookies", async ({
   await page.goto("/");
   await expect(page.locator("html")).toHaveAttribute("lang", "es");
   await expect(
-    page.getByRole("heading", { name: "Alex Vicente" }),
+    page.locator("#hero-title"),
   ).toBeVisible();
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     "href",
@@ -41,7 +41,7 @@ test("english URLs serve english with a self-referencing canonical", async ({
     page.locator('link[rel="alternate"][hreflang="es"]'),
   ).toHaveAttribute("href", "https://www.aleviclop.dev");
   await expect(
-    page.getByRole("heading", { name: "Alex Vicente" }),
+    page.locator("#hero-title"),
   ).toBeVisible();
 });
 

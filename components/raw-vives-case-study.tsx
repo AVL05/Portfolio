@@ -1,6 +1,10 @@
 "use client";
 
 import Image from "next/image";
+import { ProjectShowcase } from "./project-showcase";
+import styles from "./project-case-study.module.css";
+import { useRef } from "react";
+import { gsap, motion, useGSAP } from "@/lib/gsap";
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight, Check, ExternalLink } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
@@ -99,11 +103,18 @@ const stack = ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS 4", "GSAP",
 export function RawVivesCaseStudy() {
   const { language } = useLanguage();
   const t = copy[language];
+  const containerRef = useRef<HTMLElement>(null);
+  useGSAP(() => {
+    const media = gsap.matchMedia();
+    media.add("(prefers-reduced-motion: no-preference)", () => {
+      gsap.from(containerRef.current?.querySelector("h1") ?? null, { y: motion.distance.content, duration: motion.duration.title, ease: motion.ease.out });
+    });
+    return () => media.revert();
+  }, { scope: containerRef });
 
   return (
-    <main id="main-content" className="case-study min-h-screen overflow-hidden bg-background text-foreground">
+    <main id="main-content" ref={containerRef} className={`premium-home case-study min-h-screen bg-background text-foreground ${styles.story}`}>
       <section className="relative px-4 pb-16 pt-6 sm:px-6 lg:px-8">
-        <div className="pointer-events-none absolute inset-0 bg-grid opacity-[0.05]" />
         <div className="relative z-10 mx-auto max-w-7xl">
           <nav aria-label={t.back} className="mb-12 flex items-center justify-between rounded-lg border border-border/65 bg-card/60 px-4 py-3 sm:mb-16">
             <Link href={localizeHref("/#projects", language)} className="inline-flex min-h-11 items-center gap-2 font-mono text-xs font-black uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:text-primary"><ArrowLeft className="h-4 w-4" />{t.back}</Link>
@@ -113,20 +124,22 @@ export function RawVivesCaseStudy() {
             </div>
           </nav>
 
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,.78fr)_minmax(420px,.82fr)] lg:items-center">
+          <div className={styles.heroGrid}>
             <div>
-              <p className="section-kicker mb-5">{t.kicker}</p>
               <h1 className="text-6xl font-black leading-[0.86] tracking-[-0.055em] sm:text-8xl lg:text-[7.5rem]">raw.<span className="text-primary">vives</span></h1>
+              <p className="section-kicker mt-5">{t.kicker}</p>
               <p className="mt-7 max-w-3xl text-lg font-medium leading-relaxed text-muted-foreground sm:text-xl">{t.lead}</p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a href={productionUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-bold text-primary-foreground hover:bg-primary/90">{t.live}<ArrowUpRight className="h-4 w-4" /></a>
                 <a href={repositoryUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-border/70 px-5 py-3 text-sm font-bold hover:border-primary/45 hover:text-primary"><FaGithub className="h-4 w-4" />{t.code}</a>
               </div>
             </div>
-            <figure className="relative aspect-[16/10] overflow-hidden rounded-lg border border-border/65 bg-card">
-              <Image src="/projects/raw-vives/raw-vives-hero.webp" alt={language === "es" ? "Hero de raw.vives con los acantilados de Moher" : "raw.vives hero featuring the Cliffs of Moher"} fill className="object-cover" priority sizes="(max-width:1024px) 100vw, 640px" style={{ viewTransitionName: "project-raw-vives" }} />
-            </figure>
+            <ProjectShowcase image="/projects/raw-vives/raw-vives-hero.webp" alt={language === "es" ? "Hero de raw.vives con los acantilados de Moher" : "raw.vives hero featuring the Cliffs of Moher"} viewTransitionName="project-raw-vives" caption={language === "es" ? "Vista del proyecto · Captura de la web" : "Project preview · Website screenshot"} />
           </div>
+
+          <nav aria-label={language === "es" ? "Contenido del caso" : "Case contents"} className={styles.contents}>
+            {[["context", t.summary], ["architecture", t.stack], ["decisions", t.decisions], ["result", t.results]].map(([id, label]) => <a key={id} href={`#${id}`}>{label}</a>)}
+          </nav>
 
           <dl className="mt-12 grid grid-cols-2 border-y border-border/55 sm:grid-cols-4">
             {[["30", language === "es" ? "Fotografías" : "Photographs"], ["3", language === "es" ? "Series" : "Series"], ["73", language === "es" ? "Rutas estáticas" : "Static routes"], ["67", language === "es" ? "Pruebas" : "Tests"]].map(([value, label]) => <div key={label} className="border-border/55 px-3 py-5 first:pl-0 sm:border-r sm:last:border-r-0"><dt className="font-mono text-2xl font-black text-primary sm:text-3xl">{value}</dt><dd className="mt-1 text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">{label}</dd></div>)}
@@ -134,24 +147,24 @@ export function RawVivesCaseStudy() {
         </div>
       </section>
 
-      <section className="px-4 py-16 sm:px-6 lg:px-8"><div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[.72fr_1.28fr]">
-        <div><p className="section-kicker mb-4">{t.summary}</p><h2 className="text-3xl font-black leading-tight sm:text-5xl">{t.challenge}</h2></div>
+      <section id="context" className="px-4 py-16 sm:px-6 lg:px-8"><div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[.72fr_1.28fr]">
+        <div><h2 className="text-3xl font-black leading-tight sm:text-5xl">{t.challenge}</h2><p className="section-kicker mt-5">{t.summary}</p></div>
         <div className="space-y-6 text-base font-medium leading-relaxed text-muted-foreground sm:text-lg"><p>{t.summaryText}</p><p>{t.challengeText}</p><div className="grid gap-4 border-t border-border/55 pt-6 sm:grid-cols-2"><div><h3 className="mb-3 text-lg font-black text-foreground">{t.goals}</h3><ul className="space-y-2">{t.goalItems.map(item => <li key={item} className="flex gap-2"><Check className="mt-1 h-4 w-4 shrink-0 text-primary" />{item}</li>)}</ul></div><div><h3 className="mb-3 text-lg font-black text-foreground">{t.role}</h3><p>{t.roleText}</p></div></div></div>
       </div></section>
 
-      <section className="px-4 py-16 sm:px-6 lg:px-8"><div className="mx-auto max-w-7xl rounded-lg border border-border/65 bg-card/62 p-6 sm:p-9"><p className="section-kicker mb-5">{t.stack}</p><div className="flex flex-wrap gap-2">{stack.map(item => <span key={item} className="rounded-md border border-border/55 bg-background/40 px-3 py-2 font-mono text-[11px] font-bold uppercase tracking-[.1em] text-muted-foreground">{item}</span>)}</div></div></section>
+      <section id="architecture" className="px-4 py-16 sm:px-6 lg:px-8"><div className="mx-auto max-w-7xl rounded-lg border border-border/65 bg-card/62 p-6 sm:p-9"><p className="section-kicker mb-5">{t.stack}</p><div className="flex flex-wrap gap-2">{stack.map(item => <span key={item} className="rounded-md border border-border/55 bg-background/40 px-3 py-2 font-mono text-[11px] font-bold uppercase tracking-[.1em] text-muted-foreground">{item}</span>)}</div></div></section>
 
-      <section className="px-4 py-16 sm:px-6 lg:px-8"><div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:items-center"><div><p className="section-kicker mb-4">01 / Editorial</p><h2 className="text-3xl font-black leading-tight sm:text-5xl">{t.direction}</h2><p className="mt-5 text-base font-medium leading-relaxed text-muted-foreground sm:text-lg">{t.directionText}</p></div><Image src="/projects/raw-vives/raw-vives-home-editorial.webp" alt={language === "es" ? "Sección de series en la home editorial de raw.vives" : "Series section on the raw.vives editorial home"} width={1280} height={720} className="h-auto w-full rounded-lg border border-border/65" sizes="(max-width:1024px) 100vw, 50vw" /></div></section>
+      <section className="px-4 py-16 sm:px-6 lg:px-8"><div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:items-center"><div><h2 className="text-3xl font-black leading-tight sm:text-5xl">{t.direction}</h2><p className="section-kicker mt-5">01 / Editorial</p><p className="mt-5 text-base font-medium leading-relaxed text-muted-foreground sm:text-lg">{t.directionText}</p></div><Image src="/projects/raw-vives/raw-vives-home-editorial.webp" alt={language === "es" ? "Sección de series en la home editorial de raw.vives" : "Series section on the raw.vives editorial home"} width={1280} height={720} className="h-auto w-full rounded-lg border border-border/65" sizes="(max-width:1024px) 100vw, 50vw" /></div></section>
 
       <section className="px-4 py-16 sm:px-6 lg:px-8"><div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-3">{[[t.architecture,t.architectureText],[t.series,t.seriesText],[t.delivery,t.deliveryText]].map(([title, text], index) => <article key={title} className="rounded-lg border border-border/65 bg-card/62 p-6"><span className="font-mono text-xs font-black text-primary">0{index + 2}</span><h2 className="mt-5 text-2xl font-black">{title}</h2><p className="mt-4 font-medium leading-relaxed text-muted-foreground">{text}</p></article>)}</div></section>
 
-      <section className="px-4 py-16 sm:px-6 lg:px-8"><div className="mx-auto max-w-7xl"><p className="section-kicker mb-4">{t.gallery}</p><h2 className="mb-9 max-w-4xl text-3xl font-black leading-tight sm:text-5xl">{language === "es" ? "Un sistema, distintos modos de explorar." : "One system, different ways to explore."}</h2><div className="grid gap-6 md:grid-cols-2">{media.map(([file, esAlt, enAlt], index) => <figure key={file} className={index === 0 ? "md:col-span-2" : ""}><div className="relative aspect-video overflow-hidden rounded-lg border border-border/65 bg-card"><Image src={`/projects/raw-vives/${file}`} alt={language === "es" ? esAlt : enAlt} fill className="object-cover" loading="lazy" sizes={index === 0 ? "(max-width:768px) 100vw, 1200px" : "(max-width:768px) 100vw, 50vw"} /></div><figcaption className="mt-3 font-mono text-[11px] font-bold uppercase tracking-[0.12em] text-muted-foreground">{String(index + 1).padStart(2, "0")} / {language === "es" ? esAlt : enAlt}</figcaption></figure>)}</div></div></section>
+      <section className="px-4 py-16 sm:px-6 lg:px-8"><div className="mx-auto max-w-7xl"><h2 className="mb-9 max-w-4xl text-3xl font-black leading-tight sm:text-5xl">{language === "es" ? "Un sistema, distintos modos de explorar." : "One system, different ways to explore."}</h2><p className="section-kicker mt-5">{t.gallery}</p><div className="grid gap-6 md:grid-cols-2">{media.map(([file, esAlt, enAlt], index) => <figure key={file} className={index === 0 ? "md:col-span-2" : ""}><div className="relative aspect-video overflow-hidden rounded-lg border border-border/65 bg-card"><Image src={`/projects/raw-vives/${file}`} alt={language === "es" ? esAlt : enAlt} fill className="object-cover" loading="lazy" sizes={index === 0 ? "(max-width:768px) 100vw, 1200px" : "(max-width:768px) 100vw, 50vw"} /></div><figcaption className="mt-3 font-mono text-[11px] font-bold uppercase tracking-[0.12em] text-muted-foreground">{String(index + 1).padStart(2, "0")} / {language === "es" ? esAlt : enAlt}</figcaption></figure>)}</div></div></section>
 
-      <section className="px-4 py-16 sm:px-6 lg:px-8"><div className="mx-auto grid max-w-7xl gap-7 lg:grid-cols-2"><article className="rounded-lg border border-border/65 bg-card/62 p-7"><p className="section-kicker mb-4">{t.quality}</p><ul className="space-y-3">{t.qualityItems.map(item => <li key={item} className="flex gap-3 font-medium text-muted-foreground"><Check className="mt-1 h-4 w-4 shrink-0 text-primary" />{item}</li>)}</ul></article><article className="rounded-lg border border-border/65 bg-card/62 p-7"><p className="section-kicker mb-4">{t.decisions}</p><p className="font-medium leading-relaxed text-muted-foreground">{t.decisionsText}</p></article></div></section>
+      <section id="decisions" className="px-4 py-16 sm:px-6 lg:px-8"><div className="mx-auto grid max-w-7xl gap-7 lg:grid-cols-2"><article className="rounded-lg border border-border/65 bg-card/62 p-7"><p className="section-kicker mb-4">{t.quality}</p><ul className="space-y-3">{t.qualityItems.map(item => <li key={item} className="flex gap-3 font-medium text-muted-foreground"><Check className="mt-1 h-4 w-4 shrink-0 text-primary" />{item}</li>)}</ul></article><article className="rounded-lg border border-border/65 bg-card/62 p-7"><p className="section-kicker mb-4">{t.decisions}</p><p className="font-medium leading-relaxed text-muted-foreground">{t.decisionsText}</p></article></div></section>
 
-      <section className="px-4 py-16 sm:px-6 lg:px-8"><div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[.9fr_1.1fr]"><div><p className="section-kicker mb-4">{t.results}</p><h2 className="text-3xl font-black leading-tight sm:text-5xl">{language === "es" ? "Resultados verificables, sin métricas decorativas." : "Verifiable results, without decorative metrics."}</h2><p className="mt-5 font-medium leading-relaxed text-muted-foreground">{t.resultsText}</p></div><div className="rounded-lg border border-border/65 bg-card/62 p-7"><h3 className="text-2xl font-black">{t.learnings}</h3><ol className="mt-5 space-y-4">{t.learningItems.map((item,index) => <li key={item} className="flex gap-4 font-medium text-muted-foreground"><span className="font-mono text-xs font-black text-primary">0{index + 1}</span>{item}</li>)}</ol></div></div></section>
+      <section id="result" className="px-4 py-16 sm:px-6 lg:px-8"><div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[.9fr_1.1fr]"><div><h2 className="text-3xl font-black leading-tight sm:text-5xl">{language === "es" ? "Resultados verificables, sin métricas decorativas." : "Verifiable results, without decorative metrics."}</h2><p className="section-kicker mt-5">{t.results}</p><p className="mt-5 font-medium leading-relaxed text-muted-foreground">{t.resultsText}</p></div><div className="rounded-lg border border-border/65 bg-card/62 p-7"><h3 className="text-2xl font-black">{t.learnings}</h3><ol className="mt-5 space-y-4">{t.learningItems.map((item,index) => <li key={item} className="flex gap-4 font-medium text-muted-foreground"><span className="font-mono text-xs font-black text-primary">0{index + 1}</span>{item}</li>)}</ol></div></div></section>
 
-      <section className="px-4 py-20 sm:px-6 lg:px-8"><div className="mx-auto grid max-w-7xl gap-8 rounded-lg border border-primary/30 bg-primary/8 p-7 sm:p-10 lg:grid-cols-[1fr_auto] lg:items-end"><div><p className="section-kicker mb-4">{t.next}</p><h2 className="text-4xl font-black sm:text-6xl">{t.nextTitle}</h2><p className="mt-4 max-w-2xl font-medium text-muted-foreground">{t.nextText}</p></div><Link href={localizeHref("/proyectos/lumaflow-studio", language)} className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-bold text-primary-foreground hover:bg-primary/90">{language === "es" ? "Ver siguiente caso" : "View next case"}<ArrowUpRight className="h-4 w-4" /></Link></div></section>
+      <section className="px-4 py-20 sm:px-6 lg:px-8"><div className="mx-auto grid max-w-7xl gap-8 rounded-lg border border-primary/30 bg-primary/8 p-7 sm:p-10 lg:grid-cols-[1fr_auto] lg:items-end"><div><h2 className="text-4xl font-black sm:text-6xl">{t.nextTitle}</h2><p className="section-kicker mt-5">{t.next}</p><p className="mt-4 max-w-2xl font-medium text-muted-foreground">{t.nextText}</p></div><Link href={localizeHref("/proyectos/lumaflow-studio", language)} className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-bold text-primary-foreground hover:bg-primary/90">{language === "es" ? "Ver siguiente caso" : "View next case"}<ArrowUpRight className="h-4 w-4" /></Link></div></section>
     </main>
   );
 }

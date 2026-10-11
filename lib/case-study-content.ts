@@ -58,8 +58,11 @@ export const LUMA_DATA: ProjectCaseStudyData = {
     es: "Diseñé y desarrollé el producto completo: interfaz React, API Laravel, autenticación, modelo de datos multiusuario, módulos de negocio, IA local, pruebas y documentación.",
     en: "I designed and built the complete product: React interface, Laravel API, authentication, multi-user data model, business modules, local AI, testing, and documentation.",
   },
-  image: "/projects/lumaflow-studio-cover.svg",
-  imageAlt: { es: "Representación conceptual de los módulos de LumaFlow Studio", en: "Conceptual overview of LumaFlow Studio modules" },
+  image: "/projects/lumaflow-studio-ai.webp",
+  gallery: [
+    { image: "/projects/lumaflow-studio-delivery.webp", caption: { es: "Flujo de entrega — captura de desarrollo con datos de ejemplo.", en: "Delivery workflow — development screenshot with sample data." } },
+  ],
+  imageAlt: { es: "Interfaz de IA local de LumaFlow Studio, sin modelo instalado", en: "LumaFlow Studio local AI interface with no installed model" },
   viewTransitionName: "project-lumaflow-studio",
   stack: ["React 19", "Vite", "Tailwind CSS 4", "Laravel 13", "PHP 8.3", "Sanctum", "MySQL 8", "WebGPU", "WebLLM", "Docker", "PWA", "Vitest / PHPUnit"],
   github: LUMA_URLS.github,

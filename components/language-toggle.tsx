@@ -34,7 +34,7 @@ export function LanguageToggle() {
     >
       <span
         aria-hidden="true"
-        className={`absolute left-1 top-1 size-9 rounded-md bg-primary/14 ring-1 ring-inset ring-primary/28 transition-transform duration-300 ease-[cubic-bezier(.2,.8,.2,1)] ${
+        className={`absolute left-1 top-1 size-9 rounded-md bg-primary/14 ring-1 ring-inset ring-primary/28 transition-transform duration-[var(--motion-normal)] ease-[var(--ease-out)] motion-reduce:transition-none ${
           language === "en" ? "translate-x-9" : "translate-x-0"
         }`}
       />

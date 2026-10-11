@@ -33,7 +33,9 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: "pnpm dev --hostname 127.0.0.1 --port 3100",
+    command: process.env.CI
+      ? "pnpm start --hostname 127.0.0.1 --port 3100"
+      : "pnpm dev --hostname 127.0.0.1 --port 3100",
     url: baseURL,
     reuseExistingServer: !process.env.CI,
     stdout: "ignore",

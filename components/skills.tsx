@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { gsap, useGSAP } from "@/lib/gsap";
+import { deferToViewport, gsap, motion, revealTrigger, useGSAP } from "@/lib/gsap";
 import { useLanguage } from "@/lib/language-context";
 
 export function Skills() {
@@ -10,21 +10,22 @@ export function Skills() {
   const groups = t.skills.groups;
 
   useGSAP(
-    () => {
+    (_, contextSafe) => deferToViewport(containerRef.current, contextSafe!(() => {
       const rows = gsap.utils.selector(containerRef)(".capability-row");
       const media = gsap.matchMedia();
       media.add("(prefers-reduced-motion: no-preference)", () => {
-        gsap.fromTo(rows, { autoAlpha: 0, y: 24 }, {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.7,
-          stagger: 0.07,
-          ease: "power3.out",
-          scrollTrigger: { trigger: containerRef.current, start: "top 72%", once: true },
+        gsap.from(rows, {
+          y: motion.distance.content,
+          duration: motion.duration.enter,
+          stagger: motion.stagger.content,
+          ease: motion.ease.out,
+          scrollTrigger: revealTrigger(containerRef.current),
         });
+        // Staggered children may restore a neutral matrix during media reversion.
+        return () => gsap.set(rows, { clearProps: "transform" });
       });
       return () => media.revert();
-    },
+    })),
     { scope: containerRef },
   );
 

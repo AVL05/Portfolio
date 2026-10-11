@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import type React from "react";
 import "../globals.css";
-import { GeistMono, GeistSans } from "@/lib/fonts";
+import { BodyFont, DisplayFont, LabelFont, GeistMono, GeistSans } from "@/lib/fonts";
 import { RootShell } from "@/components/root-shell";
 import {
   personJsonLd,
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     telephone: false,
   },
   icons: {
-    icon: [{ url: "/favicon.png", type: "image/png", sizes: "1254x1254" }],
+    icon: [{ url: "/favicon.png", type: "image/png", sizes: "192x192" }],
     shortcut: "/favicon.png",
     apple: "/favicon.png",
   },
@@ -99,7 +99,7 @@ export default function EsLayout({
         />
       </head>
       <body
-        className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased bg-background text-foreground overflow-x-clip`}
+        className={`font-sans ${GeistSans.variable} ${GeistMono.variable} ${DisplayFont.variable} ${BodyFont.variable} ${LabelFont.variable} antialiased bg-background text-foreground overflow-x-clip`}
         style={{ fontFeatureSettings: '"cv11", "ss01", "ss03"' }}
         suppressHydrationWarning
       >

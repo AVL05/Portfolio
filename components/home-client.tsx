@@ -1,30 +1,18 @@
 "use client";
 
-import dynamicLoader from "next/dynamic";
 import { Navigation } from "@/components/navigation";
 import { Hero } from "@/components/hero";
 import type { ReactNode } from "react";
 import { Currently } from "@/components/currently";
-
-const Skills = dynamicLoader(() =>
-  import("@/components/skills").then((mod) => mod.Skills),
-);
-const Projects = dynamicLoader(() =>
-  import("@/components/projects").then((mod) => mod.Projects),
-);
-const Photography = dynamicLoader(() =>
-  import("@/components/photography").then((mod) => mod.Photography),
-);
-const Experience = dynamicLoader(() =>
-  import("@/components/experience").then((mod) => mod.Experience),
-);
-const Contact = dynamicLoader(() =>
-  import("@/components/contact").then((mod) => mod.Contact),
-);
+import { Skills } from "@/components/skills";
+import { Projects } from "@/components/projects";
+import { Photography } from "@/components/photography";
+import { Experience } from "@/components/experience";
+import { Contact } from "@/components/contact";
 
 export function HomeClient({ children }: { children?: ReactNode }) {
   return (
-    <div className="min-h-screen relative">
+    <div className="premium-home code-home min-h-screen relative">
       <Navigation />
 
       <main id="main-content" className="relative z-10">

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
+import { localizeHref } from "@/lib/i18n-paths";
 import { useLanguage } from "@/lib/language-context";
 
 const frames = [
@@ -49,12 +50,15 @@ export function Photography() {
           <a href={ARCHIVE_URL} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex min-h-11 items-center gap-4 border-b border-black/40 text-sm font-semibold transition-colors hover:text-[#85412d] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black">
             {language === "es" ? "Explorar raw.vives" : "Explore raw.vives"}<ArrowUpRight aria-hidden="true" size={18} />
           </a>
+          <a href={localizeHref("/proyectos/raw-vives", language)} className="ml-6 inline-flex min-h-11 items-center gap-2 text-sm font-semibold underline underline-offset-4">
+            {language === "es" ? "Ver caso de estudio" : "View case study"}<ArrowUpRight aria-hidden="true" size={18} />
+          </a>
         </div>
       </header>
       <div className="mt-12 grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6 lg:grid-cols-4">
         {frames.map((frame, index) => <figure key={frame.src} className={index === 0 ? "group col-span-2 flex flex-col lg:row-span-2" : "group"}>
           <div className={index === 0 ? "relative aspect-[4/3] overflow-hidden bg-black lg:aspect-auto lg:flex-1 lg:min-h-96" : "relative aspect-[4/3] overflow-hidden bg-black"}>
-            <Image src={frame.src} alt={frame.alt[language]} fill loading="lazy" sizes={index === 0 ? "(max-width: 1023px) 100vw, 50vw" : "(max-width: 1023px) 50vw, 25vw"} className="object-cover transition-transform duration-500 motion-safe:group-hover:scale-[1.015] motion-reduce:transition-none" />
+            <Image src={frame.src} alt={frame.alt[language]} fill loading="lazy" sizes={index === 0 ? "(max-width: 1023px) 100vw, 50vw" : "(max-width: 1023px) 50vw, 25vw"} className="object-cover photo-image" />
           </div>
           <figcaption className="mt-3 font-mono text-[11px] leading-relaxed text-black/75">{frame.series[language]}</figcaption>
         </figure>)}

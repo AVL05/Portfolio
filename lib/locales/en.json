@@ -1,12 +1,24 @@
 {
   "nav": {
     "home": "Home",
-    "projects": "Projects",
+    "about": "About",
+    "projects": "Work",
     "skills": "Stack",
     "experience": "Experience",
     "contact": "Contact"
   },
   "hero": {
+    "role": "Junior Full-Stack Developer",
+    "location": "Valencia, Spain",
+    "lines": [
+      "Code.",
+      "Craft."
+    ],
+    "intro": "I'm Alex Vicente, a full-stack developer. I build applications that bring together engineering, design and digital experiences.",
+    "work": "View work",
+    "cv": "Download CV",
+    "profile": "Frontend, backend and data. End to end.",
+    "experience": "Experience & education",
     "status": "Available for new professional opportunities and selected projects",
     "description": "I build web applications end to end, from the interface through the API to the data layer, bringing together development, interface design and applied AI.",
     "cta_github": "GitHub",
@@ -21,7 +33,12 @@
         "pc": "Capabilities",
         "mountain": "Perspective"
       }
-    }
+    },
+    "artLabels": [
+      "Interface",
+      "API",
+      "Data"
+    ]
   },
   "skills": {
     "title": "Stack",
@@ -115,28 +132,6 @@
     "outcome_label": "Outcome",
     "items": [
       {
-        "title": "AI Creative Assistant",
-        "description": "A desktop application for analysing multimedia content and automating parts of the creative workflow with locally executed AI models.",
-        "image": "/projects/ai-creative-assistant-cover.svg",
-        "technologies": [
-          "Python",
-          "React",
-          "REST APIs",
-          "Local inference",
-          "Automation"
-        ],
-        "category": "Full-Stack Development",
-        "github": "https://github.com/AVL05/ai-creative-assistant",
-        "type": "AI desktop application",
-        "role": "Designed and built the application architecture, frontend-backend integration, multimedia processing and local inference experiments.",
-        "outcome": "Work-in-progress project also used as a hands-on environment for AI-assisted development, agents, automation and model evaluation.",
-        "summary": "Multimedia analysis and creative automation with local AI.",
-        "evidence": [
-          "Local AI",
-          "In progress"
-        ]
-      },
-      {
         "title": "Distrito Gourmet",
         "description": "A full-stack web application for a restaurant with a digital menu, reservations, orders and operations dashboards.",
         "image": "/projects/distrito-gourmet-ui.webp",
@@ -161,12 +156,14 @@
         "evidence": [
           "Public demo",
           "Bookings and orders"
-        ]
+        ],
+        "imageCaption": "Published website screenshot",
+        "imageAlt": "Distrito Gourmet — Published website screenshot"
       },
       {
         "title": "LumaFlow Studio",
         "description": "A full-stack workflow platform for photography studios: clients, sessions, calendar, quotes, invoices, galleries, and privacy-first local AI assistance.",
-        "image": "/projects/lumaflow-studio-cover.svg",
+        "image": "/projects/lumaflow-studio-ai.webp",
         "technologies": [
           "React 19",
           "Laravel 13",
@@ -187,7 +184,9 @@
           "33 frontend tests",
           "Docker",
           "CI"
-        ]
+        ],
+        "imageCaption": "Local AI · interface screenshot with no installed model",
+        "imageAlt": "LumaFlow Studio — Local AI · interface screenshot with no installed model"
       },
       {
         "title": "raw.vives",
@@ -212,7 +211,9 @@
           "ES / EN",
           "Static deployment",
           "CI/CD"
-        ]
+        ],
+        "imageCaption": "Published website screenshot",
+        "imageAlt": "raw.vives — Published website screenshot"
       },
       {
         "title": "El Fogón: Restaurant landing page",
@@ -382,11 +383,6 @@
   "currently": {
     "title": "Currently",
     "items": [
-      {
-        "label": "Building",
-        "value": "AI Creative Assistant",
-        "href": "#projects"
-      },
       {
         "label": "Learning",
         "value": "Applied AI for development · agents",

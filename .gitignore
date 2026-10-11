@@ -39,6 +39,9 @@ skills-lock.json
 /playwright-report/
 /test-results/
 
+# Local audit evidence stays on disk, outside release commits.
+/artifacts/
+
 # local photography exports (production uses curated tracked assets)
 /public/photography/400/
 /public/photography/800/

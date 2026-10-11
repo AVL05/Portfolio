@@ -9,7 +9,7 @@ test("renders without horizontal overflow and switches language", async ({
 }) => {
   await page.goto("/");
 
-  await expect(page.getByRole("heading", { name: "Alex Vicente" })).toBeVisible();
+  await expect(page.locator("#hero-title")).toHaveText("Código. Criterio.");
   await expect(
     page.getByRole("heading", { name: "Proyectos", exact: true }),
   ).toBeVisible();
@@ -27,7 +27,7 @@ test("renders without horizontal overflow and switches language", async ({
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
   await expect(page.getByRole("link", { name: "ES EN" })).toBeVisible();
   await expect(
-    page.getByText("Available for new professional opportunities"),
+    page.getByText("Junior Full-Stack Developer", { exact: true }),
   ).toBeVisible();
   await expect(
     page.getByRole("heading", { name: "Work", exact: true }),

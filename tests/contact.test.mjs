@@ -88,3 +88,66 @@ test("contact rate limit allows 5 and blocks the 6th", () => {
   }
   assert.equal(contact.checkContactRateLimit(key).allowed, false);
 });
+
+function loadContactRoute(fetchMock, configured = true) {
+  const module = { exports: {} };
+  const timeouts = [];
+  const sandbox = {
+    module, exports: module.exports, AbortController,
+    process: { env: configured ? { WEB3FORMS_ACCESS_KEY: "mock-only" } : {} },
+    fetch: fetchMock,
+    setTimeout: (_callback, duration) => { timeouts.push(duration); return 1; },
+    clearTimeout: () => {},
+    require: (id) => {
+      if (id === "next/server") return { NextResponse: { json: (body, options = {}) => ({ body, status: options.status ?? 200, headers: options.headers }) } };
+      if (id === "@/lib/contact") return contact;
+      throw new Error(`Unexpected import: ${id}`);
+    },
+  };
+  runInNewContext(transpileModule(read("app/api/contact/route.ts"), {
+    compilerOptions: { module: ModuleKind.CommonJS },
+  }).outputText, sandbox);
+  return { route: module.exports, timeouts };
+}
+
+const validPayload = { name: "QA local", email: "qa@example.invalid", message: "Mocked contact audit, no real email is sent.", language: "en" };
+
+test("contact API rejects invalid input and spam without calling the provider", async () => {
+  let calls = 0;
+  const { route } = loadContactRoute(async () => { calls++; throw new Error("Unexpected network"); });
+  assert.equal((await route.POST({ json: async () => { throw new Error("Invalid JSON"); } })).status, 400);
+  assert.equal((await route.POST({ json: async () => ({ ...validPayload, email: "invalid" }) })).status, 400);
+  assert.equal((await route.POST({ json: async () => ({ ...validPayload, website: "bot" }) })).body.ok, true);
+  assert.equal((await route.GET()).status, 405);
+  assert.equal(calls, 0);
+});
+
+test("contact API reports missing configuration without attempting delivery", async () => {
+  contact.clearContactRateLimits();
+  const { route } = loadContactRoute(async () => { throw new Error("Unexpected network"); }, false);
+  const response = await route.POST({ json: async () => validPayload, headers: new Headers() });
+  assert.equal(response.status, 503);
+  assert.equal(response.body.code, "not_configured");
+});
+
+for (const scenario of ["success", "4xx", "5xx", "network"]) {
+  test(`contact provider ${scenario} preserves retry and timeout contracts`, async () => {
+    contact.clearContactRateLimits();
+    let calls = 0;
+    const { route, timeouts } = loadContactRoute(async (url, options) => {
+      calls++;
+      assert.equal(url, "https://api.web3forms.com/submit");
+      const body = JSON.parse(options.body);
+      assert.equal(body.access_key, "mock-only");
+      assert.equal(body.email, validPayload.email);
+      assert.equal(body.subject, "New contact - Developer portfolio");
+      if (scenario === "network") throw new Error("Offline mock");
+      const status = scenario === "4xx" ? 400 : scenario === "5xx" ? 503 : 200;
+      return { ok: status === 200, status, json: async () => ({ success: status === 200 }) };
+    });
+    const response = await route.POST({ json: async () => validPayload, headers: new Headers() });
+    assert.equal(response.status, scenario === "success" ? 200 : 502);
+    assert.equal(calls, ["success", "4xx"].includes(scenario) ? 1 : 2);
+    assert.ok(timeouts.reduce((sum, value) => sum + value, 0) < contact.CONTACT_LIMITS.submitTimeoutMs);
+  });
+}

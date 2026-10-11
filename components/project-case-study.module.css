@@ -1,0 +1,32 @@
+.story { font-family: var(--font-body), sans-serif; }
+.story > section:first-child { display: block; min-height: auto; padding-top: 1.5rem; }
+.story > section, .story > nav { padding-inline: var(--page-gutter); padding-block: clamp(3rem, 6vw, 6rem); }
+.story > section > div, .story > nav > div { width: 100%; max-width: 82rem; margin-inline: auto; }
+.story h1, .story h2, .story h3 { font-family: var(--font-display), sans-serif; font-weight: 500; letter-spacing: -.04em; text-wrap: balance; }
+.story h1 { font-size: clamp(3.25rem, 8vw, 7rem); line-height: 1.03; overflow-wrap: normal; }
+.story h2 { line-height: 1.15; }
+.story :global(.font-mono), .story :global(.section-kicker) { font-family: var(--font-label), monospace; font-weight: 400; }
+.story :global(.rounded-lg), .story :global(.rounded-md) { border-radius: 0; }
+.heroGrid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 3rem; }
+.heroGrid > div:first-child { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 2rem; }
+.heroGrid > div:first-child > h1, .heroGrid > div:first-child > p:first-child { grid-column: 1 / -1; }
+.heroGrid > div:first-child > p:not(:first-child) { grid-column: 1 / 8; }
+.heroGrid > div:first-child > p:global(.section-kicker) { grid-column: 1 / -1; }
+.heroGrid > div:first-child > div { grid-column: 9 / 13; }
+.heroGrid > div:first-child > div:last-child { grid-column: 1 / 8; }
+.heroGrid > figure { grid-column: 1 / -1; }
+.heroGrid img { object-fit: contain; }
+.contents { display: flex; flex-wrap: wrap; gap: .5rem 2rem; margin-top: 2rem; padding-block: 1rem; border-top: 1px solid var(--border); }
+.contents a { display: inline-flex; align-items: center; min-height: 2.75rem; font-size: .8125rem; text-decoration: underline; text-underline-offset: .4rem; }
+.story section[id] { scroll-margin-top: 2rem; }
+.story > section:nth-of-type(2) { background: #F5F3EE; --foreground: #0B0D12; --muted-foreground: #4A514C; --primary: #344E43; color: #0B0D12; }
+.gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
+.gallery figure:first-child { grid-column: 1 / -1; }
+.gallery img { width: 100%; height: auto; }
+.gallery figcaption { margin-top: .75rem; font-size: .8125rem; line-height: 1.65; color: var(--muted-foreground); }
+@media (max-width: 767px) {
+  .heroGrid { gap: 2rem; }
+  .heroGrid > div:first-child { display: block; }
+  .heroGrid > div:first-child > div { margin-top: 1.5rem; }
+  .gallery { grid-template-columns: minmax(0, 1fr); }
+}

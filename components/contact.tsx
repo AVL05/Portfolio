@@ -9,7 +9,7 @@ import { ArrowUpRight, FileText, Mail } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
-import { gsap, prefersReducedMotion, useGSAP } from "@/lib/gsap";
+import { deferToViewport, gsap, motion, revealTrigger, useGSAP } from "@/lib/gsap";
 import { useLanguage } from "@/lib/language-context";
 import { localizeHref } from "@/lib/i18n-paths";
 import { RevealHeader } from "@/components/reveal-header";
@@ -35,6 +35,7 @@ export function Contact() {
   const formRef = useRef<HTMLFormElement>(null);
   const statusRef = useRef<HTMLDivElement>(null);
   const startedAtRef = useRef<number>(Date.now());
+  const sendingRef = useRef(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -151,6 +152,8 @@ export function Contact() {
   };
 
   const send = async () => {
+    if (sendingRef.current) return;
+    sendingRef.current = true;
     setIsSubmitting(true);
     setSubmitStatus(null);
     setSubmitCode(null);
@@ -167,7 +170,8 @@ export function Contact() {
           startedAt: startedAtRef.current,
           language,
         }),
-        signal: AbortSignal.timeout(15_000),
+        // Allow both 12s server attempts to finish before offering a retry.
+        signal: AbortSignal.timeout(CONTACT_LIMITS.submitTimeoutMs),
       });
 
       const data = (await response.json().catch(() => null)) as {
@@ -203,6 +207,7 @@ export function Contact() {
       setSubmitStatus("error");
       setSubmitCode("network_error");
     } finally {
+      sendingRef.current = false;
       setIsSubmitting(false);
       window.requestAnimationFrame(() => {
         statusRef.current?.focus();
@@ -238,33 +243,19 @@ export function Contact() {
   const messageLength = formData.message.trim().length;
 
   useGSAP(
-    () => {
+    (_, contextSafe) => deferToViewport(containerRef.current, contextSafe!(() => {
       const q = gsap.utils.selector(containerRef);
       const items = q(".contact-item");
       if (!items.length) return;
 
-      if (prefersReducedMotion()) {
-        gsap.set(items, { autoAlpha: 1, y: 0 });
-        return;
-      }
-
-      gsap.fromTo(
-        items,
-        { autoAlpha: 0, y: 48 },
-        {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.9,
-          ease: "power3.out",
-          stagger: 0.15,
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 70%",
-            once: true,
-          },
-        },
-      );
-    },
+      const media = gsap.matchMedia();
+      media.add("(prefers-reduced-motion: no-preference)", () => {
+        gsap.from(items, { y: motion.distance.content, duration: motion.duration.enter,
+          ease: motion.ease.out, stagger: motion.stagger.content,
+          scrollTrigger: revealTrigger(containerRef.current) });
+      });
+      return () => media.revert();
+    })),
     { scope: containerRef },
   );
 
@@ -288,7 +279,11 @@ export function Contact() {
             <Card className="dev-panel overflow-hidden py-0">
               <form
                 ref={formRef}
+                data-contact-form
+                action="/api/contact"
+                method="post"
                 onSubmit={handleSubmit}
+                aria-busy={isSubmitting}
                 className="space-y-6 p-5 sm:p-8"
                 noValidate
               >
@@ -311,7 +306,7 @@ export function Contact() {
                 <div className="space-y-2">
                   <label
                     htmlFor="name"
-                    className="ml-0.5 block text-xs font-bold uppercase tracking-[0.16em] text-primary/80"
+                    className="ml-0.5 block text-xs font-bold uppercase tracking-[0.16em] text-primary"
                   >
                     {t.contact.form_name}
                   </label>
@@ -328,7 +323,7 @@ export function Contact() {
                     aria-describedby={formErrors.name ? "name-error" : undefined}
                     onBlur={() => validateOnBlur("name")}
                     onChange={(e) => updateField("name", e.target.value)}
-                    className="rounded-lg border-border/70 bg-secondary/50 px-4 py-5 text-base placeholder:text-muted-foreground/70 focus-visible:border-primary focus-visible:ring-primary/40"
+                    className="rounded-lg border-border/70 bg-secondary/50 px-4 py-5 text-base placeholder:text-muted-foreground focus-visible:border-primary focus-visible:ring-primary/40"
                     required
                   />
                   <p
@@ -343,7 +338,7 @@ export function Contact() {
                 <div className="space-y-2">
                   <label
                     htmlFor="email"
-                    className="ml-0.5 block text-xs font-bold uppercase tracking-[0.16em] text-primary/80"
+                    className="ml-0.5 block text-xs font-bold uppercase tracking-[0.16em] text-primary"
                   >
                     {t.contact.form_email}
                   </label>
@@ -360,7 +355,7 @@ export function Contact() {
                     aria-describedby={formErrors.email ? "email-error" : undefined}
                     onBlur={() => validateOnBlur("email")}
                     onChange={(e) => updateField("email", e.target.value)}
-                    className="rounded-lg border-border/70 bg-secondary/50 px-4 py-5 text-base placeholder:text-muted-foreground/70 focus-visible:border-primary focus-visible:ring-primary/40"
+                    className="rounded-lg border-border/70 bg-secondary/50 px-4 py-5 text-base placeholder:text-muted-foreground focus-visible:border-primary focus-visible:ring-primary/40"
                     required
                   />
                   <p
@@ -376,7 +371,7 @@ export function Contact() {
                   <div className="ml-0.5 flex items-baseline justify-between gap-3">
                     <label
                       htmlFor="message"
-                      className="block text-xs font-bold uppercase tracking-[0.16em] text-primary/80"
+                      className="block text-xs font-bold uppercase tracking-[0.16em] text-primary"
                     >
                       {t.contact.form_message}
                     </label>
@@ -400,7 +395,7 @@ export function Contact() {
                     aria-describedby={`message-count${formErrors.message ? " message-error" : ""}`}
                     onBlur={() => validateOnBlur("message")}
                     onChange={(e) => updateField("message", e.target.value)}
-                    className="resize-none rounded-lg border-border/70 bg-secondary/50 p-4 text-base placeholder:text-muted-foreground/70 focus-visible:border-primary focus-visible:ring-primary/40"
+                    className="resize-none rounded-lg border-border/70 bg-secondary/50 p-4 text-base placeholder:text-muted-foreground focus-visible:border-primary focus-visible:ring-primary/40"
                     required
                   />
                   <p
@@ -418,7 +413,7 @@ export function Contact() {
 
                 <Button
                   type="submit"
-                  className="group w-full rounded-lg bg-primary py-6 text-sm font-bold text-primary-foreground transition-all hover:-translate-y-0.5 hover:bg-primary/90 active:scale-[0.99]"
+                  className="group w-full rounded-lg bg-primary py-6 text-sm font-bold text-primary-foreground transition-[color,background-color,border-color] duration-[var(--motion-fast)] hover:bg-primary/90 active:bg-primary/75"
                   disabled={isSubmitting}
                   aria-busy={isSubmitting}
                 >
@@ -444,7 +439,7 @@ export function Contact() {
                             type="button"
                             variant="outline"
                             size="sm"
-                            onClick={send}
+                            onClick={() => formRef.current?.requestSubmit()}
                             disabled={isSubmitting}
                             className="min-h-11"
                           >
@@ -465,6 +460,13 @@ export function Contact() {
                   )}
                 </div>
               </form>
+              <noscript>
+                <style>{"[data-contact-form] { display: none; }"}</style>
+                <p className="p-5 sm:p-8">
+                  {t.contact.form_fallback}{" "}
+                  <a href="mailto:alexviclop@gmail.com" className="text-primary underline underline-offset-2">alexviclop@gmail.com</a>
+                </p>
+              </noscript>
             </Card>
           </div>
 
@@ -486,7 +488,7 @@ export function Contact() {
                 href="mailto:alexviclop@gmail.com"
                 className="group flex min-w-0 items-center gap-4 text-xl font-bold transition-colors hover:text-primary sm:text-2xl"
               >
-                <span className="shrink-0 rounded-lg border border-border/70 bg-secondary p-3.5 transition-all group-hover:border-primary/40 group-hover:bg-primary group-hover:text-primary-foreground">
+                <span className="shrink-0 rounded-lg border border-border/70 bg-secondary p-3.5 transition-[color,background-color,border-color] duration-[var(--motion-fast)] group-hover:border-primary/40 group-hover:bg-primary group-hover:text-primary-foreground">
                   <Mail className="h-5 w-5" />
                 </span>
                 <span className="min-w-0 break-all text-foreground transition-colors group-hover:text-primary">
@@ -499,7 +501,7 @@ export function Contact() {
                   href={CV_HREF}
                   download
                   data-track="cv-download"
-                  className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-primary-foreground transition-all hover:-translate-y-0.5 hover:bg-primary/90"
+                  className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-primary-foreground transition-[color,background-color,border-color] duration-[var(--motion-fast)] hover:bg-primary/90"
                 >
                   <FileText className="h-4 w-4" />
                   {t.contact.cv_btn}
@@ -508,7 +510,7 @@ export function Contact() {
                   href="https://www.linkedin.com/in/aleviclop/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-primary/35 bg-background/35 px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-primary transition-all hover:-translate-y-0.5 hover:bg-primary hover:text-primary-foreground"
+                  className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-primary/35 bg-background/35 px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-primary transition-[color,background-color,border-color] duration-[var(--motion-fast)] hover:bg-primary hover:text-primary-foreground"
                 >
                   <FaLinkedin className="h-4 w-4" />
                   LinkedIn
@@ -568,7 +570,7 @@ export function Contact() {
                 {t.contact.footer_built}
               </p>
               <Link
-                href="/legal"
+                href={localizeHref("/legal", language)}
                 className="inline-flex min-h-11 items-center font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground transition-colors hover:text-primary"
               >
                 {language === "es" ? "Aviso legal y privacidad" : "Legal notice & privacy"}

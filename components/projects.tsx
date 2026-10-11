@@ -1,113 +1,102 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
-import { useRef } from "react";
-import { gsap, useGSAP } from "@/lib/gsap";
+import { useEffect, useRef, useState } from "react";
+import styles from "./projects.module.css";
+import { deferToViewport, gsap, motion, revealTrigger, useGSAP } from "@/lib/gsap";
 import { useLanguage, type ProjectItem as Project } from "@/lib/language-context";
+import { localizeHref } from "@/lib/i18n-paths";
 
-const featuredIndexes = [0, 1, 2, 3];
+const featuredIndexes = [0, 1, 2];
 
 const viewTransitionName = (project: Project) =>
   `project-${project.caseStudyHref?.split("/").pop() ?? "editorial"}`;
 
-function ProjectScene({
-  project,
-  index,
-  total,
-  language,
-}: {
-  project: Project;
-  index: number;
-  total: number;
-  language: "es" | "en";
+const layouts = ["restaurant", "product", "photography"] as const;
+
+function ProjectScene({ project, index, total, language }: {
+  project: Project; index: number; total: number; language: "es" | "en";
 }) {
-  const media = (
-    <div
-      className="scene-media relative h-full min-h-[44dvh] overflow-hidden bg-[#171714] md:min-h-[30rem]"
-      style={{ viewTransitionName: viewTransitionName(project) }}
-    >
-      <Image
-        src={project.image}
-        alt={`${project.title} — ${project.summary}`}
-        fill
-        priority={index === 0}
-        className={`scene-image ${
-          project.image.includes("raw-manager") || project.image.includes("Falla")
-            ? "object-contain p-[8%]"
-            : "object-cover"
-        }`}
-        sizes="(max-width: 767px) 100vw, 60vw"
-      />
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_45%,rgba(8,8,7,.62))]" />
-      <span className="absolute left-4 top-4 border border-white/20 bg-black/55 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-[.14em] text-white sm:left-6 sm:top-6">
-        {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
-      </span>
-    </div>
-  );
+  const [preview, setPreview] = useState(false);
+  const [previewRequested, setPreviewRequested] = useState(false);
+  const [previewReady, setPreviewReady] = useState(false);
+  const previewQuery = "(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)";
+  const showPreview = () => {
+    if ((index !== 1 && index !== 2) || !window.matchMedia(previewQuery).matches) return;
+    setPreviewRequested(true);
+    setPreview(true);
+  };
+  useEffect(() => {
+    if (!previewRequested) return;
+    const query = window.matchMedia(previewQuery);
+    const reset = () => { if (!query.matches) setPreview(false); };
+    query.addEventListener("change", reset);
+    reset();
+    return () => query.removeEventListener("change", reset);
+  }, [previewRequested]);
+  const contactHref = localizeHref("/#contact", language);
+  const destination = project.caseStudyHref ?? project.link ?? (project.repositoryPrivate ? contactHref : project.github);
+  const previewImage = index === 1 ? "/projects/lumaflow-studio-delivery.webp"
+    : index === 2 ? "/projects/raw-vives/raw-vives-series.webp" : undefined;
+  const media = <div className={`scene-media ${styles.imagePlane}`}>
+    <Image src={project.image} alt={project.imageAlt ?? `${project.title} — ${project.summary}`} fill
+      loading="lazy" sizes="(max-width: 1023px) 92vw, 60vw"
+      className={`scene-image ${styles.image}`} />
+    {previewRequested && previewImage ? <Image src={previewImage} alt="" aria-hidden="true" fill loading="lazy"
+      onLoad={() => setPreviewReady(true)} data-visible={preview && previewReady}
+      sizes="(max-width: 1023px) 92vw, 60vw" className={styles.preview} /> : null}
+  </div>;
+  const number = `${String(index + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`;
+  const action = project.caseStudyHref ? (language === "es" ? "Ver caso de estudio" : "View case study")
+    : project.repositoryPrivate ? (language === "es" ? "Consultar proyecto" : "Ask about this project")
+    : language === "es" ? "Ver código" : "View code";
 
-  return (
-    <article className="project-scene relative border-t border-border/55 py-10 sm:py-14 md:py-16">
-      <div className="mx-auto grid max-w-[100rem] gap-6 px-4 sm:px-6 md:grid-cols-[minmax(280px,.55fr)_minmax(0,1.45fr)] md:items-center md:gap-10 lg:gap-16 lg:px-8">
-        <div className="scene-copy z-10 flex min-w-0 flex-col">
-          <p className="font-mono text-[11px] font-bold uppercase tracking-[.15em] text-primary">
-            {project.type}
-          </p>
-          <h3 className="mt-5 max-w-full text-balance text-[clamp(2.75rem,4.6vw,5.25rem)] font-black leading-[.98] tracking-[-.06em] text-foreground">
-            {project.title}
-          </h3>
-          <p className="mt-6 max-w-[50ch] text-base font-medium leading-relaxed text-foreground/68 sm:text-lg">
-            {project.summary}
-          </p>
-
-          <ul aria-label={language === "es" ? "Resultados" : "Outcomes"} className="mt-6 flex flex-wrap gap-2">
-            {project.evidence.map((item) => <li key={item} className="border-l-2 border-primary/60 bg-secondary/45 px-3 py-2 font-mono text-xs leading-relaxed text-foreground">{item}</li>)}
-          </ul>
-
-          <div className="mt-7 flex flex-wrap gap-x-4 gap-y-2 font-mono text-[11px] font-semibold uppercase tracking-[.11em] text-muted-foreground">
-            {project.technologies.slice(0, 6).map((technology) => (
-              <span key={technology}>{technology}</span>
-            ))}
-          </div>
-
-          <div className="mt-8 flex flex-wrap items-center gap-5">
-            {project.caseStudyHref && (
-              <Link
-                data-cursor="project"
-                href={project.caseStudyHref}
-                className="group inline-flex min-h-12 items-center gap-6 border-b border-foreground pb-1 text-xs font-bold uppercase tracking-[.12em] text-foreground transition-colors hover:border-primary hover:text-primary"
-              >
-                {language === "es" ? "Ver caso de estudio" : "View case study"}
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Link>
-            )}
-            {project.link && (
-              <a data-cursor="external" href={project.link} target="_blank" rel="noopener noreferrer" className="cinema-link text-[11px]">
-                {language === "es" ? "Ver sitio" : "Live site"} <ArrowUpRight />
-              </a>
-            )}
-            {project.github && (
-              <a data-cursor="external" href={project.github} target="_blank" rel="noopener noreferrer" className="cinema-link text-[11px]">
-                <FaGithub /> GitHub
-              </a>
-            )}
-          </div>
+  return <article className={`project-scene ${styles.scene}`} data-layout={layouts[index]} aria-labelledby={`project-title-${index}`}>
+    <div className={styles.inner}>
+      <header className={`scene-copy ${styles.heading}`}>
+        <h3 id={`project-title-${index}`}>{project.title}</h3>
+        <p className={styles.label}><span>{number}</span><span>{project.type}</span></p>
+        <p className={styles.summary}>{project.summary}</p>
+      </header>
+      <figure className={styles.visual}>
+        {project.caseStudyHref ? <a href={project.caseStudyHref} data-cursor="project"
+          className={styles.frame} style={{ viewTransitionName: viewTransitionName(project) }}
+          aria-label={`${action}: ${project.title}`}
+          onPointerEnter={event => { if (event.pointerType === "mouse") showPreview(); }}
+          onFocus={showPreview}
+          onPointerLeave={() => setPreview(false)} onBlur={() => setPreview(false)}>{media}</a>
+          : destination ? <a href={destination} target={destination.startsWith("https://") ? "_blank" : undefined} rel="noopener noreferrer" data-cursor="external"
+            aria-label={`${action}: ${project.title}`} className={styles.frame}>{media}</a> : <div className={styles.frame}>{media}</div>}
+        <figcaption className={styles.caption}>
+          <span>{preview && previewReady && index === 1 ? (language === "es" ? "Entrega · captura con datos de ejemplo" : "Delivery · screenshot with sample data")
+            : preview && previewReady && index === 2 ? (language === "es" ? "Series · captura del sitio publicado" : "Series · published website screenshot") : project.imageCaption}</span>
+          <span className="inline-flex items-center gap-2">{action}<ArrowUpRight aria-hidden="true" /></span>
+        </figcaption>
+      </figure>
+      <div className={styles.details}>
+        <p className={styles.role}>{project.role}</p>
+        <ul aria-label={language === "es" ? "Resultados" : "Outcomes"} className={styles.evidence}>
+          {project.evidence.map(item => <li key={item}>{item}</li>)}
+        </ul>
+        <ul className={styles.stack} aria-label={language === "es" ? "Tecnologías" : "Technologies"}>
+          {project.technologies.map(technology => <li key={technology}>{technology}</li>)}
+        </ul>
+        <div className={styles.actions}>
+          {project.caseStudyHref ? <a href={project.caseStudyHref} data-cursor="project">
+            {language === "es" ? "Ver caso de estudio" : "View case study"}<ArrowRight aria-hidden="true" /></a> : null}
+          {project.link ? <a href={project.link} target="_blank" rel="noopener noreferrer">
+            {language === "es" ? "Ver sitio" : "Live site"}<ArrowUpRight aria-hidden="true" /></a> : null}
+          {project.repositoryPrivate ? <>
+            <a href={contactHref}>{action}<ArrowUpRight aria-hidden="true" /></a>
+            <span className="inline-flex items-center gap-2 text-muted-foreground"><FaGithub aria-hidden="true" />{language === "es" ? "Código privado" : "Private code"}</span>
+          </> : project.github ? <a href={project.github} target="_blank" rel="noopener noreferrer">
+            <FaGithub aria-hidden="true" />{project.caseStudyHref ? "GitHub" : language === "es" ? "Ver código" : "View code"}</a> : null}
         </div>
-
-        {project.caseStudyHref ? (
-          <Link data-cursor="project" href={project.caseStudyHref} aria-label={`${String(index + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")} — ${language === "es" ? "Abrir caso" : "Open case"}: ${project.title}`} className="scene-link block">
-            {media}
-          </Link>
-        ) : (
-          <a data-cursor="external" href={project.link} target="_blank" rel="noopener noreferrer" aria-label={`${String(index + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")} — ${project.title}`} className="scene-link block">
-            {media}
-          </a>
-        )}
       </div>
-    </article>
-  );
+    </div>
+  </article>;
 }
 
 export function Projects() {
@@ -117,24 +106,35 @@ export function Projects() {
   const featured = featuredIndexes.map((index) => projects[index]).filter(Boolean);
   const archive = projects.filter((_, index) => !featuredIndexes.includes(index));
 
-  useGSAP(() => {
+  useGSAP((_, contextSafe) => deferToViewport(containerRef.current?.querySelector(".scene-copy") ?? null, contextSafe!(() => {
     const media = gsap.matchMedia();
     media.add("(prefers-reduced-motion: no-preference)", () => {
-      gsap.utils.selector(containerRef)(".scene-copy").forEach((copy) => {
-        gsap.from(copy, { y: 18, opacity: 0, duration: 0.55,
-          scrollTrigger: { trigger: copy, start: "top 90%", once: true } });
+      gsap.utils.toArray<HTMLElement>(".project-scene", containerRef.current).forEach(scene => {
+        const frame = scene.querySelector(`.${styles.frame}`);
+        const title = scene.querySelector(".scene-copy");
+        const details = scene.querySelector(`.${styles.details}`);
+        gsap.timeline({ scrollTrigger: revealTrigger(scene) })
+          .from(frame, { clipPath: motion.mask, duration: motion.duration.mask, ease: motion.ease.reveal })
+          .from(title, { y: window.matchMedia("(min-width: 1024px)").matches ? motion.distance.title : motion.distance.small, duration: motion.duration.title, ease: motion.ease.out }, 0)
+          .from(details, { y: motion.distance.content, duration: motion.duration.enter, ease: motion.ease.out }, .08);
+      });
+    });
+    media.add("(min-width: 1024px) and (pointer: fine) and (prefers-reduced-motion: no-preference)", () => {
+      gsap.utils.toArray<HTMLElement>(".project-scene", containerRef.current).forEach(scene => {
+        gsap.fromTo(scene.querySelector(".scene-media"), { y: -motion.distance.parallax }, { y: motion.distance.parallax, ease: "none",
+          scrollTrigger: { trigger: scene, start: "top bottom", end: "bottom top", scrub: .5 } });
       });
     });
     return () => media.revert();
-  }, { scope: containerRef });
+  })), { scope: containerRef });
 
-  return <section id="projects" ref={containerRef} aria-labelledby="projects-title" className="relative bg-background">
-    <header className="mx-auto grid max-w-[100rem] gap-6 px-4 pb-16 pt-24 sm:px-6 sm:pt-32 md:grid-cols-[.9fr_1.1fr] md:items-end lg:px-8">
+  return <section id="projects" ref={containerRef} aria-labelledby="projects-title" className={`relative bg-background ${styles.work}`}>
+    <header className={styles.intro}>
       <div>
-        <p className="section-kicker">{language === "es" ? "01 / Proyectos seleccionados" : "01 / Selected work"}</p>
-        <h2 id="projects-title" className="mt-5 text-[clamp(3.5rem,8vw,8rem)] font-black leading-[.95] tracking-[-.065em]">{language === "es" ? "Proyectos" : "Work"}</h2>
+        <h2 id="projects-title">{language === "es" ? "Proyectos" : "Work"}</h2>
+        <p className={styles.label}>{language === "es" ? "01 / Proyectos seleccionados" : "01 / Selected work"}</p>
       </div>
-      <p className="max-w-[42ch] text-lg leading-relaxed text-muted-foreground md:justify-self-end">{t.projects.desc}</p>
+      <p>{t.projects.desc}</p>
     </header>
     {featured.map((project, index) => <ProjectScene key={project.title} project={project} index={index} total={featured.length} language={language} />)}
     <div className="mx-auto max-w-[100rem] px-4 pb-16 pt-8 sm:px-6 lg:px-8">
@@ -154,7 +154,7 @@ export function Projects() {
           <p className="mt-3 text-xs text-muted-foreground">{project.technologies.slice(0, 3).join(" · ")}</p>
           <div className="mt-3 flex flex-wrap gap-5 text-xs">
             {project.link && <a href={project.link} target="_blank" rel="noopener noreferrer" className="cinema-link min-h-11" aria-label={project.title + (language === "es" ? ": ver demo" : ": view demo")}>Demo <ArrowUpRight aria-hidden="true" /></a>}
-            {project.github && <a href={project.github} target="_blank" rel="noopener noreferrer" className="cinema-link min-h-11" aria-label={project.title + ": GitHub"}>{language === "es" ? "Ver código" : "View code"}<ArrowUpRight aria-hidden="true" /></a>}
+            {project.github && <a href={project.github} target="_blank" rel="noopener noreferrer" className="cinema-link min-h-11" aria-label={`${language === "es" ? "Ver código" : "View code"} — ${project.title}: GitHub`}>{language === "es" ? "Ver código" : "View code"}<ArrowUpRight aria-hidden="true" /></a>}
             {!project.link && !project.github && <span className="inline-flex min-h-11 items-center text-muted-foreground">{language === "es" ? "Proyecto privado" : "Private project"}</span>}
           </div>
         </article>)}

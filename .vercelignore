@@ -1,1 +1,7 @@
 public/hero-3d/models/
+artifacts/
+.env*
+.vercel/
+test-results/
+playwright-report/
+explorations/

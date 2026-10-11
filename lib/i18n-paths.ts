@@ -38,8 +38,10 @@ export const INDEXABLE_EN_PATHS: readonly string[] = ROUTE_PAIRS.map(
   (pair) => pair.en,
 );
 
-const ES_TO_EN = new Map(ROUTE_PAIRS.map((pair) => [pair.es, pair.en]));
-const EN_TO_ES = new Map(ROUTE_PAIRS.map((pair) => [pair.en, pair.es]));
+// Legal pages are navigable in both languages, but remain outside the sitemap.
+const navigationPairs = [...ROUTE_PAIRS, { es: "/legal", en: "/en/legal" }];
+const ES_TO_EN = new Map(navigationPairs.map((pair) => [pair.es, pair.en]));
+const EN_TO_ES = new Map(navigationPairs.map((pair) => [pair.en, pair.es]));
 
 /** Remove a trailing slash (except for the root) so lookups are stable. */
 export function normalizePathname(pathname: string): string {

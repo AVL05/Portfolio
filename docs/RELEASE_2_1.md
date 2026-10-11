@@ -34,4 +34,19 @@ La incidencia de LCP móvil sigue abierta. No se atribuyen las mediciones de M4 
 - E2E en producción local: 74 PASS, 18 SKIP, 0 FAIL; perfiles desktop y móvil Chromium. Las omisiones corresponden a perfiles incompatibles o matrices explícitas no activadas.
 - Diff sin errores de whitespace, sin imports Three/R3F restantes y sin hallazgos en el escaneo de patrones comunes de secretos. No es un pentest.
 
-El identificador y las comprobaciones públicas se registrarán después del despliegue. No se han repetido Lighthouse, Firefox, WebKit ni pruebas en dispositivos físicos en esta limpieza.
+No se han repetido Lighthouse, Firefox, WebKit ni pruebas en dispositivos físicos en esta limpieza.
+
+## Resultado de publicación
+
+- Código publicado: commit `821a26ab4a88408556eec939815144c97f657884`, subido a `origin/main`.
+- Deployment: `dpl_AjQkp3d9HHmWo1dKUzT8uGcnKnh7`, estado `READY`, target real `production`; proyecto y SHA verificados mediante la API antes de promocionarlo.
+- URL propia del deployment: https://portfolio-gp2rzivg8-aleviclop.vercel.app.
+- URL pública: https://www.aleviclop.dev. `aleviclop.dev` redirige correctamente a www.
+- Aliases `aleviclop.dev`, `www.aleviclop.dev`, `aleviclop.vercel.app` y `portfolio-aleviclop.vercel.app` apuntan al deployment nuevo. El alias Git histórico `portfolio-git-main-aleviclop.vercel.app` permanece en el deployment anterior; no es la URL pública de esta release.
+- Comprobaciones HTTPS: 23 PASS. Las 16 rutas indexables devuelven 200, idioma ES/EN correcto, canonical coherente y sin noindex. Los seis casos contienen `data-project-showcase`; las homes contienen la nueva composición y no incluyen AI Creative Assistant.
+- CV: 200 y contenido PDF. Sitemap: 16 URLs. Robots, favicon, imagen del proyecto y Open Graph: 200.
+- GitHub Actions: CI del commit de código completado con `success`.
+- No se modifica DNS, configuración de dominios ni protección SSO. La promoción actualiza la asignación del deployment a los dominios existentes.
+- Evidencia local: `artifacts/release/preflight.json`, `deployment-es.html`, `deployment-en.html`, `public-checks.json`; excluida de Git y Vercel.
+
+**CONDITIONAL GO:** versión publicada con pruebas técnicas aprobadas; continúan pendientes la incidencia de LCP móvil, recepción real del correo y validación en dispositivos físicos. Los commits posteriores de documentación no alteran el código ejecutable de este deployment.

@@ -30,3 +30,7 @@ La home está en http://127.0.0.1:3101/ y http://127.0.0.1:3101/en. No se ha vue
 ## Case study website presentation
 
 The three case studies share a responsive CSS laptop frame with the existing real screenshot. The image remains uncropped. `ProjectShowcase` supports an optional `videoSrc` rendered with native controls, `playsInline`, no autoplay and `preload="none"`; generic case data uses `demoVideo`. No video is configured or downloaded yet. When adding a narrated recording, provide captions before publication. Live-site links and galleries remain unchanged.
+
+## GitHub synchronization without launch
+
+`vercel.json` disables automatic Git deployments from `main` while launch is paused. GitHub CI remains enabled. Remove this branch guard only when publication is authorized. The Vercel project currently names `master` as its production branch; no project settings, domains or aliases are changed. Local explorations, captures and the unused AI Creative Assistant screenshot remain outside these commits.

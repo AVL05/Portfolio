@@ -65,4 +65,3 @@ Referencias: [CLI deploy](https://vercel.com/docs/cli/deploy), [URLs de deployme
 ## Cambio local posterior al despliegue
 
 Por petición del usuario, AI Creative Assistant se elimina del contenido público ES/EN y quedan tres proyectos destacados. La Preview anterior conserva la candidata de cuatro proyectos. Su fingerprint y el manifest RC histórico no validan este nuevo cambio; hace falta validar una nueva candidata antes de otro despliegue. No se actualiza hosting automáticamente.
-

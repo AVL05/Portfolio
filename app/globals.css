@@ -343,46 +343,6 @@
   color: var(--primary);
 }
 
-.custom-cursor {
-  position: fixed;
-  left: -.5rem;
-  top: -.5rem;
-  z-index: 110;
-  display: none;
-  width: 1rem;
-  height: 1rem;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid color-mix(in oklab, var(--foreground) 75%, transparent);
-  border-radius: 50%;
-  background: color-mix(in oklab, var(--background) 76%, transparent);
-  color: var(--foreground);
-  font: 700 .5rem/1 var(--font-geist-mono);
-  letter-spacing: .08em;
-  opacity: 0;
-  pointer-events: none;
-  transition: width 180ms ease, height 180ms ease, opacity 120ms ease, background-color 180ms ease, color 180ms ease;
-  backdrop-filter: blur(8px);
-}
-
-@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  .custom-cursor { display: flex; }
-  .custom-cursor[data-visible="true"] { opacity: 1; }
-  .custom-cursor[data-state]:not([data-state=""]) {
-    width: 4.25rem;
-    height: 4.25rem;
-    border-color: var(--primary);
-    background: var(--primary);
-    color: var(--primary-foreground);
-  }
-  html.custom-cursor-enabled body,
-  html.custom-cursor-enabled a[data-cursor] { cursor: none; }
-  html.custom-cursor-enabled input,
-  html.custom-cursor-enabled textarea,
-  html.custom-cursor-enabled select,
-  html.custom-cursor-enabled [contenteditable="true"] { cursor: auto; }
-}
-
 .hero-cinema::after {
   content: "";
   position: absolute;

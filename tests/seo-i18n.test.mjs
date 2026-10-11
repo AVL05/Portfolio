@@ -199,7 +199,6 @@ test("locale-dependent internal links stay inside their language", () => {
     "components/not-found-content.tsx",
     "components/legal-page-content.tsx",
     "components/contact.tsx",
-    "components/hero-3d/RoomHotspots.tsx",
   ]) {
     assert.match(read(file), /localizeHref/, file);
   }

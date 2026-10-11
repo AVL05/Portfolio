@@ -45,5 +45,5 @@ test("home has one hero heading, both primary journeys and natural photography f
   assert.ok(home.indexOf("<Photography />") < home.indexOf("<Currently />"));
   assert.ok(home.indexOf("<Currently />") < home.indexOf("<Contact />"));
   assert.doesNotMatch(read("components/photography.tsx"), /pin:|preventDefault|window.location/);
-  assert.match(read("components/hero-3d/CreativeRoomHero.tsx"), /prefers-reduced-motion: no-preference/);
+  assert.match(hero, /prefers-reduced-motion: no-preference/);
 });

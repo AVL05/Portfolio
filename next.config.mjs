@@ -83,29 +83,10 @@ const nextConfig = {
         source: "/(.*)",
         headers: securityHeaders,
       },
-      {
-        source: "/",
-        // Home diorama uses the same local embedded-texture loader.
-        headers: securityHeaders.filter(({ key }) => key === "Content-Security-Policy")
-          .map(({ key, value }) => ({
-            key,
-            value: value.replace("connect-src 'self'", "connect-src 'self' blob:")
-              .replace("script-src 'self'", "script-src 'self' 'wasm-unsafe-eval'"),
-          })),
-      },
-      {
-        source: "/avatar-preview",
-        // GLTFLoader decodes embedded textures through ImageBitmapLoader/fetch.
-        headers: securityHeaders.filter(({ key }) => key === "Content-Security-Policy")
-          .map(({ key, value }) => ({
-            key,
-            value: value.replace("connect-src 'self'", "connect-src 'self' blob:"),
-          })),
-      },
     ];
   },
   experimental: {
-    optimizePackageImports: ["react-icons", "lucide-react", "@react-three/drei", "three-stdlib"],
+    optimizePackageImports: ["react-icons", "lucide-react"],
     // Required for app/global-not-found.tsx: with multiple root layouts
     // there is no single layout to compose unmatched-URL 404s from.
     globalNotFound: true,

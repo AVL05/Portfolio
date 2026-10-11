@@ -74,16 +74,12 @@ test("contact form exposes localized inline validation", () => {
 test("focus, lightweight editorial hero, and localized Open Graph contracts remain explicit", () => {
   const globals = read("app/globals.css");
   const hero = read("components/hero.tsx");
-  const cursor = read("components/custom-cursor.tsx");
   const seo = read("lib/seo.ts");
 
   assert.match(globals, /:focus-visible/);
   assert.match(globals, /outline: 2px solid var\(--primary\)/);
-  assert.doesNotMatch(hero, /CreativeRoomHero/);
-  assert.match(read("components/hero-3d/CreativeRoomHero.tsx"), /ssr: false/);
-  assert.match(read("components/hero-3d/CreativeRoomScene.tsx"), /frameloop="demand"/);
-  assert.match(cursor, /query\.addEventListener\("change", syncCursor\)/);
-  assert.match(cursor, /query\.removeEventListener\("change", syncCursor\)/);
+  assert.doesNotMatch(hero, /CreativeRoomHero|Canvas/);
+  assert.doesNotMatch(read("next.config.mjs"), /wasm-unsafe-eval/);
   assert.match(seo, /alternateLocale/);
   assert.match(seo, /buildPageMetadata/);
   assert.match(read("app/(es)/proyectos/raw-vives/page.tsx"), /type: "article"/);

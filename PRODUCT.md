@@ -27,7 +27,7 @@ Precisa, creativa y resolutiva. La experiencia debe transmitir curiosidad visual
 
 - Desarrollo full-stack de principio a fin: frontend, backend y datos, con React, Next.js, Laravel, PHP y MySQL.
 - Mostrar decisiones y resultados antes que listas de tecnologías.
-- Mantener cuatro proyectos destacados (AI Creative Assistant, Distrito Gourmet, LumaFlow Studio, raw.vives) y un archivo secundario. Un proyecto nuevo solo entra si supera a uno de los cuatro; raw.vives permanece como caso web y fotográfico, no como segunda profesión.
+- Mantener tres proyectos destacados (Distrito Gourmet, LumaFlow Studio, raw.vives) y un archivo secundario. Un proyecto nuevo solo entra si supera a uno de los tres; raw.vives permanece como caso web y fotográfico, no como segunda profesión.
 - Resolver cada caso de estudio con contexto, problema, responsabilidad, construcción y resultado verificable, sin convertirlo en documentación extensa.
 - La creatividad debe reforzar la lectura y la memoria, no distraer.
 - Cada llamada a la acción debe acercar a un caso, al CV o al contacto.

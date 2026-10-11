@@ -49,6 +49,40 @@ components:
 
 # Design System: Alex Vicente Portfolio
 
+## ALEVICLOP 2.1 — Code / Composition (2026-10-11)
+
+El usuario autoriza convertir la exploración aprobada en la home principal local.
+Esta dirección sustituye el hero M1: Código / Criterio en ES, Code / Craft en EN,
+monograma AV vectorial y capturas reales de LumaFlow y Distrito Gourmet.
+Fondo `#10151E`, secciones de proyectos y experiencia en gris mineral `#292D32`,
+marfil `#F5F3EE` y acento `#ADC1FF`. La clase `code-home` limita los nuevos tokens
+a la home; estudios de caso, rutas, formulario y SEO conservan sus contratos.
+Movimiento de entrada sobre elementos gráficos, desplazamiento exterior de 18 px
+solo en escritorio y contenido profesional siempre visible. La entrada se omite
+si la hidratación llega tarde. Los CTAs circulares mantienen foco y área fija.
+El lanzamiento continúa detenido: esta integración no autoriza publicar.
+Ver `docs/ALEVICLOP_2_1.md` para validación y límites.
+
+## ALEVICLOP 2.0 — M1 override (2026-10-10)
+
+La especificación explícita del usuario sustituye la dirección anterior en la home:
+Dark Editorial / Equilibrio Premium. Fondo `#0B0D12`, superficie `#171A22`,
+marfil `#F5F3EE`, secundario `#A6AAB7`, azul `#7686FF` y naranja puntual `#FF6542`.
+Space Grotesk para display, Inter para cuerpo e IBM Plex Mono para etiquetas.
+Los tokens viven en `.premium-home` en `app/globals.css`; hero y navegación usan
+CSS Modules, una retícula de 12 columnas y un contenedor máximo de 1440px.
+
+El hero es tipográfico, con tres líneas, cierre azul, nombre visible, perfil junior,
+acceso a proyectos, CV y experiencia. Entrada GSAP de 1,3s; desplazamiento del
+titular limitado a 20px en escritorio. Botones magnéticos: solo el contenido se
+mueve (4px / 3px), con zona clicable fija. Movimiento opcional y contenido SSR visible.
+Navegación móvil con diálogo nativo, cierre con Escape y retorno de foco; enlaces
+alternativos sin JavaScript. No se publica una nueva disponibilidad sin confirmación.
+
+M1 no rediseña proyectos ni estudios de caso. La dirección anterior, documentada
+debajo, sigue rigiendo esas superficies hasta M2. Componentes y assets 3D conservados,
+pero fuera del hero. Ver `docs/ALEVICLOP_2_0.md` para alcance y siguientes hitos.
+
 ## Overview
 
 **Creative North Star: "Visual Systems / Quiet Cinema"**
@@ -145,3 +179,28 @@ Cuatro proyectos principales se muestran como escenas amplias con imagen, rol, s
 - **Don't** usar glassmorphism, brillos, contadores y tarjetas repetidas sin contenido real como identidad.
 - **Don't** añadir efectos que compitan con los proyectos o perjudiquen rendimiento y accesibilidad.
 - **Don't** reducir el perfil a una sola capa del desarrollo web.
+
+## ALEVICLOP 2.0 — extensión aprobada M2 (2026-10-10)
+
+M2 extiende Dark Editorial / Equilibrio Premium desde M1 a Selected Work y los tres estudios de caso existentes, en home e índice de proyectos. Conserva tokens globales legacy fuera de esas superficies y no regenera frontmatter ni sidecar. Evidencia y validaciones: [M2_SELECTED_WORK.md](docs/M2_SELECTED_WORK.md).
+
+- Space Grotesk 500 para títulos; Inter para cuerpo; IBM Plex Mono 400 para metadatos bajo el título. Sección `clamp(3.5rem, 8vw, 7rem)`; proyecto `clamp(2.75rem, 5.3vw, 5rem)`; raw.vives `clamp(3.75rem, 11vw, 9rem)`; cuerpos con 42ch y línea 1.65–1.7.
+- Retícula de 12 columnas y ancho máximo 90rem; desde 1023px hacia abajo, lectura vertical título → imagen → detalles. Escenas amplias de borde fino, sin tarjetas anidadas. AI panorámico, Distrito imagen izquierda sobre marfil, Luma interfaz derecha y raw.vives composición editorial asimétrica.
+- Paleta M1 de fondo, texto y azul; Distrito usa localmente marfil `#F5F3EE`, texto `#0B0D12`, secundario `#4A514C` y verde `#344E43`. Estas excepciones de proyecto no sustituyen el acento global.
+- Media real optimizada, pies que distinguen desarrollo/datos de ejemplo, lazy loading y proporción reservada. Preview alternativo solo condicional tras mouse/foco en desktop compatible; acciones completas sin hover.
+- Revelado GSAP diferido y scoped, entradas 18/12px y máscara 0.75s; parallax exclusivamente de imagen ±10px en desktop ≥1024px con puntero fino. Esta excepción aprobada sustituye «sin parallax continuo» solo para M2. Movimiento reducido y SSR/sin JS conservan acceso al contenido.
+- Casos con hero amplio, anclas internas con enlaces de 44px de alto mínimo, esquinas rectas y contraste editorial marfil en el bloque de contexto. Código privado se expresa como estado textual y contacto, sin enlace público roto.
+
+No se canonizan etiquetas encima de titulares, avisos consultivos de paleta legacy ni métricas de laboratorio como resultados de producto. No se reparan las superficies fuera del alcance M2 para disimular esa deriva.
+
+## ALEVICLOP 2.0 — refinamiento M3 (2026-10-11)
+
+M3 mantiene la composición de M1/M2 y coordina el movimiento mediante `motion` en `lib/gsap.ts`: estados 140/240 ms, entrada 450 ms, títulos 600 ms, máscaras 650 ms y líneas del hero 800 ms; `power3.out` / `expo.out`, stagger 40/80 ms y desplazamientos 8/12/18 px. CSS comparte las duraciones de estado y la curva de salida. [Evidencia, límites y validación M3](docs/M3_MOTION_POLISH.md).
+
+- Entradas de sección al 88% del viewport, con contenido visible y finalización al saltar la sección. Hero conserva su presupuesto; descripción LCP sin entrada ni transformación.
+- Cursor nativo. Foco inmediato, botones estables y menú accesible. Movimiento reducido también al cambiar la preferencia durante la sesión.
+- Preview alternativo tras interacción compatible y carga completa; crossfade reversible de 240 ms, sin reemplazar la imagen principal durante la carga. Touch no depende de hover.
+- Inter, Space Grotesk 500 e IBM Plex Mono 400 dan continuidad a las superficies premium. Se mantiene el parallax acotado de M2 exclusivamente en desktop compatible.
+- Contacto permanece legible durante la entrada, con estado de envío accesible y borrador conservado. Transiciones entre páginas breves, sin desplazamiento raíz ni demora previa a navegar.
+
+Estos criterios no añaden efectos continuos ni habilitan M4. La incidencia de LCP móvil permanece abierta.

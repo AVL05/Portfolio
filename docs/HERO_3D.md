@@ -1,5 +1,10 @@
 # Alex Creative Space
 
+> Desde ALEVICLOP 2.0 M1 la home usa un hero editorial tipográfico. Este módulo y
+> sus assets se conservan para reutilización, pero ya no se montan en `/` ni `/en`.
+> Las instrucciones siguientes describen la integración histórica; sus pruebas
+> de assets permanecen, y las pruebas E2E de la home ahora cubren el hero editorial.
+
 ## Probar
 
 `pnpm dev`, abrir `/`. Arrastrar para inspeccionar; «Expandir escena» activa el zoom con rueda/pellizco. «Restablecer vista» restaura encuadre; «Minimizar» o Escape cierran el modo focus. El foco vuelve al botón de expansión. Título, descripción y CTA siguen siendo HTML en la hero.

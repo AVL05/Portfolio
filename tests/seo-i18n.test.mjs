@@ -38,14 +38,12 @@ test("legal navigation preserves locale without adding indexable URLs", () => {
   assert.equal(i18n.getAlternatePath("/legal", "en"), "/en/legal");
   assert.equal(seo.languageAlternates("/legal", "es"), undefined);
   assert.equal(seo.languageAlternates("/en/legal", "en"), undefined);
-  assert.equal(seo.INDEXABLE_ROUTES.length, 16);
+  assert.equal(seo.INDEXABLE_ROUTES.length, 8);
 });
 
 const EXPECTED_PAGES = [
   ["/", "app/(es)/page.tsx", "es"],
   ["/en", "app/(en)/en/page.tsx", "en"],
-  ["/proyectos", "app/(es)/proyectos/page.tsx", "es"],
-  ["/en/projects", "app/(en)/en/projects/page.tsx", "en"],
   ["/proyectos/raw-vives", "app/(es)/proyectos/raw-vives/page.tsx", "es"],
   ["/en/projects/raw-vives", "app/(en)/en/projects/raw-vives/page.tsx", "en"],
   [
@@ -68,24 +66,18 @@ const EXPECTED_PAGES = [
     "app/(en)/en/projects/distrito-gourmet/page.tsx",
     "en",
   ],
-  ["/sobre-mi", "app/(es)/sobre-mi/page.tsx", "es"],
-  ["/en/about", "app/(en)/en/about/page.tsx", "en"],
-  ["/fotografia", "app/(es)/fotografia/page.tsx", "es"],
-  ["/en/photography", "app/(en)/en/photography/page.tsx", "en"],
-  ["/contacto", "app/(es)/contacto/page.tsx", "es"],
-  ["/en/contact", "app/(en)/en/contact/page.tsx", "en"],
 ];
 
-test("sitemap contains exactly the 16 indexable URLs, 8 ES + 8 EN", () => {
+test("sitemap contains exactly the 8 indexable URLs, 4 ES + 4 EN", () => {
   const { INDEXABLE_ROUTES } = seo;
-  assert.equal(INDEXABLE_ROUTES.length, 16);
+  assert.equal(INDEXABLE_ROUTES.length, 8);
   assert.equal(
     INDEXABLE_ROUTES.filter((route) => route.locale === "es").length,
-    8,
+    4,
   );
   assert.equal(
     INDEXABLE_ROUTES.filter((route) => route.locale === "en").length,
-    8,
+    4,
   );
   const paths = INDEXABLE_ROUTES.map((route) => route.path).sort();
   assert.equal(
@@ -117,8 +109,8 @@ test("canonical is self-referential and hreflang is reciprocal with ES x-default
     assert.equal(alternates.languages["x-default"], absoluteUrl(es));
   }
   // Reciprocity across the pair.
-  const esAlt = languageAlternates("/proyectos", "es");
-  const enAlt = languageAlternates("/en/projects", "en");
+  const esAlt = languageAlternates("/proyectos/raw-vives", "es");
+  const enAlt = languageAlternates("/en/projects/raw-vives", "en");
   assert.deepEqual(esAlt.languages, enAlt.languages);
   // Non-indexable paths get canonical only, never hreflang.
   assert.equal(languageAlternates("/legal", "es"), undefined);
@@ -193,7 +185,6 @@ test("no URL renders a locale from cookies, storage, headers or user agent", () 
 
 test("locale-dependent internal links stay inside their language", () => {
   for (const file of [
-    "components/seo-page-shell.tsx",
     "components/project-case-study.tsx",
     "components/raw-vives-case-study.tsx",
     "components/not-found-content.tsx",
@@ -207,8 +198,7 @@ test("locale-dependent internal links stay inside their language", () => {
     read("app/(en)/en/projects/lumaflow-studio/page.tsx"),
     read("app/(en)/en/projects/distrito-gourmet/page.tsx"),
   ].join("\n");
-  assert.doesNotMatch(enShell, /"\/proyectos/);
-  assert.doesNotMatch(enShell, /"\/sobre-mi"/);
+  assert.doesNotMatch(enShell, /"\/proyectos\//);
 });
 
 test("unmatched URLs use the global 404 localized purely from the path", () => {
@@ -240,13 +230,9 @@ test("redirects are explicit, single-hop and chain-free", () => {
   assert.doesNotMatch(config, /source: "\/es\/\*"/);
   for (const [source, destination] of [
     ["/es", "/"],
-    ["/es/proyectos", "/proyectos"],
     ["/es/proyectos/raw-vives", "/proyectos/raw-vives"],
     ["/es/proyectos/lumaflow-studio", "/proyectos/lumaflow-studio"],
     ["/es/proyectos/distrito-gourmet", "/proyectos/distrito-gourmet"],
-    ["/es/sobre-mi", "/sobre-mi"],
-    ["/es/fotografia", "/fotografia"],
-    ["/es/contacto", "/contacto"],
     ["/es/legal", "/legal"],
     ["/proyectos/raw-manager", "/proyectos/lumaflow-studio"],
   ]) {
@@ -260,25 +246,17 @@ test("redirects are explicit, single-hop and chain-free", () => {
   // Every destination is a final 200 (indexable or legal), never another redirect.
   const redirectSources = [
     "/es",
-    "/es/proyectos",
     "/es/proyectos/raw-vives",
     "/es/proyectos/lumaflow-studio",
     "/es/proyectos/distrito-gourmet",
-    "/es/sobre-mi",
-    "/es/fotografia",
-    "/es/contacto",
     "/es/legal",
     "/proyectos/raw-manager",
   ];
   for (const destination of [
     "/",
-    "/proyectos",
     "/proyectos/raw-vives",
     "/proyectos/lumaflow-studio",
     "/proyectos/distrito-gourmet",
-    "/sobre-mi",
-    "/fotografia",
-    "/contacto",
     "/legal",
   ]) {
     assert.ok(!redirectSources.includes(destination), destination);

@@ -175,12 +175,8 @@ test("selected work remains usable without JavaScript", async ({ browser }) => {
   await context.close();
 });
 
-test("public project indexes expose the same three projects in both locales", async ({ page }) => {
-  for (const route of ["/proyectos", "/en/projects"]) {
-    expect((await page.goto(route))?.status()).toBe(200);
-    await expect(page.locator("h1")).toBeVisible();
-    await expect(page.locator(".project-scene")).toHaveCount(3);
-    expect(await page.locator("main").count()).toBe(1);
-    expect(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)).toBe(false);
+test("removed public indexes stay gone and never leak into the sitemap", async ({ page }) => {
+  for (const route of ["/proyectos", "/en/projects", "/sobre-mi", "/fotografia", "/contacto", "/en/about", "/en/photography", "/en/contact"]) {
+    expect((await page.goto(route))?.status()).toBe(404);
   }
 });

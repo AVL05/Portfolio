@@ -67,13 +67,9 @@ const nextConfig = {
       // anything else (e.g. /es/projects) correctly stays a 404.
       // 308 preserves method and signals permanence without chains.
       { source: "/es", destination: "/", permanent: true },
-      { source: "/es/proyectos", destination: "/proyectos", permanent: true },
       { source: "/es/proyectos/raw-vives", destination: "/proyectos/raw-vives", permanent: true },
       { source: "/es/proyectos/lumaflow-studio", destination: "/proyectos/lumaflow-studio", permanent: true },
       { source: "/es/proyectos/distrito-gourmet", destination: "/proyectos/distrito-gourmet", permanent: true },
-      { source: "/es/sobre-mi", destination: "/sobre-mi", permanent: true },
-      { source: "/es/fotografia", destination: "/fotografia", permanent: true },
-      { source: "/es/contacto", destination: "/contacto", permanent: true },
       { source: "/es/legal", destination: "/legal", permanent: true },
     ];
   },

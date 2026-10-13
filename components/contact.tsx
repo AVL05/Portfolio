@@ -520,25 +520,6 @@ export function Contact() {
 
             <footer className="mt-16 border-t border-border/50 pt-8 text-center sm:text-left">
               <nav
-                aria-label={language === "es" ? "Páginas del portfolio" : "Portfolio pages"}
-                className="mb-6 flex flex-wrap justify-center gap-x-5 gap-y-2 sm:justify-start"
-              >
-                {[
-                  { href: "/sobre-mi", es: "Sobre mí", en: "About" },
-                  { href: "/proyectos", es: "Proyectos", en: "Projects" },
-                  { href: "/fotografia", es: "Fotografía", en: "Photography" },
-                  { href: "/contacto", es: "Contacto", en: "Contact" },
-                ].map((item) => (
-                  <Link
-                    key={item.href}
-                    href={localizeHref(item.href, language)}
-                    className="inline-flex min-h-11 items-center font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground transition-colors hover:text-primary"
-                  >
-                    {item[language]}
-                  </Link>
-                ))}
-              </nav>
-              <nav
                 aria-label={
                   language === "es" ? "Perfiles externos" : "External profiles"
                 }

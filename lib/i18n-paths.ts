@@ -21,13 +21,9 @@ export interface RoutePair {
 
 export const ROUTE_PAIRS: readonly RoutePair[] = [
   { es: "/", en: "/en" },
-  { es: "/proyectos", en: "/en/projects" },
   { es: "/proyectos/raw-vives", en: "/en/projects/raw-vives" },
   { es: "/proyectos/lumaflow-studio", en: "/en/projects/lumaflow-studio" },
   { es: "/proyectos/distrito-gourmet", en: "/en/projects/distrito-gourmet" },
-  { es: "/sobre-mi", en: "/en/about" },
-  { es: "/fotografia", en: "/en/photography" },
-  { es: "/contacto", en: "/en/contact" },
 ];
 
 export const INDEXABLE_ES_PATHS: readonly string[] = ROUTE_PAIRS.map(

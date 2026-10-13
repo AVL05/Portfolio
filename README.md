@@ -1,6 +1,6 @@
 # ALEVICLOP — Alex Vicente López
 
-Portfolio profesional de [Alex Vicente López](https://www.aleviclop.dev), Desarrollador Full-Stack Junior en Valencia con formación en Desarrollo de Aplicaciones Web y Sistemas Microinformáticos y Redes, experiencia profesional y proyectos propios. Presenta casos de estudio, experiencia profesional y trabajo fotográfico mediante una experiencia bilingüe y accesible.
+Portfolio profesional de [Alex Vicente López](https://www.aleviclop.dev), Desarrollador Full-Stack en Valencia con formación en Desarrollo de Aplicaciones Web y Sistemas Microinformáticos y Redes, experiencia profesional y proyectos propios. Presenta casos de estudio, experiencia profesional y trabajo fotográfico mediante una experiencia bilingüe y accesible.
 
 [Ver portfolio](https://www.aleviclop.dev) · [Explorar raw.vives](https://rawvives.aleviclop.dev) · [GitHub](https://github.com/AVL05) · [LinkedIn](https://www.linkedin.com/in/aleviclop/)
 
@@ -64,16 +64,12 @@ Los catálogos de idioma viven en `lib/locales/`. `lib/i18n-paths.ts` define las
 | Español | Inglés |
 | --- | --- |
 | `/` | `/en` |
-| `/sobre-mi` | `/en/about` |
-| `/proyectos` | `/en/projects` |
 | `/proyectos/raw-vives` | `/en/projects/raw-vives` |
 | `/proyectos/lumaflow-studio` | `/en/projects/lumaflow-studio` |
 | `/proyectos/distrito-gourmet` | `/en/projects/distrito-gourmet` |
-| `/fotografia` | `/en/photography` |
-| `/contacto` | `/en/contact` |
 | `/legal` | `/en/legal` |
 
-Español reside en la raíz, sin un sitio paralelo `/es`. Hay 16 URLs indexables; las rutas legales quedan fuera del sitemap.
+Español reside en la raíz, sin un sitio paralelo `/es`. Hay 8 URLs indexables; las rutas legales quedan fuera del sitemap. La home concentra presentación, proyectos, experiencia, fotografía y contacto en una sola página por idioma.
 
 ## Requisitos
 

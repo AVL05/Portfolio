@@ -37,7 +37,6 @@ export default function EnglishRawVivesCaseStudyPage() {
   };
   const breadcrumbs = breadcrumbJsonLd([
     { name: "Home", path: "/en" },
-    { name: "Projects", path: "/en/projects" },
     { name: "raw.vives", path: "/en/projects/raw-vives" },
   ]);
 

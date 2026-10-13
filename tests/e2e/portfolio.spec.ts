@@ -27,7 +27,7 @@ test("renders without horizontal overflow and switches language", async ({
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
   await expect(page.getByRole("link", { name: "ES EN" })).toBeVisible();
   await expect(
-    page.getByText("Junior Full-Stack Developer", { exact: true }),
+    page.getByText("Full-Stack Developer", { exact: true }),
   ).toBeVisible();
   await expect(
     page.getByRole("heading", { name: "Work", exact: true }),

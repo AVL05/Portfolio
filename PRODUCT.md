@@ -6,11 +6,11 @@ brand
 
 ## Users
 
-Responsables de contratación, recruiters y equipos de producto que buscan un Desarrollador Full-Stack Junior con base en Desarrollo de Aplicaciones Web y Sistemas, capaz de trabajar desde la interfaz hasta la API y los datos. Deben poder identificar el encaje profesional, revisar trabajo real y contactar en pocos minutos.
+Responsables de contratación, recruiters y equipos de producto que buscan un Desarrollador Full-Stack con base en Desarrollo de Aplicaciones Web y Sistemas, capaz de trabajar desde la interfaz hasta la API y los datos. Deben poder identificar el encaje profesional, revisar trabajo real y contactar en pocos minutos.
 
 ## Product Purpose
 
-Presentar a Alex Vicente López como Desarrollador Full-Stack Junior, mostrando experiencia profesional, una base técnica en sistemas y proyectos propios que demuestran capacidad para construir aplicaciones completas y continuar creciendo en desarrollo de software e IA aplicada. El portfolio debe convertir una visita breve en interés por una entrevista mediante casos verificables, una dirección de arte memorable y una propuesta profesional inequívoca.
+Presentar a Alex Vicente López como Desarrollador Full-Stack, mostrando experiencia profesional, una base técnica en sistemas y proyectos propios que demuestran capacidad para construir aplicaciones completas y continuar creciendo en desarrollo de software e IA aplicada. El portfolio debe convertir una visita breve en interés por una entrevista mediante casos verificables, una dirección de arte memorable y una propuesta profesional inequívoca.
 
 ## Brand Personality
 

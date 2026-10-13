@@ -34,7 +34,6 @@ export default function LumaFlowStudioCaseStudyPage() {
   };
   const breadcrumbs = breadcrumbJsonLd([
     { name: "Inicio", path: "/" },
-    { name: "Proyectos", path: "/proyectos" },
     { name: "LumaFlow Studio", path: LUMA_URLS.path },
   ]);
 

@@ -36,7 +36,6 @@ export default function EnglishLumaFlowStudioCaseStudyPage() {
   };
   const breadcrumbs = breadcrumbJsonLd([
     { name: "Home", path: "/en" },
-    { name: "Projects", path: "/en/projects" },
     { name: "LumaFlow Studio", path: projectUrl },
   ]);
 

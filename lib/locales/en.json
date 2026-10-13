@@ -8,7 +8,7 @@
     "contact": "Contact"
   },
   "hero": {
-    "role": "Junior Full-Stack Developer",
+    "role": "Full-Stack Developer",
     "location": "Valencia, Spain",
     "lines": ["Code.", "Craft."],
     "intro": "I'm Alex Vicente, a full-stack developer. I build applications that bring together engineering, design and digital experiences.",
@@ -319,7 +319,7 @@
     "form_error_message": "Enter a message with at least 20 characters.",
     "links_title": "Direct links",
     "availability_title": "Open to new opportunities",
-    "availability_desc": "Open to new opportunities as a Junior Full-Stack Developer, on-site, hybrid or remote. I also consider selected freelance projects.",
+    "availability_desc": "Open to new opportunities as a Full-Stack Developer, on-site, hybrid or remote. I also consider selected freelance projects.",
     "cv_btn": "Download CV",
     "footer_built": "Designed and developed by Alex Vicente."
   },

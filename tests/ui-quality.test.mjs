@@ -119,8 +119,9 @@ test("search crawlers can discover the public profile routes", () => {
   assert.match(sitemap, /INDEXABLE_ROUTES/);
   assert.match(seo, /Alex Vicente Lopez/);
   for (const route of ["sobre-mi", "proyectos", "fotografia", "contacto"]) {
-    assert.match(contact, new RegExp(`href: "\\/${route}"`));
+    assert.doesNotMatch(contact, new RegExp(`href: "\\/${route}"`));
   }
+  assert.match(contact, /\/legal/);
 });
 
 test("featured case studies expose project-specific social images", () => {

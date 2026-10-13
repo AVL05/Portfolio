@@ -141,7 +141,7 @@ export function ProjectCaseStudy({
           <nav aria-label="Breadcrumb" className="mb-14 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[11px] uppercase tracking-[.12em] text-muted-foreground">
             <Link href={localizeHref("/", language)} className="transition-colors hover:text-primary">{copy.home}</Link>
             <span aria-hidden="true">/</span>
-            <Link href={localizeHref("/proyectos", language)} className="transition-colors hover:text-primary">{copy.projects}</Link>
+            <Link href={localizeHref("/#projects", language)} className="transition-colors hover:text-primary">{copy.projects}</Link>
             <span aria-hidden="true">/</span>
             <span aria-current="page" className="text-foreground">{data.title}</span>
           </nav>

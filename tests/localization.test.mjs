@@ -49,13 +49,12 @@ test("known mixed-language surfaces select copy from the active language", () =>
   const projects = read("components/projects.tsx");
   const notFound = read("app/global-not-found.tsx");
   const notFoundContent = read("components/not-found-content.tsx");
-  const seoShell = read("components/seo-page-shell.tsx");
   const legal = read("components/legal-page-content.tsx");
   const og = read("app/api/og/route.tsx");
 
   assert.match(hero, /copy.role/);
-  assert.equal(es.hero.role, "Desarrollador Full-Stack Junior");
-  assert.equal(en.hero.role, "Junior Full-Stack Developer");
+  assert.equal(es.hero.role, "Desarrollador Full-Stack");
+  assert.equal(en.hero.role, "Full-Stack Developer");
   assert.match(es.hero.description, /principio a fin/);
   assert.match(en.hero.description, /end to end/);
   assert.match(photography, /Otra/);
@@ -67,11 +66,11 @@ test("known mixed-language surfaces select copy from the active language", () =>
   assert.match(notFoundContent, /usePathname/);
   assert.match(notFoundContent, /Page not found/);
   assert.doesNotMatch(notFoundContent, /useLanguage/);
-  assert.match(seoShell, /useLanguage/);
   assert.match(legal, /Aviso legal/);
   assert.match(legal, /Legal notice/);
-  assert.match(og, /Desarrollador Full-Stack Junior/);
-  assert.match(og, /Junior Full-Stack Developer/);
+  assert.match(og, /Desarrollador Full-Stack/);
+  assert.match(og, /Full-Stack Developer/);
+  assert.doesNotMatch(og, /Junior/);
 });
 
 test("language switching is a real navigation, never client state", () => {
@@ -88,15 +87,15 @@ test("language switching is a real navigation, never client state", () => {
   assert.doesNotMatch(toggle, /fetch\(/);
 });
 
-test("public positioning presents a junior full-stack profile without a frontend-only headline", () => {
+test("public positioning presents a full-stack profile without a frontend-only headline", () => {
   const layoutEs = read("app/(es)/layout.tsx");
   const layoutEn = read("app/(en)/layout.tsx");
   const seo = read("lib/seo.ts");
-  const about = read("app/(es)/sobre-mi/page.tsx");
-  const publicPositioning = [layoutEs, layoutEn, seo, about, JSON.stringify(es), JSON.stringify(en)].join("\n");
+  const publicPositioning = [layoutEs, layoutEn, seo, JSON.stringify(es), JSON.stringify(en)].join("\n");
 
-  assert.match(publicPositioning, /Desarrollador Full-Stack Junior/);
-  assert.match(publicPositioning, /Junior Full-Stack Developer/);
+  assert.match(publicPositioning, /Desarrollador Full-Stack/);
+  assert.match(publicPositioning, /Full-Stack Developer/);
+  assert.doesNotMatch(publicPositioning, /Junior/);
   assert.match(publicPositioning, /React/);
   assert.match(publicPositioning, /Laravel/);
   assert.match(publicPositioning, /freelance/i);

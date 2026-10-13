@@ -11,13 +11,13 @@ export const SITE_URL =
 
 export const SITE_NAME = "Alex Vicente López";
 export const SITE_TITLE =
-  "Alex Vicente López | Desarrollador Full-Stack Junior";
+  "Alex Vicente López | Desarrollador Full-Stack";
 export const EN_SITE_TITLE =
-  "Alex Vicente López | Junior Full-Stack Developer";
+  "Alex Vicente López | Full-Stack Developer";
 export const SITE_DESCRIPTION =
-  "Portfolio de Alex Vicente López, Desarrollador Full-Stack Junior en Valencia con formación en Desarrollo de Aplicaciones Web y Sistemas Microinformáticos y Redes, experiencia profesional y proyectos propios.";
+  "Portfolio de Alex Vicente López, Desarrollador Full-Stack en Valencia con formación en Desarrollo de Aplicaciones Web y Sistemas Microinformáticos y Redes, experiencia profesional y proyectos propios.";
 export const EN_SITE_DESCRIPTION =
-  "Portfolio of Alex Vicente López, Junior Full-Stack Developer in Valencia with training in Web Application Development and IT Systems and Networks, professional experience and personal projects.";
+  "Portfolio of Alex Vicente López, Full-Stack Developer in Valencia with training in Web Application Development and IT Systems and Networks, professional experience and personal projects.";
 
 export const SEO_KEYWORDS = [
   "Alex Vicente López",
@@ -34,8 +34,6 @@ export const SEO_KEYWORDS = [
   "bases de datos",
   "Laravel",
   "PHP",
-  "desarrollador full-stack junior Valencia",
-  "junior full-stack developer Valencia",
   "desarrollador full-stack Valencia",
   "full-stack developer Valencia",
   "desarrollador de aplicaciones web",
@@ -62,16 +60,12 @@ export interface IndexableRoute {
 const ROUTE_PRIORITY: Record<string, { priority: number; changeFrequency: "weekly" | "monthly" }> = {
   "/": { priority: 1, changeFrequency: "weekly" },
   "/proyectos/raw-vives": { priority: 0.92, changeFrequency: "monthly" },
-  "/sobre-mi": { priority: 0.9, changeFrequency: "monthly" },
-  "/proyectos": { priority: 0.85, changeFrequency: "monthly" },
   "/proyectos/lumaflow-studio": { priority: 0.84, changeFrequency: "monthly" },
   "/proyectos/distrito-gourmet": { priority: 0.82, changeFrequency: "monthly" },
-  "/fotografia": { priority: 0.75, changeFrequency: "monthly" },
-  "/contacto": { priority: 0.7, changeFrequency: "monthly" },
 };
 
 /**
- * Exactly the 16 indexable URLs: 8 ES + 8 EN.
+ * Exactly the 8 indexable URLs: 4 ES + 4 EN.
  * /legal and /en/legal stay noindex and are intentionally excluded.
  */
 export const INDEXABLE_ROUTES: IndexableRoute[] = [
@@ -169,9 +163,9 @@ export const personJsonLd = {
   alternateName: ["Alex Vicente", "Alex Vicente Lopez", "aleviclop", "AVL05"],
   url: SITE_URL,
   email: "mailto:alexviclop@gmail.com",
-  jobTitle: "Desarrollador Full-Stack Junior",
+  jobTitle: "Desarrollador Full-Stack",
   description:
-    "Alex Vicente López es Desarrollador Full-Stack Junior con formación en Desarrollo de Aplicaciones Web y Sistemas Microinformáticos y Redes, experiencia en desarrollo de software y proyectos propios.",
+    "Alex Vicente López es Desarrollador Full-Stack con formación en Desarrollo de Aplicaciones Web y Sistemas Microinformáticos y Redes, experiencia en desarrollo de software y proyectos propios.",
   image: `${SITE_URL}/api/og?lang=es`,
   sameAs: SAME_AS,
   knowsAbout: [
@@ -197,7 +191,7 @@ export const personJsonLd = {
   ],
   hasOccupation: {
     "@type": "Occupation",
-    name: "Desarrollador Full-Stack Junior",
+    name: "Desarrollador Full-Stack",
     skills:
       "React, Next.js, JavaScript, Tailwind CSS, Laravel, PHP, MySQL, APIs REST, Git, Docker, accesibilidad, IA aplicada",
   },

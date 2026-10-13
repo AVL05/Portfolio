@@ -8,7 +8,7 @@
     "contact": "Contacto"
   },
   "hero": {
-    "role": "Desarrollador Full-Stack Junior",
+    "role": "Desarrollador Full-Stack",
     "location": "Valencia, España",
     "lines": ["Código.", "Criterio."],
     "intro": "Soy Alex Vicente, desarrollador full-stack. Creo aplicaciones que combinan ingeniería, diseño y experiencias digitales.",
@@ -325,7 +325,7 @@
     "form_error_message": "Escribe un mensaje de al menos 20 caracteres.",
     "links_title": "Enlaces directos",
     "availability_title": "Abierto a nuevas oportunidades",
-    "availability_desc": "Abierto a nuevas oportunidades como Desarrollador Full-Stack Junior, tanto presenciales como híbridas o remotas. También valoro proyectos freelance seleccionados.",
+    "availability_desc": "Abierto a nuevas oportunidades como Desarrollador Full-Stack, tanto presenciales como híbridas o remotas. También valoro proyectos freelance seleccionados.",
     "cv_btn": "Descargar CV",
     "footer_built": "Diseñado y desarrollado por Alex Vicente."
   },

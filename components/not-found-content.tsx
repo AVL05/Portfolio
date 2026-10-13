@@ -42,7 +42,7 @@ export function NotFoundContent() {
           <Link href={localizeHref("/", language)} className="inline-flex min-h-11 items-center bg-primary px-5 text-sm font-bold text-primary-foreground">
             {language === "es" ? "Volver al portfolio" : "Back to portfolio"}
           </Link>
-          <Link href={localizeHref("/proyectos", language)} className="inline-flex min-h-11 items-center border border-border px-5 text-sm font-bold">
+          <Link href={localizeHref("/#projects", language)} className="inline-flex min-h-11 items-center border border-border px-5 text-sm font-bold">
             {language === "es" ? "Ver proyectos" : "View projects"}
           </Link>
         </div>

@@ -27,28 +27,20 @@ const {
   normalizePathname,
 } = module.exports;
 
-test("route map covers exactly 8 ES and 8 EN indexable URLs", () => {
+test("route map covers exactly 4 ES and 4 EN indexable URLs", () => {
   assert.deepEqual([...LOCALES], ["es", "en"]);
   assert.equal(DEFAULT_LOCALE, "es");
-  assert.equal(ROUTE_PAIRS.length, 8);
-  assert.equal(INDEXABLE_ES_PATHS.length, 8);
-  assert.equal(INDEXABLE_EN_PATHS.length, 8);
+  assert.equal(ROUTE_PAIRS.length, 4);
+  assert.equal(INDEXABLE_ES_PATHS.length, 4);
+  assert.equal(INDEXABLE_EN_PATHS.length, 4);
   assert.deepEqual([...INDEXABLE_ES_PATHS].sort(), [
     "/",
-    "/contacto",
-    "/fotografia",
-    "/proyectos",
     "/proyectos/distrito-gourmet",
     "/proyectos/lumaflow-studio",
     "/proyectos/raw-vives",
-    "/sobre-mi",
   ]);
   assert.deepEqual([...INDEXABLE_EN_PATHS].sort(), [
     "/en",
-    "/en/about",
-    "/en/contact",
-    "/en/photography",
-    "/en/projects",
     "/en/projects/distrito-gourmet",
     "/en/projects/lumaflow-studio",
     "/en/projects/raw-vives",
@@ -76,13 +68,13 @@ test("alternate paths are reciprocal and preserve hashes", () => {
     assert.equal(getAlternatePath(pair.en, "en"), pair.en);
   }
   assert.equal(getAlternatePath("/#projects", "en"), "/en/#projects");
-  assert.equal(getAlternatePath("/proyectos#top", "en"), "/en/projects#top");
+  assert.equal(getAlternatePath("/proyectos/raw-vives#top", "en"), "/en/projects/raw-vives#top");
   assert.equal(getAlternatePath("/en/#contact", "es"), "/#contact");
 });
 
 test("unknown paths fail safely instead of leaking across locales", () => {
   assert.equal(getAlternatePath("/projects", "es"), null);
-  assert.equal(getAlternatePath("/es/proyectos", "en"), null);
+  assert.equal(getAlternatePath("/es/proyectos/raw-vives", "en"), null);
   assert.equal(getAlternatePath("/nope", "en"), null);
   assert.equal(getAlternatePath("", "es"), null);
   assert.equal(localizeHref("/nope", "en"), "/en");
@@ -90,19 +82,19 @@ test("unknown paths fail safely instead of leaking across locales", () => {
   assert.equal(localizeHref("#top", "en"), "#top");
   assert.equal(localizeHref("https://example.com/x", "en"), "https://example.com/x");
   assert.equal(localizeHref("mailto:a@b.com", "en"), "mailto:a@b.com");
-  assert.equal(localizeHref("/sobre-mi", "es"), "/sobre-mi");
-  assert.equal(localizeHref("/sobre-mi", "en"), "/en/about");
+  assert.equal(localizeHref("/proyectos/raw-vives", "es"), "/proyectos/raw-vives");
+  assert.equal(localizeHref("/proyectos/raw-vives", "en"), "/en/projects/raw-vives");
   assert.equal(homePath("es"), "/");
   assert.equal(homePath("en"), "/en");
 });
 
 test("locale derives purely from the pathname", () => {
   assert.equal(getLocaleFromPathname("/"), "es");
-  assert.equal(getLocaleFromPathname("/proyectos"), "es");
+  assert.equal(getLocaleFromPathname("/proyectos/raw-vives"), "es");
   assert.equal(getLocaleFromPathname("/en"), "en");
   assert.equal(getLocaleFromPathname("/en/"), "en");
-  assert.equal(getLocaleFromPathname("/en/projects"), "en");
+  assert.equal(getLocaleFromPathname("/en/projects/raw-vives"), "en");
   assert.equal(getLocaleFromPathname("/english"), "es");
-  assert.equal(normalizePathname("/proyectos/"), "/proyectos");
+  assert.equal(normalizePathname("/proyectos/raw-vives/"), "/proyectos/raw-vives");
   assert.equal(normalizePathname("/en/"), "/en");
 });

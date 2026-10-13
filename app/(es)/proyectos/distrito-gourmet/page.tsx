@@ -35,7 +35,6 @@ export default function DistritoGourmetCaseStudyPage() {
   };
   const breadcrumbs = breadcrumbJsonLd([
     { name: "Inicio", path: "/" },
-    { name: "Proyectos", path: "/proyectos" },
     { name: "Distrito Gourmet", path: DISTRITO_URLS.path },
   ]);
 

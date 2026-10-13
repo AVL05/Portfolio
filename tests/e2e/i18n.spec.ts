@@ -67,8 +67,7 @@ test("guessed spanish prefixes redirect explicitly without chains", async ({
 }) => {
   for (const [source, destination] of [
     ["/es", "/"],
-    ["/es/proyectos", "/proyectos"],
-    ["/es/sobre-mi", "/sobre-mi"],
+    ["/es/proyectos/raw-vives", "/proyectos/raw-vives"],
   ]) {
     const response = await request.get(source, { maxRedirects: 0 });
     expect(response.status(), source).toBe(308);

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { ProjectShowcase } from "./project-showcase";
 import styles from "./project-case-study.module.css";
-import { useRef } from "react";
+import { useRef, type ReactNode } from "react";
 import { gsap, motion, useGSAP } from "@/lib/gsap";
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
@@ -18,6 +18,7 @@ export interface ProjectCaseStudyData {
   title: string;
   eyebrow: LocalizedText;
   summary: LocalizedText;
+  introduction?: { title: LocalizedText; paragraphs: LocalizedText[]; type: LocalizedText };
   role: LocalizedText;
   image: string;
   demoVideo?: string;
@@ -108,10 +109,12 @@ export function ProjectCaseStudy({
   data,
   previous,
   next,
+  editorial,
 }: {
   data: ProjectCaseStudyData;
   previous?: AdjacentProject;
   next?: AdjacentProject;
+  editorial?: ReactNode;
 }) {
   const { language } = useLanguage();
   const copy = labels[language];
@@ -147,25 +150,29 @@ export function ProjectCaseStudy({
             <div>
               <h1 className="text-[clamp(3.6rem,8vw,7.5rem)] font-black leading-[.82] tracking-[-.065em]">{data.title}</h1>
               <p className="section-kicker mt-5">{data.eyebrow[language]}</p>
-              <p className="mt-7 max-w-[62ch] text-lg font-medium leading-relaxed text-foreground/70 sm:text-xl">{data.summary[language]}</p>
+              {data.introduction ? <div className={styles.introduction}>
+                <h2>{data.introduction.title[language]}</h2>
+                {data.introduction.paragraphs.map(paragraph => <p key={paragraph.en}>{paragraph[language]}</p>)}
+              </div> : <p className="mt-7 max-w-[62ch] text-lg font-medium leading-relaxed text-foreground/70 sm:text-xl">{data.summary[language]}</p>}
               <div className="mt-7 border-l border-primary pl-4">
                 <p className="font-mono text-[11px] uppercase tracking-[.13em] text-muted-foreground">{copy.role}</p>
                 <p className="mt-2 max-w-[62ch] text-sm font-medium leading-relaxed text-foreground/82 sm:text-base">{data.role[language]}</p>
+                {data.introduction ? <><p className="section-kicker mt-5">{language === "es" ? "Stack principal" : "Core stack"}</p><p className="mt-2 text-sm leading-relaxed">React · Laravel · MySQL · Tailwind CSS · Zustand</p><p className="section-kicker mt-5">{language === "es" ? "Tipo" : "Type"}</p><p className="mt-2 text-sm">{data.introduction.type[language]}</p></> : null}
               </div>
               <div className="mt-8 flex flex-wrap gap-3">
-                {data.demo ? <a href={data.demo} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center gap-2 bg-primary px-5 text-sm font-bold text-primary-foreground">{copy.demo}<ArrowUpRight className="h-4 w-4" /></a> : null}
-                <a href={data.github} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center gap-2 border border-border/70 px-5 text-sm font-bold transition-colors hover:border-primary hover:text-primary"><FaGithub className="h-4 w-4" />{copy.code}</a>
+                {data.demo ? <a href={data.demo} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center gap-2 bg-primary px-5 text-sm font-bold text-primary-foreground">{data.introduction ? (language === "es" ? "Ver aplicación" : "View application") : copy.demo}<ArrowUpRight className="h-4 w-4" /></a> : null}
+                <a href={data.github} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center gap-2 border border-border/70 px-5 text-sm font-bold transition-colors hover:border-primary hover:text-primary"><FaGithub className="h-4 w-4" />{data.introduction ? (language === "es" ? "Explorar repositorio" : "Explore repository") : copy.code}</a>
               </div>
             </div>
             <ProjectShowcase image={data.image} alt={data.imageAlt[language]} videoSrc={data.demoVideo} viewTransitionName={data.viewTransitionName} caption={language === "es" ? (data.demoVideo ? "Demostración del proyecto" : "Vista del proyecto · Captura de la interfaz") : (data.demoVideo ? "Project demonstration" : "Project preview · Interface screenshot")} />
           </div>
           <nav aria-label={language === "es" ? "Contenido del caso" : "Case contents"} className={styles.contents}>
-            {[["context", copy.problem], ["decisions", copy.decisions], ["architecture", copy.architecture], ["result", copy.result]].map(([id, label]) => <a key={id} href={`#${id}`}>{label}</a>)}
+            {(editorial ? [["context", language === "es" ? "Contexto" : "Context"], ["design", "Home"], ["customer", language === "es" ? "Experiencia de cliente" : "Customer experience"], ["backoffice", "Backoffice"], ["architecture", copy.architecture], ["decisions", copy.decisions], ["result", language === "es" ? "Aprendizajes" : "Learnings"]] : [["context", copy.problem], ["decisions", copy.decisions], ["architecture", copy.architecture], ["result", copy.result]]).map(([id, label]) => <a key={id} href={`#${id}`}>{label}</a>)}
           </nav>
         </div>
       </section>
 
-      <section id="context" className="border-t border-border/55 px-4 py-16 sm:px-6 lg:px-8">
+      {editorial ?? <><section id="context" className="border-t border-border/55 px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[.75fr_1.25fr]">
           <div><h2 className="text-3xl font-black leading-tight sm:text-5xl">{data.problem.title[language]}</h2><p className="section-kicker mt-5">01 / {copy.problem}</p></div>
           <p className="max-w-[65ch] text-base font-medium leading-relaxed text-foreground/68 sm:text-lg">{data.problem.body[language]}</p>
@@ -220,6 +227,7 @@ export function ProjectCaseStudy({
         </div>
       </section>
 
+      </>}
       {previous || next ? (
         <nav aria-label={language === "es" ? "Otros casos de estudio" : "More case studies"} className="border-t border-border/55 px-4 py-10 sm:px-6 lg:px-8">
           <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4">

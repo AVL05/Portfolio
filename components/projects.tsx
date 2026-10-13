@@ -70,8 +70,8 @@ function ProjectScene({ project, index, total, language }: {
           : destination ? <a href={destination} target={destination.startsWith("https://") ? "_blank" : undefined} rel="noopener noreferrer" data-cursor="external"
             aria-label={`${action}: ${project.title}`} className={styles.frame}>{media}</a> : <div className={styles.frame}>{media}</div>}
         <figcaption className={styles.caption}>
-          <span>{preview && previewReady && index === 1 ? (language === "es" ? "Entrega · captura con datos de ejemplo" : "Delivery · screenshot with sample data")
-            : preview && previewReady && index === 2 ? (language === "es" ? "Series · captura del sitio publicado" : "Series · published website screenshot") : project.imageCaption}</span>
+          {project.imageCaption ? <span>{preview && previewReady && index === 1 ? (language === "es" ? "Entrega · captura con datos de ejemplo" : "Delivery · screenshot with sample data")
+            : preview && previewReady && index === 2 ? (language === "es" ? "Series · captura del sitio publicado" : "Series · published website screenshot") : project.imageCaption}</span> : null}
           <span className="inline-flex items-center gap-2">{action}<ArrowUpRight aria-hidden="true" /></span>
         </figcaption>
       </figure>

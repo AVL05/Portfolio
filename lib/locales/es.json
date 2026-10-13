@@ -10,10 +10,7 @@
   "hero": {
     "role": "Desarrollador Full-Stack Junior",
     "location": "Valencia, España",
-    "lines": [
-      "Código.",
-      "Criterio."
-    ],
+    "lines": ["Código.", "Criterio."],
     "intro": "Soy Alex Vicente, desarrollador full-stack. Creo aplicaciones que combinan ingeniería, diseño y experiencias digitales.",
     "work": "Ver proyectos",
     "cv": "Descargar CV",
@@ -34,11 +31,7 @@
         "mountain": "Perspectiva"
       }
     },
-    "artLabels": [
-      "Interfaz",
-      "API",
-      "Datos"
-    ]
+    "artLabels": ["Interfaz", "API", "Datos"]
   },
   "skills": {
     "title": "Tecnologías",
@@ -62,6 +55,10 @@
         ]
       },
       {
+        "area": "Aplicaciones de escritorio",
+        "stack": ["Electron"]
+      },
+      {
         "area": "Backend y datos",
         "stack": [
           "PHP",
@@ -82,23 +79,11 @@
       },
       {
         "area": "Diseño de interfaces",
-        "stack": [
-          "Figma",
-          "Diseño UI",
-          "Prototipado",
-          "Jerarquía visual"
-        ]
+        "stack": ["Figma", "Diseño UI", "Prototipado", "Jerarquía visual"]
       },
       {
         "area": "Desarrollo y workflow",
-        "stack": [
-          "Git",
-          "GitHub",
-          "Testing",
-          "Depuración",
-          "Docker",
-          "CI/CD"
-        ]
+        "stack": ["Git", "GitHub", "Testing", "Depuración", "Docker", "CI/CD"]
       },
       {
         "area": "Despliegue web",
@@ -112,12 +97,7 @@
       },
       {
         "area": "Sistemas y soporte",
-        "stack": [
-          "Windows",
-          "Linux",
-          "Hardware",
-          "Soporte IT"
-        ]
+        "stack": ["Windows", "Linux", "Hardware", "Soporte IT"]
       }
     ]
   },
@@ -134,7 +114,7 @@
       {
         "title": "Distrito Gourmet",
         "description": "Aplicación web Full-Stack para un restaurante con carta digital, reservas, pedidos y paneles operativos.",
-        "image": "/projects/distrito-gourmet-ui.webp",
+        "image": "/projects/distrito_gourmet/distrito-gourmet.png",
         "technologies": [
           "React",
           "Laravel",
@@ -146,18 +126,15 @@
           "JavaScript"
         ],
         "category": "Desarrollo Web",
-        "link": "https://distrito.aleviclop.dev/",
+        "link": "https://distrito-gourmet.aleviclop.dev/",
         "github": "https://github.com/AVL05/distrito-gourmet",
         "caseStudyHref": "/proyectos/distrito-gourmet",
         "type": "Aplicación full-stack",
         "role": "Construí la interfaz React, la conecté con Laravel y trabajé los flujos de administración, reservas y pedidos.",
         "outcome": "Demo completa con operaciones reales de restaurante: menú, carrito, reservas, administración y despliegue público.",
         "summary": "Carta, reservas y pedidos para un restaurante.",
-        "evidence": [
-          "Demo pública",
-          "Reservas y pedidos"
-        ],
-        "imageCaption": "Captura del sitio publicado",
+        "evidence": ["Reservas y pedidos"],
+        "imageCaption": "",
         "imageAlt": "Distrito Gourmet — Captura del sitio publicado"
       },
       {
@@ -179,12 +156,7 @@
         "role": "Diseñé e implementé frontend, API, autenticación, modelo multiusuario, flujos de negocio, IA local y documentación técnica.",
         "outcome": "Release reproducible de portfolio con 56 tests backend y 33 frontend, Docker, CI y una arquitectura documentada.",
         "summary": "Plataforma full-stack para estudios de fotografía.",
-        "evidence": [
-          "56 tests backend",
-          "33 tests frontend",
-          "Docker",
-          "CI"
-        ],
+        "evidence": ["56 tests backend", "33 tests frontend", "Docker", "CI"],
         "imageCaption": "IA local · captura de la interfaz sin modelo instalado",
         "imageAlt": "LumaFlow Studio — IA local · captura de la interfaz sin modelo instalado"
       },
@@ -207,11 +179,7 @@
         "role": "Diseñé e implementé la interfaz, arquitectura, curación, interacción, accesibilidad, SEO localizado y CI/CD.",
         "outcome": "Archivo bilingüe publicado con fichas individuales, series curadas, navegación por teclado, SEO localizado, tests y despliegue estático en Cloudflare Workers.",
         "summary": "Archivo fotográfico editorial bilingüe.",
-        "evidence": [
-          "ES / EN",
-          "Despliegue estático",
-          "CI/CD"
-        ],
+        "evidence": ["ES / EN", "Despliegue estático", "CI/CD"],
         "imageCaption": "Captura del sitio publicado",
         "imageAlt": "raw.vives — Captura del sitio publicado"
       },
@@ -219,12 +187,7 @@
         "title": "El Fogón: Landing gastronómica",
         "description": "Landing para restaurante mediterráneo desarrollada con HTML5 y Tailwind CSS. Trabajé dirección de arte, jerarquía de contenido, responsive y navegación sencilla.",
         "image": "/projects/el-fogon.png",
-        "technologies": [
-          "HTML5",
-          "Tailwind CSS",
-          "JavaScript",
-          "Vite"
-        ],
+        "technologies": ["HTML5", "Tailwind CSS", "JavaScript", "Vite"],
         "category": "Desarrollo Web",
         "type": "Landing page",
         "role": "Definí la jerarquía, estructura responsive, navegación y composición de una landing gastronómica clara.",
@@ -236,11 +199,7 @@
         "title": "Sistema de Gestión Hotelera (API)",
         "description": "API para gestionar reservas y datos de hotel con PHP, MySQL y JavaScript. Trabajé estructura de base de datos, endpoints, validación y flujo principal de gestión.",
         "image": "/projects/api-hotel-cover.png",
-        "technologies": [
-          "PHP",
-          "CSS",
-          "JavaScript"
-        ],
+        "technologies": ["PHP", "CSS", "JavaScript"],
         "category": "Desarrollo Web",
         "link": "/projects/Demo_API_Hotel.mp4",
         "github": "https://github.com/avl05/API_Hotel",
@@ -254,10 +213,7 @@
         "title": "E-commerce navideño",
         "description": "Aplicación de comercio electrónico estacional hecha con Vue y Vite. Incluye navegación por categorías, carrito, gestión de estado y flujo completo de compra.",
         "image": "/projects/aitanamora.png",
-        "technologies": [
-          "Vue",
-          "Vite"
-        ],
+        "technologies": ["Vue", "Vite"],
         "category": "Desarrollo Web",
         "link": "https://aitanamora.vercel.app/",
         "github": "https://github.com/AVL05/Dulces",
@@ -271,21 +227,14 @@
         "title": "Llibret Falla el Molí 24/25",
         "description": "Diseño editorial de una publicación de más de 100 páginas. Definí la dirección de arte y trabajé composición, tipografía y preparación de originales con herramientas Adobe.",
         "image": "/projects/Falla.svg",
-        "technologies": [
-          "InDesign",
-          "Photoshop",
-          "Illustrator"
-        ],
+        "technologies": ["InDesign", "Photoshop", "Illustrator"],
         "category": "Diseño Gráfico",
         "link": "/projects/LLIBRET 24-25.pdf",
         "type": "Diseño editorial",
         "role": "Trabajé dirección de arte, composición editorial, tipografía y preparación de originales.",
         "outcome": "Publicación extensa y coherente que demuestra composición y criterio tipográfico aplicables a interfaces web.",
         "summary": "Dirección de arte y diseño de una publicación fallera.",
-        "evidence": [
-          "Más de 100 páginas",
-          "Arte final"
-        ]
+        "evidence": ["Más de 100 páginas", "Arte final"]
       }
     ]
   },

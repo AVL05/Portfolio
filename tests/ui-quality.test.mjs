@@ -131,14 +131,14 @@ test("featured case studies expose project-specific social images", () => {
 
   assert.match(caseContent, /raw-vives-og\.webp/);
   assert.match(caseContent, /lumaflow-studio-og\.webp/);
-  assert.match(caseContent, /distrito-gourmet-og\.webp/);
+  assert.match(caseContent, /distrito_gourmet\/distrito-gourmet\.png/);
   assert.match(rawVives, /RAW_VIVES_URLS\.image/);
   assert.match(lumaFlow, /lumaflow-studio-og\.webp/);
-  assert.match(distrito, /distrito-gourmet-og\.webp/);
+  assert.match(distrito, /distrito_gourmet\/distrito-gourmet\.png/);
   for (const asset of [
     "public/projects/raw-vives/raw-vives-og.webp",
     "public/projects/lumaflow-studio-og.webp",
-    "public/projects/distrito-gourmet-og.webp",
+    "public/projects/distrito_gourmet/distrito-gourmet.png",
   ]) {
     assert.equal(existsSync(join(root, asset)), true, asset);
   }

@@ -35,6 +35,14 @@ test("Spanish and English locale catalogs have matching structure", () => {
   assertSameShape(es, en);
 });
 
+test("Distrito Gourmet editorial chapters preserve Spanish and English parity", () => {
+  const story = JSON.parse(read("lib/locales/distrito-gourmet.json"));
+  assertSameShape(story.es, story.en, "distrito");
+  assert.equal(story.es.sections.length, 8);
+  assert.deepEqual(story.es.sections.map(section => section.id), story.en.sections.map(section => section.id));
+  assert.equal(story.es.sections.filter(section => section.video).length, 3);
+});
+
 test("known mixed-language surfaces select copy from the active language", () => {
   const hero = read("components/hero.tsx");
   const photography = read("components/photography.tsx");

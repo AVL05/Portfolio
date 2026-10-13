@@ -6,7 +6,7 @@ Portfolio profesional de [Alex Vicente López](https://www.aleviclop.dev), Desar
 
 > **ALEVICLOP 2.1 — publicación autorizada.** La versión se valida antes de desplegar a producción. La incidencia de LCP móvil permanece abierta; las mediciones históricas no se presentan como resultados actuales.
 
-![Interfaz de Distrito Gourmet](public/projects/distrito-gourmet-ui.webp)
+![Interfaz de Distrito Gourmet](public/projects/distrito_gourmet/distrito-gourmet.png)
 
 ## Dirección visual y proyectos
 

@@ -1,0 +1,192 @@
+{
+  "es": {
+    "introTitle": "Una experiencia gastronómica, de principio a fin.",
+    "intro": [
+      "Distrito Gourmet es una aplicación web Full-Stack que conecta la experiencia digital del cliente con la gestión interna de un restaurante.",
+      "Desde explorar la carta y realizar pedidos hasta gestionar reservas, productos y usuarios, el proyecto reúne diferentes procesos en una única plataforma.",
+      "Desarrollado como mi proyecto final del ciclo de Desarrollo de Aplicaciones Web, asumí el diseño de la interfaz, la implementación del frontend y backend, el modelado de datos y la integración del sistema."
+    ],
+    "sections": [
+      {
+        "id": "context", "label": "01 / El contexto", "title": "Mucho más que la web de un restaurante.",
+        "paragraphs": [
+          "Una web gastronómica puede ser el primer contacto entre un cliente y un restaurante, pero detrás de esa experiencia existen diferentes necesidades: gestionar pedidos, organizar reservas, actualizar productos y controlar las operaciones del negocio.",
+          "Distrito Gourmet surgió con la idea de conectar ambos lados de esa experiencia.",
+          "El objetivo no era desarrollar únicamente una página visualmente atractiva, sino construir una aplicación completa en la que clientes y personal interactuasen con el mismo sistema desde interfaces diseñadas para sus respectivas necesidades."
+        ], "items": []
+      },
+      {
+        "id": "approach", "label": "02 / El enfoque", "title": "Una plataforma. Dos formas de utilizarla.",
+        "paragraphs": ["Organicé el proyecto alrededor de dos grandes áreas:"],
+        "items": [
+          {"title": "La experiencia pública", "body": "Centrada en explorar el restaurante, consultar la carta, realizar pedidos y gestionar reservas."},
+          {"title": "La experiencia interna", "body": "Pensada para que el personal y los administradores puedan supervisar las operaciones y mantener actualizada la información del restaurante."}
+        ],
+        "after": ["Ambas comparten una API REST y una base de datos relacional, mientras que las funcionalidades disponibles dependen del perfil del usuario.", "Esta separación permite adaptar cada interfaz a su propósito sin duplicar la lógica principal del sistema."]
+      },
+      {
+        "id": "design", "label": "03 / Diseño", "title": "La primera impresión.",
+        "paragraphs": [
+          "La primera impresión también forma parte de la experiencia. La Home es el punto de entrada a Distrito Gourmet. Su objetivo es presentar la identidad del restaurante y guiar al visitante hacia las funcionalidades principales.",
+          "Trabajé una composición visual centrada en la gastronomía, combinando imágenes, tipografía, jerarquía de contenidos y animaciones para conseguir una navegación atractiva y coherente.",
+          "La experiencia está diseñada para que el usuario pueda descubrir el restaurante sin perder de vista las acciones más importantes: explorar la carta, realizar una reserva o acceder a su cuenta."
+        ], "items": [],
+        "video": {"title": "Vídeo 01 — Home y navegación", "description": "Recorrido por la portada, sus distintas secciones, las transiciones y la experiencia de navegación.", "highlights": "Diseño responsive · Componentes React · Animaciones · Navegación"}
+      },
+      {
+        "id": "customer", "label": "04 / Experiencia de cliente", "title": "Del descubrimiento a la acción.",
+        "paragraphs": [
+          "La experiencia pública va más allá de navegar por una página.",
+          "Diseñé diferentes recorridos para que el cliente pudiera consultar la carta, descubrir los productos disponibles, gestionar un carrito, preparar un pedido para recoger y realizar reservas.",
+          "Cada interacción necesita mantener la información coherente y ofrecer respuestas claras al usuario.",
+          "Para conseguirlo, utilicé React para construir componentes reutilizables, Zustand para gestionar el estado compartido y Laravel para procesar las operaciones y aplicar las validaciones correspondientes.",
+          "El objetivo fue que los procesos resultaran sencillos de utilizar, aunque detrás existieran diferentes estados, formularios y reglas de negocio."
+        ], "items": [],
+        "video": {"title": "Vídeo 02 — Experiencia de cliente", "description": "Demostración de las principales funcionalidades públicas de Distrito Gourmet.", "highlights": "Carta digital · Carrito y pedidos · Reservas · Validaciones · Gestión de estado"}
+      },
+      {
+        "id": "backoffice", "label": "05 / Backoffice", "title": "El sistema detrás de la experiencia.",
+        "paragraphs": [
+          "Lo que ocurre detrás de cada pedido y reserva. Una experiencia de cliente necesita herramientas internas que permitan al restaurante gestionar las operaciones de manera organizada.",
+          "Por eso desarrollé un entorno de administración independiente de la navegación pública, pensado para consultar información y realizar acciones sobre los diferentes módulos del sistema.",
+          "Desde este panel es posible administrar productos, supervisar pedidos y reservas, gestionar usuarios y consultar indicadores operativos, de acuerdo con los permisos disponibles.",
+          "El backend centraliza las reglas de negocio y aplica controles de autorización para diferenciar las acciones de clientes, personal y administradores.",
+          "Esta parte del proyecto fue especialmente importante para trabajar con operaciones CRUD, relaciones entre entidades, autenticación y control de acceso."
+        ],
+        "items": [
+          {"title": "Gestión de pedidos", "body": "Supervisión de los pedidos y sus estados."},
+          {"title": "Reservas y catálogo", "body": "Gestión de reservas y mantenimiento de productos."},
+          {"title": "Usuarios y permisos", "body": "Operaciones disponibles según el perfil del usuario."}
+        ],
+        "video": {"title": "Vídeo 03 — Panel de administración", "description": "Recorrido por el dashboard y los principales módulos de gestión interna.", "highlights": "Dashboard · Gestión de pedidos · Reservas · Catálogo · Roles y permisos"}
+      },
+      {
+        "id": "architecture", "label": "06 / Arquitectura y tecnologías", "title": "Separar responsabilidades para construir un sistema coherente.",
+        "paragraphs": ["Distrito Gourmet se apoya en una arquitectura cliente-servidor donde las interfaces consumen una API REST."],
+        "items": [
+          {"title": "Frontend — React, Vite y Tailwind CSS", "body": "React permite dividir las interfaces en componentes reutilizables. Tailwind CSS facilita la construcción de estilos consistentes y adaptables a distintos tamaños de pantalla."},
+          {"title": "Estado — Zustand", "body": "Gestiona información compartida entre componentes, especialmente en los recorridos que requieren conservar datos durante la navegación."},
+          {"title": "Backend — Laravel", "body": "Proporciona los endpoints de la API, la validación de solicitudes y la lógica de negocio relacionada con los diferentes módulos."},
+          {"title": "Autenticación — Laravel Sanctum", "body": "Permite proteger los recursos y restringir operaciones según los roles definidos."},
+          {"title": "Base de datos — MySQL", "body": "Mantiene la información del sistema mediante entidades relacionadas, como usuarios, productos, pedidos y reservas."},
+          {"title": "Entorno — Docker Compose", "body": "Facilita la ejecución de los servicios y la preparación de un entorno de desarrollo reproducible."}
+        ]
+      },
+      {
+        "id": "decisions", "label": "07 / Decisiones y desafíos", "title": "Construir las pantallas fue solo una parte del trabajo.",
+        "paragraphs": [],
+        "items": [
+          {"title": "01. Mantener el estado entre diferentes vistas", "body": "El carrito y otras interacciones necesitaban conservar información mientras el usuario navegaba. Utilicé Zustand para centralizar el estado compartido y simplificar su comunicación entre componentes."},
+          {"title": "02. Gestionar operaciones con reglas de negocio", "body": "Reservas y pedidos requieren controles que van más allá de los formularios. Concentré las validaciones relevantes en Laravel para evitar depender exclusivamente del frontend."},
+          {"title": "03. Diferenciar los permisos de cada usuario", "body": "No todos los perfiles deben tener acceso a las mismas operaciones. Organicé la autenticación y autorización para separar las funcionalidades públicas de las internas."},
+          {"title": "04. Conectar diferentes partes del sistema", "body": "La comunicación entre React, Laravel y MySQL me permitió trabajar con un flujo completo: interacción del usuario, solicitud HTTP, procesamiento en el backend, persistencia y actualización de la interfaz."}
+        ]
+      },
+      {
+        "id": "result", "label": "08 / Resultado y aprendizajes", "title": "Un proyecto que cambió mi manera de desarrollar.",
+        "paragraphs": [
+          "Distrito Gourmet comenzó como mi proyecto final de Desarrollo de Aplicaciones Web y terminó convirtiéndose en una aplicación que integra experiencias de usuario, operaciones internas y diferentes tecnologías.",
+          "Más allá del resultado visual, me permitió trabajar con problemas propios de una aplicación Full-Stack: arquitectura, permisos, relaciones entre datos, estados compartidos y lógica de negocio.",
+          "Fue el proyecto con el que comprendí que desarrollar una aplicación no consiste solamente en conseguir que cada pantalla funcione, sino en diseñar un sistema en el que todas las piezas tengan sentido juntas."
+        ],
+        "items": [{"title": "Lo que mejoraría en una siguiente iteración", "body": "Ampliar la cobertura de pruebas automatizadas, reforzar las pruebas de extremo a extremo y seguir refinando la accesibilidad y el rendimiento."}]
+      }
+    ],
+    "explore": "Explora el proyecto", "exploreBody": "Conoce cómo funciona Distrito Gourmet o consulta su código y documentación técnica.", "demo": "Ver Distrito Gourmet", "code": "Código fuente en GitHub", "download": "Abrir vídeo", "highlights": "Aspectos destacados"
+  },
+  "en": {
+    "introTitle": "A dining experience, from start to finish.",
+    "intro": [
+      "Distrito Gourmet is a full-stack web application connecting the customer's digital experience with a restaurant's internal management.",
+      "From exploring the menu and placing orders to managing reservations, products, and users, the project brings different processes together in one platform.",
+      "Built as my final project for the Web Application Development vocational programme, I took responsibility for interface design, frontend and backend implementation, data modelling, and system integration."
+    ],
+    "sections": [
+      {
+        "id": "context", "label": "01 / Context", "title": "More than a restaurant website.",
+        "paragraphs": [
+          "A restaurant website may be the first point of contact with a customer, but behind that experience are several needs: managing orders, organising reservations, updating products, and overseeing business operations.",
+          "Distrito Gourmet started with the idea of connecting both sides of that experience.",
+          "The goal was to build more than a visually appealing page: a complete application in which customers and staff interact with the same system through interfaces designed for their respective needs."
+        ], "items": []
+      },
+      {
+        "id": "approach", "label": "02 / Approach", "title": "One platform. Two ways to use it.",
+        "paragraphs": ["I organised the project around two main areas:"],
+        "items": [
+          {"title": "The public experience", "body": "Focused on discovering the restaurant, browsing the menu, placing orders, and managing reservations."},
+          {"title": "The internal experience", "body": "Designed for staff and administrators to oversee operations and keep restaurant information up to date."}
+        ],
+        "after": ["Both share a REST API and a relational database, while available functionality depends on the user's profile.", "This separation adapts each interface to its purpose without duplicating the system's core logic."]
+      },
+      {
+        "id": "design", "label": "03 / Design", "title": "The first impression.",
+        "paragraphs": [
+          "The first impression is part of the experience. The home page is the entry point to Distrito Gourmet, introducing the restaurant's identity and guiding visitors towards its main features.",
+          "I developed a food-focused visual composition, combining images, typography, content hierarchy, and animation to create engaging and consistent navigation.",
+          "Visitors can discover the restaurant while keeping the key actions in sight: exploring the menu, making a reservation, or accessing their account."
+        ], "items": [],
+        "video": {"title": "Video 01 — Home and navigation", "description": "A walkthrough of the landing page, its sections, transitions, and navigation experience.", "highlights": "Responsive design · React components · Animation · Navigation"}
+      },
+      {
+        "id": "customer", "label": "04 / Customer experience", "title": "From discovery to action.",
+        "paragraphs": [
+          "The public experience goes beyond browsing a page.",
+          "I designed journeys for customers to browse the menu, discover available products, manage a cart, prepare a takeaway order, and make reservations.",
+          "Each interaction needs to keep information consistent and give users clear feedback.",
+          "I used React to build reusable components, Zustand to manage shared state, and Laravel to process operations and apply the corresponding validation.",
+          "The goal was to make these processes straightforward to use, even when they involve different states, forms, and business rules."
+        ], "items": [],
+        "video": {"title": "Video 02 — Customer experience", "description": "A demonstration of Distrito Gourmet's main public features.", "highlights": "Digital menu · Cart and orders · Reservations · Validation · State management"}
+      },
+      {
+        "id": "backoffice", "label": "05 / Backoffice", "title": "The system behind the experience.",
+        "paragraphs": [
+          "What happens behind every order and reservation. A customer experience needs internal tools that help the restaurant manage operations in an organised way.",
+          "I built an administration environment separate from public navigation, designed to review information and take actions across the system's modules.",
+          "The panel supports managing products, overseeing orders and reservations, managing users, and viewing operational indicators according to available permissions.",
+          "The backend centralises business rules and applies authorisation controls to distinguish the actions of customers, staff, and administrators.",
+          "This part of the project was particularly valuable for working with CRUD operations, entity relationships, authentication, and access control."
+        ],
+        "items": [
+          {"title": "Order management", "body": "Overseeing orders and their states."},
+          {"title": "Reservations and catalogue", "body": "Managing reservations and maintaining products."},
+          {"title": "Users and permissions", "body": "Operations available according to the user's profile."}
+        ],
+        "video": {"title": "Video 03 — Administration panel", "description": "A walkthrough of the dashboard and the main internal management modules.", "highlights": "Dashboard · Order management · Reservations · Catalogue · Roles and permissions"}
+      },
+      {
+        "id": "architecture", "label": "06 / Architecture and technologies", "title": "Separate responsibilities to build a coherent system.",
+        "paragraphs": ["Distrito Gourmet uses a client-server architecture in which interfaces consume a REST API."],
+        "items": [
+          {"title": "Frontend — React, Vite and Tailwind CSS", "body": "React divides interfaces into reusable components. Tailwind CSS supports consistent styling that adapts to different screen sizes."},
+          {"title": "State — Zustand", "body": "Manages shared information between components, particularly in journeys that need to retain data during navigation."},
+          {"title": "Backend — Laravel", "body": "Provides API endpoints, request validation, and the business logic for the different modules."},
+          {"title": "Authentication — Laravel Sanctum", "body": "Protects resources and restricts operations according to defined roles."},
+          {"title": "Database — MySQL", "body": "Stores system information through related entities such as users, products, orders, and reservations."},
+          {"title": "Environment — Docker Compose", "body": "Supports running services and preparing a reproducible development environment."}
+        ]
+      },
+      {
+        "id": "decisions", "label": "07 / Decisions and challenges", "title": "Building the screens was only part of the work.",
+        "paragraphs": [],
+        "items": [
+          {"title": "01. Preserve state between views", "body": "The cart and other interactions needed to retain information during navigation. I used Zustand to centralise shared state and simplify communication between components."},
+          {"title": "02. Manage operations with business rules", "body": "Reservations and orders need checks beyond forms. I concentrated the relevant validation in Laravel to avoid depending exclusively on the frontend."},
+          {"title": "03. Distinguish each user's permissions", "body": "Not every profile should access the same operations. I organised authentication and authorisation to separate public and internal functionality."},
+          {"title": "04. Connect the parts of the system", "body": "Communication between React, Laravel, and MySQL let me work with a complete flow: user interaction, HTTP request, backend processing, persistence, and interface update."}
+        ]
+      },
+      {
+        "id": "result", "label": "08 / Outcome and learnings", "title": "A project that changed how I develop.",
+        "paragraphs": [
+          "Distrito Gourmet started as my final Web Application Development project and became an application integrating user experiences, internal operations, and different technologies.",
+          "Beyond the visual result, it let me work with full-stack application challenges: architecture, permissions, data relationships, shared state, and business logic.",
+          "This project taught me that developing an application is about more than making each screen work: it is about designing a system in which all the pieces make sense together."
+        ],
+        "items": [{"title": "What I would improve in the next iteration", "body": "Expand automated test coverage, strengthen end-to-end testing, and continue refining accessibility and performance."}]
+      }
+    ],
+    "explore": "Explore the project", "exploreBody": "Discover how Distrito Gourmet works or browse its source code and technical documentation.", "demo": "View Distrito Gourmet", "code": "Source code on GitHub", "download": "Open video", "highlights": "Highlights"
+  }
+}

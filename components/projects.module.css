@@ -51,8 +51,8 @@
 .scene[data-layout="restaurant"] .visual { grid-column: 1 / 8; grid-row: 1 / 3; align-self: center; }
 .scene[data-layout="restaurant"] .heading, .scene[data-layout="restaurant"] .details { grid-column: 9 / 13; }
 .scene[data-layout="restaurant"] .details { grid-row: 2; }
-.scene[data-layout="restaurant"] .frame { aspect-ratio: 4 / 5; }
-.scene[data-layout="restaurant"] .image { object-fit: cover; padding: 0; }
+.scene[data-layout="restaurant"] .frame { aspect-ratio: 16 / 9; }
+.scene[data-layout="restaurant"] .image { object-fit: contain; padding: 0; }
 .scene[data-layout="product"] { --project-surface: #26251F; }
 .scene[data-layout="product"] .heading, .scene[data-layout="product"] .details { grid-column: 1 / 5; }
 .scene[data-layout="product"] .details { grid-row: 2; }

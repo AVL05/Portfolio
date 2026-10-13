@@ -1,5 +1,6 @@
 import type { ProjectCaseStudyData } from "@/components/project-case-study";
 import type { Language } from "@/lib/language-context";
+import distritoContent from "@/lib/locales/distrito-gourmet.json";
 
 export interface CaseMetadataCopy {
   es: { title: string; description: string };
@@ -107,9 +108,9 @@ export const LUMA_DATA: ProjectCaseStudyData = {
 
 export const DISTRITO_URLS = {
   path: "/proyectos/distrito-gourmet",
-  demo: "https://distrito.aleviclop.dev/",
+  demo: "https://distrito-gourmet.aleviclop.dev/",
   github: "https://github.com/AVL05/distrito-gourmet",
-  image: "/projects/distrito-gourmet-og.webp",
+  image: "/projects/distrito_gourmet/distrito-gourmet.png",
 } as const;
 
 export const DISTRITO_METADATA_COPY: CaseMetadataCopy = {
@@ -127,10 +128,15 @@ export const DISTRITO_METADATA_COPY: CaseMetadataCopy = {
 
 export const DISTRITO_DATA: ProjectCaseStudyData = {
   title: "Distrito Gourmet",
-  eyebrow: { es: "Caso de estudio / Producto full-stack", en: "Case study / Full-stack product" },
+  eyebrow: { es: "Proyecto destacado · Full-Stack · 2026", en: "Featured project · Full-Stack · 2026" },
+  introduction: {
+    title: { es: distritoContent.es.introTitle, en: distritoContent.en.introTitle },
+    paragraphs: distritoContent.es.intro.map((es, index) => ({ es, en: distritoContent.en.intro[index] })),
+    type: { es: "Proyecto académico funcional", en: "Functional academic project" },
+  },
   summary: { es: "Aplicación para restaurante que conecta carta, pedidos y reservas con un panel operativo propio.", en: "A restaurant application connecting menu, orders, and reservations with its own operations dashboard." },
-  role: { es: "Diseñé el producto y desarrollé frontend React, API Laravel, modelo MySQL, flujos de cliente y administración, despliegue y documentación.", en: "I designed the product and built the React frontend, Laravel API, MySQL model, customer and admin flows, deployment, and documentation." },
-  image: "/projects/distrito-gourmet-ui.webp",
+  role: { es: "Diseño y desarrollo Full-Stack", en: "Full-stack design and development" },
+  image: "/projects/distrito_gourmet/distrito-gourmet.png",
   imageAlt: { es: "Hero de la web de Distrito Gourmet con acceso a carta y reservas", en: "Distrito Gourmet website hero with menu and reservation actions" },
   viewTransitionName: "project-distrito-gourmet",
   stack: ["React 19", "Vite", "Tailwind CSS", "Laravel 12", "PHP 8.2", "MySQL", "Zustand", "React Router", "GSAP", "Docker"],

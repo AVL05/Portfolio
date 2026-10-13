@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ProjectCaseStudy } from "@/components/project-case-study";
+import { DistritoGourmetStory } from "@/components/distrito-gourmet-story";
 import { DISTRITO_DATA, DISTRITO_METADATA_COPY, DISTRITO_URLS } from "@/lib/case-study-content";
 import {
   absoluteUrl,
@@ -13,7 +14,7 @@ export function generateMetadata(): Metadata {
     locale: "es",
     path: "/proyectos/distrito-gourmet",
     type: "article",
-    image: `${SITE_URL}/projects/distrito-gourmet-og.webp`,
+    image: `${SITE_URL}/projects/distrito_gourmet/distrito-gourmet.png`,
     title: DISTRITO_METADATA_COPY.es.title,
     description: DISTRITO_METADATA_COPY.es.description,
   });
@@ -26,7 +27,7 @@ export default function DistritoGourmetCaseStudyPage() {
     name: "Distrito Gourmet",
     description: DISTRITO_METADATA_COPY.es.description,
     url: DISTRITO_URLS.demo,
-    image: `${SITE_URL}/projects/distrito-gourmet-og.webp`,
+    image: `${SITE_URL}/projects/distrito_gourmet/distrito-gourmet.png`,
     inLanguage: "es",
     applicationCategory: "BusinessApplication",
     operatingSystem: "Web",
@@ -44,6 +45,7 @@ export default function DistritoGourmetCaseStudyPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
       <ProjectCaseStudy
         data={DISTRITO_DATA}
+        editorial={<DistritoGourmetStory key="distrito-editorial" />}
         previous={{ href: "/proyectos/lumaflow-studio", title: "LumaFlow Studio" }}
       />
     </>

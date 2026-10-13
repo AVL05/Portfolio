@@ -81,7 +81,7 @@ export function Hero() {
           <figcaption>LumaFlow / {t.projects.items[1].imageCaption}</figcaption>
         </figure>
         <figure data-art-secondary className={`${styles.artifact} ${styles.restaurant}`}>
-          <Image src="/projects/distrito-gourmet-ui.webp" alt="" loading="eager" width={1600} height={1000} sizes="(max-width: 767px) 42vw, 25vw" />
+          <Image src="/projects/distrito_gourmet/distrito-gourmet.png" alt="" loading="eager" width={1600} height={1000} sizes="(max-width: 767px) 42vw, 25vw" />
           <figcaption>Distrito / {t.projects.items[0].type}</figcaption>
         </figure>
         {copy.artLabels.map((label, index) => <span key={label} className={`${styles.tag} ${styles[`tag${index}`]}`}>0{index + 1} / {label}</span>)}

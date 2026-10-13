@@ -24,9 +24,38 @@
 .gallery figure:first-child { grid-column: 1 / -1; }
 .gallery img { width: 100%; height: auto; }
 .gallery figcaption { margin-top: .75rem; font-size: .8125rem; line-height: 1.65; color: var(--muted-foreground); }
+.heroGrid > div:first-child > .introduction { grid-column: 1 / 8; margin-top: 2rem; }
+.introduction h2 { font-size: clamp(1.75rem, 3vw, 2.75rem); margin-bottom: 1.5rem; }
+.introduction p, .chapterCopy > p:not(:first-child), .chapterItems p, .afterParagraph { max-width: 65ch; font-size: 1rem; line-height: 1.8; color: var(--muted-foreground); }
+.introduction p + p, .chapterCopy > p + p { margin-top: 1rem; }
+.chapter {
+  --chapter-gap: clamp(2rem, 4vw, 3rem);
+  --chapter-title: clamp(2rem, 4vw, 3.75rem);
+  border-top: 1px solid var(--border);
+}
+.chapterCopy h2 { max-width: 23ch; font-size: var(--chapter-title); margin-block: 1rem 2rem; }
+.chapterBody { display: grid; gap: var(--chapter-gap); }
+.splitChapter { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: var(--chapter-gap); align-items: center; }
+.videoFigure { min-width: 0; margin-top: 1rem; }
+.videoFigure video { display: block; background: #0B0D12; }
+.videoFigure video:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
+.videoFigure figcaption { margin-top: 1rem; font-size: .875rem; line-height: 1.7; color: var(--muted-foreground); }
+.videoFigure figcaption > div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; }
+.videoFigure figcaption h3 { color: var(--foreground); font-size: 1rem; }
+.videoFigure figcaption > p { margin-top: .5rem; }
+.videoHighlights { font-family: var(--font-label), monospace; font-size: .75rem; }
+.chapterItems { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--chapter-gap); margin-top: 3rem; }
+.chapterItems article { border-top: 1px solid var(--border); padding-top: 1rem; }
+.chapterItems h3 { font-size: 1.25rem; margin-bottom: .75rem; }
+.afterParagraph { margin-top: 1.5rem; }
+.chapter[data-composition="backoffice"] { background: var(--card); }
+.chapter[data-composition="backoffice"] .chapterCopy h2 { max-width: 21ch; font-size: clamp(2.5rem, 6vw, 5rem); }
+.chapter[data-composition="backoffice"] .chapterItems { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.exploreLinks { display: flex; flex-wrap: wrap; gap: 1rem 2rem; margin-top: 2rem; }
 @media (max-width: 767px) {
   .heroGrid { gap: 2rem; }
   .heroGrid > div:first-child { display: block; }
   .heroGrid > div:first-child > div { margin-top: 1.5rem; }
   .gallery { grid-template-columns: minmax(0, 1fr); }
+  .splitChapter, .chapterItems, .chapter[data-composition="backoffice"] .chapterItems { grid-template-columns: minmax(0, 1fr); }
 }

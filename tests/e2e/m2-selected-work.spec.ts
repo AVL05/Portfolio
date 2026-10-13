@@ -26,8 +26,8 @@ test("case study capture matrix", async ({ browser }, testInfo) => {
         expect(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)).toBe(false);
         await expect(page.locator("h1")).toBeVisible();
         await expect(page.locator("[data-project-showcase] img")).toBeVisible();
-        await expect(page.locator("[data-project-showcase] figcaption")).toContainText(locale === "es" ? "Captura" : "screenshot");
-        await expect(page.locator("[data-project-showcase] video")).toHaveCount(0);
+        await expect(page.locator("[data-project-showcase]").first().locator("figcaption")).toContainText(locale === "es" ? "Captura" : "screenshot");
+        await expect(page.locator("[data-project-showcase]").first().locator("video")).toHaveCount(0);
         await page.screenshot({ path: path.join(caseOutput!, `${device}-${locale}-${slug}-hero.png`) });
         for (const image of await page.locator("main img").all()) {
           expect(await image.evaluate(element => (element as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
@@ -43,6 +43,50 @@ test("case study capture matrix", async ({ browser }, testInfo) => {
 });
 
 for (const locale of ["es", "en"] as const) {
+  test(`Distrito Gourmet editorial videos and navigation: ${locale}`, async ({ page }) => {
+    const errors: string[] = [];
+    page.on("pageerror", error => errors.push(error.message));
+    page.on("console", message => { if (message.type() === "error") errors.push(message.text()); });
+    const mediaRequests: string[] = [];
+    page.on("request", request => {
+      if (request.url().endsWith(".mp4")) mediaRequests.push(request.url());
+    });
+    await page.goto(locale === "es" ? "/proyectos/distrito-gourmet" : "/en/projects/distrito-gourmet");
+    await expect(page.locator("h1")).toHaveText("Distrito Gourmet");
+    await expect(page.locator("main section[id]")).toHaveCount(8);
+    await expect(page.locator("main video")).toHaveCount(3);
+    await expect(page.locator("[data-project-showcase] video")).toHaveCount(3);
+    expect(mediaRequests).toEqual([]);
+    for (const video of await page.locator("main video").all()) {
+      await expect(video).toHaveAttribute("preload", "none");
+      await expect(video).toHaveAttribute("controls", "");
+      expect(await video.getAttribute("autoplay")).toBeNull();
+      const source = await video.getAttribute("src");
+      const response = await page.request.get(source!, { headers: { Range: "bytes=0-1023" } });
+      expect(response.status()).toBe(206);
+      expect(response.headers()["content-type"]).toContain("video/mp4");
+    }
+    const firstVideo = page.locator("main video").first();
+    await firstVideo.scrollIntoViewIfNeeded();
+    await expect.poll(() => firstVideo.evaluate(element => (element as HTMLVideoElement).currentTime)).toBeGreaterThan(0);
+    expect(await firstVideo.evaluate(element => (element as HTMLVideoElement).muted)).toBe(true);
+    await page.locator("h1").scrollIntoViewIfNeeded();
+    await expect.poll(() => firstVideo.evaluate(element => (element as HTMLVideoElement).paused)).toBe(true);
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await firstVideo.scrollIntoViewIfNeeded();
+    await expect.poll(() => firstVideo.evaluate(element => (element as HTMLVideoElement).paused)).toBe(true);
+    await firstVideo.focus();
+    await page.keyboard.press("Space");
+    await expect.poll(() => firstVideo.evaluate(element => (element as HTMLVideoElement).paused)).toBe(false);
+    await page.keyboard.press("Space");
+    expect(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)).toBe(false);
+    expect(errors).toEqual([]);
+    await page.goto(locale === "es" ? "/" : "/en");
+    const distrito = page.locator('.project-scene[data-layout="restaurant"]');
+    await expect(distrito).not.toContainText(locale === "es" ? "Demo pública" : "Public demo");
+    await expect(distrito.locator("figcaption")).not.toContainText(locale === "es" ? "Captura del sitio publicado" : "Published website screenshot");
+  });
+
   test(`selected work preserves destinations, lazy media and reduced motion: ${locale}`, async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto(locale === "es" ? "/" : "/en");
@@ -51,6 +95,7 @@ for (const locale of ["es", "en"] as const) {
     await expect(scenes.locator("h3")).toHaveText(["Distrito Gourmet", "LumaFlow Studio", "raw.vives"]);
     expect(await scenes.evaluateAll(elements => elements.map(element => element.getAttribute("data-layout"))))
       .toEqual(["restaurant", "product", "photography"]);
+    await expect(scenes.first().locator("img")).toHaveCSS("object-fit", "contain");
     for (const scene of await scenes.all()) {
       await scene.scrollIntoViewIfNeeded();
       await expect(scene.locator(".scene-copy")).toHaveCSS("transform", "none");

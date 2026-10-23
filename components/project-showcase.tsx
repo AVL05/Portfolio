@@ -45,7 +45,7 @@ export function ProjectShowcase({ image, alt, caption, viewTransitionName, video
 
   return (
     <figure className={styles.showcase} data-project-showcase>
-      <div className={styles.laptop}>
+      <div className={styles.browser}>
         <div className={styles.screen} style={{ viewTransitionName }}>
           {videoSrc ? (
             <video ref={videoRef} src={videoSrc} poster={image} controls playsInline muted={autoPlayOnView} preload="none" aria-label={alt}>
@@ -56,7 +56,6 @@ export function ProjectShowcase({ image, alt, caption, viewTransitionName, video
           )}
         </div>
       </div>
-      <div className={styles.base} aria-hidden="true" />
       <figcaption>{caption}</figcaption>
     </figure>
   );

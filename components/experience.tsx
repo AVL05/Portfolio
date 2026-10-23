@@ -32,7 +32,7 @@ export function Experience() {
         </div>
         <p className="max-w-[42ch] text-lg leading-relaxed text-muted-foreground lg:justify-self-end">{t.experience.desc}</p>
       </header>
-      <div className="mt-14 grid gap-8 lg:grid-cols-[.35fr_1fr]">
+      <div className="experience-timelines mt-14 grid gap-8 lg:grid-cols-[.35fr_1fr]">
         {/* Experience comes first for recruiter scanning */}
         <h3 className="text-lg font-semibold">{t.experience.job_title}</h3>
         <Timeline items={t.experience.experience_list} />

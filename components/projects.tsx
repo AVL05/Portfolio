@@ -53,7 +53,7 @@ function ProjectScene({ project, index, total, language }: {
     : project.repositoryPrivate ? (language === "es" ? "Consultar proyecto" : "Ask about this project")
     : language === "es" ? "Ver código" : "View code";
 
-  return <article className={`project-scene ${styles.scene}`} data-layout={layouts[index]} aria-labelledby={`project-title-${index}`}>
+  return <article id={`work-${index + 1}`} className={`project-scene ${styles.scene}`} data-layout={layouts[index]} aria-labelledby={`project-title-${index}`}>
     <div className={styles.inner}>
       <header className={`scene-copy ${styles.heading}`}>
         <h3 id={`project-title-${index}`}>{project.title}</h3>
@@ -119,10 +119,12 @@ export function Projects() {
           .from(details, { y: motion.distance.content, duration: motion.duration.enter, ease: motion.ease.out }, .08);
       });
     });
-    media.add("(min-width: 1024px) and (pointer: fine) and (prefers-reduced-motion: no-preference)", () => {
-      gsap.utils.toArray<HTMLElement>(".project-scene", containerRef.current).forEach(scene => {
-        gsap.fromTo(scene.querySelector(".scene-media"), { y: -motion.distance.parallax }, { y: motion.distance.parallax, ease: "none",
-          scrollTrigger: { trigger: scene, start: "top bottom", end: "bottom top", scrub: .5 } });
+    media.add("(min-width: 1024px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)", () => {
+      const scenes = gsap.utils.toArray<HTMLElement>(".project-scene", containerRef.current);
+      scenes.slice(0, -1).forEach((scene, index) => {
+        gsap.to(scene, { scale: .96, ease: "none", scrollTrigger: {
+          trigger: scenes[index + 1], start: "top bottom", end: "top 110px", scrub: .5,
+        } });
       });
     });
     return () => media.revert();
@@ -136,7 +138,15 @@ export function Projects() {
       </div>
       <p>{t.projects.desc}</p>
     </header>
-    {featured.map((project, index) => <ProjectScene key={project.title} project={project} index={index} total={featured.length} language={language} />)}
+    <nav className={styles.index} aria-label={language === "es" ? "Explorar proyectos seleccionados" : "Explore selected work"}>
+      {featured.map((project, index) => <a key={project.title} href={`#work-${index + 1}`}>
+        <span className={styles.indexImage}><Image src={project.image} alt="" fill loading="lazy" sizes="(max-width: 767px) 35vw, 28vw" /></span>
+        <span className={styles.indexLabel}>{project.title}<ArrowUpRight aria-hidden="true" size={18} /></span>
+      </a>)}
+    </nav>
+    <div className={styles.featured} data-project-deck>
+      {featured.map((project, index) => <ProjectScene key={project.title} project={project} index={index} total={featured.length} language={language} />)}
+    </div>
     <div className="mx-auto max-w-[100rem] px-4 pb-16 pt-8 sm:px-6 lg:px-8">
       <div className="flex flex-wrap items-baseline justify-between gap-4 border-t border-border/55 pt-8">
         <h3 className="text-2xl font-semibold tracking-tight">{language === "es" ? "Otros proyectos" : "Other projects"}</h3>

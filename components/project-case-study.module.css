@@ -1,31 +1,31 @@
 .story { font-family: var(--font-body), sans-serif; }
-.story > section:first-child { display: block; min-height: auto; padding-top: 1.5rem; }
+.story > section:first-child { display: block; min-height: auto; padding-top: 2rem; }
 .story > section, .story > nav { padding-inline: var(--page-gutter); padding-block: clamp(3rem, 6vw, 6rem); }
-.story > section > div, .story > nav > div { width: 100%; max-width: 82rem; margin-inline: auto; }
+.story > section > div, .story > nav > div { width: 100%; max-width: 84rem; margin-inline: auto; }
 .story h1, .story h2, .story h3 { font-family: var(--font-display), sans-serif; font-weight: 500; letter-spacing: -.04em; text-wrap: balance; }
-.story h1 { font-size: clamp(3.25rem, 8vw, 7rem); line-height: 1.03; overflow-wrap: normal; }
-.story h2 { line-height: 1.15; }
+.story h1 { font-size: clamp(3rem, 8.5vw, 8rem); line-height: 1.03; overflow-wrap: normal; }
+.story h2 { line-height: 1.1; }
+.story > section { border-color: var(--border); }
+.story > section:not(:first-child) h2 { font-size: clamp(2rem, 4.5vw, 4rem); }
+.story > section > div > div:first-child:has(> h2) { align-self: start; }
 .story :global(.font-mono), .story :global(.section-kicker) { font-family: var(--font-label), monospace; font-weight: 400; }
 .story :global(.rounded-lg), .story :global(.rounded-md) { border-radius: 0; }
-.heroGrid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 3rem; }
-.heroGrid > div:first-child { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 2rem; }
-.heroGrid > div:first-child > h1, .heroGrid > div:first-child > p:first-child { grid-column: 1 / -1; }
-.heroGrid > div:first-child > p:not(:first-child) { grid-column: 1 / 8; }
-.heroGrid > div:first-child > p:global(.section-kicker) { grid-column: 1 / -1; }
-.heroGrid > div:first-child > div { grid-column: 9 / 13; }
-.heroGrid > div:first-child > div:last-child { grid-column: 1 / 8; }
-.heroGrid > figure { grid-column: 1 / -1; }
+.heroGrid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 4rem; align-items: start; }
+.heroGrid > div:first-child { grid-column: 1 / 6; display: flex; flex-direction: column; min-width: 0; }
+.heroGrid > div:first-child > h1 { font-size: clamp(3rem, 5.8vw, 6rem); margin-top: 1rem; line-height: 1; }
+.heroGrid > div:first-child > div { margin-top: 2rem; }
+.heroGrid > figure { grid-column: 6 / 13; grid-row: 1; position: sticky; top: 2rem; margin-top: 1rem; padding-top: 1rem; }
 .heroGrid img { object-fit: contain; }
 .contents { display: flex; flex-wrap: wrap; gap: .5rem 2rem; margin-top: 2rem; padding-block: 1rem; border-top: 1px solid var(--border); }
 .contents a { display: inline-flex; align-items: center; min-height: 2.75rem; font-size: .8125rem; text-decoration: underline; text-underline-offset: .4rem; }
 .story section[id] { scroll-margin-top: 2rem; }
-.story > section:nth-of-type(2) { background: #F5F3EE; --foreground: #0B0D12; --muted-foreground: #4A514C; --primary: #344E43; color: #0B0D12; }
+.story > section:first-child { --background: #e9ece1; --foreground: #151913; --muted-foreground: #4b5344; --primary: #3e5427; --primary-foreground: #e9ece1; --border: #b7bfae; background: var(--background); color: var(--foreground); border-radius: 0 0 2rem 2rem; padding-bottom: 3rem; }
 .gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
 .gallery figure:first-child { grid-column: 1 / -1; }
 .gallery img { width: 100%; height: auto; }
 .gallery figcaption { margin-top: .75rem; font-size: .8125rem; line-height: 1.65; color: var(--muted-foreground); }
-.heroGrid > div:first-child > .introduction { grid-column: 1 / 8; margin-top: 2rem; }
-.introduction h2 { font-size: clamp(1.75rem, 3vw, 2.75rem); margin-bottom: 1.5rem; }
+.heroGrid > div:first-child > .introduction { margin-top: 2rem; }
+.introduction h2 { font-size: clamp(1.5rem, 2.7vw, 2.25rem); margin-bottom: 1.5rem; }
 .introduction p, .chapterCopy > p:not(:first-child), .chapterItems p, .afterParagraph { max-width: 65ch; font-size: 1rem; line-height: 1.8; color: var(--muted-foreground); }
 .introduction p + p, .chapterCopy > p + p { margin-top: 1rem; }
 .chapter {
@@ -54,8 +54,36 @@
 .exploreLinks { display: flex; flex-wrap: wrap; gap: 1rem 2rem; margin-top: 2rem; }
 @media (max-width: 767px) {
   .heroGrid { gap: 2rem; }
-  .heroGrid > div:first-child { display: block; }
+  .heroGrid > div:first-child { display: block; grid-column: 1 / -1; }
+  .heroGrid > figure { grid-column: 1 / -1; grid-row: auto; position: relative; top: auto; }
   .heroGrid > div:first-child > div { margin-top: 1.5rem; }
   .gallery { grid-template-columns: minmax(0, 1fr); }
   .splitChapter, .chapterItems, .chapter[data-composition="backoffice"] .chapterItems { grid-template-columns: minmax(0, 1fr); }
+}
+
+.story > section:first-child > div > nav:first-child { flex-wrap: wrap; gap: 1rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+.story > section:first-child > div > nav:first-child > div { margin-left: auto; }
+.story .contents { gap: .5rem 2rem; }
+.story :global(.rounded-lg.border) { border-radius: 4px; }
+.story > section:last-child > div { border-radius: 4px; }
+.story > section:first-child :global(.section-kicker) { font-size: .625rem; letter-spacing: .08em; }
+@media (min-width: 1024px) {
+  .heroGrid > div:first-child > h1 { margin-top: 2rem; }
+  .heroGrid > figure { margin-top: 1rem; }
+}
+
+.contents { border-block: 1px solid var(--border); padding-block: 1rem; }
+.contents a { text-decoration: none; border-bottom: 1px solid transparent; }
+.contents a:hover { border-color: currentColor; }
+.gallery { gap: 3rem; }
+.story > section:nth-of-type(3n) { background: var(--card); }
+.story > section:last-child { padding-block: 5rem; }
+@media (min-width: 1024px) {
+  .splitChapter { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); align-items: start; }
+  .splitChapter > div:first-child { position: sticky; top: 2rem; }
+}
+@media (max-width: 1023px) and (min-width: 768px) {
+  .heroGrid { gap: 2rem; }
+  .heroGrid > div:first-child { grid-column: 1 / 8; }
+  .heroGrid > figure { grid-column: 8 / 13; }
 }

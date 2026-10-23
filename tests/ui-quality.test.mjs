@@ -155,9 +155,9 @@ test("the portfolio keeps the hero controls aligned and overlap-safe", () => {
   assert.match(hero, /styles\.summary/);
   assert.equal((hero.match(/<h1\b/g) ?? []).length, 1);
   const heroStyles = read("components/hero.module.css");
-  assert.match(heroStyles, /\.hero\s*\{[^}]*overflow:clip/);
+  assert.match(heroStyles, /\.hero\s*\{[^}]*overflow:\s*clip/);
   assert.match(hero, /data-art-stage/);
-  assert.match(heroStyles, /@media\(max-width:767px\)/);
+  assert.match(heroStyles, /@media\s*\(max-width:\s*767px\)/);
   assert.doesNotMatch(hero, /md:bottom-7 md:left-8/);
   assert.match(languageToggle, /absolute left-1 top-1 size-9/);
   assert.match(languageToggle, /translate-x-9/);

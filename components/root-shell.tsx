@@ -26,7 +26,7 @@ export function RootShell({
       <a href="#main-content" className="skip-link">
         {skipLabel}
       </a>
-      <div className="relative min-h-screen overflow-x-clip">
+      <div className="portfolio-shell relative min-h-screen overflow-x-clip">
         {children}
       </div>
       {isVercel ? <Analytics /> : null}

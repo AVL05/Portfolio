@@ -275,7 +275,96 @@ export function Contact() {
         />
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14">
-          <div className="contact-item">
+          <div className="contact-item contact-direct flex flex-col justify-between border-y border-border/60 py-6 sm:py-8">
+            <div className="space-y-10">
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">
+                {t.contact.links_title}
+              </p>
+              <div className="max-w-xl">
+                <p className="mb-3 text-sm font-bold text-primary">
+                  {t.contact.availability_title}
+                </p>
+                <p className="text-base font-medium leading-relaxed text-foreground/72">
+                  {t.contact.availability_desc}
+                </p>
+              </div>
+
+              <a
+                href="mailto:alexviclop@gmail.com"
+                className="group flex min-w-0 items-center gap-4 text-xl font-bold transition-colors hover:text-primary sm:text-2xl"
+              >
+                <span className="shrink-0 rounded-lg border border-border/70 bg-secondary p-3.5 transition-[color,background-color,border-color] duration-[var(--motion-fast)] group-hover:border-primary/40 group-hover:bg-primary group-hover:text-primary-foreground">
+                  <Mail className="h-5 w-5" />
+                </span>
+                <span className="min-w-0 break-all text-foreground transition-colors group-hover:text-primary">
+                  alexviclop@gmail.com
+                </span>
+              </a>
+
+              <div className="flex flex-wrap gap-3">
+                <a
+                  href={CV_HREF}
+                  download
+                  data-track="cv-download"
+                  className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-primary-foreground transition-[color,background-color,border-color] duration-[var(--motion-fast)] hover:bg-primary/90"
+                >
+                  <FileText className="h-4 w-4" />
+                  {t.contact.cv_btn}
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/aleviclop/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-primary/35 bg-background/35 px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-primary transition-[color,background-color,border-color] duration-[var(--motion-fast)] hover:bg-primary hover:text-primary-foreground"
+                >
+                  <FaLinkedin className="h-4 w-4" />
+                  LinkedIn
+                </a>
+              </div>
+            </div>
+
+            <footer className="mt-16 border-t border-border/50 pt-8 text-center sm:text-left">
+              <nav
+                aria-label={
+                  language === "es" ? "Perfiles externos" : "External profiles"
+                }
+                className="mb-6 flex flex-wrap justify-center gap-3 sm:justify-start"
+              >
+                <a
+                  href="https://github.com/AVL05"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-11 items-center gap-2 font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground transition-colors hover:text-primary"
+                >
+                  <FaGithub className="h-3.5 w-3.5" />
+                  GitHub
+                </a>
+                <a
+                  href="https://rawvives.aleviclop.dev/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-11 items-center gap-2 font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground transition-colors hover:text-primary"
+                >
+                  raw.vives
+                  <ArrowUpRight className="h-3.5 w-3.5" />
+                </a>
+              </nav>
+              <p className="mb-1 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground">
+                &copy; 2026 Alex Vicente López
+              </p>
+              <p className="text-muted-foreground text-sm font-medium mb-4">
+                {t.contact.footer_built}
+              </p>
+              <Link
+                href={localizeHref("/legal", language)}
+                className="inline-flex min-h-11 items-center font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground transition-colors hover:text-primary"
+              >
+                {language === "es" ? "Aviso legal y privacidad" : "Legal notice & privacy"}
+              </Link>
+            </footer>
+          </div>
+
+          <div className="contact-item contact-form">
             <Card className="dev-panel overflow-hidden py-0">
               <form
                 ref={formRef}
@@ -468,95 +557,6 @@ export function Contact() {
                 </p>
               </noscript>
             </Card>
-          </div>
-
-          <div className="contact-item flex flex-col justify-between border-y border-border/60 py-6 sm:py-8">
-            <div className="space-y-10">
-              <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">
-                {t.contact.links_title}
-              </p>
-              <div className="max-w-xl">
-                <p className="mb-3 text-sm font-bold text-primary">
-                  {t.contact.availability_title}
-                </p>
-                <p className="text-base font-medium leading-relaxed text-foreground/72">
-                  {t.contact.availability_desc}
-                </p>
-              </div>
-
-              <a
-                href="mailto:alexviclop@gmail.com"
-                className="group flex min-w-0 items-center gap-4 text-xl font-bold transition-colors hover:text-primary sm:text-2xl"
-              >
-                <span className="shrink-0 rounded-lg border border-border/70 bg-secondary p-3.5 transition-[color,background-color,border-color] duration-[var(--motion-fast)] group-hover:border-primary/40 group-hover:bg-primary group-hover:text-primary-foreground">
-                  <Mail className="h-5 w-5" />
-                </span>
-                <span className="min-w-0 break-all text-foreground transition-colors group-hover:text-primary">
-                  alexviclop@gmail.com
-                </span>
-              </a>
-
-              <div className="flex flex-wrap gap-3">
-                <a
-                  href={CV_HREF}
-                  download
-                  data-track="cv-download"
-                  className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-primary-foreground transition-[color,background-color,border-color] duration-[var(--motion-fast)] hover:bg-primary/90"
-                >
-                  <FileText className="h-4 w-4" />
-                  {t.contact.cv_btn}
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/aleviclop/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-primary/35 bg-background/35 px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-primary transition-[color,background-color,border-color] duration-[var(--motion-fast)] hover:bg-primary hover:text-primary-foreground"
-                >
-                  <FaLinkedin className="h-4 w-4" />
-                  LinkedIn
-                </a>
-              </div>
-            </div>
-
-            <footer className="mt-16 border-t border-border/50 pt-8 text-center sm:text-left">
-              <nav
-                aria-label={
-                  language === "es" ? "Perfiles externos" : "External profiles"
-                }
-                className="mb-6 flex flex-wrap justify-center gap-3 sm:justify-start"
-              >
-                <a
-                  href="https://github.com/AVL05"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex min-h-11 items-center gap-2 font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground transition-colors hover:text-primary"
-                >
-                  <FaGithub className="h-3.5 w-3.5" />
-                  GitHub
-                </a>
-                <a
-                  href="https://rawvives.aleviclop.dev/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex min-h-11 items-center gap-2 font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground transition-colors hover:text-primary"
-                >
-                  raw.vives
-                  <ArrowUpRight className="h-3.5 w-3.5" />
-                </a>
-              </nav>
-              <p className="mb-1 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground">
-                &copy; 2026 Alex Vicente López
-              </p>
-              <p className="text-muted-foreground text-sm font-medium mb-4">
-                {t.contact.footer_built}
-              </p>
-              <Link
-                href={localizeHref("/legal", language)}
-                className="inline-flex min-h-11 items-center font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground transition-colors hover:text-primary"
-              >
-                {language === "es" ? "Aviso legal y privacidad" : "Legal notice & privacy"}
-              </Link>
-            </footer>
           </div>
         </div>
       </div>

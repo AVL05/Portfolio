@@ -264,8 +264,7 @@ export function LegalPageContent() {
   const content = copy[language];
 
   return (
-    <main id="main-content" className="relative min-h-screen bg-background px-4 pb-24 pt-28 sm:px-6 lg:px-8">
-      <div className="pointer-events-none absolute inset-0 bg-grid opacity-[0.06]" />
+    <main id="main-content" className="legal-page relative min-h-screen bg-background px-4 pb-24 pt-28 sm:px-6 lg:px-8">
       <div className="relative z-10 mx-auto max-w-3xl">
         <div className="mb-12 flex items-center justify-between gap-4">
           <Link href={localizeHref("/", language)} className="inline-flex min-h-11 items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-primary">

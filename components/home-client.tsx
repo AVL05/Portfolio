@@ -12,7 +12,7 @@ import { Contact } from "@/components/contact";
 
 export function HomeClient({ children }: { children?: ReactNode }) {
   return (
-    <div className="premium-home code-home min-h-screen relative">
+    <div className="premium-home min-h-screen relative">
       <Navigation />
 
       <main id="main-content" className="relative z-10">

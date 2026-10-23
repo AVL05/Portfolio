@@ -25,7 +25,8 @@ export function NotFoundContent() {
       : "es";
 
   return (
-    <main id="main-content" className="grid min-h-screen place-items-center bg-background px-6 text-foreground">
+    <main id="main-content" className="utility-page grid min-h-screen place-items-center bg-background px-6 text-foreground">
+      <span aria-hidden="true" className="utility-code">404</span>
       <div className="max-w-2xl border-l border-primary pl-6 sm:pl-10">
         <p className="font-mono text-xs font-bold uppercase tracking-[.18em] text-primary">
           {language === "es" ? "404 / No encontrada" : "404 / Not found"}

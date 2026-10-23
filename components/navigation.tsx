@@ -94,6 +94,7 @@ export function Navigation() {
             </button>
           </div>
         </nav>
+        <div aria-hidden="true" className={styles.progress} />
       </header>
       <dialog ref={menuRef} id="mobile-navigation" aria-label={language === "es" ? "Menú" : "Menu"} className={styles.menu}
         onClose={() => { setIsMenuOpen(false); triggerRef.current?.focus(); }}>

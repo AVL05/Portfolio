@@ -12,7 +12,8 @@ export default function GlobalError({ retry }: { retry: () => void }) {
     <html lang={language} className="dark">
       <body className="bg-background text-foreground antialiased">
         <title>{isEnglish ? "Unexpected error" : "Error inesperado"}</title>
-        <main className="grid min-h-screen place-items-center px-6">
+        <main className="utility-page grid min-h-screen place-items-center px-6">
+          <span aria-hidden="true" className="utility-code">!</span>
           <div className="max-w-2xl">
             <p className="font-mono text-xs font-bold uppercase tracking-[.18em] text-primary">
               {isEnglish ? "Error / Recovery" : "Error / Recuperación"}

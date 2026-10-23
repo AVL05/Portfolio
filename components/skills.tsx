@@ -42,7 +42,7 @@ export function Skills() {
           <p className="max-w-[38ch] text-lg leading-relaxed text-muted-foreground md:justify-self-end">{t.skills.desc}</p>
         </header>
 
-        <div>
+        <div className="capability-grid">
           {groups.map((group, index) => (
             <article key={group.area} className={`capability-row grid gap-4 border-b border-border/55 py-7 md:grid-cols-[3rem_minmax(0,.8fr)_minmax(0,1.2fr)] sm:items-baseline sm:py-9 ${index === 0 ? "text-primary" : index === groups.length - 1 ? "text-foreground/65" : ""}`}>
               <span className="font-mono text-[11px] text-primary">0{index + 1}</span>

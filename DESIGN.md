@@ -49,6 +49,26 @@ components:
 
 # Design System: Alex Vicente Portfolio
 
+## Portfolio como experiencia - direccion vigente (2026-10-23)
+
+Refinamiento de estudio digital: impacto visual con trabajo real protagonista.
+Se conservan textos, rutas, anclas, CV, backend y metadatos ES/EN.
+
+- Negro #0c0d0c, marfil #f0f1e8 y lima #d4ff67. Perfil y casos sobre
+  papel mineral #e9ece1, con tinta #151913.
+- Portada escultorica con lectura despejada. Titular hasta 9rem en escritorio,
+  tracking -0.04em y una composicion vertical en movil sin texto sobre el cromo.
+- Indice visual de los tres proyectos existentes, con enlaces nativos a cada
+  escena y acciones de caso diferenciadas de los enlaces secundarios.
+- Capturas de producto mas amplias en casos, con menos espacio vacio en el marco.
+- Orden DOM y visual coincidentes en contacto, con enlaces antes del formulario.
+- Navegacion flotante y dialogo nativo. Se conservan teclado, Escape, retorno
+  de foco, alternativas sin JavaScript y movimiento reducido en vivo.
+- Sin dependencias nuevas ni afirmaciones nuevas sobre experiencia o resultados.
+
+Detalles del recurso visual y validaciones: [EXPERIENCE_REDESIGN.md](docs/EXPERIENCE_REDESIGN.md).
+Las notas siguientes documentan direcciones anteriores y su alcance historico.
+
 ## ALEVICLOP 2.1 — Code / Composition (2026-10-11)
 
 El usuario autoriza convertir la exploración aprobada en la home principal local.

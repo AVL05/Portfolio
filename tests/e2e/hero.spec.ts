@@ -163,7 +163,6 @@ test("magnetic content stays bounded and the clickable area stays fixed", async 
   await expect(page.locator("[data-hero-footer]")).toHaveCSS("opacity", "1");
   const before = await button.boundingBox();
   if (!before) throw new Error("Missing primary button");
-  // Test inside the circular hit area, rather than its transparent corners.
   await button.hover({ position: { x: before.width * .75, y: before.height * .25 } });
   await expect.poll(() => button.locator("span").evaluate(element => {
     const matrix = new DOMMatrix(getComputedStyle(element).transform);

@@ -86,14 +86,25 @@ export function validateContactPayload(payload: ContactPayload): {
   return { ok: true, name, email, message };
 }
 
-/** Rate limiter en memoria por IP (suficiente para un formulario de portfolio). */
+// shortcut: límite por instancia; complementarlo con rate limiting en el firewall.
 const rateBuckets = new Map<string, number[]>();
+const MAX_RATE_BUCKETS = 1000;
+let nextCleanupAt = 0;
 
 export function checkContactRateLimit(
   key: string,
   now = Date.now(),
 ): { allowed: boolean; retryAfterMs: number } {
   const windowStart = now - CONTACT_LIMITS.rateLimitWindowMs;
+  if (now >= nextCleanupAt) {
+    for (const [client, timestamps] of rateBuckets) {
+      if (timestamps[timestamps.length - 1] <= windowStart) rateBuckets.delete(client);
+    }
+    nextCleanupAt = now + CONTACT_LIMITS.rateLimitWindowMs;
+  }
+  if (!rateBuckets.has(key) && rateBuckets.size >= MAX_RATE_BUCKETS) {
+    return { allowed: false, retryAfterMs: Math.max(nextCleanupAt - now, 1000) };
+  }
   const hits = (rateBuckets.get(key) ?? []).filter((at) => at > windowStart);
   if (hits.length >= CONTACT_LIMITS.rateLimitMax) {
     const retryAfterMs = hits[0] + CONTACT_LIMITS.rateLimitWindowMs - now;
@@ -107,4 +118,5 @@ export function checkContactRateLimit(
 
 export function clearContactRateLimits(): void {
   rateBuckets.clear();
+  nextCleanupAt = 0;
 }

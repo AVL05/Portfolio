@@ -8,6 +8,7 @@ export const runtime = "nodejs";
 
 const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
 const UPSTREAM_TIMEOUT_MS = 12_000;
+const MAX_BODY_BYTES = 32_768;
 
 function clientKey(request: Request): string {
   const forwarded = request.headers.get("x-forwarded-for");
@@ -58,14 +59,54 @@ async function sendViaWeb3Forms(params: {
 }
 
 export async function POST(request: Request) {
+  const origin = request.headers.get("origin");
+  if (
+    request.headers.get("sec-fetch-site") === "cross-site" ||
+    (origin && origin !== new URL(request.url).origin)
+  ) {
+    return NextResponse.json({ ok: false, code: "bad_request" }, { status: 403 });
+  }
+  if (request.headers.get("content-type")?.split(";")[0].trim().toLowerCase() !== "application/json") {
+    return NextResponse.json({ ok: false, code: "bad_request" }, { status: 415 });
+  }
+
+  const rate = checkContactRateLimit(clientKey(request));
+  if (!rate.allowed) {
+    return NextResponse.json(
+      { ok: false, code: "rate_limited" },
+      { status: 429, headers: { "Retry-After": String(Math.ceil(rate.retryAfterMs / 1000)) } },
+    );
+  }
+  if (Number(request.headers.get("content-length")) > MAX_BODY_BYTES) {
+    return NextResponse.json({ ok: false, code: "bad_request" }, { status: 413 });
+  }
+
   let body: unknown = null;
+  const reader = request.body?.getReader();
   try {
-    body = await request.json();
+    if (!reader) throw new Error("Missing body");
+    const decoder = new TextDecoder("utf-8", { fatal: true });
+    let size = 0;
+    let text = "";
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      size += value.byteLength;
+      if (size > MAX_BODY_BYTES) {
+        await reader.cancel();
+        return NextResponse.json({ ok: false, code: "bad_request" }, { status: 413 });
+      }
+      text += decoder.decode(value, { stream: true });
+    }
+    body = JSON.parse(text + decoder.decode());
+    if (!body || typeof body !== "object" || Array.isArray(body)) throw new Error("Invalid body");
   } catch {
     return NextResponse.json(
       { ok: false, code: "bad_request" },
       { status: 400 },
     );
+  } finally {
+    reader?.releaseLock();
   }
 
   const payload = (body ?? {}) as Record<string, unknown>;
@@ -89,19 +130,6 @@ export async function POST(request: Request) {
     return NextResponse.json(
       { ok: false, code: validation.code, field: validation.field },
       { status },
-    );
-  }
-
-  const rate = checkContactRateLimit(clientKey(request));
-  if (!rate.allowed) {
-    return NextResponse.json(
-      { ok: false, code: "rate_limited" },
-      {
-        status: 429,
-        headers: {
-          "Retry-After": String(Math.ceil(rate.retryAfterMs / 1000)),
-        },
-      },
     );
   }
 

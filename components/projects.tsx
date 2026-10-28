@@ -86,6 +86,8 @@ function ProjectScene({ project, index, total, language }: {
         <div className={styles.actions}>
           {project.caseStudyHref ? <a href={project.caseStudyHref} data-cursor="project">
             {language === "es" ? "Ver caso de estudio" : "View case study"}<ArrowRight aria-hidden="true" /></a> : null}
+          {project.caseStudyHref ? <a href={`${project.caseStudyHref}#decisions`}>
+            {language === "es" ? "Decisiones técnicas" : "Technical decisions"}<ArrowUpRight aria-hidden="true" /></a> : null}
           {project.link ? <a href={project.link} target="_blank" rel="noopener noreferrer">
             {language === "es" ? "Ver sitio" : "Live site"}<ArrowUpRight aria-hidden="true" /></a> : null}
           {project.repositoryPrivate ? <>

@@ -11,13 +11,13 @@ export const SITE_URL =
 
 export const SITE_NAME = "Alex Vicente López";
 export const SITE_TITLE =
-  "Alex Vicente López | Desarrollador Full-Stack";
+  "Alex Vicente López | Desarrollador Full-Stack Junior";
 export const EN_SITE_TITLE =
-  "Alex Vicente López | Full-Stack Developer";
+  "Alex Vicente López | Junior Full-Stack Developer";
 export const SITE_DESCRIPTION =
-  "Portfolio de Alex Vicente López, Desarrollador Full-Stack en Valencia con formación en Desarrollo de Aplicaciones Web y Sistemas Microinformáticos y Redes, experiencia profesional y proyectos propios.";
+  "Portfolio de Alex Vicente López, Desarrollador Full-Stack Junior en Valencia. Proyectos con React, Laravel y MySQL, decisiones técnicas, código y experiencia profesional.";
 export const EN_SITE_DESCRIPTION =
-  "Portfolio of Alex Vicente López, Full-Stack Developer in Valencia with training in Web Application Development and IT Systems and Networks, professional experience and personal projects.";
+  "Portfolio of Alex Vicente López, Junior Full-Stack Developer in Valencia. React, Laravel and MySQL projects, technical decisions, code and professional experience.";
 
 export const SEO_KEYWORDS = [
   "Alex Vicente López",
@@ -163,7 +163,7 @@ export const personJsonLd = {
   alternateName: ["Alex Vicente", "Alex Vicente Lopez", "aleviclop", "AVL05"],
   url: SITE_URL,
   email: "mailto:alexviclop@gmail.com",
-  jobTitle: "Desarrollador Full-Stack",
+  jobTitle: "Desarrollador Full-Stack Junior",
   description:
     "Alex Vicente López es Desarrollador Full-Stack con formación en Desarrollo de Aplicaciones Web y Sistemas Microinformáticos y Redes, experiencia en desarrollo de software y proyectos propios.",
   image: `${SITE_URL}/api/og?lang=es`,

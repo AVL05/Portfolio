@@ -9,8 +9,8 @@ test("critical font preloads stay selective and the hero uses its branded famili
 });
 
 for (const [path, title, role, work, cv] of [
-  ["/", "Código. Criterio.", "Desarrollador Full-Stack", "Ver proyectos", "Descargar CV"],
-  ["/en", "Code. Craft.", "Full-Stack Developer", "View work", "Download CV"],
+  ["/", "Código. Criterio.", "Desarrollador Full-Stack Junior", "Ver proyectos", "Descargar CV"],
+  ["/en", "Code. Craft.", "Junior Full-Stack Developer", "View work", "Download CV"],
 ]) {
   test(`hero preserves professional identity, links and responsive layout: ${path}`, async ({ page }, testInfo) => {
     const errors: string[] = [];

@@ -53,8 +53,8 @@ test("known mixed-language surfaces select copy from the active language", () =>
   const og = read("app/api/og/route.tsx");
 
   assert.match(hero, /copy.role/);
-  assert.equal(es.hero.role, "Desarrollador Full-Stack");
-  assert.equal(en.hero.role, "Full-Stack Developer");
+  assert.equal(es.hero.role, "Desarrollador Full-Stack Junior");
+  assert.equal(en.hero.role, "Junior Full-Stack Developer");
   assert.match(es.hero.description, /principio a fin/);
   assert.match(en.hero.description, /end to end/);
   assert.match(photography, /Otra/);
@@ -70,7 +70,8 @@ test("known mixed-language surfaces select copy from the active language", () =>
   assert.match(legal, /Legal notice/);
   assert.match(og, /Desarrollador Full-Stack/);
   assert.match(og, /Full-Stack Developer/);
-  assert.doesNotMatch(og, /Junior/);
+  assert.match(og, /Desarrollador Full-Stack Junior/);
+  assert.match(og, /Junior Full-Stack Developer/);
 });
 
 test("language switching is a real navigation, never client state", () => {
@@ -95,7 +96,8 @@ test("public positioning presents a full-stack profile without a frontend-only h
 
   assert.match(publicPositioning, /Desarrollador Full-Stack/);
   assert.match(publicPositioning, /Full-Stack Developer/);
-  assert.doesNotMatch(publicPositioning, /Junior/);
+  assert.match(seo, /Desarrollador Full-Stack Junior/);
+  assert.match(seo, /Junior Full-Stack Developer/);
   assert.match(publicPositioning, /React/);
   assert.match(publicPositioning, /Laravel/);
   assert.match(publicPositioning, /freelance/i);

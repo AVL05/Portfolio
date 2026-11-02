@@ -11,6 +11,11 @@ for (const route of routes) {
   test(`frontend layout preserves readable headings and media: ${route}`, async ({ page }, testInfo) => {
     const errors: string[] = [];
     page.on("pageerror", error => errors.push(error.message));
+    page.on("response", response => {
+      if (response.request().resourceType() === "image" && response.status() >= 400) {
+        errors.push(`Image ${response.status()}: ${response.url()}`);
+      }
+    });
     await page.emulateMedia({ reducedMotion: "reduce" });
     expect((await page.goto(route))?.status()).toBe(200);
     await page.evaluate(() => document.fonts.ready);

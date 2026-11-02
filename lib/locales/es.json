@@ -1,10 +1,8 @@
 {
   "nav": {
-    "home": "Inicio",
     "about": "Sobre mí",
     "projects": "Proyectos",
     "skills": "Tecnologías",
-    "experience": "Experiencia",
     "contact": "Contacto"
   },
   "hero": {
@@ -16,29 +14,10 @@
     "cv": "Descargar CV",
     "profile": "Frontend, backend y datos. De principio a fin.",
     "experience": "Experiencia y formación",
-    "status": "Disponible para nuevas oportunidades profesionales y proyectos seleccionados",
-    "description": "Desarrollo aplicaciones web de principio a fin, desde la interfaz hasta la API y los datos, combinando desarrollo, diseño e IA aplicada.",
-    "cta_github": "GitHub",
-    "cta_linkedin": "LinkedIn",
-    "scroll": "Desplazar",
-    "studio": {
-      "navigation": "Recorrido por mi espacio creativo",
-      "continue": "Descubrir los proyectos",
-      "destinations": {
-        "monitor": "Proyectos",
-        "camera": "Fotografía",
-        "pc": "Capacidades",
-        "mountain": "Perspectiva"
-      }
-    },
     "artLabels": ["Interfaz", "API", "Datos"]
   },
   "skills": {
-    "title": "Tecnologías",
-    "subtitle": "Cómo construyo aplicaciones",
     "desc": "Mi especialidad es el desarrollo web de principio a fin. El diseño de interfaces, la IA aplicada y mi base técnica en sistemas complementan mi perfil.",
-    "technologies": "Tecnologías",
-    "tools": "Herramientas",
     "groups": [
       {
         "area": "Desarrollo web",
@@ -102,14 +81,7 @@
     ]
   },
   "projects": {
-    "title": "Proyectos",
-    "subtitle": "Productos completos, de principio a fin.",
     "desc": "Selección de proyectos personales y académicos donde aplico desarrollo web, backend, bases de datos, interfaces e inteligencia artificial.",
-    "concept": "Detalle del proyecto",
-    "view_live": "Ver demo",
-    "view_code": "Ver código",
-    "role_label": "Mi parte",
-    "outcome_label": "Resultado",
     "items": [
       {
         "title": "Distrito Gourmet",
@@ -238,14 +210,6 @@
       }
     ]
   },
-  "photography": {
-    "title": "raw.vives",
-    "subtitle": "Archivo fotográfico editorial",
-    "description": "Archivo fotográfico bilingüe con series curadas, obras individuales, búsqueda y fichas accesibles.",
-    "properties": "Propiedades.RAW",
-    "filters": "Filtros",
-    "view_full": "Abrir raw.vives"
-  },
   "experience": {
     "title": "03 / Experiencia",
     "subtitle": "Trabajo real y base técnica.",
@@ -253,7 +217,6 @@
     "edu_title": "Formación Académica",
     "job_title": "Experiencia Profesional",
     "cv_title": "¿Necesitas más detalle?",
-    "cv_desc": "Descarga mi CV en PDF para revisar formación, experiencia, tecnologías y proyectos con más contexto.",
     "cv_btn": "DESCARGAR CV [PDF]",
     "education_list": [
       {

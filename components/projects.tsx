@@ -61,13 +61,13 @@ function ProjectScene({ project, index, total, language }: {
         <p className={styles.summary}>{project.summary}</p>
       </header>
       <figure className={styles.visual}>
-        {project.caseStudyHref ? <a href={project.caseStudyHref} data-cursor="project"
+        {project.caseStudyHref ? <a href={project.caseStudyHref}
           className={styles.frame} style={{ viewTransitionName: viewTransitionName(project) }}
           aria-label={`${action}: ${project.title}`}
           onPointerEnter={event => { if (event.pointerType === "mouse") showPreview(); }}
           onFocus={showPreview}
           onPointerLeave={() => setPreview(false)} onBlur={() => setPreview(false)}>{media}</a>
-          : destination ? <a href={destination} target={destination.startsWith("https://") ? "_blank" : undefined} rel="noopener noreferrer" data-cursor="external"
+          : destination ? <a href={destination} target={destination.startsWith("https://") ? "_blank" : undefined} rel="noopener noreferrer"
             aria-label={`${action}: ${project.title}`} className={styles.frame}>{media}</a> : <div className={styles.frame}>{media}</div>}
         <figcaption className={styles.caption}>
           {project.imageCaption ? <span>{preview && previewReady && index === 1 ? (language === "es" ? "Entrega · captura con datos de ejemplo" : "Delivery · screenshot with sample data")
@@ -84,7 +84,7 @@ function ProjectScene({ project, index, total, language }: {
           {project.technologies.map(technology => <li key={technology}>{technology}</li>)}
         </ul>
         <div className={styles.actions}>
-          {project.caseStudyHref ? <a href={project.caseStudyHref} data-cursor="project">
+          {project.caseStudyHref ? <a href={project.caseStudyHref}>
             {language === "es" ? "Ver caso de estudio" : "View case study"}<ArrowRight aria-hidden="true" /></a> : null}
           {project.caseStudyHref ? <a href={`${project.caseStudyHref}#decisions`}>
             {language === "es" ? "Decisiones técnicas" : "Technical decisions"}<ArrowUpRight aria-hidden="true" /></a> : null}

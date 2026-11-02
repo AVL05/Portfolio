@@ -1,10 +1,8 @@
 {
   "nav": {
-    "home": "Home",
     "about": "About",
     "projects": "Work",
     "skills": "Stack",
-    "experience": "Experience",
     "contact": "Contact"
   },
   "hero": {
@@ -16,29 +14,10 @@
     "cv": "Download CV",
     "profile": "Frontend, backend and data. End to end.",
     "experience": "Experience & education",
-    "status": "Available for new professional opportunities and selected projects",
-    "description": "I build web applications end to end, from the interface through the API to the data layer, bringing together development, interface design and applied AI.",
-    "cta_github": "GitHub",
-    "cta_linkedin": "LinkedIn",
-    "scroll": "Scroll",
-    "studio": {
-      "navigation": "Explore my creative space",
-      "continue": "Discover the projects",
-      "destinations": {
-        "monitor": "Work",
-        "camera": "Photography",
-        "pc": "Capabilities",
-        "mountain": "Perspective"
-      }
-    },
     "artLabels": ["Interface", "API", "Data"]
   },
   "skills": {
-    "title": "Stack",
-    "subtitle": "How I build applications",
     "desc": "I specialise in building web applications end to end. Interface design, applied AI and my background in IT systems round out my skills.",
-    "technologies": "Technologies",
-    "tools": "Tools",
     "groups": [
       {
         "area": "Web development",
@@ -96,14 +75,7 @@
     ]
   },
   "projects": {
-    "title": "Projects",
-    "subtitle": "Complete products, end to end.",
     "desc": "A selection of personal and academic projects showing my work in web development, backend development, databases, interface design and AI.",
-    "concept": "Project detail",
-    "view_live": "Open demo",
-    "view_code": "View code",
-    "role_label": "My role",
-    "outcome_label": "Outcome",
     "items": [
       {
         "title": "Distrito Gourmet",
@@ -232,14 +204,6 @@
       }
     ]
   },
-  "photography": {
-    "title": "raw.vives",
-    "subtitle": "Editorial photography archive",
-    "description": "A bilingual photography archive with curated series, individual works, search, and accessible detail pages.",
-    "properties": "Properties.RAW",
-    "filters": "Filters",
-    "view_full": "Open raw.vives"
-  },
   "experience": {
     "title": "03 / Experience",
     "subtitle": "Real work and technical foundations.",
@@ -247,7 +211,6 @@
     "edu_title": "Education",
     "job_title": "Professional experience",
     "cv_title": "Need more detail?",
-    "cv_desc": "Download my CV in PDF format to review education, experience, stack, and projects with more context.",
     "cv_btn": "DOWNLOAD CV [PDF]",
     "education_list": [
       {

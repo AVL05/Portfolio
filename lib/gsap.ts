@@ -3,11 +3,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 
 export const motion = {
-  duration: { fast: .14, state: .24, enter: .45, title: .6, mask: .65, hero: .8 },
+  duration: { state: .24, enter: .45, title: .6, mask: .65, hero: .8 },
   ease: { out: 'power3.out', reveal: 'expo.out' },
-  distance: { small: 8, content: 12, title: 18, parallax: 10 },
-  stagger: { content: .04, hero: .08 },
-  opacity: { hidden: 0, visible: 1 },
+  distance: { small: 8, content: 12, title: 18 },
+  stagger: { content: .04 },
   mask: 'inset(12% 0 12% 0)',
 } as const;
 

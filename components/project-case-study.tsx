@@ -21,7 +21,6 @@ export interface ProjectCaseStudyData {
   introduction?: { title: LocalizedText; paragraphs: LocalizedText[]; type: LocalizedText };
   role: LocalizedText;
   image: string;
-  demoVideo?: string;
   imageAlt: LocalizedText;
   gallery?: Array<{ image: string; caption: LocalizedText }>;
   viewTransitionName: string;
@@ -40,7 +39,7 @@ export interface ProjectCaseStudyData {
   learnings: LocalizedText[];
 }
 
-export interface AdjacentProject {
+interface AdjacentProject {
   href: string;
   title: string;
 }
@@ -164,7 +163,7 @@ export function ProjectCaseStudy({
                 <a href={data.github} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center gap-2 border border-border/70 px-5 text-sm font-bold transition-colors hover:border-primary hover:text-primary"><FaGithub className="h-4 w-4" />{data.introduction ? (language === "es" ? "Explorar repositorio" : "Explore repository") : copy.code}</a>
               </div>
             </div>
-            <ProjectShowcase image={data.image} alt={data.imageAlt[language]} videoSrc={data.demoVideo} viewTransitionName={data.viewTransitionName} caption={language === "es" ? (data.demoVideo ? "Demostración del proyecto" : "Vista del proyecto · Captura de la interfaz") : (data.demoVideo ? "Project demonstration" : "Project preview · Interface screenshot")} />
+            <ProjectShowcase image={data.image} alt={data.imageAlt[language]} viewTransitionName={data.viewTransitionName} caption={language === "es" ? "Vista del proyecto · Captura de la interfaz" : "Project preview · Interface screenshot"} />
           </div>
           <nav aria-label={language === "es" ? "Contenido del caso" : "Case contents"} className={styles.contents}>
             {(editorial ? [["context", language === "es" ? "Contexto" : "Context"], ["design", "Home"], ["customer", language === "es" ? "Experiencia de cliente" : "Customer experience"], ["backoffice", "Backoffice"], ["architecture", copy.architecture], ["decisions", copy.decisions], ["result", language === "es" ? "Aprendizajes" : "Learnings"]] : [["context", copy.problem], ["decisions", copy.decisions], ["architecture", copy.architecture], ["result", copy.result]]).map(([id, label]) => <a key={id} href={`#${id}`}>{label}</a>)}

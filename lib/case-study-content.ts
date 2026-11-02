@@ -2,7 +2,7 @@ import type { ProjectCaseStudyData } from "@/components/project-case-study";
 import type { Language } from "@/lib/language-context";
 import distritoContent from "@/lib/locales/distrito-gourmet.json";
 
-export interface CaseMetadataCopy {
+interface CaseMetadataCopy {
   es: { title: string; description: string };
   en: { title: string; description: string };
 }

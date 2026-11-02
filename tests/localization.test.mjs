@@ -55,8 +55,8 @@ test("known mixed-language surfaces select copy from the active language", () =>
   assert.match(hero, /copy.role/);
   assert.equal(es.hero.role, "Desarrollador Full-Stack Junior");
   assert.equal(en.hero.role, "Junior Full-Stack Developer");
-  assert.match(es.hero.description, /principio a fin/);
-  assert.match(en.hero.description, /end to end/);
+  assert.match(es.hero.profile, /principio a fin/);
+  assert.match(en.hero.profile, /end to end/i);
   assert.match(photography, /Otra/);
   assert.match(photography, /See/);
   assert.match(projects, /Proyectos seleccionados/);

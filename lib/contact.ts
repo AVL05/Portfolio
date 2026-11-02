@@ -13,7 +13,7 @@ export const CONTACT_LIMITS = {
 
 export type ContactField = "name" | "email" | "message";
 
-export interface ContactPayload {
+interface ContactPayload {
   name: unknown;
   email: unknown;
   message: unknown;
@@ -21,7 +21,7 @@ export interface ContactPayload {
   startedAt?: unknown;
 }
 
-export type ContactErrorCode =
+type ContactErrorCode =
   | "invalid_name"
   | "invalid_email"
   | "invalid_message"

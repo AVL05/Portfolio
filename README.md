@@ -18,7 +18,7 @@ La dirección **Code / Composition** combina una identidad AV vectorial, interfa
 | LumaFlow Studio | Aplicación de escritorio para fotografía e IA local | [Ver caso](https://www.aleviclop.dev/proyectos/lumaflow-studio) |
 | raw.vives | Experiencia web para presentar fotografía | [Ver caso](https://www.aleviclop.dev/proyectos/raw-vives) |
 
-Los enlaces apuntan a la versión pública; las capturas del repositorio pueden corresponder a una candidata posterior. Los casos incorporan un portátil responsive con la captura real de la interfaz, preparado para mostrar una futura grabación con controles nativos. Actualmente no hay vídeos configurados.
+Los enlaces apuntan a la versión pública; las capturas del repositorio pueden corresponder a una candidata posterior. Los casos incorporan un portátil responsive con la captura real de la interfaz. Distrito Gourmet incorpora además tres vídeos locales con controles nativos.
 
 ## Características
 
@@ -34,10 +34,10 @@ Los enlaces apuntan a la versión pública; las capturas del repositorio pueden 
 
 | Área | Tecnologías |
 | --- | --- |
-| Framework | Next.js 16.3.8, App Router, React 19 |
+| Framework | Next.js 16.4.1, App Router, React 19 |
 | Lenguaje | TypeScript 5.7 |
 | Estilos | Tailwind CSS 4, PostCSS |
-| Movimiento | GSAP, `@gsap/react`, ScrollTrigger, ScrollToPlugin |
+| Movimiento | GSAP, `@gsap/react`, ScrollTrigger |
 | UI | Radix UI, Lucide, React Icons |
 | Tipografía | Space Grotesk, Inter, IBM Plex Mono; Geist en secciones existentes |
 | Calidad | ESLint, TypeScript, Node Test Runner, Playwright |
@@ -158,7 +158,7 @@ El portfolio expone:
 - `robots.txt` abierto a rastreadores y referencia al sitemap;
 - `sitemap.xml` con todas las rutas públicas indexables;
 - favicon público y estable en `/favicon.png`;
-- enlaces internos a las páginas de perfil, proyectos, fotografía y contacto.
+- enlaces internos a las secciones de perfil, proyectos, fotografía y contacto, y a los casos de estudio.
 
 Los motores de búsqueda mantienen índices independientes. La publicación técnica facilita el descubrimiento, pero la incorporación y posición final dependen de cada buscador.
 

@@ -38,9 +38,7 @@ export interface TimelineItem {
 
 interface Translation {
   nav: {
-    home: string;
     skills: string;
-    experience: string;
     projects: string;
     contact: string;
     about: string;
@@ -55,24 +53,10 @@ interface Translation {
     cv: string;
     profile: string;
     experience: string;
-    status: string;
-    description: string;
-    cta_github: string;
-    cta_linkedin: string;
-    scroll: string;
-    studio: {
-      destinations: Record<"monitor" | "camera" | "pc" | "mountain", string>;
-      navigation: string;
-      continue: string;
-    };
   };
   skills: {
     groups: { area: string; stack: string[] }[];
-    title: string;
-    subtitle: string;
     desc: string;
-    technologies: string;
-    tools: string;
   };
   experience: {
     title: string;
@@ -81,7 +65,6 @@ interface Translation {
     edu_title: string;
     job_title: string;
     cv_title: string;
-    cv_desc: string;
     cv_btn: string;
     education_list: TimelineItem[];
     experience_list: TimelineItem[];
@@ -91,23 +74,8 @@ interface Translation {
     items: { label: string; value: string; href: string }[];
   };
   projects: {
-    title: string;
-    subtitle: string;
     desc: string;
-    concept: string;
-    view_live: string;
-    view_code: string;
-    role_label: string;
-    outcome_label: string;
     items: ProjectItem[];
-  };
-  photography: {
-    title: string;
-    subtitle: string;
-    description: string;
-    properties: string;
-    filters: string;
-    view_full: string;
   };
   contact: {
     title: string;

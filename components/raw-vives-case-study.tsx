@@ -116,7 +116,7 @@ export function RawVivesCaseStudy() {
     <main id="main-content" ref={containerRef} className={`premium-home case-study min-h-screen bg-background text-foreground ${styles.story}`}>
       <section className="relative px-4 pb-16 pt-6 sm:px-6 lg:px-8">
         <div className="relative z-10 mx-auto max-w-7xl">
-          <nav aria-label={t.back} className="mb-12 flex items-center justify-between rounded-lg border border-border/65 bg-card/60 px-4 py-3 sm:mb-16">
+          <nav aria-label={t.back} className="mb-12 flex items-center justify-between rounded-lg border border-border/65 bg-background/60 px-4 py-3 sm:mb-16">
             <Link href={localizeHref("/#projects", language)} className="inline-flex min-h-11 items-center gap-2 font-mono text-xs font-black uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:text-primary"><ArrowLeft className="h-4 w-4" />{t.back}</Link>
             <div className="flex items-center gap-3">
               <a href={productionUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-border/70 px-4 py-2 font-mono text-[11px] font-black uppercase tracking-[0.12em] transition-colors hover:border-primary/45 hover:text-primary">raw.vives <ExternalLink className="h-3.5 w-3.5" /></a>

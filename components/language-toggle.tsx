@@ -40,14 +40,14 @@ export function LanguageToggle() {
       />
       <span
         className={`relative z-10 inline-flex size-9 items-center justify-center transition-colors ${
-          language === "es" ? "text-primary" : "text-foreground/55"
+          language === "es" ? "text-primary" : "text-foreground/70"
         }`}
       >
         ES
       </span>
       <span
         className={`relative z-10 inline-flex size-9 items-center justify-center transition-colors ${
-          language === "en" ? "text-primary" : "text-foreground/55"
+          language === "en" ? "text-primary" : "text-foreground/70"
         }`}
       >
         EN

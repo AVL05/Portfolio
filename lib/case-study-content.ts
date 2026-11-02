@@ -18,14 +18,14 @@ export const RAW_VIVES_METADATA_COPY: Record<
   { title: string; description: string }
 > = {
   es: {
-    title: "raw.vives - Caso de estudio",
+    title: "raw.vives: portfolio fotográfico con Next.js",
     description:
-      "Caso de estudio de raw.vives, archivo fotográfico editorial bilingüe con series curadas, obras individuales, interacción accesible y despliegue estático.",
+      "Archivo fotográfico bilingüe de Alex Vicente López con Next.js y TypeScript. Series, fichas de obras, navegación por teclado y SEO localizado.",
   },
   en: {
-    title: "raw.vives - Case study",
+    title: "raw.vives: a Next.js photography portfolio",
     description:
-      "Case study of raw.vives, a bilingual editorial photography archive with curated series, individual works, accessible interaction, and static deployment.",
+      "Alex Vicente López's bilingual photography archive, built with Next.js and TypeScript. Curated series, image pages, keyboard navigation and localized SEO.",
   },
 };
 
@@ -37,14 +37,14 @@ export const LUMA_URLS = {
 
 export const LUMA_METADATA_COPY: CaseMetadataCopy = {
   es: {
-    title: "LumaFlow Studio - Caso de estudio",
+    title: "LumaFlow Studio: React, Laravel e IA local",
     description:
-      "Caso de estudio de una plataforma full-stack para estudios fotográficos creada con React, Laravel, MySQL, PWA e IA local.",
+      "Plataforma para estudios fotográficos con React, Laravel y MySQL. Clientes, sesiones y entregas, IA local bajo demanda y pruebas automatizadas.",
   },
   en: {
-    title: "LumaFlow Studio - Case study",
+    title: "LumaFlow Studio: React, Laravel and local AI",
     description:
-      "Case study of a full-stack photography studio platform built with React, Laravel, MySQL, PWA, and local AI.",
+      "Photography studio platform built with React, Laravel and MySQL. Clients, sessions and deliveries, on-demand local AI and automated tests.",
   },
 };
 
@@ -52,8 +52,8 @@ export const LUMA_DATA: ProjectCaseStudyData = {
   title: "LumaFlow Studio",
   eyebrow: { es: "Caso de estudio / Producto full-stack", en: "Case study / Full-stack product" },
   summary: {
-    es: "Plataforma de flujo de trabajo para fotógrafos que conecta planificación, CRM, finanzas, entregas y asistencia local con IA sin convertir el proyecto en un SaaS ficticio.",
-    en: "A workflow platform for photographers connecting planning, CRM, finance, delivery, and local AI assistance without presenting the project as a fictional SaaS.",
+    es: "Proyecto personal full-stack que conecta clientes, sesiones, presupuestos y entregas de un estudio fotográfico, con React, Laravel e IA local bajo demanda.",
+    en: "A personal full-stack project connecting clients, sessions, quotes and deliveries for photography studios, with React, Laravel and on-demand local AI.",
   },
   role: {
     es: "Diseñé y desarrollé el producto completo: interfaz React, API Laravel, autenticación, modelo de datos multiusuario, módulos de negocio, IA local, pruebas y documentación.",
@@ -98,7 +98,7 @@ export const LUMA_DATA: ProjectCaseStudyData = {
   architecture: { es: "SPA React y API Laravel independientes, conectadas por HTTP y respaldadas por MySQL.", en: "Independent React SPA and Laravel API connected over HTTP and backed by MySQL." },
   challenge: { es: "Mantener coherencia entre muchos módulos sin convertir controladores, estado o navegación en puntos de acoplamiento difíciles de probar.", en: "Keeping many modules coherent without turning controllers, state, or navigation into tightly coupled, hard-to-test bottlenecks." },
   solution: { es: "Organicé el código por dominio, separé estado remoto y local, encapsulé reglas en servicios y documenté contratos, instalación y límites del producto.", en: "I organized code by domain, separated remote and local state, encapsulated rules in services, and documented contracts, setup, and product limits." },
-  result: { es: "Release pública de código con 56 tests backend y 33 frontend.", en: "Public code release with 56 backend tests and 33 frontend tests." },
+  result: { es: "Código público con 56 tests backend y 33 frontend en la release documentada, entorno Docker e instrucciones para reproducir y revisar la aplicación.", en: "Public code with 56 backend tests and 33 frontend tests in the documented release, a Docker environment and instructions to run and review the application." },
   learnings: [
     { es: "Un producto de portfolio gana credibilidad cuando documenta también lo que no implementa.", en: "A portfolio product gains credibility when it documents what it does not implement." },
     { es: "La privacidad y la propiedad de datos deben formar parte del modelo, no añadirse al final.", en: "Privacy and data ownership must be part of the model rather than added at the end." },
@@ -115,14 +115,14 @@ export const DISTRITO_URLS = {
 
 export const DISTRITO_METADATA_COPY: CaseMetadataCopy = {
   es: {
-    title: "Distrito Gourmet - Caso de estudio",
+    title: "Distrito Gourmet: aplicación React y Laravel",
     description:
-      "Caso de estudio de Distrito Gourmet, aplicación full-stack para restaurante con carta, pedidos y reservas, creada con React, Laravel y MySQL.",
+      "Aplicación de restaurante con React, Laravel y MySQL: carta, carrito, reservas y panel de gestión. Proyecto final DAW de Alex Vicente López.",
   },
   en: {
-    title: "Distrito Gourmet - Case study",
+    title: "Distrito Gourmet: a React and Laravel app",
     description:
-      "Case study of Distrito Gourmet, a full-stack restaurant application with menu, orders, and reservations, built with React, Laravel, and MySQL.",
+      "Restaurant app built with React, Laravel and MySQL: menu, cart, reservations and admin tools. Alex Vicente López's final web development project.",
   },
 };
 

@@ -9,7 +9,7 @@
     "role": "Desarrollador Full-Stack Junior",
     "location": "Valencia, España",
     "lines": ["Código.", "Criterio."],
-    "intro": "Soy Alex Vicente, desarrollador full-stack junior en Valencia. Construyo aplicaciones con React, Laravel y MySQL. Explora mis proyectos, el código y las decisiones que hay detrás.",
+    "intro": "Soy Alex Vicente, desarrollador full-stack junior en Valencia, con foco en frontend. Construyo interfaces con React y Next.js y las conecto con APIs Laravel y bases de datos MySQL.",
     "work": "Ver proyectos",
     "cv": "Descargar CV",
     "profile": "Frontend, backend y datos. De principio a fin.",
@@ -81,7 +81,7 @@
     ]
   },
   "projects": {
-    "desc": "Selección de proyectos personales y académicos donde aplico desarrollo web, backend, bases de datos, interfaces e inteligencia artificial.",
+    "desc": "Aplicaciones con React y Laravel, una PWA con IA local y un archivo fotográfico con Next.js. Cada caso explica qué construí, cómo lo resolví y qué se puede revisar.",
     "items": [
       {
         "title": "Distrito Gourmet",
@@ -103,11 +103,11 @@
         "caseStudyHref": "/proyectos/distrito-gourmet",
         "type": "Aplicación full-stack",
         "role": "Construí la interfaz React y la conecté con la API Laravel por HTTP, con flujos de administración, reservas y pedidos.",
-        "outcome": "Demo completa con operaciones reales de restaurante: menú, carrito, reservas, administración y despliegue público.",
+        "outcome": "Demo pública del proyecto académico: carta, carrito, reservas, panel de gestión y despliegue.",
         "summary": "Carta, reservas y pedidos para un restaurante.",
-        "evidence": ["Reservas y pedidos"],
+        "evidence": ["Reservas y pedidos", "API REST", "Demo académica"],
         "imageCaption": "",
-        "imageAlt": "Distrito Gourmet — Captura del sitio publicado"
+        "imageAlt": "Distrito Gourmet: portada con acceso a carta y reservas"
       },
       {
         "title": "LumaFlow Studio",
@@ -153,7 +153,7 @@
         "summary": "Archivo fotográfico editorial bilingüe.",
         "evidence": ["ES / EN", "Despliegue estático", "CI/CD"],
         "imageCaption": "Captura del sitio publicado",
-        "imageAlt": "raw.vives — Captura del sitio publicado"
+        "imageAlt": "raw.vives: portada del archivo fotográfico"
       },
       {
         "title": "El Fogón: Landing gastronómica",
@@ -213,7 +213,7 @@
   "experience": {
     "title": "03 / Experiencia",
     "subtitle": "Trabajo real y base técnica.",
-    "desc": "Desarrollo en empresa, soporte técnico y formación en aplicaciones web y sistemas.",
+    "desc": "Realicé prácticas de desarrollo web en Burguet Sistemas y de soporte informático en el Ajuntament de Carlet. Mi formación reúne aplicaciones web y sistemas.",
     "edu_title": "Formación Académica",
     "job_title": "Experiencia Profesional",
     "cv_title": "¿Necesitas más detalle?",

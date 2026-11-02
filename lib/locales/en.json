@@ -9,7 +9,7 @@
     "role": "Junior Full-Stack Developer",
     "location": "Valencia, Spain",
     "lines": ["Code.", "Craft."],
-    "intro": "I'm Alex Vicente, a junior full-stack developer in Valencia. I build applications with React, Laravel and MySQL. Explore my projects, the code and the decisions behind them.",
+    "intro": "I'm Alex Vicente, a junior full-stack developer in Valencia with a frontend focus. I build React and Next.js interfaces connected to Laravel APIs and MySQL databases.",
     "work": "View work",
     "cv": "Download CV",
     "profile": "Frontend, backend and data. End to end.",
@@ -75,7 +75,7 @@
     ]
   },
   "projects": {
-    "desc": "A selection of personal and academic projects showing my work in web development, backend development, databases, interface design and AI.",
+    "desc": "React and Laravel applications, a PWA with local AI and a Next.js photography archive. Each case explains what I built, the decisions behind it and what you can review.",
     "items": [
       {
         "title": "Distrito Gourmet",
@@ -97,11 +97,11 @@
         "caseStudyHref": "/en/projects/distrito-gourmet",
         "type": "Full-stack application",
         "role": "I built the React interface and connected it to the Laravel API over HTTP, with administration, reservation, and order flows.",
-        "outcome": "Complete public demo with real restaurant operations: menu, cart, reservations, admin flows, and deployment.",
+        "outcome": "Public demo of the academic project: menu, cart, reservations, admin tools and deployment.",
         "summary": "Menus, reservations and orders for a restaurant.",
-        "evidence": ["Bookings and orders"],
+        "evidence": ["Bookings and orders", "REST API", "Academic demo"],
         "imageCaption": "",
-        "imageAlt": "Distrito Gourmet — Published website screenshot"
+        "imageAlt": "Distrito Gourmet homepage with menu and reservation links"
       },
       {
         "title": "LumaFlow Studio",
@@ -147,7 +147,7 @@
         "summary": "A bilingual editorial photography archive.",
         "evidence": ["ES / EN", "Static deployment", "CI/CD"],
         "imageCaption": "Published website screenshot",
-        "imageAlt": "raw.vives — Published website screenshot"
+        "imageAlt": "raw.vives photography archive homepage"
       },
       {
         "title": "El Fogón: Restaurant landing page",
@@ -207,7 +207,7 @@
   "experience": {
     "title": "03 / Experience",
     "subtitle": "Real work and technical foundations.",
-    "desc": "Professional development, technical support and education in web applications and systems.",
+    "desc": "Web development internship at Burguet Sistemas and IT support internship at Ajuntament de Carlet, backed by training in web applications and IT systems.",
     "edu_title": "Education",
     "job_title": "Professional experience",
     "cv_title": "Need more detail?",

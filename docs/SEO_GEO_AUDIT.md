@@ -165,3 +165,46 @@ el lockfile.
 - [Google: canonicalización](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls).
 - [Google: ProfilePage](https://developers.google.com/search/docs/appearance/structured-data/profile-page).
 - [Google: funciones de IA y sitios web](https://developers.google.com/search/docs/appearance/ai-features).
+
+## Refinamiento de contenido ES/EN sobre fc5a316
+
+La segunda revisión conserva los contratos técnicos anteriores y centra el cambio
+en la relevancia profesional y el contenido de las ocho páginas:
+
+- Títulos y descripciones de la home con identidad junior, Valencia y foco
+  frontend/full-stack; las tecnologías se apoyan en los proyectos existentes.
+- Introducción visible que explica el trabajo de interfaz, API y datos. El resumen
+  de experiencia distingue las prácticas en Burguet Sistemas y Ajuntament de Carlet.
+- Títulos de casos descriptivos: React/Laravel para Distrito Gourmet y LumaFlow,
+  Next.js para raw.vives. Los textos explican entregables revisables, no impacto
+  comercial supuesto. Los recuentos históricos de tests se identifican como tales.
+- Distrito Gourmet se presenta como proyecto académico con demo, código y vídeos.
+  LumaFlow como proyecto personal full-stack; raw.vives como archivo publicado con
+  código, navegación accesible y despliegue estático.
+- `Person`, su ocupación y `ProfilePage` mantienen el rol junior y las mismas
+  descripciones localizadas que el contenido profesional. Se conserva la jerarquía
+  H1-H3 y el titular visual, sin texto SEO oculto ni nuevas secciones artificiales.
+- Se concretan los alt de las imágenes de Distrito Gourmet y raw.vives. Las
+  imágenes decorativas siguen con alt vacío. No cambian rutas, CSS ni animaciones.
+- Los tests amplían la comprobación de contenido, coherencia del JSON-LD y enlaces
+  internos, descargas y fragmentos de las ocho páginas, sin consultas externas en CI.
+
+La comprobación externa de destinos enlazados en el HTML público devuelve nueve
+respuestas finales 200. LinkedIn rechaza HEAD con 405 y GET con 999: queda pendiente
+de revisión manual, sin clasificarlo como enlace roto. Evidencia local ignorada:
+`artifacts/seo-outbound-links-2026-11-02.json`. No se han modificado destinos externos.
+
+Esta revisión no mide una mejora de CTR, posicionamiento o inclusión en respuestas
+de IA. Esos resultados solo podrán evaluarse después de una publicación autorizada
+y nuevos rastreos. No modifica las solicitudes de indexación existentes.
+
+Validación de esta revisión con Node 22.22.2: lint, typecheck, 61 tests unitarios
+y build PASS. Suite E2E completa: 144 pasados, 18 omitidos por condiciones de
+auditoría opcional, cero fallos. Tras el último ajuste editorial se reconstruyó
+la candidata y se repitieron SEO y responsive: 58 pasados en escritorio y móvil.
+
+Archivos de contenido: `lib/seo.ts`, `lib/case-study-content.ts`,
+`lib/locales/{es,en,distrito-gourmet}.json`, `components/raw-vives-case-study.tsx`,
+`app/(en)/layout.tsx` y `app/(en)/en/page.tsx`. Regresiones cubiertas en
+`tests/seo-i18n.test.mjs` y `tests/e2e/seo.spec.ts`. El resto del cambio es este
+informe. No se ha hecho commit, push ni deploy.

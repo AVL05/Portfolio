@@ -14,13 +14,13 @@ export const SITE_URL = new URL(
 
 export const SITE_NAME = "Alex Vicente López";
 export const SITE_TITLE =
-  "Alex Vicente López | Desarrollador Full-Stack Junior";
+  "Alex Vicente López | Desarrollador Full-Stack Junior en Valencia";
 export const EN_SITE_TITLE =
-  "Alex Vicente López | Junior Full-Stack Developer";
+  "Alex Vicente López | Junior Full-Stack Developer in Valencia";
 export const SITE_DESCRIPTION =
-  "Portfolio de Alex Vicente López, Desarrollador Full-Stack Junior en Valencia. Proyectos con React, Laravel y MySQL, decisiones técnicas, código y experiencia profesional.";
+  "Alex Vicente López, desarrollador frontend y full-stack junior en Valencia. Proyectos con React, Next.js, Laravel y MySQL, experiencia en prácticas y código.";
 export const EN_SITE_DESCRIPTION =
-  "Portfolio of Alex Vicente López, Junior Full-Stack Developer in Valencia. React, Laravel and MySQL projects, technical decisions, code and professional experience.";
+  "Alex Vicente López, junior frontend and full-stack developer in Valencia, Spain. React, Next.js, Laravel and MySQL projects, internship experience and code.";
 
 export const SEO_KEYWORDS = [
   "Alex Vicente López",
@@ -167,8 +167,7 @@ export const personJsonLd = {
   url: SITE_URL,
   email: "mailto:alexviclop@gmail.com",
   jobTitle: "Desarrollador Full-Stack Junior",
-  description:
-    "Alex Vicente López es Desarrollador Full-Stack con formación en Desarrollo de Aplicaciones Web y Sistemas Microinformáticos y Redes, experiencia en desarrollo de software y proyectos propios.",
+  description: SITE_DESCRIPTION,
   sameAs: SAME_AS,
   knowsAbout: [
     "Desarrollo web",
@@ -193,7 +192,7 @@ export const personJsonLd = {
   ],
   hasOccupation: {
     "@type": "Occupation",
-    name: "Desarrollador Full-Stack",
+    name: "Desarrollador Full-Stack Junior",
     skills:
       "React, Next.js, JavaScript, Tailwind CSS, Laravel, PHP, MySQL, APIs REST, Git, Docker, accesibilidad, IA aplicada",
   },

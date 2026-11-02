@@ -85,7 +85,7 @@
       {
         "id": "result", "label": "08 / Resultado y aprendizajes", "title": "Un proyecto que cambió mi manera de desarrollar.",
         "paragraphs": [
-          "Distrito Gourmet comenzó como mi proyecto final de Desarrollo de Aplicaciones Web y terminó convirtiéndose en una aplicación que integra experiencias de usuario, operaciones internas y diferentes tecnologías.",
+          "El resultado es una demo pública con carta, carrito, pedidos, reservas y panel de administración. El código y tres recorridos en vídeo permiten revisar tanto la experiencia del cliente como la gestión interna del proyecto final de DAW.",
           "Más allá del resultado visual, me permitió trabajar con problemas propios de una aplicación Full-Stack: arquitectura, permisos, relaciones entre datos, estados compartidos y lógica de negocio.",
           "Fue el proyecto con el que comprendí que desarrollar una aplicación no consiste solamente en conseguir que cada pantalla funcione, sino en diseñar un sistema en el que todas las piezas tengan sentido juntas."
         ],
@@ -180,7 +180,7 @@
       {
         "id": "result", "label": "08 / Outcome and learnings", "title": "A project that changed how I develop.",
         "paragraphs": [
-          "Distrito Gourmet started as my final Web Application Development project and became an application integrating user experiences, internal operations, and different technologies.",
+          "The result is a public demo with a menu, cart, orders, reservations and administration dashboard. The code and three video walkthroughs show both the customer journey and internal management in my final Web Application Development project.",
           "Beyond the visual result, it let me work with full-stack application challenges: architecture, permissions, data relationships, shared state, and business logic.",
           "This project taught me that developing an application is about more than making each screen work: it is about designing a system in which all the pieces make sense together."
         ],

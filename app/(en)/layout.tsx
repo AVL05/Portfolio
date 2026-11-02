@@ -65,8 +65,8 @@ const enJsonLd = [
   {
     ...personJsonLd,
     jobTitle: "Junior Full-Stack Developer",
-    description:
-      "Alex Vicente López is a Full-Stack Developer with training in Web Application Development and IT Systems and Networks, software development experience and personal projects.",
+    description: EN_SITE_DESCRIPTION,
+    hasOccupation: { ...personJsonLd.hasOccupation, name: "Junior Full-Stack Developer" },
   },
   {
     ...websiteJsonLd,

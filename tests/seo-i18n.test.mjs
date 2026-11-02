@@ -32,6 +32,36 @@ function loadLib(relativePath, extraModules = {}, env = process.env) {
 const i18n = loadLib("lib/i18n-paths.ts");
 const seo = loadLib("lib/seo.ts", { "@/lib/i18n-paths": i18n });
 
+test("professional metadata and visible introductions explain location, focus and real experience", () => {
+  for (const locale of ["es", "en"]) {
+    const copy = JSON.parse(read(`lib/locales/${locale}.json`));
+    const title = locale === "es" ? seo.SITE_TITLE : seo.EN_SITE_TITLE;
+    const description = locale === "es" ? seo.SITE_DESCRIPTION : seo.EN_SITE_DESCRIPTION;
+    assert.match(title, /Valencia/);
+    assert.match(description, /frontend/i);
+    assert.match(description, /junior/i);
+    assert.match(copy.hero.intro, /frontend/i);
+    assert.match(copy.hero.intro, /Valencia/);
+    assert.match(copy.experience.desc, /Burguet Sistemas/);
+    assert.match(copy.experience.desc, /prácticas|internship/i);
+    assert.match(copy.experience.desc, /Carlet/);
+  }
+});
+
+test("case metadata distinguishes the work by product and verified technologies", () => {
+  const cases = loadLib("lib/case-study-content.ts", {
+    "@/lib/locales/distrito-gourmet.json": { default: JSON.parse(read("lib/locales/distrito-gourmet.json")) },
+  });
+  for (const [key, technology] of [["LUMA_METADATA_COPY", /React.*Laravel/], ["DISTRITO_METADATA_COPY", /React.*Laravel/], ["RAW_VIVES_METADATA_COPY", /Next\.js/]]) {
+    for (const locale of ["es", "en"]) {
+      assert.match(cases[key][locale].title, technology);
+      assert.match(cases[key][locale].description, /React|Next\.js/);
+      assert.ok(cases[key][locale].description.length <= 175);
+    }
+  }
+  assert.doesNotMatch(cases.LUMA_DATA.summary.es + cases.LUMA_DATA.summary.en, /fictici|fictional/i);
+});
+
 test("Vercel production always uses the public canonical origin", () => {
   for (const origin of [undefined, "https://aleviclop.dev", "https://example.vercel.app", "http://localhost:3100"]) {
     const production = loadLib("lib/seo.ts", { "@/lib/i18n-paths": i18n }, {

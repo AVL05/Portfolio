@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { HomeClient } from "@/components/home-client";
-import { buildPageMetadata, profilePageJsonLd, SITE_URL, EN_SITE_DESCRIPTION } from "@/lib/seo";
+import { buildPageMetadata, profilePageJsonLd, SITE_URL, EN_SITE_DESCRIPTION, EN_SITE_TITLE } from "@/lib/seo";
 
 export function generateMetadata(): Metadata {
   return buildPageMetadata({
@@ -13,11 +13,10 @@ export function generateMetadata(): Metadata {
 export default function EnglishHome() {
   const profile = {
     ...profilePageJsonLd,
-    "@id": `${SITE_URL}/en/#profile-page`,
-    name: "Alex Vicente López - Full-Stack Developer profile",
+    "@id": `${SITE_URL}/en#profile-page`,
+    name: EN_SITE_TITLE,
     url: `${SITE_URL}/en`,
-    description:
-      "Professional Full-Stack Developer profile of Alex Vicente López, with training in web applications and IT systems plus professional experience.",
+    description: EN_SITE_DESCRIPTION,
     inLanguage: "en",
   };
   return <>

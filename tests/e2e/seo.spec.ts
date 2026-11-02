@@ -70,6 +70,8 @@ for (const pair of ROUTE_PAIRS) {
       const person = entities.find(entity => entity["@type"] === "Person");
       expect(person.name).toBe("Alex Vicente López");
       expect(person["@id"]).toBe(`${origin}/#alex-vicente-lopez`);
+      expect(person.description).toMatch(/frontend/i);
+      expect(person.hasOccupation.name).toBe(person.jobTitle);
       expect(entities.filter(entity => entity["@type"] === "WebSite")).toHaveLength(1);
       const profiles = entities.filter(entity => entity["@type"] === "ProfilePage");
       expect(profiles).toHaveLength(pair.es === "/" ? 1 : 0);
@@ -77,10 +79,13 @@ for (const pair of ROUTE_PAIRS) {
         expect(profiles[0].url).toBe(absolute(path));
         expect(profiles[0].inLanguage).toBe(locale);
         expect(profiles[0].mainEntity["@id"]).toBe(person["@id"]);
+        expect(profiles[0].name).toBe(await page.title());
+        expect(profiles[0].description).toBe(await page.locator('meta[name="description"]').getAttribute("content"));
       } else {
         const project = entities.find(entity => ["CreativeWork", "WebApplication"].includes(entity["@type"]));
         expect(project.inLanguage).toBe(locale);
         expect(project.author["@id"]).toBe(person["@id"]);
+        expect(project.description).toBe(await page.locator('meta[name="description"]').getAttribute("content"));
         const breadcrumb = entities.find(entity => entity["@type"] === "BreadcrumbList");
         expect(breadcrumb.itemListElement.map((item: { position: number }) => item.position)).toEqual([1, 2]);
         expect(breadcrumb.itemListElement[0].item).toBe(absolute(locale === "es" ? "/" : "/en"));
@@ -89,6 +94,30 @@ for (const pair of ROUTE_PAIRS) {
     });
   }
 }
+
+test("internal links, downloads and fragment targets resolve without redirects", async ({ page, request }) => {
+  const targets = new Map<string, Set<string>>();
+  const documentIds = new Map<string, Set<string>>();
+  for (const path of ROUTE_PAIRS.flatMap(pair => [pair.es, pair.en])) {
+    await page.goto(path);
+    documentIds.set(path, new Set(await page.locator("[id]").evaluateAll(elements => elements.map(element => element.id))));
+    for (const href of await page.locator("a[href]").evaluateAll(elements => elements.map(element => element.getAttribute("href")!))) {
+      const url = new URL(href, page.url());
+      if (![new URL(page.url()).origin, origin].includes(url.origin)) continue;
+      const key = `${url.pathname}${url.search}`;
+      const fragments = targets.get(key) ?? new Set<string>();
+      if (url.hash) fragments.add(decodeURIComponent(url.hash.slice(1)));
+      targets.set(key, fragments);
+    }
+  }
+  for (const [target, fragments] of targets) {
+    const response = await request.head(target, { maxRedirects: 0 });
+    expect(response.status(), target).toBe(200);
+    for (const fragment of fragments) {
+      expect(documentIds.get(new URL(target, origin).pathname)?.has(fragment), `${target}#${fragment}`).toBe(true);
+    }
+  }
+});
 
 test("robots and sitemap expose exactly the eight canonical documents", async ({ request, page }) => {
   const robots = await request.get("/robots.txt", { maxRedirects: 0 });

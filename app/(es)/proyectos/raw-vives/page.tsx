@@ -32,7 +32,7 @@ export default function RawVivesCaseStudyPage() {
     url: RAW_VIVES_URLS.production,
     image,
     inLanguage: "es",
-    author: { "@type": "Person", name: "Alex Vicente", url: absoluteUrl("/") },
+    author: { "@id": absoluteUrl("/#alex-vicente-lopez"), "@type": "Person", name: "Alex Vicente", url: absoluteUrl("/") },
     sameAs: RAW_VIVES_URLS.repository,
   };
   const breadcrumbs = breadcrumbJsonLd([

@@ -6,8 +6,11 @@ import {
   type Locale,
 } from "@/lib/i18n-paths";
 
-export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://www.aleviclop.dev";
+export const SITE_URL = new URL(
+  process.env.VERCEL_ENV === "production"
+    ? "https://www.aleviclop.dev"
+    : process.env.NEXT_PUBLIC_SITE_URL || "https://www.aleviclop.dev",
+).origin;
 
 export const SITE_NAME = "Alex Vicente López";
 export const SITE_TITLE =
@@ -128,7 +131,7 @@ export function buildPageMetadata({
     `${SITE_URL}/api/og?lang=${locale}&title=${encodeURIComponent(title ?? SITE_NAME)}`;
   // Pages without an explicit title (home) inherit the layout default for
   // <title> but still need an explicit Open Graph / Twitter title.
-  const socialTitle = title ?? SITE_TITLE;
+  const socialTitle = title ?? (locale === "en" ? EN_SITE_TITLE : SITE_TITLE);
 
   return {
     ...(title ? { title } : {}),
@@ -166,7 +169,6 @@ export const personJsonLd = {
   jobTitle: "Desarrollador Full-Stack Junior",
   description:
     "Alex Vicente López es Desarrollador Full-Stack con formación en Desarrollo de Aplicaciones Web y Sistemas Microinformáticos y Redes, experiencia en desarrollo de software y proyectos propios.",
-  image: `${SITE_URL}/api/og?lang=es`,
   sameAs: SAME_AS,
   knowsAbout: [
     "Desarrollo web",

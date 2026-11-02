@@ -33,7 +33,7 @@ export default function EnglishDistritoGourmetCaseStudyPage() {
     inLanguage: "en",
     applicationCategory: "BusinessApplication",
     operatingSystem: "Web",
-    author: { "@type": "Person", name: "Alex Vicente López", url: absoluteUrl("/en") },
+    author: { "@id": absoluteUrl("/#alex-vicente-lopez"), "@type": "Person", name: "Alex Vicente López", url: absoluteUrl("/en") },
   };
   const breadcrumbs = breadcrumbJsonLd([
     { name: "Home", path: "/en" },

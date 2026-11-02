@@ -175,8 +175,8 @@ test("selected work remains usable without JavaScript", async ({ browser }) => {
   await context.close();
 });
 
-test("removed public indexes stay gone and never leak into the sitemap", async ({ page }) => {
-  for (const route of ["/proyectos", "/en/projects", "/sobre-mi", "/fotografia", "/contacto", "/en/about", "/en/photography", "/en/contact"]) {
+test("unknown public routes keep real 404 responses", async ({ page }) => {
+  for (const route of ["/proyectos/inexistente", "/en/projects/missing", "/ruta-inexistente", "/en/missing", "/es/projects"]) {
     expect((await page.goto(route))?.status()).toBe(404);
   }
 });

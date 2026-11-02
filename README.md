@@ -116,6 +116,8 @@ pnpm test:e2e
 
 Para servir una compilación de producción usa `pnpm start`. Para diagnosticar diferencias con el bundler de desarrollo, `pnpm dev:webpack`.
 
+`pnpm test:seo` ejecuta los contratos HTTP, metadata, multidioma y JSON-LD de forma aislada. También forman parte de `pnpm test:e2e` y de CI. La auditoría y el checklist de publicación están en [docs/SEO_GEO_AUDIT.md](docs/SEO_GEO_AUDIT.md).
+
 </details>
 
 <details>

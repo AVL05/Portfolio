@@ -30,7 +30,7 @@ export default function LumaFlowStudioCaseStudyPage() {
     inLanguage: "es",
     applicationCategory: "BusinessApplication",
     operatingSystem: "Web",
-    author: { "@type": "Person", name: "Alex Vicente López", url: absoluteUrl("/") },
+    author: { "@id": absoluteUrl("/#alex-vicente-lopez"), "@type": "Person", name: "Alex Vicente López", url: absoluteUrl("/") },
   };
   const breadcrumbs = breadcrumbJsonLd([
     { name: "Inicio", path: "/" },

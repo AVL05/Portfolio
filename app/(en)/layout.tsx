@@ -7,7 +7,6 @@ import {
   EN_SITE_DESCRIPTION,
   EN_SITE_TITLE,
   personJsonLd,
-  profilePageJsonLd,
   SAME_AS,
   SEO_KEYWORDS,
   SITE_NAME,
@@ -65,20 +64,12 @@ export const metadata: Metadata = {
 const enJsonLd = [
   {
     ...personJsonLd,
+    jobTitle: "Junior Full-Stack Developer",
     description:
       "Alex Vicente López is a Full-Stack Developer with training in Web Application Development and IT Systems and Networks, software development experience and personal projects.",
   },
   {
     ...websiteJsonLd,
-    inLanguage: "en",
-  },
-  {
-    ...profilePageJsonLd,
-    "@id": `${SITE_URL}/en/#profile-page`,
-    name: "Alex Vicente López - Full-Stack Developer profile",
-    url: `${SITE_URL}/en`,
-    description:
-      "Professional Full-Stack Developer profile of Alex Vicente López, with training in web applications and IT systems plus professional experience.",
     inLanguage: "en",
   },
 ];

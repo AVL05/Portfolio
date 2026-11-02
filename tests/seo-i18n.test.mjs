@@ -7,13 +7,13 @@ import { ModuleKind, transpileModule } from "typescript";
 const root = new URL("../", import.meta.url);
 const read = (path) => readFileSync(new URL(path, root), "utf8");
 
-function loadLib(relativePath, extraModules = {}) {
+function loadLib(relativePath, extraModules = {}, env = process.env) {
   const module = { exports: {} };
   const sandbox = {
     module,
     exports: module.exports,
     URL,
-    process,
+    process: { env },
     require: (id) => {
       if (id in extraModules) return extraModules[id];
       if (id === "next") return {};
@@ -31,6 +31,65 @@ function loadLib(relativePath, extraModules = {}) {
 
 const i18n = loadLib("lib/i18n-paths.ts");
 const seo = loadLib("lib/seo.ts", { "@/lib/i18n-paths": i18n });
+
+test("Vercel production always uses the public canonical origin", () => {
+  for (const origin of [undefined, "https://aleviclop.dev", "https://example.vercel.app", "http://localhost:3100"]) {
+    const production = loadLib("lib/seo.ts", { "@/lib/i18n-paths": i18n }, {
+      VERCEL_ENV: "production", NEXT_PUBLIC_SITE_URL: origin,
+    });
+    assert.equal(production.SITE_URL, "https://www.aleviclop.dev");
+    assert.equal(production.absoluteUrl("/en"), "https://www.aleviclop.dev/en");
+  }
+  const preview = loadLib("lib/seo.ts", { "@/lib/i18n-paths": i18n }, {
+    VERCEL_ENV: "preview", NEXT_PUBLIC_SITE_URL: "https://example.vercel.app/",
+  });
+  assert.equal(preview.SITE_URL, "https://example.vercel.app");
+  const development = loadLib("lib/seo.ts", { "@/lib/i18n-paths": i18n }, {
+    NEXT_PUBLIC_SITE_URL: "http://localhost:3100/",
+  });
+  assert.equal(development.SITE_URL, "http://localhost:3100");
+});
+
+test("home social titles follow the serving language", () => {
+  for (const locale of ["es", "en"]) {
+    const metadata = seo.buildPageMetadata({ locale, path: locale === "es" ? "/" : "/en", description: "Profile" });
+    const title = locale === "es" ? seo.SITE_TITLE : seo.EN_SITE_TITLE;
+    assert.equal(metadata.openGraph.title, title);
+    assert.equal(metadata.twitter.title, title);
+  }
+});
+
+test("ProfilePage belongs to the two home pages, never a shared layout", () => {
+  for (const layout of ["app/(es)/layout.tsx", "app/(en)/layout.tsx"]) {
+    assert.doesNotMatch(read(layout), /profilePageJsonLd|ProfilePage/);
+  }
+  for (const home of ["app/(es)/page.tsx", "app/(en)/en/page.tsx"]) {
+    assert.match(read(home), /profilePageJsonLd/);
+  }
+});
+
+test("retired sections redirect to real replacements without catching unknown routes", async () => {
+  const { default: config } = await import("../next.config.mjs");
+  const redirects = await config.redirects();
+  for (const [source, destination] of [
+    ["/contacto", "/#contact"], ["/en/contact", "/en#contact"],
+    ["/proyectos", "/#projects"], ["/en/projects", "/en#projects"],
+    ["/sobre-mi", "/#experience"], ["/en/about", "/en#experience"],
+    ["/fotografia", "/#photography"], ["/en/photography", "/en#photography"],
+  ]) {
+    const redirect = redirects.find(rule => rule.source === source && !rule.has);
+    assert.ok(redirect, source);
+    assert.equal(redirect.destination, destination);
+    assert.equal(redirect.permanent, true);
+    const hostRedirect = redirects.find(rule => rule.source === source && rule.has);
+    assert.equal(hostRedirect?.destination, `https://www.aleviclop.dev${destination}`);
+  }
+  const alias = redirects.find(rule => rule.source === "/:path*");
+  assert.deepEqual(alias?.has, [{ type: "host", value: "aleviclop.vercel.app" }]);
+  assert.equal(alias?.destination, "https://www.aleviclop.dev/:path*");
+  assert.equal(alias?.permanent, true);
+  assert.ok(!redirects.some(rule => rule.source === "/:path*" && !rule.has));
+});
 
 test("legal navigation preserves locale without adding indexable URLs", () => {
   assert.equal(i18n.localizeHref("/legal", "en"), "/en/legal");

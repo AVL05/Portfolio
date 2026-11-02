@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { HomeClient } from "@/components/home-client";
-import { buildPageMetadata, SITE_DESCRIPTION } from "@/lib/seo";
+import { buildPageMetadata, profilePageJsonLd, SITE_DESCRIPTION } from "@/lib/seo";
 
 export function generateMetadata(): Metadata {
   return buildPageMetadata({
@@ -11,5 +11,12 @@ export function generateMetadata(): Metadata {
 }
 
 export default function Home() {
-  return <HomeClient />;
+  const profile = {
+    ...profilePageJsonLd,
+    inLanguage: "es",
+  };
+  return <>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(profile) }} />
+    <HomeClient />
+  </>;
 }

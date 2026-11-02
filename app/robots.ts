@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
         // Technical / non-indexable routes. /legal stays crawlable so its
         // page-level noindex is honoured instead of being masked by robots.
-        disallow: ["/api/", "/avatar-preview/"],
+        disallow: ["/api/contact"],
       },
     ],
     sitemap: `${SITE_URL}/sitemap.xml`,

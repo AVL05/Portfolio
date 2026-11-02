@@ -5,7 +5,6 @@ import { BodyFont, DisplayFont, LabelFont, GeistMono, GeistSans } from "@/lib/fo
 import { RootShell } from "@/components/root-shell";
 import {
   personJsonLd,
-  profilePageJsonLd,
   SAME_AS,
   SEO_KEYWORDS,
   SITE_DESCRIPTION,
@@ -66,10 +65,6 @@ const esJsonLd = [
   personJsonLd,
   {
     ...websiteJsonLd,
-    inLanguage: "es",
-  },
-  {
-    ...profilePageJsonLd,
     inLanguage: "es",
   },
 ];

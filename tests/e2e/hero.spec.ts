@@ -4,13 +4,13 @@ test("critical font preloads stay selective and the hero uses its branded famili
   await page.goto("/");
   await page.evaluate(() => document.fonts.ready);
   await expect(page.locator('link[rel="preload"][as="font"]')).toHaveCount(3);
-  await expect(page.locator("[data-hero-title]")).toHaveCSS("font-family", /Space Grotesk/);
-  await expect(page.locator("p[data-hero-copy]")).toHaveCSS("font-family", /Inter/);
+  await expect(page.locator("[data-hero-title]")).toHaveCSS("font-family", /Geist/);
+  await expect(page.locator("p[data-hero-copy]")).toHaveCSS("font-family", /Geist/);
 });
 
 for (const [path, title, role, work, cv] of [
-  ["/", "Código. Criterio.", "Desarrollador Full-Stack Junior", "Ver proyectos", "Descargar CV"],
-  ["/en", "Code. Craft.", "Junior Full-Stack Developer", "View work", "Download CV"],
+  ["/", "Alex Vicente López, Desarrollador Full-Stack Junior", "Desarrollador Full-Stack Junior", "Ver proyectos", "Descargar CV"],
+  ["/en", "Alex Vicente López, Junior Full-Stack Developer", "Junior Full-Stack Developer", "View work", "Download CV"],
 ]) {
   test(`hero preserves professional identity, links and responsive layout: ${path}`, async ({ page }, testInfo) => {
     const errors: string[] = [];
@@ -23,7 +23,8 @@ for (const [path, title, role, work, cv] of [
     await expect(page.locator("h1")).toHaveCount(1);
     await expect(page.locator("h1")).toHaveText(title);
     await expect(hero.getByText(role, { exact: true })).toBeVisible();
-    await expect(hero.getByText("Alex Vicente López", { exact: true })).toBeVisible();
+    await expect(hero.locator("h1")).toContainText("Alex Vicente López");
+    await expect(hero.getByRole("navigation", { name: /Proyectos seleccionados|Selected work/ }).getByRole("link")).toHaveCount(3);
     await expect(hero.getByRole("link", { name: work, exact: true })).toHaveAttribute("href", "#projects");
     await expect(hero.getByRole("link", { name: cv, exact: true })).toHaveAttribute("download", "");
     expect((await page.request.get("/cv/CV_Alex_Vicente_Lopez.pdf")).ok()).toBe(true);
@@ -35,7 +36,7 @@ for (const [path, title, role, work, cv] of [
     }));
     expect(layout.overflow).toBe(false);
     expect(layout.clippedLines).toBe(false);
-    expect(layout.titleFont).toContain("Space Grotesk");
+    expect(layout.titleFont).toContain("Geist");
     const contrast = await hero.evaluate(element => {
       const luminance = (color: string) => {
         const rgb = color.match(/[\d.]+/g)!.slice(0, 3).map(value => {
@@ -53,7 +54,7 @@ for (const [path, title, role, work, cv] of [
       });
       const formRatios = ["name", "email", "message"].map(id => {
         const label = document.querySelector(`#contact label[for="${id}"]`)!;
-        const card = label.closest('[data-slot="card"]')!;
+        const card = label.closest("#contact")!;
         const values = [luminance(getComputedStyle(label).color), luminance(getComputedStyle(card).backgroundColor)].sort((a, b) => a - b);
         return (values[1] + .05) / (values[0] + .05);
       });

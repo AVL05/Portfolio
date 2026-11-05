@@ -1,0 +1,48 @@
+/* Paper chapter shared by capabilities and experience: reads like a CV spread. */
+.chapter { padding-block: clamp(4.5rem, 9vw, 8rem); }
+.capabilities { padding-bottom: clamp(3rem, 6vw, 5rem); }
+.experience { padding-top: 0; }
+.frame { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(1rem, 2vw, 2rem); max-width: var(--page-width); margin-inline: auto; padding-inline: var(--page-gutter); }
+.experience .frame::before { content: ""; grid-column: 1 / -1; margin-bottom: clamp(3rem, 6vw, 5rem); border-top: 1px solid var(--border); }
+
+.aside { grid-column: 1 / 6; align-self: start; display: grid; gap: 1.25rem; padding-right: 2rem; }
+.aside h2 { font-size: clamp(2.75rem, 5.4vw, 5.25rem); line-height: .98; letter-spacing: -.04em; text-wrap: balance; }
+.aside h2 :global(.accent-serif) { color: var(--primary); }
+.aside > p:not(:global(.section-kicker)) { max-width: 40ch; color: var(--muted-foreground); font-size: 1rem; line-height: 1.7; }
+.cv { justify-self: start; margin-top: .5rem; }
+
+/* Capabilities ledger */
+.capabilityList { grid-column: 6 / 13; border-top: 1px solid var(--foreground); }
+.capabilityRow { display: grid; grid-template-columns: 2.5rem minmax(0, .85fr) minmax(0, 1.15fr); gap: 1rem; align-items: baseline; padding-block: 1.15rem; border-bottom: 1px solid var(--border); }
+.capabilityRow > span { color: var(--primary); font: 400 var(--type-label)/1 var(--font-label), monospace; }
+.capabilityRow h3 { font-size: clamp(1.15rem, 1.6vw, 1.5rem); line-height: 1.2; letter-spacing: -.025em; }
+.capabilityRow p { color: var(--muted-foreground); font-size: .875rem; line-height: 1.6; }
+.capabilityRow[data-primary] h3 { font-size: clamp(1.5rem, 2.2vw, 2rem); }
+.capabilityRow[data-primary] p { color: var(--foreground); }
+
+/* Timelines */
+.timelines { grid-column: 6 / 13; display: grid; gap: 0; }
+.timelines > h3 { padding-block: 0 .9rem; font: 400 var(--type-label)/1.6 var(--font-label), monospace; text-transform: uppercase; letter-spacing: .08em; color: var(--primary); border-bottom: 1px solid var(--foreground); }
+.timelines > h3:not(:first-child) { margin-top: 3rem; }
+.timeline > li { display: grid; grid-template-columns: 9rem minmax(0, 1fr); gap: 1.5rem; padding-block: 1.75rem; border-bottom: 1px solid var(--border); }
+.period { color: var(--muted-foreground); font: 400 .75rem/1.7 var(--font-label), monospace; font-variant-numeric: tabular-nums; }
+.org { font-size: .875rem; font-weight: 500; color: var(--primary); }
+.timeline h4 { margin-top: .35rem; font-size: clamp(1.25rem, 2vw, 1.75rem); line-height: 1.2; letter-spacing: -.03em; }
+.place { margin-top: .35rem; color: var(--muted-foreground); font-size: .8125rem; }
+.body { max-width: 62ch; margin-top: 1rem; font-size: .9375rem; line-height: 1.7; color: var(--foreground-soft); }
+.highlights { display: grid; gap: .4rem; max-width: 62ch; margin-top: 1rem; font-size: .875rem; line-height: 1.6; color: var(--muted-foreground); }
+.highlights li { display: flex; gap: .75rem; }
+.highlights li::before { content: "—"; color: var(--primary); }
+
+@media (min-width: 1024px) {
+  .aside { position: sticky; top: calc(var(--header-height) + 2rem); }
+}
+@media (max-width: 1023px) {
+  .aside, .capabilityList, .timelines { grid-column: 1 / -1; }
+  .aside { padding-right: 0; margin-bottom: 2.5rem; }
+}
+@media (max-width: 639px) {
+  .capabilityRow { grid-template-columns: 2rem minmax(0, 1fr); row-gap: .35rem; }
+  .capabilityRow p { grid-column: 2; }
+  .timeline > li { grid-template-columns: minmax(0, 1fr); gap: .5rem; }
+}

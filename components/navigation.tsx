@@ -85,12 +85,13 @@ export function Navigation() {
             {navItems.map((item) => (
               <a key={item.href} href={item.href} aria-current={activeSection === item.href.slice(1) ? "location" : undefined}>{item.name}</a>
             ))}
+            <a href="/cv/CV_Alex_Vicente_Lopez.pdf?v=2026-09" download data-track="cv-download" className={styles.cvLink}>CV</a>
           </div>
           <div className={styles.controls}>
             <LanguageToggle />
             <button data-menu-trigger ref={triggerRef} type="button" aria-expanded={isMenuOpen} aria-controls="mobile-navigation" aria-haspopup="dialog" aria-label={language === "es" ? "Abrir menú" : "Open menu"}
               onClick={() => { menuRef.current?.showModal(); setIsMenuOpen(true); }} className={styles.menuButton}>
-              <Menu aria-hidden="true" size={20} />
+              <span className="label-mono" aria-hidden="true">{language === "es" ? "Menú" : "Menu"}</span><Menu aria-hidden="true" size={18} />
             </button>
           </div>
         </nav>

@@ -1,20 +1,20 @@
 "use client";
 
 import { useLanguage, type TimelineItem } from "@/lib/language-context";
-import { FileText } from "lucide-react";
+import { Download } from "lucide-react";
+import styles from "./profile.module.css";
 
-function Timeline({ items }: { items: TimelineItem[] }) {
-  return <ol className="mt-6">
-    {items.map((item) => <li key={`${item.title}-${item.period}`} className="grid gap-4 border-t border-border/50 py-8 sm:grid-cols-[10rem_minmax(0,1fr)] lg:grid-cols-[14rem_minmax(0,1fr)]">
-      <p className="font-mono text-xs leading-relaxed text-primary tabular-nums">{item.period}</p>
-      <article className="relative border-l border-border/60 pl-6">
-        <span aria-hidden="true" className="absolute -left-[3px] top-2 size-[5px] rounded-full bg-primary" />
-        <p className="text-sm font-medium text-muted-foreground">{item.company ?? item.institution}</p>
-        <h4 className="mt-2 text-xl font-semibold tracking-tight sm:text-2xl">{item.title}</h4>
-        <p className="mt-2 text-xs text-muted-foreground">{[item.contract, item.location].filter(Boolean).join(" · ")}</p>
-        <p className="mt-4 max-w-[65ch] text-sm leading-relaxed text-muted-foreground">{item.description}</p>
-        {item.highlights?.length ? <ul className="mt-4 max-w-[65ch] space-y-2">
-          {item.highlights.map(highlight => <li key={highlight} className="flex gap-3 text-sm leading-relaxed text-foreground/80"><span aria-hidden="true" className="text-primary">—</span>{highlight}</li>)}
+function Timeline({ items, labelledBy }: { items: TimelineItem[]; labelledBy: string }) {
+  return <ol className={styles.timeline} aria-labelledby={labelledBy}>
+    {items.map((item) => <li key={`${item.title}-${item.period}`}>
+      <p className={styles.period}>{item.period}</p>
+      <article>
+        <p className={styles.org}>{item.company ?? item.institution}</p>
+        <h4>{item.title}</h4>
+        <p className={styles.place}>{[item.contract, item.location].filter(Boolean).join(" · ")}</p>
+        <p className={styles.body}>{item.description}</p>
+        {item.highlights?.length ? <ul className={styles.highlights}>
+          {item.highlights.map(highlight => <li key={highlight}>{highlight}</li>)}
         </ul> : null}
       </article>
     </li>)}
@@ -22,27 +22,23 @@ function Timeline({ items }: { items: TimelineItem[] }) {
 }
 
 export function Experience() {
-  const { t } = useLanguage();
-  return <section id="experience" aria-labelledby="experience-title" className="bg-background px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
-    <div className="mx-auto max-w-[100rem]">
-      <header className="grid gap-8 lg:grid-cols-[.85fr_1.15fr] lg:items-end">
-        <div>
-          <p className="section-kicker">{t.experience.title}</p>
-          <h2 id="experience-title" className="mt-5 max-w-[14ch] text-[clamp(3rem,6vw,6rem)] font-black leading-[.98] tracking-[-.055em]">{t.experience.subtitle}</h2>
-        </div>
-        <p className="max-w-[42ch] text-lg leading-relaxed text-muted-foreground lg:justify-self-end">{t.experience.desc}</p>
+  const { language, t } = useLanguage();
+  return <section id="experience" aria-labelledby="experience-title" className={`surface-paper ${styles.chapter} ${styles.experience}`}>
+    <div className={styles.frame}>
+      <header className={styles.aside}>
+        <h2 id="experience-title">{t.experience.subtitle}</h2>
+        <p>{t.experience.desc}</p>
+        <a href="/cv/CV_Alex_Vicente_Lopez.pdf?v=2026-09" download data-track="cv-download" className={`action-primary ${styles.cv}`}>
+          {language === "es" ? "Descargar CV (PDF)" : "Download CV (PDF)"}<Download aria-hidden="true" />
+        </a>
       </header>
-      <div className="experience-timelines mt-14 grid gap-8 lg:grid-cols-[.35fr_1fr]">
+      <div className={`experience-timelines ${styles.timelines}`}>
         {/* Experience comes first for recruiter scanning */}
-        <h3 className="text-lg font-semibold">{t.experience.job_title}</h3>
-        <Timeline items={t.experience.experience_list} />
+        <h3 id="experience-work">{t.experience.job_title}</h3>
+        <Timeline items={t.experience.experience_list} labelledBy="experience-work" />
         {/* Education */}
-        <h3 className="text-lg font-semibold">{t.experience.edu_title}</h3>
-        <Timeline items={t.experience.education_list} />
-      </div>
-      <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-border/55 pt-6">
-        <p className="text-sm text-muted-foreground">{t.experience.cv_title}</p>
-        <a href="/cv/CV_Alex_Vicente_Lopez.pdf?v=2026-09" download data-track="cv-download" className="cinema-link min-h-11 text-sm"><FileText aria-hidden="true" size={16} />{t.experience.cv_btn}</a>
+        <h3 id="experience-education">{t.experience.edu_title}</h3>
+        <Timeline items={t.experience.education_list} labelledBy="experience-education" />
       </div>
     </div>
   </section>;

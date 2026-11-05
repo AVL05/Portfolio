@@ -59,8 +59,11 @@ test("known mixed-language surfaces select copy from the active language", () =>
   assert.match(en.hero.profile, /end to end/i);
   assert.match(photography, /Otra/);
   assert.match(photography, /See/);
-  assert.match(projects, /Proyectos seleccionados/);
-  assert.match(projects, /Selected work/);
+  assert.match(hero, /copy.index/);
+  assert.equal(es.hero.index, "Proyectos seleccionados");
+  assert.equal(en.hero.index, "Selected work");
+  assert.match(projects, /Otros proyectos/);
+  assert.match(projects, /Other projects/);
   assert.doesNotMatch(notFound, /Inicio \/ Home|Proyectos \/ Work/);
   assert.match(notFound, /robots: \{ index: false/);
   assert.match(notFoundContent, /usePathname/);

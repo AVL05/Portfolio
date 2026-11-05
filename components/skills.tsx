@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { deferToViewport, gsap, motion, revealTrigger, useGSAP } from "@/lib/gsap";
 import { useLanguage } from "@/lib/language-context";
+import styles from "./profile.module.css";
 
 export function Skills() {
   const { language, t } = useLanguage();
@@ -30,27 +31,24 @@ export function Skills() {
   );
 
   return (
-    <section id="about" ref={containerRef} aria-labelledby="capabilities-title" className="relative bg-background px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:py-40">
-      <div className="mx-auto max-w-[100rem]">
-        <header className="grid gap-8 border-b border-border/60 pb-12 md:grid-cols-[.75fr_1.25fr] md:items-end">
-          <div>
-            <p className="section-kicker">{language === "es" ? "02 / Perfil y capacidades" : "02 / Profile & capabilities"}</p>
-            <h2 id="capabilities-title" className="mt-5 text-[clamp(3rem,7vw,7rem)] font-black leading-[.98] tracking-[-.075em]">
-              {language === "es" ? <>De principio<br />a fin.</> : <>From start<br />to finish.</>}
-            </h2>
-          </div>
-          <p className="max-w-[38ch] text-lg leading-relaxed text-muted-foreground md:justify-self-end">{t.skills.desc}</p>
+    <section id="about" ref={containerRef} aria-labelledby="capabilities-title" className={`surface-paper ${styles.chapter} ${styles.capabilities}`}>
+      <div className={styles.frame}>
+        <header className={styles.aside}>
+          <h2 id="capabilities-title">
+            {language === "es" ? <>De principio <span className="accent-serif">a fin.</span></> : <>From start <span className="accent-serif">to finish.</span></>}
+          </h2>
+          <p>{t.skills.desc}</p>
         </header>
 
-        <div className="capability-grid">
+        <ol className={`capability-grid ${styles.capabilityList}`}>
           {groups.map((group, index) => (
-            <article key={group.area} className={`capability-row grid gap-4 border-b border-border/55 py-7 md:grid-cols-[3rem_minmax(0,.8fr)_minmax(0,1.2fr)] sm:items-baseline sm:py-9 ${index === 0 ? "text-primary" : index === groups.length - 1 ? "text-foreground/65" : ""}`}>
-              <span className="font-mono text-[11px] text-primary">0{index + 1}</span>
-              <h3 className={`font-black tracking-[-.04em] ${index === 0 ? "text-3xl sm:text-4xl" : "text-2xl sm:text-3xl"}`}>{group.area}</h3>
-              <p className="text-base font-semibold leading-relaxed text-foreground/82 sm:text-lg">{group.stack.join(" · ")}</p>
-            </article>
+            <li key={group.area} className={`capability-row ${styles.capabilityRow}`} data-primary={index === 0 || undefined}>
+              <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+              <h3>{group.area}</h3>
+              <p>{group.stack.join(" · ")}</p>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   );

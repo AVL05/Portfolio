@@ -14,7 +14,10 @@
     "cv": "Download CV",
     "profile": "Frontend, backend and data. End to end.",
     "experience": "Experience & education",
-    "artLabels": ["Interface", "API", "Data"]
+    "artLabels": ["Interface", "API", "Data"],
+    "contact": "Contact",
+    "index": "Selected work",
+    "indexHint": "Three case studies with real screenshots, technical decisions and reviewable code."
   },
   "skills": {
     "desc": "I specialise in building web applications end to end. Interface design, applied AI and my background in IT systems round out my skills.",
@@ -216,14 +219,14 @@
       {
         "title": "Web Application Development",
         "institution": "IES Serra Perenxisa",
-        "period": "2024 - 2026",
+        "period": "2024 — 2026",
         "location": "Torrent, Valencia",
         "description": "Coursework in frontend and backend development, databases, interface design, deployment and web application architecture."
       },
       {
         "title": "IT Systems and Networks",
         "institution": "Enseñanzas Profesionales Sorolla",
-        "period": "2022 - 2024",
+        "period": "2022 — 2024",
         "location": "Valencia",
         "description": "Technical foundation in systems administration, networks, hardware, support, and incident resolution."
       }

@@ -84,7 +84,7 @@ for (const locale of ["es", "en"] as const) {
     await page.goto(locale === "es" ? "/" : "/en");
     const distrito = page.locator('.project-scene[data-layout="restaurant"]');
     await expect(distrito).not.toContainText(locale === "es" ? "Demo pública" : "Public demo");
-    await expect(distrito.locator("figcaption")).not.toContainText(locale === "es" ? "Captura del sitio publicado" : "Published website screenshot");
+    await expect(distrito.locator("figure").first().locator("figcaption")).not.toContainText(locale === "es" ? "Captura del sitio publicado" : "Published website screenshot");
   });
 
   test(`selected work preserves destinations, lazy media and reduced motion: ${locale}`, async ({ page }) => {
@@ -95,7 +95,7 @@ for (const locale of ["es", "en"] as const) {
     await expect(scenes.locator("h3")).toHaveText(["Distrito Gourmet", "LumaFlow Studio", "raw.vives"]);
     expect(await scenes.evaluateAll(elements => elements.map(element => element.getAttribute("data-layout"))))
       .toEqual(["restaurant", "product", "photography"]);
-    await expect(scenes.first().locator("img")).toHaveCSS("object-fit", "contain");
+    await expect(scenes.first().locator("img").first()).toHaveCSS("object-fit", "cover");
     for (const scene of await scenes.all()) {
       await scene.scrollIntoViewIfNeeded();
       await expect(scene.locator(".scene-copy")).toHaveCSS("transform", "none");
@@ -138,27 +138,18 @@ test("project reveals restore their static state when motion preference changes"
   expect(errors).toEqual([]);
 });
 
-test("secondary previews enhance fine-pointer and keyboard interaction only", async ({ page }) => {
+test("companion views are static, described and never depend on hover", async ({ page }, testInfo) => {
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.goto("/");
   await page.waitForLoadState("networkidle");
-  const finePointer = await page.evaluate(() => matchMedia("(hover: hover) and (pointer: fine)").matches);
-  const scene = page.locator(".project-scene").nth(1);
-  const link = scene.locator("figure > a");
-  await expect(scene.locator("img")).toHaveCount(1);
-  await link.hover();
-  await expect(scene.locator("img")).toHaveCount(finePointer ? 2 : 1);
-  await page.mouse.move(0, 0);
-  await link.blur();
-  await expect(scene.locator("img")).toHaveCount(finePointer ? 2 : 1);
-  if (finePointer) await expect(scene.locator('img[aria-hidden="true"]')).toHaveCSS("opacity", "0");
-  await link.focus();
-  await expect(scene.locator("img")).toHaveCount(finePointer ? 2 : 1);
-  await link.blur();
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await link.hover();
-  await expect(scene.locator("img")).toHaveCount(finePointer ? 2 : 1);
-  if (finePointer) await expect(scene.locator('img[aria-hidden="true"]')).toHaveCSS("opacity", "0");
+  for (const scene of await page.locator(".project-scene").all()) {
+    await expect(scene.locator("img")).toHaveCount(2);
+    await expect(scene.locator('img[aria-hidden="true"]')).toHaveCount(0);
+    for (const image of await scene.locator("img").all()) expect((await image.getAttribute("alt"))!.length).toBeGreaterThan(8);
+    const companion = scene.locator("figure").nth(1);
+    if (testInfo.project.name.includes("mobile")) await expect(companion).toBeHidden();
+    else await expect(companion).toBeVisible();
+  }
 });
 
 test("selected work remains usable without JavaScript", async ({ browser }) => {

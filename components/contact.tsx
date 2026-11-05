@@ -1,8 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { ArrowUpRight, FileText, Mail } from "lucide-react";
@@ -12,8 +10,8 @@ import { useEffect, useRef, useState } from "react";
 import { deferToViewport, gsap, motion, revealTrigger, useGSAP } from "@/lib/gsap";
 import { useLanguage } from "@/lib/language-context";
 import { localizeHref } from "@/lib/i18n-paths";
-import { RevealHeader } from "@/components/reveal-header";
 import { CONTACT_LIMITS } from "@/lib/contact";
+import styles from "./contact.module.css";
 
 type ContactField = "name" | "email" | "message";
 type ContactFormErrors = Partial<Record<ContactField, true>>;
@@ -262,303 +260,214 @@ export function Contact() {
   return (
     <section
       id="contact"
-      aria-label={t.contact.title}
+      aria-labelledby="contact-title"
       ref={containerRef}
-      className="relative overflow-hidden bg-background px-4 py-24 sm:px-6 sm:py-36 lg:px-8"
+      className={styles.section}
     >
+      <div className={styles.frame}>
+        <header className={styles.header}>
+          <h2 id="contact-title">{t.contact.subtitle}</h2>
+          <p className={styles.lead}>{t.contact.desc}</p>
+        </header>
 
-      <div className="relative z-10 mx-auto max-w-[100rem]">
-        <RevealHeader
-          title={t.contact.title}
-          subtitle={t.contact.subtitle}
-          description={t.contact.desc}
-        />
+        <div className={`contact-item contact-direct ${styles.direct}`}>
+          <a href="mailto:alexviclop@gmail.com" className={styles.email}>
+            <Mail aria-hidden="true" />
+            <span>alexviclop@gmail.com</span>
+            <ArrowUpRight aria-hidden="true" />
+          </a>
 
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14">
-          <div className="contact-item contact-direct flex flex-col justify-between border-y border-border/60 py-6 sm:py-8">
-            <div className="space-y-10">
-              <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">
-                {t.contact.links_title}
-              </p>
-              <div className="max-w-xl">
-                <p className="mb-3 text-sm font-bold text-primary">
-                  {t.contact.availability_title}
-                </p>
-                <p className="text-base font-medium leading-relaxed text-foreground/72">
-                  {t.contact.availability_desc}
-                </p>
-              </div>
+          <div className={styles.availability}>
+            <h3 className={styles.groupTitle}>{t.contact.availability_title}</h3>
+            <p>{t.contact.availability_desc}</p>
+          </div>
 
-              <a
-                href="mailto:alexviclop@gmail.com"
-                className="group flex min-w-0 items-center gap-4 text-xl font-bold transition-colors hover:text-primary sm:text-2xl"
-              >
-                <span className="shrink-0 rounded-lg border border-border/70 bg-secondary p-3.5 transition-[color,background-color,border-color] duration-[var(--motion-fast)] group-hover:border-primary/40 group-hover:bg-primary group-hover:text-primary-foreground">
-                  <Mail className="h-5 w-5" />
-                </span>
-                <span className="min-w-0 break-all text-foreground transition-colors group-hover:text-primary">
-                  alexviclop@gmail.com
-                </span>
-              </a>
+          <div className={styles.directActions}>
+            <a href={CV_HREF} download data-track="cv-download" className="action-primary">
+              {t.contact.cv_btn}<FileText aria-hidden="true" />
+            </a>
+            <a href="https://www.linkedin.com/in/aleviclop/" target="_blank" rel="noopener noreferrer" className="action-secondary">
+              LinkedIn<FaLinkedin aria-hidden="true" />
+            </a>
+          </div>
 
-              <div className="flex flex-wrap gap-3">
-                <a
-                  href={CV_HREF}
-                  download
-                  data-track="cv-download"
-                  className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-primary-foreground transition-[color,background-color,border-color] duration-[var(--motion-fast)] hover:bg-primary/90"
-                >
-                  <FileText className="h-4 w-4" />
-                  {t.contact.cv_btn}
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/aleviclop/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-primary/35 bg-background/35 px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-primary transition-[color,background-color,border-color] duration-[var(--motion-fast)] hover:bg-primary hover:text-primary-foreground"
-                >
-                  <FaLinkedin className="h-4 w-4" />
-                  LinkedIn
-                </a>
-              </div>
+          <nav aria-label={language === "es" ? "Perfiles externos" : "External profiles"} className={styles.profiles}>
+            <h3 className={styles.groupTitle}>{t.contact.links_title}</h3>
+            <a href="https://github.com/AVL05" target="_blank" rel="noopener noreferrer" className="cinema-link">
+              <FaGithub aria-hidden="true" />GitHub<ArrowUpRight aria-hidden="true" />
+            </a>
+            <a href="https://rawvives.aleviclop.dev/" target="_blank" rel="noopener noreferrer" className="cinema-link">
+              raw.vives<ArrowUpRight aria-hidden="true" />
+            </a>
+          </nav>
+        </div>
+
+        <div className={`contact-item contact-form ${styles.formColumn}`}>
+          <form
+            ref={formRef}
+            data-contact-form
+            action="/api/contact"
+            method="post"
+            onSubmit={handleSubmit}
+            aria-busy={isSubmitting}
+            className={styles.form}
+            noValidate
+          >
+            {/* Honeypot anti-spam: invisible para personas, irresistible para bots. */}
+            <div aria-hidden="true" className="absolute h-px w-px overflow-hidden">
+              <label htmlFor="website">Website</label>
+              <input
+                id="website"
+                type="text"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                value={formData.website}
+                onChange={(e) =>
+                  setFormData({ ...formData, website: e.target.value })
+                }
+              />
             </div>
 
-            <footer className="mt-16 border-t border-border/50 pt-8 text-center sm:text-left">
-              <nav
-                aria-label={
-                  language === "es" ? "Perfiles externos" : "External profiles"
-                }
-                className="mb-6 flex flex-wrap justify-center gap-3 sm:justify-start"
-              >
-                <a
-                  href="https://github.com/AVL05"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex min-h-11 items-center gap-2 font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground transition-colors hover:text-primary"
-                >
-                  <FaGithub className="h-3.5 w-3.5" />
-                  GitHub
-                </a>
-                <a
-                  href="https://rawvives.aleviclop.dev/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex min-h-11 items-center gap-2 font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground transition-colors hover:text-primary"
-                >
-                  raw.vives
-                  <ArrowUpRight className="h-3.5 w-3.5" />
-                </a>
-              </nav>
-              <p className="mb-1 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground">
-                &copy; 2026 Alex Vicente López
+            <div className={styles.field}>
+              <label htmlFor="name">{t.contact.form_name}</label>
+              <Input
+                id="name"
+                name="name"
+                type="text"
+                autoComplete="name"
+                placeholder={t.contact.form_placeholder_name}
+                value={formData.name}
+                minLength={2}
+                maxLength={120}
+                aria-invalid={Boolean(formErrors.name)}
+                aria-describedby={formErrors.name ? "name-error" : undefined}
+                onBlur={() => validateOnBlur("name")}
+                onChange={(e) => updateField("name", e.target.value)}
+                className={styles.input}
+                required
+              />
+              <p id="name-error" className={styles.error} aria-live="polite">
+                {formErrors.name ? getFieldError("name") : ""}
               </p>
-              <p className="text-muted-foreground text-sm font-medium mb-4">
-                {t.contact.footer_built}
+            </div>
+
+            <div className={styles.field}>
+              <label htmlFor="email">{t.contact.form_email}</label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                inputMode="email"
+                autoComplete="email"
+                placeholder={t.contact.form_placeholder_email}
+                value={formData.email}
+                maxLength={254}
+                aria-invalid={Boolean(formErrors.email)}
+                aria-describedby={formErrors.email ? "email-error" : undefined}
+                onBlur={() => validateOnBlur("email")}
+                onChange={(e) => updateField("email", e.target.value)}
+                className={styles.input}
+                required
+              />
+              <p id="email-error" className={styles.error} aria-live="polite">
+                {formErrors.email ? getFieldError("email") : ""}
               </p>
-              <Link
-                href={localizeHref("/legal", language)}
-                className="inline-flex min-h-11 items-center font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground transition-colors hover:text-primary"
-              >
-                {language === "es" ? "Aviso legal y privacidad" : "Legal notice & privacy"}
-              </Link>
-            </footer>
-          </div>
+            </div>
 
-          <div className="contact-item contact-form">
-            <Card className="dev-panel overflow-hidden py-0">
-              <form
-                ref={formRef}
-                data-contact-form
-                action="/api/contact"
-                method="post"
-                onSubmit={handleSubmit}
-                aria-busy={isSubmitting}
-                className="space-y-6 p-5 sm:p-8"
-                noValidate
-              >
-                {/* Honeypot anti-spam: invisible para personas, irresistible para bots. */}
-                <div aria-hidden="true" className="absolute h-px w-px overflow-hidden">
-                  <label htmlFor="website">Website</label>
-                  <input
-                    id="website"
-                    type="text"
-                    name="website"
-                    tabIndex={-1}
-                    autoComplete="off"
-                    value={formData.website}
-                    onChange={(e) =>
-                      setFormData({ ...formData, website: e.target.value })
-                    }
-                  />
-                </div>
+            <div className={styles.field}>
+              <div className={styles.fieldHead}>
+                <label htmlFor="message">{t.contact.form_message}</label>
+                <span id="message-count" className={styles.count}>
+                  {messageLength}/{CONTACT_LIMITS.messageMax}{" "}
+                  {t.contact.form_message_count}
+                </span>
+              </div>
+              <Textarea
+                id="message"
+                name="message"
+                placeholder={t.contact.form_placeholder_message}
+                rows={5}
+                value={formData.message}
+                minLength={20}
+                maxLength={CONTACT_LIMITS.messageMax}
+                aria-invalid={Boolean(formErrors.message)}
+                aria-describedby={`message-count${formErrors.message ? " message-error" : ""}`}
+                onBlur={() => validateOnBlur("message")}
+                onChange={(e) => updateField("message", e.target.value)}
+                className={`${styles.input} ${styles.textarea}`}
+                required
+              />
+              <p id="message-error" className={styles.error} aria-live="polite">
+                {formErrors.message
+                  ? getFieldError("message")
+                  : messageLength > 0 && messageLength < 20
+                    ? t.contact.form_message_min
+                    : ""}
+              </p>
+            </div>
 
-                <div className="space-y-2">
-                  <label
-                    htmlFor="name"
-                    className="ml-0.5 block text-xs font-bold uppercase tracking-[0.16em] text-primary"
-                  >
-                    {t.contact.form_name}
-                  </label>
-                  <Input
-                    id="name"
-                    name="name"
-                    type="text"
-                    autoComplete="name"
-                    placeholder={t.contact.form_placeholder_name}
-                    value={formData.name}
-                    minLength={2}
-                    maxLength={120}
-                    aria-invalid={Boolean(formErrors.name)}
-                    aria-describedby={formErrors.name ? "name-error" : undefined}
-                    onBlur={() => validateOnBlur("name")}
-                    onChange={(e) => updateField("name", e.target.value)}
-                    className="rounded-lg border-border/70 bg-secondary/50 px-4 py-5 text-base placeholder:text-muted-foreground focus-visible:border-primary focus-visible:ring-primary/40"
-                    required
-                  />
-                  <p
-                    id="name-error"
-                    className="min-h-5 text-sm font-medium text-destructive"
-                    aria-live="polite"
-                  >
-                    {formErrors.name ? getFieldError("name") : ""}
-                  </p>
-                </div>
+            <button
+              type="submit"
+              className={`action-primary ${styles.submit}`}
+              disabled={isSubmitting}
+              aria-busy={isSubmitting}
+            >
+              {isSubmitting
+                ? t.contact.form_btn_sending
+                : t.contact.form_btn_send}
+              <ArrowUpRight aria-hidden="true" />
+            </button>
 
-                <div className="space-y-2">
-                  <label
-                    htmlFor="email"
-                    className="ml-0.5 block text-xs font-bold uppercase tracking-[0.16em] text-primary"
-                  >
-                    {t.contact.form_email}
-                  </label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    inputMode="email"
-                    autoComplete="email"
-                    placeholder={t.contact.form_placeholder_email}
-                    value={formData.email}
-                    maxLength={254}
-                    aria-invalid={Boolean(formErrors.email)}
-                    aria-describedby={formErrors.email ? "email-error" : undefined}
-                    onBlur={() => validateOnBlur("email")}
-                    onChange={(e) => updateField("email", e.target.value)}
-                    className="rounded-lg border-border/70 bg-secondary/50 px-4 py-5 text-base placeholder:text-muted-foreground focus-visible:border-primary focus-visible:ring-primary/40"
-                    required
-                  />
-                  <p
-                    id="email-error"
-                    className="min-h-5 text-sm font-medium text-destructive"
-                    aria-live="polite"
-                  >
-                    {formErrors.email ? getFieldError("email") : ""}
-                  </p>
-                </div>
-
-                <div className="space-y-2">
-                  <div className="ml-0.5 flex items-baseline justify-between gap-3">
-                    <label
-                      htmlFor="message"
-                      className="block text-xs font-bold uppercase tracking-[0.16em] text-primary"
-                    >
-                      {t.contact.form_message}
-                    </label>
-                    <span
-                      id="message-count"
-                      className="font-mono text-[11px] text-muted-foreground tabular-nums"
-                    >
-                      {messageLength}/{CONTACT_LIMITS.messageMax}{" "}
-                      {t.contact.form_message_count}
-                    </span>
-                  </div>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    placeholder={t.contact.form_placeholder_message}
-                    rows={5}
-                    value={formData.message}
-                    minLength={20}
-                    maxLength={CONTACT_LIMITS.messageMax}
-                    aria-invalid={Boolean(formErrors.message)}
-                    aria-describedby={`message-count${formErrors.message ? " message-error" : ""}`}
-                    onBlur={() => validateOnBlur("message")}
-                    onChange={(e) => updateField("message", e.target.value)}
-                    className="resize-none rounded-lg border-border/70 bg-secondary/50 p-4 text-base placeholder:text-muted-foreground focus-visible:border-primary focus-visible:ring-primary/40"
-                    required
-                  />
-                  <p
-                    id="message-error"
-                    className="min-h-5 text-sm font-medium text-destructive"
-                    aria-live="polite"
-                  >
-                    {formErrors.message
-                      ? getFieldError("message")
-                      : messageLength > 0 && messageLength < 20
-                        ? t.contact.form_message_min
-                        : ""}
-                  </p>
-                </div>
-
-                <Button
-                  type="submit"
-                  className="group w-full rounded-lg bg-primary py-6 text-sm font-bold text-primary-foreground transition-[color,background-color,border-color] duration-[var(--motion-fast)] hover:bg-primary/90 active:bg-primary/75"
-                  disabled={isSubmitting}
-                  aria-busy={isSubmitting}
-                >
-                  {isSubmitting
-                    ? t.contact.form_btn_sending
-                    : t.contact.form_btn_send}
-                </Button>
-
-                <div ref={statusRef} tabIndex={-1} aria-live="polite">
-                  {submitStatus === "success" && (
-                    <p role="status" className="rounded-lg border border-primary/25 bg-primary/10 px-4 py-3 text-center text-sm font-medium text-primary">
-                      {t.contact.form_success}
-                    </p>
-                  )}
-                  {submitStatus === "error" && (
-                    <div role="alert" className="rounded-lg border border-destructive/25 bg-destructive/10 px-4 py-3 text-center">
-                      <p className="text-sm font-medium text-destructive">
-                        {errorMessageFor(submitCode)}
-                      </p>
-                      <div className="mt-3 flex flex-col items-center justify-center gap-2 sm:flex-row">
-                        {submitCode !== "not_configured" && (
-                          <Button
-                            type="button"
-                            variant="outline"
-                            size="sm"
-                            onClick={() => formRef.current?.requestSubmit()}
-                            disabled={isSubmitting}
-                            className="min-h-11"
-                          >
-                            {t.contact.form_retry}
-                          </Button>
-                        )}
-                        <p className="text-xs text-muted-foreground">
-                          {t.contact.form_fallback}{" "}
-                          <a
-                            href="mailto:alexviclop@gmail.com"
-                            className="font-semibold text-primary underline underline-offset-2"
-                          >
-                            alexviclop@gmail.com
-                          </a>
-                        </p>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </form>
-              <noscript>
-                <style>{"[data-contact-form] { display: none; }"}</style>
-                <p className="p-5 sm:p-8">
-                  {t.contact.form_fallback}{" "}
-                  <a href="mailto:alexviclop@gmail.com" className="text-primary underline underline-offset-2">alexviclop@gmail.com</a>
+            <div ref={statusRef} tabIndex={-1} aria-live="polite">
+              {submitStatus === "success" && (
+                <p role="status" className={styles.success}>
+                  {t.contact.form_success}
                 </p>
-              </noscript>
-            </Card>
-          </div>
+              )}
+              {submitStatus === "error" && (
+                <div role="alert" className={styles.failure}>
+                  <p>{errorMessageFor(submitCode)}</p>
+                  <div className={styles.failureActions}>
+                    {submitCode !== "not_configured" && (
+                      <button
+                        type="button"
+                        onClick={() => formRef.current?.requestSubmit()}
+                        disabled={isSubmitting}
+                        className="action-secondary"
+                      >
+                        {t.contact.form_retry}
+                      </button>
+                    )}
+                    <p>
+                      {t.contact.form_fallback}{" "}
+                      <a href="mailto:alexviclop@gmail.com">alexviclop@gmail.com</a>
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+          </form>
+          <noscript>
+            <style>{"[data-contact-form] { display: none; }"}</style>
+            <p className={styles.noscript}>
+              {t.contact.form_fallback}{" "}
+              <a href="mailto:alexviclop@gmail.com">alexviclop@gmail.com</a>
+            </p>
+          </noscript>
         </div>
+
+        <footer className={styles.footer}>
+          <p className={styles.signature} aria-hidden="true">
+            {t.hero.lines.map((line, index) => <span key={line} className={index ? "accent-serif" : undefined}>{line} </span>)}
+          </p>
+          <div className={styles.footerMeta}>
+            <p>&copy; 2026 Alex Vicente López · {t.contact.footer_built}</p>
+            <Link href={localizeHref("/legal", language)} className="cinema-link">
+              {language === "es" ? "Aviso legal y privacidad" : "Legal notice & privacy"}
+            </Link>
+          </div>
+        </footer>
       </div>
     </section>
   );

@@ -7,19 +7,21 @@ export function Currently() {
   const { t } = useLanguage();
 
   return (
-    <section id="currently" aria-labelledby="currently-title" className="px-4 py-16 sm:px-6 lg:px-8">
-      <div className="mx-auto grid max-w-[100rem] gap-8 border-y border-border/55 py-10 lg:grid-cols-[.7fr_1.3fr]">
-        <h2 id="currently-title" className="text-3xl font-semibold tracking-tight">{t.currently.title}</h2>
-        <dl className="grid gap-7 sm:grid-cols-3">
-          {t.currently.items.map((item) => (
-            <div key={item.label}>
-              <dt className="font-mono text-xs text-muted-foreground">{item.label}</dt>
-              <dd className="mt-3 text-base font-medium">
-                {item.href ? <a href={item.href} className="cinema-link min-h-11">{item.value}<ArrowUpRight aria-hidden="true" /></a> : item.value}
-              </dd>
-            </div>
-          ))}
-        </dl>
+    <section id="currently" aria-labelledby="currently-title" className="pb-16 sm:pb-20">
+      <div className="page-frame">
+        <div className="grid gap-6 border-y border-border py-7 sm:grid-cols-[12rem_minmax(0,1fr)] sm:items-baseline">
+          <h2 id="currently-title" className="label-mono text-primary">{t.currently.title}</h2>
+          <dl className="flex flex-wrap gap-x-12 gap-y-5">
+            {t.currently.items.map((item) => (
+              <div key={item.label} className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+                <dt className="label-mono text-muted-foreground">{item.label}</dt>
+                <dd className="text-lg font-medium tracking-tight">
+                  {item.href ? <a href={item.href} className="cinema-link">{item.value}<ArrowUpRight aria-hidden="true" /></a> : item.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
       </div>
     </section>
   );

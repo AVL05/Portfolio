@@ -22,7 +22,7 @@ for (const pair of ROUTE_PAIRS.filter(pair => pair.es !== "/")) {
       await page.emulateMedia({ reducedMotion: "reduce" });
       await page.goto(path);
       await page.evaluate(() => document.fonts.ready);
-      const ratios = await page.locator("main > section:first-child nav:first-child").evaluate(nav => {
+      const ratios = await page.locator("main > section:first-child > nav:first-child").evaluate(nav => {
         const canvas = document.createElement("canvas");
         canvas.width = canvas.height = 1;
         const ctx = canvas.getContext("2d", { willReadFrequently: true })!;

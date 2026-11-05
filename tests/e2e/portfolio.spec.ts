@@ -9,10 +9,8 @@ test("renders without horizontal overflow and switches language", async ({
 }) => {
   await page.goto("/");
 
-  await expect(page.locator("#hero-title")).toHaveText("Código. Criterio.");
-  await expect(
-    page.getByRole("heading", { name: "Proyectos", exact: true }),
-  ).toBeVisible();
+  await expect(page.locator("#hero-title")).toHaveText("Alex Vicente López, Desarrollador Full-Stack Junior");
+  await expect(page.locator("#projects-title")).toContainText("Proyectos");
   await expect(page.locator("html")).toHaveAttribute("lang", "es");
 
   const viewport = await page.locator("html").evaluate((element) => ({
@@ -27,11 +25,9 @@ test("renders without horizontal overflow and switches language", async ({
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
   await expect(page.getByRole("link", { name: "ES EN" })).toBeVisible();
   await expect(
-    page.getByText("Junior Full-Stack Developer", { exact: true }),
+    page.locator("#hero").getByText("Junior Full-Stack Developer", { exact: true }),
   ).toBeVisible();
-  await expect(
-    page.getByRole("heading", { name: "Work", exact: true }),
-  ).toBeVisible();
+  await expect(page.locator("#projects-title")).toContainText("Work");
 });
 
 test("keeps secondary projects compact and accessible", async ({ page }) => {

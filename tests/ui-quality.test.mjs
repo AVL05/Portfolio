@@ -157,7 +157,8 @@ test("the portfolio keeps the hero controls aligned and overlap-safe", () => {
   const heroStyles = read("components/hero.module.css");
   assert.match(heroStyles, /\.hero\s*\{[^}]*overflow:\s*clip/);
   assert.match(hero, /data-art-stage/);
-  assert.match(heroStyles, /@media\s*\(max-width:\s*767px\)/);
+  assert.match(heroStyles, /@media\s*\(max-width:\s*1023px\)/);
+  assert.match(heroStyles, /@media\s*\(max-width:\s*479px\)/);
   assert.doesNotMatch(hero, /md:bottom-7 md:left-8/);
   assert.match(languageToggle, /absolute left-1 top-1 size-9/);
   assert.match(languageToggle, /translate-x-9/);
@@ -167,7 +168,8 @@ test("secondary work stays compact with visible media and real destinations", ()
   const projects = read("components/projects.tsx");
   assert.match(projects, /Otros proyectos/);
   assert.match(projects, /Other projects/);
-  assert.match(projects, /md:grid-cols-3/);
+  assert.match(projects, /archiveList/);
+  assert.match(projects, /archiveThumb/);
   assert.match(projects, /project.summary/);
   assert.match(projects, /Ver código/);
   assert.match(projects, /View code/);

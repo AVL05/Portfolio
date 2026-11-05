@@ -53,6 +53,9 @@ interface Translation {
     cv: string;
     profile: string;
     experience: string;
+    contact: string;
+    index: string;
+    indexHint: string;
   };
   skills: {
     groups: { area: string; stack: string[] }[];

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import type React from "react";
 import "../globals.css";
-import { BodyFont, DisplayFont, LabelFont, GeistMono, GeistSans } from "@/lib/fonts";
+import { AccentSerif, GeistMono, GeistSans } from "@/lib/fonts";
 import { RootShell } from "@/components/root-shell";
 import {
   personJsonLd,
@@ -17,8 +17,8 @@ import {
 export const viewport = {
   colorScheme: "dark",
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#e9e5dc" },
-    { media: "(prefers-color-scheme: dark)", color: "#0b0b09" },
+    { media: "(prefers-color-scheme: light)", color: "#0e0d0b" },
+    { media: "(prefers-color-scheme: dark)", color: "#0e0d0b" },
   ],
 };
 
@@ -94,7 +94,7 @@ export default function EsLayout({
         />
       </head>
       <body
-        className={`font-sans ${GeistSans.variable} ${GeistMono.variable} ${DisplayFont.variable} ${BodyFont.variable} ${LabelFont.variable} antialiased bg-background text-foreground overflow-x-clip`}
+        className={`font-sans ${GeistSans.variable} ${GeistMono.variable} ${AccentSerif.variable} antialiased bg-background text-foreground overflow-x-clip`}
         style={{ fontFeatureSettings: '"cv11", "ss01", "ss03"' }}
         suppressHydrationWarning
       >

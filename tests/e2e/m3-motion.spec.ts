@@ -77,7 +77,7 @@ for (const locale of ["es", "en"]) {
       }
     }
     await page.emulateMedia({ reducedMotion: "reduce" });
-    for (const selector of [".contact-item", ".capability-row", ".rh-word", ".scene-media"]) {
+    for (const selector of [".contact-item", ".capability-row", "[data-hero-line]", ".scene-media"]) {
       for (const item of await page.locator(selector).all()) await expect(item).toHaveCSS("transform", "none");
     }
     await expect(page.locator(".custom-cursor")).toHaveCount(0);
@@ -86,26 +86,17 @@ for (const locale of ["es", "en"]) {
   });
 }
 
-test("project preview decodes before fading and reverses without unmounting", async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name.includes("mobile"), "Fine pointer only");
+test("case links claim one unique view-transition name at a time", async ({ page }) => {
   await page.goto("/en");
-  const frame = page.locator('.project-scene[data-layout="product"] figure a');
-  await frame.hover();
-  const image = frame.locator('img[aria-hidden="true"]');
-  await expect(image).toHaveAttribute("data-visible", "true");
-  expect(await image.evaluate(element => (element as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
-  for (let i = 0; i < 3; i++) {
-    await page.mouse.move(1, 1);
-    await expect(image).toHaveAttribute("data-visible", "false");
-    await frame.hover();
-    await expect(image).toHaveAttribute("data-visible", "true");
-  }
-  await page.mouse.move(1, 1);
-  await expect(image).toHaveCSS("opacity", "0");
-  await frame.focus();
-  await expect(image).toHaveAttribute("data-visible", "true");
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await expect(image).toHaveCSS("opacity", "0");
+  await page.waitForLoadState("networkidle");
+  await page.evaluate(() => document.addEventListener("click", event => event.preventDefault(), { capture: true }));
+  const named = () => page.evaluate(() => [...document.querySelectorAll<HTMLElement>("*")]
+    .map(element => element.style.getPropertyValue("view-transition-name")).filter(Boolean));
+  expect(await named()).toEqual([]);
+  await page.locator("[data-hero-row] a").nth(1).click();
+  expect(await named()).toEqual(["project-lumaflow-studio"]);
+  await page.locator('.project-scene[data-layout="photography"] figure a').first().click();
+  expect(await named()).toEqual(["project-raw-vives"]);
 });
 
 test("menu active state follows capabilities and keyboard focus is immediate", async ({ page }, testInfo) => {

@@ -1,0 +1,29 @@
+/* Justified contact sheet: every frame keeps its real aspect ratio. */
+.section { padding-block: clamp(4.5rem, 9vw, 8rem); background: var(--background); }
+.frame { max-width: var(--page-width); margin-inline: auto; padding-inline: var(--page-gutter); }
+.header { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(1rem, 2vw, 2rem); row-gap: 1.25rem; align-items: end; padding-bottom: clamp(2.5rem, 5vw, 4rem); }
+.header h2 { grid-column: 1 / 8; font-size: clamp(3rem, 6vw, 6rem); line-height: .95; letter-spacing: -.04em; }
+.header h2 :global(.accent-serif) { color: var(--primary); }
+.statement { grid-column: 8 / 13; display: grid; gap: 1rem; }
+.statement > p { max-width: 32ch; font-size: clamp(1.125rem, 1.6vw, 1.5rem); line-height: 1.35; letter-spacing: -.02em; text-wrap: balance; }
+.links { display: flex; flex-wrap: wrap; gap: 0 1.5rem; font-size: .875rem; }
+.rows { display: grid; gap: clamp(1rem, 2vw, 2rem); }
+.row { display: flex; gap: clamp(1rem, 2vw, 2rem); }
+.row figure { flex: var(--ratio) 1 0; min-width: 0; }
+.image { position: relative; aspect-ratio: var(--ratio); overflow: hidden; background: var(--ink-2); }
+.image img { object-fit: cover; transition: transform 900ms var(--ease-out); }
+.row figcaption { padding-top: .7rem; color: var(--muted-foreground); font: 400 var(--type-label)/1.6 var(--font-label), monospace; text-transform: uppercase; letter-spacing: .06em; }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .row figure:hover img { transform: scale(1.02); }
+}
+@media (max-width: 1023px) {
+  .header h2, .statement { grid-column: 1 / -1; }
+}
+@media (max-width: 639px) {
+  .rows { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem 1rem; }
+  .row { display: contents; }
+  .row figure { flex: none; }
+  .row:first-child figure:first-child { grid-column: 1 / -1; }
+  .image { aspect-ratio: 4 / 3; }
+}
+@media (prefers-reduced-motion: reduce) { .image img { transition: none; } }

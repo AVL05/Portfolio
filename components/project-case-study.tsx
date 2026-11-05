@@ -6,7 +6,7 @@ import styles from "./project-case-study.module.css";
 import { useRef, type ReactNode } from "react";
 import { gsap, motion, useGSAP } from "@/lib/gsap";
 import Link from "next/link";
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
 import { useLanguage, type Language } from "@/lib/language-context";
 import { localizeHref } from "@/lib/i18n-paths";
@@ -44,15 +44,20 @@ interface AdjacentProject {
   title: string;
 }
 
+export type CaseIdentity = "distrito" | "luma" | "raw";
+
 const labels = {
   es: {
-    back: "Volver a proyectos",
+    back: "Proyectos",
     contact: "Contacto",
     home: "Inicio",
     projects: "Proyectos",
-    previous: "Proyecto anterior",
-    next: "Siguiente proyecto",
+    previous: "Caso anterior",
+    next: "Siguiente caso",
     role: "Mi rol",
+    stack: "Stack",
+    type: "Tipo",
+    links: "Revisar",
     problem: "Problema y contexto",
     goals: "Objetivos",
     process: "Proceso",
@@ -66,15 +71,20 @@ const labels = {
     learnings: "Aprendizajes",
     code: "Ver código",
     demo: "Ver sitio",
+    contents: "En este caso",
+    screens: "Producto",
   },
   en: {
-    back: "Back to projects",
+    back: "Work",
     contact: "Contact",
     home: "Home",
     projects: "Projects",
-    previous: "Previous project",
-    next: "Next project",
+    previous: "Previous case",
+    next: "Next case",
     role: "My role",
+    stack: "Stack",
+    type: "Type",
+    links: "Review",
     problem: "Problem and context",
     goals: "Goals",
     process: "Process",
@@ -88,19 +98,123 @@ const labels = {
     learnings: "Learnings",
     code: "View code",
     demo: "Live site",
+    contents: "In this case",
+    screens: "Product",
   },
 };
 
 function TextList({ items, language }: { items: LocalizedText[]; language: Language }) {
   return (
-    <ul className="space-y-3">
-      {items.map((item) => (
-        <li key={item.en} className="flex gap-3 text-sm font-medium leading-relaxed text-foreground/72 sm:text-base">
-          <span aria-hidden="true" className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-          {item[language]}
-        </li>
-      ))}
+    <ul className={styles.list}>
+      {items.map((item) => <li key={item.en}>{item[language]}</li>)}
     </ul>
+  );
+}
+
+/** Numbered editorial chapter: sticky label column and a reading column. */
+export function Chapter({ id, number, label, title, children, tone }: {
+  id?: string; number: string; label: string; title?: ReactNode; children?: ReactNode; tone?: "raised";
+}) {
+  return (
+    <section id={id} className={styles.chapter} data-tone={tone}>
+      <div className={styles.chapterFrame}>
+        <p className={styles.chapterLabel}><span>{number}</span>{label}</p>
+        <div className={styles.chapterMain}>
+          {title ? <h2 className={styles.chapterTitle}>{title}</h2> : null}
+          {children}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export interface CaseShellProps {
+  identity: CaseIdentity;
+  title: ReactNode;
+  plainTitle: string;
+  eyebrow: string;
+  lead: ReactNode;
+  facts: Array<[string, ReactNode]>;
+  actions: ReactNode;
+  showcase: { image: string; alt: string; caption: string; viewTransitionName: string };
+  contents: Array<[string, string]>;
+  previous?: AdjacentProject;
+  next?: AdjacentProject;
+  children: ReactNode;
+}
+
+/** Shared case-study frame used by every project, so cases differ by identity, not by system. */
+export function CaseShell({ identity, title, plainTitle, eyebrow, lead, facts, actions, showcase, contents, previous, next, children }: CaseShellProps) {
+  const { language } = useLanguage();
+  const copy = labels[language];
+  const containerRef = useRef<HTMLElement>(null);
+  useGSAP(() => {
+    const media = gsap.matchMedia();
+    media.add("(prefers-reduced-motion: no-preference)", () => {
+      if (performance.now() > 1600) return;
+      gsap.from(containerRef.current?.querySelector("h1") ?? null, { yPercent: 18, autoAlpha: 0, duration: motion.duration.hero, ease: motion.ease.reveal, clearProps: "transform,opacity,visibility" });
+    });
+    return () => media.revert();
+  }, { scope: containerRef });
+
+  return (
+    <main id="main-content" ref={containerRef} className={`premium-home case-study ${styles.story}`} data-case={identity}>
+      <section className={styles.hero}>
+        <nav aria-label={language === "es" ? "Navegación del caso" : "Case study navigation"} className={styles.topbar}>
+          <Link href={localizeHref("/#projects", language)} className={styles.back}><ArrowLeft aria-hidden="true" />{copy.back}</Link>
+          <div className={styles.topbarEnd}>
+            <Link href={localizeHref("/#contact", language)} className="cinema-link">{copy.contact}<ArrowUpRight aria-hidden="true" /></Link>
+            <LanguageToggle />
+          </div>
+        </nav>
+        <div className={styles.heroFrame}>
+          <nav aria-label="Breadcrumb" className={styles.breadcrumb}>
+            <Link href={localizeHref("/", language)}>{copy.home}</Link>
+            <span aria-hidden="true">/</span>
+            <Link href={localizeHref("/#projects", language)}>{copy.projects}</Link>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">{plainTitle}</span>
+          </nav>
+          <h1 className={styles.title}>{title}</h1>
+          <p className={styles.eyebrow}>{eyebrow}</p>
+          <div className={styles.lead}>{lead}</div>
+          <dl className={styles.facts}>
+            {facts.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}
+          </dl>
+          <div className={styles.heroActions}>{actions}</div>
+        </div>
+        <div className={styles.showcaseFrame}>
+          <ProjectShowcase image={showcase.image} alt={showcase.alt} viewTransitionName={showcase.viewTransitionName} caption={showcase.caption} />
+        </div>
+        <nav aria-label={language === "es" ? "Contenido del caso" : "Case contents"} className={styles.contents}>
+          <p>{copy.contents}</p>
+          <ol>
+            {contents.map(([id, label], index) => <li key={id}><a href={`#${id}`}><span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>{label}</a></li>)}
+          </ol>
+        </nav>
+      </section>
+
+      {children}
+
+      {previous || next ? (
+        <nav aria-label={language === "es" ? "Otros casos de estudio" : "More case studies"} className={styles.adjacent}>
+          <div className={styles.adjacentFrame}>
+            {previous ? (
+              <Link href={localizeHref(previous.href, language)} className={styles.adjacentLink} data-direction="previous">
+                <span className={styles.adjacentLabel}><ArrowLeft aria-hidden="true" />{copy.previous}</span>
+                <span className={styles.adjacentTitle}>{previous.title}</span>
+              </Link>
+            ) : <span />}
+            {next ? (
+              <Link href={localizeHref(next.href, language)} className={styles.adjacentLink} data-direction="next">
+                <span className={styles.adjacentLabel}>{copy.next}<ArrowRight aria-hidden="true" /></span>
+                <span className={styles.adjacentTitle}>{next.title}</span>
+              </Link>
+            ) : null}
+          </div>
+        </nav>
+      ) : null}
+    </main>
   );
 }
 
@@ -117,132 +231,85 @@ export function ProjectCaseStudy({
 }) {
   const { language } = useLanguage();
   const copy = labels[language];
-  const containerRef = useRef<HTMLElement>(null);
-  useGSAP(() => {
-    const media = gsap.matchMedia();
-    media.add("(prefers-reduced-motion: no-preference)", () => {
-      gsap.from(containerRef.current?.querySelector("h1") ?? null, { y: motion.distance.content, duration: motion.duration.title, ease: motion.ease.out });
-    });
-    return () => media.revert();
-  }, { scope: containerRef });
+  const identity: CaseIdentity = data.viewTransitionName.includes("distrito") ? "distrito" : "luma";
+  const contents: Array<[string, string]> = editorial
+    ? [["context", language === "es" ? "Contexto" : "Context"], ["design", language === "es" ? "Diseño" : "Design"], ["customer", language === "es" ? "Experiencia de cliente" : "Customer experience"], ["backoffice", "Backoffice"], ["architecture", copy.architecture], ["decisions", copy.decisions], ["result", copy.learnings]]
+    : [["context", copy.problem], ["decisions", copy.decisions], ["architecture", copy.architecture], ["result", copy.result]];
+
+  const lead = data.introduction ? <>
+    <h2>{data.introduction.title[language]}</h2>
+    {data.introduction.paragraphs.map(paragraph => <p key={paragraph.en}>{paragraph[language]}</p>)}
+  </> : <p>{data.summary[language]}</p>;
+
+  const facts: Array<[string, ReactNode]> = [
+    [copy.role, data.role[language]],
+    [copy.stack, (data.introduction ? ["React", "Laravel", "MySQL", "Tailwind CSS", "Zustand"] : data.stack.slice(0, 6)).join(" · ")],
+  ];
+  if (data.introduction) facts.push([copy.type, data.introduction.type[language]]);
+
+  const actions = <>
+    {data.demo ? <a href={data.demo} target="_blank" rel="noopener noreferrer" className="action-primary">{data.introduction ? (language === "es" ? "Ver aplicación" : "View application") : copy.demo}<ArrowUpRight aria-hidden="true" /></a> : null}
+    <a href={data.github} target="_blank" rel="noopener noreferrer" className={data.demo ? "action-secondary" : "action-primary"}><FaGithub aria-hidden="true" />{data.introduction ? (language === "es" ? "Explorar repositorio" : "Explore repository") : copy.code}</a>
+  </>;
 
   return (
-    <main id="main-content" ref={containerRef} className={`premium-home case-study min-h-screen bg-background text-foreground ${styles.story}`}>
-      <section className="px-4 pb-16 pt-6 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <nav aria-label={language === "es" ? "Navegación del caso" : "Case study navigation"} className="mb-6 flex items-center justify-between border-b border-border/65 py-3">
-            <Link href={localizeHref("/#projects", language)} className="cinema-link font-mono text-[11px] font-bold uppercase tracking-[.13em]"><ArrowLeft />{copy.back}</Link>
-            <div className="flex items-center gap-3">
-              <Link href={localizeHref("/#contact", language)} className="cinema-link font-mono text-[11px] font-bold uppercase tracking-[.13em]">{copy.contact}<ArrowUpRight /></Link>
-              <LanguageToggle />
-            </div>
-          </nav>
-          <nav aria-label="Breadcrumb" className="mb-14 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[11px] uppercase tracking-[.12em] text-muted-foreground">
-            <Link href={localizeHref("/", language)} className="transition-colors hover:text-primary">{copy.home}</Link>
-            <span aria-hidden="true">/</span>
-            <Link href={localizeHref("/#projects", language)} className="transition-colors hover:text-primary">{copy.projects}</Link>
-            <span aria-hidden="true">/</span>
-            <span aria-current="page" className="text-foreground">{data.title}</span>
-          </nav>
+    <CaseShell identity={identity} title={data.title} plainTitle={data.title} eyebrow={data.eyebrow[language]}
+      lead={lead} facts={facts} actions={actions} contents={contents} previous={previous} next={next}
+      showcase={{ image: data.image, alt: data.imageAlt[language], viewTransitionName: data.viewTransitionName, caption: language === "es" ? "Vista del proyecto · Captura de la interfaz" : "Project preview · Interface screenshot" }}>
+      {editorial ?? <>
+        <Chapter id="context" number="01" label={copy.problem} title={data.problem.title[language]}>
+          <p className={styles.prose}>{data.problem.body[language]}</p>
+        </Chapter>
 
-          <div className={styles.heroGrid}>
-            <div>
-              <h1 className="text-[clamp(3.6rem,8vw,7.5rem)] font-black leading-[.82] tracking-[-.065em]">{data.title}</h1>
-              <p className="section-kicker mt-5">{data.eyebrow[language]}</p>
-              {data.introduction ? <div className={styles.introduction}>
-                <h2>{data.introduction.title[language]}</h2>
-                {data.introduction.paragraphs.map(paragraph => <p key={paragraph.en}>{paragraph[language]}</p>)}
-              </div> : <p className="mt-7 max-w-[62ch] text-lg font-medium leading-relaxed text-foreground/70 sm:text-xl">{data.summary[language]}</p>}
-              <div className="mt-7 border-l border-primary pl-4">
-                <p className="font-mono text-[11px] uppercase tracking-[.13em] text-muted-foreground">{copy.role}</p>
-                <p className="mt-2 max-w-[62ch] text-sm font-medium leading-relaxed text-foreground/82 sm:text-base">{data.role[language]}</p>
-                {data.introduction ? <><p className="section-kicker mt-5">{language === "es" ? "Stack principal" : "Core stack"}</p><p className="mt-2 text-sm leading-relaxed">React · Laravel · MySQL · Tailwind CSS · Zustand</p><p className="section-kicker mt-5">{language === "es" ? "Tipo" : "Type"}</p><p className="mt-2 text-sm">{data.introduction.type[language]}</p></> : null}
-              </div>
-              <div className="mt-8 flex flex-wrap gap-3">
-                {data.demo ? <a href={data.demo} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center gap-2 bg-primary px-5 text-sm font-bold text-primary-foreground">{data.introduction ? (language === "es" ? "Ver aplicación" : "View application") : copy.demo}<ArrowUpRight className="h-4 w-4" /></a> : null}
-                <a href={data.github} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center gap-2 border border-border/70 px-5 text-sm font-bold transition-colors hover:border-primary hover:text-primary"><FaGithub className="h-4 w-4" />{data.introduction ? (language === "es" ? "Explorar repositorio" : "Explore repository") : copy.code}</a>
-              </div>
-            </div>
-            <ProjectShowcase image={data.image} alt={data.imageAlt[language]} viewTransitionName={data.viewTransitionName} caption={language === "es" ? "Vista del proyecto · Captura de la interfaz" : "Project preview · Interface screenshot"} />
+        {data.gallery ? <section aria-label={language === "es" ? "Capturas del producto" : "Product screenshots"} className={styles.gallerySection}>
+          <div className={styles.gallery}>
+            {data.gallery.map(item => <figure key={item.image}>
+              <Image src={item.image} alt={item.caption[language]} width={1270} height={714} loading="lazy"
+                sizes="(max-width: 767px) 92vw, 80vw" />
+              <figcaption>{item.caption[language]}</figcaption>
+            </figure>)}
           </div>
-          <nav aria-label={language === "es" ? "Contenido del caso" : "Case contents"} className={styles.contents}>
-            {(editorial ? [["context", language === "es" ? "Contexto" : "Context"], ["design", "Home"], ["customer", language === "es" ? "Experiencia de cliente" : "Customer experience"], ["backoffice", "Backoffice"], ["architecture", copy.architecture], ["decisions", copy.decisions], ["result", language === "es" ? "Aprendizajes" : "Learnings"]] : [["context", copy.problem], ["decisions", copy.decisions], ["architecture", copy.architecture], ["result", copy.result]]).map(([id, label]) => <a key={id} href={`#${id}`}>{label}</a>)}
-          </nav>
-        </div>
-      </section>
+        </section> : null}
 
-      {editorial ?? <><section id="context" className="border-t border-border/55 px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[.75fr_1.25fr]">
-          <div><h2 className="text-3xl font-black leading-tight sm:text-5xl">{data.problem.title[language]}</h2><p className="section-kicker mt-5">01 / {copy.problem}</p></div>
-          <p className="max-w-[65ch] text-base font-medium leading-relaxed text-foreground/68 sm:text-lg">{data.problem.body[language]}</p>
-        </div>
-      </section>
-
-      {data.gallery ? <section aria-label={language === "es" ? "Capturas del producto" : "Product screenshots"}>
-        <div className={styles.gallery}>
-          {data.gallery.map(item => <figure key={item.image}>
-            <Image src={item.image} alt={item.caption[language]} width={1270} height={714} loading="lazy"
-              sizes="(max-width: 767px) 92vw, 80vw" />
-            <figcaption>{item.caption[language]}</figcaption>
-          </figure>)}
-        </div>
-      </section> : null}
-
-      <section className="border-t border-border/55 px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2">
-          <div><p className="section-kicker">02 / {copy.goals}</p><TextList items={data.goals} language={language} /></div>
-          <div><p className="section-kicker">03 / {copy.process}</p><div className="space-y-5">{data.process.map((step, index) => <article key={step.title.en} className="border-t border-border/55 pt-4"><p className="font-mono text-[11px] text-primary">0{index + 1}</p><h3 className="mt-2 text-xl font-black">{step.title[language]}</h3><p className="mt-2 text-sm font-medium leading-relaxed text-foreground/72">{step.body[language]}</p></article>)}</div></div>
-        </div>
-      </section>
-
-      <section id="decisions" className="border-t border-border/55 px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <h2 className="section-kicker">04 / {copy.decisions}</h2>
-          <div className="mt-8 grid gap-8 lg:grid-cols-2">
-            <div><h3 className="mb-5 text-2xl font-black">{copy.technical}</h3><TextList items={data.technicalDecisions} language={language} /></div>
-            <div><h3 className="mb-5 text-2xl font-black">{copy.ux}</h3><TextList items={data.uxDecisions} language={language} /></div>
+        <Chapter number="02" label={`${copy.goals} · ${copy.process}`} title={language === "es" ? "Qué debía resolver y cómo lo construí." : "What it had to solve and how I built it."}>
+          <div className={styles.split}>
+            <div><h3 className={styles.subhead}>{copy.goals}</h3><TextList items={data.goals} language={language} /></div>
+            <ol className={styles.steps}>
+              {data.process.map((step, index) => <li key={step.title.en}>
+                <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                <h3>{step.title[language]}</h3>
+                <p>{step.body[language]}</p>
+              </li>)}
+            </ol>
           </div>
-        </div>
-      </section>
+        </Chapter>
 
-      <section id="architecture" className="border-t border-border/55 px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[.75fr_1.25fr]">
-          <div><h2 className="text-3xl font-black leading-tight sm:text-5xl">{data.architecture[language]}</h2><p className="section-kicker mt-5">05 / {copy.architecture}</p></div>
-          <div className="grid content-start gap-2 sm:grid-cols-3">{data.stack.map((item) => <span key={item} className="border border-border/55 px-3 py-3 font-mono text-[11px] font-bold uppercase tracking-[.1em] text-muted-foreground">{item}</span>)}</div>
-        </div>
-      </section>
+        <Chapter id="decisions" number="03" label={copy.decisions} title={language === "es" ? "Decisiones que se pueden revisar en el código." : "Decisions you can review in the code."} tone="raised">
+          <div className={styles.split}>
+            <div><h3 className={styles.subhead}>{copy.technical}</h3><TextList items={data.technicalDecisions} language={language} /></div>
+            <div><h3 className={styles.subhead}>{copy.ux}</h3><TextList items={data.uxDecisions} language={language} /></div>
+          </div>
+        </Chapter>
 
-      <section className="border-y border-border/55 bg-card/35 px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-2">
-          <article><p className="section-kicker">06 / {copy.challenge}</p><p className="mt-5 text-lg font-medium leading-relaxed text-foreground/72">{data.challenge[language]}</p></article>
-          <article><p className="section-kicker">07 / {copy.solution}</p><p className="mt-5 text-lg font-medium leading-relaxed text-foreground/72">{data.solution[language]}</p></article>
-        </div>
-      </section>
+        <Chapter id="architecture" number="04" label={copy.architecture} title={data.architecture[language]}>
+          <ul className={styles.stackGrid} aria-label={copy.stack}>
+            {data.stack.map((item) => <li key={item}>{item}</li>)}
+          </ul>
+          <div className={`${styles.split} ${styles.pair}`}>
+            <article><h3 className={styles.subhead}>{copy.challenge}</h3><p className={styles.prose}>{data.challenge[language]}</p></article>
+            <article><h3 className={styles.subhead}>{copy.solution}</h3><p className={styles.prose}>{data.solution[language]}</p></article>
+          </div>
+        </Chapter>
 
-      <section id="result" className="px-4 py-20 sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[.8fr_1.2fr]">
-          <div><h2 className="text-3xl font-black leading-tight sm:text-5xl">{data.result[language]}</h2><p className="section-kicker mt-5">08 / {copy.result}</p></div>
-          <div><p className="mb-5 font-mono text-[11px] font-bold uppercase tracking-[.13em] text-muted-foreground">{copy.learnings}</p><TextList items={data.learnings} language={language} /><div className="mt-8 flex flex-wrap gap-4"><a href={data.github} target="_blank" rel="noopener noreferrer" className="cinema-link font-mono text-[11px] font-bold uppercase tracking-[.12em]"><FaGithub />{copy.code}</a>{data.demo ? <a href={data.demo} target="_blank" rel="noopener noreferrer" className="cinema-link font-mono text-[11px] font-bold uppercase tracking-[.12em]">{copy.demo}<ArrowUpRight /></a> : null}</div></div>
-        </div>
-      </section>
-
+        <Chapter id="result" number="05" label={copy.result} title={data.result[language]}>
+          <h3 className={styles.subhead}>{copy.learnings}</h3>
+          <TextList items={data.learnings} language={language} />
+          <div className={styles.inlineActions}>
+            <a href={data.github} target="_blank" rel="noopener noreferrer" className="cinema-link"><FaGithub aria-hidden="true" />{copy.code}<ArrowUpRight aria-hidden="true" /></a>
+            {data.demo ? <a href={data.demo} target="_blank" rel="noopener noreferrer" className="cinema-link">{copy.demo}<ArrowUpRight aria-hidden="true" /></a> : null}
+          </div>
+        </Chapter>
       </>}
-      {previous || next ? (
-        <nav aria-label={language === "es" ? "Otros casos de estudio" : "More case studies"} className="border-t border-border/55 px-4 py-10 sm:px-6 lg:px-8">
-          <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4">
-            {previous ? (
-              <Link href={previous.href} className="cinema-link font-mono text-[11px] font-bold uppercase tracking-[.12em]">
-                <ArrowLeft />{copy.previous}: {previous.title}
-              </Link>
-            ) : <span />}
-            {next ? (
-              <Link href={next.href} className="cinema-link font-mono text-[11px] font-bold uppercase tracking-[.12em]">
-                {copy.next}: {next.title}<ArrowUpRight />
-              </Link>
-            ) : null}
-          </div>
-        </nav>
-      ) : null}
-    </main>
+    </CaseShell>
   );
 }

@@ -1,226 +1,168 @@
 ---
-name: Alex Vicente Portfolio
-description: A precise frontend portfolio built around real interface and product work
+name: Alex Vicente Portfolio — Editorial Index
+description: A dark editorial portfolio where real project work is the first thing a recruiter reads
 colors:
-  background: "oklch(0.105 0.012 58)"
-  foreground: "oklch(0.94 0.013 86)"
-  surface: "oklch(0.145 0.014 58)"
-  primary: "oklch(0.72 0.115 42)"
-  accent: "oklch(0.72 0.115 42)"
-  muted: "oklch(0.68 0.012 82)"
-  border: "oklch(0.30 0.014 58)"
+  ink-0: "#0e0d0b"
+  ink-1: "#161512"
+  ink-2: "#201e1a"
+  ink-3: "#2c2924"
+  bone: "#f1ece2"
+  foreground-soft: "#d3ccc0"
+  stone: "#a9a196"
+  paper-0: "#ece6da"
+  paper-1: "#e2dbcc"
+  paper-ink: "#191714"
+  paper-muted: "#575047"
+  copper: "#d4895a"
+  copper-deep: "#8c4a24"
+  rule-dark: "#34302a"
+  rule-paper: "#bfb6a5"
 typography:
   display:
-    fontFamily: "Geist Sans, sans-serif"
-    fontSize: "clamp(3.2rem, 8vw, 7.4rem)"
-    fontWeight: 900
-    lineHeight: 0.9
-  body:
-    fontFamily: "Geist Sans, sans-serif"
-    fontSize: "1rem"
+    fontFamily: "Geist, system-ui, sans-serif"
+    fontSize: "clamp(3.25rem, 6vw, 6rem)"
     fontWeight: 500
+    lineHeight: 0.92
+    letterSpacing: "-0.04em"
+  accent:
+    fontFamily: "Instrument Serif, Georgia, serif"
+    fontStyle: italic
+    fontWeight: 400
+  body:
+    fontFamily: "Geist, system-ui, sans-serif"
+    fontSize: "1rem"
+    fontWeight: 400
     lineHeight: 1.65
   label:
-    fontFamily: "Geist Mono, monospace"
+    fontFamily: "Geist Mono, ui-monospace, monospace"
     fontSize: "0.6875rem"
-    fontWeight: 700
-    letterSpacing: "0.16em"
+    fontWeight: 400
+    letterSpacing: "0.08em"
 rounded:
-  control: "8px"
-  surface: "12px"
+  control: "2px"
+  media: "0"
 spacing:
-  xs: "8px"
-  sm: "12px"
-  md: "16px"
-  lg: "24px"
-  xl: "32px"
+  gutter: "clamp(1.25rem, 4.4vw, 4rem)"
+  page: "90rem"
+  header: "4.5rem"
+  target: "2.75rem"
 components:
-  button-primary:
-    backgroundColor: "{colors.primary}"
-    textColor: "{colors.background}"
-    rounded: "{rounded.surface}"
-    padding: "16px 28px"
-  card:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.foreground}"
-    rounded: "{rounded.surface}"
-    padding: "24px"
+  action-primary:
+    backgroundColor: "{colors.copper}"
+    textColor: "{colors.ink-0}"
+    rounded: "{rounded.control}"
+    minHeight: "3.25rem"
+  action-secondary:
+    border: "1px solid foreground 34%"
+    textColor: "{colors.bone}"
+    rounded: "{rounded.control}"
 ---
 
-# Design System: Alex Vicente Portfolio
+# Design System: Editorial Index
 
-## Portfolio como experiencia - direccion vigente (2026-10-23)
+Current direction since 2026-11-05. It replaces the 2026-10 "studio sculpture"
+direction (black, ivory and lime with a chrome hero object) and the earlier
+ALEVICLOP 2.x experiments. Those decisions are historical; the redesign record,
+the three explored directions and the evidence live in
+[docs/EDITORIAL_INDEX_REDESIGN.md](docs/EDITORIAL_INDEX_REDESIGN.md).
 
-Refinamiento de estudio digital: impacto visual con trabajo real protagonista.
-Se conservan textos, rutas, anclas, CV, backend y metadatos ES/EN.
+**Visual thesis.** The work is the interface: the portfolio reads like a
+printed index of real projects, set in confident type, with each project shown
+as a large art-directed spread and its engineering facts written beside it.
 
-- Negro #0c0d0c, marfil #f0f1e8 y lima #d4ff67. Perfil y casos sobre
-  papel mineral #e9ece1, con tinta #151913.
-- Portada escultorica con lectura despejada. Titular hasta 9rem en escritorio,
-  tracking -0.04em y una composicion vertical en movil sin texto sobre el cromo.
-- Indice visual de los tres proyectos existentes, con enlaces nativos a cada
-  escena y acciones de caso diferenciadas de los enlaces secundarios.
-- Capturas de producto mas amplias en casos, con menos espacio vacio en el marco.
-- Orden DOM y visual coincidentes en contacto, con enlaces antes del formulario.
-- Navegacion flotante y dialogo nativo. Se conservan teclado, Escape, retorno
-  de foco, alternativas sin JavaScript y movimiento reducido en vivo.
-- Sin dependencias nuevas ni afirmaciones nuevas sobre experiencia o resultados.
+**Ambition:** Immersive, expressed through composition and one signature
+interaction rather than WebGL. No new dependencies.
 
-Detalles del recurso visual y validaciones: [EXPERIENCE_REDESIGN.md](docs/EXPERIENCE_REDESIGN.md).
-Las notas siguientes documentan direcciones anteriores y su alcance historico.
+## Colour
 
-## ALEVICLOP 2.1 — Code / Composition (2026-10-11)
+One warm-black workspace, one paper chapter and one accent.
 
-El usuario autoriza convertir la exploración aprobada en la home principal local.
-Esta dirección sustituye el hero M1: Código / Criterio en ES, Code / Craft en EN,
-monograma AV vectorial y capturas reales de LumaFlow y Distrito Gourmet.
-Fondo `#10151E`, secciones de proyectos y experiencia en gris mineral `#292D32`,
-marfil `#F5F3EE` y acento `#ADC1FF`. La clase `code-home` limita los nuevos tokens
-a la home; estudios de caso, rutas, formulario y SEO conservan sus contratos.
-Movimiento de entrada sobre elementos gráficos, desplazamiento exterior de 18 px
-solo en escritorio y contenido profesional siempre visible. La entrada se omite
-si la hidratación llega tarde. Los CTAs circulares mantienen foco y área fija.
-El lanzamiento continúa detenido: esta integración no autoriza publicar.
-Ver `docs/ALEVICLOP_2_1.md` para validación y límites.
+- `ink-0` page, `ink-1` raised chapters and alerts, `ink-2` media wells.
+- `bone` primary text, `foreground-soft` reading text, `stone` metadata.
+  Text is always opaque; secondary text never uses translucent colour.
+- `copper` is the only accent: primary action, active state, numbers, accent
+  phrases. On paper it becomes `copper-deep` to keep AA.
+- The paper surface (`.surface-paper`) is used once on the home page, for the
+  profile chapter (capabilities and experience), so the CV reads as a document.
+- Case-study heroes carry a project identity through local tokens on
+  `[data-case]`: Distrito Gourmet on paper with green `#2f4a3c`, LumaFlow
+  Studio on ink with copper, raw.vives on night green `#0f1615` with
+  `#d9a27c`. Chapters below the hero return to the shared system.
 
-## ALEVICLOP 2.0 — M1 override (2026-10-10)
-
-La especificación explícita del usuario sustituye la dirección anterior en la home:
-Dark Editorial / Equilibrio Premium. Fondo `#0B0D12`, superficie `#171A22`,
-marfil `#F5F3EE`, secundario `#A6AAB7`, azul `#7686FF` y naranja puntual `#FF6542`.
-Space Grotesk para display, Inter para cuerpo e IBM Plex Mono para etiquetas.
-Los tokens viven en `.premium-home` en `app/globals.css`; hero y navegación usan
-CSS Modules, una retícula de 12 columnas y un contenedor máximo de 1440px.
-
-El hero es tipográfico, con tres líneas, cierre azul, nombre visible, perfil junior,
-acceso a proyectos, CV y experiencia. Entrada GSAP de 1,3s; desplazamiento del
-titular limitado a 20px en escritorio. Botones magnéticos: solo el contenido se
-mueve (4px / 3px), con zona clicable fija. Movimiento opcional y contenido SSR visible.
-Navegación móvil con diálogo nativo, cierre con Escape y retorno de foco; enlaces
-alternativos sin JavaScript. No se publica una nueva disponibilidad sin confirmación.
-
-M1 no rediseña proyectos ni estudios de caso. La dirección anterior, documentada
-debajo, sigue rigiendo esas superficies hasta M2. Componentes y assets 3D conservados,
-pero fuera del hero. Ver `docs/ALEVICLOP_2_0.md` para alcance y siguientes hitos.
-
-## Overview
-
-**Creative North Star: "Visual Systems / Quiet Cinema"**
-
-El portfolio se comporta como una secuencia editorial: oscuro, preciso y material. Fotografía real, tipografía de gran escala y movimiento ligado al scroll construyen profundidad sin convertir la página en una demostración de efectos.
-
-La identidad rechaza los portfolios tecnológicos genéricos construidos como una plantilla SaaS y la estética de IA basada en glassmorphism, brillos, contadores y tarjetas repetidas sin contenido real.
-
-**Key Characteristics:**
-
-- Desarrollo full-stack de principio a fin con casos reales, de la interfaz a la API y los datos.
-- Carbón y marfil con un único acento cobre controlado.
-- Tipografía de gran escala compensada con texto cómodo y directo.
-- Movimiento expresivo, siempre opcional mediante reducción de movimiento.
-
-**The Motion Budget Rule.** Una entrada orquestada en el hero, una entrada breve por lista y microinteracciones de estado. No se animan secciones completas por costumbre ni se acumulan efectos simultáneos.
-
-## Colors
-
-La paleta usa un negro cálido como espacio de trabajo, tinta clara y cobre para dirigir la atención; el verde queda reservado a disponibilidad y estados positivos.
-
-**The Evidence Rule.** El color primario señala acciones y decisiones importantes; nunca compensa contenido débil.
+Measured contrast (WCAG): copper on ink 6.96:1, stone on ink 7.6:1,
+placeholder `#958d82` on ink ≈5.7:1, ink on copper 6.96:1.
 
 ## Typography
 
-**Display Font:** Geist Sans (sans-serif)
-**Body Font:** Geist Sans (sans-serif)
-**Label/Mono Font:** Geist Mono (monospace)
+- **Geist** for display and reading, 500 for headings, 400 for body.
+  Display is capped at 6rem with −0.04em tracking.
+- **Instrument Serif italic** is reserved for short accent phrases: the role
+  in the hero, the second half of section headings and `raw.vives`. Never for
+  paragraphs.
+- **Geist Mono** only for data and metadata: dates, numbers, stack names,
+  captions, breadcrumb. Not as decoration.
+- No eyebrow or kicker above headings. Metadata follows the heading it
+  describes. Numbers appear only where sequence is information (project
+  index, chapter column on desktop).
 
-**Character:** Directa y contemporánea. La escala display da presencia creativa; la familia mono aporta precisión únicamente en metadatos breves.
+## Layout
 
-### Hierarchy
+- 12-column grid, `--page-width` 90rem, fluid gutter.
+- Hero: name and role (h1) left, introduction, actions and links right; the
+  project index and the live plate share the lower band, so name, position,
+  CV, contact and all three projects are visible in a 1440×900 first viewport.
+- Selected work: three spreads, each with a large primary plate and an offset
+  companion view (bottom-right overlap, bottom-left overlap, staggered
+  diptych), then a facts ledger (my part, evidence, stack) and actions.
+- Archive: a single ledger list, not a card grid.
+- Case studies: shared `CaseShell` (top bar, breadcrumb, title, lead, facts,
+  actions, full-width showcase, contents) and numbered `Chapter` sections
+  with a sticky label column on desktop.
+- Breakpoints: 1024 (single column, plate hidden, thumbnails in the index),
+  640 (stacked ledgers, companion views hidden), 480 (compact hero).
 
-- **Display** (900, `clamp(3.2rem, 8vw, 7.4rem)`, 0.9): nombre y titulares dominantes.
-- **Headline** (900, `clamp(2.5rem, 6vw, 4.5rem)`, 0.96): títulos de sección.
-- **Body** (500, `1rem–1.25rem`, 1.65): argumentos y contexto, con un máximo aproximado de 70 caracteres.
-- **Label** (700, `0.6875rem`, `0.16em`, mayúsculas): categorías y metadatos puntuales.
+## Components and states
 
-**The Mono Ratio Rule.** Geist Mono nunca se usa como cuerpo de texto ni como sustituto automático de personalidad técnica.
+- `.action-primary` / `.action-secondary`: 2px radius, 52px tall, icon at the
+  trailing edge. Hover swaps to bone; focus uses the global copper outline.
+- `.cinema-link`: text link with a 44px target.
+- Form fields: underline inputs, mono labels, inline errors in text plus
+  colour, `aria-invalid` border, 1px bordered success/error panels with retry
+  and direct-email fallback.
+- Navigation: transparent bar that becomes solid on scroll, desktop links plus
+  CV, language toggle and the native `<dialog>` menu on every size.
+- Browser surfaces: themed selection, caret and scrollbar.
 
-## Elevation
+## Motion
 
-La profundidad se construye principalmente con contraste tonal y bordes. Las sombras son ambientales y contenidas; aparecen en superficies protagonistas o durante una interacción, no en cada contenedor.
+Budget: one authored moment plus restrained reveals.
 
-**The Surface Rule.** Una superficie en reposo usa borde o sombra, nunca ambos como decoración dominante.
+1. **Signature — the project plate.** Hovering (fine pointer) or focusing an
+   index row wipes the plate to that project with a 650ms `clip-path` reveal
+   and a slight image settle. With reduced motion it swaps instantly.
+   Clicking claims the project's `view-transition-name`, so the plate morphs
+   into the case-study showcase on supporting browsers.
+2. Hero entrance: masked line rise, plate wipe and index rows, skipped when
+   hydration is late.
+3. Scene reveals once per project (title, plate mask, companion), completed
+   on fast scroll.
 
-## Components
+No parallax, no sticky stacking, no permanent loops. Every effect lives in a
+`gsap.matchMedia` reduced-motion branch and reverts cleanly.
 
-### Buttons
+## Imagery
 
-- **Shape:** esquinas firmes suavizadas (8–12px).
-- **Primary:** cobre, texto oscuro y padding generoso.
-- **Hover / Focus:** desplazamiento máximo de 2px y foco visible de alto contraste.
-- **Secondary:** borde discreto y fondo tonal; nunca cristal decorativo.
+Only real screenshots, recorded-demo frames and Alex's own photographs. Captions
+say what each image is (published site, sample data, demo frame). Distrito's
+home plate uses the published site capture; no private or proprietary assets.
 
-### Chips
+## Acceptance criteria
 
-- **Style:** etiquetas breves con Geist Mono, sin competir con el título.
-- **State:** la selección usa fondo primario; el resto mantiene contraste AA.
-
-### Cards / Containers
-
-- **Corner Style:** 12px como máximo habitual.
-- **Background:** superficies oscuras tonales.
-- **Shadow Strategy:** elevación solo en protagonistas o interacción.
-- **Border:** una línea semitransparente.
-- **Internal Padding:** 24–32px en escritorio y 16–24px en móvil.
-
-### Inputs / Fields
-
-- **Style:** fondo tonal, borde visible y radio de 8px.
-- **Focus:** borde primario y anillo perceptible.
-- **Error / Disabled:** mensaje textual además del color.
-
-### Navigation
-
-Barra persistente compacta, con sección activa reconocible, acceso secundario al CV e idioma. En móvil se convierte en un diálogo de navegación con cierre por teclado.
-
-### Project Scenes
-
-Cuatro proyectos principales se muestran como escenas amplias con imagen, rol, stack y enlaces. Una entrada discreta acompaña cada proyecto, sin parallax continuo. El resto vive en un archivo editorial compacto.
-
-## Do's and Don'ts
-
-### Do:
-
-- **Do** presentar primero el trabajo full-stack de principio a fin y respaldar cada capa con evidencia real.
-- **Do** mostrar imágenes reales, decisiones y resultados verificables.
-- **Do** probar cada cambio a 390px y 1440px con movimiento reducido.
-
-### Don't:
-
-- **Don't** convertir el portfolio en una plantilla SaaS genérica.
-- **Don't** usar glassmorphism, brillos, contadores y tarjetas repetidas sin contenido real como identidad.
-- **Don't** añadir efectos que compitan con los proyectos o perjudiquen rendimiento y accesibilidad.
-- **Don't** reducir el perfil a una sola capa del desarrollo web.
-
-## ALEVICLOP 2.0 — extensión aprobada M2 (2026-10-10)
-
-M2 extiende Dark Editorial / Equilibrio Premium desde M1 a Selected Work y los tres estudios de caso existentes, en home e índice de proyectos. Conserva tokens globales legacy fuera de esas superficies y no regenera frontmatter ni sidecar. Evidencia y validaciones: [M2_SELECTED_WORK.md](docs/M2_SELECTED_WORK.md).
-
-- Space Grotesk 500 para títulos; Inter para cuerpo; IBM Plex Mono 400 para metadatos bajo el título. Sección `clamp(3.5rem, 8vw, 7rem)`; proyecto `clamp(2.75rem, 5.3vw, 5rem)`; raw.vives `clamp(3.75rem, 11vw, 9rem)`; cuerpos con 42ch y línea 1.65–1.7.
-- Retícula de 12 columnas y ancho máximo 90rem; desde 1023px hacia abajo, lectura vertical título → imagen → detalles. Escenas amplias de borde fino, sin tarjetas anidadas. AI panorámico, Distrito imagen izquierda sobre marfil, Luma interfaz derecha y raw.vives composición editorial asimétrica.
-- Paleta M1 de fondo, texto y azul; Distrito usa localmente marfil `#F5F3EE`, texto `#0B0D12`, secundario `#4A514C` y verde `#344E43`. Estas excepciones de proyecto no sustituyen el acento global.
-- Media real optimizada, pies que distinguen desarrollo/datos de ejemplo, lazy loading y proporción reservada. Preview alternativo solo condicional tras mouse/foco en desktop compatible; acciones completas sin hover.
-- Revelado GSAP diferido y scoped, entradas 18/12px y máscara 0.75s; parallax exclusivamente de imagen ±10px en desktop ≥1024px con puntero fino. Esta excepción aprobada sustituye «sin parallax continuo» solo para M2. Movimiento reducido y SSR/sin JS conservan acceso al contenido.
-- Casos con hero amplio, anclas internas con enlaces de 44px de alto mínimo, esquinas rectas y contraste editorial marfil en el bloque de contexto. Código privado se expresa como estado textual y contacto, sin enlace público roto.
-
-No se canonizan etiquetas encima de titulares, avisos consultivos de paleta legacy ni métricas de laboratorio como resultados de producto. No se reparan las superficies fuera del alcance M2 para disimular esa deriva.
-
-## ALEVICLOP 2.0 — refinamiento M3 (2026-10-11)
-
-M3 mantiene la composición de M1/M2 y coordina el movimiento mediante `motion` en `lib/gsap.ts`: estados 140/240 ms, entrada 450 ms, títulos 600 ms, máscaras 650 ms y líneas del hero 800 ms; `power3.out` / `expo.out`, stagger 40/80 ms y desplazamientos 8/12/18 px. CSS comparte las duraciones de estado y la curva de salida. [Evidencia, límites y validación M3](docs/M3_MOTION_POLISH.md).
-
-- Entradas de sección al 88% del viewport, con contenido visible y finalización al saltar la sección. Hero conserva su presupuesto; descripción LCP sin entrada ni transformación.
-- Cursor nativo. Foco inmediato, botones estables y menú accesible. Movimiento reducido también al cambiar la preferencia durante la sesión.
-- Preview alternativo tras interacción compatible y carga completa; crossfade reversible de 240 ms, sin reemplazar la imagen principal durante la carga. Touch no depende de hover.
-- Inter, Space Grotesk 500 e IBM Plex Mono 400 dan continuidad a las superficies premium. Se mantiene el parallax acotado de M2 exclusivamente en desktop compatible.
-- Contacto permanece legible durante la entrada, con estado de envío accesible y borrador conservado. Transiciones entre páginas breves, sin desplazamiento raíz ni demora previa a navegar.
-
-Estos criterios no añaden efectos continuos ni habilitan M4. La incidencia de LCP móvil permanece abierta.
+- Name, role, CV, contact and the three projects visible without scrolling at
+  1440×900; name, role, both actions at 390×844.
+- No horizontal overflow at 320, 390, 768, 1440 and 1920.
+- Keyboard: every row, plate action and form control reachable with a visible
+  focus ring; the menu dialog traps and restores focus.
+- Reduced motion: no transforms remain after a live preference change.
+- `pnpm lint`, `pnpm typecheck`, `pnpm test`, `pnpm build` and the Playwright
+  suite pass.

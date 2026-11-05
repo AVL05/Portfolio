@@ -14,7 +14,10 @@
     "cv": "Descargar CV",
     "profile": "Frontend, backend y datos. De principio a fin.",
     "experience": "Experiencia y formación",
-    "artLabels": ["Interfaz", "API", "Datos"]
+    "artLabels": ["Interfaz", "API", "Datos"],
+    "contact": "Contacto",
+    "index": "Proyectos seleccionados",
+    "indexHint": "Tres casos de estudio con capturas reales, decisiones técnicas y código revisable."
   },
   "skills": {
     "desc": "Mi especialidad es el desarrollo web de principio a fin. El diseño de interfaces, la IA aplicada y mi base técnica en sistemas complementan mi perfil.",
@@ -222,14 +225,14 @@
       {
         "title": "Desarrollo de Aplicaciones Web",
         "institution": "IES Serra Perenxisa",
-        "period": "2024 - 2026",
+        "period": "2024 — 2026",
         "location": "Torrent, Valencia",
         "description": "Formación en desarrollo frontend y backend, bases de datos, diseño de interfaces, despliegue y arquitectura de aplicaciones web."
       },
       {
         "title": "Sistemas Microinformáticos y Redes",
         "institution": "Enseñanzas Profesionales Sorolla",
-        "period": "2022 - 2024",
+        "period": "2022 — 2024",
         "location": "Valencia",
         "description": "Base técnica en administración de sistemas, redes, hardware, soporte y resolución de incidencias."
       }
@@ -252,7 +255,7 @@
         "title": "Técnico informático en prácticas",
         "contract": "Prácticas",
         "company": "Ajuntament de Carlet",
-        "period": "Mar 2024 — Jun 2024",
+        "period": "mar. 2024 — jun. 2024",
         "location": "Carlet, Valencia",
         "description": "Soporte técnico presencial para puestos de trabajo e infraestructura municipal.",
         "highlights": [

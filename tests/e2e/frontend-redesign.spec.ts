@@ -32,7 +32,7 @@ for (const route of routes) {
     );
     expect(clippedHeadings).toEqual([]);
     expect(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)).toBe(false);
-    const clippedNavigation = await page.locator("main > section:first-child nav:first-child a").evaluateAll(elements =>
+    const clippedNavigation = await page.locator("main > section:first-child > nav:first-child a").evaluateAll(elements =>
       elements.filter(element => {
         const box = element.getBoundingClientRect();
         return box.left < -1 || box.right > innerWidth + 1;
@@ -40,7 +40,9 @@ for (const route of routes) {
     );
     expect(clippedNavigation).toEqual([]);
 
+    // Responsive duplicates (hero thumbnails on touch, plate on desktop) are not rendered at every width.
     for (const image of await page.locator("main img").all()) {
+      if (!(await image.isVisible())) continue;
       await image.scrollIntoViewIfNeeded();
       await expect.poll(() => image.evaluate(element => (element as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
     }
@@ -60,35 +62,33 @@ test("unmatched routes retain the shared design and localized recovery", async (
   for (const route of ["/missing-page", "/en/missing-page"]) {
     expect((await page.goto(route))?.status()).toBe(404);
     await expect(page.locator("h1")).toHaveText(route.startsWith("/en") ? "Page not found." : "Página no encontrada.");
-    await expect(page.locator("main")).toHaveCSS("background-color", "rgb(12, 13, 12)");
+    await expect(page.locator("main")).toHaveCSS("background-color", "rgb(14, 13, 11)");
     await expect(page.locator(".utility-code")).toHaveAttribute("aria-hidden", "true");
   }
 });
 
-test("the sculpture and project deck respect pointer and live reduced motion", async ({ page }, testInfo) => {
+test("the hero plate follows pointer and keyboard focus, and reduced motion swaps instantly", async ({ page }, testInfo) => {
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.goto("/");
   await page.waitForLoadState("networkidle");
-  const art = page.locator("[data-art-pointer]");
-  await expect(page.locator("[data-art-primary]")).toBeVisible();
-  expect(await page.locator("[data-art-primary]").evaluate(element => (element as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+  const rows = page.locator("[data-hero-row] a");
+  const plate = page.locator("[data-hero-plate]");
+  await expect(rows).toHaveCount(3);
+  await expect(rows.first()).toHaveAttribute("data-active", "true");
   if (testInfo.project.name.includes("desktop")) {
-    await page.mouse.move(1300, 300);
-    await expect.poll(() => art.evaluate(element => Math.abs(new DOMMatrix(getComputedStyle(element).transform).m41))).toBeGreaterThan(2);
-    const movement = await art.evaluate(element => {
-      const matrix = new DOMMatrix(getComputedStyle(element).transform);
-      return { x: Math.abs(matrix.m41), y: Math.abs(matrix.m42) };
-    });
-    expect(movement.x).toBeLessThanOrEqual(14.1);
-    expect(movement.y).toBeLessThanOrEqual(10.1);
-    await expect(page.locator(".project-scene").first()).toHaveCSS("position", "sticky");
+    await expect(plate).toBeVisible();
+    expect(await plate.locator("img").first().evaluate(element => (element as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+    await rows.nth(1).hover();
+    await expect(rows.nth(1)).toHaveAttribute("data-active", "true");
+    await expect.poll(() => plate.locator('[data-plate-layer="1"]').evaluate(element => getComputedStyle(element).clipPath)).toMatch(/inset\(0(px)?( 0(px|%)?)*\)|none/);
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await rows.nth(2).focus();
+    await expect(rows.nth(2)).toHaveAttribute("data-active", "true");
+    expect(await plate.locator('[data-plate-layer="2"]').evaluate(element => getComputedStyle(element).clipPath)).toMatch(/inset\(0(px)?( 0(px|%)?)*\)|none/);
   } else {
-    await expect(art).toHaveCSS("transform", "none");
-    await expect(page.locator(".project-scene").first()).toHaveCSS("position", "relative");
+    await expect(plate).toBeHidden();
+    await expect(rows.first().locator("img")).toBeVisible();
   }
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await expect(art).toHaveCSS("transform", "none");
-  await expect(page.locator("[data-art-stage]")).toHaveCSS("transform", "none");
   await expect(page.locator(".project-scene").first()).toHaveCSS("position", "relative");
 });
 
@@ -111,20 +111,19 @@ test("photography links keep a visible focus against the dark gallery", async ({
   const link = page.locator('#photography a').first();
   await link.focus();
   await expect(link).toBeFocused();
-  await expect(link).toHaveCSS("outline-color", "rgb(240, 241, 232)");
+  await expect(link).toHaveCSS("outline-color", "rgb(212, 137, 90)");
   await expect(link).toHaveCSS("outline-style", "solid");
 });
 
-test("visual project index reaches each full case preview", async ({ page }) => {
+test("the hero index opens each case and every scene keeps its case action", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
-  const index = page.getByRole("navigation", { name: "Explorar proyectos seleccionados" });
+  const index = page.getByRole("navigation", { name: /Proyectos seleccionados/ });
   await expect(index.getByRole("link")).toHaveCount(3);
-  for (const [number, title] of ["Distrito Gourmet", "LumaFlow Studio", "raw.vives"].entries()) {
-    const link = index.getByRole("link", { name: title, exact: true });
-    await expect(link).toHaveAttribute("href", `#work-${number + 1}`);
-    await link.click();
+  for (const [number, [title, slug]] of [["Distrito Gourmet", "distrito-gourmet"], ["LumaFlow Studio", "lumaflow-studio"], ["raw.vives", "raw-vives"]].entries()) {
+    await expect(index.getByRole("link", { name: new RegExp(`^${title.replace(".", "\\.")}`) })).toHaveAttribute("href", `/proyectos/${slug}`);
     const scene = page.locator(`#work-${number + 1}`);
+    await scene.scrollIntoViewIfNeeded();
     await expect(scene.getByRole("heading", { name: title, exact: true })).toBeInViewport();
     const action = scene.getByRole("link", { name: "Ver caso de estudio", exact: true });
     await expect(action).toBeVisible();

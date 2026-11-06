@@ -13,6 +13,7 @@
     "lint": "eslint .",
     "start": "next start",
     "test": "node --test",
+    "test:smoke": "playwright test --grep @smoke",
     "test:e2e": "playwright test",
     "test:seo": "playwright test tests/e2e/seo.spec.ts",
     "typecheck": "tsc --noEmit"

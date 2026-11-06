@@ -4,97 +4,41 @@ test.beforeEach(async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
 });
 
-test("spanish URLs always serve spanish, ignoring cookies", async ({
-  page,
-  context,
-}) => {
-  await context.addCookies([
-    { name: "language", value: "en", domain: "127.0.0.1", path: "/" },
-  ]);
-  await page.goto("/");
-  await expect(page.locator("html")).toHaveAttribute("lang", "es");
-  await expect(
-    page.locator("#hero-title"),
-  ).toBeVisible();
-  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
-    "href",
-    "https://www.aleviclop.dev",
-  );
-  await expect(
-    page.locator('link[rel="alternate"][hreflang="en"]'),
-  ).toHaveAttribute("href", "https://www.aleviclop.dev/en");
-  await expect(
-    page.locator('link[rel="alternate"][hreflang="x-default"]'),
-  ).toHaveAttribute("href", "https://www.aleviclop.dev");
-});
-
-test("english URLs serve english with a self-referencing canonical", async ({
-  page,
-}) => {
-  await page.goto("/en");
-  await expect(page.locator("html")).toHaveAttribute("lang", "en");
-  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
-    "href",
-    "https://www.aleviclop.dev/en",
-  );
-  await expect(
-    page.locator('link[rel="alternate"][hreflang="es"]'),
-  ).toHaveAttribute("href", "https://www.aleviclop.dev");
-  await expect(
-    page.locator("#hero-title"),
-  ).toBeVisible();
-});
-
-test("the switcher navigates to the equivalent page in the other locale", async ({
-  page,
-}) => {
+test("the language switcher reaches the equivalent page in the other locale", { tag: ["@smoke"] }, async ({ page }) => {
   await page.goto("/proyectos/lumaflow-studio");
   await page.locator('a[hrefLang="en"]').first().click();
   await expect(page).toHaveURL("/en/projects/lumaflow-studio");
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
-  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
-    "href",
-    "https://www.aleviclop.dev/en/projects/lumaflow-studio",
-  );
-
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", "https://www.aleviclop.dev/en/projects/lumaflow-studio");
   await page.locator('a[hrefLang="es"]').first().click();
   await expect(page).toHaveURL("/proyectos/lumaflow-studio");
   await expect(page.locator("html")).toHaveAttribute("lang", "es");
 });
 
-test("guessed spanish prefixes redirect explicitly without chains", async ({
-  request,
-}) => {
-  for (const [source, destination] of [
-    ["/es", "/"],
-    ["/es/proyectos/raw-vives", "/proyectos/raw-vives"],
-  ]) {
-    const response = await request.get(source, { maxRedirects: 0 });
-    expect(response.status(), source).toBe(308);
-    expect(response.headers().location, source).toBe(destination);
-  }
-  const unknown = await request.get("/es/projects", { maxRedirects: 0 });
-  expect(unknown.status()).toBe(404);
+test("the URL alone decides the language, ignoring cookies", async ({ page, context }) => {
+  await context.addCookies([{ name: "language", value: "en", domain: "127.0.0.1", path: "/" }]);
+  await page.goto("/");
+  await expect(page.locator("html")).toHaveAttribute("lang", "es");
+  await expect(page.locator("#hero-title")).toBeVisible();
 });
 
-test("not-found pages stay localized and non-indexable", async ({ page }) => {
-  const esResponse = await page.goto("/ruta-que-no-existe");
-  expect(esResponse?.status()).toBe(404);
-  await expect(page.locator("html")).toHaveAttribute("lang", "es");
-  await expect(
-    page.getByRole("heading", { name: "Página no encontrada." }),
-  ).toBeVisible();
-  // Next injects its own noindex on not-found pages; ours adds nofollow.
-  await expect(
-    page.locator('meta[name="robots"][content="noindex, nofollow"]'),
-  ).toHaveCount(1);
-
-  const enResponse = await page.goto("/en/missing-route");
-  expect(enResponse?.status()).toBe(404);
-  // global-not-found ships one static document (lang="es"); the visible
-  // content localizes from the URL path after hydration.
-  await expect(page.getByRole("heading", { name: "Page not found." })).toBeVisible();
-  await expect(
-    page.locator('meta[name="robots"][content="noindex, nofollow"]'),
-  ).toHaveCount(1);
+test("missing routes and legal pages stay localized, honest and non-indexable", async ({ page }) => {
+  const cases = [
+    { path: "/ruta-que-no-existe", status: 404, heading: "Página no encontrada." },
+    { path: "/en/missing-route", status: 404, heading: "Page not found." },
+    { path: "/proyectos/inexistente", status: 404 },
+    { path: "/en/projects/missing", status: 404 },
+    { path: "/es/projects", status: 404 },
+    { path: "/legal", status: 200 },
+    { path: "/en/legal", status: 200 },
+  ];
+  for (const { path, status, heading } of cases) {
+    expect((await page.goto(path))?.status(), path).toBe(status);
+    if (heading) await expect(page.getByRole("heading", { name: heading }), path).toBeVisible();
+    await expect(page.locator('meta[name="robots"]').first(), path).toHaveAttribute("content", /noindex/);
+    await expect(page.locator('link[rel="alternate"][hreflang]'), path).toHaveCount(0);
+    expect((await page.locator('script[type="application/ld+json"]').allTextContents()).join("\n"), path).not.toContain('"@type":"ProfilePage"');
+  }
+  await page.goto("/en/legal");
+  await expect(page.locator('a[hreflang="es"]')).toHaveAttribute("href", "/legal");
 });

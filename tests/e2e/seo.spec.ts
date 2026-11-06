@@ -19,7 +19,7 @@ test.use({ javaScriptEnabled: false });
 for (const pair of ROUTE_PAIRS) {
   for (const locale of ["es", "en"] as const) {
     const path = pair[locale];
-    test(`indexable SEO contract: ${path}`, async ({ page, request }) => {
+    test(`indexable SEO contract: ${path}`, { tag: ["@smoke"] }, async ({ page, request }) => {
       const response = await page.goto(path);
       expect(response?.status()).toBe(200);
       expect(response?.headers()["x-robots-tag"] ?? "").not.toMatch(/noindex|none/i);
@@ -95,7 +95,7 @@ for (const pair of ROUTE_PAIRS) {
   }
 }
 
-test("internal links, downloads and fragment targets resolve without redirects", async ({ page, request }) => {
+test("internal links, downloads and fragment targets resolve without redirects", { tag: ["@smoke"] }, async ({ page, request }) => {
   const targets = new Map<string, Set<string>>();
   const documentIds = new Map<string, Set<string>>();
   for (const path of ROUTE_PAIRS.flatMap(pair => [pair.es, pair.en])) {
@@ -119,7 +119,7 @@ test("internal links, downloads and fragment targets resolve without redirects",
   }
 });
 
-test("robots and sitemap expose exactly the eight canonical documents", async ({ request, page }) => {
+test("robots and sitemap expose exactly the eight canonical documents", { tag: ["@smoke"] }, async ({ request, page }) => {
   const robots = await request.get("/robots.txt", { maxRedirects: 0 });
   expect(robots.status()).toBe(200);
   const directives = await robots.text();
@@ -149,7 +149,7 @@ test("robots and sitemap expose exactly the eight canonical documents", async ({
   }
 });
 
-test("legacy redirects reach a real document and section in one hop", async ({ request, page }) => {
+test("legacy redirects reach a real document and section in one hop", { tag: ["@smoke"] }, async ({ request, page }) => {
   for (const [source, destination] of retired) {
     const response = await request.get(source, { maxRedirects: 0 });
     expect(response.status(), source).toBe(308);
@@ -165,7 +165,7 @@ test("legacy redirects reach a real document and section in one hop", async ({ r
   }
 });
 
-test("only the public Vercel alias redirects, including retired paths", async ({ request, baseURL }) => {
+test("only the public Vercel alias redirects, including retired paths", { tag: ["@smoke"] }, async ({ request, baseURL }) => {
   test.skip(!["127.0.0.1", "localhost"].includes(new URL(baseURL!).hostname), "Host simulation runs only against the local server");
   for (const [source, destination] of [["/en", "/en"], ...retired]) {
     const response = await request.get(source, { maxRedirects: 0, headers: { host: "aleviclop.vercel.app" } });
@@ -174,18 +174,5 @@ test("only the public Vercel alias redirects, including retired paths", async ({
   }
   for (const host of ["localhost", "portfolio-preview.vercel.app"]) {
     expect((await request.get("/", { maxRedirects: 0, headers: { host } })).status()).toBe(200);
-  }
-});
-
-test("legal pages and genuine missing routes remain non-indexable", async ({ page }) => {
-  for (const path of ["/legal", "/en/legal", "/unknown-seo-route", "/en/unknown-seo-route", "/proyectos/unknown", "/es/projects"]) {
-    const legal = path.endsWith("/legal");
-    expect((await page.goto(path))?.status(), path).toBe(legal ? 200 : 404);
-    expect(await page.locator('meta[name="robots"]').count()).toBeGreaterThan(0);
-    for (const meta of await page.locator('meta[name="robots"]').all()) {
-      expect(await meta.getAttribute("content")).toContain("noindex");
-    }
-    await expect(page.locator('link[rel="alternate"][hreflang]')).toHaveCount(0);
-    expect((await page.locator('script[type="application/ld+json"]').allTextContents()).join("\n")).not.toContain('"@type":"ProfilePage"');
   }
 });

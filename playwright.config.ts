@@ -16,9 +16,14 @@ export default defineConfig({
     locale: "es-ES",
     trace: "retain-on-failure",
   },
+  // Desktop runs every scenario except those tagged @mobile-only. Mobile runs
+  // only scenarios whose behaviour differs on touch/narrow screens (@responsive)
+  // or exists only there (@mobile-only); device-agnostic checks (SEO, headers,
+  // redirects, forms) are not repeated. Tag @smoke selects the push-time subset.
   projects: [
     {
       name: "desktop-chromium",
+      grepInvert: /@mobile-only/,
       use: {
         ...devices["Desktop Chrome"],
         viewport: { width: 1440, height: 900 },
@@ -26,6 +31,7 @@ export default defineConfig({
     },
     {
       name: "mobile-chromium",
+      grep: /@responsive|@mobile-only/,
       use: {
         ...devices["Pixel 5"],
         viewport: { width: 390, height: 844 },

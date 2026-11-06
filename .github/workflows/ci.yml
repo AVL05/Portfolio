@@ -1,10 +1,25 @@
 name: CI
 
+# Every push and pull request: fast static/unit checks plus a production build
+# and the critical browser smoke suite (tag @smoke), running in parallel.
+# The broader pre-release suite (all scenarios, desktop + responsive) runs on
+# version tags (v*) and on demand: Actions > CI > Run workflow > suite: full.
 on:
   push:
     branches: [main]
+    tags: ["v*"]
+    paths-ignore:
+      - "**/*.md"
+      - "docs/**"
   pull_request:
     branches: [main]
+  workflow_dispatch:
+    inputs:
+      suite:
+        description: "Browser suite to run"
+        type: choice
+        options: [smoke, full]
+        default: smoke
 
 permissions:
   contents: read
@@ -13,12 +28,14 @@ concurrency:
   group: portfolio-${{ github.ref }}
   cancel-in-progress: true
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    env:
-      NEXT_PUBLIC_SITE_URL: https://www.aleviclop.dev
+env:
+  NEXT_PUBLIC_SITE_URL: https://www.aleviclop.dev
 
+jobs:
+  checks:
+    name: Static and unit checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
 
@@ -44,8 +61,30 @@ jobs:
       - name: Type Check
         run: pnpm typecheck
 
-      - name: Tests
+      - name: Unit and contract tests
         run: pnpm test
+
+  e2e:
+    name: Build and browser tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      FULL_SUITE: ${{ startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && inputs.suite == 'full') }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4.4.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: "pnpm"
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Build
         run: pnpm build
@@ -53,5 +92,19 @@ jobs:
       - name: Install Playwright
         run: pnpm exec playwright install --with-deps chromium
 
-      - name: End-to-end tests including SEO contracts
+      - name: Smoke tests (critical journeys, SEO, security headers, regressions)
+        if: env.FULL_SUITE != 'true'
+        run: pnpm test:smoke
+
+      - name: Full browser suite (pre-release)
+        if: env.FULL_SUITE == 'true'
         run: pnpm test:e2e
+
+      - name: Upload Playwright traces
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-traces
+          path: test-results/
+          retention-days: 7
+          if-no-files-found: ignore

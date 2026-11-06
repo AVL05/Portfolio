@@ -111,12 +111,15 @@ pnpm typecheck
 pnpm test
 pnpm build
 pnpm exec playwright install chromium
-pnpm test:e2e
+pnpm test:smoke   # navegador: recorridos críticos, SEO, cabeceras y regresiones (cada push)
+pnpm test:e2e     # suite completa antes de publicar (etiquetas de versión y ejecución manual en CI)
 ```
+
+Las pruebas de navegador viven en `tests/e2e/` y se organizan por área. La etiqueta `@smoke` marca el subconjunto de cada push; `@responsive` indica que el escenario también se ejecuta en el proyecto móvil y `@mobile-only` que solo existe allí. El resto de comprobaciones se ejecuta una sola vez en escritorio. La lógica determinista (API de contacto, rutas, catálogos, activos publicados) se prueba sin navegador en `tests/*.test.mjs`.
 
 Para servir una compilación de producción usa `pnpm start`. Para diagnosticar diferencias con el bundler de desarrollo, `pnpm dev:webpack`.
 
-`pnpm test:seo` ejecuta los contratos HTTP, metadata, multidioma y JSON-LD de forma aislada. También forman parte de `pnpm test:e2e` y de CI. La auditoría y el checklist de publicación están en [docs/SEO_GEO_AUDIT.md](docs/SEO_GEO_AUDIT.md).
+`pnpm test:seo` ejecuta los contratos HTTP, metadata, multidioma y JSON-LD de forma aislada. También forman parte de `pnpm test:smoke`, `pnpm test:e2e` y de CI. La auditoría y el checklist de publicación están en [docs/SEO_GEO_AUDIT.md](docs/SEO_GEO_AUDIT.md).
 
 </details>
 

@@ -78,18 +78,41 @@ test("the hero plate follows pointer and keyboard focus, and reduced motion swap
   if (testInfo.project.name.includes("desktop")) {
     await expect(plate).toBeVisible();
     expect(await plate.locator("img").first().evaluate(element => (element as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+    const fullyRevealed = /^(none|inset\(0(px)?( 0(px|%)?)*\))$/;
+    const clipOf = (index: number) => plate.locator(`[data-plate-layer="${index}"]`).evaluate(element => getComputedStyle(element).clipPath);
     await rows.nth(1).hover();
     await expect(rows.nth(1)).toHaveAttribute("data-active", "true");
-    await expect.poll(() => plate.locator('[data-plate-layer="1"]').evaluate(element => getComputedStyle(element).clipPath)).toMatch(/inset\(0(px)?( 0(px|%)?)*\)|none/);
+    // The wipe publishes its settled state; assert it instead of sampling a running tween.
+    await expect(plate.locator('[data-plate-layer="1"]')).toHaveAttribute("data-plate-state", "revealed");
+    expect(await clipOf(1)).toMatch(fullyRevealed);
     await page.emulateMedia({ reducedMotion: "reduce" });
     await rows.nth(2).focus();
     await expect(rows.nth(2)).toHaveAttribute("data-active", "true");
-    expect(await plate.locator('[data-plate-layer="2"]').evaluate(element => getComputedStyle(element).clipPath)).toMatch(/inset\(0(px)?( 0(px|%)?)*\)|none/);
+    await expect(plate.locator('[data-plate-layer="2"]')).toHaveAttribute("data-plate-state", "revealed");
+    expect(await clipOf(2)).toMatch(fullyRevealed);
+    // Keyboard users can always return to the first project.
+    await rows.first().focus();
+    await expect(plate.locator('[data-plate-layer="0"]')).toHaveAttribute("data-plate-state", "revealed");
+    expect(await clipOf(0)).toMatch(fullyRevealed);
   } else {
     await expect(plate).toBeHidden();
     await expect(rows.first().locator("img")).toBeVisible();
   }
   await expect(page.locator(".project-scene").first()).toHaveCSS("position", "relative");
+});
+
+test("a reduced-motion preference that turns on mid-wipe settles the plate", async ({ page }, testInfo) => {
+  test.skip(!testInfo.project.name.includes("desktop"), "The plate is desktop-only");
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.goto("/");
+  await page.waitForLoadState("networkidle");
+  const rows = page.locator("[data-hero-row] a");
+  const layer = page.locator('[data-hero-plate] [data-plate-layer="1"]');
+  await rows.nth(1).focus();
+  await expect(layer).toHaveAttribute("data-plate-state", "revealing");
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(layer).toHaveAttribute("data-plate-state", "revealed");
+  expect(await layer.evaluate(element => getComputedStyle(element).clipPath)).toMatch(/^(none|inset\(0(px)?( 0(px|%)?)*\))$/);
 });
 
 test("the full navigation works on desktop and touch with focus restoration", async ({ page }) => {

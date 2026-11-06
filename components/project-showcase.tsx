@@ -20,14 +20,28 @@ export function ProjectShowcase({ image, alt, caption, viewTransitionName, video
     if (!video || !autoPlayOnView || !("IntersectionObserver" in window)) return;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let visible = false;
+    // True only while playback was started by this effect, never by the viewer.
+    let autoStarted = false;
     const syncPlayback = () => {
       if (visible && !reducedMotion.matches && !document.hidden) {
-        // Browsers may block autoplay; native controls remain available.
-        void video.play().catch(() => {});
-      } else {
+        if (video.paused) {
+          autoStarted = true;
+          // Browsers may block autoplay; native controls remain available.
+          video.play().catch(() => { autoStarted = false; });
+        }
+        return;
+      }
+      // Leaving the viewport or the tab always pauses. A reduced-motion preference
+      // may only stop playback the page started itself: calling pause() here when a
+      // viewer has pressed play (e.g. Space on the focused video) would cancel
+      // their request whenever an observer notification arrives late.
+      if (!visible || document.hidden || autoStarted) {
+        autoStarted = false;
         video.pause();
       }
     };
+    const onPause = () => { autoStarted = false; };
+    video.addEventListener("pause", onPause);
     const observer = new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting && entry.intersectionRatio >= .35;
       syncPlayback();
@@ -37,6 +51,7 @@ export function ProjectShowcase({ image, alt, caption, viewTransitionName, video
     document.addEventListener("visibilitychange", syncPlayback);
     return () => {
       observer.disconnect();
+      video.removeEventListener("pause", onPause);
       reducedMotion.removeEventListener("change", syncPlayback);
       document.removeEventListener("visibilitychange", syncPlayback);
       video.pause();

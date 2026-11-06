@@ -16,8 +16,17 @@ export function Hero() {
   const containerRef = useRef<HTMLElement>(null);
   const plateRef = useRef<HTMLDivElement>(null);
   const activeRef = useRef(0);
+  const wipeRef = useRef<gsap.core.Timeline | null>(null);
+  const phaseRef = useRef<"revealing" | "revealed">("revealed");
   const [active, setActive] = useState(0);
+  const [phase, setPhaseState] = useState<"revealing" | "revealed">("revealed");
   const copy = t.hero;
+  const setPhase = (next: "revealing" | "revealed") => { phaseRef.current = next; setPhaseState(next); };
+  const layerAt = (index: number) => plateRef.current?.querySelector<HTMLElement>(`[data-plate-layer="${index}"]`) ?? null;
+  const showLayer = (layer: HTMLElement) => {
+    gsap.set(layer, { clipPath: "inset(0 0 0 0%)" });
+    gsap.set(layer.querySelector("img"), { clearProps: "transform" });
+  };
   const featured = FEATURED_INDEXES
     .map((index) => t.projects.items[index])
     .filter((project): project is ProjectItem => Boolean(project));
@@ -35,6 +44,15 @@ export function Hero() {
         .from(q("[data-hero-line]"), { yPercent: 108, duration: motion.duration.hero, stagger: .08, clearProps: "transform" })
         .from(q("[data-hero-plate]"), { clipPath: "inset(0 0 0 100%)", duration: .9, clearProps: "clipPath" }, .15)
         .from(q("[data-hero-row]"), { y: motion.distance.content, autoAlpha: 0, duration: motion.duration.enter, stagger: .06, ease: motion.ease.out, clearProps: "transform,opacity,visibility" }, .3);
+    });
+    media.add("(prefers-reduced-motion: reduce)", () => {
+      // A motion preference that turns on mid-wipe settles the plate immediately.
+      const layer = layerAt(activeRef.current);
+      if (!layer || phaseRef.current === "revealed") return;
+      wipeRef.current?.kill();
+      wipeRef.current = null;
+      showLayer(layer);
+      setPhase("revealed");
     });
     media.add("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)", () => {
       const button = containerRef.current?.querySelector<HTMLAnchorElement>("[data-magnetic]");
@@ -63,19 +81,31 @@ export function Hero() {
     return () => media.revert();
   }, { scope: containerRef });
 
+  // Idempotent: calling it for the active row finishes a wipe that is still
+  // running when motion is reduced, instead of leaving the plate half clipped.
   const activate = contextSafe((index: number) => {
-    if (index === activeRef.current) return;
-    activeRef.current = index;
-    setActive(index);
-    const layer = plateRef.current?.querySelector<HTMLElement>(`[data-plate-layer="${index}"]`);
+    const current = activeRef.current;
+    const reduced = prefersReducedMotion();
+    if (index === current && (phaseRef.current === "revealed" || !reduced)) return;
+    const layer = layerAt(index);
     if (!layer) return;
-    gsap.killTweensOf(layer);
-    if (prefersReducedMotion()) {
-      gsap.set(layer, { clipPath: "inset(0 0 0 0%)" });
+    wipeRef.current?.kill();
+    wipeRef.current = null;
+    if (index !== current) {
+      // The outgoing layer becomes the static backdrop for the incoming wipe.
+      const previous = layerAt(current);
+      if (previous) showLayer(previous);
+      activeRef.current = index;
+      setActive(index);
+    }
+    if (reduced) {
+      showLayer(layer);
+      setPhase("revealed");
       return;
     }
+    setPhase("revealing");
     const image = layer.querySelector("img");
-    gsap.timeline()
+    wipeRef.current = gsap.timeline({ onComplete: () => setPhase("revealed") })
       .fromTo(layer, { clipPath: "inset(0 0 0 100%)" }, { clipPath: "inset(0 0 0 0%)", duration: motion.duration.mask, ease: motion.ease.reveal })
       .fromTo(image, { scale: 1.06 }, { scale: 1, duration: .9, ease: motion.ease.reveal, clearProps: "transform" }, 0);
   });
@@ -148,7 +178,7 @@ export function Hero() {
           <div ref={plateRef} data-hero-plate data-art-stage className={styles.plate} data-tone={activeMedia.tone}>
             {FEATURED_MEDIA.map((media, index) => (
               <div key={media.slug} data-plate-layer={index} className={styles.plateLayer}
-                data-tone={media.tone} style={{ zIndex: index === active ? 2 : 1, clipPath: index === 0 ? undefined : "inset(0 0 0 100%)" }}>
+                data-tone={media.tone} data-plate-state={index === active ? phase : "idle"} style={{ zIndex: index === active ? 2 : 1, clipPath: index === 0 ? undefined : "inset(0 0 0 100%)" }}>
                 <Image src={media.plate} alt="" fill priority={index === 0} loading={index === 0 ? undefined : "lazy"}
                   sizes="(max-width: 1023px) 1px, 56vw" />
               </div>

@@ -122,6 +122,25 @@ for (const locale of ["es", "en"] as const) {
   });
 }
 
+test("a viewer-started video is never paused by a late viewport notification under reduced motion", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/proyectos/distrito-gourmet");
+  const video = page.locator("main video").first();
+  await page.locator("h1").scrollIntoViewIfNeeded();
+  await expect.poll(() => video.evaluate(element => (element as HTMLVideoElement).paused)).toBe(true);
+  // Re-enter the viewport and press play in the same task, before the observer
+  // has reported the intersection: this is the ordering a slow runner produces.
+  const outcome = await video.evaluate(async element => {
+    const media = element as HTMLVideoElement;
+    media.scrollIntoView({ block: "center" });
+    await media.play();
+    await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
+    await new Promise<void>(resolve => setTimeout(resolve, 250));
+    return media.paused;
+  });
+  expect(outcome).toBe(false);
+});
+
 test("project reveals restore their static state when motion preference changes", async ({ page }) => {
   const errors: string[] = [];
   page.on("pageerror", error => errors.push(error.message));

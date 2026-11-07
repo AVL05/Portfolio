@@ -159,6 +159,30 @@
         "imageAlt": "raw.vives: portada del archivo fotográfico"
       },
       {
+        "title": "Premium Frontend Director",
+        "description": "Skill open source para agentes de programación que combina dirección artística, implementación frontend y revisión visual verificable.",
+        "image": "/projects/premium-frontend-director.svg",
+        "technologies": [
+          "Agent Skills",
+          "JavaScript",
+          "Next.js",
+          "Three.js",
+          "GSAP"
+        ],
+        "category": "Herramientas para desarrolladores",
+        "link": "https://the-art-of-direction.netlify.app",
+        "github": "https://github.com/AVL05/premium-frontend-director",
+        "type": "Skill open source y showcase interactivo",
+        "role": "Diseñé la metodología, la documentación de instalación y la experiencia de demostración cinematográfica.",
+        "outcome": "Skill pública con perfiles Core, Premium y Studio; demo interactiva desplegada y guía de instalación para Codex y Claude Code.",
+        "summary": "Dirección artística y calidad visual para agentes de programación.",
+        "evidence": [
+          "Skill pública",
+          "Demo cinematográfica",
+          "Guía de instalación"
+        ]
+      },
+      {
         "title": "El Fogón: Landing gastronómica",
         "description": "Landing para restaurante mediterráneo desarrollada con HTML5 y Tailwind CSS. Trabajé dirección de arte, jerarquía de contenido, responsive y navegación sencilla.",
         "image": "/projects/el-fogon.png",

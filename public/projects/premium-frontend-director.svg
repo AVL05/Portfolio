@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+<title id="title">Premium Frontend Director</title><desc id="desc">Editorial design with interlocking rings and large typography</desc>
+<rect width="1200" height="760" fill="#f3f0e9"/>
+<path d="M0 85H1200 M0 678H1200" stroke="#171817" stroke-opacity=".25"/>
+<text x="70" y="64" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="700" letter-spacing="4" fill="#171817">THE ART OF DIRECTION</text>
+<text x="70" y="274" font-family="Arial,Helvetica,sans-serif" font-size="98" font-weight="900" letter-spacing="-5" fill="#171817">THE WEB</text>
+<text x="70" y="373" font-family="Arial,Helvetica,sans-serif" font-size="98" font-weight="900" letter-spacing="-5" fill="#171817">DESERVES</text>
+<text x="70" y="473" font-family="Arial,Helvetica,sans-serif" font-size="98" font-weight="900" letter-spacing="-5" fill="#cd4f38">DIRECTION.</text>
+<g transform="translate(915 355) rotate(-26)" fill="none" stroke-linecap="round">
+<ellipse rx="177" ry="78" stroke="#171817" stroke-opacity=".2" stroke-width="63" transform="translate(15 18)"/>
+<ellipse rx="177" ry="78" stroke="#8f918f" stroke-width="63"/>
+<ellipse rx="177" ry="78" stroke="#eeeae0" stroke-width="4" transform="translate(0 -31)"/>
+</g>
+<g transform="translate(915 355) rotate(51)" fill="none"><ellipse rx="177" ry="78" stroke="#555a59" stroke-width="60"/><ellipse rx="177" ry="78" stroke="#e6e2da" stroke-width="4" transform="translate(0 -30)"/></g>
+<circle cx="915" cy="355" r="13" fill="#cd4f38"/>
+<text x="70" y="651" font-family="Arial,Helvetica,sans-serif" font-size="23" fill="#171817">ART DIRECTION  /  FRONTEND ENGINEERING  /  VISUAL PROOF</text>
+<text x="70" y="718" font-family="Arial,Helvetica,sans-serif" font-size="15" letter-spacing="3" fill="#171817">OPEN-SOURCE AGENT SKILL</text>
+</svg>

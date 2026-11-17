@@ -43,7 +43,12 @@ for (const home of HOMES) {
     await expect(jobs.nth(1).locator("h3")).toHaveText(home.companies[1]);
     await expect(jobs.nth(0).locator("ul li")).toHaveCount(3);
     await expect(jobs.nth(1).locator("ul li")).toHaveCount(2);
-    await expect(page.locator("#education ol > li")).toHaveCount(2);
+    const education = page.locator("#education ol > li");
+    await expect(education).toHaveCount(3);
+    const courseTitle = home.locale === "es" ? "Curso de AWS Academy Cloud Foundations" : "AWS Academy Cloud Foundations course";
+    const course = education.filter({ has: page.getByRole("heading", { name: courseTitle, exact: true }) });
+    await expect(course).toBeVisible();
+    await expect(course.getByText("2025–2026", { exact: true })).toBeVisible();
     for (const language of home.languages) await expect(page.locator("#education")).toContainText(language);
     // TypeScript is deliberately not advertised anywhere on the home.
     await expect(page.locator("main")).not.toContainText("TypeScript");

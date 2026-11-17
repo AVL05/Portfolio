@@ -32,7 +32,12 @@ test("home content contract: featured projects, other projects and skills are fa
       assert.ok(!text.includes(retired), retired);
     }
     assert.equal(locale.experience.experience_list.length, 2);
-    assert.equal(locale.experience.education_list.length, 2);
+    const education = locale.experience.education_list;
+    assert.equal(education.length, 3);
+    assert.deepEqual(education.filter((item) => item.title.includes("AWS Academy")), [{
+      title: language === "es" ? "Curso de AWS Academy Cloud Foundations" : "AWS Academy Cloud Foundations course",
+      period: "2025–2026",
+    }]);
     assert.deepEqual(locale.experience.experience_list.map((item) => item.highlights.length), [3, 2]);
   }
 });

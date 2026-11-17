@@ -16,7 +16,13 @@ function Timeline({ items, kind }: { items: TimelineItem[]; kind: "work" | "stud
               <h3>{heading}</h3>
               <p className={styles.period}>{item.period}</p>
             </div>
-            <p className={styles.sub}>{detail} <span aria-hidden="true">·</span> <span>{item.location}</span></p>
+            {detail || item.location ? (
+              <p className={styles.sub}>
+                {detail}
+                {detail && item.location ? <span aria-hidden="true"> · </span> : null}
+                {item.location ? <span>{item.location}</span> : null}
+              </p>
+            ) : null}
             {item.highlights?.length ? (
               <ul className={styles.points}>
                 {item.highlights.map((point) => <li key={point}>{point}</li>)}

@@ -12,7 +12,7 @@ export interface TimelineItem {
   institution?: string;
   company?: string;
   period: string;
-  location: string;
+  location?: string;
   description?: string;
   highlights?: string[];
 }

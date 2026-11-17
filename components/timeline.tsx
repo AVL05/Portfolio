@@ -23,6 +23,7 @@ function Timeline({ items, kind }: { items: TimelineItem[]; kind: "work" | "stud
                 {item.location ? <span>{item.location}</span> : null}
               </p>
             ) : null}
+            {item.description ? <p className={styles.detail}>{item.description}</p> : null}
             {item.highlights?.length ? (
               <ul className={styles.points}>
                 {item.highlights.map((point) => <li key={point}>{point}</li>)}

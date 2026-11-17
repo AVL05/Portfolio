@@ -50,3 +50,6 @@ skills-lock.json
 
 # Meshy source exports stay local; the scene uses optimized copies.
 /public/hero-3d/models/
+
+.claude/
+.codex/

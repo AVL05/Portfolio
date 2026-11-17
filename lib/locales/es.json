@@ -3,14 +3,12 @@
     "about": "Sobre mí",
     "experience": "Experiencia",
     "projects": "Proyectos",
-    "skills": "Tecnologías",
     "contact": "Contacto"
   },
   "sections": {
     "about": "Sobre mí",
     "experience": "Experiencia",
-    "projects": "Proyectos destacados",
-    "other": "Otros proyectos",
+    "projects": "Proyectos",
     "skills": "Habilidades",
     "education": "Educación",
     "contact": "Contacto"
@@ -26,26 +24,31 @@
     "cv": "Descargar CV"
   },
   "about": {
-    "bullets": [
-      "Soy desarrollador web junior, con base en React/Next.js y PHP/Laravel.",
-      "Hice mis prácticas en equipo: una aplicación de escritorio de gestión de parking y una intranet corporativa.",
-      "Construyo proyectos full-stack con código público. Uso la IA como herramienta de desarrollo y valido el código con pruebas."
+    "paragraphs": [
+      "En mis prácticas en Burguet Sistemas trabajé con otro desarrollador en una aplicación de escritorio para gestionar un parking. También amplié la intranet de la empresa con React, PHP y MySQL.",
+      "Fuera de las prácticas, he construido tres proyectos con código público: una plataforma para restaurantes, un CRM para estudios de foto y vídeo y mi propio archivo fotográfico.",
+      "Uso la IA como herramienta de desarrollo y valido el código con pruebas. También publiqué Premium Frontend Director, una skill de código abierto para mejorar el diseño de interfaces con agentes de programación."
     ]
   },
+  "skillsSummary": "Trabajo desde la interfaz hasta la API y el diseño de la base de datos. Uso control de versiones y pruebas para revisar los cambios.",
   "projects": {
     "live": "Live",
     "code": "Code",
-    "case": "Caso de estudio",
+    "showMore": "Ver más",
+    "hideMore": "Ver menos",
+    "otherLabel": "Otros proyectos",
     "featured": [
       {
         "slug": "distrito-gourmet",
-        "description": "Plataforma de gestión para restaurantes: carta, carrito, reservas, pedidos y paneles de administración, sala y cocina. Proyecto de fin de ciclo de DAW.",
+        "category": "Proyecto de fin de ciclo · DAW",
+        "description": "Una web donde los clientes consultan la carta, hacen pedidos y reservan mesa. El personal gestiona la operación desde paneles separados para sala, cocina y administración.",
         "alt": "Distrito Gourmet: portada con acceso a carta y reservas",
         "evidence": []
       },
       {
         "slug": "lumaflow-studio",
-        "description": "CRM para estudios de foto y vídeo: clientes, sesiones, calendario, presupuestos, facturación y galerías privadas.",
+        "category": "CRM · Aplicación web progresiva",
+        "description": "Reúne en un solo lugar el trabajo de un estudio de foto y vídeo: desde el presupuesto y la planificación de la sesión hasta la factura y la entrega en una galería privada. Incluye asistencia con IA local.",
         "alt": "LumaFlow Studio: captura de la interfaz de la aplicación",
         "evidence": [
           "56 tests de backend",
@@ -54,7 +57,8 @@
       },
       {
         "slug": "raw-vives",
-        "description": "Archivo fotográfico bilingüe con series, filtros y fichas individuales.",
+        "category": "Archivo fotográfico · Web bilingüe",
+        "description": "Mi archivo de fotografía, organizado en series que se pueden filtrar y recorrer imagen por imagen. Genero las páginas de forma estática con Next.js.",
         "alt": "raw.vives: portada del archivo fotográfico",
         "evidence": []
       }
@@ -90,9 +94,9 @@
         "period": "feb 2026 – may 2026",
         "location": "Xirivella",
         "highlights": [
-          "Desarrollo en equipo, repartiendo el trabajo con otro desarrollador, de todos los módulos de una aplicación de escritorio de gestión de parking (React, Electron): plazas libres, cobros y recibos, caja, abonos, usuarios del parking, turnos de personal, control de barreras y visualización de cámaras.",
-          "Evolución de la intranet corporativa (React, PHP, MySQL): nuevas funcionalidades, diseño de tablas y resolución de incidencias.",
-          "Control de versiones con Git y Bitbucket."
+          "Desarrollé en equipo los módulos de la aplicación de parking con React y Electron: desde la ocupación, los cobros y los abonos hasta los turnos, las barreras y las cámaras.",
+          "Añadí funciones a la intranet corporativa, diseñé tablas y resolví incidencias con React, PHP y MySQL.",
+          "Usé Git y Bitbucket para el control de versiones."
         ]
       },
       {
@@ -111,11 +115,13 @@
         "title": "Técnico Superior en Desarrollo de Aplicaciones Web (DAW)",
         "institution": "IES Serra Perenxisa",
         "period": "2024–2026",
-        "location": "Torrent"
+        "location": "Torrent",
+        "description": "Proyecto de fin de ciclo: Distrito Gourmet."
       },
       {
         "title": "Curso de AWS Academy Cloud Foundations",
-        "period": "2025–2026"
+        "period": "2025–2026",
+        "description": "10 módulos y 6 laboratorios sobre identidad, redes, cómputo, almacenamiento, bases de datos, escalado y funciones."
       },
       {
         "title": "Técnico en Sistemas Microinformáticos y Redes (SMR)",
@@ -143,9 +149,8 @@
     ]
   },
   "contact": {
-    "title": "Contacto",
     "subtitle": "¿Hablamos?",
-    "desc": "Busco mi primer puesto como desarrollador web: en Valencia (presencial o híbrido) o en remoto desde Europa. Escríbeme y te respondo pronto.",
+    "desc": "Busco mi primer puesto como desarrollador web en un equipo de producto, en Valencia (presencial o híbrido) o en remoto desde Europa. Si crees que puedo encajar en tu equipo, escríbeme.",
     "form_name": "Tu nombre",
     "form_email": "Tu email",
     "form_message": "Tu mensaje",

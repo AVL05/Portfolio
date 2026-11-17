@@ -50,20 +50,19 @@ const securityHeaders = [
   },
 ];
 
+const retiredProjectSlugs = ["raw-vives", "lumaflow-studio", "distrito-gourmet"];
 const legacyRedirects = [
-  {
-    source: "/proyectos/raw-manager",
-    destination: "/proyectos/lumaflow-studio",
-    permanent: true,
-  },
+  ...retiredProjectSlugs.flatMap((slug) => [
+    { source: `/proyectos/${slug}`, destination: "/#projects", permanent: true },
+    { source: `/es/proyectos/${slug}`, destination: "/#projects", permanent: true },
+    { source: `/en/projects/${slug}`, destination: "/en#projects", permanent: true },
+  ]),
+  { source: "/proyectos/raw-manager", destination: "/#projects", permanent: true },
   // Spanish lives at the root: normalize guessed /es/* URLs with
   // explicit single-hop redirects. Only real ES paths are mapped;
   // anything else (e.g. /es/projects) correctly stays a 404.
   // 308 preserves method and signals permanence without chains.
   { source: "/es", destination: "/", permanent: true },
-  { source: "/es/proyectos/raw-vives", destination: "/proyectos/raw-vives", permanent: true },
-  { source: "/es/proyectos/lumaflow-studio", destination: "/proyectos/lumaflow-studio", permanent: true },
-  { source: "/es/proyectos/distrito-gourmet", destination: "/proyectos/distrito-gourmet", permanent: true },
   { source: "/es/legal", destination: "/legal", permanent: true },
   // These retired pages now have equivalent sections in each localized home.
   { source: "/contacto", destination: "/#contact", permanent: true },

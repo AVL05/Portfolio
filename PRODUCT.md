@@ -26,8 +26,8 @@ Precisa, directa y verificable. Transmite cuidado por el detalle y confianza té
 ## Design Principles
 
 - Una sola etiqueta: Desarrollador Web Full-Stack Junior (Junior Full-Stack Web Developer), en toda la web y en los metadatos.
-- Mostrar decisiones y resultados antes que listas de tecnologías. Solo cifras verificables (los 56 tests de backend y 33 de frontend de LumaFlow Studio).
-- Tres proyectos destacados en este orden: Distrito Gourmet, LumaFlow Studio y raw.vives (caso web y fotográfico, no una segunda profesión). El resto va en "Otros proyectos", de forma compacta.
+- Mostrar decisiones y resultados antes que listas de tecnologías. Usar cifras verificables, como los 56 tests de backend y 33 de frontend de LumaFlow Studio.
+- Tres proyectos destacados en este orden: Distrito Gourmet, LumaFlow Studio y raw.vives. Cada uno tiene una ficha breve en la portada. El resto aparece al desplegar «Ver más».
 - No anunciar TypeScript como habilidad ni como chip de proyecto. No afirmar certificaciones. Inglés B1; español y valenciano nativos.
 - Un enlace Live solo si la demo está publicada y responde (LumaFlow Studio no tiene).
 - Cada llamada a la acción acerca a un proyecto, al CV o al contacto.

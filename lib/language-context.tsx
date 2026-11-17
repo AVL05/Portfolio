@@ -8,7 +8,6 @@ export type Language = "es" | "en";
 
 export interface TimelineItem {
   title: string;
-  contract?: string;
   institution?: string;
   company?: string;
   period: string;
@@ -19,7 +18,6 @@ export interface TimelineItem {
 
 interface Translation {
   nav: {
-    skills: string;
     projects: string;
     contact: string;
     about: string;
@@ -29,7 +27,6 @@ interface Translation {
     about: string;
     experience: string;
     projects: string;
-    other: string;
     skills: string;
     education: string;
     contact: string;
@@ -45,8 +42,9 @@ interface Translation {
     cv: string;
   };
   about: {
-    bullets: string[];
+    paragraphs: string[];
   };
+  skillsSummary: string;
   experience: {
     experience_list: TimelineItem[];
     education_list: TimelineItem[];
@@ -58,12 +56,13 @@ interface Translation {
   projects: {
     live: string;
     code: string;
-    case: string;
-    featured: { slug: string; description: string; alt: string; evidence: string[] }[];
+    showMore: string;
+    hideMore: string;
+    otherLabel: string;
+    featured: { slug: string; category: string; description: string; alt: string; evidence: string[] }[];
     other: { slug: string; title: string; description: string }[];
   };
   contact: {
-    title: string;
     subtitle: string;
     desc: string;
     form_name: string;

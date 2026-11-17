@@ -1,7 +1,6 @@
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type React from "react";
-import "@/lib/raf-polyfill";
 import { LanguageProvider } from "@/lib/language-context";
 import type { Locale } from "@/lib/i18n-paths";
 

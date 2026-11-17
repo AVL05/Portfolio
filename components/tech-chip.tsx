@@ -53,7 +53,7 @@ const ICONS: Record<string, Icon> = {
 
 const LABELS_EN: Record<string, string> = { "APIs REST": "REST APIs" };
 
-export function TechChip({ name, locale = "es" }: { name: string; locale?: "es" | "en" }) {
+function TechChip({ name, locale }: { name: string; locale: "es" | "en" }) {
   const Icon = ICONS[name];
   const label = locale === "en" ? LABELS_EN[name] ?? name : name;
   return (

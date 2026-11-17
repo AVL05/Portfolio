@@ -24,8 +24,10 @@ export function HomeClient() {
           <Hero />
           <Section id="about" title={s.about}><About /></Section>
           <Section id="experience" title={s.experience}><Experience /></Section>
-          <Section id="projects" title={s.projects}><FeaturedProjects /></Section>
-          <Section id="other" title={s.other}><OtherProjects /></Section>
+          <Section id="projects" title={s.projects}>
+            <FeaturedProjects />
+            <OtherProjects />
+          </Section>
           <Section id="skills" title={s.skills}><Skills /></Section>
           <Section id="education" title={s.education}><Education /></Section>
           <Section id="contact" title={s.contact}><Contact /></Section>

@@ -6,8 +6,8 @@ import styles from "./content.module.css";
 export function About() {
   const { t } = useLanguage();
   return (
-    <ul className={styles.bullets}>
-      {t.about.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}
-    </ul>
+    <div className={styles.bio}>
+      {t.about.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+    </div>
   );
 }

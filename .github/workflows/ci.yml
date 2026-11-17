@@ -1,25 +1,14 @@
 name: CI
 
-# Every push and pull request: fast static/unit checks plus a production build
-# and the critical browser smoke suite (tag @smoke), running in parallel.
-# The broader pre-release suite (all scenarios, desktop + responsive) runs on
-# version tags (v*) and on demand: Actions > CI > Run workflow > suite: full.
 on:
   push:
     branches: [main]
     tags: ["v*"]
     paths-ignore:
       - "**/*.md"
-      - "docs/**"
   pull_request:
     branches: [main]
   workflow_dispatch:
-    inputs:
-      suite:
-        description: "Browser suite to run"
-        type: choice
-        options: [smoke, full]
-        default: smoke
 
 permissions:
   contents: read
@@ -61,15 +50,13 @@ jobs:
       - name: Type Check
         run: pnpm typecheck
 
-      - name: Unit and contract tests
+      - name: Contact API tests
         run: pnpm test
 
   e2e:
     name: Build and browser tests
     runs-on: ubuntu-latest
     timeout-minutes: 20
-    env:
-      FULL_SUITE: ${{ startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && inputs.suite == 'full') }}
     steps:
       - uses: actions/checkout@v7
 
@@ -92,12 +79,7 @@ jobs:
       - name: Install Playwright
         run: pnpm exec playwright install --with-deps chromium
 
-      - name: Smoke tests (critical journeys, SEO, security headers, regressions)
-        if: env.FULL_SUITE != 'true'
-        run: pnpm test:smoke
-
-      - name: Full browser suite (pre-release)
-        if: env.FULL_SUITE == 'true'
+      - name: Browser tests
         run: pnpm test:e2e
 
       - name: Upload Playwright traces

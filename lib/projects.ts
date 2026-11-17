@@ -1,9 +1,11 @@
+import { RAW_VIVES_URL } from "@/lib/site";
+
 /**
  * Structural project data (links, media, stack). Copy lives in the locale
  * files under `projects`, joined by `slug`. Only claims that can be checked:
  * a `live` URL exists only when the demo is published and answering.
  */
-export interface FeaturedProject {
+interface FeaturedProject {
   slug: "distrito-gourmet" | "lumaflow-studio" | "raw-vives";
   title: string;
   image: string;
@@ -18,7 +20,7 @@ export const FEATURED_PROJECTS: readonly FeaturedProject[] = [
   {
     slug: "distrito-gourmet",
     title: "Distrito Gourmet",
-    image: "/projects/distrito_gourmet/distrito-gourmet.png",
+    image: "/projects/distrito_gourmet/distrito-gourmet.webp",
     width: 1919,
     height: 916,
     tech: ["React", "Laravel", "MySQL", "Tailwind CSS", "GSAP", "Docker"],
@@ -43,11 +45,11 @@ export const FEATURED_PROJECTS: readonly FeaturedProject[] = [
     height: 720,
     tech: ["Next.js", "Tailwind CSS", "GSAP"],
     code: "https://github.com/AVL05/alexgallery",
-    live: "https://rawvives.aleviclop.dev",
+    live: RAW_VIVES_URL,
   },
 ];
 
-export interface OtherProject {
+interface OtherProject {
   slug: string;
   code: string;
   tech: string[];

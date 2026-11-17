@@ -12,7 +12,7 @@ export function Section({
   return (
     <section id={id} aria-labelledby={`${id}-title`}>
       <div className="section-strip">
-        <h2 id={`${id}-title`}><span aria-hidden="true">/</span>{title}</h2>
+        <h2 id={`${id}-title`}><span aria-hidden="true" />{title}</h2>
       </div>
       <div className="section-body" data-reveal>{children}</div>
     </section>

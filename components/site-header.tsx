@@ -16,7 +16,6 @@ const NAV_TARGET: Record<string, string> = {
   experience: "experience",
   education: "experience",
   projects: "projects",
-  other: "projects",
   skills: "projects",
   contact: "contact",
 };

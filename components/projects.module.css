@@ -1,25 +1,28 @@
-/* Featured cards: one stretched link per card (the title), external links sit above it. */
-.featured { display: grid; gap: 1.5rem; }
-.card { position: relative; display: grid; overflow: hidden; border: 1px solid var(--border); border-radius: .75rem; background: var(--background); transition: border-color var(--motion-normal) var(--ease-out); }
-.card:hover { border-color: color-mix(in oklab, var(--primary) 55%, var(--border)); }
-.card:focus-within { border-color: var(--primary); }
-.thumb { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-bottom: 1px solid var(--border); background: var(--surface); }
-.thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
-.body { display: grid; gap: .875rem; padding: 1.25rem; }
-.head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .25rem 1rem; }
-.head h3 { font-size: 1.25rem; font-weight: 500; letter-spacing: -.025em; }
-.titleLink { display: inline-flex; align-items: center; min-height: var(--target-size); }
-.titleLink::after { content: ""; position: absolute; inset: 0; z-index: 1; }
-.titleLink:hover { color: var(--primary); }
-.links { position: relative; z-index: 2; display: flex; align-items: center; gap: 1rem; }
+/* Featured cards with separate demo and source links. */
+.featured { display: grid; gap: 1.25rem; }
+.card { position: relative; display: grid; align-items: start; gap: 1.25rem; padding: 1rem; border: 1px solid var(--border); border-radius: .875rem; background: var(--surface); transition: border-color var(--motion-normal) var(--ease-out), transform var(--motion-normal) var(--ease-out); }
+.card:hover, .card:focus-within { border-color: color-mix(in oklab, var(--primary) 70%, var(--border)); }
+.thumb { position: relative; aspect-ratio: 16 / 10; overflow: hidden; border: 1px solid var(--border); border-radius: .625rem; background: var(--background); }
+.thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform 600ms var(--ease-out); }
+.card:hover .thumb img { transform: scale(1.03); }
+.body { display: grid; gap: .5rem; min-width: 0; }
+.body h3 { font-size: clamp(1.5rem, 3.2vw, 1.875rem); font-weight: 600; line-height: 1.1; letter-spacing: -.035em; }
+.category { color: var(--primary); font: 500 var(--type-label)/1.5 var(--font-label), monospace; }
+.links { display: flex; align-items: center; gap: 1rem; }
 .links a { display: inline-flex; align-items: center; gap: .375rem; min-height: var(--target-size); color: var(--foreground-soft); font-size: .875rem; transition: color var(--motion-fast) var(--ease-out); }
 .links a:hover { color: var(--primary); }
 .links svg { width: .9375rem; height: .9375rem; flex-shrink: 0; }
-.description { color: var(--foreground-soft); font-size: .9375rem; line-height: 1.65; text-wrap: pretty; }
-.evidence { color: var(--muted-foreground); font: 400 var(--type-label)/1.6 var(--font-label), ui-monospace, monospace; letter-spacing: .02em; }
+.description { color: var(--foreground-soft); font-size: 1rem; line-height: 1.65; text-wrap: pretty; }
+.evidence { justify-self: start; padding: .25rem .625rem; border: 1px solid color-mix(in oklab, var(--primary) 50%, var(--border)); border-radius: .375rem; color: var(--foreground); font: 500 var(--type-label)/1.6 var(--font-label), ui-monospace, monospace; letter-spacing: .02em; }
+.skills { display: grid; gap: 1rem; }
 
 /* Other projects: compact rows between rules. */
-.other { display: grid; }
+.more { margin-top: 1.5rem; }
+.moreToggle { list-style: none; cursor: pointer; }
+.moreToggle::-webkit-details-marker { display: none; }
+.more[open] .showMore, .more:not([open]) .hideMore { display: none; }
+.more[open] .moreToggle svg { transform: rotate(180deg); }
+.other { display: grid; margin-top: 1rem; scroll-margin-top: calc(var(--header-height) + 1rem); }
 .other > li { display: grid; gap: .625rem; padding-block: 1.125rem; border-top: 1px solid var(--border); }
 .other > li:first-child { padding-top: 0; border-top: 0; }
 .other > li:last-child { padding-bottom: 0; }
@@ -29,5 +32,8 @@
 .otherMain h3 svg { width: .9375rem; height: .9375rem; color: var(--muted-foreground); }
 .otherMain p { color: var(--muted-foreground); font-size: .9375rem; line-height: 1.6; }
 
-@media (min-width: 40rem) { .body { padding: 1.5rem; } }
-@media (prefers-reduced-motion: reduce) { .card, .links a { transition: none; } }
+@media (min-width: 40rem) {
+  .card { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 1.75rem; padding: 1.25rem; }
+  .thumb { position: sticky; top: calc(var(--header-height) + 1rem); }
+}
+@media (prefers-reduced-motion: reduce) { .links a, .thumb img, .card { transition: none; } .card:hover .thumb img { transform: none; } }

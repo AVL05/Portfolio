@@ -28,7 +28,13 @@ export default [
     ignores: [
       ".next/**",
       ".agents/**",
+      ".claude/**",
+      ".codex/**",
+      ".impeccable/**",
+      "artifacts/**",
       "node_modules/**",
+      "playwright-report/**",
+      "test-results/**",
       "next-env.d.ts",
       "tsconfig.tsbuildinfo",
     ],

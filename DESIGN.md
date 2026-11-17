@@ -1,6 +1,6 @@
 ---
 name: Alex Vicente Portfolio: Framed Column
-description: A dark-first, single-column portfolio framed by thin rules, with one copper accent and an equally careful light theme
+description: A dark-first, single-column professional profile with a photographic cover, numbered chapters and one copper accent
 colors:
   dark:
     background: "#0f0e0d"
@@ -11,7 +11,6 @@ colors:
     faint: "#8f887e"
     border: "#2a2724"
     input: "#7a7368"
-    dot: "#3a3631"
     primary: "#e0956a"
     on-primary: "#0f0e0d"
     destructive: "#ff9f8f"
@@ -24,17 +23,16 @@ colors:
     faint: "#6a6359"
     border: "#d9d3c8"
     input: "#8a8377"
-    dot: "#cfc8bb"
     primary: "#8f4a24"
     on-primary: "#ffffff"
     destructive: "#b3261e"
 typography:
   display:
     fontFamily: "Hanken Grotesk, system-ui, sans-serif"
-    fontSize: "clamp(2.25rem, 7vw, 3.25rem)"
-    fontWeight: 500
-    lineHeight: 1.04
-    letterSpacing: "-0.035em"
+    fontSize: "clamp(1.75rem, 5.3vw, 3.25rem)"
+    fontWeight: 600
+    lineHeight: 1.06
+    letterSpacing: "-0.05em"
   body:
     fontFamily: "Hanken Grotesk, system-ui, sans-serif"
     fontSize: "1.0625rem"
@@ -49,7 +47,7 @@ rounded:
   card: "0.75rem"
   pill: "999px"
 spacing:
-  column: "48.75rem"
+  column: "56rem"
   columnPad: "clamp(1.25rem, 5vw, 2.5rem)"
   header: "3.75rem"
   target: "2.75rem"
@@ -69,9 +67,13 @@ components:
 
 ## Overview
 
-**Creative direction.** A single centered column (780 px) framed by thin vertical rules on wide screens and edge to edge on phones. Sections are separated by horizontal rules and titled in a strip (`/ SECCIÓN`, mono, uppercase). A subtle dot band sits above the introduction. Everything is quiet, precise and fast; real project work is the content.
+**Creative direction.** A single centered column (896 px) framed by thin vertical rules on wide screens and edge to edge on phones. The home reads like a personal profile and a portfolio of work: a photograph and portrait introduce Alex, numbered chapters tell the story, and each featured project explains what it does before listing its stack.
 
-**Themes.** Dark is the default and the no-JavaScript state. Light is chosen with the header toggle and stored in `localStorage` (`theme`); an inline head script applies it before first paint. Tokens switch on `[data-theme]` in `app/globals.css`. Case-study pages keep their own dark surfaces (`data-theme="dark"` on the page).
+**Direction explored.** The profile format gives both the person and the work room. Shubham and Paras informed the cover-and-portrait composition. Prathm and Anuzx informed the compact professional history.
+
+**Cover source.** `public/portfolio-cover.webp` is an optimized crop of Alex Vicente’s photograph from the raw.vives archive (`alexgallery/public/photos/raw/53.webp`). The credit links to the published archive. The profile portrait has its own alternative text.
+
+**Themes.** Dark is the default and the no-JavaScript state. Light is chosen with the header toggle and stored in `localStorage` (`theme`); an inline head script applies it before first paint. Tokens switch on `[data-theme]` in `app/globals.css`.
 
 **One accent.** Copper: `#e0956a` on dark, `#8f4a24` on light. All text pairs meet WCAG AA (measured: foreground 15.8:1 and 16.0:1, muted 6.6:1 and 6.3:1, primary on background 8.0:1 and 6.0:1, on-primary 8.0:1 and 6.6:1). Input borders are at least 3:1 against their surface.
 
@@ -82,25 +84,26 @@ Hanken Grotesk for headings and reading, JetBrains Mono for the wordmark, sectio
 ## Layout
 
 - `.site-column` holds header content, main and footer at `--column-width`.
-- `.section-strip` (title) and `.section-body` (padding `--column-pad`) make up every section; `Section` in `components/section.tsx` is the only way to add one.
-- Section ids are stable anchors used by redirects and the command palette: `about`, `experience`, `projects`, `other`, `skills`, `education`, `contact`.
+- `.section-strip` (number and heading) and `.section-body` (padding `--column-pad`) make up every numbered section; `Section` in `components/section.tsx` is the only way to add one.
+- Section ids are stable anchors used by redirects and the command palette: `about`, `experience`, `projects`, `skills`, `education`, `contact`. The `other` anchor targets the secondary project list inside Projects.
 - Header: wordmark `aleviclop.dev`, links from 768 px (a modal menu below), palette button from 480 px, theme toggle and ES/EN switch.
 
 ## Components
 
 - **Pills** (`.pill`, `.pill-primary`, `.pill-secondary`): icon plus label, 44 px minimum height.
-- **Project cards:** thumbnail, title (the stretched link to the case study), Live and Code links, one sentence, optional verified figure, technology chips with icon. No card inside a card.
+- **Featured project rows:** thumbnail, category, title, a short account of what the project does, optional verified evidence, technology chips, and direct links to the demo when available and source code. Thumbnail and text sit side by side from 640 px and stack below.
+- **Secondary projects:** compact rows inside a native disclosure under the featured work. The control works with a keyboard and without JavaScript.
 - **Chips** (`tech-chip`): single-colour brand icons (`react-icons/si`) in `currentColor`, so the page keeps one accent.
 - **Command palette:** `Ctrl+K` / `⌘K`; native modal dialog with a combobox and listbox (see `components/command-palette.tsx`).
 - **Forms:** bordered fields, visible labels, inline errors with text (colour is never the only signal).
 
 ## Motion
 
-Budget: soft section entrances (CSS and one IntersectionObserver in `components/reveal.tsx`), a 280 ms colour cross-fade on theme change, hover, focus and press states, and the palette opening. All of it is gated on `prefers-reduced-motion: no-preference`. The home does not load GSAP. No parallax, no scroll-linked effects, no entrance animation on the hero (it protects LCP).
+Budget: soft section entrances (CSS and one IntersectionObserver in `components/reveal.tsx`), a 280 ms colour cross-fade on theme change, hover, focus and press states, and the palette opening. All of it is gated on `prefers-reduced-motion: no-preference`.
 
 ## Accessibility
 
-WCAG 2.2 AA. One `h1`, then `h2` per section and `h3` inside. Skip link first. Visible focus (2 px copper outline). Targets of at least 44 px. Verified with axe-core on the home (both languages, both themes, 360 / 768 / 1440 px), case studies, legal pages, the open palette and the open mobile menu.
+WCAG 2.2 AA target. One `h1`, then `h2` per section and `h3` inside. Skip link first. Visible focus (2 px copper outline). Targets of at least 44 px. During the redesign, the home was checked in Chromium in both languages and themes at 375, 390, 768, 1440 and 1920 px. The current browser suite exercises the public project, language and CV flow on desktop and mobile.
 
 ## Do not
 

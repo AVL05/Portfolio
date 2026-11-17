@@ -13,25 +13,17 @@
     "lint": "eslint .",
     "start": "next start",
     "test": "node --test",
-    "test:smoke": "playwright test --grep @smoke",
     "test:e2e": "playwright test",
-    "test:seo": "playwright test tests/e2e/seo.spec.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@gsap/react": "latest",
-    "@radix-ui/react-slot": "latest",
     "@vercel/analytics": "latest",
     "@vercel/speed-insights": "latest",
-    "class-variance-authority": "latest",
-    "clsx": "latest",
-    "gsap": "latest",
     "lucide-react": "latest",
     "next": "16.4.6",
     "react": "latest",
     "react-dom": "latest",
-    "react-icons": "latest",
-    "tailwind-merge": "latest"
+    "react-icons": "latest"
   },
   "devDependencies": {
     "@playwright/test": "latest",

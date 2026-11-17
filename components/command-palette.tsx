@@ -1,11 +1,11 @@
 "use client";
 
-import { CornerDownLeft, Download, ExternalLink, FileText, Hash, Languages, Mail, Palette, Search } from "lucide-react";
+import { CornerDownLeft, Download, ExternalLink, Hash, Languages, Mail, Palette, Search } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useId, useMemo, useRef, useState, type ComponentType, type KeyboardEvent } from "react";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import { toggleTheme } from "@/components/theme-toggle";
-import { getAlternatePath, localizeHref, type Locale } from "@/lib/i18n-paths";
+import { getAlternatePath, type Locale } from "@/lib/i18n-paths";
 import { useLanguage } from "@/lib/language-context";
 import { FEATURED_PROJECTS } from "@/lib/projects";
 import { CV_HREF, GITHUB_URL, LINKEDIN_URL, SITE_EMAIL } from "@/lib/site";
@@ -25,7 +25,7 @@ interface Command {
   run: () => void;
 }
 
-const SECTION_IDS = ["about", "experience", "projects", "other", "skills", "education", "contact"] as const;
+const SECTION_IDS = ["about", "experience", "projects", "skills", "education", "contact"] as const;
 
 const normalize = (value: string) => value.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 
@@ -60,13 +60,14 @@ export function CommandPalette({ triggerClassName }: { triggerClassName: string 
     const target: Locale = es ? "en" : "es";
     const list: Command[] = [
       ...SECTION_IDS.map((id) => ({ id: `go-${id}`, group: groups.go, label: t.sections[id], hint: `#${id}`, icon: Hash, run: goTo(id) })),
+      { id: "go-other", group: groups.go, label: t.projects.otherLabel, hint: "#other", icon: Hash, run: goTo("other") },
       ...FEATURED_PROJECTS.map((project) => ({
-        id: `case-${project.slug}`,
+        id: `code-${project.slug}`,
         group: groups.projects,
-        label: `${es ? "Caso de estudio" : "Case study"}: ${project.title}`,
+        label: `${project.title} · ${t.projects.code}`,
         keywords: project.tech.join(" "),
-        icon: FileText,
-        run: () => router.push(localizeHref(`/proyectos/${project.slug}`, language)),
+        icon: FaGithub,
+        run: () => openExternal(project.code),
       })),
       ...FEATURED_PROJECTS.flatMap((project) => project.live ? [{
         id: `live-${project.slug}`,

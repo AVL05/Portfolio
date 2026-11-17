@@ -1,109 +1,31 @@
-<div align="center">
+# Portfolio de Alex Vicente López
 
-# ALEVICLOP
+Desarrollador Web Full-Stack Junior en Valencia. En este portfolio reúno mi experiencia, mi CV y tres proyectos con código público. La web está en español e inglés. [Portfolio](https://www.aleviclop.dev) · [LinkedIn](https://www.linkedin.com/in/aleviclop/) · [Contacto](mailto:alexviclop@gmail.com)
 
-### Portfolio de Alex Vicente López
+- **Distrito Gourmet** reúne la carta, los pedidos, las reservas y la gestión de restaurante. [Código](https://github.com/AVL05/distrito-gourmet)
+- **LumaFlow Studio** organiza el trabajo de un estudio de fotografía y vídeo, desde los presupuestos hasta las galerías privadas. [Código](https://github.com/AVL05/lumaflow-studio)
+- **raw.vives** presenta mi archivo fotográfico bilingüe, con series, filtros y fichas individuales. [Código](https://github.com/AVL05/alexgallery)
 
-**Desarrollador Full-Stack · Frontend, backend y experiencias web**
+## Desarrollo local
 
-Valencia, España · React · Next.js · JavaScript · PHP · Laravel
-
-Un portfolio pensado para mostrar **trabajo real, decisiones técnicas y atención al detalle**, desde la interfaz hasta la lógica de aplicación.
-
-**[Explorar portfolio](https://www.aleviclop.dev)** · **[Ver proyectos](https://www.aleviclop.dev/#projects)** · **[LinkedIn](https://www.linkedin.com/in/aleviclop/)** · **[Contacto](mailto:alexviclop@gmail.com)**
-
-</div>
-
-Los enlaces apuntan a la versión pública; las capturas del repositorio pueden corresponder a una candidata posterior. Los casos incorporan un portátil responsive con la captura real de la interfaz. Distrito Gourmet incorpora además tres vídeos locales con controles nativos.
-
----
-
-## En 30 segundos
-
-Soy Alex, desarrollador Full-Stack con formación en Desarrollo de Aplicaciones Web y Sistemas Microinformáticos y Redes, experiencia profesional desarrollando software y especial interés por crear interfaces cuidadas y aplicaciones útiles.
-
-Este repositorio contiene **mi portfolio personal**, no todos los proyectos que aparecen en él. Lo he construido para que un reclutador o un equipo técnico pueda conocer mi perfil, explorar casos de estudio y acceder a mi contacto sin perderse en una lista interminable de tecnologías.
-
-- **Mi enfoque:** desarrollo web completo, con especial atención a frontend, experiencia de usuario y calidad del producto.
-- **Qué encontrarás:** proyectos seleccionados, experiencia, decisiones de diseño y desarrollo, y formas directas de contactar.
-- **Idiomas:** español e inglés.
-- **Sitio publicado:** **[aleviclop.dev](https://www.aleviclop.dev)**.
-
-> **¿Quieres ver cómo trabajo?** La mejor forma de conocer este proyecto es abrir el [portfolio en vivo](https://www.aleviclop.dev). No se incluye una captura genérica ni la imagen de otro proyecto como si fuera la portada de esta web.
-
-## Trabajo seleccionado
-
-Tres proyectos con enfoques distintos: resolver un flujo de negocio, diseñar software para un sector creativo y construir una experiencia visual propia.
-
-| Proyecto | Problema / enfoque | Explorar |
-| :--- | :--- | :--- |
-| **Distrito Gourmet** | Experiencia digital para un restaurante: carta, pedidos, reservas y administración. | [Caso de estudio](https://www.aleviclop.dev/proyectos/distrito-gourmet) |
-| **LumaFlow Studio** | Herramientas de software para mejorar flujos de trabajo vinculados a fotografía y creación audiovisual. | [Caso de estudio](https://www.aleviclop.dev/proyectos/lumaflow-studio) |
-| **raw.vives** | Una galería personal donde la fotografía, la composición y el desarrollo web se encuentran. | [Caso de estudio](https://www.aleviclop.dev/proyectos/raw-vives) |
-
-Los casos de estudio permiten conocer el contexto y el trabajo detrás de cada propuesta. **Cada aplicación tiene su propio alcance**: no todo lo mostrado en el portfolio forma parte de este repositorio.
-
-## Qué aporta este portfolio
-
-| Área | Implementación |
-| :--- | :--- |
-| **Diseño e interacción** | Dirección visual propia, componentes reutilizables, GSAP y transiciones que respetan las preferencias de movimiento reducido. |
-| **Experiencia responsive** | Presentación adaptada a distintos tamaños de pantalla y navegación accesible. |
-| **Contenido bilingüe** | Español e inglés con rutas localizadas. |
-| **Casos de estudio** | Páginas dedicadas para explicar los proyectos más allá de una simple miniatura. |
-| **Contacto** | Formulario validado en el servidor, con controles anti-spam y envío mediante Web3Forms. |
-| **SEO** | Metadatos localizados, URLs canónicas, sitemap, robots y datos estructurados. |
-| **Calidad técnica** | ESLint, comprobación de tipos, pruebas automatizadas y flujos E2E con Playwright. |
-
-### Tecnologías utilizadas en este repositorio
-
-**Frontend:** Next.js 16.4.1 (App Router), React, TypeScript, Tailwind CSS 4, GSAP, Radix UI.
-
-**Tooling y calidad:** pnpm, ESLint, Node.js Test Runner, Playwright, GitHub Actions.
-
-**Infraestructura:** Vercel, Vercel Analytics y Speed Insights.
-
-> El stack de **este portfolio** no representa todas las tecnologías con las que trabajo. También desarrollo aplicaciones con PHP, Laravel y bases de datos relacionales.
-
----
-
-<details>
-<summary><strong>Para desarrolladores: instalación y ejecución local</strong></summary>
-
-### Requisitos
-
-- Node.js 22.x
-- pnpm 10.34.1 (declarado en `package.json`)
-
-### Inicio rápido
+Requiere Node.js 22 y pnpm 10.34.1. La web usa Next.js, React y Tailwind CSS.
 
 ```bash
-git clone https://github.com/AVL05/Portfolio.git
-cd Portfolio
 corepack enable
 pnpm install --frozen-lockfile
 pnpm dev --hostname 127.0.0.1 --port 3100
 ```
 
-Abre [http://127.0.0.1:3100](http://127.0.0.1:3100). La versión en inglés está disponible en `/en`.
+Abre [la versión local](http://127.0.0.1:3100/). La versión en inglés está en `/en`. Para servir una compilación de producción, ejecuta `pnpm build` y `pnpm start`.
 
-### Variables de entorno
+El formulario usa `WEB3FORMS_ACCESS_KEY` desde el servidor. Configúrala en `.env.local` únicamente para probar el envío real. `NEXT_PUBLIC_SITE_URL` permite cambiar el origen canónico y en producción debe ser `https://www.aleviclop.dev`.
 
-Configura `.env.local` si necesitas probar las funciones que utilizan servicios externos:
+## Mantenimiento
 
-```dotenv
-NEXT_PUBLIC_SITE_URL=http://localhost:3100
-WEB3FORMS_ACCESS_KEY=tu_clave_privada
-```
-
-| Variable | Uso |
-| :--- | :--- |
-| `NEXT_PUBLIC_SITE_URL` | Origen canónico del sitio. |
-| `WEB3FORMS_ACCESS_KEY` | Clave privada de envío del formulario de contacto. |
-
-No compartas ni versiones claves reales. El formulario necesita la clave de Web3Forms para entregar mensajes.
-
-### Comandos
+- `app/` contiene las rutas, los metadatos y la API de contacto. `components/` contiene las secciones.
+- `lib/locales/` contiene los textos. Actualiza el español y el inglés juntos. Las equivalencias de rutas se mantienen en `lib/i18n-paths.ts` y el SEO en `lib/seo.ts`.
+- `public/` contiene el CV y las imágenes de portada. Mantén las miniaturas optimizadas y sus textos alternativos en ambos idiomas.
+- Los criterios de contenido, diseño y trabajo se documentan en [PRODUCT.md](PRODUCT.md), [DESIGN.md](DESIGN.md) y [AGENTS.md](AGENTS.md).
 
 ```bash
 pnpm lint
@@ -111,70 +33,13 @@ pnpm typecheck
 pnpm test
 pnpm build
 pnpm exec playwright install chromium
-pnpm test:smoke   # navegador: recorridos críticos, SEO, cabeceras y regresiones (cada push)
-pnpm test:e2e     # suite completa antes de publicar (etiquetas de versión y ejecución manual en CI)
+pnpm test:e2e
 ```
 
-Las pruebas de navegador viven en `tests/e2e/` y se organizan por área. La etiqueta `@smoke` marca el subconjunto de cada push; `@responsive` indica que el escenario también se ejecuta en el proyecto móvil y `@mobile-only` que solo existe allí. El resto de comprobaciones se ejecuta una sola vez en escritorio. La lógica determinista (API de contacto, rutas, catálogos, activos publicados) se prueba sin navegador en `tests/*.test.mjs`.
+Las pruebas cubren el contacto con envío simulado, el sitemap y el recorrido por los proyectos, el cambio de idioma y la descarga del CV.
 
-Para servir una compilación de producción usa `pnpm start`. Para diagnosticar diferencias con el bundler de desarrollo, `pnpm dev:webpack`.
+## Publicación
 
-`pnpm test:seo` ejecuta los contratos HTTP, metadata, multidioma y JSON-LD de forma aislada. También forman parte de `pnpm test:smoke`, `pnpm test:e2e` y de CI. La auditoría y el checklist de publicación están en [docs/SEO_GEO_AUDIT.md](docs/SEO_GEO_AUDIT.md).
+GitHub Actions comprueba el código y ejecuta las pruebas. La publicación en Vercel se gestiona de forma explícita. Después de publicar, comprueba el dominio canónico, las páginas públicas de ambos idiomas, el sitemap, una redirección antigua y el formulario. Si una publicación rompe un recorrido principal, se puede volver al despliegue estable anterior en Vercel.
 
-</details>
-
-<details>
-<summary><strong>Arquitectura, calidad y publicación</strong></summary>
-
-### Organización
-
-```text
-app/                  Rutas, layouts, APIs y SEO
-components/           Componentes y secciones
-lib/                  Utilidades y lógica compartida
-lib/locales/          Textos de español e inglés
-public/               Recursos estáticos
-tests/                Pruebas automatizadas
-tests/e2e/            Pruebas de navegador
-docs/                 Decisiones y documentación técnica
-.github/workflows/    Integración continua
-```
-
-La internacionalización se apoya en `lib/locales/` y `lib/i18n-paths.ts`. La configuración SEO se centraliza en `lib/seo.ts`.
-
-- metadata localizada y URL canonical bajo `www.aleviclop.dev`;
-- datos estructurados `Person`, `WebSite` y `ProfilePage`;
-- `robots.txt` abierto a rastreadores y referencia al sitemap;
-- `sitemap.xml` con todas las rutas públicas indexables;
-- favicon público y estable en `/favicon.png`;
-- enlaces internos a las secciones de perfil, proyectos, fotografía y contacto, y a los casos de estudio.
-
-### CI y despliegue
-
-GitHub Actions ejecuta verificaciones del código en `main` y en las pull requests. El proyecto está preparado para Vercel, pero la publicación de producción se gestiona de forma explícita tras la validación; **un merge no equivale automáticamente a un despliegue**.
-
-La documentación de releases y auditorías recoge decisiones y pruebas históricas, no garantías sobre métricas actuales.
-
-### Documentación del proyecto
-
-- [PRODUCT.md](PRODUCT.md) — objetivos y criterios del portfolio.
-- [DESIGN.md](DESIGN.md) — lenguaje visual y decisiones de diseño.
-- [docs/EXPERIENCE_REDESIGN.md](docs/EXPERIENCE_REDESIGN.md) — evolución de la experiencia.
-- [docs/RELEASE_CANDIDATE.md](docs/RELEASE_CANDIDATE.md) — controles previos a publicación.
-- [AGENTS.md](AGENTS.md) — contexto para agentes de desarrollo.
-
-</details>
-
----
-
-## Hablemos
-
-Busco seguir creciendo profesionalmente en desarrollo web y participar en proyectos donde importen tanto la implementación técnica como la experiencia de quien los utiliza.
-
-**[Visitar mi portfolio](https://www.aleviclop.dev)** · **[Conectar en LinkedIn](https://www.linkedin.com/in/aleviclop/)** · **[Escribirme por email](mailto:alexviclop@gmail.com)**
-
-<sub>Desarrollado por Alex Vicente López · Valencia, España</sub>
-
-### Licencia
-
-Este es un proyecto personal. El código, el diseño y los contenidos están sujetos a **todos los derechos reservados**. Consulta [LICENSE.md](LICENSE.md) antes de reutilizar cualquier parte.
+El código, el diseño y los contenidos están sujetos a todos los derechos reservados. [Licencia](LICENSE.md)

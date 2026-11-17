@@ -2,17 +2,13 @@
  * Single source of truth for the ES <-> EN route map.
  *
  * Spanish is the default locale and lives at the root (no prefix).
- * English lives under `/en` with translated section slugs; brand slugs
- * (raw-vives, lumaflow-studio, distrito-gourmet) stay identical.
+ * English lives under `/en`.
  *
  * This module is intentionally dependency-free so it can run anywhere
  * (server components, client components, metadata, tests).
  */
 
 export type Locale = "es" | "en";
-
-export const LOCALES: readonly Locale[] = ["es", "en"];
-export const DEFAULT_LOCALE: Locale = "es";
 
 interface RoutePair {
   es: string;
@@ -21,9 +17,6 @@ interface RoutePair {
 
 export const ROUTE_PAIRS: readonly RoutePair[] = [
   { es: "/", en: "/en" },
-  { es: "/proyectos/raw-vives", en: "/en/projects/raw-vives" },
-  { es: "/proyectos/lumaflow-studio", en: "/en/projects/lumaflow-studio" },
-  { es: "/proyectos/distrito-gourmet", en: "/en/projects/distrito-gourmet" },
 ];
 
 export const INDEXABLE_ES_PATHS: readonly string[] = ROUTE_PAIRS.map(
@@ -40,7 +33,7 @@ const ES_TO_EN = new Map(navigationPairs.map((pair) => [pair.es, pair.en]));
 const EN_TO_ES = new Map(navigationPairs.map((pair) => [pair.en, pair.es]));
 
 /** Remove a trailing slash (except for the root) so lookups are stable. */
-export function normalizePathname(pathname: string): string {
+function normalizePathname(pathname: string): string {
   if (!pathname) return "/";
   const clean = pathname.split("?")[0]?.split("#")[0] ?? "/";
   if (clean.length > 1 && clean.endsWith("/")) return clean.slice(0, -1);

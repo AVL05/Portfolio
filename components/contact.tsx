@@ -1,17 +1,14 @@
 "use client";
 
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { ArrowUpRight, FileText, Mail } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/lib/language-context";
-import { CONTACT_LIMITS } from "@/lib/contact";
+import { CONTACT_LIMITS, type ContactField } from "@/lib/contact";
 import { CV_HREF, GITHUB_URL, LINKEDIN_URL, SITE_EMAIL } from "@/lib/site";
 import styles from "./contact.module.css";
 
-type ContactField = "name" | "email" | "message";
 type ContactFormErrors = Partial<Record<ContactField, true>>;
 type SubmitCode =
   | "provider_error"
@@ -281,15 +278,15 @@ export function Contact() {
 
         <div className={styles.field}>
           <label htmlFor="name">{t.contact.form_name}</label>
-          <Input
+          <input
             id="name"
             name="name"
             type="text"
             autoComplete="name"
             placeholder={t.contact.form_placeholder_name}
             value={formData.name}
-            minLength={2}
-            maxLength={120}
+            minLength={CONTACT_LIMITS.nameMin}
+            maxLength={CONTACT_LIMITS.nameMax}
             aria-invalid={Boolean(formErrors.name)}
             aria-describedby={formErrors.name ? "name-error" : undefined}
             onBlur={() => validateOnBlur("name")}
@@ -304,7 +301,7 @@ export function Contact() {
 
         <div className={styles.field}>
           <label htmlFor="email">{t.contact.form_email}</label>
-          <Input
+          <input
             id="email"
             name="email"
             type="email"
@@ -312,7 +309,7 @@ export function Contact() {
             autoComplete="email"
             placeholder={t.contact.form_placeholder_email}
             value={formData.email}
-            maxLength={254}
+            maxLength={CONTACT_LIMITS.emailMax}
             aria-invalid={Boolean(formErrors.email)}
             aria-describedby={formErrors.email ? "email-error" : undefined}
             onBlur={() => validateOnBlur("email")}
@@ -327,13 +324,13 @@ export function Contact() {
 
         <div className={styles.field}>
           <label htmlFor="message">{t.contact.form_message}</label>
-          <Textarea
+          <textarea
             id="message"
             name="message"
             placeholder={t.contact.form_placeholder_message}
             rows={5}
             value={formData.message}
-            minLength={20}
+            minLength={CONTACT_LIMITS.messageMin}
             maxLength={CONTACT_LIMITS.messageMax}
             aria-invalid={Boolean(formErrors.message)}
             aria-describedby="message-error"
@@ -345,7 +342,7 @@ export function Contact() {
           <p id="message-error" className={styles.error} aria-live="polite">
             {formErrors.message
               ? getFieldError("message")
-              : messageLength > 0 && messageLength < 20
+              : messageLength > 0 && messageLength < CONTACT_LIMITS.messageMin
                 ? t.contact.form_message_min
                 : ""}
           </p>

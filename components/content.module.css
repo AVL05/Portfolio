@@ -1,17 +1,16 @@
-/* About, experience, education and languages: quiet lists inside the column. */
-.bullets { display: grid; gap: 1rem; }
-.bullets li { position: relative; padding-left: 1.5rem; color: var(--foreground-soft); font-size: 1.0625rem; line-height: 1.65; text-wrap: pretty; }
-.bullets li::before { content: ""; position: absolute; left: 0; top: .72em; width: .5rem; height: .5rem; border-radius: 1px; background: var(--primary); }
+/* About, experience, education and languages inside the column. */
+.bio { display: grid; gap: 1rem; max-width: 68ch; }
+.bio p { color: var(--foreground-soft); font-size: 1.0625rem; line-height: 1.65; text-wrap: pretty; }
+.bio p:first-child { color: var(--foreground); font-weight: 500; font-size: 1.25rem; line-height: 1.55; }
 
-.timeline { display: grid; gap: 0; }
-.timeline > li { display: grid; gap: .5rem; padding-block: 1.5rem; border-top: 1px solid var(--border); }
-.timeline > li:first-child { padding-top: 0; border-top: 0; }
-.timeline > li:last-child { padding-bottom: 0; }
+.timeline { display: grid; gap: 1rem; }
+.timeline > li { display: grid; gap: .5rem; padding: 1.25rem; border: 1px solid var(--border); border-radius: .5rem; background: var(--surface); }
 .head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .25rem 1rem; }
-.head h3 { font-size: 1.1875rem; font-weight: 500; letter-spacing: -.02em; }
+.head h3 { font-size: 1.375rem; font-weight: 600; letter-spacing: -.02em; }
 .period { color: var(--muted-foreground); font: 400 var(--type-label)/1.6 var(--font-label), ui-monospace, monospace; letter-spacing: .02em; white-space: nowrap; }
 .sub { color: var(--foreground-soft); font-size: .9375rem; }
 .sub span { color: var(--muted-foreground); }
+.detail { color: var(--muted-foreground); font-size: .9375rem; line-height: 1.65; }
 .points { display: grid; gap: .625rem; margin-top: .5rem; }
 .points li { position: relative; padding-left: 1.125rem; color: var(--muted-foreground); font-size: .9375rem; line-height: 1.65; text-wrap: pretty; }
 .points li::before { content: ""; position: absolute; left: 0; top: .72em; width: .4rem; height: 1px; background: var(--primary); }

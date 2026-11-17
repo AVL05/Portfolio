@@ -3,14 +3,12 @@
     "about": "About",
     "experience": "Experience",
     "projects": "Projects",
-    "skills": "Stack",
     "contact": "Contact"
   },
   "sections": {
     "about": "About",
     "experience": "Experience",
-    "projects": "Featured projects",
-    "other": "Other projects",
+    "projects": "Projects",
     "skills": "Skills",
     "education": "Education",
     "contact": "Contact"
@@ -26,26 +24,31 @@
     "cv": "Download CV"
   },
   "about": {
-    "bullets": [
-      "I'm a junior web developer with a base in React/Next.js and PHP/Laravel.",
-      "I did my internship in a team: a parking management desktop application and a corporate intranet.",
-      "I build full-stack projects with public code. I use AI as a development tool and validate the code with tests."
+    "paragraphs": [
+      "During my internship at Burguet Sistemas, I worked with another developer on a desktop app for managing a car park. I also extended the company intranet with React, PHP and MySQL.",
+      "I've built three projects with public source code: a platform for restaurants, a CRM for photo and video studios, and my own photography archive.",
+      "I use AI as a development tool and verify the code with tests. I also published Premium Frontend Director, an open-source skill for improving interface design with coding agents."
     ]
   },
+  "skillsSummary": "I work across the interface, the API and database design. I use version control and tests to review changes.",
   "projects": {
     "live": "Live",
     "code": "Code",
-    "case": "Case study",
+    "showMore": "Show more",
+    "hideMore": "Show less",
+    "otherLabel": "Other projects",
     "featured": [
       {
         "slug": "distrito-gourmet",
-        "description": "Restaurant management platform: menu, cart, reservations, orders and admin, dining-room and kitchen dashboards. Final project of the DAW programme.",
+        "category": "Web development capstone · DAW",
+        "description": "Customers can browse the menu, place an order and book a table. Staff run the restaurant through separate dashboards for the dining room, kitchen and administration.",
         "alt": "Distrito Gourmet: home page with access to the menu and reservations",
         "evidence": []
       },
       {
         "slug": "lumaflow-studio",
-        "description": "CRM for photo and video studios: clients, sessions, calendar, quotes, invoicing and private galleries.",
+        "category": "CRM · Progressive web app",
+        "description": "One place for a photo or video studio's workflow, from quotes and session planning to invoices and delivery through a private gallery. Includes a local AI assistant.",
         "alt": "LumaFlow Studio: screenshot of the application interface",
         "evidence": [
           "56 backend tests",
@@ -54,7 +57,8 @@
       },
       {
         "slug": "raw-vives",
-        "description": "Bilingual photo archive with series, filters and individual pages.",
+        "category": "Photography archive · Bilingual site",
+        "description": "My photography archive, arranged into series you can filter and browse one image at a time. I generate the pages statically with Next.js.",
         "alt": "raw.vives: home page of the photo archive",
         "evidence": []
       }
@@ -90,9 +94,9 @@
         "period": "Feb 2026 – May 2026",
         "location": "Xirivella",
         "highlights": [
-          "Team development, sharing the work with another developer, of every module of a parking management desktop application (React, Electron): free spaces, payments and receipts, cash register, subscriptions, parking users, staff shifts, barrier control and camera viewing.",
-          "Evolution of the corporate intranet (React, PHP, MySQL): new features, table design and issue resolution.",
-          "Version control with Git and Bitbucket."
+          "Worked in a team to build the parking app modules in React and Electron, from occupancy, payments and subscriptions to staff shifts, barriers and cameras.",
+          "Added features to the company intranet, designed database tables and fixed issues using React, PHP and MySQL.",
+          "Used Git and Bitbucket for version control."
         ]
       },
       {
@@ -111,11 +115,13 @@
         "title": "Higher Vocational Diploma in Web Application Development (DAW)",
         "institution": "IES Serra Perenxisa",
         "period": "2024–2026",
-        "location": "Torrent"
+        "location": "Torrent",
+        "description": "Capstone project: Distrito Gourmet."
       },
       {
         "title": "AWS Academy Cloud Foundations course",
-        "period": "2025–2026"
+        "period": "2025–2026",
+        "description": "10 modules and 6 labs on identity, networking, compute, storage, databases, scaling and functions."
       },
       {
         "title": "Vocational Diploma in IT Systems and Networks (SMR)",
@@ -143,9 +149,8 @@
     ]
   },
   "contact": {
-    "title": "Contact",
     "subtitle": "Shall we talk?",
-    "desc": "I'm looking for my first role as a web developer: in Valencia (on-site or hybrid) or remote from Europe. Write to me and I'll reply soon.",
+    "desc": "I'm looking for my first web developer role on a product team, in Valencia (on-site or hybrid) or remotely from Europe. If you think I could be a fit for your team, get in touch.",
     "form_name": "Your name",
     "form_email": "Your email",
     "form_message": "Your message",

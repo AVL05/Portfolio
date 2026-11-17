@@ -48,36 +48,13 @@ interface IndexableRoute {
   path: string;
   locale: Locale;
   priority: number;
-  changeFrequency: "weekly" | "monthly";
+  changeFrequency: "weekly";
 }
 
-const ROUTE_PRIORITY: Record<string, { priority: number; changeFrequency: "weekly" | "monthly" }> = {
-  "/": { priority: 1, changeFrequency: "weekly" },
-  "/proyectos/raw-vives": { priority: 0.92, changeFrequency: "monthly" },
-  "/proyectos/lumaflow-studio": { priority: 0.84, changeFrequency: "monthly" },
-  "/proyectos/distrito-gourmet": { priority: 0.82, changeFrequency: "monthly" },
-};
-
-/**
- * Exactly the 8 indexable URLs: 4 ES + 4 EN.
- * /legal and /en/legal stay noindex and are intentionally excluded.
- */
+/** Only the Spanish and English home pages are indexable. */
 export const INDEXABLE_ROUTES: IndexableRoute[] = [
-  ...INDEXABLE_ES_PATHS.map((path) => ({
-    path,
-    locale: "es" as Locale,
-    priority: ROUTE_PRIORITY[path]?.priority ?? 0.5,
-    changeFrequency: ROUTE_PRIORITY[path]?.changeFrequency ?? ("monthly" as const),
-  })),
-  ...INDEXABLE_EN_PATHS.map((path) => {
-    const esPath = getAlternatePath(path, "es") ?? "/";
-    return {
-      path,
-      locale: "en" as Locale,
-      priority: ROUTE_PRIORITY[esPath]?.priority ?? 0.5,
-      changeFrequency: ROUTE_PRIORITY[esPath]?.changeFrequency ?? ("monthly" as const),
-    };
-  }),
+  ...INDEXABLE_ES_PATHS.map((path) => ({ path, locale: "es" as const, priority: 1, changeFrequency: "weekly" as const })),
+  ...INDEXABLE_EN_PATHS.map((path) => ({ path, locale: "en" as const, priority: 1, changeFrequency: "weekly" as const })),
 ];
 
 export function absoluteUrl(path = "/") {
@@ -88,7 +65,7 @@ export function absoluteUrl(path = "/") {
 }
 
 /** hreflang set for an indexable URL: self + alternate + x-default (ES). */
-export function languageAlternates(path: string, locale: Locale) {
+function languageAlternates(path: string, locale: Locale) {
   const es = locale === "es" ? path : getAlternatePath(path, "es");
   const en = locale === "en" ? path : getAlternatePath(path, "en");
   if (!es || !en || !INDEXABLE_ES_PATHS.includes(es)) return undefined;
@@ -107,18 +84,13 @@ export function buildPageMetadata({
   path,
   title,
   description,
-  type = "website",
-  image,
 }: {
   locale: Locale;
   path: string;
   title?: string;
   description: string;
-  type?: "website" | "article" | "profile";
-  image?: string;
 }): Metadata {
   const imageUrl =
-    image ??
     `${SITE_URL}/api/og?lang=${locale}&title=${encodeURIComponent(title ?? SITE_NAME)}`;
   // Pages without an explicit title (home) inherit the layout default for
   // <title> but still need an explicit Open Graph / Twitter title.
@@ -135,7 +107,7 @@ export function buildPageMetadata({
       description,
       url: absoluteUrl(path),
       siteName: SITE_NAME,
-      type,
+      type: "website",
       locale: locale === "es" ? "es_ES" : "en_GB",
       alternateLocale: locale === "es" ? ["en_GB"] : ["es_ES"],
       images: [imageUrl],
@@ -219,8 +191,6 @@ export function buildPersonJsonLd(locale: Locale) {
   };
 }
 
-export const personJsonLd = buildPersonJsonLd("es");
-
 export const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
@@ -250,18 +220,3 @@ export const profilePageJsonLd = {
     "@id": `${SITE_URL}/#alex-vicente-lopez`,
   },
 };
-
-export function breadcrumbJsonLd(
-  items: Array<{ name: string; path: string }>,
-) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: items.map((item, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      name: item.name,
-      item: absoluteUrl(item.path),
-    })),
-  };
-}

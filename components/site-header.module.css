@@ -1,0 +1,31 @@
+.header { position: sticky; top: 0; z-index: 50; background: var(--background); border-bottom: 1px solid var(--border); }
+.bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; height: var(--header-height); max-width: var(--column-width); margin-inline: auto; padding-inline: var(--column-pad); }
+@media (min-width: 49rem) { .bar { border-inline: 1px solid var(--border); } }
+.wordmark { display: inline-flex; align-items: center; min-height: var(--target-size); font: 500 .9375rem/1 var(--font-label), ui-monospace, monospace; letter-spacing: -.02em; color: var(--foreground); }
+.wordmark span { color: var(--primary); }
+.links { display: none; align-items: center; gap: 1.5rem; margin-left: auto; }
+.links a { position: relative; display: inline-flex; align-items: center; min-height: var(--target-size); font-size: .875rem; color: var(--muted-foreground); transition: color var(--motion-fast) var(--ease-out); }
+.links a::after { content: ""; position: absolute; bottom: .55rem; inset-inline: 0; height: 1px; background: var(--primary); transform: scaleX(0); transform-origin: left; transition: transform var(--motion-normal) var(--ease-out); }
+.links a:hover, .links a[aria-current] { color: var(--foreground); }
+.links a:hover::after, .links a:focus-visible::after, .links a[aria-current]::after { transform: scaleX(1); }
+.controls { display: flex; align-items: center; gap: .5rem; }
+.iconButton { display: inline-flex; align-items: center; justify-content: center; width: var(--target-size); height: var(--target-size); border: 1px solid var(--border); border-radius: var(--radius); color: var(--foreground-soft); cursor: pointer; transition: color var(--motion-fast) var(--ease-out), border-color var(--motion-fast) var(--ease-out); }
+.iconButton:hover { color: var(--primary); border-color: color-mix(in oklab, var(--primary) 60%, transparent); }
+.menu { max-width: none; max-height: none; width: 100%; height: 100dvh; margin: 0; padding: 0 var(--column-pad) 2rem; border: 0; background: var(--background); color: var(--foreground); font-family: var(--font-body), sans-serif; }
+.menu[open] { display: flex; flex-direction: column; }
+.menu::backdrop { background: var(--background); }
+.menuHeader { display: flex; align-items: center; justify-content: space-between; height: var(--header-height); border-bottom: 1px solid var(--border); }
+.menuLinks { display: flex; flex-direction: column; flex: 1; justify-content: center; padding-block: 2rem; }
+.menuLinks a { display: flex; align-items: baseline; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--border); font-size: clamp(1.75rem, 8vw, 2.5rem); font-weight: 500; letter-spacing: -.03em; }
+.menuLinks a > span { min-width: 2rem; color: var(--primary); font: 400 var(--type-label)/1 var(--font-label), monospace; }
+.menuLinks a:hover, .menuLinks a[aria-current] { color: var(--primary); }
+.menuFooter { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; color: var(--muted-foreground); font: 400 var(--type-label)/1.5 var(--font-label), monospace; text-transform: uppercase; letter-spacing: .06em; }
+.menuFooter a { display: inline-flex; align-items: center; min-height: var(--target-size); }
+.menuFooter a:hover, .menuAction:hover { color: var(--primary); }
+.menuAction { display: inline-flex; align-items: center; min-height: var(--target-size); text-transform: uppercase; letter-spacing: .06em; cursor: pointer; }
+.paletteButton { display: none; }
+.fallback { display: none; }
+@media (min-width: 30rem) { .paletteButton { display: inline-flex; } }
+@media (min-width: 48rem) { .links { display: flex; } .menuButton { display: none; } }
+@media (max-width: 47.99rem) { .fallback { display: flex; flex-wrap: wrap; justify-content: space-around; border-bottom: 1px solid var(--border); } .fallback a { display: inline-flex; align-items: center; min-height: var(--target-size); font-size: .875rem; } }
+@media (prefers-reduced-motion: reduce) { .links a::after, .iconButton { transition: none; } }

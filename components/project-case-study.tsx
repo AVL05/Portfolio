@@ -158,7 +158,7 @@ export function CaseShell({ identity, title, plainTitle, eyebrow, lead, facts, a
   }, { scope: containerRef });
 
   return (
-    <main id="main-content" ref={containerRef} className={`premium-home case-study ${styles.story}`} data-case={identity}>
+    <main id="main-content" ref={containerRef} className={`premium-home case-study ${styles.story}`} data-case={identity} data-theme="dark">
       <section className={styles.hero}>
         <nav aria-label={language === "es" ? "Navegación del caso" : "Case study navigation"} className={styles.topbar}>
           <Link href={localizeHref("/#projects", language)} className={styles.back}><ArrowLeft aria-hidden="true" />{copy.back}</Link>

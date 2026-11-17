@@ -72,8 +72,8 @@ const legacyRedirects = [
   { source: "/en/projects", destination: "/en#projects", permanent: true },
   { source: "/sobre-mi", destination: "/#experience", permanent: true },
   { source: "/en/about", destination: "/en#experience", permanent: true },
-  { source: "/fotografia", destination: "/#photography", permanent: true },
-  { source: "/en/photography", destination: "/en#photography", permanent: true },
+  { source: "/fotografia", destination: "/#projects", permanent: true },
+  { source: "/en/photography", destination: "/en#projects", permanent: true },
 ];
 
 /** @type {import('next').NextConfig} */

@@ -71,14 +71,14 @@ test("contact form exposes localized inline validation", () => {
   assert.match(en, /"form_error_network"/);
 });
 
-test("focus, lightweight editorial hero, and localized Open Graph contracts remain explicit", () => {
+test("focus, lightweight home, and localized Open Graph contracts remain explicit", () => {
   const globals = read("app/globals.css");
-  const hero = read("components/hero.tsx");
+  const home = read("components/home-client.tsx");
   const seo = read("lib/seo.ts");
 
   assert.match(globals, /:focus-visible/);
   assert.match(globals, /outline: 2px solid var\(--primary\)/);
-  assert.doesNotMatch(hero, /CreativeRoomHero|Canvas/);
+  assert.doesNotMatch(home, /CreativeRoomHero|Canvas/);
   assert.doesNotMatch(read("next.config.mjs"), /wasm-unsafe-eval/);
   assert.match(seo, /alternateLocale/);
   assert.match(seo, /buildPageMetadata/);
@@ -107,7 +107,7 @@ test("search crawlers can discover the public profile routes", () => {
   const robots = read("app/robots.ts");
   const sitemap = read("app/sitemap.ts");
   const seo = read("lib/seo.ts");
-  const contact = read("components/contact.tsx");
+  const footer = read("components/site-footer.tsx");
 
   assert.match(layoutEs, /rel="sitemap"/);
   assert.match(layoutEn, /rel="sitemap"/);
@@ -119,9 +119,9 @@ test("search crawlers can discover the public profile routes", () => {
   assert.match(sitemap, /INDEXABLE_ROUTES/);
   assert.match(seo, /Alex Vicente Lopez/);
   for (const route of ["sobre-mi", "proyectos", "fotografia", "contacto"]) {
-    assert.doesNotMatch(contact, new RegExp(`href: "\\/${route}"`));
+    assert.doesNotMatch(footer, new RegExp(`href: "\\/${route}"`));
   }
-  assert.match(contact, /\/legal/);
+  assert.match(footer, /\/legal/);
 });
 
 test("featured case studies expose project-specific social images", () => {
@@ -145,46 +145,68 @@ test("featured case studies expose project-specific social images", () => {
   }
 });
 
-test("the portfolio keeps the hero controls aligned and overlap-safe", () => {
-  const hero = read("components/hero.tsx");
-  const navigation = read("components/navigation.tsx");
+test("the header keeps wordmark, links, theme and language controls in one bar", () => {
+  const header = read("components/site-header.tsx");
+  const headerStyles = read("components/site-header.module.css");
   const languageToggle = read("components/language-toggle.tsx");
+  const hero = read("components/hero.tsx");
 
-  assert.doesNotMatch(hero, /data-portfolio|Portfolio \/ [A-Z]\d+/);
-  assert.doesNotMatch(navigation, />\s*V\d+\s*</);
-  assert.match(hero, /styles\.summary/);
   assert.equal((hero.match(/<h1\b/g) ?? []).length, 1);
-  const heroStyles = read("components/hero.module.css");
-  assert.match(heroStyles, /\.hero\s*\{[^}]*overflow:\s*clip/);
-  assert.match(hero, /data-art-stage/);
-  assert.match(heroStyles, /@media\s*\(max-width:\s*1023px\)/);
-  assert.match(heroStyles, /@media\s*\(max-width:\s*479px\)/);
-  assert.doesNotMatch(hero, /md:bottom-7 md:left-8/);
+  assert.match(header, /<ThemeToggle/);
+  assert.match(header, /<LanguageToggle/);
+  assert.match(header, /aria-haspopup="dialog"/);
+  assert.match(headerStyles, /@media \(min-width: 48rem\)/);
   assert.match(languageToggle, /absolute left-1 top-1 size-9/);
   assert.match(languageToggle, /translate-x-9/);
 });
 
-test("secondary work stays compact with visible media and real destinations", () => {
-  const projects = read("components/projects.tsx");
-  assert.match(projects, /Otros proyectos/);
-  assert.match(projects, /Other projects/);
-  assert.match(projects, /archiveList/);
-  assert.match(projects, /archiveThumb/);
-  assert.match(projects, /project.summary/);
-  assert.match(projects, /Ver código/);
-  assert.match(projects, /View code/);
-  assert.match(projects, /Proyecto privado/);
-  assert.doesNotMatch(projects, /archive-floating-preview|onMouseMove|quickTo/);
-  for (const locale of ["es", "en"]) {
-    assert.doesNotMatch(read("lib/locales/" + locale + ".json"), /github\.com\/AVL05\/PRWEB02/);
+test("theme is dark by default, applied before paint and switchable", () => {
+  const globals = read("app/globals.css");
+  const theme = read("lib/theme.ts");
+  const toggle = read("components/theme-toggle.tsx");
+
+  assert.match(globals, /:root,\s*\[data-theme="dark"\]/);
+  assert.match(globals, /\[data-theme="light"\]/);
+  assert.match(theme, /themeInitScript/);
+  assert.match(toggle, /localStorage\.setItem/);
+  for (const layout of ["app/(es)/layout.tsx", "app/(en)/layout.tsx"]) {
+    const source = read(layout);
+    assert.match(source, /data-theme="dark"/);
+    assert.match(source, /themeInitScript/);
   }
 });
 
-test("the recruiter view keeps exactly three featured projects plus an archive", () => {
-  const projects = read("components/projects.tsx");
+test("command palette keeps its keyboard and ARIA contract", () => {
+  const palette = read("components/command-palette.tsx");
+  const header = read("components/site-header.tsx");
 
-  assert.match(projects, /const featuredIndexes = \[0, 1, 2\]/);
-  assert.match(projects, /archive = projects\.filter/);
-  assert.match(projects, /Ver caso de estudio/);
-  assert.match(projects, /View case study/);
+  assert.match(palette, /role="combobox"/);
+  assert.match(palette, /role="listbox"/);
+  assert.match(palette, /role="option"/);
+  assert.match(palette, /aria-activedescendant/);
+  assert.match(palette, /aria-controls=\{listId\}/);
+  assert.match(palette, /aria-keyshortcuts="Control\+K Meta\+K"/);
+  assert.match(palette, /event\.metaKey \|\| event\.ctrlKey/);
+  assert.match(palette, /showModal\(\)/);
+  for (const key of ["ArrowDown", "ArrowUp", "Home", "End", "Enter"]) assert.match(palette, new RegExp(key));
+  // External destinations never leak window.opener.
+  assert.match(palette, /noopener,noreferrer/);
+  assert.match(header, /<CommandPalette/);
+  assert.match(header, /OPEN_PALETTE_EVENT/);
+});
+
+test("motion stays inside the budget and respects reduced motion", () => {
+  const globals = read("app/globals.css");
+  const reveal = read("components/reveal.tsx");
+  const home = read("components/home-client.tsx");
+
+  assert.match(globals, /@media \(prefers-reduced-motion: no-preference\)\s*\{\s*\[data-reveal="pending"\]/);
+  assert.match(reveal, /prefers-reduced-motion: reduce/);
+  assert.match(reveal, /IntersectionObserver/);
+  assert.match(reveal, /observer\.disconnect\(\)/);
+  // The home no longer ships GSAP: reveals are CSS plus one observer.
+  for (const file of ["components/home-client.tsx", "components/hero.tsx", "components/projects.tsx", "components/timeline.tsx", "components/site-header.tsx", "components/command-palette.tsx", "components/reveal.tsx"]) {
+    assert.doesNotMatch(read(file), /gsap/i, file);
+  }
+  assert.match(home, /<Reveal \/>/);
 });

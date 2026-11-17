@@ -1,23 +1,68 @@
 import { expect, test } from "@playwright/test";
 import { CASES, hasHorizontalOverflow, trackErrors } from "./helpers";
 
-test("recruiter journey: every project is one click from the home and exposes its decisions", { tag: ["@smoke", "@responsive"] }, async ({ page }) => {
+const FEATURED = [
+  { title: "Distrito Gourmet", live: "https://distrito-gourmet.aleviclop.dev", code: "https://github.com/AVL05/distrito-gourmet" },
+  { title: "LumaFlow Studio", live: null, code: "https://github.com/AVL05/lumaflow-studio" },
+  { title: "raw.vives", live: "https://rawvives.aleviclop.dev", code: "https://github.com/AVL05/alexgallery" },
+] as const;
+
+const OTHER = [
+  "https://github.com/AVL05/premium-frontend-director",
+  "https://github.com/AVL05/echo-the-awakening",
+  "https://github.com/avl05/API_Hotel",
+  "https://github.com/AVL05/Dulces",
+];
+
+test("recruiter journey: every featured project is one click from the home and exposes its decisions", { tag: ["@smoke", "@responsive"] }, async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
-  const titles = ["Distrito Gourmet", "LumaFlow Studio", "raw.vives"];
   for (const [index, slug] of CASES.entries()) {
     await page.goto("/");
     const destination = `/proyectos/${slug}`;
-    // Every scene keeps a visible, focusable case action pointing at the same destination.
-    const action = page.locator(`#work-${index + 1}`).getByRole("link", { name: "Ver caso de estudio", exact: true });
-    await expect(action).toHaveAttribute("href", destination);
-    await action.focus();
-    await expect(action).toBeFocused();
-    await expect(action).toHaveCSS("outline-style", "solid");
-    await page.getByRole("navigation", { name: /Proyectos seleccionados/ }).locator(`a[href="${destination}"]`).click();
+    const card = page.locator("#projects .section-body > ul > li").nth(index);
+    const title = card.getByRole("heading", { level: 3 }).getByRole("link");
+    await expect(title).toHaveAttribute("href", destination);
+    await title.focus();
+    await expect(title).toBeFocused();
+    await expect(title).toHaveCSS("outline-style", "solid");
+    await title.click();
     await expect(page).toHaveURL(destination);
-    await expect(page.locator("h1")).toHaveText(titles[index]);
+    await expect(page.locator("h1")).toHaveText(FEATURED[index].title);
     await expect(page.locator("#decisions")).toContainText(/\S{10}/);
     expect(await hasHorizontalOverflow(page)).toBe(false);
+  }
+});
+
+test("project cards, other projects and skills expose real destinations and no unverified claims", { tag: ["@smoke", "@responsive"] }, async ({ page }) => {
+  for (const path of ["/", "/en"]) {
+    await page.goto(path);
+    const cards = page.locator("#projects .section-body > ul > li");
+    await expect(cards).toHaveCount(3);
+    for (const [index, project] of FEATURED.entries()) {
+      const card = cards.nth(index);
+      await expect(card.locator("h3")).toContainText(project.title);
+      const code = card.locator('a[href^="https://github.com/"]');
+      await expect(code).toHaveAttribute("href", project.code);
+      await expect(code).toHaveAttribute("target", "_blank");
+      await expect(code).toHaveAttribute("rel", /noopener/);
+      const live = card.locator('a[href^="https://"]:not([href^="https://github.com/"])');
+      if (project.live) await expect(live).toHaveAttribute("href", project.live);
+      else await expect(live).toHaveCount(0);
+      const image = card.locator("img");
+      await expect(image).toHaveAttribute("alt", /.{20,}/);
+      await expect(image).toHaveAttribute("width", /\d+/);
+      await expect(image).toHaveAttribute("height", /\d+/);
+    }
+    // Only verifiable figures: the LumaFlow test counts.
+    await expect(cards.nth(1)).toContainText(/56/);
+    await expect(cards.nth(1)).toContainText(/33/);
+
+    const others = page.locator("#other ul > li h3 a");
+    expect(await others.evaluateAll(links => links.map(link => link.getAttribute("href")))).toEqual(OTHER);
+
+    await expect(page.locator("#skills ul > li")).toHaveCount(18);
+    await expect(page.locator("#skills")).not.toContainText("TypeScript");
+    await expect(page.locator("#skills ul > li svg").first()).toBeVisible();
   }
 });
 

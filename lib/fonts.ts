@@ -1,15 +1,21 @@
-import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
+import { Hanken_Grotesk, JetBrains_Mono } from "next/font/google";
 
-// Editorial Index: one sans family for display and reading, a mono for
-// metadata and a single serif italic reserved for short accent phrases.
-export const GeistSans = Geist({
-  subsets: ["latin"], variable: "--font-geist-sans", display: "swap",
+// Self-hosted by next/font at build time (no runtime request to Google).
+// One sans family for headings and reading; one mono for the wordmark and
+// metadata labels.
+export const HankenSans = Hanken_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-hanken",
+  display: "swap",
 });
-export const GeistMono = Geist_Mono({
-  subsets: ["latin"], variable: "--font-geist-mono", display: "swap", preload: false,
+
+export const JetBrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains",
+  display: "swap",
+  preload: false,
   adjustFontFallback: false,
   fallback: ["ui-monospace", "SFMono-Regular", "Roboto Mono", "Menlo", "Monaco", "Liberation Mono", "DejaVu Sans Mono", "Courier New", "monospace"],
 });
-export const AccentSerif = Instrument_Serif({
-  subsets: ["latin"], weight: "400", style: ["normal", "italic"], variable: "--font-accent", display: "swap",
-});
+
+export const fontVariables = `${HankenSans.variable} ${JetBrainsMono.variable}`;

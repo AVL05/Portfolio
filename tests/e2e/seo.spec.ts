@@ -7,7 +7,7 @@ const retired = [
   ["/contacto", "/#contact"], ["/en/contact", "/en#contact"],
   ["/proyectos", "/#projects"], ["/en/projects", "/en#projects"],
   ["/sobre-mi", "/#experience"], ["/en/about", "/en#experience"],
-  ["/fotografia", "/#photography"], ["/en/photography", "/en#photography"],
+  ["/fotografia", "/#projects"], ["/en/photography", "/en#projects"],
   ["/proyectos/raw-manager", "/proyectos/lumaflow-studio"],
   ["/es", "/"], ["/es/legal", "/legal"],
   ...ROUTE_PAIRS.slice(1).map(pair => [`/es${pair.es}`, pair.es]),
@@ -49,7 +49,7 @@ for (const pair of ROUTE_PAIRS) {
         expect(await page.locator(`meta[property="${attribute}"]`).getAttribute("content")).toBeTruthy();
       }
       if (pair.es === "/") {
-        await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", new RegExp(locale === "es" ? "Desarrollador Full-Stack Junior" : "Junior Full-Stack Developer"));
+        await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", new RegExp(locale === "es" ? "Desarrollador Web Full-Stack Junior" : "Junior Full-Stack Web Developer"));
       }
       const image = new URL((await page.locator('meta[property="og:image"]').getAttribute("content"))!);
       expect(image.origin).toBe(origin);
@@ -70,7 +70,10 @@ for (const pair of ROUTE_PAIRS) {
       const person = entities.find(entity => entity["@type"] === "Person");
       expect(person.name).toBe("Alex Vicente López");
       expect(person["@id"]).toBe(`${origin}/#alex-vicente-lopez`);
-      expect(person.description).toMatch(/frontend/i);
+      expect(person.description).toMatch(/full-stack/i);
+      expect(person.jobTitle).toBe(locale === "es" ? "Desarrollador Web Full-Stack Junior" : "Junior Full-Stack Web Developer");
+      expect(JSON.stringify(person)).not.toMatch(/instagram|Figma|Fotograf|photograph|TypeScript/i);
+      expect(person.sameAs).toEqual(["https://github.com/AVL05", "https://www.linkedin.com/in/aleviclop", "https://rawvives.aleviclop.dev/"]);
       expect(person.hasOccupation.name).toBe(person.jobTitle);
       expect(entities.filter(entity => entity["@type"] === "WebSite")).toHaveLength(1);
       const profiles = entities.filter(entity => entity["@type"] === "ProfilePage");

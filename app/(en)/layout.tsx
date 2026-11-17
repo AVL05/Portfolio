@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import type React from "react";
 import "../globals.css";
-import { AccentSerif, GeistMono, GeistSans } from "@/lib/fonts";
+import { fontVariables } from "@/lib/fonts";
+import { THEME_COLORS, themeInitScript } from "@/lib/theme";
 import { RootShell } from "@/components/root-shell";
 import {
   EN_SITE_DESCRIPTION,
   EN_SITE_TITLE,
-  personJsonLd,
+  buildPersonJsonLd,
   SAME_AS,
   SEO_KEYWORDS,
   SITE_NAME,
@@ -15,11 +16,9 @@ import {
 } from "@/lib/seo";
 
 export const viewport = {
-  colorScheme: "dark",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#0e0d0b" },
-    { media: "(prefers-color-scheme: dark)", color: "#0e0d0b" },
-  ],
+  colorScheme: "dark light",
+  // Dark by default; the head script and the theme toggle update this tag.
+  themeColor: THEME_COLORS.dark,
 };
 
 export const metadata: Metadata = {
@@ -62,12 +61,7 @@ export const metadata: Metadata = {
 };
 
 const enJsonLd = [
-  {
-    ...personJsonLd,
-    jobTitle: "Junior Full-Stack Developer",
-    description: EN_SITE_DESCRIPTION,
-    hasOccupation: { ...personJsonLd.hasOccupation, name: "Junior Full-Stack Developer" },
-  },
+  buildPersonJsonLd("en"),
   {
     ...websiteJsonLd,
     inLanguage: "en",
@@ -84,10 +78,12 @@ export default function EnLayout({
   return (
     <html
       lang="en"
-      className="dark scroll-smooth overflow-x-clip"
+      data-theme="dark"
+      className="scroll-smooth overflow-x-clip"
       suppressHydrationWarning
     >
       <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         {isVercel ? <link rel="preconnect" href="https://va.vercel-scripts.com" /> : null}
         {isVercel ? <link rel="preconnect" href="https://vitals.vercel-insights.com" /> : null}
@@ -99,8 +95,7 @@ export default function EnLayout({
         />
       </head>
       <body
-        className={`font-sans ${GeistSans.variable} ${GeistMono.variable} ${AccentSerif.variable} antialiased bg-background text-foreground overflow-x-clip`}
-        style={{ fontFeatureSettings: '"cv11", "ss01", "ss03"' }}
+        className={`font-sans ${fontVariables} antialiased bg-background text-foreground overflow-x-clip`}
         suppressHydrationWarning
       >
         <RootShell language="en" skipLabel="Skip to content">

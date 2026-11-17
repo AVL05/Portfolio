@@ -6,33 +6,14 @@ import en from "./locales/en.json";
 
 export type Language = "es" | "en";
 
-export interface ProjectItem {
-  title: string;
-  description: string;
-  summary: string;
-  evidence: string[];
-  image: string;
-  imageAlt?: string;
-  imageCaption?: string;
-  technologies: string[];
-  category: string;
-  link?: string;
-  github?: string;
-  repositoryPrivate?: boolean;
-  type: string;
-  role?: string;
-  outcome?: string;
-  caseStudyHref?: string;
-}
-
 export interface TimelineItem {
   title: string;
   contract?: string;
   institution?: string;
   company?: string;
   period: string;
-  location: string;
-  description: string;
+  location?: string;
+  description?: string;
   highlights?: string[];
 }
 
@@ -42,43 +23,44 @@ interface Translation {
     projects: string;
     contact: string;
     about: string;
+    experience: string;
+  };
+  sections: {
+    about: string;
+    experience: string;
+    projects: string;
+    other: string;
+    skills: string;
+    education: string;
+    contact: string;
   };
   hero: {
-    artLabels: string[];
+    portraitAlt: string;
     role: string;
+    tagline: string;
     location: string;
-    lines: string[];
-    intro: string;
+    availability: string;
     work: string;
-    cv: string;
-    profile: string;
-    experience: string;
     contact: string;
-    index: string;
-    indexHint: string;
+    cv: string;
   };
-  skills: {
-    groups: { area: string; stack: string[] }[];
-    desc: string;
+  about: {
+    bullets: string[];
   };
   experience: {
-    title: string;
-    subtitle: string;
-    desc: string;
-    edu_title: string;
-    job_title: string;
-    cv_title: string;
-    cv_btn: string;
-    education_list: TimelineItem[];
     experience_list: TimelineItem[];
+    education_list: TimelineItem[];
   };
-  currently: {
+  languages: {
     title: string;
-    items: { label: string; value: string; href: string }[];
+    items: { name: string; level: string }[];
   };
   projects: {
-    desc: string;
-    items: ProjectItem[];
+    live: string;
+    code: string;
+    case: string;
+    featured: { slug: string; description: string; alt: string; evidence: string[] }[];
+    other: { slug: string; title: string; description: string }[];
   };
   contact: {
     title: string;
@@ -99,15 +81,10 @@ interface Translation {
     form_error_config: string;
     form_retry: string;
     form_fallback: string;
-    form_message_count: string;
     form_message_min: string;
     form_error_name: string;
     form_error_email: string;
     form_error_message: string;
-    links_title: string;
-    availability_title: string;
-    availability_desc: string;
-    cv_btn: string;
     footer_built: string;
   };
 }

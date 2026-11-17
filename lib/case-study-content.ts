@@ -18,14 +18,14 @@ export const RAW_VIVES_METADATA_COPY: Record<
   { title: string; description: string }
 > = {
   es: {
-    title: "raw.vives: portfolio fotográfico con Next.js",
+    title: "raw.vives: archivo fotográfico bilingüe con Next.js",
     description:
-      "Archivo fotográfico bilingüe de Alex Vicente López con Next.js y TypeScript. Series, fichas de obras, navegación por teclado y SEO localizado.",
+      "Archivo fotográfico bilingüe de Alex Vicente López, hecho con Next.js y Tailwind CSS. Series, fichas individuales, navegación por teclado y SEO localizado.",
   },
   en: {
-    title: "raw.vives: a Next.js photography portfolio",
+    title: "raw.vives: a bilingual photo archive built with Next.js",
     description:
-      "Alex Vicente López's bilingual photography archive, built with Next.js and TypeScript. Curated series, image pages, keyboard navigation and localized SEO.",
+      "Alex Vicente López's bilingual photo archive, built with Next.js and Tailwind CSS. Curated series, individual pages, keyboard navigation and localized SEO.",
   },
 };
 
@@ -37,14 +37,14 @@ export const LUMA_URLS = {
 
 export const LUMA_METADATA_COPY: CaseMetadataCopy = {
   es: {
-    title: "LumaFlow Studio: React, Laravel e IA local",
+    title: "LumaFlow Studio: CRM con React y Laravel",
     description:
-      "Plataforma para estudios fotográficos con React, Laravel y MySQL. Clientes, sesiones y entregas, IA local bajo demanda y pruebas automatizadas.",
+      "CRM para estudios de foto y vídeo con React, Laravel y MySQL: clientes, sesiones, presupuestos y galerías privadas. 56 tests de backend y 33 de frontend.",
   },
   en: {
-    title: "LumaFlow Studio: React, Laravel and local AI",
+    title: "LumaFlow Studio: a React and Laravel CRM",
     description:
-      "Photography studio platform built with React, Laravel and MySQL. Clients, sessions and deliveries, on-demand local AI and automated tests.",
+      "CRM for photo and video studios built with React, Laravel and MySQL: clients, sessions, quotes and private galleries. 56 backend and 33 frontend tests.",
   },
 };
 

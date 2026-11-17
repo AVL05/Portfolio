@@ -4,48 +4,53 @@ import { test } from "node:test";
 
 const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url), "utf8");
 
-test("localized home retains evidence, eight ordered capability groups and a factual currently section", () => {
+test("home content contract: featured projects, other projects and skills are factual and complete", () => {
+  const source = read("lib/projects.ts");
+  const featured = [...source.matchAll(/slug: "([a-z-]+)",\r?\n\s+title: "([^"]+)"/g)].map((match) => [match[1], match[2]]);
+  assert.deepEqual(featured, [
+    ["distrito-gourmet", "Distrito Gourmet"],
+    ["lumaflow-studio", "LumaFlow Studio"],
+    ["raw-vives", "raw.vives"],
+  ]);
+  // Live links only where a demo is published: Distrito Gourmet and raw.vives.
+  assert.equal((source.match(/live: "https:/g) ?? []).length, 2);
+  assert.match(source, /live: "https:\/\/distrito-gourmet\.aleviclop\.dev"/);
+  assert.match(source, /live: "https:\/\/rawvives\.aleviclop\.dev"/);
+  // No TypeScript as a skill or project chip.
+  assert.doesNotMatch(source, /TypeScript/);
+  const skills = source.slice(source.indexOf("export const SKILLS"));
+  assert.equal((skills.match(/^\s+"[^"]+",$/gm) ?? []).length, 18);
+
   for (const language of ["es", "en"]) {
-    const locale = JSON.parse(read(`lib/locales/${language}.json`));
-    const projects = locale.projects.items;
-    assert.equal(projects.length, 7);
-    assert.equal(locale.skills.groups.length, 8);
-    assert.match(locale.skills.groups[0].area, /Desarrollo web|Web development/);
-    assert.deepEqual(locale.skills.groups[0].stack.slice(0, 3), ["HTML", "CSS", "JavaScript"]);
-    assert.ok(!locale.skills.groups[0].stack.includes("TypeScript"));
-    assert.match(locale.skills.groups[1].area, /Aplicaciones de escritorio|Desktop applications/);
-    assert.deepEqual(locale.skills.groups[1].stack, ["Electron"]);
-    assert.ok(locale.skills.groups[4].stack.includes("Figma"));
-    assert.match(locale.skills.groups[7].area, /Sistemas|Systems/);
-    assert.deepEqual(projects[1].evidence.map((text) => text.match(/\d+/)?.[0]).filter(Boolean), ["56", "33"]);
-    assert.match(projects[1].outcome, /56/);
-    assert.match(projects[1].outcome, /33/);
-    assert.match(projects[6].description, /100/);
-    assert.equal(projects[0].title, "Distrito Gourmet");
-    assert.equal(projects[1].title, "LumaFlow Studio");
-    assert.equal(projects[2].title, "raw.vives");
-    for (const project of projects) {
-      assert.ok(project.summary.length <= 90);
-      assert.ok(project.description.length >= project.summary.length);
+    const locale = JSON.parse(read("lib/locales/" + language + ".json"));
+    assert.deepEqual(locale.projects.featured.map((project) => project.slug), featured.map(([slug]) => slug));
+    assert.deepEqual(locale.projects.featured[1].evidence.map((text) => text.match(/\d+/)?.[0]), ["56", "33"]);
+    assert.deepEqual(locale.projects.other.map((project) => project.slug), ["premium-frontend-director", "echo-the-awakening", "api-hotel", "dulces"]);
+    for (const project of locale.projects.featured) assert.ok(project.alt.length > 20);
+    const text = JSON.stringify(locale);
+    for (const retired of ["AI Creative Assistant", "TypeScript", "foco frontend", "frontend focus", "Llibret", "llibret"]) {
+      assert.ok(!text.includes(retired), retired);
     }
-    assert.ok(!JSON.stringify(locale).includes("AI Creative Assistant"));
-    assert.equal(locale.currently.items[1].value, "Valencia");
     assert.equal(locale.experience.experience_list.length, 2);
-    assert.equal(locale.experience.education_list.length, 2);
+    const education = locale.experience.education_list;
+    assert.equal(education.length, 3);
+    assert.deepEqual(education.filter((item) => item.title.includes("AWS Academy")), [{
+      title: language === "es" ? "Curso de AWS Academy Cloud Foundations" : "AWS Academy Cloud Foundations course",
+      period: "2025–2026",
+    }]);
     assert.deepEqual(locale.experience.experience_list.map((item) => item.highlights.length), [3, 2]);
   }
 });
 
-test("home has one hero heading, both primary journeys and natural photography flow", () => {
-  const hero = read("components/hero.tsx");
-  assert.equal((hero.match(/<h1\b/g) ?? []).length, 1);
-  assert.match(hero, /href="#projects"/);
-  assert.match(hero, /download data-track="cv-download"/);
-  assert.match(hero, /href="#experience"/);
-  assert.doesNotMatch(hero, /studio-photography|studio-perspective/);
+test("home is one framed column with ordered sections and a single hero heading", () => {
   const home = read("components/home-client.tsx");
-  assert.ok(home.indexOf("<Photography />") < home.indexOf("<Currently />"));
-  assert.ok(home.indexOf("<Currently />") < home.indexOf("<Contact />"));
-  assert.doesNotMatch(read("components/photography.tsx"), /pin:|preventDefault|window.location/);
-  assert.match(hero, /prefers-reduced-motion: no-preference/);
+  assert.equal((read("components/hero.tsx").match(/<h1\b/g) ?? []).length, 1);
+  assert.match(home, /<Hero \/>/);
+  assert.match(home, /<SiteHeader \/>/);
+  assert.match(home, /className="site-column"/);
+  assert.match(home, /<main id="main-content">/);
+  const ids = [...home.matchAll(/<Section id="([a-z-]+)"/g)].map((match) => match[1]);
+  assert.deepEqual(ids, ["about", "experience", "projects", "other", "skills", "education", "contact"]);
+  assert.ok(home.indexOf("<Hero />") < home.indexOf('id="about"'));
+  assert.doesNotMatch(home, /Photography|Currently/);
 });

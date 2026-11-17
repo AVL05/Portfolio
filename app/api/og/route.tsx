@@ -2,10 +2,12 @@ import { ImageResponse } from "next/og";
 
 const translations = {
   es: {
-    subtitle: "Desarrollador Full-Stack Junior",
+    subtitle: "Desarrollador Web Full-Stack Junior",
+    stack: "React, Next.js, PHP y Laravel · Valencia",
   },
   en: {
-    subtitle: "Junior Full-Stack Developer",
+    subtitle: "Junior Full-Stack Web Developer",
+    stack: "React, Next.js, PHP and Laravel · Valencia",
   },
 };
 
@@ -33,9 +35,7 @@ export async function GET(request: Request) {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#000",
-          backgroundImage:
-            "radial-gradient(circle at 25% 25%, #111 0%, #000 100%)",
+          backgroundColor: "#0f0e0d",
         }}
       >
         <div
@@ -44,17 +44,17 @@ export async function GET(request: Request) {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            border: "1px solid rgba(255,255,255,0.1)",
+            border: "1px solid #2a2724",
             padding: "60px 80px",
             borderRadius: "20px",
-            backgroundColor: "rgba(255,255,255,0.03)",
+            backgroundColor: "#161513",
           }}
         >
           <div
             style={{
               fontSize: 60,
               fontWeight: "bold",
-              color: "white",
+              color: "#ece8e1",
               marginBottom: 20,
               textAlign: "center",
             }}
@@ -66,12 +66,15 @@ export async function GET(request: Request) {
               fontSize: 24,
               maxWidth: 900,
               textAlign: "center",
-              color: "#888",
+              color: "#e0956a",
               letterSpacing: "0.03em",
               textTransform: "uppercase",
             }}
           >
             {t.subtitle}
+          </div>
+          <div style={{ fontSize: 22, marginTop: 18, color: "#9d968c", textAlign: "center" }}>
+            {t.stack}
           </div>
         </div>
         <div
@@ -79,7 +82,7 @@ export async function GET(request: Request) {
             position: "absolute",
             bottom: 40,
             fontSize: 20,
-            color: "#444",
+            color: "#9d968c",
           }}
         >
           aleviclop.dev

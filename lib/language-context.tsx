@@ -35,6 +35,7 @@ interface Translation {
     contact: string;
   };
   hero: {
+    portraitAlt: string;
     role: string;
     tagline: string;
     location: string;

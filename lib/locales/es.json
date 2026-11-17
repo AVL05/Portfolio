@@ -16,6 +16,7 @@
     "contact": "Contacto"
   },
   "hero": {
+    "portraitAlt": "Retrato de Alex Vicente López",
     "role": "Desarrollador Web Full-Stack Junior",
     "tagline": "React, Next.js, PHP y Laravel. Valencia.",
     "location": "Valencia, España",

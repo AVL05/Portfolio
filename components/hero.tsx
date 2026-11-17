@@ -1,194 +1,35 @@
 "use client";
 
-import Image from "next/image";
-import { ArrowDown, ArrowUpRight, Download } from "lucide-react";
-import { useRef, useState } from "react";
-import { gsap, motion, prefersReducedMotion, useGSAP } from "@/lib/gsap";
-import { useLanguage, type ProjectItem } from "@/lib/language-context";
-import { FEATURED_INDEXES, FEATURED_MEDIA, claimViewTransition } from "@/lib/featured-work";
+import { ArrowDown, Download, Mail } from "lucide-react";
+import { useLanguage } from "@/lib/language-context";
+import { CV_HREF, SITE_EMAIL } from "@/lib/site";
 import styles from "./hero.module.css";
 
-const CV_HREF = "/cv/CV_Alex_Vicente_Lopez.pdf?v=2026-09";
-const pad = (value: number) => String(value).padStart(2, "0");
-
+/**
+ * Introduction. The avatar is a monogram until a portrait is supplied;
+ * it is decorative, so it stays out of the accessibility tree.
+ */
 export function Hero() {
-  const { language, t } = useLanguage();
-  const containerRef = useRef<HTMLElement>(null);
-  const plateRef = useRef<HTMLDivElement>(null);
-  const activeRef = useRef(0);
-  const wipeRef = useRef<gsap.core.Timeline | null>(null);
-  const phaseRef = useRef<"revealing" | "revealed">("revealed");
-  const [active, setActive] = useState(0);
-  const [phase, setPhaseState] = useState<"revealing" | "revealed">("revealed");
+  const { t } = useLanguage();
   const copy = t.hero;
-  const setPhase = (next: "revealing" | "revealed") => { phaseRef.current = next; setPhaseState(next); };
-  const layerAt = (index: number) => plateRef.current?.querySelector<HTMLElement>(`[data-plate-layer="${index}"]`) ?? null;
-  const showLayer = (layer: HTMLElement) => {
-    gsap.set(layer, { clipPath: "inset(0 0 0 0%)" });
-    gsap.set(layer.querySelector("img"), { clearProps: "transform" });
-  };
-  const featured = FEATURED_INDEXES
-    .map((index) => t.projects.items[index])
-    .filter((project): project is ProjectItem => Boolean(project));
-
-  // Signature interaction: the plate wipes to the project under the pointer
-  // or keyboard focus. The row link stays the only interactive element.
-  const { contextSafe } = useGSAP(() => {
-    const q = gsap.utils.selector(containerRef);
-    const media = gsap.matchMedia();
-    media.add("(prefers-reduced-motion: no-preference)", () => {
-      // Hydration after the first paint keeps the server-rendered state.
-      if (performance.now() > 1300) return;
-      const timeline = gsap.timeline({ defaults: { ease: motion.ease.reveal } });
-      timeline
-        .from(q("[data-hero-line]"), { yPercent: 108, duration: motion.duration.hero, stagger: .08, clearProps: "transform" })
-        .from(q("[data-hero-plate]"), { clipPath: "inset(0 0 0 100%)", duration: .9, clearProps: "clipPath" }, .15)
-        .from(q("[data-hero-row]"), { y: motion.distance.content, autoAlpha: 0, duration: motion.duration.enter, stagger: .06, ease: motion.ease.out, clearProps: "transform,opacity,visibility" }, .3);
-    });
-    media.add("(prefers-reduced-motion: reduce)", () => {
-      // A motion preference that turns on mid-wipe settles the plate immediately.
-      const layer = layerAt(activeRef.current);
-      if (!layer || phaseRef.current === "revealed") return;
-      wipeRef.current?.kill();
-      wipeRef.current = null;
-      showLayer(layer);
-      setPhase("revealed");
-    });
-    media.add("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)", () => {
-      const button = containerRef.current?.querySelector<HTMLAnchorElement>("[data-magnetic]");
-      const label = button?.firstElementChild;
-      if (!button || !label) return;
-      const xTo = gsap.quickTo(label, "x", { duration: motion.duration.state, ease: motion.ease.out });
-      const yTo = gsap.quickTo(label, "y", { duration: motion.duration.state, ease: motion.ease.out });
-      const move = (event: PointerEvent) => {
-        if (event.pointerType !== "mouse" || button.matches(":focus-visible")) return;
-        const bounds = button.getBoundingClientRect();
-        xTo(gsap.utils.clamp(-4, 4, (event.clientX - bounds.left - bounds.width / 2) * .06));
-        yTo(gsap.utils.clamp(-3, 3, (event.clientY - bounds.top - bounds.height / 2) * .08));
-      };
-      const reset = () => { xTo(0); yTo(0); };
-      button.addEventListener("pointermove", move);
-      button.addEventListener("pointerleave", reset);
-      button.addEventListener("focus", reset);
-      return () => {
-        button.removeEventListener("pointermove", move);
-        button.removeEventListener("pointerleave", reset);
-        button.removeEventListener("focus", reset);
-        xTo.tween.kill(); yTo.tween.kill();
-        gsap.set(label, { clearProps: "transform" });
-      };
-    });
-    return () => media.revert();
-  }, { scope: containerRef });
-
-  // Idempotent: calling it for the active row finishes a wipe that is still
-  // running when motion is reduced, instead of leaving the plate half clipped.
-  const activate = contextSafe((index: number) => {
-    const current = activeRef.current;
-    const reduced = prefersReducedMotion();
-    if (index === current && (phaseRef.current === "revealed" || !reduced)) return;
-    const layer = layerAt(index);
-    if (!layer) return;
-    wipeRef.current?.kill();
-    wipeRef.current = null;
-    if (index !== current) {
-      // The outgoing layer becomes the static backdrop for the incoming wipe.
-      const previous = layerAt(current);
-      if (previous) showLayer(previous);
-      activeRef.current = index;
-      setActive(index);
-    }
-    if (reduced) {
-      showLayer(layer);
-      setPhase("revealed");
-      return;
-    }
-    setPhase("revealing");
-    const image = layer.querySelector("img");
-    wipeRef.current = gsap.timeline({ onComplete: () => setPhase("revealed") })
-      .fromTo(layer, { clipPath: "inset(0 0 0 100%)" }, { clipPath: "inset(0 0 0 0%)", duration: motion.duration.mask, ease: motion.ease.reveal })
-      .fromTo(image, { scale: 1.06 }, { scale: 1, duration: .9, ease: motion.ease.reveal, clearProps: "transform" }, 0);
-  });
-
-  const activeProject = featured[active];
-  const activeMedia = FEATURED_MEDIA[active];
 
   return (
-    <section id="hero" ref={containerRef} aria-labelledby="hero-title" className={styles.hero}>
-      <div className={styles.frame}>
-        <h1 id="hero-title" data-hero-title className={styles.title}>
-          <span className={styles.mask}><span data-hero-line className={styles.line}>Alex Vicente</span>{" "}</span>
-          <span className={styles.mask}><span data-hero-line className={styles.line}>López<span className={styles.comma}>,</span></span>{" "}</span>
-          <span className={styles.mask}><span data-hero-line className={`${styles.line} ${styles.role}`}>{copy.role}</span></span>
-        </h1>
-
-        <div data-hero-summary data-hero-footer className={styles.summary}>
-          <p data-hero-indicator className={styles.meta}>
-            <span>{copy.location}</span>
-            <span className={styles.metaRule} aria-hidden="true" />
-            <span>{copy.artLabels.join(" · ")}</span>
-          </p>
-          <p data-hero-copy className={styles.description}>{copy.intro}</p>
-          <div className={styles.actions}>
-            <a data-magnetic href="#projects" className={`action-primary ${styles.primary}`}>
-              <span>{copy.work}<ArrowDown aria-hidden="true" /></span>
-            </a>
-            <a href={CV_HREF} download data-track="cv-download" className="action-secondary">
-              {copy.cv}<Download aria-hidden="true" />
-            </a>
-          </div>
-          <ul className={styles.links} aria-label={language === "es" ? "Perfil y contacto" : "Profile and contact"}>
-            <li><a className="cinema-link" href="#contact">{copy.contact}<ArrowUpRight aria-hidden="true" /></a></li>
-            <li><a className="cinema-link" href="#experience">{copy.experience}<ArrowUpRight aria-hidden="true" /></a></li>
-            <li><a className="cinema-link" href="https://github.com/AVL05" target="_blank" rel="noopener noreferrer">GitHub<ArrowUpRight aria-hidden="true" /></a></li>
-            <li><a className="cinema-link" href="https://www.linkedin.com/in/aleviclop/" target="_blank" rel="noopener noreferrer">LinkedIn<ArrowUpRight aria-hidden="true" /></a></li>
-          </ul>
+    <section id="hero" aria-labelledby="hero-title">
+      <div className="dot-band" aria-hidden="true" />
+      <div className={styles.intro}>
+        <div className={styles.avatar} aria-hidden="true">AV</div>
+        <h1 id="hero-title" className={styles.title}>Alex Vicente López</h1>
+        <p className={styles.role}>{copy.role}</p>
+        <p className={styles.tagline}>{copy.tagline}</p>
+        <p className={styles.availability}>
+          <span className={styles.dot} aria-hidden="true" />
+          {copy.availability}
+        </p>
+        <div className={styles.actions}>
+          <a href="#projects" className="pill pill-primary">{copy.work}<ArrowDown aria-hidden="true" /></a>
+          <a href={`mailto:${SITE_EMAIL}`} className="pill pill-secondary"><Mail aria-hidden="true" />{copy.contact}</a>
+          <a href={CV_HREF} download data-track="cv-download" className="cinema-link"><Download aria-hidden="true" />{copy.cv}</a>
         </div>
-
-        <nav className={styles.index} aria-labelledby="hero-index-title">
-          <div className={styles.indexHead}>
-            <h2 id="hero-index-title" className="label-mono">{copy.index} <span aria-hidden="true">({pad(featured.length)})</span></h2>
-            <p>{copy.indexHint}</p>
-          </div>
-          <ol>
-            {featured.map((project, index) => {
-              const media = FEATURED_MEDIA[index];
-              return <li key={project.title} data-hero-row>
-                <a href={project.caseStudyHref} data-active={active === index}
-                  onPointerEnter={(event) => { if (event.pointerType === "mouse") activate(index); }}
-                  onFocus={() => activate(index)}
-                  onClick={() => claimViewTransition(plateRef.current?.querySelector<HTMLElement>(`[data-plate-layer="${index}"]`) ?? null, media.slug)}>
-                  <span className={styles.rowNumber} aria-hidden="true">{pad(index + 1)}</span>
-                  <span className={styles.rowTitle}>{project.title}</span>
-                  <span className={styles.rowMeta}>
-                    <span>{project.type}</span>
-                    <span>{project.technologies.slice(0, 3).join(" · ")}</span>
-                  </span>
-                  <span className={styles.rowThumb} aria-hidden="true">
-                    <Image src={media.plate} alt="" fill sizes="7rem" loading="lazy" />
-                  </span>
-                  <ArrowUpRight aria-hidden="true" className={styles.rowArrow} />
-                </a>
-              </li>;
-            })}
-          </ol>
-        </nav>
-
-        <figure className={styles.plateFigure} aria-hidden="true">
-          <div ref={plateRef} data-hero-plate data-art-stage className={styles.plate} data-tone={activeMedia.tone}>
-            {FEATURED_MEDIA.map((media, index) => (
-              <div key={media.slug} data-plate-layer={index} className={styles.plateLayer}
-                data-tone={media.tone} data-plate-state={index === active ? phase : "idle"} style={{ zIndex: index === active ? 2 : 1, clipPath: index === 0 ? undefined : "inset(0 0 0 100%)" }}>
-                <Image src={media.plate} alt="" fill priority={index === 0} loading={index === 0 ? undefined : "lazy"}
-                  sizes="(max-width: 1023px) 1px, 56vw" />
-              </div>
-            ))}
-          </div>
-          <figcaption className={styles.plateCaption}>
-            <span>{pad(active + 1)} / {pad(featured.length)}</span>
-            <span>{activeProject?.title} — {activeProject?.summary}</span>
-          </figcaption>
-        </figure>
       </div>
     </section>
   );

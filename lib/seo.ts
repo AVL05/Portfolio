@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { GITHUB_URL, LINKEDIN_URL } from "@/lib/site";
 import {
   getAlternatePath,
   INDEXABLE_EN_PATHS,
@@ -14,42 +15,32 @@ export const SITE_URL = new URL(
 
 export const SITE_NAME = "Alex Vicente López";
 export const SITE_TITLE =
-  "Alex Vicente López | Desarrollador Full-Stack Junior en Valencia";
+  "Alex Vicente López | Desarrollador Web Full-Stack Junior en Valencia";
 export const EN_SITE_TITLE =
-  "Alex Vicente López | Junior Full-Stack Developer in Valencia";
+  "Alex Vicente López | Junior Full-Stack Web Developer in Valencia";
 export const SITE_DESCRIPTION =
-  "Alex Vicente López, desarrollador frontend y full-stack junior en Valencia. Proyectos con React, Next.js, Laravel y MySQL, experiencia en prácticas y código.";
+  "Alex Vicente López, desarrollador web full-stack junior en Valencia. React, Next.js, PHP y Laravel. Proyectos con código público y prácticas en equipo.";
 export const EN_SITE_DESCRIPTION =
-  "Alex Vicente López, junior frontend and full-stack developer in Valencia, Spain. React, Next.js, Laravel and MySQL projects, internship experience and code.";
+  "Alex Vicente López, junior full-stack web developer in Valencia, Spain. React, Next.js, PHP and Laravel. Projects with public code and team internship experience.";
 
+// One role, one stack: no topic lists (photography, design, AI) that would
+// compete with the Junior Full-Stack Web Developer positioning.
 export const SEO_KEYWORDS = [
   "Alex Vicente López",
   "Alex Vicente Lopez",
-  "Alex Vicente",
   "aleviclop",
-  "AVL05",
-  "portfolio Alex Vicente López",
-  "desarrollador web Alex Vicente",
+  "desarrollador web full-stack junior",
+  "junior full-stack web developer",
   "desarrollador web Valencia",
   "React",
   "Next.js",
-  "desarrollo backend",
-  "bases de datos",
-  "Laravel",
   "PHP",
-  "desarrollador full-stack Valencia",
-  "full-stack developer Valencia",
-  "desarrollador de aplicaciones web",
-  "fotografía",
-  "diseño digital",
-  "raw.vives",
-  "archivo fotográfico editorial",
+  "Laravel",
 ];
 
 export const SAME_AS = [
-  "https://github.com/AVL05",
-  "https://www.linkedin.com/in/aleviclop/",
-  "https://www.instagram.com/aleviclop/",
+  GITHUB_URL,
+  LINKEDIN_URL,
   "https://rawvives.aleviclop.dev/",
 ];
 
@@ -158,55 +149,77 @@ export function buildPageMetadata({
   };
 }
 
-export const personJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "@id": `${SITE_URL}/#alex-vicente-lopez`,
-  name: "Alex Vicente López",
-  alternateName: ["Alex Vicente", "Alex Vicente Lopez", "aleviclop", "AVL05"],
-  url: SITE_URL,
-  email: "mailto:alexviclop@gmail.com",
-  jobTitle: "Desarrollador Full-Stack Junior",
-  description: SITE_DESCRIPTION,
-  sameAs: SAME_AS,
-  knowsAbout: [
-    "Desarrollo web",
-    "Aplicaciones full-stack",
-    "React",
-    "Next.js",
-    "JavaScript",
-    "Laravel",
-    "PHP",
-    "MySQL",
-    "APIs REST",
-    "Tailwind CSS",
-    "GSAP",
-    "Docker",
-    "Figma",
-    "Diseño de interfaces",
-    "Sistemas y redes",
-    "Git y GitHub",
-    "IA aplicada",
-    "Fotografía",
-    "Diseño editorial",
-  ],
-  hasOccupation: {
-    "@type": "Occupation",
-    name: "Desarrollador Full-Stack Junior",
-    skills:
-      "React, Next.js, JavaScript, Tailwind CSS, Laravel, PHP, MySQL, APIs REST, Git, Docker, accesibilidad, IA aplicada",
+const PERSON_COPY = {
+  es: {
+    jobTitle: "Desarrollador Web Full-Stack Junior",
+    description: SITE_DESCRIPTION,
+    knowsAbout: [
+      "Desarrollo web",
+      "Aplicaciones full-stack",
+      "React",
+      "Next.js",
+      "JavaScript",
+      "PHP",
+      "Laravel",
+      "MySQL",
+      "APIs REST",
+      "Tailwind CSS",
+      "GSAP",
+      "Docker",
+      "Electron",
+      "Git y GitHub",
+    ],
   },
-  alumniOf: [
-    {
-      "@type": "EducationalOrganization",
-      name: "IES Serra Perenxisa",
+  en: {
+    jobTitle: "Junior Full-Stack Web Developer",
+    description: EN_SITE_DESCRIPTION,
+    knowsAbout: [
+      "Web development",
+      "Full-stack applications",
+      "React",
+      "Next.js",
+      "JavaScript",
+      "PHP",
+      "Laravel",
+      "MySQL",
+      "REST APIs",
+      "Tailwind CSS",
+      "GSAP",
+      "Docker",
+      "Electron",
+      "Git and GitHub",
+    ],
+  },
+} as const;
+
+export function buildPersonJsonLd(locale: Locale) {
+  const copy = PERSON_COPY[locale];
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": `${SITE_URL}/#alex-vicente-lopez`,
+    name: "Alex Vicente López",
+    alternateName: ["Alex Vicente", "Alex Vicente Lopez", "aleviclop"],
+    url: SITE_URL,
+    email: "mailto:alexviclop@gmail.com",
+    jobTitle: copy.jobTitle,
+    description: copy.description,
+    address: { "@type": "PostalAddress", addressLocality: "Valencia", addressCountry: "ES" },
+    sameAs: SAME_AS,
+    knowsAbout: copy.knowsAbout,
+    hasOccupation: {
+      "@type": "Occupation",
+      name: copy.jobTitle,
+      skills: "React, Next.js, JavaScript, Tailwind CSS, PHP, Laravel, MySQL, REST APIs, Git, Docker",
     },
-    {
-      "@type": "EducationalOrganization",
-      name: "Enseñanzas Profesionales Sorolla",
-    },
-  ],
-};
+    alumniOf: [
+      { "@type": "EducationalOrganization", name: "IES Serra Perenxisa" },
+      { "@type": "EducationalOrganization", name: "Enseñanzas Profesionales Sorolla" },
+    ],
+  };
+}
+
+export const personJsonLd = buildPersonJsonLd("es");
 
 export const websiteJsonLd = {
   "@context": "https://schema.org",

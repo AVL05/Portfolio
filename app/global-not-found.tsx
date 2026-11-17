@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { AccentSerif, GeistMono, GeistSans } from "@/lib/fonts";
+import { fontVariables } from "@/lib/fonts";
 import { NotFoundContent } from "@/components/not-found-content";
 
 export const metadata: Metadata = {
@@ -17,9 +17,9 @@ export const metadata: Metadata = {
  */
 export default function GlobalNotFound() {
   return (
-    <html lang="es" className="dark scroll-smooth overflow-x-clip">
+    <html lang="es" data-theme="dark" className="scroll-smooth overflow-x-clip">
       <body
-        className={`portfolio-shell font-sans ${AccentSerif.variable} ${GeistSans.variable} ${GeistMono.variable} antialiased bg-background text-foreground overflow-x-clip`}
+        className={`portfolio-shell font-sans ${fontVariables} antialiased bg-background text-foreground overflow-x-clip`}
       >
         <NotFoundContent />
       </body>

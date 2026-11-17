@@ -1,14 +1,73 @@
 @import 'tailwindcss';
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 /*
- * Editorial Index (2026-11). One warm-black workspace, one paper surface for
- * the profile chapter, copper as the single accent. See DESIGN.md.
+ * Portfolio v2. A single framed column, one copper accent, dark by default
+ * with an equally careful light theme. Theme tokens switch on
+ * [data-theme]; without the attribute (no JS) the page stays dark.
+ * See DESIGN.md.
  */
 :root,
-.dark {
-  /* Primitives */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Semantic */
+  --background: #0f0e0d;
+  --surface: #161513;
+  --foreground: #ece8e1;
+  --foreground-soft: #cfc9bf;
+  --foreground-faint: #8f887e;
+  --card: var(--surface);
+  --card-foreground: var(--foreground);
+  --popover: #1d1b18;
+  --popover-foreground: var(--foreground);
+  --primary: #e0956a;
+  --primary-foreground: #0f0e0d;
+  --secondary: #1d1b18;
+  --secondary-foreground: var(--foreground);
+  --muted: #1d1b18;
+  --muted-foreground: #9d968c;
+  --accent: var(--primary);
+  --accent-foreground: var(--primary-foreground);
+  --border: #2a2724;
+  --input: #7a7368;
+  --ring: var(--primary);
+  --destructive: #ff9f8f;
+  --destructive-foreground: #0f0e0d;
+  --dot: #3a3631;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  --background: #f6f3ee;
+  --surface: #efebe4;
+  --foreground: #1a1814;
+  --foreground-soft: #3a352e;
+  --foreground-faint: #6a6359;
+  --card: var(--surface);
+  --card-foreground: var(--foreground);
+  --popover: #ffffff;
+  --popover-foreground: var(--foreground);
+  --primary: #8f4a24;
+  --primary-foreground: #ffffff;
+  --secondary: #e8e3da;
+  --secondary-foreground: var(--foreground);
+  --muted: #e8e3da;
+  --muted-foreground: #5f584e;
+  --accent: var(--primary);
+  --accent-foreground: var(--primary-foreground);
+  --border: #d9d3c8;
+  --input: #8a8377;
+  --ring: var(--primary);
+  --destructive: #b3261e;
+  --destructive-foreground: #ffffff;
+  --dot: #cfc8bb;
+}
+
+:root {
+  /* Theme-invariant primitives (case studies and legal keep their own surfaces) */
   --ink-0: #0e0d0b;
   --ink-1: #161512;
   --ink-2: #201e1a;
@@ -24,39 +83,18 @@
   --rule-dark: #34302a;
   --rule-paper: #bfb6a5;
 
-  /* Semantic */
-  --background: var(--ink-0);
-  --foreground: var(--bone);
-  --foreground-soft: #d3ccc0;
-  --foreground-faint: #958d82;
-  --card: var(--ink-1);
-  --card-foreground: var(--bone);
-  --popover: var(--ink-2);
-  --popover-foreground: var(--bone);
-  --primary: var(--copper);
-  --primary-foreground: var(--ink-0);
-  --secondary: var(--ink-2);
-  --secondary-foreground: var(--bone);
-  --muted: var(--ink-2);
-  --muted-foreground: var(--stone);
-  --accent: var(--copper);
-  --accent-foreground: var(--ink-0);
-  --border: var(--rule-dark);
-  --input: #5d574e;
-  --ring: var(--copper);
-  --destructive: #ff9f8f;
-  --destructive-foreground: var(--ink-0);
-  --radius: 0.25rem;
+  --radius: 0.375rem;
+  --type-label: .75rem;
 
-  --type-label: .6875rem;
-
-  /* Layout */
+  /* Layout: one framed column */
+  --column-width: 48.75rem;
+  --column-pad: clamp(1.25rem, 5vw, 2.5rem);
   --page-gutter: clamp(1.25rem, 4.4vw, 4rem);
   --page-width: 90rem;
-  --header-height: 4.5rem;
+  --header-height: 3.75rem;
   --target-size: 2.75rem;
 
-  /* Motion (mirrors lib/gsap.ts) */
+  /* Motion */
   --motion-fast: 140ms;
   --motion-normal: 240ms;
   --motion-enter: 450ms;
@@ -67,32 +105,14 @@
 
 /* Font aliases resolve where next/font defines its variables. */
 body {
-  --font-display: var(--font-geist-sans);
-  --font-body: var(--font-geist-sans);
-  --font-label: var(--font-geist-mono);
-  --font-serif: var(--font-accent);
-}
-
-/* Light editorial chapter: profile, capabilities and experience. */
-.surface-paper {
-  --background: var(--paper-0);
-  --foreground: var(--paper-ink);
-  --foreground-soft: #37322b;
-  --foreground-faint: #6d655a;
-  --card: var(--paper-1);
-  --muted-foreground: var(--paper-muted);
-  --primary: var(--copper-deep);
-  --primary-foreground: var(--paper-0);
-  --ring: var(--copper-deep);
-  --border: var(--rule-paper);
-  background: var(--background);
-  color: var(--foreground);
+  --font-display: var(--font-hanken);
+  --font-body: var(--font-hanken);
+  --font-label: var(--font-jetbrains);
 }
 
 @theme inline {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-serif: var(--font-accent);
+  --font-sans: var(--font-hanken);
+  --font-mono: var(--font-jetbrains);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -124,7 +144,7 @@ body {
   }
 
   html {
-    scrollbar-color: var(--ink-3) var(--background);
+    scrollbar-color: var(--border) var(--background);
     caret-color: var(--primary);
     scroll-behavior: smooth;
     overflow-x: clip;
@@ -149,7 +169,7 @@ body {
   section {
     width: 100%;
     position: relative;
-    scroll-margin-top: 5rem;
+    scroll-margin-top: calc(var(--header-height) + 1rem);
   }
 
   .section-kicker {
@@ -160,19 +180,19 @@ body {
   }
 
   ::selection {
-    background: color-mix(in oklab, var(--copper) 38%, transparent);
+    background: color-mix(in oklab, var(--primary) 34%, transparent);
     color: var(--foreground);
   }
 }
 
-/* Shared editorial primitives ---------------------------------------- */
+/* Shared primitives --------------------------------------------------- */
 .portfolio-shell { font-family: var(--font-body), system-ui, sans-serif; }
 .portfolio-shell :where(h1, h2, h3, h4) { font-family: var(--font-display), system-ui, sans-serif; font-weight: 500; }
 .portfolio-shell .font-mono { font-family: var(--font-label), ui-monospace, monospace; }
 .portfolio-shell a[hreflang] { flex-shrink: 0; }
 
+/* Retained for case-study titles; no serif face is loaded any more. */
 .accent-serif {
-  font-family: var(--font-serif), Georgia, serif;
   font-style: italic;
   font-weight: 400;
   letter-spacing: -.01em;
@@ -186,6 +206,46 @@ body {
   margin-inline: auto;
   padding-inline: var(--page-gutter);
 }
+
+/* Framed column: vertical rules on wide screens, edge to edge on phones. */
+.site-column {
+  width: 100%;
+  max-width: var(--column-width);
+  margin-inline: auto;
+  background: var(--background);
+}
+@media (min-width: 49rem) {
+  .site-column { border-inline: 1px solid var(--border); }
+}
+
+/* Subtle dot pattern band above the introduction. */
+.dot-band {
+  height: clamp(5rem, 14vw, 7.5rem);
+  border-bottom: 1px solid var(--border);
+  background-image: radial-gradient(circle at center, var(--dot) 1px, transparent 1.4px);
+  background-size: 14px 14px;
+  background-position: center;
+  -webkit-mask-image: linear-gradient(to bottom, #000 35%, transparent);
+  mask-image: linear-gradient(to bottom, #000 35%, transparent);
+}
+
+/* Section title sits in a strip between two horizontal rules. */
+.section-strip {
+  padding: .75rem var(--column-pad);
+  border-block: 1px solid var(--border);
+  background: var(--surface);
+}
+.section-strip h2 {
+  display: flex;
+  align-items: center;
+  gap: .625rem;
+  font: 500 var(--type-label)/1.4 var(--font-label), ui-monospace, monospace;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--muted-foreground);
+}
+.section-strip h2 span { color: var(--primary); }
+.section-body { padding: clamp(1.5rem, 4vw, 2.25rem) var(--column-pad); }
 
 /* Label: one mono line used for metadata only. */
 .label-mono {
@@ -206,7 +266,7 @@ body {
 .cinema-link svg { width: .95rem; height: .95rem; flex-shrink: 0; }
 .cinema-link:hover, .cinema-link:focus-visible { color: var(--primary); }
 
-/* Primary and secondary actions. Square-ish, no pills. */
+/* Primary and secondary actions. */
 .action-primary, .action-secondary {
   display: inline-flex;
   align-items: center;
@@ -239,22 +299,15 @@ body {
   background: var(--foreground);
   color: var(--background);
   padding: .75rem 1rem;
-  font: 400 .75rem/1 var(--font-label), monospace;
+  font: 500 .75rem/1 var(--font-label), monospace;
   text-transform: uppercase;
   letter-spacing: .12em;
   transition: none;
 }
 .skip-link:focus { transform: translateY(0); }
 
-/* View transitions --------------------------------------------------- */
+/* Cross-document fade between pages. */
 @view-transition { navigation: auto; }
-
-::view-transition-group(project-distrito-gourmet),
-::view-transition-group(project-lumaflow-studio),
-::view-transition-group(project-raw-vives) {
-  animation-duration: 420ms;
-  animation-timing-function: cubic-bezier(.16, 1, .3, 1);
-}
 ::view-transition-old(root) { animation: page-out var(--motion-fast) var(--ease-out) both; }
 ::view-transition-new(root) { animation: page-in var(--motion-normal) var(--ease-out) both; }
 @keyframes page-out { to { opacity: 0; } }
@@ -277,7 +330,7 @@ body {
 .legal-page section h2 { font-weight: 500; letter-spacing: -.035em; }
 .legal-page footer { text-align: left; }
 .utility-page { position: relative; isolation: isolate; overflow: clip; font-family: var(--font-body, Arial), sans-serif; }
-.utility-code { position: absolute; z-index: -1; right: -3vw; bottom: -5vw; color: var(--ink-2); font-size: clamp(12rem, 40vw, 42rem); font-weight: 600; letter-spacing: -.04em; line-height: 1; pointer-events: none; }
+.utility-code { position: absolute; z-index: -1; right: -3vw; bottom: -5vw; color: var(--surface); font-size: clamp(12rem, 40vw, 42rem); font-weight: 600; letter-spacing: -.04em; line-height: 1; pointer-events: none; }
 @media (min-width: 1024px) {
   .legal-page > div:last-child { display: grid; grid-template-columns: 16rem minmax(0, 1fr); gap: 0 5rem; }
   .legal-page > div > :is(div:first-child, header, footer) { grid-column: 1 / -1; }
@@ -295,5 +348,44 @@ body {
     animation-duration: .01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: .01ms !important;
+  }
+}
+
+/* Pill actions (hero and calls to action). 44px+ targets, icon + label. */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  min-height: var(--target-size);
+  padding-inline: 1.25rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: .9375rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background-color var(--motion-normal) var(--ease-out), color var(--motion-normal) var(--ease-out), border-color var(--motion-normal) var(--ease-out);
+}
+.pill svg { width: 1rem; height: 1rem; flex-shrink: 0; }
+.pill-primary { background: var(--primary); color: var(--primary-foreground); }
+.pill-primary:hover { background: var(--foreground); color: var(--background); }
+.pill-secondary { border-color: color-mix(in oklab, var(--foreground) 28%, transparent); color: var(--foreground); }
+.pill-secondary:hover { border-color: var(--primary); color: var(--primary); }
+
+/* Microinteractions: all gated on motion preference. ----------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal="pending"] { opacity: 0; transform: translateY(10px); }
+  [data-reveal="shown"] { transition: opacity var(--motion-reveal) var(--ease-out), transform var(--motion-reveal) var(--ease-out); }
+
+  .pill:active { transform: translateY(1px); }
+  .pill-primary svg { transition: transform var(--motion-normal) var(--ease-out); }
+  .pill-primary:hover svg { transform: translateY(2px); }
+
+  /* Colour cross-fade while the theme switches (class set for ~300ms by the toggle). */
+  html.theme-transition,
+  html.theme-transition *,
+  html.theme-transition *::before,
+  html.theme-transition *::after {
+    transition: background-color 280ms var(--ease-out), color 280ms var(--ease-out), border-color 280ms var(--ease-out), fill 280ms var(--ease-out) !important;
   }
 }

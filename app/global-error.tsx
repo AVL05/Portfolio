@@ -9,7 +9,7 @@ export default function GlobalError({ retry }: { retry: () => void }) {
   const isEnglish = language === "en";
 
   return (
-    <html lang={language} className="dark">
+    <html lang={language} data-theme="dark">
       <body className="bg-background text-foreground antialiased">
         <title>{isEnglish ? "Unexpected error" : "Error inesperado"}</title>
         <main className="utility-page grid min-h-screen place-items-center px-6">

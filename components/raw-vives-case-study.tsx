@@ -33,7 +33,7 @@ const copy = {
     goals: "Objetivos",
     goalItems: ["Jerarquizar y curar el recorrido", "Conectar archivo, fichas y series", "Mantener rendimiento, teclado y reduced motion"],
     role: "Mi papel",
-    roleText: "Diseñé y desarrollé la interfaz con Next.js, React y TypeScript, el modelo de contenido y la navegación. También trabajé la curación fotográfica, la accesibilidad, el SEO ES/EN y la integración continua.",
+    roleText: "Diseñé y desarrollé la interfaz con Next.js y React, el modelo de contenido y la navegación. También trabajé la curación fotográfica, la accesibilidad, el SEO ES/EN y la integración continua.",
     stack: "Stack verificado",
     direction: "Dirección de arte, curación e interacción",
     directionText: "Una dirección editorial en negro y marfil deja que la fotografía sea la interfaz. La curación asigna una función exclusiva a hero, historia, capítulos y trabajo seleccionado; una gramática limitada de máscaras, escala suave y transiciones contextuales aporta ritmo sin ocultar contenido.",
@@ -69,7 +69,7 @@ const copy = {
     goals: "Goals",
     goalItems: ["Curate and prioritize the journey", "Connect archive, details, and series", "Preserve performance, keyboard access, and reduced motion"],
     role: "My role",
-    roleText: "I designed and built the Next.js, React and TypeScript interface, content model and navigation. I also worked on photographic curation, accessibility, ES/EN SEO and continuous integration.",
+    roleText: "I designed and built the Next.js and React interface, content model and navigation. I also worked on photographic curation, accessibility, ES/EN SEO and continuous integration.",
     stack: "Verified stack",
     direction: "Art direction, curation, and interaction",
     directionText: "A black-and-ivory editorial direction lets photography become the interface. Curation gives hero, story, chapters, and selected work distinct roles; a limited grammar of masks, soft scale, and contextual transitions adds rhythm without hiding content.",
@@ -94,7 +94,7 @@ const copy = {
   },
 } as const;
 
-const stack = ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS 4", "GSAP", "Three.js", "Lenis", "Cloudflare Workers", "GitHub Actions"];
+const stack = ["Next.js 16", "React 19", "Tailwind CSS 4", "GSAP", "Three.js", "Lenis", "Cloudflare Workers", "GitHub Actions"];
 
 export function RawVivesCaseStudy() {
   const { language } = useLanguage();

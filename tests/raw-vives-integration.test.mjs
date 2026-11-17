@@ -12,30 +12,24 @@ const content = read("components/raw-vives-case-study.tsx");
 const seo = read("lib/seo.ts");
 
 test("raw.vives is a featured web and photography project", () => {
-  assert.equal(es.projects.items[2].title, "raw.vives");
-  assert.equal(es.projects.items[2].link, "https://rawvives.aleviclop.dev/");
-  assert.equal(es.projects.items[2].caseStudyHref, "/proyectos/raw-vives");
-  assert.equal(en.projects.items[2].title, "raw.vives");
-  assert.equal(en.projects.items[2].link, "https://rawvives.aleviclop.dev/");
-  assert.equal(en.projects.items[2].caseStudyHref, "/en/projects/raw-vives");
+  const projects = read("lib/projects.ts");
+  const block = projects.slice(projects.indexOf('slug: "raw-vives"'));
+  assert.match(block, /live: "https:\/\/rawvives\.aleviclop\.dev"/);
+  assert.match(block, /code: "https:\/\/github\.com\/AVL05\/alexgallery"/);
+  assert.equal(es.projects.featured[2].slug, "raw-vives");
+  assert.equal(en.projects.featured[2].slug, "raw-vives");
   for (const locale of [es, en]) {
-    const project = locale.projects.items[2];
-    assert.equal(project.github, "https://github.com/AVL05/alexgallery");
-    assert.match(project.outcome, /static|estático/i);
-    assert.doesNotMatch(project.description, /\b30\b/);
-    assert.doesNotMatch(project.outcome, /\b30\b/);
+    assert.doesNotMatch(locale.projects.featured[2].description, /\b30\b/);
   }
   assert.match(content, /67/);
   assert.doesNotMatch(content, /81 páginas|81 static|105 tests/i);
 });
 
 test("raw.vives public copy avoids an exact photograph count", () => {
-  const photography = read("components/photography.tsx");
   const localizedCopy = JSON.stringify([es.photography, en.photography]);
 
   assert.doesNotMatch(route, /30 (?:fotografías|photographs)/i);
   assert.doesNotMatch(content, /30 (?:fotografías|photographs)/i);
-  assert.doesNotMatch(photography, /30 (?:fotografías|photographs)/i);
   assert.doesNotMatch(localizedCopy, /\b30\b/);
 });
 

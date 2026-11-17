@@ -3,8 +3,8 @@ import type { Locator, Page } from "@playwright/test";
 export const CASES = ["distrito-gourmet", "lumaflow-studio", "raw-vives"] as const;
 
 export const HOMES = [
-  { locale: "es", path: "/", cases: "/proyectos/", title: "Alex Vicente López, Desarrollador Full-Stack Junior", work: "Ver proyectos", cv: "Descargar CV" },
-  { locale: "en", path: "/en", cases: "/en/projects/", title: "Alex Vicente López, Junior Full-Stack Developer", work: "View work", cv: "Download CV" },
+  { locale: "es", path: "/", cases: "/proyectos/", title: "Alex Vicente López", work: "Ver proyectos", cv: "Descargar CV", contact: "Escríbeme", role: "Desarrollador Web Full-Stack Junior", tagline: "React, Next.js, PHP y Laravel. Valencia.", availability: "Disponible · Valencia (presencial/híbrido) o remoto", companies: ["Burguet Sistemas SL", "Ajuntament de Carlet"], languages: ["Español", "Valenciano", "Inglés"] },
+  { locale: "en", path: "/en", cases: "/en/projects/", title: "Alex Vicente López", work: "View projects", cv: "Download CV", contact: "Email me", role: "Junior Full-Stack Web Developer", tagline: "React, Next.js, PHP and Laravel. Valencia.", availability: "Available · Valencia (on-site/hybrid) or remote", companies: ["Burguet Sistemas SL", "Ajuntament de Carlet"], languages: ["Spanish", "Valencian", "English"] },
 ] as const;
 
 /** Collects uncaught exceptions and console errors for the lifetime of the page. */
@@ -17,11 +17,6 @@ export function trackErrors(page: Page) {
 
 export const hasHorizontalOverflow = (page: Page) =>
   page.evaluate(() => document.documentElement.scrollWidth > innerWidth);
-
-/** True when every masked hero headline line fits inside its mask. */
-export const heroLinesFit = (page: Page) =>
-  page.locator("#hero").evaluate(hero =>
-    [...hero.querySelectorAll<HTMLElement>("[data-hero-line]")].every(line => line.scrollWidth <= line.parentElement!.clientWidth + 1));
 
 /**
  * WCAG contrast ratio of each element's text (or placeholder) against its

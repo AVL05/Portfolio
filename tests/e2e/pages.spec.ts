@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { ROUTE_PAIRS } from "../../lib/i18n-paths";
-import { CASES, contrastRatios, hasHorizontalOverflow, heroLinesFit } from "./helpers";
+import { CASES, contrastRatios, hasHorizontalOverflow } from "./helpers";
 
 const routes = [...ROUTE_PAIRS.flatMap(pair => [pair.es, pair.en]), "/legal", "/en/legal"];
 
@@ -34,7 +34,7 @@ test("every public page has one heading, no clipped content and loaded images", 
   expect(failedImages).toEqual([]);
 });
 
-test("the home keeps its headline and layout intact from 320px to desktop", async ({ page }) => {
+test("the home keeps its layout intact from 320px to desktop", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   for (const path of ["/", "/en"]) {
     await page.goto(path);
@@ -42,7 +42,6 @@ test("the home keeps its headline and layout intact from 320px to desktop", asyn
     for (const width of [320, 768, 1024, 1440]) {
       await page.setViewportSize({ width, height: 900 });
       expect(await hasHorizontalOverflow(page), `${path} at ${width}px overflows`).toBe(false);
-      expect(await heroLinesFit(page), `${path} at ${width}px clips the headline`).toBe(true);
     }
   }
 });
@@ -64,3 +63,18 @@ test("case navigation and contact placeholders meet AA text contrast", async ({ 
     expect(item.ratio, `placeholder ${item.text}`).toBeGreaterThanOrEqual(4.5);
   }
 });
+
+for (const theme of ["dark", "light"] as const) {
+  test(`home text meets AA contrast in the ${theme} theme, in both languages`, { tag: ["@smoke"] }, async ({ page }) => {
+    await page.addInitScript((value) => localStorage.setItem("theme", value), theme);
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    for (const path of ["/", "/en"]) {
+      await page.goto(path);
+      await page.evaluate(() => document.fonts.ready);
+      await expect(page.locator("html")).toHaveAttribute("data-theme", theme);
+      const items = await contrastRatios(page.locator("header :is(a, span, button), main :is(h1, h2, h3, p, li, a, span, label), footer :is(p, a, span)"), { ownTextOnly: true });
+      expect(items.length, path).toBeGreaterThan(40);
+      for (const item of items) expect(item.ratio, `${theme} ${path} "${item.text.slice(0, 40)}"`).toBeGreaterThanOrEqual(4.5);
+    }
+  });
+}

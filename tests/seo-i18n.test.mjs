@@ -30,7 +30,8 @@ function loadLib(relativePath, extraModules = {}, env = process.env) {
 }
 
 const i18n = loadLib("lib/i18n-paths.ts");
-const seo = loadLib("lib/seo.ts", { "@/lib/i18n-paths": i18n });
+const site = loadLib("lib/site.ts");
+const seo = loadLib("lib/seo.ts", { "@/lib/i18n-paths": i18n, "@/lib/site": site });
 
 test("professional metadata and visible introductions explain location, focus and real experience", () => {
   for (const locale of ["es", "en"]) {
@@ -38,13 +39,14 @@ test("professional metadata and visible introductions explain location, focus an
     const title = locale === "es" ? seo.SITE_TITLE : seo.EN_SITE_TITLE;
     const description = locale === "es" ? seo.SITE_DESCRIPTION : seo.EN_SITE_DESCRIPTION;
     assert.match(title, /Valencia/);
-    assert.match(description, /frontend/i);
+    assert.match(description, /full-stack/i);
     assert.match(description, /junior/i);
-    assert.match(copy.hero.intro, /frontend/i);
-    assert.match(copy.hero.intro, /Valencia/);
-    assert.match(copy.experience.desc, /Burguet Sistemas/);
-    assert.match(copy.experience.desc, /prácticas|internship/i);
-    assert.match(copy.experience.desc, /Carlet/);
+    assert.match(copy.hero.tagline, /Valencia/);
+    assert.match(copy.hero.availability, /Valencia/);
+    const [first, second] = copy.experience.experience_list;
+    assert.match(first.company, /Burguet Sistemas/);
+    assert.match(first.title, /prácticas|internship/i);
+    assert.match(second.company, /Carlet/);
   }
 });
 
@@ -64,17 +66,17 @@ test("case metadata distinguishes the work by product and verified technologies"
 
 test("Vercel production always uses the public canonical origin", () => {
   for (const origin of [undefined, "https://aleviclop.dev", "https://example.vercel.app", "http://localhost:3100"]) {
-    const production = loadLib("lib/seo.ts", { "@/lib/i18n-paths": i18n }, {
+    const production = loadLib("lib/seo.ts", { "@/lib/i18n-paths": i18n, "@/lib/site": site }, {
       VERCEL_ENV: "production", NEXT_PUBLIC_SITE_URL: origin,
     });
     assert.equal(production.SITE_URL, "https://www.aleviclop.dev");
     assert.equal(production.absoluteUrl("/en"), "https://www.aleviclop.dev/en");
   }
-  const preview = loadLib("lib/seo.ts", { "@/lib/i18n-paths": i18n }, {
+  const preview = loadLib("lib/seo.ts", { "@/lib/i18n-paths": i18n, "@/lib/site": site }, {
     VERCEL_ENV: "preview", NEXT_PUBLIC_SITE_URL: "https://example.vercel.app/",
   });
   assert.equal(preview.SITE_URL, "https://example.vercel.app");
-  const development = loadLib("lib/seo.ts", { "@/lib/i18n-paths": i18n }, {
+  const development = loadLib("lib/seo.ts", { "@/lib/i18n-paths": i18n, "@/lib/site": site }, {
     NEXT_PUBLIC_SITE_URL: "http://localhost:3100/",
   });
   assert.equal(development.SITE_URL, "http://localhost:3100");
@@ -105,7 +107,7 @@ test("retired sections redirect to real replacements without catching unknown ro
     ["/contacto", "/#contact"], ["/en/contact", "/en#contact"],
     ["/proyectos", "/#projects"], ["/en/projects", "/en#projects"],
     ["/sobre-mi", "/#experience"], ["/en/about", "/en#experience"],
-    ["/fotografia", "/#photography"], ["/en/photography", "/en#photography"],
+    ["/fotografia", "/#projects"], ["/en/photography", "/en#projects"],
   ]) {
     const redirect = redirects.find(rule => rule.source === source && !rule.has);
     assert.ok(redirect, source);
@@ -278,7 +280,7 @@ test("locale-dependent internal links stay inside their language", () => {
     "components/raw-vives-case-study.tsx",
     "components/not-found-content.tsx",
     "components/legal-page-content.tsx",
-    "components/contact.tsx",
+    "components/site-footer.tsx",
   ]) {
     assert.match(read(file), /localizeHref/, file);
   }

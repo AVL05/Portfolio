@@ -2,6 +2,7 @@
 
 import { Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { CommandPalette, OPEN_PALETTE_EVENT } from "@/components/command-palette";
 import { LanguageToggle } from "@/components/language-toggle";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { useLanguage } from "@/lib/language-context";
@@ -88,6 +89,7 @@ export function SiteHeader() {
             ))}
           </div>
           <div className={styles.controls}>
+            <CommandPalette triggerClassName={`${styles.iconButton} ${styles.paletteButton}`} />
             <ThemeToggle className={styles.iconButton} />
             <LanguageToggle />
             <button data-menu-trigger ref={triggerRef} type="button" aria-expanded={isMenuOpen} aria-controls="mobile-navigation" aria-haspopup="dialog"
@@ -112,6 +114,10 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className={styles.menuFooter}>
+          <button type="button" className={styles.menuAction}
+            onClick={() => { closeMenu(); window.setTimeout(() => window.dispatchEvent(new Event(OPEN_PALETTE_EVENT)), 50); }}>
+            {es ? "Buscar y comandos" : "Search & commands"}
+          </button>
           <a href={CV_HREF} download data-track="cv-download">{t.hero.cv}</a>
           <span>{t.hero.location}</span>
         </div>

@@ -21,8 +21,11 @@
 .menuLinks a:hover, .menuLinks a[aria-current] { color: var(--primary); }
 .menuFooter { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; color: var(--muted-foreground); font: 400 var(--type-label)/1.5 var(--font-label), monospace; text-transform: uppercase; letter-spacing: .06em; }
 .menuFooter a { display: inline-flex; align-items: center; min-height: var(--target-size); }
-.menuFooter a:hover { color: var(--primary); }
+.menuFooter a:hover, .menuAction:hover { color: var(--primary); }
+.menuAction { display: inline-flex; align-items: center; min-height: var(--target-size); text-transform: uppercase; letter-spacing: .06em; cursor: pointer; }
+.paletteButton { display: none; }
 .fallback { display: none; }
+@media (min-width: 30rem) { .paletteButton { display: inline-flex; } }
 @media (min-width: 48rem) { .links { display: flex; } .menuButton { display: none; } }
 @media (max-width: 47.99rem) { .fallback { display: flex; flex-wrap: wrap; justify-content: space-around; border-bottom: 1px solid var(--border); } .fallback a { display: inline-flex; align-items: center; min-height: var(--target-size); font-size: .875rem; } }
 @media (prefers-reduced-motion: reduce) { .links a::after, .iconButton { transition: none; } }

@@ -1,168 +1,109 @@
 ---
-name: Alex Vicente Portfolio — Editorial Index
-description: A dark editorial portfolio where real project work is the first thing a recruiter reads
+name: Alex Vicente Portfolio: Framed Column
+description: A dark-first, single-column portfolio framed by thin rules, with one copper accent and an equally careful light theme
 colors:
-  ink-0: "#0e0d0b"
-  ink-1: "#161512"
-  ink-2: "#201e1a"
-  ink-3: "#2c2924"
-  bone: "#f1ece2"
-  foreground-soft: "#d3ccc0"
-  stone: "#a9a196"
-  paper-0: "#ece6da"
-  paper-1: "#e2dbcc"
-  paper-ink: "#191714"
-  paper-muted: "#575047"
-  copper: "#d4895a"
-  copper-deep: "#8c4a24"
-  rule-dark: "#34302a"
-  rule-paper: "#bfb6a5"
+  dark:
+    background: "#0f0e0d"
+    surface: "#161513"
+    foreground: "#ece8e1"
+    foreground-soft: "#cfc9bf"
+    muted: "#9d968c"
+    faint: "#8f887e"
+    border: "#2a2724"
+    input: "#7a7368"
+    dot: "#3a3631"
+    primary: "#e0956a"
+    on-primary: "#0f0e0d"
+    destructive: "#ff9f8f"
+  light:
+    background: "#f6f3ee"
+    surface: "#efebe4"
+    foreground: "#1a1814"
+    foreground-soft: "#3a352e"
+    muted: "#5f584e"
+    faint: "#6a6359"
+    border: "#d9d3c8"
+    input: "#8a8377"
+    dot: "#cfc8bb"
+    primary: "#8f4a24"
+    on-primary: "#ffffff"
+    destructive: "#b3261e"
 typography:
   display:
-    fontFamily: "Geist, system-ui, sans-serif"
-    fontSize: "clamp(3.25rem, 6vw, 6rem)"
+    fontFamily: "Hanken Grotesk, system-ui, sans-serif"
+    fontSize: "clamp(2.25rem, 7vw, 3.25rem)"
     fontWeight: 500
-    lineHeight: 0.92
-    letterSpacing: "-0.04em"
-  accent:
-    fontFamily: "Instrument Serif, Georgia, serif"
-    fontStyle: italic
-    fontWeight: 400
+    lineHeight: 1.04
+    letterSpacing: "-0.035em"
   body:
-    fontFamily: "Geist, system-ui, sans-serif"
-    fontSize: "1rem"
-    fontWeight: 400
+    fontFamily: "Hanken Grotesk, system-ui, sans-serif"
+    fontSize: "1.0625rem"
     lineHeight: 1.65
   label:
-    fontFamily: "Geist Mono, ui-monospace, monospace"
-    fontSize: "0.6875rem"
-    fontWeight: 400
-    letterSpacing: "0.08em"
+    fontFamily: "JetBrains Mono, ui-monospace, monospace"
+    fontSize: "0.75rem"
+    fontWeight: 500
+    letterSpacing: "0.1em"
 rounded:
-  control: "2px"
-  media: "0"
+  control: "0.5rem"
+  card: "0.75rem"
+  pill: "999px"
 spacing:
-  gutter: "clamp(1.25rem, 4.4vw, 4rem)"
-  page: "90rem"
-  header: "4.5rem"
+  column: "48.75rem"
+  columnPad: "clamp(1.25rem, 5vw, 2.5rem)"
+  header: "3.75rem"
   target: "2.75rem"
 components:
-  action-primary:
-    backgroundColor: "{colors.copper}"
-    textColor: "{colors.ink-0}"
-    rounded: "{rounded.control}"
-    minHeight: "3.25rem"
-  action-secondary:
-    border: "1px solid foreground 34%"
-    textColor: "{colors.bone}"
-    rounded: "{rounded.control}"
+  pill-primary:
+    backgroundColor: "{colors.dark.primary}"
+    textColor: "{colors.dark.on-primary}"
+    rounded: "{rounded.pill}"
+    minHeight: "2.75rem"
+  pill-secondary:
+    border: "1px solid foreground 28%"
+    rounded: "{rounded.pill}"
+    minHeight: "2.75rem"
 ---
 
-# Design System: Editorial Index
+# Design System: Framed Column
 
-Current direction since 2026-11-05. It replaces the 2026-10 "studio sculpture"
-direction (black, ivory and lime with a chrome hero object) and the earlier
-ALEVICLOP 2.x experiments. Those decisions are historical; the redesign record,
-the three explored directions and the evidence live in
-[docs/EDITORIAL_INDEX_REDESIGN.md](docs/EDITORIAL_INDEX_REDESIGN.md).
+## Overview
 
-**Visual thesis.** The work is the interface: the portfolio reads like a
-printed index of real projects, set in confident type, with each project shown
-as a large art-directed spread and its engineering facts written beside it.
+**Creative direction.** A single centered column (780 px) framed by thin vertical rules on wide screens and edge to edge on phones. Sections are separated by horizontal rules and titled in a strip (`/ SECCIÓN`, mono, uppercase). A subtle dot band sits above the introduction. Everything is quiet, precise and fast; real project work is the content.
 
-**Ambition:** Immersive, expressed through composition and one signature
-interaction rather than WebGL. No new dependencies.
+**Themes.** Dark is the default and the no-JavaScript state. Light is chosen with the header toggle and stored in `localStorage` (`theme`); an inline head script applies it before first paint. Tokens switch on `[data-theme]` in `app/globals.css`. Case-study pages keep their own dark surfaces (`data-theme="dark"` on the page).
 
-## Colour
-
-One warm-black workspace, one paper chapter and one accent.
-
-- `ink-0` page, `ink-1` raised chapters and alerts, `ink-2` media wells.
-- `bone` primary text, `foreground-soft` reading text, `stone` metadata.
-  Text is always opaque; secondary text never uses translucent colour.
-- `copper` is the only accent: primary action, active state, numbers, accent
-  phrases. On paper it becomes `copper-deep` to keep AA.
-- The paper surface (`.surface-paper`) is used once on the home page, for the
-  profile chapter (capabilities and experience), so the CV reads as a document.
-- Case-study heroes carry a project identity through local tokens on
-  `[data-case]`: Distrito Gourmet on paper with green `#2f4a3c`, LumaFlow
-  Studio on ink with copper, raw.vives on night green `#0f1615` with
-  `#d9a27c`. Chapters below the hero return to the shared system.
-
-Measured contrast (WCAG): copper on ink 6.96:1, stone on ink 7.6:1,
-placeholder `#958d82` on ink ≈5.7:1, ink on copper 6.96:1.
+**One accent.** Copper: `#e0956a` on dark, `#8f4a24` on light. All text pairs meet WCAG AA (measured: foreground 15.8:1 and 16.0:1, muted 6.6:1 and 6.3:1, primary on background 8.0:1 and 6.0:1, on-primary 8.0:1 and 6.6:1). Input borders are at least 3:1 against their surface.
 
 ## Typography
 
-- **Geist** for display and reading, 500 for headings, 400 for body.
-  Display is capped at 6rem with −0.04em tracking.
-- **Instrument Serif italic** is reserved for short accent phrases: the role
-  in the hero, the second half of section headings and `raw.vives`. Never for
-  paragraphs.
-- **Geist Mono** only for data and metadata: dates, numbers, stack names,
-  captions, breadcrumb. Not as decoration.
-- No eyebrow or kicker above headings. Metadata follows the heading it
-  describes. Numbers appear only where sequence is information (project
-  index, chapter column on desktop).
+Hanken Grotesk for headings and reading, JetBrains Mono for the wordmark, section strips, dates and metadata. Both are self-hosted through `next/font` with `display: swap`. No serif.
 
 ## Layout
 
-- 12-column grid, `--page-width` 90rem, fluid gutter.
-- Hero: name and role (h1) left, introduction, actions and links right; the
-  project index and the live plate share the lower band, so name, position,
-  CV, contact and all three projects are visible in a 1440×900 first viewport.
-- Selected work: three spreads, each with a large primary plate and an offset
-  companion view (bottom-right overlap, bottom-left overlap, staggered
-  diptych), then a facts ledger (my part, evidence, stack) and actions.
-- Archive: a single ledger list, not a card grid.
-- Case studies: shared `CaseShell` (top bar, breadcrumb, title, lead, facts,
-  actions, full-width showcase, contents) and numbered `Chapter` sections
-  with a sticky label column on desktop.
-- Breakpoints: 1024 (single column, plate hidden, thumbnails in the index),
-  640 (stacked ledgers, companion views hidden), 480 (compact hero).
+- `.site-column` holds header content, main and footer at `--column-width`.
+- `.section-strip` (title) and `.section-body` (padding `--column-pad`) make up every section; `Section` in `components/section.tsx` is the only way to add one.
+- Section ids are stable anchors used by redirects and the command palette: `about`, `experience`, `projects`, `other`, `skills`, `education`, `contact`.
+- Header: wordmark `aleviclop.dev`, links from 768 px (a modal menu below), palette button from 480 px, theme toggle and ES/EN switch.
 
-## Components and states
+## Components
 
-- `.action-primary` / `.action-secondary`: 2px radius, 52px tall, icon at the
-  trailing edge. Hover swaps to bone; focus uses the global copper outline.
-- `.cinema-link`: text link with a 44px target.
-- Form fields: underline inputs, mono labels, inline errors in text plus
-  colour, `aria-invalid` border, 1px bordered success/error panels with retry
-  and direct-email fallback.
-- Navigation: transparent bar that becomes solid on scroll, desktop links plus
-  CV, language toggle and the native `<dialog>` menu on every size.
-- Browser surfaces: themed selection, caret and scrollbar.
+- **Pills** (`.pill`, `.pill-primary`, `.pill-secondary`): icon plus label, 44 px minimum height.
+- **Project cards:** thumbnail, title (the stretched link to the case study), Live and Code links, one sentence, optional verified figure, technology chips with icon. No card inside a card.
+- **Chips** (`tech-chip`): single-colour brand icons (`react-icons/si`) in `currentColor`, so the page keeps one accent.
+- **Command palette:** `Ctrl+K` / `⌘K`; native modal dialog with a combobox and listbox (see `components/command-palette.tsx`).
+- **Forms:** bordered fields, visible labels, inline errors with text (colour is never the only signal).
 
 ## Motion
 
-Budget: one authored moment plus restrained reveals.
+Budget: soft section entrances (CSS and one IntersectionObserver in `components/reveal.tsx`), a 280 ms colour cross-fade on theme change, hover, focus and press states, and the palette opening. All of it is gated on `prefers-reduced-motion: no-preference`. The home does not load GSAP. No parallax, no scroll-linked effects, no entrance animation on the hero (it protects LCP).
 
-1. **Signature — the project plate.** Hovering (fine pointer) or focusing an
-   index row wipes the plate to that project with a 650ms `clip-path` reveal
-   and a slight image settle. With reduced motion it swaps instantly.
-   Clicking claims the project's `view-transition-name`, so the plate morphs
-   into the case-study showcase on supporting browsers.
-2. Hero entrance: masked line rise, plate wipe and index rows, skipped when
-   hydration is late.
-3. Scene reveals once per project (title, plate mask, companion), completed
-   on fast scroll.
+## Accessibility
 
-No parallax, no sticky stacking, no permanent loops. Every effect lives in a
-`gsap.matchMedia` reduced-motion branch and reverts cleanly.
+WCAG 2.2 AA. One `h1`, then `h2` per section and `h3` inside. Skip link first. Visible focus (2 px copper outline). Targets of at least 44 px. Verified with axe-core on the home (both languages, both themes, 360 / 768 / 1440 px), case studies, legal pages, the open palette and the open mobile menu.
 
-## Imagery
+## Do not
 
-Only real screenshots, recorded-demo frames and Alex's own photographs. Captions
-say what each image is (published site, sample data, demo frame). Distrito's
-home plate uses the published site capture; no private or proprietary assets.
-
-## Acceptance criteria
-
-- Name, role, CV, contact and the three projects visible without scrolling at
-  1440×900; name, role, both actions at 390×844.
-- No horizontal overflow at 320, 390, 768, 1440 and 1920.
-- Keyboard: every row, plate action and form control reachable with a visible
-  focus ring; the menu dialog traps and restores focus.
-- Reduced motion: no transforms remain after a live preference change.
-- `pnpm lint`, `pnpm typecheck`, `pnpm test`, `pnpm build` and the Playwright
-  suite pass.
+- Add a second accent colour, gradients, glass or glow.
+- Advertise skills or tools that are not in the CV and the repositories.
+- Hide content behind motion: everything is in the markup and readable without JavaScript.

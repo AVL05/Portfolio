@@ -4,23 +4,25 @@
 
 This repository powers the professional portfolio of Alex Vicente López.
 
-Its job is to help recruiters, hiring managers, and product/engineering teams understand Alex quickly as a **Junior Full-Stack Developer** through credible project evidence, professional experience, technical decisions, and clear contact paths.
+Its job is to help recruiters, hiring managers, and product/engineering teams understand Alex quickly as a **Junior Full-Stack Web Developer** (Spanish: *Desarrollador Web Full-Stack Junior*) through credible project evidence, professional experience, technical decisions, and clear contact paths.
 
-The site is not a generic developer showcase and not a photography-first portfolio.
+The site is not a generic developer showcase and not a photography-first portfolio. It is a single framed column: introduction, about, experience, projects, skills, education and contact.
 
 ### Product truths
 
 Preserve these unless the user explicitly changes the product direction:
 
-- Position Alex primarily as a **Junior Full-Stack Developer**.
-- Show end-to-end capability through real work: frontend, backend, APIs, data, systems, and applied AI.
+- Use one positioning label everywhere (UI, metadata, JSON-LD, Open Graph, manifest): **Desarrollador Web Full-Stack Junior** / **Junior Full-Stack Web Developer**. No competing labels ("AI builder", "digital creator", "frontend focus").
+- Show end-to-end capability through real work: frontend, backend, APIs and data. AI is a development tool Alex uses and validates with tests, not a headline.
 - Prefer project decisions and outcomes over technology inventories.
 - Never invent or exaggerate experience, responsibilities, clients, metrics, testimonials, or results.
-- Keep these four projects as the primary portfolio work:
-  - AI Creative Assistant
+- Keep these three projects as the featured work, in this order:
   - Distrito Gourmet
   - LumaFlow Studio
   - raw.vives
+- Secondary work stays compact ("Other projects"): Premium Frontend Director, ECHO: The Awakening, the hotel management API and the Christmas shop.
+- Do not advertise TypeScript as a skill or as a project chip. Do not claim certifications.
+- Show a Live link only when the demo URL is published and answering (LumaFlow Studio has none).
 - Treat raw.vives as a web + photography case study, not as a second profession.
 - Keep the path to projects, CV, and contact obvious.
 - Visual ambition must never compromise readability, accessibility, responsive behavior, or performance.
@@ -50,22 +52,16 @@ Do not introduce a new architecture, design language, route model, localization 
 
 Preserve the existing stack:
 
-- Next.js 16.3.4
+- Next.js 16
 - App Router
 - React 19
 - TypeScript 5.7
 - Tailwind CSS 4
-- GSAP
-- `@gsap/react`
-- ScrollTrigger
-- ScrollToPlugin
-- React Three Fiber
-- Drei
-- Three.js
+- GSAP, `@gsap/react` and ScrollTrigger (case-study pages only; the home uses CSS and one IntersectionObserver)
 - Radix UI
 - Lucide
 - React Icons
-- Geist
+- Hanken Grotesk and JetBrains Mono through `next/font` (self-hosted)
 - Node.js 22
 - pnpm 10
 - Node `node:test`
@@ -98,7 +94,7 @@ Use this map before searching broadly:
 - `lib/locales/`
   Localized ES/EN content.
 - `public/`
-  Published media, CV, images, icons, 3D assets.
+  Published media, CV, images and icons.
 - `tests/`
   Node integration and contract tests.
 - `tests/e2e/`
@@ -129,12 +125,14 @@ English lives under `/en`.
 Examples:
 
 ```text
-/                     ↔ /en
-/proyectos            ↔ /en/projects
-/sobre-mi             ↔ /en/about
-/fotografia           ↔ /en/photography
-/contacto             ↔ /en/contact
+/                              ↔ /en
+/proyectos/raw-vives           ↔ /en/projects/raw-vives
+/proyectos/lumaflow-studio     ↔ /en/projects/lumaflow-studio
+/proyectos/distrito-gourmet    ↔ /en/projects/distrito-gourmet
+/legal                         ↔ /en/legal   (navigable, not indexable)
 ```
+
+Retired section pages (`/proyectos`, `/sobre-mi`, `/fotografia`, `/contacto` and their English forms) redirect once to the matching home anchor.
 
 `lib/i18n-paths.ts` is the source of truth for indexable ES/EN route pairs.
 
@@ -170,9 +168,9 @@ Preserve:
 
 Current public indexable contract:
 
-- 8 Spanish URLs;
-- 8 English URLs;
-- 16 indexable URLs total.
+- 4 Spanish URLs (home plus three case studies);
+- 4 English URLs;
+- 8 indexable URLs in total.
 
 Legal routes remain intentionally outside the indexable set.
 
@@ -221,18 +219,14 @@ Do not translate mechanically when that produces unnatural professional language
 
 Creative direction:
 
-**Visual Systems / Quiet Cinema**
+**Framed Column**
 
 The portfolio should feel:
 
-- dark;
-- precise;
-- editorial;
-- image-led;
-- technically controlled;
-- visually distinctive without becoming ornamental.
-
-Primary accent: controlled copper.
+- dark by default, with an equally careful light theme;
+- a single centered column framed by thin vertical rules, sections separated by horizontal rules and titled in a strip;
+- precise and quiet, with one copper accent;
+- fast: self-hosted fonts, optimized images, no heavy libraries on the home.
 
 Avoid:
 
@@ -240,9 +234,6 @@ Avoid:
 - gratuitous glassmorphism;
 - purple/blue AI gradients;
 - excessive glow;
-- unnecessary pills;
-- metric counters without value;
-- repetitive card grids;
 - cards nested inside cards;
 - effects added only to demonstrate technique.
 
@@ -258,9 +249,9 @@ Motion must have a purpose.
 
 Current motion budget:
 
-- one orchestrated hero entrance;
-- restrained section/list entrances;
-- purposeful state microinteractions.
+- restrained section entrances (CSS plus one IntersectionObserver, skipped for reduced motion and when the visit starts on an anchor);
+- a short colour cross-fade when the theme changes;
+- hover, focus and press states, and the command palette opening.
 
 Avoid:
 
@@ -310,34 +301,18 @@ Do not rely on remembered behavior when local Next.js 16 documentation contradic
 
 ---
 
-## 11. Three.js and Rich Media
+## 11. Rich Media
 
-The home experience and avatar preview use local 3D assets.
+The site ships no 3D. Media are optimized images (AVIF/WebP through `next/image`) and the three Distrito Gourmet videos (`preload="none"`, played on demand).
 
-Before changing:
-
-- R3F;
-- Three.js;
-- GLTF loading;
-- WASM;
-- blob URLs;
-- image decoding;
-- route CSP;
-
-inspect `next.config.mjs` and the directly related loader/component.
+Before adding any media pipeline (WASM, blob URLs, canvases), inspect `next.config.mjs` for the route CSP.
 
 ### Rules
 
 - Keep CSP permissions as narrow as possible.
 - Do not weaken the global CSP to fix a route-specific feature.
-- Dispose of:
-  - geometries;
-  - materials;
-  - textures;
-  - render targets;
-  - observers;
-  - animation loops.
-- Prefer optimized production assets.
+- Dispose of observers, listeners and animation loops.
+- Prefer optimized production assets with explicit dimensions.
 - Do not commit RAW photography.
 - Do not commit temporary renders or generated working files.
 - Do not retain unused large assets.
@@ -585,13 +560,13 @@ next.config.mjs when headers/CSP are involved
 related tests
 ```
 
-### Three.js / rich media
+### Media
 
 Read:
 
 ```text
-target R3F/Three component
-asset loader
+lib/projects.ts
+target component
 next.config.mjs when CSP is involved
 ```
 

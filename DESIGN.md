@@ -92,7 +92,7 @@ Hanken Grotesk for headings and reading, JetBrains Mono for the wordmark, sectio
 
 - **Pills** (`.pill`, `.pill-primary`, `.pill-secondary`): icon plus label, 44 px minimum height.
 - **Featured project rows:** thumbnail, category, title, a short account of what the project does, optional verified evidence, technology chips, and direct links to the demo when available and source code. Thumbnail and text sit side by side from 640 px and stack below.
-- **Secondary projects:** compact rows inside a native disclosure under the featured work. The control works with a keyboard and without JavaScript.
+- **Secondary projects:** use the same card layout inside a native disclosure under the featured work. The control works with a keyboard and without JavaScript.
 - **Chips** (`tech-chip`): single-colour brand icons (`react-icons/si`) in `currentColor`, so the page keeps one accent.
 - **Command palette:** `Ctrl+K` / `⌘K`; native modal dialog with a combobox and listbox (see `components/command-palette.tsx`).
 - **Forms:** bordered fields, visible labels, inline errors with text (colour is never the only signal).

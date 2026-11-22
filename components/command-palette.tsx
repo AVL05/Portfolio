@@ -61,14 +61,14 @@ export function CommandPalette({ triggerClassName }: { triggerClassName: string 
     const list: Command[] = [
       ...SECTION_IDS.map((id) => ({ id: `go-${id}`, group: groups.go, label: t.sections[id], hint: `#${id}`, icon: Hash, run: goTo(id) })),
       { id: "go-other", group: groups.go, label: t.projects.otherLabel, hint: "#other", icon: Hash, run: goTo("other") },
-      ...FEATURED_PROJECTS.map((project) => ({
-        id: `code-${project.slug}`,
+      ...FEATURED_PROJECTS.flatMap(({ slug, title, tech, code }) => code ? [{
+        id: `code-${slug}`,
         group: groups.projects,
-        label: `${project.title} · ${t.projects.code}`,
-        keywords: project.tech.join(" "),
+        label: `${title} · ${t.projects.code}`,
+        keywords: tech.join(" "),
         icon: FaGithub,
-        run: () => openExternal(project.code),
-      })),
+        run: () => openExternal(code),
+      }] : []),
       ...FEATURED_PROJECTS.flatMap((project) => project.live ? [{
         id: `live-${project.slug}`,
         group: groups.projects,

@@ -39,17 +39,15 @@
     "otherLabel": "Other projects",
     "featured": [
       {
-        "slug": "distrito-gourmet",
-        "category": "Web development capstone · DAW",
-        "description": "Customers can browse the menu, place an order and book a table. Staff run the restaurant through separate dashboards for the dining room, kitchen and administration.",
-        "alt": "Distrito Gourmet: home page with access to the menu and reservations",
+        "slug": "sinergia",
+        "category": "Hospitality · Academic project",
+        "description": "Website for Aitana Mora González’s culinary project, with tasting menus, online reservations and a dashboard for the restaurant team.",
         "evidence": []
       },
       {
         "slug": "lumaflow-studio",
         "category": "CRM · Progressive web app",
         "description": "One place for a photo or video studio's workflow, from quotes and session planning to invoices and delivery through a private gallery. Includes a local AI assistant.",
-        "alt": "LumaFlow Studio: screenshot of the application interface",
         "evidence": [
           "56 backend tests",
           "33 frontend tests"
@@ -59,7 +57,6 @@
         "slug": "raw-vives",
         "category": "Photography archive · Bilingual site",
         "description": "My photography archive, arranged into series you can filter and browse one image at a time. I generate the pages statically with Next.js.",
-        "alt": "raw.vives: home page of the photo archive",
         "evidence": []
       }
     ],
@@ -67,22 +64,38 @@
       {
         "slug": "premium-frontend-director",
         "title": "Premium Frontend Director",
+        "category": "Tool for coding agents",
         "description": "Open-source (MIT) skill for coding agents that combines art direction, frontend implementation and evidence-based visual review."
       },
       {
         "slug": "echo-the-awakening",
         "title": "ECHO: The Awakening",
-        "description": "Sci-fi experience in the browser."
+        "category": "Interactive experience · Science fiction",
+        "description": "Explore an abandoned facility and decide what its resident AI should preserve."
       },
       {
         "slug": "api-hotel",
         "title": "Hotel management API",
-        "description": "Hotel management API in PHP."
+        "category": "REST API",
+        "description": "PHP backend for managing hotel bookings, with an admin dashboard."
       },
       {
         "slug": "dulces",
         "title": "Christmas shop",
-        "description": "Christmas shop built with Vue and Vite."
+        "category": "Online catalogue · Orders",
+        "description": "Catalogue of Spanish Christmas cakes and yule logs with an order enquiry form."
+      },
+      {
+        "slug": "distrito-gourmet",
+        "title": "Distrito Gourmet",
+        "category": "Web development capstone · DAW",
+        "description": "Customers can browse the menu, place an order and book a table. Staff run the restaurant through separate dashboards for the dining room, kitchen and administration."
+      },
+      {
+        "slug": "racefinder",
+        "title": "RaceFinder",
+        "category": "Local app · Sports photography",
+        "description": "Find your race photos by bib number. Import a folder and save the originals you select. Photos are processed on your device."
       }
     ]
   },

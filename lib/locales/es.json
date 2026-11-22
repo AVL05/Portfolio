@@ -39,17 +39,15 @@
     "otherLabel": "Otros proyectos",
     "featured": [
       {
-        "slug": "distrito-gourmet",
-        "category": "Proyecto de fin de ciclo · DAW",
-        "description": "Una web donde los clientes consultan la carta, hacen pedidos y reservan mesa. El personal gestiona la operación desde paneles separados para sala, cocina y administración.",
-        "alt": "Distrito Gourmet: portada con acceso a carta y reservas",
+        "slug": "sinergia",
+        "category": "Restauración · Proyecto académico",
+        "description": "Web para el proyecto gastronómico de Aitana Mora González, con menús degustación, reservas online y un panel de gestión para el equipo de sala.",
         "evidence": []
       },
       {
         "slug": "lumaflow-studio",
         "category": "CRM · Aplicación web progresiva",
         "description": "Reúne en un solo lugar el trabajo de un estudio de foto y vídeo: desde el presupuesto y la planificación de la sesión hasta la factura y la entrega en una galería privada. Incluye asistencia con IA local.",
-        "alt": "LumaFlow Studio: captura de la interfaz de la aplicación",
         "evidence": [
           "56 tests de backend",
           "33 tests de frontend"
@@ -59,7 +57,6 @@
         "slug": "raw-vives",
         "category": "Archivo fotográfico · Web bilingüe",
         "description": "Mi archivo de fotografía, organizado en series que se pueden filtrar y recorrer imagen por imagen. Genero las páginas de forma estática con Next.js.",
-        "alt": "raw.vives: portada del archivo fotográfico",
         "evidence": []
       }
     ],
@@ -67,22 +64,38 @@
       {
         "slug": "premium-frontend-director",
         "title": "Premium Frontend Director",
+        "category": "Herramienta para agentes",
         "description": "Skill de código abierto (MIT) para agentes de programación que combina dirección artística, implementación frontend y revisión visual verificable."
       },
       {
         "slug": "echo-the-awakening",
         "title": "ECHO: The Awakening",
-        "description": "Experiencia de ciencia ficción en el navegador."
+        "category": "Experiencia interactiva · Ciencia ficción",
+        "description": "Explora una instalación abandonada y decide qué debe preservar su inteligencia artificial."
       },
       {
         "slug": "api-hotel",
         "title": "API de gestión hotelera",
-        "description": "API de gestión hotelera en PHP."
+        "category": "API REST",
+        "description": "Backend en PHP para gestionar reservas hoteleras, con un panel de administración."
       },
       {
         "slug": "dulces",
         "title": "Tienda navideña",
-        "description": "Tienda navideña con Vue y Vite."
+        "category": "Catálogo web · Encargos",
+        "description": "Catálogo de roscones y troncos de Navidad con un formulario para consultar encargos."
+      },
+      {
+        "slug": "distrito-gourmet",
+        "title": "Distrito Gourmet",
+        "category": "Proyecto de fin de ciclo · DAW",
+        "description": "Una web donde los clientes consultan la carta, hacen pedidos y reservan mesa. El personal gestiona la operación desde paneles separados para sala, cocina y administración."
+      },
+      {
+        "slug": "racefinder",
+        "title": "RaceFinder",
+        "category": "Aplicación local · Fotografía deportiva",
+        "description": "Encuentra tus fotos de una carrera por número de dorsal. Importa una carpeta y guarda los originales que elijas. Las fotos se procesan en tu equipo."
       }
     ]
   },

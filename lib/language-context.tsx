@@ -59,8 +59,8 @@ interface Translation {
     showMore: string;
     hideMore: string;
     otherLabel: string;
-    featured: { slug: string; category: string; description: string; alt: string; evidence: string[] }[];
-    other: { slug: string; title: string; description: string }[];
+    featured: { slug: string; category: string; description: string; evidence: string[] }[];
+    other: { slug: string; title: string; category: string; description: string }[];
   };
   contact: {
     subtitle: string;

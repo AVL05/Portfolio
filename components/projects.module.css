@@ -1,10 +1,21 @@
-/* Featured cards with separate demo and source links. */
-.featured { display: grid; gap: 1.25rem; }
+/* Project cards with separate demo and source links. */
+.list { display: grid; gap: 1.25rem; }
 .card { position: relative; display: grid; align-items: start; gap: 1.25rem; padding: 1rem; border: 1px solid var(--border); border-radius: .875rem; background: var(--surface); transition: border-color var(--motion-normal) var(--ease-out), transform var(--motion-normal) var(--ease-out); }
 .card:hover, .card:focus-within { border-color: color-mix(in oklab, var(--primary) 70%, var(--border)); }
 .thumb { position: relative; aspect-ratio: 16 / 10; overflow: hidden; border: 1px solid var(--border); border-radius: .625rem; background: var(--background); }
-.thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform 600ms var(--ease-out); }
-.card:hover .thumb img { transform: scale(1.03); }
+.thumb img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.thumb[data-project="distrito-gourmet"] img { object-fit: cover; object-position: center 37%; }
+.thumb:is(
+  [data-project="lumaflow-studio"],
+  [data-project="premium-frontend-director"],
+  [data-project="echo-the-awakening"],
+  [data-project="dulces"],
+  [data-project="sinergia"],
+  [data-project="racefinder"]
+) img { padding: .75rem; }
+.thumb[data-project="api-hotel"] img { object-fit: cover; }
+.thumb:is([data-project="raw-vives"], [data-project="sinergia"]) { background: #f6f3ee; }
+.thumb[data-project="raw-vives"] img { padding-block-end: .75rem; }
 .body { display: grid; gap: .5rem; min-width: 0; }
 .body h3 { font-size: clamp(1.5rem, 3.2vw, 1.875rem); font-weight: 600; line-height: 1.1; letter-spacing: -.035em; }
 .category { color: var(--primary); font: 500 var(--type-label)/1.5 var(--font-label), monospace; }
@@ -16,24 +27,15 @@
 .evidence { justify-self: start; padding: .25rem .625rem; border: 1px solid color-mix(in oklab, var(--primary) 50%, var(--border)); border-radius: .375rem; color: var(--foreground); font: 500 var(--type-label)/1.6 var(--font-label), ui-monospace, monospace; letter-spacing: .02em; }
 .skills { display: grid; gap: 1rem; }
 
-/* Other projects: compact rows between rules. */
 .more { margin-top: 1.5rem; }
 .moreToggle { list-style: none; cursor: pointer; }
 .moreToggle::-webkit-details-marker { display: none; }
 .more[open] .showMore, .more:not([open]) .hideMore { display: none; }
 .more[open] .moreToggle svg { transform: rotate(180deg); }
-.other { display: grid; margin-top: 1rem; scroll-margin-top: calc(var(--header-height) + 1rem); }
-.other > li { display: grid; gap: .625rem; padding-block: 1.125rem; border-top: 1px solid var(--border); }
-.other > li:first-child { padding-top: 0; border-top: 0; }
-.other > li:last-child { padding-bottom: 0; }
-.otherMain h3 { font-size: 1.0625rem; font-weight: 500; letter-spacing: -.015em; }
-.otherMain h3 a { display: inline-flex; align-items: center; gap: .375rem; min-height: var(--target-size); }
-.otherMain h3 a:hover { color: var(--primary); }
-.otherMain h3 svg { width: .9375rem; height: .9375rem; color: var(--muted-foreground); }
-.otherMain p { color: var(--muted-foreground); font-size: .9375rem; line-height: 1.6; }
+.other { margin-top: 1rem; scroll-margin-top: calc(var(--header-height) + 1rem); }
 
 @media (min-width: 40rem) {
   .card { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 1.75rem; padding: 1.25rem; }
   .thumb { position: sticky; top: calc(var(--header-height) + 1rem); }
 }
-@media (prefers-reduced-motion: reduce) { .links a, .thumb img, .card { transition: none; } .card:hover .thumb img { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .links a, .card { transition: none; } }

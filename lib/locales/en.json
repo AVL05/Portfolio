@@ -11,7 +11,7 @@
     "portraitAlt": "Portrait of Alex Vicente López",
     "role": "Junior Full-Stack Web Developer",
     "tagline": "I build complete web applications with React and Laravel, such as a CRM for photography studios and a restaurant platform.",
-    "stack": "I also work with Next.js and PHP.",
+    "stack": "I build AI into products (local language models, OCR and computer vision) and also work with Next.js and PHP.",
     "location": "Valencia, Spain",
     "availability": "Available for remote work from Spain",
     "work": "View projects",
@@ -20,11 +20,12 @@
   },
   "about": {
     "paragraphs": [
-      "I use AI as a development tool and review code with tests. I published Premium Frontend Director, an open-source skill for coding agents."
+      "I code with Codex and Claude Code: I set rules in AGENTS.md, work in milestones and review diffs and tests. I published Premium Frontend Director, an open-source skill for coding agents."
     ]
   },
   "skillsSummary": "I work across the interface, the API and database design. I use version control and tests to review changes.",
   "skillGroups": {
+    "ai": "Applied AI",
     "frontend": "Frontend",
     "backend": "Backend",
     "tools": "Tools"
@@ -44,7 +45,7 @@
       {
         "slug": "lumaflow-studio",
         "category": "CRM · Progressive web app",
-        "description": "One place for a photo or video studio's workflow, from quotes and session planning to invoices and delivery through a private gallery. Includes a local AI assistant.",
+        "description": "One place for a photo or video studio's workflow, from quotes and session planning to invoices and delivery through a private gallery. Includes an assistant that drafts session plans and recommends gear with an in-browser language model (WebLLM/WebGPU), with Ollama as an option.",
         "evidence": [
           "Problem — Studio work is scattered across calendars, spreadsheets and galleries.",
           "Technical decision — The React demo uses local fictional data and lets visitors explore the workflow without saving changes.",
@@ -69,7 +70,7 @@
         "slug": "echo-the-awakening",
         "title": "ECHO: The Awakening",
         "category": "Interactive experience · Science fiction",
-        "description": "Explore an abandoned facility and decide what its resident AI should preserve."
+        "description": "Explore an abandoned facility and decide what its resident AI should preserve. An optional local model interprets your instructions, and actions are validated and confirmed before they run."
       },
       {
         "slug": "api-hotel",
@@ -92,8 +93,8 @@
       {
         "slug": "racefinder",
         "title": "RaceFinder",
-        "category": "Local app · Sports photography",
-        "description": "Find your race photos by bib number. Import a folder and save the originals you select. Photos are processed on your device."
+        "category": "Computer vision · Sports photography",
+        "description": "Find race photos by bib number using OCR and, with consent, by facial similarity. Uncertain readings are reviewed manually and photos are processed on your device."
       }
     ]
   },

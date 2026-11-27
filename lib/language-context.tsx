@@ -48,7 +48,7 @@ interface Translation {
     paragraphs: string[];
   };
   skillsSummary: string;
-  skillGroups: Record<"frontend" | "backend" | "tools", string>;
+  skillGroups: Record<"ai" | "frontend" | "backend" | "tools", string>;
   experience: {
     experience_list: TimelineItem[];
     education_list: TimelineItem[];

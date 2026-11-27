@@ -21,9 +21,9 @@ export const SITE_TITLE =
 export const EN_SITE_TITLE =
   "Alex Vicente López | Junior Full-Stack Web Developer in Valencia";
 export const SITE_DESCRIPTION =
-  `Alex Vicente López, desarrollador web full-stack junior. React, Next.js, PHP y Laravel. ${es.hero.availability}.`;
+  `Alex Vicente López, desarrollador web full-stack junior. React, Next.js, PHP, Laravel e IA aplicada. ${es.hero.availability}.`;
 export const EN_SITE_DESCRIPTION =
-  `Alex Vicente López, junior full-stack web developer. React, Next.js, PHP and Laravel. ${en.hero.availability}.`;
+  `Alex Vicente López, junior full-stack web developer. React, Next.js, PHP, Laravel and applied AI. ${en.hero.availability}.`;
 
 // One role, one stack: no topic lists (photography, design, AI) that would
 // compete with the Junior Full-Stack Web Developer positioning.
@@ -130,6 +130,10 @@ const PERSON_COPY = {
     knowsAbout: [
       "Desarrollo web",
       "Aplicaciones full-stack",
+      "IA aplicada",
+      "Modelos de lenguaje en local",
+      "Visión por computador",
+      "Python",
       "React",
       "Next.js",
       "JavaScript",
@@ -150,6 +154,10 @@ const PERSON_COPY = {
     knowsAbout: [
       "Web development",
       "Full-stack applications",
+      "Applied AI",
+      "Local language models",
+      "Computer vision",
+      "Python",
       "React",
       "Next.js",
       "JavaScript",
@@ -184,7 +192,7 @@ export function buildPersonJsonLd(locale: Locale) {
     hasOccupation: {
       "@type": "Occupation",
       name: copy.jobTitle,
-      skills: "React, Next.js, JavaScript, Tailwind CSS, PHP, Laravel, MySQL, REST APIs, Git, Docker",
+      skills: "React, Next.js, JavaScript, Tailwind CSS, PHP, Laravel, MySQL, Python, REST APIs, Git, Docker",
     },
     alumniOf: [
       { "@type": "EducationalOrganization", name: "IES Serra Perenxisa" },

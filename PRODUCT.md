@@ -26,6 +26,7 @@ Precisa, directa y verificable. Transmite cuidado por el detalle y confianza té
 ## Design Principles
 
 - Una sola etiqueta: Desarrollador Web Full-Stack Junior (Junior Full-Stack Web Developer), en toda la web y en los metadatos.
+- La IA aplicada es una capacidad destacada del perfil full-stack. Se presenta mediante funciones concretas de los proyectos y prácticas de desarrollo verificables.
 - Mostrar decisiones técnicas y pruebas concretas antes de las listas de tecnologías.
 - Tres proyectos destacados en este orden: Sinergia, LumaFlow Studio y raw.vives. Cada uno tiene una ficha breve en la portada. El resto aparece al desplegar «Ver más», incluido Distrito Gourmet.
 - No anunciar TypeScript como habilidad ni como chip de proyecto. No afirmar certificaciones. Inglés B1; español y valenciano nativos.

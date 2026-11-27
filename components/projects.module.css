@@ -33,6 +33,6 @@
 
 @media (min-width: 40rem) {
   .card { padding: 1.25rem; }
-  .skillGroups { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .skillGroups { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (prefers-reduced-motion: reduce) { .links a, .card { transition: none; } }

@@ -37,6 +37,7 @@ test("visitors can explore the work, switch languages and download the CV", { ta
   await more.click();
   await expect(other.locator(":scope > li")).toHaveCount(5);
   await expect(other.locator(":scope > li").first().getByRole("heading")).toHaveText("Premium Frontend Director");
+  await expect(other.getByRole("link", { name: "Demo · ECHO: The Awakening" })).toHaveAttribute("href", "https://echo-the-awakening.pages.dev/");
   const raceFinder = other.locator(":scope > li").filter({
     has: page.getByRole("heading", { name: "RaceFinder", exact: true }),
   });

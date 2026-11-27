@@ -36,7 +36,7 @@ export const FEATURED_PROJECTS: readonly FeaturedProject[] = [
     image: "/projects/lumaflow-studio.webp",
     width: 1440,
     height: 850,
-    tech: ["React 19", "Laravel", "MySQL", "Sanctum"],
+    tech: ["React 19", "Laravel", "PostgreSQL", "WebLLM"],
     code: "https://github.com/AVL05/lumaflow-studio",
     live: "https://lumaflow.aleviclop.dev/demo",
   },
@@ -68,7 +68,8 @@ export const OTHER_PROJECTS: readonly Project[] = [
     width: 512,
     height: 512,
     code: "https://github.com/AVL05/echo-the-awakening",
-    tech: ["React 19", "Three.js", "Vite"],
+    live: "https://echo-the-awakening.pages.dev/",
+    tech: ["React 19", "Three.js", "Vite", "WebLLM"],
   },
   {
     slug: "api-hotel",
@@ -91,13 +92,14 @@ export const OTHER_PROJECTS: readonly Project[] = [
     image: "/projects/racefinder.webp",
     width: 512,
     height: 512,
-    tech: ["React 19", "Python", "SQLite"],
+    tech: ["React 19", "Python", "FastAPI", "ONNX Runtime", "SQLite"],
     code: "https://github.com/AVL05/RaceFinder",
   },
 ];
 
 export const SKILLS = {
+  ai: ["Codex", "Claude Code", "WebLLM", "Ollama", "RapidOCR", "ONNX Runtime"],
   frontend: ["React", "Next.js", "JavaScript", "HTML", "CSS", "Tailwind CSS", "GSAP", "Electron"],
-  backend: ["PHP", "Laravel", "MySQL", "APIs REST"],
-  tools: ["Git", "GitHub", "Bitbucket", "Docker", "Vercel", "Cloudflare"],
+  backend: ["PHP", "Laravel", "MySQL", "APIs REST", "Python", "FastAPI", "PostgreSQL", "SQLite"],
+  tools: ["Git", "GitHub", "Bitbucket", "Docker", "Vercel", "Cloudflare", "GitHub Actions", "PHPUnit", "Vitest", "Playwright"],
 } as const;

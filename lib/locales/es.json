@@ -11,7 +11,7 @@
     "portraitAlt": "Retrato de Alex Vicente López",
     "role": "Desarrollador Web Full-Stack Junior",
     "tagline": "Creo aplicaciones web completas con React y Laravel, como un CRM para estudios fotográficos y una plataforma para restaurantes.",
-    "stack": "También trabajo con Next.js y PHP.",
+    "stack": "Integro IA en producto (modelos de lenguaje en local, OCR y visión por computador) y trabajo también con Next.js y PHP.",
     "location": "Valencia, España",
     "availability": "Disponible en remoto desde España",
     "work": "Ver proyectos",
@@ -20,11 +20,12 @@
   },
   "about": {
     "paragraphs": [
-      "Uso la IA como herramienta de desarrollo y reviso el código con pruebas. Publiqué Premium Frontend Director, una skill de código abierto para agentes de programación."
+      "Programo con Codex y Claude Code: defino reglas en AGENTS.md, avanzo por hitos y reviso diffs y pruebas. Publiqué Premium Frontend Director, una skill de código abierto para agentes de programación."
     ]
   },
   "skillsSummary": "Trabajo desde la interfaz hasta la API y el diseño de la base de datos. Uso control de versiones y pruebas para revisar los cambios.",
   "skillGroups": {
+    "ai": "IA aplicada",
     "frontend": "Frontend",
     "backend": "Backend",
     "tools": "Herramientas"
@@ -44,7 +45,7 @@
       {
         "slug": "lumaflow-studio",
         "category": "CRM · Aplicación web progresiva",
-        "description": "Reúne en un solo lugar el trabajo de un estudio de foto y vídeo: desde el presupuesto y la planificación de la sesión hasta la factura y la entrega en una galería privada. Incluye asistencia con IA local.",
+        "description": "Reúne en un solo lugar el trabajo de un estudio de foto y vídeo: desde el presupuesto y la planificación de la sesión hasta la factura y la entrega en una galería privada. Incluye un asistente que prepara planes de sesión y recomienda equipo con un modelo de lenguaje en el navegador (WebLLM/WebGPU), con Ollama como opción.",
         "evidence": [
           "Problema — El trabajo del estudio queda repartido entre calendarios, hojas de cálculo y galerías.",
           "Decisión técnica — La demo de React usa datos ficticios locales y permite explorar el flujo sin guardar cambios.",
@@ -69,7 +70,7 @@
         "slug": "echo-the-awakening",
         "title": "ECHO: The Awakening",
         "category": "Experiencia interactiva · Ciencia ficción",
-        "description": "Explora una instalación abandonada y decide qué debe preservar su inteligencia artificial."
+        "description": "Explora una instalación abandonada y decide qué debe preservar su inteligencia artificial. Un modelo local opcional interpreta tus órdenes y las acciones se validan y confirman antes de ejecutarse."
       },
       {
         "slug": "api-hotel",
@@ -92,8 +93,8 @@
       {
         "slug": "racefinder",
         "title": "RaceFinder",
-        "category": "Aplicación local · Fotografía deportiva",
-        "description": "Encuentra tus fotos de una carrera por número de dorsal. Importa una carpeta y guarda los originales que elijas. Las fotos se procesan en tu equipo."
+        "category": "Visión por computador · Fotografía deportiva",
+        "description": "Encuentra fotos de una carrera por dorsal con OCR y, con consentimiento, por similitud facial. Las lecturas dudosas se revisan a mano y las fotos se procesan en tu equipo."
       }
     ]
   },

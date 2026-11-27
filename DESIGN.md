@@ -85,13 +85,13 @@ Hanken Grotesk for headings and reading, JetBrains Mono for the wordmark, sectio
 
 - `.site-column` holds header content, main and footer at `--column-width`.
 - `.section-strip` (number and heading) and `.section-body` (padding `--column-pad`) make up every numbered section; `Section` in `components/section.tsx` is the only way to add one.
-- Section ids are stable anchors used by redirects and the command palette: `about`, `experience`, `projects`, `skills`, `education`, `contact`. The `other` anchor targets the secondary project list inside Projects.
-- Header: wordmark `aleviclop.dev`, links from 768 px (a modal menu below), palette button from 480 px, theme toggle and ES/EN switch.
+- Sections appear in this order after the cover: `projects`, `experience`, `about`, `skills`, `education`, `contact`. Their ids are stable anchors used by redirects and the command palette. The `other` anchor targets the secondary project list inside Projects.
+- The header has the `aleviclop.dev` wordmark, four links from 768 px, a full section list in the mobile menu, a palette button from 480 px, a theme toggle and an ES/EN switch.
 
 ## Components
 
 - **Pills** (`.pill`, `.pill-primary`, `.pill-secondary`): icon plus label, 44 px minimum height.
-- **Featured project rows:** thumbnail, category, title, a short account of what the project does, optional verified evidence, technology chips, and direct links to the demo when available and source code. Thumbnail and text sit side by side from 640 px and stack below.
+- **Featured project cards:** full-width media above the category, title, description, demo and code links, optional evidence and technology chips.
 - **Secondary projects:** use the same card layout inside a native disclosure under the featured work. The control works with a keyboard and without JavaScript.
 - **Chips** (`tech-chip`): single-colour brand icons (`react-icons/si`) in `currentColor`, so the page keeps one accent.
 - **Command palette:** `Ctrl+K` / `⌘K`; native modal dialog with a combobox and listbox (see `components/command-palette.tsx`).

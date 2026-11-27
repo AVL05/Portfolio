@@ -16,13 +16,15 @@ export interface TimelineItem {
   highlights?: string[];
 }
 
+export interface ProjectCopy {
+  slug: string;
+  category: string;
+  description: string;
+  imageAlt?: string;
+  evidence?: readonly string[];
+}
+
 interface Translation {
-  nav: {
-    projects: string;
-    contact: string;
-    about: string;
-    experience: string;
-  };
   sections: {
     about: string;
     experience: string;
@@ -35,6 +37,7 @@ interface Translation {
     portraitAlt: string;
     role: string;
     tagline: string;
+    stack: string;
     location: string;
     availability: string;
     work: string;
@@ -45,6 +48,7 @@ interface Translation {
     paragraphs: string[];
   };
   skillsSummary: string;
+  skillGroups: Record<"frontend" | "backend" | "tools", string>;
   experience: {
     experience_list: TimelineItem[];
     education_list: TimelineItem[];
@@ -59,8 +63,8 @@ interface Translation {
     showMore: string;
     hideMore: string;
     otherLabel: string;
-    featured: { slug: string; category: string; description: string; evidence: string[] }[];
-    other: { slug: string; title: string; category: string; description: string }[];
+    featured: ProjectCopy[];
+    other: (ProjectCopy & { title: string })[];
   };
   contact: {
     subtitle: string;

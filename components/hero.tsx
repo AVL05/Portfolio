@@ -42,6 +42,7 @@ export function Hero() {
           </div>
         </div>
         <p className={styles.tagline}>{copy.tagline}</p>
+        <p className={styles.stack}>{copy.stack}</p>
         <p className={styles.availability}>
           <span className={styles.dot} aria-hidden="true" />
           {copy.availability}

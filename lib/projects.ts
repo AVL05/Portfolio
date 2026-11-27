@@ -33,12 +33,12 @@ export const FEATURED_PROJECTS: readonly FeaturedProject[] = [
   {
     slug: "lumaflow-studio",
     title: "LumaFlow Studio",
-    image: "/projects/lumaflow-studio.png",
-    width: 1254,
-    height: 1254,
+    image: "/projects/lumaflow-studio.webp",
+    width: 1440,
+    height: 850,
     tech: ["React 19", "Laravel", "MySQL", "Sanctum"],
     code: "https://github.com/AVL05/lumaflow-studio",
-    // No live demo is published for LumaFlow, so no Live link is shown.
+    live: "https://lumaflow.aleviclop.dev/demo",
   },
   {
     slug: "raw-vives",
@@ -79,21 +79,12 @@ export const OTHER_PROJECTS: readonly Project[] = [
     tech: ["PHP"],
   },
   {
-    slug: "dulces",
-    image: "/projects/dulces.webp",
-    width: 512,
-    height: 512,
-    code: "https://github.com/AVL05/Dulces",
-    tech: ["Vue", "Vite"],
-  },
-  {
     slug: "distrito-gourmet",
-    image: "/projects/distrito-gourmet.png",
-    width: 1024,
-    height: 1024,
+    image: "/projects/distrito-gourmet.webp",
+    width: 1440,
+    height: 778,
     tech: ["React", "Laravel", "MySQL", "Tailwind CSS", "GSAP", "Docker"],
     code: "https://github.com/AVL05/distrito-gourmet",
-    live: "https://distrito-gourmet.aleviclop.dev",
   },
   {
     slug: "racefinder",
@@ -105,24 +96,8 @@ export const OTHER_PROJECTS: readonly Project[] = [
   },
 ];
 
-/** Skills shown on the home, in display order. */
-export const SKILLS: readonly string[] = [
-  "React",
-  "Next.js",
-  "JavaScript",
-  "HTML",
-  "CSS",
-  "Tailwind CSS",
-  "GSAP",
-  "PHP",
-  "Laravel",
-  "MySQL",
-  "APIs REST",
-  "Git",
-  "GitHub",
-  "Bitbucket",
-  "Docker",
-  "Electron",
-  "Vercel",
-  "Cloudflare",
-];
+export const SKILLS = {
+  frontend: ["React", "Next.js", "JavaScript", "HTML", "CSS", "Tailwind CSS", "GSAP", "Electron"],
+  backend: ["PHP", "Laravel", "MySQL", "APIs REST"],
+  tools: ["Git", "GitHub", "Bitbucket", "Docker", "Vercel", "Cloudflare"],
+} as const;

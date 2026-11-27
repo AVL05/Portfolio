@@ -1,10 +1,4 @@
 {
-  "nav": {
-    "about": "Sobre mí",
-    "experience": "Experiencia",
-    "projects": "Proyectos",
-    "contact": "Contacto"
-  },
   "sections": {
     "about": "Sobre mí",
     "experience": "Experiencia",
@@ -16,24 +10,28 @@
   "hero": {
     "portraitAlt": "Retrato de Alex Vicente López",
     "role": "Desarrollador Web Full-Stack Junior",
-    "tagline": "React, Next.js, PHP y Laravel. Valencia.",
+    "tagline": "Creo aplicaciones web completas con React y Laravel, como un CRM para estudios fotográficos y una plataforma para restaurantes.",
+    "stack": "También trabajo con Next.js y PHP.",
     "location": "Valencia, España",
-    "availability": "Disponible · Valencia (presencial/híbrido) o remoto",
+    "availability": "Disponible en remoto desde España",
     "work": "Ver proyectos",
     "contact": "Escríbeme",
     "cv": "Descargar CV"
   },
   "about": {
     "paragraphs": [
-      "En mis prácticas en Burguet Sistemas trabajé con otro desarrollador en una aplicación de escritorio para gestionar un parking. También amplié la intranet de la empresa con React, PHP y MySQL.",
-      "Fuera de las prácticas, he construido tres proyectos con código público: una plataforma para restaurantes, un CRM para estudios de foto y vídeo y mi propio archivo fotográfico.",
-      "Uso la IA como herramienta de desarrollo y valido el código con pruebas. También publiqué Premium Frontend Director, una skill de código abierto para mejorar el diseño de interfaces con agentes de programación."
+      "Uso la IA como herramienta de desarrollo y reviso el código con pruebas. Publiqué Premium Frontend Director, una skill de código abierto para agentes de programación."
     ]
   },
   "skillsSummary": "Trabajo desde la interfaz hasta la API y el diseño de la base de datos. Uso control de versiones y pruebas para revisar los cambios.",
+  "skillGroups": {
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "tools": "Herramientas"
+  },
   "projects": {
-    "live": "Live",
-    "code": "Code",
+    "live": "Demo",
+    "code": "Código",
     "showMore": "Ver más",
     "hideMore": "Ver menos",
     "otherLabel": "Otros proyectos",
@@ -41,23 +39,23 @@
       {
         "slug": "sinergia",
         "category": "Restauración · Proyecto académico",
-        "description": "Web para el proyecto gastronómico de Aitana Mora González, con menús degustación, reservas online y un panel de gestión para el equipo de sala.",
-        "evidence": []
+        "description": "Web para el proyecto gastronómico de Aitana Mora González, con menús degustación, reservas online y un panel de gestión para el equipo de sala."
       },
       {
         "slug": "lumaflow-studio",
         "category": "CRM · Aplicación web progresiva",
         "description": "Reúne en un solo lugar el trabajo de un estudio de foto y vídeo: desde el presupuesto y la planificación de la sesión hasta la factura y la entrega en una galería privada. Incluye asistencia con IA local.",
         "evidence": [
-          "56 tests de backend",
-          "33 tests de frontend"
-        ]
+          "Problema — El trabajo del estudio queda repartido entre calendarios, hojas de cálculo y galerías.",
+          "Decisión técnica — La demo de React usa datos ficticios locales y permite explorar el flujo sin guardar cambios.",
+          "Verificación — Pruebas de agenda, ficha de cliente y favoritas. La guía para Codex define criterios de aceptación y revisión de cambios."
+        ],
+        "imageAlt": "Panel de la demo de LumaFlow Studio con sesiones, clientes, facturación y entregas ficticias."
       },
       {
         "slug": "raw-vives",
         "category": "Archivo fotográfico · Web bilingüe",
-        "description": "Mi archivo de fotografía, organizado en series que se pueden filtrar y recorrer imagen por imagen. Genero las páginas de forma estática con Next.js.",
-        "evidence": []
+        "description": "Mi archivo de fotografía, organizado en series que se pueden filtrar y recorrer imagen por imagen. Genero las páginas de forma estática con Next.js."
       }
     ],
     "other": [
@@ -80,16 +78,16 @@
         "description": "Backend en PHP para gestionar reservas hoteleras, con un panel de administración."
       },
       {
-        "slug": "dulces",
-        "title": "Tienda navideña",
-        "category": "Catálogo web · Encargos",
-        "description": "Catálogo de roscones y troncos de Navidad con un formulario para consultar encargos."
-      },
-      {
         "slug": "distrito-gourmet",
         "title": "Distrito Gourmet",
         "category": "Proyecto de fin de ciclo · DAW",
-        "description": "Una web donde los clientes consultan la carta, hacen pedidos y reservan mesa. El personal gestiona la operación desde paneles separados para sala, cocina y administración."
+        "description": "Una web donde los clientes consultan la carta, hacen pedidos y reservan mesa. El personal gestiona la operación desde paneles separados para sala, cocina y administración.",
+        "imageAlt": "Portada de Distrito Gourmet con una foto de pulpo a la brasa y accesos a la carta y las reservas.",
+        "evidence": [
+          "Problema — La carta, las reservas y los pedidos suelen gestionarse en herramientas separadas.",
+          "Decisión técnica — La interfaz React consume una API Laravel con permisos para clientes, personal y administración.",
+          "Verificación — Pruebas de disponibilidad, aforo y estados de pedidos. La guía para agentes de IA documenta requisitos, implementación y pruebas."
+        ]
       },
       {
         "slug": "racefinder",
@@ -108,7 +106,7 @@
         "location": "Xirivella",
         "highlights": [
           "Desarrollé en equipo los módulos de la aplicación de parking con React y Electron: desde la ocupación, los cobros y los abonos hasta los turnos, las barreras y las cámaras.",
-          "Añadí funciones a la intranet corporativa, diseñé tablas y resolví incidencias con React, PHP y MySQL.",
+          "Añadí funciones a la intranet corporativa, diseñé tablas de base de datos y resolví incidencias con React, PHP y MySQL.",
           "Usé Git y Bitbucket para el control de versiones."
         ]
       },
@@ -163,7 +161,7 @@
   },
   "contact": {
     "subtitle": "¿Hablamos?",
-    "desc": "Busco mi primer puesto como desarrollador web en un equipo de producto, en Valencia (presencial o híbrido) o en remoto desde Europa. Si crees que puedo encajar en tu equipo, escríbeme.",
+    "desc": "Busco mi primer puesto como desarrollador web en un equipo de producto. Si crees que puedo encajar en tu equipo, escríbeme.",
     "form_name": "Tu nombre",
     "form_email": "Tu email",
     "form_message": "Tu mensaje",

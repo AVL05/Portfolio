@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { GITHUB_URL, LINKEDIN_URL } from "@/lib/site";
+import es from "./locales/es.json";
+import en from "./locales/en.json";
 import {
   getAlternatePath,
   INDEXABLE_EN_PATHS,
@@ -19,9 +21,9 @@ export const SITE_TITLE =
 export const EN_SITE_TITLE =
   "Alex Vicente López | Junior Full-Stack Web Developer in Valencia";
 export const SITE_DESCRIPTION =
-  "Alex Vicente López, desarrollador web full-stack junior en Valencia. React, Next.js, PHP y Laravel. Proyectos con código público y prácticas en equipo.";
+  `Alex Vicente López, desarrollador web full-stack junior. React, Next.js, PHP y Laravel. ${es.hero.availability}.`;
 export const EN_SITE_DESCRIPTION =
-  "Alex Vicente López, junior full-stack web developer in Valencia, Spain. React, Next.js, PHP and Laravel. Projects with public code and team internship experience.";
+  `Alex Vicente López, junior full-stack web developer. React, Next.js, PHP and Laravel. ${en.hero.availability}.`;
 
 // One role, one stack: no topic lists (photography, design, AI) that would
 // compete with the Junior Full-Stack Web Developer positioning.

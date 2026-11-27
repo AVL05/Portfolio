@@ -236,7 +236,7 @@ export function Contact() {
   return (
     <div className={styles.contact}>
       <h3 className={styles.title}>{t.contact.subtitle}</h3>
-      <p className={styles.lead}>{t.contact.desc}</p>
+      <p className={styles.lead}>{t.hero.availability}. {t.contact.desc}</p>
 
       <a href={`mailto:${SITE_EMAIL}`} className={styles.email}>
         <Mail aria-hidden="true" />

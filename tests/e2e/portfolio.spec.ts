@@ -17,29 +17,31 @@ test("visitors can explore the work, switch languages and download the CV", { ta
   const firstProject = projects.locator("ul").first().locator(":scope > li").first();
   await expect(firstProject.getByRole("heading", { name: "Sinergia", exact: true })).toBeVisible();
   await expect(firstProject.getByRole("link")).toHaveCount(1);
-  await expect(firstProject.getByRole("link", { name: "Live · Sinergia" })).toHaveAttribute("href", "https://sinergia.aleviclop.dev/");
+  await expect(firstProject.getByRole("link", { name: "Demo · Sinergia" })).toHaveAttribute("href", "https://sinergia.aleviclop.dev/");
 
   const more = projects.locator("summary");
   const other = projects.locator("#other");
   await expect(other).toBeHidden();
   await more.click();
-  await expect(other.locator(":scope > li")).toHaveCount(6);
+  await expect(other.locator(":scope > li")).toHaveCount(5);
+  await expect(other.locator(":scope > li").first().getByRole("heading")).toHaveText("Premium Frontend Director");
   const raceFinder = other.locator(":scope > li").filter({
     has: page.getByRole("heading", { name: "RaceFinder", exact: true }),
   });
   await expect(raceFinder.getByRole("link")).toHaveCount(1);
-  await expect(raceFinder.getByRole("link", { name: "Code · RaceFinder" })).toHaveAttribute("href", "https://github.com/AVL05/RaceFinder");
+  await expect(raceFinder.getByRole("link", { name: "Código · RaceFinder" })).toHaveAttribute("href", "https://github.com/AVL05/RaceFinder");
 
   await expect(other.getByRole("heading", { name: "Distrito Gourmet", exact: true })).toBeVisible();
-  await expect(other.getByRole("link", { name: "Live · Distrito Gourmet" })).toHaveAttribute("href", "https://distrito-gourmet.aleviclop.dev");
-  await expect(other.getByRole("link", { name: "Code · Distrito Gourmet" })).toHaveAttribute("href", "https://github.com/AVL05/distrito-gourmet");
-  await expect(projects.getByRole("link", { name: "Code · LumaFlow Studio" })).toHaveAttribute("href", "https://github.com/AVL05/lumaflow-studio");
+  await expect(other.getByRole("link", { name: "Código · Distrito Gourmet" })).toHaveAttribute("href", "https://github.com/AVL05/distrito-gourmet");
+  await expect(projects.getByRole("link", { name: "Código · LumaFlow Studio" })).toHaveAttribute("href", "https://github.com/AVL05/lumaflow-studio");
+  await expect(projects.getByRole("link", { name: "Demo · LumaFlow Studio" })).toHaveAttribute("href", "https://lumaflow.aleviclop.dev/demo");
   await page.locator('a[hreflang="en"]').first().click();
   await expect(page).toHaveURL(/\/en\/?(?:#projects)?$/);
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
   await expect(page.getByRole("heading", { name: "Projects", exact: true })).toBeVisible();
   await expect(firstProject.getByRole("heading", { name: "Sinergia", exact: true })).toBeVisible();
   await expect(firstProject.getByRole("link")).toHaveCount(1);
+  await expect(projects.getByRole("link", { name: "Live · LumaFlow Studio" })).toHaveAttribute("href", "https://lumaflow.aleviclop.dev/demo");
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 });
 

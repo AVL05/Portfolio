@@ -7,8 +7,8 @@ import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import { toggleTheme } from "@/components/theme-toggle";
 import { getAlternatePath, type Locale } from "@/lib/i18n-paths";
 import { useLanguage } from "@/lib/language-context";
-import { FEATURED_PROJECTS } from "@/lib/projects";
-import { CV_HREF, GITHUB_URL, LINKEDIN_URL, SITE_EMAIL } from "@/lib/site";
+import { FEATURED_PROJECTS, OTHER_PROJECTS } from "@/lib/projects";
+import { CV_HREF, GITHUB_URL, HOME_SECTION_IDS, LINKEDIN_URL, SITE_EMAIL } from "@/lib/site";
 import styles from "./command-palette.module.css";
 
 export const OPEN_PALETTE_EVENT = "command-palette:open";
@@ -24,8 +24,6 @@ interface Command {
   icon: Icon;
   run: () => void;
 }
-
-const SECTION_IDS = ["about", "experience", "projects", "skills", "education", "contact"] as const;
 
 const normalize = (value: string) => value.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 
@@ -56,26 +54,40 @@ export function CommandPalette({ triggerClassName }: { triggerClassName: string 
     const groups = es
       ? { go: "Ir a", projects: "Proyectos", links: "Enlaces", prefs: "Preferencias" }
       : { go: "Go to", projects: "Projects", links: "Links", prefs: "Preferences" };
-    const goTo = (id: string) => () => { window.location.hash = id; };
+    const goTo = (id: string) => () => {
+      const section = document.getElementById(id);
+      const disclosure = section?.closest("details");
+      if (disclosure) disclosure.open = true;
+      if (window.location.hash === `#${id}`) section?.scrollIntoView();
+      else window.location.hash = id;
+    };
     const target: Locale = es ? "en" : "es";
+    const projects = [
+      ...FEATURED_PROJECTS,
+      ...OTHER_PROJECTS.flatMap((project) => {
+        const copy = t.projects.other.find(({ slug }) => slug === project.slug);
+        return copy ? [{ ...project, title: copy.title }] : [];
+      }),
+    ];
     const list: Command[] = [
-      ...SECTION_IDS.map((id) => ({ id: `go-${id}`, group: groups.go, label: t.sections[id], hint: `#${id}`, icon: Hash, run: goTo(id) })),
+      { id: "go-hero", group: groups.go, label: es ? "Inicio" : "Home", hint: "#hero", icon: Hash, run: goTo("hero") },
+      ...HOME_SECTION_IDS.map((id) => ({ id: `go-${id}`, group: groups.go, label: t.sections[id], hint: `#${id}`, icon: Hash, run: goTo(id) })),
       { id: "go-other", group: groups.go, label: t.projects.otherLabel, hint: "#other", icon: Hash, run: goTo("other") },
-      ...FEATURED_PROJECTS.flatMap(({ slug, title, tech, code }) => code ? [{
+      ...projects.flatMap(({ slug, title, live }) => live ? [{
+        id: `live-${slug}`,
+        group: groups.projects,
+        label: `${es ? "Abrir" : "Open"} ${title} (${t.projects.live})`,
+        hint: new URL(live).host,
+        icon: ExternalLink,
+        run: () => openExternal(live),
+      }] : []),
+      ...projects.flatMap(({ slug, title, tech, code }) => code ? [{
         id: `code-${slug}`,
         group: groups.projects,
         label: `${title} · ${t.projects.code}`,
         keywords: tech.join(" "),
         icon: FaGithub,
         run: () => openExternal(code),
-      }] : []),
-      ...FEATURED_PROJECTS.flatMap((project) => project.live ? [{
-        id: `live-${project.slug}`,
-        group: groups.projects,
-        label: `${es ? "Abrir" : "Open"} ${project.title} (Live)`,
-        hint: new URL(project.live).host,
-        icon: ExternalLink,
-        run: () => openExternal(project.live as string),
       }] : []),
       { id: "link-github", group: groups.links, label: "GitHub", hint: "AVL05", icon: FaGithub, run: () => openExternal(GITHUB_URL) },
       { id: "link-linkedin", group: groups.links, label: "LinkedIn", hint: "aleviclop", icon: FaLinkedin, run: () => openExternal(LINKEDIN_URL) },
@@ -198,7 +210,7 @@ export function CommandPalette({ triggerClassName }: { triggerClassName: string 
         onClose={() => {
           setOpen(false);
           const target = returnFocusRef.current;
-          if (target && target.isConnected) target.focus();
+          if (target && target.isConnected) target.focus({ preventScroll: true });
         }}
         onClick={(event) => { if (event.target === event.currentTarget) close(); }}
       >

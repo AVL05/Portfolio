@@ -1,10 +1,4 @@
 {
-  "nav": {
-    "about": "About",
-    "experience": "Experience",
-    "projects": "Projects",
-    "contact": "Contact"
-  },
   "sections": {
     "about": "About",
     "experience": "Experience",
@@ -16,21 +10,25 @@
   "hero": {
     "portraitAlt": "Portrait of Alex Vicente López",
     "role": "Junior Full-Stack Web Developer",
-    "tagline": "React, Next.js, PHP and Laravel. Valencia.",
+    "tagline": "I build complete web applications with React and Laravel, such as a CRM for photography studios and a restaurant platform.",
+    "stack": "I also work with Next.js and PHP.",
     "location": "Valencia, Spain",
-    "availability": "Available · Valencia (on-site/hybrid) or remote",
+    "availability": "Available for remote work from Spain",
     "work": "View projects",
     "contact": "Email me",
     "cv": "Download CV"
   },
   "about": {
     "paragraphs": [
-      "During my internship at Burguet Sistemas, I worked with another developer on a desktop app for managing a car park. I also extended the company intranet with React, PHP and MySQL.",
-      "I've built three projects with public source code: a platform for restaurants, a CRM for photo and video studios, and my own photography archive.",
-      "I use AI as a development tool and verify the code with tests. I also published Premium Frontend Director, an open-source skill for improving interface design with coding agents."
+      "I use AI as a development tool and review code with tests. I published Premium Frontend Director, an open-source skill for coding agents."
     ]
   },
   "skillsSummary": "I work across the interface, the API and database design. I use version control and tests to review changes.",
+  "skillGroups": {
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "tools": "Tools"
+  },
   "projects": {
     "live": "Live",
     "code": "Code",
@@ -41,23 +39,23 @@
       {
         "slug": "sinergia",
         "category": "Hospitality · Academic project",
-        "description": "Website for Aitana Mora González’s culinary project, with tasting menus, online reservations and a dashboard for the restaurant team.",
-        "evidence": []
+        "description": "Website for Aitana Mora González’s culinary project, with tasting menus, online reservations and a dashboard for the restaurant team."
       },
       {
         "slug": "lumaflow-studio",
         "category": "CRM · Progressive web app",
         "description": "One place for a photo or video studio's workflow, from quotes and session planning to invoices and delivery through a private gallery. Includes a local AI assistant.",
         "evidence": [
-          "56 backend tests",
-          "33 frontend tests"
-        ]
+          "Problem — Studio work is scattered across calendars, spreadsheets and galleries.",
+          "Technical decision — The React demo uses local fictional data and lets visitors explore the workflow without saving changes.",
+          "Verification — Tests cover the calendar, client details and gallery favourites. The Codex guide defines acceptance criteria and change review."
+        ],
+        "imageAlt": "LumaFlow Studio demo dashboard with fictional sessions, clients, invoices and deliveries."
       },
       {
         "slug": "raw-vives",
         "category": "Photography archive · Bilingual site",
-        "description": "My photography archive, arranged into series you can filter and browse one image at a time. I generate the pages statically with Next.js.",
-        "evidence": []
+        "description": "My photography archive, arranged into series you can filter and browse one image at a time. I generate the pages statically with Next.js."
       }
     ],
     "other": [
@@ -80,16 +78,16 @@
         "description": "PHP backend for managing hotel bookings, with an admin dashboard."
       },
       {
-        "slug": "dulces",
-        "title": "Christmas shop",
-        "category": "Online catalogue · Orders",
-        "description": "Catalogue of Spanish Christmas cakes and yule logs with an order enquiry form."
-      },
-      {
         "slug": "distrito-gourmet",
         "title": "Distrito Gourmet",
         "category": "Web development capstone · DAW",
-        "description": "Customers can browse the menu, place an order and book a table. Staff run the restaurant through separate dashboards for the dining room, kitchen and administration."
+        "description": "Customers can browse the menu, place an order and book a table. Staff run the restaurant through separate dashboards for the dining room, kitchen and administration.",
+        "imageAlt": "Distrito Gourmet home page with a photo of grilled octopus and links to the menu and reservations.",
+        "evidence": [
+          "Problem — Menus, reservations and orders are often managed in separate tools.",
+          "Technical decision — The React interface uses a Laravel API with permissions for customers, staff and administrators.",
+          "Verification — Tests cover availability, capacity and order status. The AI agent guide documents requirements, implementation and testing."
+        ]
       },
       {
         "slug": "racefinder",
@@ -163,7 +161,7 @@
   },
   "contact": {
     "subtitle": "Shall we talk?",
-    "desc": "I'm looking for my first web developer role on a product team, in Valencia (on-site or hybrid) or remotely from Europe. If you think I could be a fit for your team, get in touch.",
+    "desc": "I’m looking for my first web developer role on a product team. If you think I could be a fit for your team, get in touch.",
     "form_name": "Your name",
     "form_email": "Your email",
     "form_message": "Your message",

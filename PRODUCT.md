@@ -10,7 +10,7 @@ Responsables de contratación, recruiters y equipos de producto que buscan un De
 
 ## Product Purpose
 
-Presentar a Alex Vicente López como Desarrollador Web Full-Stack Junior en Valencia, con React, Next.js, PHP y Laravel. El portfolio es su herramienta principal de búsqueda de empleo (primer puesto: Valencia presencial o híbrido, o remoto en Europa) y debe contar la misma historia que su CV, LinkedIn y GitHub: prácticas en equipo, proyectos con acceso a la web o al código cuando están disponibles y una forma clara de escribirle.
+Presentar a Alex Vicente López como Desarrollador Web Full-Stack Junior en Valencia, con React, Next.js, PHP y Laravel. El portfolio muestra su disponibilidad para trabajar en remoto desde España, sus prácticas en equipo, proyectos con acceso a la web o al código y una forma clara de escribirle.
 
 ## Brand Personality
 
@@ -26,10 +26,10 @@ Precisa, directa y verificable. Transmite cuidado por el detalle y confianza té
 ## Design Principles
 
 - Una sola etiqueta: Desarrollador Web Full-Stack Junior (Junior Full-Stack Web Developer), en toda la web y en los metadatos.
-- Mostrar decisiones y resultados antes que listas de tecnologías. Usar cifras verificables, como los 56 tests de backend y 33 de frontend de LumaFlow Studio.
+- Mostrar decisiones técnicas y pruebas concretas antes de las listas de tecnologías.
 - Tres proyectos destacados en este orden: Sinergia, LumaFlow Studio y raw.vives. Cada uno tiene una ficha breve en la portada. El resto aparece al desplegar «Ver más», incluido Distrito Gourmet.
 - No anunciar TypeScript como habilidad ni como chip de proyecto. No afirmar certificaciones. Inglés B1; español y valenciano nativos.
-- Un enlace Live solo si la demo está publicada y responde (LumaFlow Studio no tiene).
+- Mostrar «Demo» en español y «Live» en inglés cuando la demo esté publicada y responda.
 - Cada llamada a la acción acerca a un proyecto, al CV o al contacto.
 - La calidad percibida está respaldada por accesibilidad, responsive y rendimiento.
 

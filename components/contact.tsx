@@ -245,7 +245,7 @@ export function Contact() {
       </a>
 
       <ul className={styles.profiles} aria-label={language === "es" ? "Perfiles y CV" : "Profiles and CV"}>
-        <li><a href={CV_HREF} download data-track="cv-download" className="pill pill-secondary"><FileText aria-hidden="true" />{t.hero.cv}</a></li>
+        <li><a href={CV_HREF[language]} download data-track="cv-download" className="pill pill-secondary"><FileText aria-hidden="true" />{t.hero.cv}</a></li>
         <li><a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="pill pill-secondary"><FaLinkedin aria-hidden="true" />LinkedIn</a></li>
         <li><a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="pill pill-secondary"><FaGithub aria-hidden="true" />GitHub</a></li>
       </ul>

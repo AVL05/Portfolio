@@ -101,7 +101,7 @@ export function CommandPalette({ triggerClassName }: { triggerClassName: string 
         icon: Download,
         run: () => {
           const link = document.createElement("a");
-          link.href = CV_HREF;
+          link.href = CV_HREF[language];
           link.download = "";
           link.click();
         },

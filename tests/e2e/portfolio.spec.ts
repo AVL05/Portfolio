@@ -5,11 +5,23 @@ test("visitors can explore the work, switch languages and download the CV", { ta
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Alex Vicente López");
 
-  const cv = await page.getByRole("link", { name: "Descargar CV" }).first().getAttribute("href");
-  expect(cv).toBeTruthy();
-  const download = await request.get(cv!);
-  expect(download.ok()).toBe(true);
-  expect(download.headers()["content-type"]).toContain("application/pdf");
+  const verifyCv = async (file: string, command: string) => {
+    const href = `/cv/${file}?v=2026-11`;
+    const links = page.locator('a[data-track="cv-download"]');
+    await expect(links).toHaveCount(3);
+    for (const link of await links.all()) await expect(link).toHaveAttribute("href", href);
+    const response = await request.get(href);
+    expect(response.ok()).toBe(true);
+    expect(response.headers()["content-type"]).toContain("application/pdf");
+
+    await page.keyboard.press("Control+k");
+    const search = page.getByRole("combobox");
+    await search.fill(command);
+    const download = page.waitForEvent("download");
+    await search.press("Enter");
+    expect((await download).suggestedFilename()).toBe(file);
+  };
+  await verifyCv("CV_Alex_Vicente_Lopez.pdf", "Descargar CV");
 
   await page.getByRole("link", { name: "Ver proyectos" }).click();
   const projects = page.locator("#projects");
@@ -42,6 +54,7 @@ test("visitors can explore the work, switch languages and download the CV", { ta
   await expect(firstProject.getByRole("heading", { name: "Sinergia", exact: true })).toBeVisible();
   await expect(firstProject.getByRole("link")).toHaveCount(1);
   await expect(projects.getByRole("link", { name: "Live · LumaFlow Studio" })).toHaveAttribute("href", "https://lumaflow.aleviclop.dev/demo");
+  await verifyCv("CV_Alex_Vicente_Lopez_EN.pdf", "Download CV");
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 });
 

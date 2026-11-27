@@ -8,7 +8,7 @@ import { CV_HREF, GITHUB_URL, LINKEDIN_URL, RAW_VIVES_URL, SITE_EMAIL } from "@/
 import styles from "./hero.module.css";
 
 export function Hero() {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
   const copy = t.hero;
 
   return (
@@ -50,7 +50,7 @@ export function Hero() {
         <div className={styles.actions}>
           <a href="#projects" className="pill pill-primary">{copy.work}<ArrowDown aria-hidden="true" /></a>
           <a href={`mailto:${SITE_EMAIL}`} className="pill pill-secondary"><Mail aria-hidden="true" />{copy.contact}</a>
-          <a href={CV_HREF} download data-track="cv-download" className="cinema-link"><Download aria-hidden="true" />{copy.cv}</a>
+          <a href={CV_HREF[language]} download data-track="cv-download" className="cinema-link"><Download aria-hidden="true" />{copy.cv}</a>
         </div>
         <div className={styles.socials}>
           <a href={LINKEDIN_URL} className="cinema-link"><FaLinkedin aria-hidden="true" />LinkedIn</a>

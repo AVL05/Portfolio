@@ -101,7 +101,7 @@ export function SiteHeader() {
             onClick={() => { closeMenu(); window.setTimeout(() => window.dispatchEvent(new Event(OPEN_PALETTE_EVENT)), 50); }}>
             {es ? "Buscar y comandos" : "Search & commands"}
           </button>
-          <a href={CV_HREF} download data-track="cv-download">{t.hero.cv}</a>
+          <a href={CV_HREF[language]} download data-track="cv-download">{t.hero.cv}</a>
           <span>{t.hero.location}</span>
         </div>
       </dialog>

@@ -38,11 +38,6 @@
     "otherLabel": "Otros proyectos",
     "featured": [
       {
-        "slug": "sinergia",
-        "category": "Restauración · Proyecto académico",
-        "description": "Web para el proyecto gastronómico de Aitana Mora González, con menús degustación, reservas online y un panel de gestión para el equipo de sala."
-      },
-      {
         "slug": "lumaflow-studio",
         "category": "CRM · Aplicación web progresiva",
         "description": "Reúne en un solo lugar el trabajo de un estudio de foto y vídeo: desde el presupuesto y la planificación de la sesión hasta la factura y la entrega en una galería privada. Incluye un asistente que prepara planes de sesión y recomienda equipo con un modelo de lenguaje en el navegador (WebLLM/WebGPU), con Ollama como opción.",
@@ -54,9 +49,15 @@
         "imageAlt": "Panel de la demo de LumaFlow Studio con sesiones, clientes, facturación y entregas ficticias."
       },
       {
-        "slug": "raw-vives",
-        "category": "Archivo fotográfico · Web bilingüe",
-        "description": "Mi archivo de fotografía, organizado en series que se pueden filtrar y recorrer imagen por imagen. Genero las páginas de forma estática con Next.js."
+        "slug": "racefinder",
+        "category": "Visión por computador · Fotografía deportiva",
+        "description": "Encuentra fotos de una carrera por dorsal con OCR y, con consentimiento, por similitud facial. Las lecturas dudosas se revisan a mano y las fotos se procesan en tu equipo.",
+        "imageAlt": "Resultados en RaceFinder para el dorsal 184, con una foto coincidente."
+      },
+      {
+        "slug": "sinergia",
+        "category": "Restauración · Proyecto académico",
+        "description": "Web para el proyecto gastronómico de Aitana Mora González, con menús degustación, reservas online y un panel de gestión para el equipo de sala."
       }
     ],
     "other": [
@@ -91,10 +92,10 @@
         ]
       },
       {
-        "slug": "racefinder",
-        "title": "RaceFinder",
-        "category": "Visión por computador · Fotografía deportiva",
-        "description": "Encuentra fotos de una carrera por dorsal con OCR y, con consentimiento, por similitud facial. Las lecturas dudosas se revisan a mano y las fotos se procesan en tu equipo."
+        "slug": "raw-vives",
+        "title": "raw.vives",
+        "category": "Archivo fotográfico · Web bilingüe",
+        "description": "Mi archivo de fotografía, organizado en series que se pueden filtrar y recorrer imagen por imagen. Genero las páginas de forma estática con Next.js."
       }
     ]
   },

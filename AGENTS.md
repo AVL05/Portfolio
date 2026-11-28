@@ -4,7 +4,7 @@
 
 - This portfolio presents Alex Vicente López as a **Desarrollador Web Full-Stack Junior** / **Junior Full-Stack Web Developer**. Use that positioning throughout the UI, metadata, structured data and manifest.
 - [PRODUCT.md](PRODUCT.md) governs public copy and claims. [DESIGN.md](DESIGN.md) governs layout, themes, interaction and motion. Explicit user requests and existing functional contracts take precedence.
-- Keep Sinergia, LumaFlow Studio and raw.vives featured in that order. Keep Premium Frontend Director first under “Show more”, followed by ECHO: The Awakening, the hotel API, Distrito Gourmet and RaceFinder.
+- Keep LumaFlow Studio, RaceFinder and Sinergia featured in that order. Keep Premium Frontend Director first under “Show more”, followed by ECHO: The Awakening, the hotel API, Distrito Gourmet and raw.vives.
 - Use factual, localized copy. Do not invent credentials, outcomes or metrics, advertise TypeScript as a skill or project chip, or present photography as a separate profession. Show a live demo only if published and responding.
 - Keep a clear path to the projects, CV and contact. Preserve the framed column, the copper accent, and both carefully maintained themes unless asked to redesign.
 

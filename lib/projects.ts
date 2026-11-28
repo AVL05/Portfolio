@@ -16,20 +16,11 @@ export interface Project {
 }
 
 interface FeaturedProject extends Project {
-  slug: "sinergia" | "lumaflow-studio" | "raw-vives";
+  slug: "lumaflow-studio" | "racefinder" | "sinergia";
   title: string;
 }
 
 export const FEATURED_PROJECTS: readonly FeaturedProject[] = [
-  {
-    slug: "sinergia",
-    title: "Sinergia",
-    image: "/projects/sinergia.webp",
-    width: 400,
-    height: 291,
-    tech: ["React 19", "Laravel", "PostgreSQL"],
-    live: "https://sinergia.aleviclop.dev/",
-  },
   {
     slug: "lumaflow-studio",
     title: "LumaFlow Studio",
@@ -41,14 +32,22 @@ export const FEATURED_PROJECTS: readonly FeaturedProject[] = [
     live: "https://lumaflow.aleviclop.dev/demo",
   },
   {
-    slug: "raw-vives",
-    title: "raw.vives",
-    image: "/projects/raw-vives.png",
-    width: 1254,
-    height: 1254,
-    tech: ["Next.js", "Tailwind CSS", "GSAP"],
-    code: "https://github.com/AVL05/alexgallery",
-    live: RAW_VIVES_URL,
+    slug: "racefinder",
+    title: "RaceFinder",
+    image: "/projects/racefinder-busqueda-dorsal.webp",
+    width: 1152,
+    height: 780,
+    tech: ["React 19", "Python", "FastAPI", "ONNX Runtime", "SQLite"],
+    code: "https://github.com/AVL05/RaceFinder",
+  },
+  {
+    slug: "sinergia",
+    title: "Sinergia",
+    image: "/projects/sinergia.webp",
+    width: 400,
+    height: 291,
+    tech: ["React 19", "Laravel", "PostgreSQL"],
+    live: "https://sinergia.aleviclop.dev/",
   },
 ];
 
@@ -88,12 +87,13 @@ export const OTHER_PROJECTS: readonly Project[] = [
     code: "https://github.com/AVL05/distrito-gourmet",
   },
   {
-    slug: "racefinder",
-    image: "/projects/racefinder.webp",
-    width: 512,
-    height: 512,
-    tech: ["React 19", "Python", "FastAPI", "ONNX Runtime", "SQLite"],
-    code: "https://github.com/AVL05/RaceFinder",
+    slug: "raw-vives",
+    image: "/projects/raw-vives.png",
+    width: 1254,
+    height: 1254,
+    tech: ["Next.js", "Tailwind CSS", "GSAP"],
+    code: "https://github.com/AVL05/alexgallery",
+    live: RAW_VIVES_URL,
   },
 ];
 

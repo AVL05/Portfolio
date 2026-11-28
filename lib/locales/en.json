@@ -38,11 +38,6 @@
     "otherLabel": "Other projects",
     "featured": [
       {
-        "slug": "sinergia",
-        "category": "Hospitality · Academic project",
-        "description": "Website for Aitana Mora González’s culinary project, with tasting menus, online reservations and a dashboard for the restaurant team."
-      },
-      {
         "slug": "lumaflow-studio",
         "category": "CRM · Progressive web app",
         "description": "One place for a photo or video studio's workflow, from quotes and session planning to invoices and delivery through a private gallery. Includes an assistant that drafts session plans and recommends gear with an in-browser language model (WebLLM/WebGPU), with Ollama as an option.",
@@ -54,9 +49,15 @@
         "imageAlt": "LumaFlow Studio demo dashboard with fictional sessions, clients, invoices and deliveries."
       },
       {
-        "slug": "raw-vives",
-        "category": "Photography archive · Bilingual site",
-        "description": "My photography archive, arranged into series you can filter and browse one image at a time. I generate the pages statically with Next.js."
+        "slug": "racefinder",
+        "category": "Computer vision · Sports photography",
+        "description": "Find race photos by bib number using OCR and, with consent, by facial similarity. Uncertain readings are reviewed manually and photos are processed on your device.",
+        "imageAlt": "RaceFinder results for bib number 184, showing one matching photo."
+      },
+      {
+        "slug": "sinergia",
+        "category": "Hospitality · Academic project",
+        "description": "Website for Aitana Mora González’s culinary project, with tasting menus, online reservations and a dashboard for the restaurant team."
       }
     ],
     "other": [
@@ -91,10 +92,10 @@
         ]
       },
       {
-        "slug": "racefinder",
-        "title": "RaceFinder",
-        "category": "Computer vision · Sports photography",
-        "description": "Find race photos by bib number using OCR and, with consent, by facial similarity. Uncertain readings are reviewed manually and photos are processed on your device."
+        "slug": "raw-vives",
+        "title": "raw.vives",
+        "category": "Photography archive · Bilingual site",
+        "description": "My photography archive, arranged into series you can filter and browse one image at a time. I generate the pages statically with Next.js."
       }
     ]
   },
